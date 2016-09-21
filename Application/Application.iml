@@ -185,6 +185,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="commons-lang3-3.4" level="project" />
   </component>
 </module>
 
