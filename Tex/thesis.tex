@@ -1,0 +1,73 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Frame for Bachelor or Master Thesis at FAU/i1
+% Topic: [Title of thesis]
+% Copyright (C) 2012  [Author]
+% based on original work by Johannes Goetzfried, used with permission
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% usage hints:
+% - base document class is scrbook with some fancy additions
+% - can be used for English or German texts (Umlaut encodings enabled)
+% - inserts hyperlinks for cross referencing
+% 
+% included files contain examples for
+% - listings
+% - tables
+% - figures
+%
+% Use at your own risk, i1 offers only limited support for this frame.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Include Header
+\input{include/00-0-header}
+
+\begin{document}
+
+% Alphabetic page numbers
+\pagenumbering{alph}
+
+% Title
+\include{include/00-1-title}
+
+% Roman page numbers
+\pagenumbering{roman}
+
+% Pre content
+\include{include/00-2-declaration}
+\include{include/00-3-abstract}
+
+% Table of Contents
+% \listoftables
+% \listoffigures
+\begin{onehalfspacing}
+\tableofcontents
+\end{onehalfspacing}
+\cleardoublepage
+
+% Arabic page numbers
+\pagenumbering{arabic}
+
+
+% Actual content, can be split up into multiple files or kept in
+% one big file
+%\fancyhead[RE]{\leftmark}
+%\include{include/01-introduction}
+%\fancyhead[RE]{\rightmark}
+
+%\include{include/02-background}
+%\include{include/03-implementation}
+%\include{include/04-evaluation}
+
+%\fancyhead[RE]{\leftmark}
+%\include{include/05-conclusion}
+%\fancyhead[RE]{\rightmark}
+
+
+% Bibliography
+%\bibliographystyle{plainnat}
+\bibliography{thesis}
+
+\cleardoublepage
+
+\end{document}
