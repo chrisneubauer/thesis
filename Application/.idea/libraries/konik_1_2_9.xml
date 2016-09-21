@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="konik-1.2.9">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/konik/konik-1.2.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/konik/nv-i18n-1.13.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
