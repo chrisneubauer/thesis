@@ -1,33 +1,20 @@
-package de.cneubauer.gui;
+package de.cneubauer.gui.Controller;
 
 import de.cneubauer.ocr.TesseractWrapper;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 
 /**
- * Created by Christoph Neubauer on 23.09.2016.
+ * Created by Christoph Neubauer on 04.10.2016.
+ * Provides controls for performing OCR in the UI
  */
-public class GUIController {
-    @FXML
-    private Text actiontarget;
-
+public class OCRController extends GUIController {
     @FXML
     private TextField fileInput;
-
-    @FXML protected void handleSubmitButtonAction(ActionEvent event) {
-        actiontarget.setText("Sign in button pressed");
-    }
-
-    @FXML
-    protected void openFileDialog() {
-
-    }
 
     @FXML
     protected void openFileChooser() {

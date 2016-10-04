@@ -8,6 +8,8 @@ import java.io.*;
 
 /**
  * Created by Christoph on 17.08.2016.
+ * Reads pdf by using snowtide framework
+ * Results are unaccurate
  */
 public class PDFScanner {
 
