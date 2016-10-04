@@ -6,8 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.apache.commons.lang3.StringUtils;
 
-import static org.junit.Assert.*;
-
 public class TesseractWrapperTest {
     private TesseractWrapper wrapper;
 
@@ -93,19 +91,19 @@ public class TesseractWrapperTest {
         String path3 = ".\\src\\test\\resources\\invoice\\KeywordSuccess\\Bruttosumme\\Scan_20160822_163306_001.jpg";
         String path4 = ".\\src\\test\\resources\\invoice\\KeywordSuccess\\Bruttosumme\\Scan_20160822_163306_005.jpg";
         String path5 = ".\\src\\test\\resources\\invoice\\KeywordSuccess\\Bruttosumme\\Scan_20160822_163306_007.jpg";
-        //String result1 = wrapper.initOcr(path1);
-        //String result2 = wrapper.initOcr(path2);
+        String result1 = wrapper.initOcr(path1);
+        String result2 = wrapper.initOcr(path2);
         String result3 = wrapper.initOcr(path3);
         String result4 = wrapper.initOcr(path4);
         String result5 = wrapper.initOcr(path5);
 
-        /*if (result1 != null) {
+        if (result1 != null) {
             Assert.assertTrue(result1.contains("Bruttosumme"));
         }
         if (result2 != null) {
             Assert.assertTrue(result2.contains("Bruttosumme"));
-        }*/
-        /*if (result3 != null) {
+        }
+        if (result3 != null) {
             System.out.println(result3);
             boolean found = assertOCR(result3, "Bruttosumme");
             Assert.assertTrue(found);
@@ -113,12 +111,36 @@ public class TesseractWrapperTest {
         if (result4 != null) {
             boolean found = assertOCR(result4, "Bruttosumme");
             Assert.assertTrue(found);
-        }*/
+        }
         if (result5 != null) {
             System.out.println(result5);
             boolean found = assertOCR(result5, "Bruttosumme");
             Assert.assertTrue(found);
         }
+    }
+
+    //the intent of this test is to check if using other languages will reveal better results
+    @Test
+    public void testDifferentLanguages() throws Exception {
+        String path = ".\\src\\test\\resources\\invoice\\2015-11-26_Reifen Ebay.pdf";
+        String englishResult = wrapper.initOcr(path);
+
+        wrapper.setLanguage("deu");
+        String germanResult = wrapper.initOcr(path);
+
+        if (englishResult != null) {
+            System.out.println(englishResult);
+            Assert.assertTrue(englishResult.length() > 0);
+            Assert.assertTrue(englishResult.contains("mein-reifen-outlet"));
+            Assert.assertTrue(englishResult.contains("26. Nov. 2015"));
+        }
+        if (germanResult != null) {
+            System.out.println(germanResult);
+            Assert.assertTrue(germanResult.length() > 0);
+            Assert.assertTrue(germanResult.contains("mein-reifen-outlet"));
+            Assert.assertTrue(germanResult.contains("26. Nov. 2015"));
+        }
+
     }
 
     private boolean assertOCR(String ocrResult, String stringToCheck) {
