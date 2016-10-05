@@ -13,14 +13,14 @@ SurName VARCHAR(100) NULL,
 Street VARCHAR(100) NULL,
 ZipCode INT(5) NULL,
 City VARCHAR(100) NULL,
-CreateDate TIMESTAMP,
+CreatedDate TIMESTAMP,
 ModifiedDate TIMESTAMP
 );
 
 CREATE TABLE Invoice (
 Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-Debitor INT(6) UNSIGNED Null,
-Creditor INT(6) UNSIGNED Null,
+Debitor INT(6) UNSIGNED NULL,
+Creditor INT(6) UNSIGNED NULL,
 Date TIMESTAMP,
 MoneyValue NUMERIC(15,2) NULL,
 HasSkonto BOOL NULL,
@@ -35,7 +35,7 @@ CREATE TABLE Scan (
 Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 -- eventually needs to be longblob
 File BLOB,
-InvoiceInformation INT(6) UNSIGNED Null,
+InvoiceInformation INT(6) UNSIGNED NULL,
 CreatedDate TIMESTAMP,
 ModifiedDate TIMESTAMP,
 FOREIGN KEY (InvoiceInformation) REFERENCES Invoice(Id) ON DELETE CASCADE

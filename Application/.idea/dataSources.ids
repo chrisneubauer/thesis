@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="hibernate.cfg.xml" uuid="21b95e0e-ebb1-44ce-baff-c743e9ee7046">
+    <database-info product="MySQL" version="5.7.15-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="ferd_transformator"/>
+    <table name="invoice" schema="" catalog="ferd_transformator" type="TABLE">
+      <column name="Id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Debitor" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Creditor" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="MoneyValue" sqlType="DECIMAL" precision="15" scale="2" nullable="true" jdbcType="3"/>
+      <column name="HasSkonto" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <column name="Skonto" sqlType="DECIMAL" precision="2" scale="1" nullable="true" jdbcType="3"/>
+      <column name="CreatedDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="ModifiedDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="Id"/>
+      <foreign-key name="invoice_ibfk_1" columns="Debitor" ref-table="legalperson" ref-schema="" ref-catalog="ferd_transformator" ref-columns="Id" update-rule="3" delete-rule="0" deferrability="2"/>
+      <foreign-key name="invoice_ibfk_2" columns="Creditor" ref-table="legalperson" ref-schema="" ref-catalog="ferd_transformator" ref-columns="Id" update-rule="3" delete-rule="0" deferrability="2"/>
+      <exported-key name="scan_ibfk_1" table="scan" schema="" catalog="ferd_transformator" columns="InvoiceInformation"/>
+    </table>
+    <table name="legalperson" schema="" catalog="ferd_transformator" type="TABLE">
+      <column name="Id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="IsCompany" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="CompanyName" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CorporateForm" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Name" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="SurName" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Street" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ZipCode" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="City" sqlType="VARCHAR" precision="100" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CreatedDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="ModifiedDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="Id"/>
+      <exported-key name="invoice_ibfk_1" table="invoice" schema="" catalog="ferd_transformator" columns="Debitor"/>
+      <exported-key name="invoice_ibfk_2" table="invoice" schema="" catalog="ferd_transformator" columns="Creditor"/>
+    </table>
+    <table name="scan" schema="" catalog="ferd_transformator" type="TABLE">
+      <column name="Id" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="File" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="InvoiceInformation" sqlType="INT UNSIGNED" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="CreatedDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="ModifiedDate" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="Id"/>
+      <foreign-key name="scan_ibfk_1" columns="InvoiceInformation" ref-table="invoice" ref-schema="" ref-catalog="ferd_transformator" ref-columns="Id" update-rule="3" delete-rule="0" deferrability="2"/>
+    </table>
+  </data-source>
+</component>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="de.cneubauer.domain.bo.LegalPerson" table="legalperson">
+        <id name="id" column="Id" >
+            <generator class="increment"/>
+        </id>
+        <property name="isCompany" column="IsCompany" />
+        <property name="companyName" column="CompanyName" />
+        <property name="corporateForm" column="CorporateForm" />
+        <property name="name" column="Name" />
+        <property name="surName" column="SurName" />
+        <property name="street" column="Street" />
+        <property name="zipCode" column="ZipCode" />
+        <property name="city" column="City" />
+        <property name="createdDate" column="CreatedDate" />
+        <property name="modifiedDate" column="ModifiedDate" />
+    </class>
+</hibernate-mapping>

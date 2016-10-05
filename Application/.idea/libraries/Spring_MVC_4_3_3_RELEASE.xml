@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Spring MVC-4.3.3.RELEASE" type="spring-mvc">
+    <properties version="4.3.3.RELEASE" />
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/lib/spring" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/spring" recursive="false" />
+  </library>
+</component>
