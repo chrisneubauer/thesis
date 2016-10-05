@@ -187,6 +187,7 @@
     </orderEntry>
     <orderEntry type="library" name="commons-lang3-3.4" level="project" />
     <orderEntry type="library" name="konik-1.2.9" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.40-bin" level="project" />
   </component>
 </module>
 
