@@ -2,25 +2,25 @@ package de.cneubauer.domain.dao;
 
 import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.domain.bo.LegalPerson;
+import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
 import java.sql.Connection;
+import java.util.List;
 
-import static org.junit.Assert.*;
-
-public class LegalPersonDaoTest {
+public class LegalPersonDaoImplTest {
     private MySQLConnector connector;
     private Connection con;
-    private LegalPersonDao dao;
+    private LegalPersonDaoImpl dao;
 
     @Before
     public void setUp() throws Exception {
         this.connector = new MySQLConnector();
         this.con = connector.connect();
-        this.dao = new LegalPersonDao();
+        this.dao = new LegalPersonDaoImpl();
     }
 
     @After
@@ -46,6 +46,17 @@ public class LegalPersonDaoTest {
 
     @Test
     public void testGetById() throws Exception {
-        Assert.notNull(this.dao.getById(1));
+        LegalPerson p = this.dao.getById(1);
+        Assert.notNull(p);
+        Assert.isTrue(p.getId() == 1);
+    }
+
+    @Test
+    public void testGetAll() throws Exception {
+        List<LegalPerson> result = null;
+        result = this.dao.getAll();
+
+        Assert.notNull(result);
+        Assert.isTrue(result.size() > 0);
     }
 }

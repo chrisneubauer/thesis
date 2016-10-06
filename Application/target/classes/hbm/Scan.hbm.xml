@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="de.cneubauer.domain.bo.Scan" table="scan">
+        <id name="id" column="Id" >
+            <generator class="increment"/>
+            <!--<generator class="foreign">
+                <param name="property">stock</param>
+            </generator>-->
+        </id>
+        <property name="file" column="File" />
+        <property name="invoiceInformation" column="InvoiceInformation" />
+        <property name="createdDate" column="CreatedDate" />
+        <property name="modifiedDate" column="ModifiedDate" />
+        <one-to-one name="invoiceInformation" class="de.cneubauer.domain.bo.Invoice" cascade="save-update"/>
+    </class>
+</hibernate-mapping>

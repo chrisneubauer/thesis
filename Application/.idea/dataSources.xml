@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="963163579">
+  <component name="DataSourceManagerImpl" format="xml" hash="588502438">
     <data-source source="LOCAL" name="hibernate.cfg.xml" uuid="21b95e0e-ebb1-44ce-baff-c743e9ee7046">
       <driver-ref>mysql</driver-ref>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
@@ -9,6 +9,18 @@
       <user-password>dfdedfc5dfc5dfd8</user-password>
       <schema-pattern>ferd_transformator.*</schema-pattern>
       <default-schemas>ferd_transformator.*</default-schemas>
+      <libraries>
+        <library>
+          <url>file://D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\lib\mysql\mysql-connector-java-5.1.40-bin.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="src:main:hibernate.cfg.xml" uuid="b5cbee57-fef4-4a21-93c5-420c75dd15ea">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1:3306/ferd_transformator?autoReconnect=true</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfdedfc5dfc5dfd8</user-password>
       <libraries>
         <library>
           <url>file://D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\lib\mysql\mysql-connector-java-5.1.40-bin.jar</url>

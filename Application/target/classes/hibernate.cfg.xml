@@ -25,6 +25,7 @@
         <property name="hibernate.show_sql">true</property>
 
         <!-- mapping files -->
-        <mapping resource="/de/cneubauer/database/hbm/LegalPerson.hbm.xml"/>
+        <mapping resource="hbm/LegalPerson.hbm.xml"/>
+        <!--<mapping resource="/de/cneubauer/database/hbm/LegalPerson.hbm.xml"/>-->
     </session-factory>
 </hibernate-configuration>

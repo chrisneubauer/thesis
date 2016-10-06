@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect </property>
+        <!--<property name="dialect">org.hibernate.dialect.MySQLDialect</property>-->
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <!--<property name="connection.driver_class">com.mysql.jdbc.Driver</property>-->
+
+        <!-- Assume test is the database name -->
+        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/ferd_transformator?autoReconnect=true</property>
+        <!--<property name="connection.url">mysql://127.0.0.1:3306</property>    -->
+        <!--<property name="hibernate.connection.url">jdbc:mysql://localhost/</property>-->
+        <!--<property name="connection.url">jdbc:mysql://127.0.0.1:3306</property>-->
+
+        <property name="connection.username">root</property>
+        <property name="connection.password">toor</property>
+
+        <!--<property name="transaction.factory_class">org.hibernate.transaction.jdbc.JDBCTransactionFactory</property>-->
+
+        <!--thread is the short name for org.hibernate.context.ThreadLocalSessionContext and let Hibernate bind the session automatically to the thread-->
+        <property name="current_session_context_class">thread</property>
+
+        <property name="hibernate.show_sql">true</property>
+
+        <!-- mapping files -->
+        <mapping resource="hbm/LegalPerson.hbm.xml"/>
+        <!--<mapping resource="/de/cneubauer/database/hbm/LegalPerson.hbm.xml"/>-->
+    </session-factory>
+</hibernate-configuration>

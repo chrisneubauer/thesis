@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="de.cneubauer.domain.bo.Invoice" table="invoice">
+        <id name="id" column="Id" >
+            <generator class="increment"/>
+        </id>
+        <property name="debitor" column="Debitor" />
+        <property name="creditor" column="Creditor" />
+        <property name="date" column="Date" />
+        <property name="moneyVale" column="MoneyValue" />
+        <property name="hasSkonto" column="HasSkonto" />
+        <property name="skonto" column="Skonto" />
+        <property name="createdDate" column="CreatedDate" />
+        <property name="modifiedDate" column="ModifiedDate" />
+        <one-to-one name="debitor" class="de.cneubauer.domain.bo.LegalPerson" cascade="save-update"/>
+        <one-to-one name="creditor" class="de.cneubauer.domain.bo.LegalPerson" cascade="save-update"/>
+    </class>
+</hibernate-mapping>

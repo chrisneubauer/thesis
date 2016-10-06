@@ -4,6 +4,9 @@
     <class name="de.cneubauer.domain.bo.LegalPerson" table="legalperson">
         <id name="id" column="Id" >
             <generator class="increment"/>
+            <!--<generator class="foreign">
+                <param name="property">stock</param>
+            </generator>-->
         </id>
         <property name="isCompany" column="IsCompany" />
         <property name="companyName" column="CompanyName" />
