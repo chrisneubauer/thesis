@@ -26,6 +26,7 @@
 
         <!-- mapping files -->
         <mapping resource="hbm/LegalPerson.hbm.xml"/>
-        <!--<mapping resource="/de/cneubauer/database/hbm/LegalPerson.hbm.xml"/>-->
+        <mapping resource="hbm/Invoice.hbm.xml"/>
+        <mapping resource="hbm/Scan.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

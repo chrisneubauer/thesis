@@ -34,7 +34,7 @@ FOREIGN KEY (Creditor) REFERENCES LegalPerson(Id) ON DELETE CASCADE
 CREATE TABLE Scan (
 Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 -- eventually needs to be longblob
-File BLOB,
+File MEDIUMBLOB,
 InvoiceInformation INT(6) UNSIGNED NULL,
 CreatedDate TIMESTAMP,
 ModifiedDate TIMESTAMP,

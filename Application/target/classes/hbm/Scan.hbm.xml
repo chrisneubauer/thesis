@@ -9,7 +9,7 @@
             </generator>-->
         </id>
         <property name="file" column="File" />
-        <property name="invoiceInformation" column="InvoiceInformation" />
+        <!--<property name="invoiceInformation" column="InvoiceInformation" />-->
         <property name="createdDate" column="CreatedDate" />
         <property name="modifiedDate" column="ModifiedDate" />
         <one-to-one name="invoiceInformation" class="de.cneubauer.domain.bo.Invoice" cascade="save-update"/>

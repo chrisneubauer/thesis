@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  */
 public class Scan {
     private int id;
-    private Byte[] file;
+    private byte[] file;
     private Invoice invoiceInformation;
     private Timestamp createdDate;
     private Timestamp modifiedDate;
@@ -21,11 +21,11 @@ public class Scan {
         this.id = id;
     }
 
-    public Byte[] getFile() {
+    public byte[] getFile() {
         return file;
     }
 
-    public void setFile(Byte[] file) {
+    public void setFile(byte[] file) {
         this.file = file;
     }
 

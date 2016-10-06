@@ -1,26 +1,24 @@
 package de.cneubauer.domain.dao.impl;
 
-import de.cneubauer.domain.bo.Invoice;
-import de.cneubauer.domain.dao.InvoiceDao;
-import org.hibernate.query.Query;
+import de.cneubauer.domain.bo.Scan;
+import de.cneubauer.domain.dao.ScanDao;
 
-import javax.persistence.criteria.CriteriaQuery;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 06.10.2016.
- * Implementation of InvoiceDAO
+ * Implementation of ScanDao
  */
-public class InvoiceDaoImpl extends AbstractDao<Invoice> implements InvoiceDao {
-    public InvoiceDaoImpl() {
-        super(Invoice.class);
+public class ScanDaoImpl extends AbstractDao<Scan> implements ScanDao {
+    public ScanDaoImpl() {
+        super(Scan.class);
     }
 
     // hook-method before saving
     @Override
-    public void onSave(Invoice entity) {
+    public void onSave(Scan entity) {
         if(entity.getCreatedDate() == null) {
             entity.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
         }

@@ -1,8 +1,8 @@
-package de.cneubauer.domain.dao;
+package de.cneubauer.domain.dao.impl;
 
 import de.cneubauer.database.MySQLConnector;
+import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.LegalPerson;
-import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,16 +11,18 @@ import org.springframework.util.Assert;
 import java.sql.Connection;
 import java.util.List;
 
-public class LegalPersonDaoImplTest {
+public class InvoiceDaoImplTest {
     private MySQLConnector connector;
     private Connection con;
-    private LegalPersonDaoImpl dao;
+    private InvoiceDaoImpl dao;
+    private LegalPersonDaoImpl personDao;
 
     @Before
     public void setUp() throws Exception {
         this.connector = new MySQLConnector();
         this.con = connector.connect();
-        this.dao = new LegalPersonDaoImpl();
+        this.dao = new InvoiceDaoImpl();
+        this.personDao = new LegalPersonDaoImpl();
     }
 
     @After
@@ -30,33 +32,38 @@ public class LegalPersonDaoImplTest {
         }
         this.connector = null;
         this.dao = null;
+        this.personDao = null;
     }
 
     @Test
     public void testSave() throws Exception {
-        LegalPerson p = new LegalPerson();
-        p.setCompanyName("fakeCompany");
-        p.setCorporateForm("AG");
-        p.setCity("Erlangen");
-        p.setZipCode(91056);
+        Invoice i = new Invoice();
+        LegalPerson creditor = this.personDao.getById(1);
+        LegalPerson debitor = this.personDao.getById(2);
+
+        i.setCreditor(creditor);
+        i.setDebitor(debitor);
+        i.setMoneyVale(199.99);
+        i.setHasSkonto(false);
 
         //Assertion not needed. Should fail by exception
-        this.dao.save(p);
+        this.dao.save(i);
     }
 
     @Test
     public void testGetById() throws Exception {
-        LegalPerson p = this.dao.getById(1);
-        Assert.notNull(p);
-        Assert.isTrue(p.getId() == 1);
+        Invoice i = this.dao.getById(1);
+        Assert.notNull(i);
+        Assert.isTrue(i.getId() == 1);
     }
 
     @Test
     public void testGetAll() throws Exception {
-        List<LegalPerson> result = null;
+        List<Invoice> result;
         result = this.dao.getAll();
 
         Assert.notNull(result);
         Assert.isTrue(result.size() > 0);
+        System.out.println("Size of table Invoice: " + result.size());
     }
 }
