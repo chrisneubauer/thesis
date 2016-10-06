@@ -1,16 +1,20 @@
 package de.cneubauer.ocr;
 
+import de.cneubauer.AbstractTest;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.apache.commons.lang3.StringUtils;
 
-public class TesseractWrapperTest {
+public class TesseractWrapperTest extends AbstractTest {
     private TesseractWrapper wrapper;
 
     @Before
     public void setUp() throws Exception {
+        super.setUp();
+
+        databaseChanged = false;
         wrapper = new TesseractWrapper();
     }
 

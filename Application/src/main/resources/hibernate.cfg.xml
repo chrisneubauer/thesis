@@ -9,7 +9,7 @@
         <!--<property name="connection.driver_class">com.mysql.jdbc.Driver</property>-->
 
         <!-- Assume test is the database name -->
-        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/ferd_transformator?autoReconnect=true</property>
+        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/ferd_transformator?autoReconnect=true&amp;useSSL=false</property>
         <!--<property name="connection.url">mysql://127.0.0.1:3306</property>    -->
         <!--<property name="hibernate.connection.url">jdbc:mysql://localhost/</property>-->
         <!--<property name="connection.url">jdbc:mysql://127.0.0.1:3306</property>-->

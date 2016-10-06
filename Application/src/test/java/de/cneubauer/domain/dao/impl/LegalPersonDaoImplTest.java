@@ -1,5 +1,6 @@
 package de.cneubauer.domain.dao.impl;
 
+import de.cneubauer.AbstractTest;
 import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.domain.bo.LegalPerson;
 import org.junit.After;
@@ -10,13 +11,16 @@ import org.springframework.util.Assert;
 import java.sql.Connection;
 import java.util.List;
 
-public class LegalPersonDaoImplTest {
+public class LegalPersonDaoImplTest extends AbstractTest {
     private MySQLConnector connector;
     private Connection con;
     private LegalPersonDaoImpl dao;
 
     @Before
     public void setUp() throws Exception {
+        super.setUp();
+
+        databaseChanged = true;
         this.connector = new MySQLConnector();
         this.con = connector.connect();
         this.dao = new LegalPersonDaoImpl();
@@ -34,7 +38,7 @@ public class LegalPersonDaoImplTest {
     @Test
     public void testSave() throws Exception {
         LegalPerson p = new LegalPerson();
-        p.setCompanyName("fakeCompany2");
+        p.setCompanyName("fakeCompany");
         p.setCorporateForm("AG");
         p.setCity("Erlangen");
         p.setZipCode(91056);

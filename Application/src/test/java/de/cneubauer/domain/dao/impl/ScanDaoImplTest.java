@@ -1,7 +1,9 @@
 package de.cneubauer.domain.dao.impl;
 
+import de.cneubauer.AbstractTest;
 import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.bo.LegalPerson;
 import de.cneubauer.domain.bo.Scan;
 import org.junit.After;
 import org.junit.Before;
@@ -13,7 +15,7 @@ import java.nio.file.Files;
 import java.sql.Connection;
 import java.util.List;
 
-public class ScanDaoImplTest {
+public class ScanDaoImplTest extends AbstractTest {
     private MySQLConnector connector;
     private Connection con;
     private ScanDaoImpl dao;
@@ -21,6 +23,9 @@ public class ScanDaoImplTest {
 
     @Before
     public void setUp() throws Exception {
+        super.setUp();
+
+        databaseChanged = true;
         this.connector = new MySQLConnector();
         this.con = connector.connect();
         this.dao = new ScanDaoImpl();
@@ -43,7 +48,11 @@ public class ScanDaoImplTest {
 
         File pdf = new File(".\\src\\test\\resources\\invoice\\2015-11-26_Reifen Ebay.pdf");
 
-        Invoice i = this.invoiceDao.getById(1);
+        Invoice i = new Invoice();
+        i.setMoneyVale(299.99);
+        i.setHasSkonto(false);
+        i.setDebitor(new LegalPerson());
+        i.setCreditor(new LegalPerson());
 
         s.setInvoiceInformation(i);
         s.setFile(Files.readAllBytes(pdf.toPath()));

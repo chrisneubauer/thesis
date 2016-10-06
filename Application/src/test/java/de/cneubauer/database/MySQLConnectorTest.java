@@ -1,18 +1,12 @@
 package de.cneubauer.database;
 
+import de.cneubauer.AbstractTest;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert.*;
 
-import java.sql.Connection;
-
-
-public class MySQLConnectorTest {
-    private Connection connection;
-    private MySQLConnector connector;
-
+public class MySQLConnectorTest extends AbstractTest {
     @Before
     public void setUp() throws Exception {
         connector = new MySQLConnector();

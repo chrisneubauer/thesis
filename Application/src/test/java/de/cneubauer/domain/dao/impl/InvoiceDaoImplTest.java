@@ -1,5 +1,6 @@
 package de.cneubauer.domain.dao.impl;
 
+import de.cneubauer.AbstractTest;
 import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.LegalPerson;
@@ -11,7 +12,7 @@ import org.springframework.util.Assert;
 import java.sql.Connection;
 import java.util.List;
 
-public class InvoiceDaoImplTest {
+public class InvoiceDaoImplTest extends AbstractTest {
     private MySQLConnector connector;
     private Connection con;
     private InvoiceDaoImpl dao;
@@ -19,6 +20,9 @@ public class InvoiceDaoImplTest {
 
     @Before
     public void setUp() throws Exception {
+        super.setUp();
+
+        databaseChanged = true;
         this.connector = new MySQLConnector();
         this.con = connector.connect();
         this.dao = new InvoiceDaoImpl();
@@ -38,8 +42,11 @@ public class InvoiceDaoImplTest {
     @Test
     public void testSave() throws Exception {
         Invoice i = new Invoice();
-        LegalPerson creditor = this.personDao.getById(1);
-        LegalPerson debitor = this.personDao.getById(2);
+
+        LegalPerson creditor = new LegalPerson();
+        creditor.setName("Kreditor");
+        LegalPerson debitor = new LegalPerson();
+        debitor.setName("Debitor");
 
         i.setCreditor(creditor);
         i.setDebitor(debitor);
@@ -55,6 +62,8 @@ public class InvoiceDaoImplTest {
         Invoice i = this.dao.getById(1);
         Assert.notNull(i);
         Assert.isTrue(i.getId() == 1);
+        Assert.notNull(i.getCreditor());
+        Assert.notNull(i.getDebitor());
     }
 
     @Test
