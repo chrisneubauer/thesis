@@ -21,7 +21,7 @@ public class GUIController {
         try {
             Node node = (Node) e.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("..\\FXML\\scanForm.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../../../../FXML/scanForm.fxml"));
             Scene scene = new Scene(root, 800, 600);
             stage.setScene(scene);
             stage.show();
@@ -36,7 +36,7 @@ public class GUIController {
         try {
             Node node = (Node) e.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("..\\FXML\\searchDatabase.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../../../../FXML/searchDatabase.fxml"));
             Scene scene = new Scene(root, 800, 600);
             stage.setScene(scene);
             stage.show();
