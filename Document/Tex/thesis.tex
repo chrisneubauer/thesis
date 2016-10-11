@@ -1,0 +1,612 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Frame for Bachelor or Master Thesis at FAU/i1
+% Topic: [Title of thesis]
+% Copyright (C) 2012  [Author]
+% based on original work by Johannes Goetzfried, used with permission
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% usage hints:
+% - base document class is scrbook with some fancy additions
+% - can be used for English or German texts (Umlaut encodings enabled)
+% - inserts hyperlinks for cross referencing
+% 
+% included files contain examples for
+% - listings
+% - tables
+% - figures
+%
+% Use at your own risk, i1 offers only limited support for this frame.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Include Header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Header
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Font size and paper
+\documentclass[10pt,twoside,a4paper,bibliography=totoc]{scrbook}
+
+% Margin
+\usepackage{setspace}
+\usepackage{anysize}
+\marginsize{3cm}{3cm}{2cm}{2cm}
+
+% Font, Encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+
+% Fancy header and footer
+\usepackage{fancyhdr}
+
+% Graphics
+\usepackage{graphicx}
+\usepackage{float}
+\graphicspath{{images/}}
+
+% Math stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+
+% Code listings
+\usepackage{listings}
+\lstset{basicstyle=\footnotesize\ttfamily}
+
+% Links within pdf file
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black,
+	filecolor=black,
+	urlcolor=black,
+	breaklinks=true,
+	bookmarksnumbered=true,
+	pdfstartpage={1},
+        % adapt following lines if you want these items to show in pdf
+        % otherwise remove
+	pdftitle={Design and Implementation of a fault-tolerant form processing application using machine learning},
+	pdfsubject={Master Thesis},
+	pdfauthor={Christoph Neubauer}
+}
+
+% Figure captions
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+
+% for sample text, can be removed in production version
+\usepackage{blindtext}
+
+% Fancy toc title
+\renewcommand{\contentsname}{CONTENTS}
+
+% Fancy chapter page
+\makeatletter
+\def\@makechapterhead#1{
+  \vspace*{100\p@}
+  {\parindent \z@ 
+    {\raggedleft
+      \fontsize{15ex}{15ex}
+      \textsf\thechapter\par\nobreak}
+    \par\nobreak
+    \interlinepenalty\@M
+    {\raggedright \Huge \textsf{\textsc{#1}}}
+    \par\nobreak
+    \leavevmode \leaders \hrule height 0.65ex \hfill \kern \z@
+    \par\nobreak
+    \vskip 100\p@
+  }
+}
+
+% No headers on empty pages before new chapter
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+  \hbox{}
+  \thispagestyle{plain}
+  \newpage
+  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother \clearpage{\pagestyle{plain}\cleardoublepage}
+
+% Fancy header / footer for chapter pages
+\fancypagestyle{plain}{
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyfoot[LE,RO]{\thepage}
+}
+
+% Fancy header / footer for normal pages
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[LE,RO]{\thepage}
+\fancyhead[LO]{\leftmark}
+\fancyhead[RE]{\rightmark}
+
+% No indent for paragraphs
+\setlength{\parskip}{1.3ex plus 0.2ex minus 0.2ex}
+\setlength{\parindent}{0pt}
+
+% A few commands
+\newcommand{\term}[1]{\textit{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+% Fancy bibliography, see http://merkel.zoneo.net/Latex/natbib.php
+\usepackage[square,comma,numbers,sort&compress]{natbib}
+
+
+\begin{document}
+
+% Alphabetic page numbers
+\pagenumbering{alph}
+
+% Title
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Title
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+
+\titlehead{
+	\centering
+	\begin{tabular}[ht]{lcr}
+		\parbox{3cm}{
+			\centering
+			\includegraphics[width=2.5cm]{fau-logo.png}
+		} &
+		\parbox{5cm}{
+			\centering
+			Lehrstuhl für Informatik 5 \\
+			Friedrich-Alexander-Universität \\
+			Erlangen-Nürnberg \\
+		} &
+		\parbox{3cm}{
+			\centering
+			\includegraphics[width=2.5cm]{i5-logo.png}
+		}
+	\end{tabular}
+	\vspace{4em}
+}
+
+\subject{
+	MASTER THESIS
+}
+
+% you should also adapt entries for name and title in 00-0-header.tex
+% in the pdf tags (if you want)
+\title{
+  Design and Implementation of a fault-tolerant form processing application using machine learning
+}
+
+\author{
+	\vspace{4em}
+	Christoph Neubauer
+}
+
+\date{
+	Erlangen, \today
+}
+
+\publishers{
+	\begin{tabular}{lcl}
+		Examiner:  && Prof. Dr.-Ing. habil. Andreas Maier \\
+		Advisor:   && PD Dr.-Ing. habil. Peter Wilke \\
+		Second Advisor: && Prof. Dr. Luiz Eduardo S. Oliveira
+	\end{tabular}
+}
+
+\maketitle
+\end{titlepage}
+
+
+% Roman page numbers
+\pagenumbering{roman}
+
+% Pre content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Declaration 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Pseudo chapter
+\chapter*{\ }
+
+
+\vspace*{\fill}
+
+
+% Header
+\begin{Large}
+\chapter{Eidesstattliche Erklärung / Statuatory Declaration}
+%	\textbf{Eidesstattliche Erklärung / Statutory Declaration}
+\end{Large}
+\vspace{1.5em}
+
+
+\noindent\hrule
+
+% German
+Hiermit versichere ich eidesstattlich, dass die vorliegende Arbeit von mir
+selbständig, ohne Hilfe Dritter und ausschließlich unter Verwendung der
+angegebenen Quellen angefertigt wurde. Alle Stellen, die wörtlich oder
+sinngemäß aus den Quellen entnommen sind, habe ich als solche kennt\-lich
+gemacht. Die Arbeit wurde bisher in gleicher oder ähnlicher Form keiner anderen
+Prüfungsbehörde vorgelegt. 
+\vspace{1.5em}
+
+
+% English
+I hereby declare formally that I have developed and written the enclosed thesis
+entirely by myself and have not used sources or means without declaration in
+the text. Any thoughts or quotations which were inferred from the sources are
+marked as such. This thesis was not submitted in the same or a substantially
+similar version to any other authority to achieve an academic grading. 
+
+\noindent\hrule
+
+\vspace{2em}
+
+% remove the following text if it doesn't seem appropriate
+
+Der Friedrich-Alexander-Universität, vertreten durch den Lehrstuhl
+für Informatik 1, wird für Zwecke der Forschung und Lehre ein
+einfaches, kostenloses, zeitlich und örtlich unbeschränktes
+Nutzungsrecht an den Arbeitsergebnissen der Arbeit einschließlich
+etwaiger Schutz- und Urheberrechte eingeräumt.
+
+
+\vspace{2em}
+
+% Sign
+Erlangen, \today
+\begin{flushright}
+	\underline{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+		\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
+	} \\
+	\small{[YOUR NAME]}
+\end{flushright}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Abstract
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Pseudo chapter
+\chapter*{\ }
+
+
+\begin{center}
+	\begin{large}
+		\textbf{Zusammenfassung}
+	\end{large}
+\end{center}
+\vspace{0.75em}
+
+Zusammenfassung auf Deutsch \blindtext
+
+\vspace{2em}
+\begin{center}
+	\begin{large}
+		\textbf{Abstract}
+	\end{large}
+\end{center}
+\vspace{0.75em}
+
+Zusammenfassung auf Englisch \blindtext{}
+
+
+
+% Table of Contents
+ \listoftables
+ \listoffigures
+\begin{onehalfspacing}
+\tableofcontents
+\end{onehalfspacing}
+\cleardoublepage
+
+% Arabic page numbers
+\pagenumbering{arabic}
+
+
+% Actual content, can be split up into multiple files or kept in
+% one big file
+\fancyhead[RE]{\leftmark}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Introduction
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Introduction}
+
+Some general information on the context and setting. \blindtext{}
+
+\Blindtext[2][2]
+
+\section{Motivation}
+
+Specific motivation for the problem at hand. \blindtext{}
+
+\blindtext[2]
+
+\section{Task}
+
+Concrete task to be solved. \blindtext{}
+
+\blindtext{}
+
+
+\section{Related Work}
+
+Other relevant academic work and how it differs from this work, for
+example \citet{shannon_diff} and \citet{blowfish}. Distinguish between
+``textual'' citation, as shown in \citet{shannon_diff}, and
+``parenthesis'' citation \citep{blowfish}.
+
+\Blindtext[3][1]
+
+
+\section{Results}
+
+What has been achieved in this work? \blindtext{}
+
+\blindtext[2][1]
+
+\section{Outline}
+
+How is the thesis structured and why? \blindtext{}
+
+
+\section{Acknowledgments}
+
+A big thank you for the support to \ldots \blindtext
+
+
+\fancyhead[RE]{\rightmark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Background
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Background}
+\label{sec:background}
+
+\blindtext[3][2]
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.92\textwidth]{screenshot}
+	\caption{Some sample caption}
+	\label{fig:cbc_enc}
+\end{figure}
+
+
+In Figure~\ref{fig:cbc_enc} you can see how to refer to figures in text. \blindtext{}
+
+
+
+
+\begin{figure}
+\centering
+\footnotesize
+\begin{minipage}[b]{0.50\textwidth}
+\centering
+\begin{alignat*}{3}
+	\hat B_0     & := &\;& IP(P)           \\
+	\hat B_{i+1} & := &&   R_i(\hat B_i)   \\
+	C            & := &&   FP(\hat B_{32}) \\
+	\text{where~~~~~~~~~~~~~~~~~~~~~}      \\
+	R_i(X)       & =  &&   L(\hat S_i(X \oplus \hat K_i))
+						&\qquad& i = 0, \ldots, 30 \\
+	R_i(X)       & =  &&   \hat S_i(X \oplus \hat K_i) \oplus \hat K_{32}
+						&& i = 31
+\end{alignat*}
+\caption{Left part of a complex figure}
+\label{fig:serpentcode}
+\end{minipage}
+\hspace{0.25cm}
+\vline
+\hspace{0.25cm}
+\begin{minipage}[b]{0.40\textwidth}
+\centering
+\begin{align*}
+	X_0,X_1,X_2,X_3 & := \hat S_i(\hat B_i \oplus \hat K_i) \\
+	X_0             & := X_0 <<< 13 \\
+	X_2             & := X_2 <<< 3 \\
+	X_1             & := X_1 \oplus X_0 \oplus X_2 \\
+	X_3             & := X_3 \oplus X_2 \oplus (X_0 << 3) \\
+	X_1             & := X_1 <<< 1 \\
+	X_3             & := X_3 <<< 7 \\
+	X_0             & := X_0 \oplus X_1 \oplus X_3 \\
+	X_2             & := X_2 \oplus X_3 \oplus (X_1 << 7) \\
+	X_0             & := X_0 <<< 5 \\
+	X_2             & := X_2 <<< 22 \\
+	\hat B_{i+1}    & := X_0,X_1,X_2,X_3
+\end{align*}
+\caption{Right part of the figure}
+\label{fig:serpentlin}
+\end{minipage}
+\end{figure}
+
+A more complex figure is shown in Figure~\ref{fig:serpentlin}. \blindtext
+
+
+
+
+
+\begin{figure}
+\centering
+\begin{minipage}[b]{0.45\textwidth}
+\centering
+\begin{tabular}{c}
+\begin{lstlisting}
+  unsigned char s0[16] = {
+          3,  8, 15,  1,
+         10,  6,  5, 11,
+         14, 13,  4,  2,
+          7,  0,  9, 12
+  };
+\end{lstlisting}
+\end{tabular}
+\caption{Serpent S-box $S_0$ written as array}
+\label{fig:serpents0a}
+\end{minipage}
+\hspace{0.25cm}
+\vline
+\hspace{0.25cm}
+\begin{minipage}[b]{0.45\textwidth}
+\centering
+\begin{tabular}{c}
+\begin{lstlisting}
+#define S0(x0, x1, x2, x3, x4) ({ \
+                        x4  = x3; \
+  x3 |= x0;  x0 ^= x4;  x4 ^= x2; \
+  x4 = ~x4;  x3 ^= x1;  x1 &= x0; \
+  x1 ^= x4;  x2 ^= x0;  x0 ^= x3; \
+  x4 |= x0;  x0 ^= x2;  x2 &= x1; \
+  x3 ^= x2;  x1 = ~x1;  x2 ^= x4; \
+  x1 ^= x2;                       \
+})
+\end{lstlisting}
+\end{tabular}
+\caption{$S_0$ written as logical sequence}
+\label{fig:serpents0l}
+\end{minipage}
+\end{figure}
+
+
+A figure using listings is shown in Figure~\ref{fig:serpents0l}. \blindtext
+
+As an example of a complex enumeration, here is
+the kernel tree of Linux:
+%
+\begin{itemize}
+	\item {\bf\code{arch/x86}}: x86\_32 and x86\_64 specific source code
+	\begin{itemize}
+		\item {\bf\code{crypto}}: x86 specific implementation of ciphers
+		\item {\bf\code{include/asm}}: x86 specific kernel headers
+	\end{itemize}
+	\item \code{block}: Block I/O layer
+	\item {\bf\code{crypto}}: Crypto API
+	\item \code{drivers}: Device drivers
+	\item \code{firmware}: Device firmware
+	\item \code{fs}: Filesystem implementations
+	\item {\bf\code{include}}: Kernel headers
+	\begin{itemize}
+		\item {\bf\code{crypto}}: Crypto API headers
+	\end{itemize}
+	\item \code{init}: Kernel boot and initialization code
+	\item \code{ipc}: Interprocess communication
+	\item \code{kernel}: Core subsystems (e.g. scheduling)
+	\item \code{lib}: Helper routines
+	\item \code{mm}: Memory Management subsystem
+	\item \code{net}: Networking subsystem (Ethernet, IPv4, IPv6, ...)
+	\item \code{security}: Linux Security Module
+	\item \code{sound}: Sound subsystem
+	\item \code{virt}: Virtualization infrastructure
+\end{itemize}
+
+\Blindtext[2][1]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Implementation
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Implementation}
+\label{sec:implementation}
+
+
+\Blindtext[5][2]
+
+\begin{figure}
+\centering
+\begin{tabular}{c}
+\begin{lstlisting}
+static int __init serpent_init(void)
+{
+    u64 xcr0;
+    if (!cpu_has_avx || !cpu_has_osxsave) {
+        printk(KERN_INFO "AVX instructions are not detected.\n");
+        return -ENODEV;
+    }
+    xcr0 = xgetbv(XCR_XFEATURE_ENABLED_MASK);
+    if ((xcr0 & (XSTATE_SSE | XSTATE_YMM)) != (XSTATE_SSE | XSTATE_YMM)) {
+        printk(KERN_INFO "AVX detected but unusable.\n");
+        return -ENODEV;
+    }
+    return crypto_register_algs(serpent_algs, ARRAY_SIZE(serpent_algs));
+}
+
+static void __exit serpent_exit(void)
+{
+    crypto_unregister_algs(serpent_algs, ARRAY_SIZE(serpent_algs));
+}
+
+module_init(serpent_init);
+module_exit(serpent_exit);
+
+MODULE_DESCRIPTION("Serpent Cipher Algorithm, AVX optimized");
+MODULE_LICENSE("GPL");
+MODULE_ALIAS("serpent");
+\end{lstlisting}
+\end{tabular}
+\caption{Serpent AVX module initialization}
+\label{fig:serpent_init}
+\end{figure}
+
+Some complex code is shown in Figure~\ref{fig:serpent_init}. \blindtext
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Evaluation
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Evaluation}
+\label{sec:evaluation}
+
+\Blindtext[5][1]
+
+
+
+\fancyhead[RE]{\leftmark}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Conclusion and Future Work
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Conclusion and Future Work}
+\label{sec:conclusion_and_future_work}
+
+In this chapter we want to draw conclusions about the work, which has been done
+during this thesis. \blindtext
+
+
+\fancyhead[RE]{\rightmark}
+
+
+% Bibliography
+%\bibliographystyle{plainnat}
+\bibliography{thesis}
+
+\cleardoublepage
+
+\end{document}

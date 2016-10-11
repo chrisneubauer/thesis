@@ -1,13 +1,20 @@
 package de.cneubauer.transformation;
 
+import io.konik.PdfHandler;
+import io.konik.validation.InvoiceValidator;
 import io.konik.zugferd.Invoice;
 import io.konik.zugferd.entity.*;
 import io.konik.zugferd.entity.trade.*;
 import io.konik.zugferd.entity.trade.item.*;
 import io.konik.zugferd.unece.codes.TaxCode;
 import io.konik.zugferd.unqualified.*;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
+import javax.validation.*;
+import java.io.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 import static com.neovisionaries.i18n.CountryCode.DE;
 import static com.neovisionaries.i18n.CurrencyCode.EUR;
@@ -19,9 +26,42 @@ import static org.apache.commons.lang3.time.DateUtils.addMonths;
 
 /**
  * Created by Christoph Neubauer on 21.09.2016.
- *
+ * Basic transformation class that provides methods to convert invoice information to zugferd
+ * TODO: provide actual invoice params instead of mock classes
  */
 public class ZugFerdTransformator {
+
+    private Logger log = Logger.getLogger(this.getClass());
+
+    public void addMockInvoiceToPDF(String pdfPath, String pdfName) throws IOException {
+        Invoice metaData = this.createMockInvoice();
+        OutputStream outPdf = new FileOutputStream(".\\target\\test-classes\\generatedPDF\\" + pdfName + ".pdf");
+        InputStream reader = this.getClass().getResourceAsStream(pdfPath);
+
+        PdfHandler pdfHandler = new PdfHandler();
+        pdfHandler.appendInvoice(metaData, reader, outPdf);
+    }
+
+    public Invoice extracInvoiceFromMockPdf(String pdfName) {
+        PdfHandler handler = new PdfHandler();
+        InputStream inputZugferdPdfStream = getClass().getResourceAsStream("../../../../../target/test-classes/generatedPDF/" + pdfName + ".pdf");
+        return handler.extractInvoice(inputZugferdPdfStream);
+    }
+
+    public void validateMockInvoiceFromPdf(String pdfName) {
+        //setup
+        Invoice invoice = extracInvoiceFromMockPdf(pdfName);
+        InvoiceValidator invoiceValidator = new InvoiceValidator();
+
+        //execute
+        Set<ConstraintViolation<Invoice>> violations = invoiceValidator.validate(invoice);
+
+        for (ConstraintViolation<Invoice> violation : violations) {
+            log.log(Level.INFO, violation.getMessage() + " at: " + violation.getPropertyPath() );
+        }
+        //verify
+        System.out.println("Violations: " + violations.size());
+    }
 
     public Invoice createMockInvoice() {
 

@@ -8,5 +8,17 @@
     <artifactId>Application</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>io.konik</groupId>
+            <artifactId>konik</artifactId>
+            <version>1.2.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.konik</groupId>
+            <artifactId>pdfbox-carriage</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+    </dependencies>
 </project>

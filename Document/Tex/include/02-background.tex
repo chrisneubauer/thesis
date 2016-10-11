@@ -1,0 +1,146 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Background
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Background}
+\label{sec:background}
+
+\blindtext[3][2]
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.92\textwidth]{screenshot}
+	\caption{Some sample caption}
+	\label{fig:cbc_enc}
+\end{figure}
+
+
+In Figure~\ref{fig:cbc_enc} you can see how to refer to figures in text. \blindtext{}
+
+
+
+
+\begin{figure}
+\centering
+\footnotesize
+\begin{minipage}[b]{0.50\textwidth}
+\centering
+\begin{alignat*}{3}
+	\hat B_0     & := &\;& IP(P)           \\
+	\hat B_{i+1} & := &&   R_i(\hat B_i)   \\
+	C            & := &&   FP(\hat B_{32}) \\
+	\text{where~~~~~~~~~~~~~~~~~~~~~}      \\
+	R_i(X)       & =  &&   L(\hat S_i(X \oplus \hat K_i))
+						&\qquad& i = 0, \ldots, 30 \\
+	R_i(X)       & =  &&   \hat S_i(X \oplus \hat K_i) \oplus \hat K_{32}
+						&& i = 31
+\end{alignat*}
+\caption{Left part of a complex figure}
+\label{fig:serpentcode}
+\end{minipage}
+\hspace{0.25cm}
+\vline
+\hspace{0.25cm}
+\begin{minipage}[b]{0.40\textwidth}
+\centering
+\begin{align*}
+	X_0,X_1,X_2,X_3 & := \hat S_i(\hat B_i \oplus \hat K_i) \\
+	X_0             & := X_0 <<< 13 \\
+	X_2             & := X_2 <<< 3 \\
+	X_1             & := X_1 \oplus X_0 \oplus X_2 \\
+	X_3             & := X_3 \oplus X_2 \oplus (X_0 << 3) \\
+	X_1             & := X_1 <<< 1 \\
+	X_3             & := X_3 <<< 7 \\
+	X_0             & := X_0 \oplus X_1 \oplus X_3 \\
+	X_2             & := X_2 \oplus X_3 \oplus (X_1 << 7) \\
+	X_0             & := X_0 <<< 5 \\
+	X_2             & := X_2 <<< 22 \\
+	\hat B_{i+1}    & := X_0,X_1,X_2,X_3
+\end{align*}
+\caption{Right part of the figure}
+\label{fig:serpentlin}
+\end{minipage}
+\end{figure}
+
+A more complex figure is shown in Figure~\ref{fig:serpentlin}. \blindtext
+
+
+
+
+
+\begin{figure}
+\centering
+\begin{minipage}[b]{0.45\textwidth}
+\centering
+\begin{tabular}{c}
+\begin{lstlisting}
+  unsigned char s0[16] = {
+          3,  8, 15,  1,
+         10,  6,  5, 11,
+         14, 13,  4,  2,
+          7,  0,  9, 12
+  };
+\end{lstlisting}
+\end{tabular}
+\caption{Serpent S-box $S_0$ written as array}
+\label{fig:serpents0a}
+\end{minipage}
+\hspace{0.25cm}
+\vline
+\hspace{0.25cm}
+\begin{minipage}[b]{0.45\textwidth}
+\centering
+\begin{tabular}{c}
+\begin{lstlisting}
+#define S0(x0, x1, x2, x3, x4) ({ \
+                        x4  = x3; \
+  x3 |= x0;  x0 ^= x4;  x4 ^= x2; \
+  x4 = ~x4;  x3 ^= x1;  x1 &= x0; \
+  x1 ^= x4;  x2 ^= x0;  x0 ^= x3; \
+  x4 |= x0;  x0 ^= x2;  x2 &= x1; \
+  x3 ^= x2;  x1 = ~x1;  x2 ^= x4; \
+  x1 ^= x2;                       \
+})
+\end{lstlisting}
+\end{tabular}
+\caption{$S_0$ written as logical sequence}
+\label{fig:serpents0l}
+\end{minipage}
+\end{figure}
+
+
+A figure using listings is shown in Figure~\ref{fig:serpents0l}. \blindtext
+
+As an example of a complex enumeration, here is
+the kernel tree of Linux:
+%
+\begin{itemize}
+	\item {\bf\code{arch/x86}}: x86\_32 and x86\_64 specific source code
+	\begin{itemize}
+		\item {\bf\code{crypto}}: x86 specific implementation of ciphers
+		\item {\bf\code{include/asm}}: x86 specific kernel headers
+	\end{itemize}
+	\item \code{block}: Block I/O layer
+	\item {\bf\code{crypto}}: Crypto API
+	\item \code{drivers}: Device drivers
+	\item \code{firmware}: Device firmware
+	\item \code{fs}: Filesystem implementations
+	\item {\bf\code{include}}: Kernel headers
+	\begin{itemize}
+		\item {\bf\code{crypto}}: Crypto API headers
+	\end{itemize}
+	\item \code{init}: Kernel boot and initialization code
+	\item \code{ipc}: Interprocess communication
+	\item \code{kernel}: Core subsystems (e.g. scheduling)
+	\item \code{lib}: Helper routines
+	\item \code{mm}: Memory Management subsystem
+	\item \code{net}: Networking subsystem (Ethernet, IPv4, IPv6, ...)
+	\item \code{security}: Linux Security Module
+	\item \code{sound}: Sound subsystem
+	\item \code{virt}: Virtualization infrastructure
+\end{itemize}
+
+\Blindtext[2][1]
