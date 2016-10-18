@@ -5,10 +5,14 @@
         <id name="id" column="Id" >
             <generator class="increment"/>
         </id>
-        <!--<property name="debitor" column="Debitor" />
-        <property name="creditor" column="Creditor" />-->
-        <property name="date" column="Date" />
-        <property name="moneyVale" column="MoneyValue" />
+        <property name="invoiceNumber" column="InvoiceNumber"/>
+        <property name="issueDate" column="IssueDate" />
+        <property name="lineTotal" column="LineTotal" />
+        <property name="chargeTotal" column="ChargeTotal" />
+        <property name="allowanceTotal" column="AllowanceTotal" />
+        <property name="taxBasisTotal" column="TaxBasisTotal" />
+        <property name="taxTotal" column="TaxTotal" />
+        <property name="grandTotal" column="GrandTotal" />
         <property name="hasSkonto" column="HasSkonto" />
         <property name="skonto" column="Skonto" />
         <property name="createdDate" column="CreatedDate" />

@@ -10,13 +10,14 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 import java.sql.Connection;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class InvoiceDaoImplTest extends AbstractTest {
     private MySQLConnector connector;
     private Connection con;
     private InvoiceDaoImpl dao;
-    private LegalPersonDaoImpl personDao;
 
     @Before
     public void setUp() throws Exception {
@@ -26,7 +27,6 @@ public class InvoiceDaoImplTest extends AbstractTest {
         this.connector = new MySQLConnector();
         this.con = connector.connect();
         this.dao = new InvoiceDaoImpl();
-        this.personDao = new LegalPersonDaoImpl();
     }
 
     @After
@@ -36,12 +36,13 @@ public class InvoiceDaoImplTest extends AbstractTest {
         }
         this.connector = null;
         this.dao = null;
-        this.personDao = null;
     }
 
     @Test
     public void testSave() throws Exception {
         Invoice i = new Invoice();
+        i.setIssueDate(Timestamp.valueOf(LocalDateTime.now()));
+        i.setDeliveryDate(Timestamp.valueOf(LocalDateTime.now()));
 
         LegalPerson creditor = new LegalPerson();
         creditor.setName("Kreditor");
@@ -50,7 +51,12 @@ public class InvoiceDaoImplTest extends AbstractTest {
 
         i.setCreditor(creditor);
         i.setDebitor(debitor);
-        i.setMoneyVale(199.99);
+        i.setLineTotal(100);
+        i.setChargeTotal(0);
+        i.setAllowanceTotal(0);
+        i.setTaxBasisTotal(100);
+        i.setTaxTotal(19);
+        i.setGrandTotal(119);
         i.setHasSkonto(false);
 
         //Assertion not needed. Should fail by exception

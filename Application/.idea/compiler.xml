@@ -25,6 +25,8 @@
         <module name="Application" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="Application" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
-

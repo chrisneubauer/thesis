@@ -19,7 +19,6 @@ public class ScanDaoImplTest extends AbstractTest {
     private MySQLConnector connector;
     private Connection con;
     private ScanDaoImpl dao;
-    private InvoiceDaoImpl invoiceDao;
 
     @Before
     public void setUp() throws Exception {
@@ -29,7 +28,6 @@ public class ScanDaoImplTest extends AbstractTest {
         this.connector = new MySQLConnector();
         this.con = connector.connect();
         this.dao = new ScanDaoImpl();
-        this.invoiceDao = new InvoiceDaoImpl();
     }
 
     @After
@@ -39,7 +37,6 @@ public class ScanDaoImplTest extends AbstractTest {
         }
         this.connector = null;
         this.dao = null;
-        this.invoiceDao = null;
     }
 
     @Test
@@ -49,7 +46,7 @@ public class ScanDaoImplTest extends AbstractTest {
         File pdf = new File(".\\src\\test\\resources\\invoice\\2015-11-26_Reifen Ebay.pdf");
 
         Invoice i = new Invoice();
-        i.setMoneyVale(299.99);
+        i.setGrandTotal(299.99);
         i.setHasSkonto(false);
         i.setDebitor(new LegalPerson());
         i.setCreditor(new LegalPerson());

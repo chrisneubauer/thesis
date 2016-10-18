@@ -87,7 +87,7 @@ public class ZugFerdTransformator {
                         .setSeller(seller)
                         .setBuyer(buyer)
         );
-        ZfDate deliveryDate = new ZfDateDay(invInfo.getDate().getTime());
+        ZfDate deliveryDate = new ZfDateDay(invInfo.getIssueDate().getTime());
         trade.setDelivery(new Delivery(deliveryDate));
         return invoice;
     }
@@ -131,7 +131,7 @@ public class ZugFerdTransformator {
     }
 
 
-    private Invoice createFullConformalBasicInvoice(de.cneubauer.domain.bo.Invoice inv) {
+    public Invoice createFullConformalBasicInvoice(de.cneubauer.domain.bo.Invoice inv) {
         Invoice i = new Invoice(BASIC);
 
         Context con = new Context(BASIC);
@@ -142,8 +142,9 @@ public class ZugFerdTransformator {
         Header h = new Header();
         //TODO: Application could also support other types except invoices
         h.setName("RECHNUNG");
+        h.setInvoiceNumber(inv.getInvoiceNumber());
         h.setCode(_380);
-        h.setIssued(new ZfDateDay(inv.getDate().getTime()));
+        h.setIssued(new ZfDateDay(inv.getIssueDate().getTime()));
 
         Trade tr = new Trade();
 
@@ -153,7 +154,7 @@ public class ZugFerdTransformator {
 
         Delivery d;
         if (inv.getDeliveryDate() == null) {
-            d = new Delivery(new ZfDateDay(inv.getDate().getTime()));
+            d = new Delivery(new ZfDateDay(inv.getIssueDate().getTime()));
         } else {
             d = new Delivery(new ZfDateDay(inv.getDeliveryDate().getTime()));
         }
@@ -170,6 +171,8 @@ public class ZugFerdTransformator {
         s.setCurrency(EUR);
         s.setMonetarySummation(sum);
 
+        Item item = new Item();
+        tr.addItem(item);
         tr.setAgreement(a);
         tr.setDelivery(d);
         tr.setSettlement(s);

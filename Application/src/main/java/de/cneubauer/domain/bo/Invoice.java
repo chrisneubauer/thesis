@@ -1,7 +1,5 @@
 package de.cneubauer.domain.bo;
 
-import io.konik.zugferd.unqualified.ZfDate;
-
 import java.sql.Timestamp;
 
 /**
@@ -10,11 +8,11 @@ import java.sql.Timestamp;
  */
 public class Invoice {
     private int id;
+    private String invoiceNumber;
     private LegalPerson debitor;
     private LegalPerson creditor;
-    private Timestamp date;
+    private Timestamp issueDate;
     private Timestamp deliveryDate;
-    private double moneyVale;
     private double lineTotal;
     private double chargeTotal;
     private double allowanceTotal;
@@ -34,6 +32,14 @@ public class Invoice {
         this.id = id;
     }
 
+    public String getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
+    }
+
     public LegalPerson getDebitor() {
         return debitor;
     }
@@ -50,20 +56,12 @@ public class Invoice {
         this.creditor = creditor;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public Timestamp getIssueDate() {
+        return issueDate;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
-    }
-
-    public double getMoneyVale() {
-        return moneyVale;
-    }
-
-    public void setMoneyVale(double moneyVale) {
-        this.moneyVale = moneyVale;
+    public void setIssueDate(Timestamp issueDate) {
+        this.issueDate = issueDate;
     }
 
     public boolean isHasSkonto() {
@@ -153,6 +151,4 @@ public class Invoice {
     public void setGrandTotal(double grandTotal) {
         this.grandTotal = grandTotal;
     }
-
-
 }

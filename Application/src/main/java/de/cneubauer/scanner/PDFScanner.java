@@ -3,8 +3,6 @@ package de.cneubauer.scanner;
 import com.snowtide.PDF;
 import com.snowtide.pdf.Document;
 import com.snowtide.pdf.OutputTarget;
-import com.snowtide.pdf.PDFTextStream;
-import java.io.*;
 
 /**
  * Created by Christoph on 17.08.2016.
