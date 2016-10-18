@@ -1,11 +1,14 @@
 package de.cneubauer.transformation;
 
+import de.cneubauer.domain.bo.LegalPerson;
 import io.konik.PdfHandler;
 import io.konik.validation.InvoiceValidator;
 import io.konik.zugferd.Invoice;
 import io.konik.zugferd.entity.*;
 import io.konik.zugferd.entity.trade.*;
 import io.konik.zugferd.entity.trade.item.*;
+import io.konik.zugferd.profile.Profile;
+import io.konik.zugferd.profile.ProfileVersion;
 import io.konik.zugferd.unece.codes.TaxCode;
 import io.konik.zugferd.unqualified.*;
 import org.apache.log4j.Level;
@@ -31,7 +34,7 @@ import static org.apache.commons.lang3.time.DateUtils.addMonths;
  */
 public class ZugFerdTransformator {
 
-    private Logger log = Logger.getLogger(this.getClass());
+    private Logger logger = Logger.getLogger(this.getClass());
 
     public void addMockInvoiceToPDF(String pdfPath, String pdfName) throws IOException {
         Invoice metaData = this.createMockInvoice();
@@ -42,25 +45,144 @@ public class ZugFerdTransformator {
         pdfHandler.appendInvoice(metaData, reader, outPdf);
     }
 
-    public Invoice extracInvoiceFromMockPdf(String pdfName) {
+    public Invoice extractInvoiceFromMockPdf(String pdfName) {
         PdfHandler handler = new PdfHandler();
         InputStream inputZugferdPdfStream = getClass().getResourceAsStream("../../../../../target/test-classes/generatedPDF/" + pdfName + ".pdf");
         return handler.extractInvoice(inputZugferdPdfStream);
     }
 
+    public void appendInvoiceToPdf(String pdfPath, String pdfName, Invoice i) throws IOException {
+        OutputStream outPdf = new FileOutputStream(".\\target\\test-classes\\generatedPDF\\" + pdfName + ".pdf");
+        InputStream reader = this.getClass().getResourceAsStream(pdfPath);
+
+        PdfHandler pdfHandler = new PdfHandler();
+        pdfHandler.appendInvoice(i, reader, outPdf);
+    }
+
     public void validateMockInvoiceFromPdf(String pdfName) {
         //setup
-        Invoice invoice = extracInvoiceFromMockPdf(pdfName);
+        Invoice invoice = extractInvoiceFromMockPdf(pdfName);
         InvoiceValidator invoiceValidator = new InvoiceValidator();
 
         //execute
         Set<ConstraintViolation<Invoice>> violations = invoiceValidator.validate(invoice);
 
         for (ConstraintViolation<Invoice> violation : violations) {
-            log.log(Level.INFO, violation.getMessage() + " at: " + violation.getPropertyPath() );
+            logger.log(Level.INFO, violation.getMessage() + " at: " + violation.getPropertyPath() );
         }
         //verify
         System.out.println("Violations: " + violations.size());
+    }
+
+    public Invoice createInvoice(de.cneubauer.domain.bo.Invoice invInfo) {
+        Invoice invoice = new Invoice(BASIC);
+        invoice.setHeader(new Header().setInvoiceNumber(String.valueOf(invInfo.getId())).setCode(_380));
+
+        Trade trade = new Trade();
+        TradeParty seller = this.convertLegalPersonToTradeParty(invInfo.getCreditor());
+
+        TradeParty buyer = this.convertLegalPersonToTradeParty(invInfo.getDebitor());
+        trade.setAgreement(
+                new Agreement()
+                        .setSeller(seller)
+                        .setBuyer(buyer)
+        );
+        ZfDate deliveryDate = new ZfDateDay(invInfo.getDate().getTime());
+        trade.setDelivery(new Delivery(deliveryDate));
+        return invoice;
+    }
+
+    public boolean isInvoiceValid(Invoice i) {
+        InvoiceValidator invoiceValidator = new InvoiceValidator();
+
+        //execute
+        Set<ConstraintViolation<Invoice>> violations = invoiceValidator.validate(i);
+
+        for (ConstraintViolation<Invoice> violation : violations) {
+            logger.log(Level.INFO, violation.getMessage() + " at: " + violation.getPropertyPath() );
+        }
+        //verify
+        System.out.println("Violations: " + violations.size());
+        return violations.size() < 1;
+    }
+
+    private TradeParty convertLegalPersonToTradeParty(LegalPerson p) {
+        TradeParty result = new TradeParty();
+        if (p.getIsCompany()) {
+            result.setName(p.getCompanyName() + " " + p.getCorporateForm());
+        } else {
+            result.setName(p.getName() + " " + p.getSurName());
+        }
+        Address a = new Address();
+        if (p.getZipCode() > 0) {
+            a.setPostcode(String.valueOf(p.getZipCode()));
+        }
+        if (p.getCity() != null) {
+            a.setCity(p.getCity());
+        }
+        if (p.getStreet() != null) {
+            a.setLineOne(p.getStreet());
+        }
+        //TODO: Get Country
+        a.setCountry(DE);
+        result.setAddress(a);
+
+        return result;
+    }
+
+
+    private Invoice createFullConformalBasicInvoice(de.cneubauer.domain.bo.Invoice inv) {
+        Invoice i = new Invoice(BASIC);
+
+        Context con = new Context(BASIC);
+        Profile guideline = new Profile(BASIC);
+        guideline.setVersion(ProfileVersion.V1P0);
+        con.setGuideline(guideline);
+
+        Header h = new Header();
+        //TODO: Application could also support other types except invoices
+        h.setName("RECHNUNG");
+        h.setCode(_380);
+        h.setIssued(new ZfDateDay(inv.getDate().getTime()));
+
+        Trade tr = new Trade();
+
+        Agreement a = new Agreement();
+        a.setBuyer(new TradeParty().setName(inv.getDebitor().getName()));
+        a.setSeller(new TradeParty().setName(inv.getCreditor().getName()));
+
+        Delivery d;
+        if (inv.getDeliveryDate() == null) {
+            d = new Delivery(new ZfDateDay(inv.getDate().getTime()));
+        } else {
+            d = new Delivery(new ZfDateDay(inv.getDeliveryDate().getTime()));
+        }
+
+        MonetarySummation sum = new MonetarySummation();
+        sum.setLineTotal(new Amount(BigDecimal.valueOf(inv.getLineTotal()), EUR));
+        sum.setChargeTotal(new Amount(BigDecimal.valueOf(inv.getChargeTotal()), EUR));
+        sum.setAllowanceTotal(new Amount(BigDecimal.valueOf(inv.getAllowanceTotal()), EUR));
+        sum.setTaxBasisTotal(new Amount(BigDecimal.valueOf(inv.getTaxBasisTotal()), EUR));
+        sum.setTaxTotal(new Amount(BigDecimal.valueOf(inv.getTaxTotal()), EUR));
+        sum.setGrandTotal(new Amount(BigDecimal.valueOf(inv.getGrandTotal()), EUR));
+
+        Settlement s = new Settlement();
+        s.setCurrency(EUR);
+        s.setMonetarySummation(sum);
+
+        tr.setAgreement(a);
+        tr.setDelivery(d);
+        tr.setSettlement(s);
+
+        i.setContext(con);
+        i.setHeader(h);
+        i.setTrade(tr);
+
+        if (this.isInvoiceValid(i)) {
+            return i;
+        } else {
+            return null;
+        }
     }
 
     public Invoice createMockInvoice() {

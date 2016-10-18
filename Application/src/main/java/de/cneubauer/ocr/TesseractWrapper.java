@@ -5,16 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sourceforge.tess4j.*;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 /**
  * Created by Christoph on 17.08.2016.
  * Uses Tess4J as a wrapper for googles Tesseract
  */
 public class TesseractWrapper {
     private String language = "deu+eng";
+    private Logger logger = Logger.getLogger(this.getClass());
+
 
     public String initOcr(String path) {
         File imageFile = new File(path);
+
+        logger.log(Level.INFO, "initiating tesseract instance");
+        long time = System.currentTimeMillis();
         ITesseract instance = new Tesseract();
+        logger.log(Level.INFO, "initialization of tesseract completed. Time taken: " + (System.currentTimeMillis() - time));
 
         instance.setDatapath(".");
         instance.setLanguage(this.getLanguage());

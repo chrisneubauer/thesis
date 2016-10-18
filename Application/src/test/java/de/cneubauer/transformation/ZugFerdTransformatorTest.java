@@ -48,7 +48,7 @@ public class ZugFerdTransformatorTest {
         } catch (Exception e) {
             throw new AssertionFailedError("Unable to add invoice to pdf");
         }
-        Invoice result = transformator.extracInvoiceFromMockPdf("mockTest");
+        Invoice result = transformator.extractInvoiceFromMockPdf("mockTest");
         transformator.validateMockInvoiceFromPdf("mockTest");
 
         Assert.assertEquals(result.getHeader().getInvoiceNumber(), generatedInvoice.getHeader().getInvoiceNumber());
