@@ -45,6 +45,12 @@ public class GUIController {
         }
     }
 
+    //this method opens invoice information after ocr processing
+    @FXML
+    protected void openExtractionInformationMenu() {
+
+    }
+
     //this method saves all states and closes the application
     @FXML
     protected void closeApplication() {

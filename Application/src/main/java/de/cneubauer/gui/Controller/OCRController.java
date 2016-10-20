@@ -1,6 +1,10 @@
 package de.cneubauer.gui.Controller;
 
+import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.service.OCRDataExtractorService;
 import de.cneubauer.ocr.TesseractWrapper;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -27,14 +31,22 @@ public class OCRController extends GUIController {
     }
 
     @FXML
-    protected void scanFile() {
+    protected void scanFile(ActionEvent e) {
         boolean valid = this.validateFileInput();
         if (valid) {
             File fileToScan = new File(this.fileInput.getText());
             TesseractWrapper wrapper = new TesseractWrapper();
             String result = wrapper.initOcr(fileToScan.getPath());
             System.out.println(result);
+            OCRDataExtractorService service = new OCRDataExtractorService(result);
+            Invoice extractedInformation = service.extractInformation();
+            this.showResultsBeforeSave(extractedInformation);
         }
+    }
+
+    @FXML
+    private void showResultsBeforeSave(Invoice invInfo) {
+        super.openExtractionInformationMenu();
     }
 
     private boolean validateFileInput() {
