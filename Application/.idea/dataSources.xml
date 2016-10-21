@@ -36,6 +36,11 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
+      <libraries>
+        <library>
+          <url>file://D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\lib\mysql\mysql-connector-java-5.1.40-bin.jar</url>
+        </library>
+      </libraries>
     </data-source>
   </component>
 </project>

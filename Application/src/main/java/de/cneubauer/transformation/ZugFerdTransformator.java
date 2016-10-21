@@ -11,12 +11,16 @@ import io.konik.zugferd.profile.Profile;
 import io.konik.zugferd.profile.ProfileVersion;
 import io.konik.zugferd.unece.codes.TaxCode;
 import io.konik.zugferd.unqualified.*;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.output.*;
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.validation.*;
 import java.io.*;
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
 import java.util.Set;
 
 import static com.neovisionaries.i18n.CountryCode.DE;
@@ -30,13 +34,12 @@ import static org.apache.commons.lang3.time.DateUtils.addMonths;
 /**
  * Created by Christoph Neubauer on 21.09.2016.
  * Basic transformation class that provides methods to convert invoice information to zugferd
- * TODO: provide actual invoice params instead of mock classes
  */
 public class ZugFerdTransformator {
 
     private Logger logger = Logger.getLogger(this.getClass());
 
-    public void addMockInvoiceToPDF(String pdfPath, String pdfName) throws IOException {
+    void addMockInvoiceToPDF(String pdfPath, String pdfName) throws IOException {
         Invoice metaData = this.createMockInvoice();
         OutputStream outPdf = new FileOutputStream(".\\target\\test-classes\\generatedPDF\\" + pdfName + ".pdf");
         InputStream reader = this.getClass().getResourceAsStream(pdfPath);
@@ -59,7 +62,16 @@ public class ZugFerdTransformator {
         pdfHandler.appendInvoice(i, reader, outPdf);
     }
 
-    public void validateMockInvoiceFromPdf(String pdfName) {
+    public byte[] appendInvoiceToPdf(byte[] pdf, Invoice i) throws IOException {
+        ByteArrayOutputStream outPdf = new ByteArrayOutputStream();
+        InputStream reader = new ByteArrayInputStream(pdf);
+
+        PdfHandler pdfHandler = new PdfHandler();
+        pdfHandler.appendInvoice(i, reader, outPdf);
+        return outPdf.toByteArray();
+    }
+
+    void validateMockInvoiceFromPdf(String pdfName) {
         //setup
         Invoice invoice = extractInvoiceFromMockPdf(pdfName);
         InvoiceValidator invoiceValidator = new InvoiceValidator();
@@ -92,7 +104,7 @@ public class ZugFerdTransformator {
         return invoice;
     }
 
-    public boolean isInvoiceValid(Invoice i) {
+    private boolean isInvoiceValid(Invoice i) {
         InvoiceValidator invoiceValidator = new InvoiceValidator();
 
         //execute
@@ -129,7 +141,6 @@ public class ZugFerdTransformator {
 
         return result;
     }
-
 
     public Invoice createFullConformalBasicInvoice(de.cneubauer.domain.bo.Invoice inv) {
         Invoice i = new Invoice(BASIC);
@@ -188,7 +199,7 @@ public class ZugFerdTransformator {
         }
     }
 
-    public Invoice createMockInvoice() {
+    Invoice createMockInvoice() {
 
         ZfDate today = new ZfDateDay();
         ZfDate nextMonth = new ZfDateMonth(addMonths(today, 1));

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.cneubauer.gui.Controller.OCRController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.cneubauer.gui.controller.ResultsController">
   <children>
     <fx:include source="..\\FXML\\menubar.fxml" />
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -54,10 +54,9 @@
                         <Button mnemonicParsing="false" text="Create report" />
                     </buttons>
                   </ButtonBar>
-                  <Label prefHeight="17.0" prefWidth="329.0" text="The following information have been extracted:" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" />
                   <ButtonBar buttonMinWidth="120.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="8">
                      <buttons>
-                      <Button fx:id="SaveExtractedInvoiceToDatabase" mnemonicParsing="false" onAction="#scanFile" text="Save" />
+                      <Button fx:id="SaveExtractedInvoiceToDatabase" mnemonicParsing="false" onAction="#saveToDatabase" text="Save" />
                      </buttons>
                      <GridPane.margin>
                         <Insets left="25.0" top="35.0" />
@@ -191,13 +190,13 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <CheckBox fx:id="extractedHasSkonto" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="12">
+                  <CheckBox fx:id="extractedHasSkonto" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="12" onAction="#checkSkonto">
                      <GridPane.margin>
                         <Insets left="35.0" />
                      </GridPane.margin>
                   </CheckBox>
                   <Label prefHeight="17.0" prefWidth="107.0" text="Has Skonto?" GridPane.columnSpan="3" GridPane.rowIndex="12" />
-                  <Label prefHeight="17.0" prefWidth="107.0" text="Skonto:" GridPane.columnIndex="7" GridPane.rowIndex="12" />
+                  <Label fx:id="extractedSkontoLabel" prefHeight="17.0" prefWidth="107.0" text="Skonto:" GridPane.columnIndex="7" GridPane.rowIndex="12" />
                   <TextField fx:id="extractedSkonto" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.rowIndex="12">
                      <padding>
                         <Insets left="5.0" />
@@ -215,6 +214,10 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </TextField>
+                  <Label prefHeight="17.0" prefWidth="329.0" text="The following information have been extracted:" GridPane.columnSpan="7">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </GridPane.margin></Label>
                </children>
             </GridPane>
       </children>

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.VBox?>
 
-<MenuBar VBox.vgrow="NEVER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.cneubauer.gui.Controller.GUIController">
+<MenuBar VBox.vgrow="NEVER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.cneubauer.gui.controller.GUIController">
     <menus>
         <Menu mnemonicParsing="false" text="File">
             <items>

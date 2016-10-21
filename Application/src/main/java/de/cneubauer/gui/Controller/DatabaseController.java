@@ -1,4 +1,4 @@
-package de.cneubauer.gui.Controller;
+package de.cneubauer.gui.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;

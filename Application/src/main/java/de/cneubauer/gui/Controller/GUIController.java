@@ -1,4 +1,4 @@
-package de.cneubauer.gui.Controller;
+package de.cneubauer.gui.controller;
 
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -43,12 +43,6 @@ public class GUIController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    //this method opens invoice information after ocr processing
-    @FXML
-    protected void openExtractionInformationMenu() {
-
     }
 
     //this method saves all states and closes the application

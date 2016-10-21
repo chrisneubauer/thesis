@@ -19,6 +19,29 @@ public class LegalPerson {
     private Timestamp createdDate;
     private Timestamp modifiedDate;
 
+    public LegalPerson() {
+
+    }
+
+    public LegalPerson(String name) {
+        if (name.contains(" ")) {
+            if (this.checkCorporateForm(name.split(" ")[1])) {
+                this.setIsCompany(true);
+                this.setCompanyName(name.split(" ")[0]);
+                this.setCorporateForm(name.split(" ")[1]);
+            } else {
+                this.setName(name.split(" ")[0]);
+                this.setSurName(name.split(" ")[1]);
+            }
+        } else {
+            this.setSurName(name);
+        }
+    }
+
+    private boolean checkCorporateForm(String s) {
+        return s.contains("AG") || s.contains("OHG") || s.contains("GmbH") || s.contains("GbR") || s.contains("S.A.") || s.contains("KG");
+    }
+
     public int getId() {
         return id;
     }
@@ -105,5 +128,23 @@ public class LegalPerson {
 
     public void setModifiedDate(Timestamp modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        if (isCompany) {
+            result = this.getCompanyName();
+            if (this.getCorporateForm() != null) {
+                result += " " + this.getCorporateForm();
+            }
+        } else if (this.getSurName() != null) {
+            if (this.getName() != null) {
+                result = this.getName() + " " + this.getSurName();
+            } else {
+                result = this.getSurName();
+            }
+        }
+        return result;
     }
 }

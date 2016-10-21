@@ -1,4 +1,4 @@
-package de.cneubauer.gui.Controller;
+package de.cneubauer.gui.controller;
 
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.service.OCRDataExtractorService;
@@ -6,10 +6,13 @@ import de.cneubauer.ocr.TesseractWrapper;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 
 /**
@@ -17,8 +20,7 @@ import java.io.File;
  * Provides controls for performing OCR in the UI
  */
 public class OCRController extends GUIController {
-    @FXML
-    private TextField fileInput;
+    @FXML private TextField fileInput;
 
     @FXML
     protected void openFileChooser() {
@@ -40,16 +42,34 @@ public class OCRController extends GUIController {
             System.out.println(result);
             OCRDataExtractorService service = new OCRDataExtractorService(result);
             Invoice extractedInformation = service.extractInformation();
-            this.showResultsBeforeSave(extractedInformation);
+            this.openExtractionInformationMenu(e, extractedInformation);
         }
     }
 
+    //this method opens invoice information after ocr processing using ResultsController
     @FXML
-    private void showResultsBeforeSave(Invoice invInfo) {
-        super.openExtractionInformationMenu();
+    private void openExtractionInformationMenu(Event e, Invoice extractedInformation) {
+        try {
+
+            Node node = (Node) e.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/showResults.fxml"));
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 800, 600);
+            stage.setScene(scene);
+
+            ResultsController ctrl = loader.getController();
+            ctrl.initData(extractedInformation, this.fileInput.getText());
+            stage.show();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     private boolean validateFileInput() {
         return this.fileInput.getText() != null;
     }
+
 }

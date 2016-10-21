@@ -5,6 +5,7 @@ import de.cneubauer.domain.bo.LegalPerson;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * Created by Christoph Neubauer on 20.10.2016.
@@ -53,9 +54,9 @@ public class OCRDataExtractorService {
     private InvoiceInformationHelper findInvoiceValues() {
         //TODO: Make actual calculation
         InvoiceInformationHelper result = new InvoiceInformationHelper();
-        result.setLineTotal(0);
+        result.setLineTotal(7);
         result.setChargeTotal(0);
-        result.setAllowanceTotal(0);
+        result.setAllowanceTotal(66);
         result.setTaxBasisTotal(0);
         result.setTaxTotal(0);
         result.setGrandTotal(0);
@@ -63,7 +64,7 @@ public class OCRDataExtractorService {
     }
 
     private Timestamp findDeliveryDate() {
-        return null;
+        return Timestamp.valueOf(LocalDateTime.now());
     }
 
     private double findSkontoValue() {
@@ -79,7 +80,7 @@ public class OCRDataExtractorService {
     }
 
     private Timestamp findIssueDate() {
-        return null;
+        return Timestamp.valueOf(LocalDateTime.now());
     }
 
     private LegalPerson findCreditor() {
@@ -87,6 +88,6 @@ public class OCRDataExtractorService {
     }
 
     private String findInvoiceNumber() {
-        return null;
+        return "";
     }
 }
