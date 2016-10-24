@@ -13,6 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 
 /**
@@ -57,6 +60,8 @@ public class OCRController extends GUIController {
 
             Parent root = loader.load();
             Scene scene = new Scene(root, 800, 600);
+            Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
+            scene.getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
             stage.setScene(scene);
 
             ResultsController ctrl = loader.getController();

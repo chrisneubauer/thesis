@@ -11,8 +11,6 @@ import io.konik.zugferd.profile.Profile;
 import io.konik.zugferd.profile.ProfileVersion;
 import io.konik.zugferd.unece.codes.TaxCode;
 import io.konik.zugferd.unqualified.*;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.*;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -20,7 +18,6 @@ import org.apache.log4j.Logger;
 import javax.validation.*;
 import java.io.*;
 import java.math.BigDecimal;
-import java.nio.charset.Charset;
 import java.util.Set;
 
 import static com.neovisionaries.i18n.CountryCode.DE;
@@ -48,7 +45,7 @@ public class ZugFerdTransformator {
         pdfHandler.appendInvoice(metaData, reader, outPdf);
     }
 
-    public Invoice extractInvoiceFromMockPdf(String pdfName) {
+    Invoice extractInvoiceFromMockPdf(String pdfName) {
         PdfHandler handler = new PdfHandler();
         InputStream inputZugferdPdfStream = getClass().getResourceAsStream("../../../../../target/test-classes/generatedPDF/" + pdfName + ".pdf");
         return handler.extractInvoice(inputZugferdPdfStream);
@@ -160,8 +157,8 @@ public class ZugFerdTransformator {
         Trade tr = new Trade();
 
         Agreement a = new Agreement();
-        a.setBuyer(new TradeParty().setName(inv.getDebitor().getName()));
-        a.setSeller(new TradeParty().setName(inv.getCreditor().getName()));
+        a.setBuyer(new TradeParty().setName(inv.getDebitor().toString()));
+        a.setSeller(new TradeParty().setName(inv.getCreditor().toString()));
 
         Delivery d;
         if (inv.getDeliveryDate() == null) {

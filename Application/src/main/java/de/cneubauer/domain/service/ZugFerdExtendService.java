@@ -32,6 +32,7 @@ public class ZugFerdExtendService {
 
     public void save(byte[] pdf, Invoice i) {
         Scan scanToSave = new Scan();
+        //TODO: invoice and legal person should be saved first and then the id should be stored too
         scanToSave.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
         scanToSave.setModifiedDate(Timestamp.valueOf(LocalDateTime.now()));
         scanToSave.setFile(pdf);
