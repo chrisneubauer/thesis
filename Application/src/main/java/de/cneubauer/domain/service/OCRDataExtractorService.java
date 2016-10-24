@@ -3,6 +3,7 @@ package de.cneubauer.domain.service;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.LegalPerson;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
+import de.cneubauer.util.config.ConfigHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -19,8 +20,10 @@ import java.util.Date;
  */
 public class OCRDataExtractorService {
     private String file;
+    private double confidence = 1 - (Double.valueOf(ConfigHelper.getValue("confidenceRate")));
 
     public OCRDataExtractorService(String file) {
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Using confidence level: " + confidence*100 + "%");
         this.file = file;
     }
 
@@ -144,8 +147,7 @@ public class OCRDataExtractorService {
                     int amountOfChanges = StringUtils.getLevenshteinDistance(line, "Bei Zahlung innerhalb von Tagen gewähren wir %");
                     double ratio = ((double) amountOfChanges) / (Math.max(line.length(), "Bei Zahlung innerhalb von Tagen gewähren wir %".length() + 2));
                     // take the line if ratio > 80%
-                    // TODO: Set the ratio as a setting for the application
-                    if (ratio < 0.2) {
+                    if (ratio < confidence) {
                         int startIndex = line.indexOf("gewähren wir");
                         skonto = line.substring(startIndex+1, startIndex+3);
                         found = true;
@@ -264,8 +266,7 @@ public class OCRDataExtractorService {
                     int amountOfChanges = StringUtils.getLevenshteinDistance(part, "Rechnungs-Nr");
                     double ratio = ((double) amountOfChanges) / (Math.max(part.length(), "Rechnungs-Nr".length()));
                     // take the line if ratio > 80%
-                    // TODO: Set the ratio as a setting for the application
-                    if (ratio < 0.2) {
+                    if (ratio < confidence) {
                         if (i < parts.length - 1) {
                             return parts[i+1];
                         }
@@ -293,8 +294,7 @@ public class OCRDataExtractorService {
                     // try again with levenshtein distance
                     double avgRatio = this.getAverageDistanceOfSearchConditions(part, searchConditions);
                     // take the line if ratio > 80%
-                    // TODO: Set the ratio as a setting for the application
-                    if (avgRatio < 0.2) {
+                    if (avgRatio < confidence) {
                         if (i < parts.length - 1) {
                             return parts[i+1];
                         }

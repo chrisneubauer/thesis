@@ -1,5 +1,6 @@
 package de.cneubauer.gui;
 
+import de.cneubauer.util.config.ConfigHelper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,9 +9,8 @@ import javafx.stage.Stage;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 
-import java.net.URL;
+import java.util.Map;
 
 /**
  * Created by Christoph Neubauer on 24.09.2016.
@@ -32,7 +32,20 @@ public class ApplicationStart extends Application {
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
+        initSettings();
         Logger.getRootLogger().setLevel(Level.DEBUG);
         launch(args);
+    }
+
+    private static void initSettings() {
+        Map<String, String> config = ConfigHelper.getConfig();
+        config.putIfAbsent("confidenceRate", "0.2");
+        config.putIfAbsent("databaseName", "ferd_transformator");
+        config.putIfAbsent("databaseUsername", "root");
+        config.putIfAbsent("databasePassword", "toor");
+        config.putIfAbsent("databaseServerName", "localhost");
+        config.putIfAbsent("databasePort", "3306");
+        config.putIfAbsent("tesseractLanguage", "deu+eng");
+        ConfigHelper.write(config);
     }
 }

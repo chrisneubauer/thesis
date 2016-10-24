@@ -33,11 +33,11 @@ public abstract class AbstractDao<T> implements IDao<T> {
         return session;
     }
 
-    public SessionFactory getSessionFactory() {
+    private SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
-    public Configuration getConfig() {
+    private Configuration getConfig() {
         return config;
     }
 

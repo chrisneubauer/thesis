@@ -5,7 +5,6 @@ import de.cneubauer.domain.dao.ScanDao;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 06.10.2016.

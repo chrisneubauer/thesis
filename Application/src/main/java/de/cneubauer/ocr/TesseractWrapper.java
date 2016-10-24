@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.cneubauer.util.config.ConfigHelper;
 import net.sourceforge.tess4j.*;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -13,9 +14,8 @@ import org.apache.log4j.Logger;
  * Uses Tess4J as a wrapper for googles Tesseract
  */
 public class TesseractWrapper {
-    private String language = "deu+eng";
+    private String language = ConfigHelper.getValue("tesseractLanguage");
     private Logger logger = Logger.getLogger(this.getClass());
-
 
     public String initOcr(String path) {
         File imageFile = new File(path);
@@ -27,6 +27,7 @@ public class TesseractWrapper {
 
         instance.setDatapath(".");
         instance.setLanguage(this.getLanguage());
+        logger.log(Level.INFO, "Using language(s): " + this.getLanguage());
 
         List<String> configs = new ArrayList<>(4);
         configs.add(0, "tessdata\\configs\\api_config");

@@ -2,12 +2,9 @@ package de.cneubauer.domain.dao.impl;
 
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.dao.InvoiceDao;
-import org.hibernate.query.Query;
 
-import javax.persistence.criteria.CriteriaQuery;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 06.10.2016.

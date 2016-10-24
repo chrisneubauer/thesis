@@ -5,6 +5,8 @@ import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.LegalPerson;
 import de.cneubauer.domain.bo.Scan;
+import de.cneubauer.domain.dao.InvoiceDao;
+import de.cneubauer.domain.dao.LegalPersonDao;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +21,8 @@ public class ScanDaoImplTest extends AbstractTest {
     private MySQLConnector connector;
     private Connection con;
     private ScanDaoImpl dao;
+    private InvoiceDao invoiceDao;
+    private LegalPersonDao legalPersonDao;
 
     @Before
     public void setUp() throws Exception {
@@ -28,6 +32,8 @@ public class ScanDaoImplTest extends AbstractTest {
         this.connector = new MySQLConnector();
         this.con = connector.connect();
         this.dao = new ScanDaoImpl();
+        this.invoiceDao = new InvoiceDaoImpl();
+        this.legalPersonDao = new LegalPersonDaoImpl();
     }
 
     @After
@@ -37,6 +43,8 @@ public class ScanDaoImplTest extends AbstractTest {
         }
         this.connector = null;
         this.dao = null;
+        this.invoiceDao = null;
+        this.legalPersonDao = null;
     }
 
     @Test
@@ -48,14 +56,31 @@ public class ScanDaoImplTest extends AbstractTest {
         Invoice i = new Invoice();
         i.setGrandTotal(299.99);
         i.setHasSkonto(false);
-        i.setDebitor(new LegalPerson());
-        i.setCreditor(new LegalPerson());
+
+        LegalPerson cred = new LegalPerson("TestCompany AG");
+        LegalPerson deb = new LegalPerson("Hannah Maier");
+
+        legalPersonDao.save(cred);
+        legalPersonDao.save(deb);
+
+        i.setDebitor(deb);
+        i.setCreditor(cred);
+
+        invoiceDao.save(i);
 
         s.setInvoiceInformation(i);
         s.setFile(Files.readAllBytes(pdf.toPath()));
 
-        //Assertion not needed. Should fail by exception
         this.dao.save(s);
+
+        Assert.isTrue(s.getId() > 0);
+        Scan persistentScan = this.dao.getById(s.getId());
+        Assert.notNull(persistentScan);
+        Assert.isTrue(persistentScan.getId() == s.getId());
+        Assert.isTrue(persistentScan.getInvoiceInformation() != null);
+        Assert.isTrue(persistentScan.getInvoiceInformation().getId() == i.getId());
+        Assert.isTrue(persistentScan.getInvoiceInformation().getDebitor().getId() == deb.getId());
+        Assert.isTrue(persistentScan.getInvoiceInformation().getCreditor().getId() == cred.getId());
     }
 
     @Test
