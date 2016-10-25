@@ -8,6 +8,7 @@ import de.cneubauer.domain.dao.impl.AbstractDao;
 import de.cneubauer.domain.dao.impl.InvoiceDaoImpl;
 import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import de.cneubauer.domain.dao.impl.ScanDaoImpl;
+import de.cneubauer.util.config.ConfigHelper;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
@@ -30,6 +31,7 @@ public class AbstractTest {
     public void setUp() throws Exception {
         BasicConfigurator.configure();
         LogManager.getRootLogger().setLevel(Level.ERROR);
+        ConfigHelper.getConfig();
     }
 
     @AfterClass

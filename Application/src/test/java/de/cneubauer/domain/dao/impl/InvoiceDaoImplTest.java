@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import java.sql.Connection;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -80,5 +81,18 @@ public class InvoiceDaoImplTest extends AbstractTest {
         Assert.notNull(result);
         Assert.isTrue(result.size() > 0);
         System.out.println("Size of table Invoice: " + result.size());
+    }
+
+    @Test
+    public void testGetByDate() throws Exception {
+        Invoice test = new Invoice();
+        LocalDateTime testDate = LocalDateTime.now();
+        test.setIssueDate(Timestamp.valueOf(testDate));
+        this.dao.save(test);
+
+        List<Invoice> results = this.dao.getAllByDate(testDate);
+
+        Assert.notNull(results);
+        Assert.isTrue(results.size() > 0);
     }
 }

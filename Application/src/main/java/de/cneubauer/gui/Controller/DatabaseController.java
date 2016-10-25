@@ -20,7 +20,7 @@ public class DatabaseController extends GUIController {
 
     @FXML
     protected void searchInDatabase() {
-        System.out.println("Set values: Date: " + this.date.toString() +
+        System.out.println("Set values: Date: " + this.date.getValue().toString() +
                 ", Kreditor: " + this.creditor.getText() +
                 ", Debitor: " + this.debitor.getText() +
                 ", and value: " + this.value.getText());
