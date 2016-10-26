@@ -4,14 +4,10 @@
     <class name="de.cneubauer.domain.bo.Scan" table="scan">
         <id name="id" column="Id" >
             <generator class="increment"/>
-            <!--<generator class="foreign">
-                <param name="property">stock</param>
-            </generator>-->
         </id>
         <property name="file" column="File" />
-        <!--<property name="invoiceInformation" column="InvoiceInformation" />-->
         <property name="createdDate" column="CreatedDate" />
         <property name="modifiedDate" column="ModifiedDate" />
-        <one-to-one name="invoiceInformation" class="de.cneubauer.domain.bo.Invoice" cascade="save-update"/>
+        <many-to-one  name="invoiceInformation" class="de.cneubauer.domain.bo.Invoice" column="InvoiceInformation" cascade="save-update"/>
     </class>
 </hibernate-mapping>

@@ -31,6 +31,9 @@ public final class ConfigHelper {
     }
 
     public static String getValue(String property) {
+        if (config == null) {
+            new ConfigHelper();
+        }
         return config.get(property);
     }
 

@@ -43,7 +43,7 @@ public class InvoiceDaoImpl extends AbstractDao<Invoice> implements InvoiceDao {
         q.setParameter(1, Timestamp.valueOf(before), TemporalType.TIMESTAMP);
         q.setParameter(2, Timestamp.valueOf(after), TemporalType.TIMESTAMP);
 
-        List results = q.getResultList();
+        List results = q.list();
         List<Invoice> result = new ArrayList<>(results.size());
 
         for (Object o : results) {

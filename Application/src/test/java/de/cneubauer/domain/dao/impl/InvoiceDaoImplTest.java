@@ -86,13 +86,20 @@ public class InvoiceDaoImplTest extends AbstractTest {
     @Test
     public void testGetByDate() throws Exception {
         Invoice test = new Invoice();
+        Invoice wrong = new Invoice();
         LocalDateTime testDate = LocalDateTime.now();
+        LocalDateTime wrongTestDate = LocalDateTime.now().minusDays(2);
         test.setIssueDate(Timestamp.valueOf(testDate));
+        wrong.setIssueDate(Timestamp.valueOf(wrongTestDate));
         this.dao.save(test);
+        this.dao.save(test);
+        this.dao.save(wrong);
 
         List<Invoice> results = this.dao.getAllByDate(testDate);
 
         Assert.notNull(results);
         Assert.isTrue(results.size() > 0);
+        Assert.isTrue(results.contains(test));
+        Assert.isTrue(!results.contains(wrong));
     }
 }

@@ -2,6 +2,8 @@ package de.cneubauer.domain.dao.impl;
 
 import de.cneubauer.AbstractTest;
 import de.cneubauer.database.MySQLConnector;
+import de.cneubauer.domain.bo.Address;
+import de.cneubauer.domain.bo.CorporateForm;
 import de.cneubauer.domain.bo.LegalPerson;
 import org.junit.After;
 import org.junit.Before;
@@ -39,9 +41,15 @@ public class LegalPersonDaoImplTest extends AbstractTest {
     public void testSave() throws Exception {
         LegalPerson p = new LegalPerson();
         p.setCompanyName("fakeCompany");
-        p.setCorporateForm("AG");
-        p.setCity("Erlangen");
-        p.setZipCode(91056);
+
+        CorporateForm c = new CorporateForm();
+        c.setShortName("AG");
+        p.setCorporateForm(c);
+
+        Address a = new Address();
+        a.setCity("Erlangen");
+        a.setZipCode(91056);
+        p.setAddress(a);
 
         //Assertion not needed. Should fail by exception
         this.dao.save(p);

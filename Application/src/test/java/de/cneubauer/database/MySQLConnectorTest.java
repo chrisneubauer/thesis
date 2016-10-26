@@ -9,6 +9,7 @@ import org.junit.Test;
 public class MySQLConnectorTest extends AbstractTest {
     @Before
     public void setUp() throws Exception {
+        super.setUp();
         connector = new MySQLConnector();
         connection = null;
     }

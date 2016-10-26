@@ -1,6 +1,8 @@
 package de.cneubauer.domain.bo;
 
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Christoph Neubauer on 05.10.2016.
@@ -11,6 +13,7 @@ public class Invoice {
     private String invoiceNumber;
     private LegalPerson debitor;
     private LegalPerson creditor;
+    //private List<LegalPerson> parties;
     private Timestamp issueDate;
     private Timestamp deliveryDate;
     private double lineTotal;
@@ -151,4 +154,12 @@ public class Invoice {
     public void setGrandTotal(double grandTotal) {
         this.grandTotal = grandTotal;
     }
+/*
+    public List<LegalPerson> getParties() {
+        return parties;
+    }
+
+    public void setParties(List<LegalPerson> parties) {
+        this.parties = parties;
+    }*/
 }

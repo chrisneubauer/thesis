@@ -10,5 +10,5 @@ import java.util.Collection;
  * Defines specific methods for Scan
  */
 public interface ScanDao extends IDao<Scan> {
-    Collection<? extends Scan> getByInvoiceId(int id);
+    Collection<Scan> getByInvoiceId(int id);
 }

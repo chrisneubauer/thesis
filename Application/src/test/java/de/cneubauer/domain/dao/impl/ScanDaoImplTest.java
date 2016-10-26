@@ -15,6 +15,9 @@ import org.springframework.util.Assert;
 import java.io.File;
 import java.nio.file.Files;
 import java.sql.Connection;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 public class ScanDaoImplTest extends AbstractTest {
@@ -66,7 +69,7 @@ public class ScanDaoImplTest extends AbstractTest {
         i.setDebitor(deb);
         i.setCreditor(cred);
 
-        invoiceDao.save(i);
+        //invoiceDao.save(i);
 
         s.setInvoiceInformation(i);
         s.setFile(Files.readAllBytes(pdf.toPath()));
@@ -100,5 +103,38 @@ public class ScanDaoImplTest extends AbstractTest {
         Assert.notNull(result);
         Assert.isTrue(result.size() > 0);
         System.out.println("Size of table Scan: " + result.size());
+    }
+
+    @Test
+    public void testGetByInvoiceId() {
+        Invoice correctInvoice = new Invoice();
+        Invoice wrongInvoice = new Invoice();
+        correctInvoice.setIssueDate(Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
+        wrongInvoice.setIssueDate(Timestamp.valueOf(LocalDateTime.now()));
+
+        Scan scan1 = new Scan();
+        scan1.setInvoiceInformation(correctInvoice);
+        Scan scan2 = new Scan();
+        scan2.setInvoiceInformation(correctInvoice);
+        Scan scan3 = new Scan();
+        scan3.setInvoiceInformation(wrongInvoice);
+
+        this.invoiceDao.save(correctInvoice);
+        this.invoiceDao.save(wrongInvoice);
+
+        this.dao.save(scan1);
+        this.dao.save(scan2);
+        this.dao.save(scan3);
+
+        System.out.println("Using id: " + correctInvoice.getId());
+        Collection<Scan> results = this.dao.getByInvoiceId(correctInvoice.getId());
+
+        Assert.notNull(results);
+        Assert.isTrue(results.size() > 0);
+        Assert.isTrue(results.contains(scan1));
+        Assert.isTrue(results.contains(scan2));
+        Assert.isTrue(!results.contains(scan3));
+        Scan resultObject = (Scan) results.toArray()[0];
+        Assert.isTrue(resultObject.getInvoiceInformation().getId() == correctInvoice.getId());
     }
 }

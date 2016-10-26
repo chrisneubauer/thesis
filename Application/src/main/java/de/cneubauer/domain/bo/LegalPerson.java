@@ -10,12 +10,10 @@ public class LegalPerson {
     private int id;
     private boolean isCompany;
     private String companyName;
-    private String corporateForm;
+    private CorporateForm corporateForm;
+    private Address address;
     private String name;
-    private String surName;
-    private String street;
-    private int zipCode;
-    private String city;
+    private String firstName;
     private Timestamp createdDate;
     private Timestamp modifiedDate;
 
@@ -28,13 +26,13 @@ public class LegalPerson {
             if (this.checkCorporateForm(name.split(" ")[1])) {
                 this.setIsCompany(true);
                 this.setCompanyName(name.split(" ")[0]);
-                this.setCorporateForm(name.split(" ")[1]);
+                //this.setCorporateForm(name.split(" ")[1]);
             } else {
-                this.setName(name.split(" ")[0]);
-                this.setSurName(name.split(" ")[1]);
+                this.setFirstName(name.split(" ")[0]);
+                this.setName(name.split(" ")[1]);
             }
         } else {
-            this.setSurName(name);
+            this.setName(name);
         }
     }
 
@@ -66,52 +64,12 @@ public class LegalPerson {
         this.companyName = companyName;
     }
 
-    public String getCorporateForm() {
-        return corporateForm;
-    }
-
-    public void setCorporateForm(String corporateForm) {
-        this.corporateForm = corporateForm;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSurName() {
-        return surName;
-    }
-
-    public void setSurName(String surName) {
-        this.surName = surName;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public int getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public Timestamp getCreatedDate() {
@@ -139,12 +97,36 @@ public class LegalPerson {
                 result += " " + this.getCorporateForm();
             }
         } else {
-            if (this.getName() != null) {
-                result = this.getName() + " " + this.getSurName();
+            if (this.getFirstName() != null) {
+                result = this.getFirstName() + " " + this.getName();
             } else {
-                result = this.getSurName();
+                result = this.getName();
             }
         }
         return result;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public CorporateForm getCorporateForm() {
+        return corporateForm;
+    }
+
+    public void setCorporateForm(CorporateForm corporateForm) {
+        this.corporateForm = corporateForm;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

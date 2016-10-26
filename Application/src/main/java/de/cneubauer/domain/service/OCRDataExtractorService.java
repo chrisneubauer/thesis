@@ -1,5 +1,6 @@
 package de.cneubauer.domain.service;
 
+import de.cneubauer.domain.bo.CorporateForm;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.LegalPerson;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
@@ -217,7 +218,10 @@ public class OCRDataExtractorService {
         if (index > 0) {
             LegalPerson result = new LegalPerson();
             result.setIsCompany(true);
-            result.setCorporateForm(line.substring(index).split(" ")[0]);
+            // TODO: Store cf in beforehand in db and receive it here by calling the db
+            CorporateForm cf = new CorporateForm();
+            cf.setShortName(line.substring(index).split(" ")[0]);
+            result.setCorporateForm(cf);
             result.setCompanyName(line.substring(0, index - 1));
             return result;
         } else {

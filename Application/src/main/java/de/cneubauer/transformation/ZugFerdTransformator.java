@@ -1,5 +1,6 @@
 package de.cneubauer.transformation;
 
+import com.neovisionaries.i18n.CountryCode;
 import de.cneubauer.domain.bo.LegalPerson;
 import io.konik.PdfHandler;
 import io.konik.validation.InvoiceValidator;
@@ -120,20 +121,23 @@ public class ZugFerdTransformator {
         if (p.getIsCompany()) {
             result.setName(p.getCompanyName() + " " + p.getCorporateForm());
         } else {
-            result.setName(p.getName() + " " + p.getSurName());
+            result.setName(p.getFirstName() + " " + p.getName());
         }
         Address a = new Address();
-        if (p.getZipCode() > 0) {
-            a.setPostcode(String.valueOf(p.getZipCode()));
+        if (p.getAddress().getZipCode() > 0) {
+            a.setPostcode(String.valueOf(p.getAddress().getZipCode()));
         }
-        if (p.getCity() != null) {
-            a.setCity(p.getCity());
+        if (p.getAddress().getCity() != null) {
+            a.setCity(p.getAddress().getCity());
         }
-        if (p.getStreet() != null) {
-            a.setLineOne(p.getStreet());
+        if (p.getAddress().getStreet() != null) {
+            a.setLineOne(p.getAddress().getStreet());
         }
-        //TODO: Get Country
-        a.setCountry(DE);
+        if (p.getAddress().getCountry() != null && p.getAddress().getCountry().getAbbreviation() != null) {
+            a.setCountry(CountryCode.valueOf(p.getAddress().getCountry().getAbbreviation()));
+        } else {
+            a.setCountry(DE);
+        }
         result.setAddress(a);
 
         return result;

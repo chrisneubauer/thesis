@@ -1,13 +1,8 @@
 package de.cneubauer;
 
 import de.cneubauer.database.MySQLConnector;
-import de.cneubauer.domain.bo.Invoice;
-import de.cneubauer.domain.bo.LegalPerson;
-import de.cneubauer.domain.bo.Scan;
-import de.cneubauer.domain.dao.impl.AbstractDao;
-import de.cneubauer.domain.dao.impl.InvoiceDaoImpl;
-import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
-import de.cneubauer.domain.dao.impl.ScanDaoImpl;
+import de.cneubauer.domain.bo.*;
+import de.cneubauer.domain.dao.impl.*;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
@@ -15,6 +10,7 @@ import org.apache.log4j.LogManager;
 import org.hibernate.query.Query;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.sql.Connection;
 
@@ -47,6 +43,9 @@ public class AbstractTest {
         AbstractDao<Scan> scanDao = new ScanDaoImpl();
         AbstractDao<Invoice> invoiceDao = new InvoiceDaoImpl();
         AbstractDao<LegalPerson> personDao = new LegalPersonDaoImpl();
+        AbstractDao<CorporateForm> corporateFormDao = new CorporateFormDaoImpl();
+        AbstractDao<Address> addressDao = new AddressDaoImpl();
+        AbstractDao<Country> countryDao = new CountryDaoImpl();
 
         String deleteScans = "DELETE FROM Scan";
         scanDao.getSession().beginTransaction();
@@ -65,6 +64,26 @@ public class AbstractTest {
         query = personDao.getSession().createQuery(deletePersons);
         query.executeUpdate();
         personDao.getSession().getTransaction().commit();
+
+        String deleteCorporateForms = "DELETE FROM CorporateForm";
+        scanDao.getSession().beginTransaction();
+        query = scanDao.getSession().createQuery(deleteCorporateForms);
+        query.executeUpdate();
+        scanDao.getSession().getTransaction().commit();
+
+
+        String deleteAddresses = "DELETE FROM Address";
+        scanDao.getSession().beginTransaction();
+        query = scanDao.getSession().createQuery(deleteAddresses);
+        query.executeUpdate();
+        scanDao.getSession().getTransaction().commit();
+
+
+        String deleteCountries = "DELETE FROM Country";
+        scanDao.getSession().beginTransaction();
+        query = scanDao.getSession().createQuery(deleteCountries);
+        query.executeUpdate();
+        scanDao.getSession().getTransaction().commit();
     }
 
 }
