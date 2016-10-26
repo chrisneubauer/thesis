@@ -20,7 +20,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
     private Configuration config;
     private Class<T> clazz;
 
-    public AbstractDao(Class<T> paramClass) {
+    AbstractDao(Class<T> paramClass) {
         this.clazz = paramClass;
         this.config = new Configuration();
         File configFile = new File("src/main/resources/hibernate.cfg.xml");
@@ -65,5 +65,5 @@ public abstract class AbstractDao<T> implements IDao<T> {
         this.getSession().getTransaction().commit();
     }
 
-    public abstract void onSave(T entity);
+    protected abstract void onSave(T entity);
 }

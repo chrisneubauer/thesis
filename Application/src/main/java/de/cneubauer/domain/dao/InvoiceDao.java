@@ -2,7 +2,6 @@ package de.cneubauer.domain.dao;
 
 import de.cneubauer.domain.bo.Invoice;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 

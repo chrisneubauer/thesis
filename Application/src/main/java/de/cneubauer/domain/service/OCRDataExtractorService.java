@@ -21,11 +21,20 @@ import java.util.Date;
  */
 public class OCRDataExtractorService {
     private String file;
+
     private double confidence = 1 - (Double.valueOf(ConfigHelper.getValue("confidenceRate")));
 
     public OCRDataExtractorService(String file) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Using confidence level: " + confidence*100 + "%");
         this.file = file;
+    }
+
+    public double getConfidence() {
+        return confidence;
+    }
+
+    public void setConfidence(double confidence) {
+        this.confidence = confidence;
     }
 
     public String getFile() {

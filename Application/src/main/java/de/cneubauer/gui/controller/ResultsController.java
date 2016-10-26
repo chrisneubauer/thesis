@@ -20,7 +20,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Optional;
 
 /**
  * Created by Christoph Neubauer on 21.10.2016.
@@ -148,11 +147,11 @@ public class ResultsController extends GUIController {
         alert.show();
     }
 
-    private Optional<ButtonType> generateSuccessMessage() {
+    private void generateSuccessMessage() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Saved successfully");
         alert.setContentText("The invoice has been successfully saved!");
-        return alert.showAndWait();
+        alert.showAndWait();
     }
 
     private boolean validateFieldsBeforeSave() {

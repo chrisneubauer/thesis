@@ -90,7 +90,7 @@ public class LegalPerson {
 
     @Override
     public String toString() {
-        String result = "";
+        String result;
         if (isCompany) {
             result = this.getCompanyName();
             if (this.getCorporateForm() != null) {

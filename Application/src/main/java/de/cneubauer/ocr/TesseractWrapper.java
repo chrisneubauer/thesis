@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
  */
 public class TesseractWrapper {
     private String language = ConfigHelper.getValue("tesseractLanguage");
-    private Logger logger = Logger.getLogger(this.getClass());
+    private final Logger logger = Logger.getLogger(this.getClass());
 
     public String initOcr(String path) {
         File imageFile = new File(path);

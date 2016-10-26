@@ -3,13 +3,9 @@ package de.cneubauer.domain.dao.impl;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.dao.InvoiceDao;
 import org.hibernate.query.Query;
-import org.hibernate.query.criteria.internal.CriteriaQueryImpl;
-import org.hibernate.query.internal.QueryImpl;
 
 import javax.persistence.TemporalType;
-import javax.persistence.criteria.CriteriaQuery;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

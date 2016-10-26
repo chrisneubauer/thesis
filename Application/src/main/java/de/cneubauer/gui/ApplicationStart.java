@@ -17,13 +17,11 @@ import java.util.Map;
  * The main class to start the application
  */
 public class ApplicationStart extends Application {
-    private Stage window;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(this.getClass().getResource("../../../FXML/mainMenu.fxml"));
         Scene scene = new Scene(root, 800,600);
-        this.window = primaryStage;
 
         primaryStage.setTitle("Ferd-Transformator");
         primaryStage.setScene(scene);

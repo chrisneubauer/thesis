@@ -1,8 +1,6 @@
 package de.cneubauer.domain.bo;
 
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Christoph Neubauer on 05.10.2016.

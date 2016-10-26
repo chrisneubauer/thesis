@@ -5,10 +5,10 @@ import de.cneubauer.domain.dao.CountryDao;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 26.10.2016.
+ * DAO implementation of business object Country
  */
 public class CountryDaoImpl extends AbstractDao<Country> implements CountryDao {
     public CountryDaoImpl() {

@@ -10,7 +10,6 @@ import org.apache.log4j.LogManager;
 import org.hibernate.query.Query;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.sql.Connection;
 
@@ -67,21 +66,21 @@ public class AbstractTest {
 
         String deleteCorporateForms = "DELETE FROM CorporateForm";
         scanDao.getSession().beginTransaction();
-        query = scanDao.getSession().createQuery(deleteCorporateForms);
+        query = corporateFormDao.getSession().createQuery(deleteCorporateForms);
         query.executeUpdate();
         scanDao.getSession().getTransaction().commit();
 
 
         String deleteAddresses = "DELETE FROM Address";
         scanDao.getSession().beginTransaction();
-        query = scanDao.getSession().createQuery(deleteAddresses);
+        query = addressDao.getSession().createQuery(deleteAddresses);
         query.executeUpdate();
         scanDao.getSession().getTransaction().commit();
 
 
         String deleteCountries = "DELETE FROM Country";
         scanDao.getSession().beginTransaction();
-        query = scanDao.getSession().createQuery(deleteCountries);
+        query = countryDao.getSession().createQuery(deleteCountries);
         query.executeUpdate();
         scanDao.getSession().getTransaction().commit();
     }

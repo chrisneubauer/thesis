@@ -5,10 +5,10 @@ import de.cneubauer.domain.dao.CorporateFormDao;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 26.10.2016.
+ * DAO implementation of business object CorporateForm
  */
 public class CorporateFormDaoImpl extends AbstractDao<CorporateForm> implements CorporateFormDao {
     public CorporateFormDaoImpl() {

@@ -2,8 +2,6 @@ package de.cneubauer.transformation;
 
 import de.cneubauer.AbstractTest;
 import de.cneubauer.domain.bo.LegalPerson;
-import de.cneubauer.domain.dao.InvoiceDao;
-import de.cneubauer.domain.dao.impl.InvoiceDaoImpl;
 import io.konik.zugferd.Invoice;
 import junit.framework.AssertionFailedError;
 import org.junit.Assert;
@@ -12,7 +10,6 @@ import org.junit.Test;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 21.09.2016.

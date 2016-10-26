@@ -4,7 +4,7 @@ import de.cneubauer.domain.service.DatabaseResultsService;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import javafx.fxml.FXML;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 
 /**

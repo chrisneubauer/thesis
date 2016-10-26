@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 /**
  * Created by Christoph Neubauer on 25.10.2016.
+ * Business Object for table Address
  */
 public class Address {
     private int id;

@@ -11,7 +11,6 @@ import org.springframework.util.Assert;
 
 import java.sql.Connection;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -35,7 +35,7 @@ import static org.apache.commons.lang3.time.DateUtils.addMonths;
  */
 public class ZugFerdTransformator {
 
-    private Logger logger = Logger.getLogger(this.getClass());
+    private final Logger logger = Logger.getLogger(this.getClass());
 
     void addMockInvoiceToPDF(String pdfPath, String pdfName) throws IOException {
         Invoice metaData = this.createMockInvoice();
@@ -60,7 +60,7 @@ public class ZugFerdTransformator {
         pdfHandler.appendInvoice(i, reader, outPdf);
     }
 
-    public byte[] appendInvoiceToPdf(byte[] pdf, Invoice i) throws IOException {
+    public byte[] appendInvoiceToPdf(byte[] pdf, Invoice i) {
         ByteArrayOutputStream outPdf = new ByteArrayOutputStream();
         InputStream reader = new ByteArrayInputStream(pdf);
 

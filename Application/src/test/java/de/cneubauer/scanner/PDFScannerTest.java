@@ -2,8 +2,6 @@ package de.cneubauer.scanner;
 
 import org.junit.Assert;
 
-import static org.junit.Assert.*;
-
 public class PDFScannerTest {
     private PDFScanner scanner;
 

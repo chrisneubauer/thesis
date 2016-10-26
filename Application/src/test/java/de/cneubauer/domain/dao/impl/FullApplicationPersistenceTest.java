@@ -81,7 +81,7 @@ public class FullApplicationPersistenceTest extends AbstractTest {
         address1.setStreet("Mustermannstr. 17");
 
         address2.setCountry(france);
-        address2.setZipCode(04271);
+        address2.setZipCode(4271);
         address2.setCity("Paris");
         address2.setStreet("Baguettestr. 9");
 
