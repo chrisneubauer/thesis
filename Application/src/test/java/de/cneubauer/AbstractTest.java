@@ -65,24 +65,24 @@ public class AbstractTest {
         personDao.getSession().getTransaction().commit();
 
         String deleteCorporateForms = "DELETE FROM CorporateForm";
-        scanDao.getSession().beginTransaction();
+        corporateFormDao.getSession().beginTransaction();
         query = corporateFormDao.getSession().createQuery(deleteCorporateForms);
         query.executeUpdate();
-        scanDao.getSession().getTransaction().commit();
+        corporateFormDao.getSession().getTransaction().commit();
 
 
         String deleteAddresses = "DELETE FROM Address";
-        scanDao.getSession().beginTransaction();
+        addressDao.getSession().beginTransaction();
         query = addressDao.getSession().createQuery(deleteAddresses);
         query.executeUpdate();
-        scanDao.getSession().getTransaction().commit();
+        addressDao.getSession().getTransaction().commit();
 
 
         String deleteCountries = "DELETE FROM Country";
-        scanDao.getSession().beginTransaction();
+        countryDao.getSession().beginTransaction();
         query = countryDao.getSession().createQuery(deleteCountries);
         query.executeUpdate();
-        scanDao.getSession().getTransaction().commit();
+        countryDao.getSession().getTransaction().commit();
     }
 
 }

@@ -2,7 +2,7 @@ package de.cneubauer.domain.dao;
 
 import de.cneubauer.domain.bo.Invoice;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface InvoiceDao extends IDao<Invoice> {
 
-    List<Invoice> getAllByDate(LocalDateTime date);
+    List<Invoice> getAllByDate(LocalDate date);
 }

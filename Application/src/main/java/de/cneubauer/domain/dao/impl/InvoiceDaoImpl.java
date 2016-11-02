@@ -6,7 +6,9 @@ import org.hibernate.query.Query;
 
 import javax.persistence.TemporalType;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +31,13 @@ public class InvoiceDaoImpl extends AbstractDao<Invoice> implements InvoiceDao {
     }
 
     @Override
-    public List<Invoice> getAllByDate(LocalDateTime date) {
-        LocalDateTime before = LocalDateTime.from(date.minusDays(1));
-        LocalDateTime after = LocalDateTime.from(date.plusDays(1));
+    public List<Invoice> getAllByDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-DD");
 
+        LocalDateTime before = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0);
+        before = before.minusDays(1);
+        LocalDateTime after = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0);
+        after = after.plusDays(1);
         String hql = "FROM Invoice I WHERE I.issueDate >?1 AND I.issueDate <?2";
 
         Query q = this.getSession().createQuery(hql);

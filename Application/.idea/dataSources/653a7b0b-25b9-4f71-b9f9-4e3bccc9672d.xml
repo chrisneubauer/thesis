@@ -157,7 +157,7 @@
       <sequence-identity>1</sequence-identity>
     </column>
     <column id="49" parent="8" name="File">
-      <data-type>blob|0</data-type>
+      <data-type>mediumblob|0</data-type>
     </column>
     <column id="50" parent="8" name="InvoiceInformation">
       <data-type>int(6) unsigned|0</data-type>

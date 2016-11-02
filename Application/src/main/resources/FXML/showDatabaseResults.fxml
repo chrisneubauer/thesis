@@ -56,7 +56,7 @@
                   </ButtonBar>
                   <ButtonBar buttonMinWidth="120.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="10" GridPane.rowIndex="1">
                      <buttons>
-                      <Button fx:id="ReturnToDatabaseSearch" mnemonicParsing="false" onAction="#saveToDatabase" text="Return" />
+                      <Button fx:id="ReturnToDatabaseSearch" mnemonicParsing="false" onAction="#returnToDatabaseSearch" text="Return" />
                      </buttons>
                      <GridPane.margin>
                         <Insets />
