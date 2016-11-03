@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 /**
  * Created by Christoph Neubauer on 01.11.2016.
+ * Model for Database SearchResults
+ * UsedBy: DatabaseResultsController
  */
 public class SearchResult {
     private ObjectProperty<LocalDate> date;

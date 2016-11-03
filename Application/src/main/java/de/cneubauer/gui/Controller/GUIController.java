@@ -14,7 +14,6 @@ import javafx.stage.Stage;
  * Contains UI logic
  */
 public class GUIController {
-
     // this method opens the page where the user can import files
     @FXML
     protected void openScanFormMenu(Event e) {

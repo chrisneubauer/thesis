@@ -2,6 +2,7 @@ package de.cneubauer.gui;
 
 import de.cneubauer.util.config.ConfigHelper;
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,11 +18,22 @@ import java.util.Map;
  * The main class to start the application
  */
 public class ApplicationStart extends Application {
+    private static HostServices hostServices;
+
+    private static void setHostServicesInternal(HostServices s){
+        hostServices = s;
+    }
+
+    public static HostServices getHostServicesInternal() {
+        return hostServices;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(this.getClass().getResource("../../../FXML/mainMenu.fxml"));
         Scene scene = new Scene(root, 800,600);
+
+        setHostServicesInternal(this.getHostServices());
 
         primaryStage.setTitle("Ferd-Transformator");
         primaryStage.setScene(scene);
