@@ -7,9 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import java.util.Map;
 
@@ -41,7 +41,7 @@ public class ApplicationStart extends Application {
     }
 
     public static void main(String[] args) {
-        BasicConfigurator.configure();
+        PropertyConfigurator.configure("src/main/log4j.properties");
         initSettings();
         Logger.getRootLogger().setLevel(Level.DEBUG);
         launch(args);
