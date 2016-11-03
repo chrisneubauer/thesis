@@ -27,6 +27,7 @@ import java.util.Locale;
  * Also contains validation logic
  */
 public class ResultsController extends GUIController {
+    public Button SaveExtractedInvoiceToDatabase;
     private String filePath;
 
     @FXML private TextField extractedInvoiceNumber;
