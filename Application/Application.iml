@@ -11,7 +11,7 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="21b95e0e-ebb1-44ce-baff-c743e9ee7046" />
+          <unit-entry name="hibernate.cfg.xml" value="653a7b0b-25b9-4f71-b9f9-4e3bccc9672d" />
           <unit-entry name="src:main:hibernate.cfg.xml" value="b5cbee57-fef4-4a21-93c5-420c75dd15ea" />
         </datasource-map>
         <naming-strategy-map />
@@ -19,7 +19,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <javadoc-paths>
@@ -219,16 +219,15 @@
     <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.bval:bval-jsr:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.bval:bval-core:1.1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.3.2" level="project" />
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils-core:1.8.3" level="project" />
-    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.3.2" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.8.2" level="project" />
     <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.2.6" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.6" level="project" />
     <orderEntry type="library" name="Maven: io.konik:pdfbox-carriage:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.pdfbox:pdfbox:2.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.pdfbox:fontbox:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.pdfbox:xmpbox:2.0.2" level="project" />
   </component>
 </module>
-

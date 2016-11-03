@@ -1,8 +1,18 @@
-package de.cneubauer.gui.Controller;
+package de.cneubauer.gui.controller;
 
+import de.cneubauer.domain.bo.Invoice;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 /**
  * Created by Christoph Neubauer on 04.10.2016.
@@ -19,10 +29,45 @@ public class DatabaseController extends GUIController {
     private TextField value;
 
     @FXML
-    protected void searchInDatabase() {
-        System.out.println("Set values: Date: " + this.date.toString() +
-                ", Kreditor: " + this.creditor.getText() +
+    protected void searchInDatabase(ActionEvent e) {
+        String logMsg = "Started searching for values: Date: ";
+        if (this.date.getValue() != null) {
+            logMsg += (this.date.getValue().toString());
+        }
+        logMsg += ", Kreditor: " + this.creditor.getText() +
                 ", Debitor: " + this.debitor.getText() +
-                ", and value: " + this.value.getText());
+                ", and value: " + this.value.getText();
+        Logger.getLogger(this.getClass()).log(Level.INFO, logMsg);
+        this.openDatabaseResults(e);
+    }
+
+    //this method opens databaseResultsController after user selected filter criteria
+    @FXML
+    private void openDatabaseResults(Event e) {
+        try {
+            Node node = (Node) e.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/showDatabaseResults.fxml"));
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 800, 600);
+            Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
+            scene.getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
+            stage.setScene(scene);
+
+            DatabaseResultsController ctrl = loader.getController();
+            double filterValue;
+            try {
+                filterValue = Double.valueOf(this.value.getText());
+            } catch (Exception ex) {
+                Logger.getLogger(this.getClass()).log(Level.INFO, "Parsing double value failed. Using default");
+                filterValue = 0;
+            }
+            ctrl.initData(this.date.getValue(), this.debitor.getText(), this.creditor.getText(), filterValue);
+            stage.show();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

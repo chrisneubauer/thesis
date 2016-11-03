@@ -1,6 +1,7 @@
 package de.cneubauer.database;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import de.cneubauer.util.config.ConfigHelper;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,13 +11,13 @@ import java.sql.SQLException;
  *
  */
 public class MySQLConnector {
-    private final String USERNAME = "root";
-    private final String PW = "toor";
-    private final String SERVERNAME = "localhost";
-    private final String DATABASE = "ferd_transformator";
-    private final int PORT = 3306;
+    private final String USERNAME = ConfigHelper.getValue("databaseUsername");
+    private final String PW = ConfigHelper.getValue("databasePassword");
+    private final String SERVERNAME = ConfigHelper.getValue("databaseServername");
+    private final String DATABASE = ConfigHelper.getValue("databaseName");
+    private final int PORT = Integer.valueOf(ConfigHelper.getValue("databasePort"));
 
-    public Connection connect() throws SQLException {
+    public Connection connect() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUser(this.getUSERNAME());
         dataSource.setPassword(this.getPW());
@@ -39,23 +40,23 @@ public class MySQLConnector {
         return con;
     }
 
-    public String getUSERNAME() {
+    private String getUSERNAME() {
         return USERNAME;
     }
 
-    public String getPW() {
+    private String getPW() {
         return PW;
     }
 
-    public String getSERVERNAME() {
+    private String getSERVERNAME() {
         return SERVERNAME;
     }
 
-    public String getDATABASE() {
+    private String getDATABASE() {
         return DATABASE;
     }
 
-    public int getPORT() {
+    private int getPORT() {
         return PORT;
     }
 }

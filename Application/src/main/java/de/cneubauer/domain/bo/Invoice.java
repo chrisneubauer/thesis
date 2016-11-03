@@ -8,10 +8,18 @@ import java.sql.Timestamp;
  */
 public class Invoice {
     private int id;
+    private String invoiceNumber;
     private LegalPerson debitor;
     private LegalPerson creditor;
-    private Timestamp date;
-    private double moneyVale;
+    //private List<LegalPerson> parties;
+    private Timestamp issueDate;
+    private Timestamp deliveryDate;
+    private double lineTotal;
+    private double chargeTotal;
+    private double allowanceTotal;
+    private double taxBasisTotal;
+    private double taxTotal;
+    private double grandTotal;
     private boolean hasSkonto;
     private double skonto;
     private Timestamp createdDate;
@@ -23,6 +31,14 @@ public class Invoice {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public void setInvoiceNumber(String invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 
     public LegalPerson getDebitor() {
@@ -41,20 +57,12 @@ public class Invoice {
         this.creditor = creditor;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public Timestamp getIssueDate() {
+        return issueDate;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
-    }
-
-    public double getMoneyVale() {
-        return moneyVale;
-    }
-
-    public void setMoneyVale(double moneyVale) {
-        this.moneyVale = moneyVale;
+    public void setIssueDate(Timestamp issueDate) {
+        this.issueDate = issueDate;
     }
 
     public boolean isHasSkonto() {
@@ -88,4 +96,68 @@ public class Invoice {
     public void setModifiedDate(Timestamp modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
+
+    public Timestamp getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(Timestamp deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public double getLineTotal() {
+        return lineTotal;
+    }
+
+    public void setLineTotal(double lineTotal) {
+        this.lineTotal = lineTotal;
+    }
+
+    public double getChargeTotal() {
+        return chargeTotal;
+    }
+
+    public void setChargeTotal(double chargeTotal) {
+        this.chargeTotal = chargeTotal;
+    }
+
+    public double getAllowanceTotal() {
+        return allowanceTotal;
+    }
+
+    public void setAllowanceTotal(double allowanceTotal) {
+        this.allowanceTotal = allowanceTotal;
+    }
+
+    public double getTaxBasisTotal() {
+        return taxBasisTotal;
+    }
+
+    public void setTaxBasisTotal(double taxBasisTotal) {
+        this.taxBasisTotal = taxBasisTotal;
+    }
+
+    public double getTaxTotal() {
+        return taxTotal;
+    }
+
+    public void setTaxTotal(double taxTotal) {
+        this.taxTotal = taxTotal;
+    }
+
+    public double getGrandTotal() {
+        return grandTotal;
+    }
+
+    public void setGrandTotal(double grandTotal) {
+        this.grandTotal = grandTotal;
+    }
+/*
+    public List<LegalPerson> getParties() {
+        return parties;
+    }
+
+    public void setParties(List<LegalPerson> parties) {
+        this.parties = parties;
+    }*/
 }

@@ -7,7 +7,7 @@ import java.util.List;
  * Interface with common methods
  */
 public interface IDao<T> {
-    public T getById(int id);
-    public List<T> getAll();
-    public void save(T entity);
+    T getById(int id);
+    List<T> getAll();
+    void save(T entity);
 }

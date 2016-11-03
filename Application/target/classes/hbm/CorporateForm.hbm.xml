@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="de.cneubauer.domain.bo.CorporateForm" table="corporateform">
+        <id name="id" column="Id" >
+            <generator class="increment"/>
+        </id>
+        <property name="name" column="Name"/>
+        <property name="shortName" column="ShortName" unique="true"/>
+        <property name="createdDate" column="CreatedDate" />
+        <property name="modifiedDate" column="ModifiedDate" />
+        <set name="usedInCountries" table="country_corporateform" lazy="true" access="field" fetch="select">
+            <key>
+                <column name="corporateform_id" not-null="true" />
+            </key>
+            <many-to-many column="country_id" class="de.cneubauer.domain.bo.Country" />
+        </set>
+    </class>
+</hibernate-mapping>
