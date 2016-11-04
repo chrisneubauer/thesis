@@ -32,6 +32,8 @@ public class ApplicationStart extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(this.getClass().getResource("../../../FXML/mainMenu.fxml"));
         Scene scene = new Scene(root, 800,600);
+        Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
+        scene.getStylesheets().add(String.valueOf(getClass().getResource("../../../css/validationError.css")));
 
         setHostServicesInternal(this.getHostServices());
 

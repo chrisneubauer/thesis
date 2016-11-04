@@ -11,11 +11,27 @@ import java.sql.SQLException;
  *
  */
 public class MySQLConnector {
-    private final String USERNAME = ConfigHelper.getValue("databaseUsername");
-    private final String PW = ConfigHelper.getValue("databasePassword");
-    private final String SERVERNAME = ConfigHelper.getValue("databaseServername");
-    private final String DATABASE = ConfigHelper.getValue("databaseName");
-    private final int PORT = Integer.valueOf(ConfigHelper.getValue("databasePort"));
+    private final String USERNAME;
+    private final String PW;
+    private final String SERVERNAME;
+    private final String DATABASE;
+    private final int PORT;
+
+    public MySQLConnector(String srv, String db, String usr, String pw, int prt) {
+        this.USERNAME = usr;
+        this.PW = pw;
+        this.SERVERNAME = srv;
+        this.DATABASE = db;
+        this.PORT = prt;
+    }
+
+    public MySQLConnector() {
+        this.USERNAME = ConfigHelper.getValue("databaseUsername");
+        this.PW = ConfigHelper.getValue("databasePassword");
+        this.SERVERNAME = ConfigHelper.getValue("databaseServername");
+        this.DATABASE = ConfigHelper.getValue("databaseName");
+        this.PORT = Integer.valueOf(ConfigHelper.getValue("databasePort"));
+    }
 
     public Connection connect() {
         MysqlDataSource dataSource = new MysqlDataSource();

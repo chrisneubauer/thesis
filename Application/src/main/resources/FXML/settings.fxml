@@ -109,11 +109,11 @@
                     <contextMenu>
                         <ContextMenu>
                             <items>
-                                <MenuItem fx:id="TesseractEnglishLanguage" mnemonicParsing="false"
+                                <MenuItem fx:id="tesseractEnglishLanguage" mnemonicParsing="false"
                                           text="English"/>
-                                <MenuItem fx:id="TesseractGermanLanguage" mnemonicParsing="false"
+                                <MenuItem fx:id="tesseractGermanLanguage" mnemonicParsing="false"
                                           text="German"/>
-                                <MenuItem fx:id="TesseractEnglishAndGerman" mnemonicParsing="false"
+                                <MenuItem fx:id="tesseractEnglishAndGerman" mnemonicParsing="false"
                                           text="English+German"/>
                             </items>
                         </ContextMenu>
@@ -149,14 +149,14 @@
                         <Insets left="20.0"/>
                     </GridPane.margin>
                 </Label>
-                <ChoiceBox fx:id="DefaultFerdProfileDropDown" prefWidth="150.0" GridPane.columnIndex="3"
+                <ChoiceBox fx:id="defaultFerdProfileDropDown" prefWidth="150.0" GridPane.columnIndex="3"
                            GridPane.columnSpan="3" GridPane.rowIndex="1">
                     <contextMenu>
                         <ContextMenu>
                             <items>
-                                <MenuItem fx:id="BasicLevel" mnemonicParsing="false" text="Basic"/>
-                                <MenuItem fx:id="ComfortLevel" mnemonicParsing="false" text="Comfort"/>
-                                <MenuItem fx:id="ExtendedLevel" mnemonicParsing="false" text="Extended"/>
+                                <MenuItem fx:id="basicLevel" mnemonicParsing="false" text="Basic"/>
+                                <MenuItem fx:id="comfortLevel" mnemonicParsing="false" text="Comfort"/>
+                                <MenuItem fx:id="extendedLevel" mnemonicParsing="false" text="Extended"/>
                             </items>
                         </ContextMenu>
                     </contextMenu>
@@ -187,35 +187,35 @@
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                 </padding>
                 <Label text="Servername:" GridPane.rowIndex="1"/>
-                <TextField fx:id="ServernameSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <TextField fx:id="servernameSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets left="10.0"/>
                     </GridPane.margin>
                 </TextField>
                 <Label text="Database:" GridPane.rowIndex="2"/>
-                <TextField fx:id="DatabaseNameSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <TextField fx:id="databaseNameSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="10.0"/>
                     </GridPane.margin>
                 </TextField>
                 <Label text="User:" GridPane.rowIndex="3"/>
-                <TextField fx:id="UsernameSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <TextField fx:id="usernameSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets left="10.0"/>
                     </GridPane.margin>
                 </TextField>
                 <Label text="Password:" GridPane.rowIndex="4"/>
-                <TextField fx:id="PasswordSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
+                <TextField fx:id="passwordSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets left="10.0"/>
                     </GridPane.margin>
                 </TextField>
                 <Label text="Port:" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
-                <TextField fx:id="PortSettings" GridPane.columnIndex="5" GridPane.columnSpan="2"
+                <TextField fx:id="portSettings" GridPane.columnIndex="5" GridPane.columnSpan="2"
                            GridPane.rowIndex="1"/>
                 <Button fx:id="testDatabaseConnectionButton" mnemonicParsing="false"
                         onAction="#testDatabaseConnection" text="Test database connection"
