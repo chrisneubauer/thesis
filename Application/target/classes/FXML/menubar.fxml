@@ -6,7 +6,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.VBox?>
 
-<MenuBar VBox.vgrow="NEVER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.cneubauer.gui.controller.GUIController">
+<MenuBar fx:id="menuBar" VBox.vgrow="NEVER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.cneubauer.gui.controller.GUIController">
     <menus>
         <Menu mnemonicParsing="false" text="File">
             <items>
@@ -19,7 +19,7 @@
                 <MenuItem mnemonicParsing="false" text="Save As…" />
                 <MenuItem mnemonicParsing="false" text="Revert" />
                 <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem mnemonicParsing="false" text="Preferences…" />
+                <MenuItem mnemonicParsing="false" text="Settings…" onAction="#openSettings"/>
                 <SeparatorMenuItem mnemonicParsing="false" />
                 <MenuItem mnemonicParsing="false" text="Quit" onAction="#closeApplication"/>
             </items>
