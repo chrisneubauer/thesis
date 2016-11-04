@@ -1,6 +1,8 @@
 package de.cneubauer.gui.controller;
 
 import de.cneubauer.database.MySQLConnector;
+import de.cneubauer.util.config.ConfigHelper;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -51,7 +53,23 @@ public class SettingsController extends GUIController {
     // load settings from configuration file
     @FXML
     private void initialize() {
-        
+        this.databaseNameSettings.setText(ConfigHelper.getValue("databaseName"));
+        this.servernameSettings.setText(ConfigHelper.getValue("databaseServerName"));
+        this.usernameSettings.setText(ConfigHelper.getValue("databaseUsername"));
+        this.passwordSettings.setText(ConfigHelper.getValue("databasePassword"));
+        this.portSettings.setText(ConfigHelper.getValue("databasePort"));
+        this.confidenceIntervalField.setText(ConfigHelper.getValue("confidenceRate"));
+
+        this.applicationLanguageDropdown.setItems(FXCollections.observableArrayList("English", "German"));
+        this.tesseractLanguageSettingDropDown.setItems(FXCollections.observableArrayList("English", "German", "English and German"));
+        String tesLang = ConfigHelper.getValue("tesseractLanguage");
+        if (tesLang == "eng") {
+            tesseractLanguageSettingDropDown.setValue(this.tesseractEnglishLanguage);
+        } else if (tesLang == "deu") {
+            tesseractLanguageSettingDropDown.setValue(this.tesseractGermanLanguage);
+        } else {
+            tesseractLanguageSettingDropDown.setValue(this.tesseractEnglishAndGerman);
+        }
     }
 
     public void applyNewSettings(ActionEvent actionEvent) {
