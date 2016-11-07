@@ -58,6 +58,6 @@ public class ApplicationStart extends Application {
         config.putIfAbsent("databaseServerName", "localhost");
         config.putIfAbsent("databasePort", "3306");
         config.putIfAbsent("tesseractLanguage", "deu+eng");
-        ConfigHelper.write(config);
+        ConfigHelper.rewrite(config);
     }
 }

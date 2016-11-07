@@ -57,7 +57,7 @@ public final class ConfigHelper {
         return config;
     }
 
-    public static void write(Map<String, String> newConfiguration) {
+    public static void rewrite(Map<String, String> newConfiguration) {
         try {
             OutputStream out = new FileOutputStream(configFile);
             BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
@@ -69,6 +69,31 @@ public final class ConfigHelper {
         } catch (Exception e) {
             e.printStackTrace();
             Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to rewrite configuration settings! Please delete config.ini to reset to default settings");
+        }
+    }
+
+    // searches for key and adjusts value
+    // if no key could be found, a new line is added to the config file
+    public static void addOrUpdate(String key, String value) {
+        if (getValue(key) == null) {
+            config.put(key, value);
+            write(key, value);
+        } else {
+            config.replace(key, value);
+        }
+    }
+
+    // extends config file for one line
+    private static void write(String key, String value) {
+        try {
+            OutputStream out = new FileOutputStream(configFile, true);
+            BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
+            w.write(key + "=" + value);
+            w.newLine();
+            w.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to add configuration settings! Please delete config.ini to reset to default settings");
         }
     }
 }

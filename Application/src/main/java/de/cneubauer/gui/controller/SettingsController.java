@@ -3,7 +3,6 @@ package de.cneubauer.gui.controller;
 import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.util.config.ConfigHelper;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -12,7 +11,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.text.ParseException;
+import java.util.Objects;
 
 /**
  * Created by Christoph Neubauer on 04.11.2016.
@@ -20,19 +19,19 @@ import java.text.ParseException;
  */
 public class SettingsController extends GUIController {
     // General settings
-    @FXML public ChoiceBox applicationLanguageDropdown;
+    @FXML public ChoiceBox<String> applicationLanguageDropdown;
     @FXML public MenuItem applicationLanguageGerman;
     @FXML public MenuItem applicationLanguageEnglish;
     
     // Scan settings
     @FXML public TextField confidenceIntervalField;
-    @FXML public ChoiceBox tesseractLanguageSettingDropDown;
+    @FXML public ChoiceBox<String> tesseractLanguageSettingDropDown;
     @FXML public MenuItem tesseractEnglishLanguage;
     @FXML public MenuItem tesseractGermanLanguage;
     @FXML public MenuItem tesseractEnglishAndGerman;
     
     // ZugFerd settings
-    @FXML public ChoiceBox defaultFerdProfileDropDown;
+    @FXML public ChoiceBox<String> defaultFerdProfileDropDown;
     @FXML public MenuItem basicLevel;
     @FXML public MenuItem comfortLevel;
     @FXML public MenuItem extendedLevel;
@@ -62,32 +61,50 @@ public class SettingsController extends GUIController {
 
         this.applicationLanguageDropdown.setItems(FXCollections.observableArrayList("English", "German"));
         this.tesseractLanguageSettingDropDown.setItems(FXCollections.observableArrayList("English", "German", "English and German"));
-        String tesLang = ConfigHelper.getValue("tesseractLanguage");
-        if (tesLang == "eng") {
-            tesseractLanguageSettingDropDown.setValue(this.tesseractEnglishLanguage);
-        } else if (tesLang == "deu") {
-            tesseractLanguageSettingDropDown.setValue(this.tesseractGermanLanguage);
+        this.defaultFerdProfileDropDown.setItems(FXCollections.observableArrayList("Basic", "Comfort", "Extended"));
+
+        String appLang = ConfigHelper.getValue("appLang");
+        if (Objects.equals(appLang, "ger")) {
+            this.applicationLanguageDropdown.setValue("German");
         } else {
-            tesseractLanguageSettingDropDown.setValue(this.tesseractEnglishAndGerman);
+            this.applicationLanguageDropdown.setValue("English");
+        }
+
+        String tesLang = ConfigHelper.getValue("tesseractLanguage");
+        if (Objects.equals(tesLang, "eng")) {
+            this.tesseractLanguageSettingDropDown.setValue("English");
+        } else if (Objects.equals(tesLang, "deu")) {
+            this.tesseractLanguageSettingDropDown.setValue("German");
+        } else {
+            this.tesseractLanguageSettingDropDown.setValue("English and German");
+        }
+
+        String ferdLevel = ConfigHelper.getValue("defaultFerdProfile");
+        if (Objects.equals(ferdLevel, "Comfort")) {
+            this.tesseractLanguageSettingDropDown.setValue("Comfort");
+        } else if (Objects.equals(ferdLevel, "Extended")) {
+            this.tesseractLanguageSettingDropDown.setValue("Extended");
+        } else {
+            this.tesseractLanguageSettingDropDown.setValue("Basic");
         }
     }
 
-    public void applyNewSettings(ActionEvent actionEvent) {
+    public void applyNewSettings() {
         this.updateSettings();
     }
 
-    public void closeAndSaveSettings(ActionEvent actionEvent) {
+    public void closeAndSaveSettings() {
         this.updateSettings();
         Stage settingsWindow = (Stage) this.cancelButtonSettings.getScene().getWindow();
         settingsWindow.close();
     }
 
-    public void closeAndIgnoreSettings(ActionEvent actionEvent) {
+    public void closeAndIgnoreSettings() {
         Stage settingsWindow = (Stage) this.cancelButtonSettings.getScene().getWindow();
         settingsWindow.close();
     }
 
-    public void testDatabaseConnection(ActionEvent actionEvent) {
+    public void testDatabaseConnection() {
         boolean valid = this.validateDatabaseFields();
         if (valid) {
             boolean dbConIsWorking = this.connectToDatabase();
@@ -180,13 +197,28 @@ public class SettingsController extends GUIController {
 
     // updates all setting values in config.ini
     private void updateSettings() {
+        // first adjust language settings
+        String selectedLanguage = this.getSelectedApplicationLanguage();
+        String currentLanguage = ConfigHelper.getValue("appLang");
+        if (!Objects.equals(selectedLanguage, currentLanguage)) {
+            this.changeLanguage(selectedLanguage);
+        }
+
+        ConfigHelper.addOrUpdate("defaultFerdProfile", this.getDefaultFerdProfileDropDown());
+        ConfigHelper.addOrUpdate("tesseractLanguage", this.getTesseractLanguageSettingDropDown());
     }
 
-    public String getSelectedApplicationLanguage() {
-        if (this.applicationLanguageDropdown.getSelectionModel().getSelectedItem().equals(this.applicationLanguageEnglish)) {
+    // changes languages in the application
+    // TODO: make internationalization
+    private void changeLanguage(String newLanguage) {
+
+    }
+
+    private String getSelectedApplicationLanguage() {
+        if (this.applicationLanguageDropdown.getSelectionModel().getSelectedItem().equals(this.applicationLanguageEnglish.getText())) {
             return "eng";
         }
-        else if (this.applicationLanguageDropdown.getSelectionModel().getSelectedItem().equals(this.applicationLanguageGerman)) {
+        else if (this.applicationLanguageDropdown.getSelectionModel().getSelectedItem().equals(this.applicationLanguageGerman.getText())) {
             return "deu";
         }
         else {
@@ -194,31 +226,48 @@ public class SettingsController extends GUIController {
         }
     }
 
-    public ChoiceBox getTesseractLanguageSettingDropDown() {
-        return tesseractLanguageSettingDropDown;
+    public String getTesseractLanguageSettingDropDown() {
+        if (Objects.equals(this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem(), this.tesseractEnglishLanguage.toString())) {
+            return "eng";
+        } else if (Objects.equals(this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem(), this.tesseractEnglishLanguage.toString())) {
+            return "deu";
+        } else {
+            return "eng+deu";
+        }
     }
 
-    public ChoiceBox getDefaultFerdProfileDropDown() {
-        return defaultFerdProfileDropDown;
+    private String getDefaultFerdProfileDropDown() {
+        if (this.defaultFerdProfileDropDown.getSelectionModel().getSelectedItem().equals(this.basicLevel.getText())) {
+            return "basic";
+        }
+        else if (this.defaultFerdProfileDropDown.getSelectionModel().getSelectedItem().equals(this.comfortLevel.getText())) {
+            return "comfort";
+        }
+        else if (this.defaultFerdProfileDropDown.getSelectionModel().getSelectedItem().equals(this.extendedLevel.getText())) {
+            return "extended";
+        }
+        else {
+            return "basic";
+        }
     }
 
-    public String getServernameSettings() {
+    private String getServernameSettings() {
         return this.servernameSettings.getText();
     }
 
-    public String getDatabaseNameSettings() {
+    private String getDatabaseNameSettings() {
         return this.databaseNameSettings.getText();
     }
 
-    public String getUsernameSettings() {
+    private String getUsernameSettings() {
         return this.usernameSettings.getText();
     }
 
-    public String getPasswordSettings() {
+    private String getPasswordSettings() {
         return this.passwordSettings.getText();
     }
 
-    public int getPortSettings() {
+    private int getPortSettings() {
         return Integer.parseInt(this.portSettings.getText());
     }
 }
