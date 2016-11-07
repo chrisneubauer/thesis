@@ -1,6 +1,9 @@
 package de.cneubauer.gui;
 
+import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
+import de.cneubauer.util.enumeration.AppLang;
+import de.cneubauer.util.enumeration.TessLang;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
@@ -51,13 +54,14 @@ public class ApplicationStart extends Application {
 
     private static void initSettings() {
         Map<String, String> config = ConfigHelper.getConfig();
-        config.putIfAbsent("confidenceRate", "0.2");
-        config.putIfAbsent("databaseName", "ferd_transformator");
-        config.putIfAbsent("databaseUsername", "root");
-        config.putIfAbsent("databasePassword", "toor");
-        config.putIfAbsent("databaseServerName", "localhost");
-        config.putIfAbsent("databasePort", "3306");
-        config.putIfAbsent("tesseractLanguage", "deu+eng");
+        config.putIfAbsent(Cfg.CONFIDENCERATE.getValue(), "0.2");
+        config.putIfAbsent(Cfg.DBNAME.getValue(), "ferd_transformator");
+        config.putIfAbsent(Cfg.DBUSER.getValue(), "root");
+        config.putIfAbsent(Cfg.DBPASSWORD.getValue(), "toor");
+        config.putIfAbsent(Cfg.DBSERVER.getValue(), "localhost");
+        config.putIfAbsent(Cfg.DBPORT.getValue(), "3306");
+        config.putIfAbsent(Cfg.TESSERACTLANGUAGE.getValue(), TessLang.ENGLISHANDGERMAN.getValue());
+        config.putIfAbsent(Cfg.APPLICATIONLANGUAGE.getValue(), AppLang.ENGLISH.name());
         ConfigHelper.rewrite(config);
     }
 }

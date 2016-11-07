@@ -1,7 +1,11 @@
 package de.cneubauer.gui.controller;
 
 import de.cneubauer.database.MySQLConnector;
+import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
+import de.cneubauer.util.enumeration.AppLang;
+import de.cneubauer.util.enumeration.FerdLevel;
+import de.cneubauer.util.enumeration.TessLang;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -19,22 +23,14 @@ import java.util.Objects;
  */
 public class SettingsController extends GUIController {
     // General settings
-    @FXML public ChoiceBox<String> applicationLanguageDropdown;
-    @FXML public MenuItem applicationLanguageGerman;
-    @FXML public MenuItem applicationLanguageEnglish;
+    @FXML public ChoiceBox<AppLang> applicationLanguageDropdown;
     
     // Scan settings
     @FXML public TextField confidenceIntervalField;
-    @FXML public ChoiceBox<String> tesseractLanguageSettingDropDown;
-    @FXML public MenuItem tesseractEnglishLanguage;
-    @FXML public MenuItem tesseractGermanLanguage;
-    @FXML public MenuItem tesseractEnglishAndGerman;
+    @FXML public ChoiceBox<TessLang> tesseractLanguageSettingDropDown;
     
     // ZugFerd settings
-    @FXML public ChoiceBox<String> defaultFerdProfileDropDown;
-    @FXML public MenuItem basicLevel;
-    @FXML public MenuItem comfortLevel;
-    @FXML public MenuItem extendedLevel;
+    @FXML public ChoiceBox<FerdLevel> defaultFerdProfileDropDown;
     
     // Database settings
     @FXML public TextField servernameSettings;
@@ -52,41 +48,26 @@ public class SettingsController extends GUIController {
     // load settings from configuration file
     @FXML
     private void initialize() {
-        this.databaseNameSettings.setText(ConfigHelper.getValue("databaseName"));
-        this.servernameSettings.setText(ConfigHelper.getValue("databaseServerName"));
-        this.usernameSettings.setText(ConfigHelper.getValue("databaseUsername"));
-        this.passwordSettings.setText(ConfigHelper.getValue("databasePassword"));
-        this.portSettings.setText(ConfigHelper.getValue("databasePort"));
-        this.confidenceIntervalField.setText(ConfigHelper.getValue("confidenceRate"));
+        this.databaseNameSettings.setText(ConfigHelper.getValue(Cfg.DBNAME.getValue()));
+        this.servernameSettings.setText(ConfigHelper.getValue(Cfg.DBSERVER.getValue()));
+        this.usernameSettings.setText(ConfigHelper.getValue(Cfg.DBUSER.getValue()));
+        this.passwordSettings.setText(ConfigHelper.getValue(Cfg.DBPASSWORD.getValue()));
+        this.portSettings.setText(ConfigHelper.getValue(Cfg.DBPORT.getValue()));
+        this.confidenceIntervalField.setText(ConfigHelper.getValue(Cfg.CONFIDENCERATE.getValue()));
 
-        this.applicationLanguageDropdown.setItems(FXCollections.observableArrayList("English", "German"));
-        this.tesseractLanguageSettingDropDown.setItems(FXCollections.observableArrayList("English", "German", "English and German"));
-        this.defaultFerdProfileDropDown.setItems(FXCollections.observableArrayList("Basic", "Comfort", "Extended"));
+        this.applicationLanguageDropdown.setItems(FXCollections.observableArrayList(AppLang.ENGLISH, AppLang.GERMAN));
+        this.tesseractLanguageSettingDropDown.setItems(FXCollections.observableArrayList(TessLang.ENGLISH, TessLang.GERMAN, TessLang.ENGLISHANDGERMAN));
+        this.defaultFerdProfileDropDown.setItems(FXCollections.observableArrayList(FerdLevel.BASIC, FerdLevel.COMFORT, FerdLevel.EXTENDED));
 
-        String appLang = ConfigHelper.getValue("appLang");
-        if (Objects.equals(appLang, "ger")) {
-            this.applicationLanguageDropdown.setValue("German");
-        } else {
-            this.applicationLanguageDropdown.setValue("English");
-        }
+        // populating dropdowns with values from config
+        String appLang = ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue());
+        this.applicationLanguageDropdown.setValue(AppLang.valueOf(appLang));
 
-        String tesLang = ConfigHelper.getValue("tesseractLanguage");
-        if (Objects.equals(tesLang, "eng")) {
-            this.tesseractLanguageSettingDropDown.setValue("English");
-        } else if (Objects.equals(tesLang, "deu")) {
-            this.tesseractLanguageSettingDropDown.setValue("German");
-        } else {
-            this.tesseractLanguageSettingDropDown.setValue("English and German");
-        }
+        String tesLang = ConfigHelper.getValue(Cfg.TESSERACTLANGUAGE.getValue());
+        this.tesseractLanguageSettingDropDown.setValue(TessLang.ofValue(tesLang));
 
-        String ferdLevel = ConfigHelper.getValue("defaultFerdProfile");
-        if (Objects.equals(ferdLevel, "Comfort")) {
-            this.tesseractLanguageSettingDropDown.setValue("Comfort");
-        } else if (Objects.equals(ferdLevel, "Extended")) {
-            this.tesseractLanguageSettingDropDown.setValue("Extended");
-        } else {
-            this.tesseractLanguageSettingDropDown.setValue("Basic");
-        }
+        String ferdLevel = ConfigHelper.getValue(Cfg.FERDPROFILE.getValue()).toUpperCase();
+        this.defaultFerdProfileDropDown.setValue(FerdLevel.valueOf(ferdLevel));
     }
 
     public void applyNewSettings() {
@@ -199,13 +180,13 @@ public class SettingsController extends GUIController {
     private void updateSettings() {
         // first adjust language settings
         String selectedLanguage = this.getSelectedApplicationLanguage();
-        String currentLanguage = ConfigHelper.getValue("appLang");
+        String currentLanguage = ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue());
         if (!Objects.equals(selectedLanguage, currentLanguage)) {
             this.changeLanguage(selectedLanguage);
         }
 
-        ConfigHelper.addOrUpdate("defaultFerdProfile", this.getDefaultFerdProfileDropDown());
-        ConfigHelper.addOrUpdate("tesseractLanguage", this.getTesseractLanguageSettingDropDown());
+        ConfigHelper.addOrUpdate(Cfg.FERDPROFILE.getValue(), this.getDefaultFerdProfileDropDown());
+        ConfigHelper.addOrUpdate(Cfg.TESSERACTLANGUAGE.getValue(), this.getTesseractLanguageSettingDropDown());
     }
 
     // changes languages in the application
@@ -215,10 +196,10 @@ public class SettingsController extends GUIController {
     }
 
     private String getSelectedApplicationLanguage() {
-        if (this.applicationLanguageDropdown.getSelectionModel().getSelectedItem().equals(this.applicationLanguageEnglish.getText())) {
+        if (this.applicationLanguageDropdown.getSelectionModel().getSelectedItem().equals(AppLang.ENGLISH)) {
             return "eng";
         }
-        else if (this.applicationLanguageDropdown.getSelectionModel().getSelectedItem().equals(this.applicationLanguageGerman.getText())) {
+        else if (this.applicationLanguageDropdown.getSelectionModel().getSelectedItem().equals(AppLang.GERMAN)) {
             return "deu";
         }
         else {
@@ -226,10 +207,10 @@ public class SettingsController extends GUIController {
         }
     }
 
-    public String getTesseractLanguageSettingDropDown() {
-        if (Objects.equals(this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem(), this.tesseractEnglishLanguage.toString())) {
+    private String getTesseractLanguageSettingDropDown() {
+        if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem().equals(TessLang.ENGLISH)) {
             return "eng";
-        } else if (Objects.equals(this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem(), this.tesseractEnglishLanguage.toString())) {
+        } else if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem().equals(TessLang.GERMAN)) {
             return "deu";
         } else {
             return "eng+deu";
@@ -237,13 +218,13 @@ public class SettingsController extends GUIController {
     }
 
     private String getDefaultFerdProfileDropDown() {
-        if (this.defaultFerdProfileDropDown.getSelectionModel().getSelectedItem().equals(this.basicLevel.getText())) {
+        if (this.defaultFerdProfileDropDown.getSelectionModel().getSelectedItem().equals(FerdLevel.BASIC)) {
             return "basic";
         }
-        else if (this.defaultFerdProfileDropDown.getSelectionModel().getSelectedItem().equals(this.comfortLevel.getText())) {
+        else if (this.defaultFerdProfileDropDown.getSelectionModel().getSelectedItem().equals(FerdLevel.COMFORT)) {
             return "comfort";
         }
-        else if (this.defaultFerdProfileDropDown.getSelectionModel().getSelectedItem().equals(this.extendedLevel.getText())) {
+        else if (this.defaultFerdProfileDropDown.getSelectionModel().getSelectedItem().equals(FerdLevel.BASIC)) {
             return "extended";
         }
         else {
