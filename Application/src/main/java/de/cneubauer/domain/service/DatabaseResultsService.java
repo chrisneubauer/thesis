@@ -8,7 +8,6 @@ import de.cneubauer.domain.dao.impl.InvoiceDaoImpl;
 import de.cneubauer.domain.dao.impl.ScanDaoImpl;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 

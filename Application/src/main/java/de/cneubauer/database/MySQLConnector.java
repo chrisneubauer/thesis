@@ -1,10 +1,10 @@
 package de.cneubauer.database;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  * Created by Christoph Neubauer on 05.10.2016.
@@ -26,11 +26,11 @@ public class MySQLConnector {
     }
 
     public MySQLConnector() {
-        this.USERNAME = ConfigHelper.getValue("databaseUsername");
-        this.PW = ConfigHelper.getValue("databasePassword");
-        this.SERVERNAME = ConfigHelper.getValue("databaseServername");
-        this.DATABASE = ConfigHelper.getValue("databaseName");
-        this.PORT = Integer.valueOf(ConfigHelper.getValue("databasePort"));
+        this.USERNAME = ConfigHelper.getValue(Cfg.DBUSER.getValue());
+        this.PW = ConfigHelper.getValue(Cfg.DBPASSWORD.getValue());
+        this.SERVERNAME = ConfigHelper.getValue(Cfg.DBSERVER.getValue());
+        this.DATABASE = ConfigHelper.getValue(Cfg.DBNAME.getValue());
+        this.PORT = Integer.valueOf(ConfigHelper.getValue(Cfg.DBPORT.getValue()));
     }
 
     public Connection connect() {
