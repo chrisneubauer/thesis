@@ -87,6 +87,7 @@
     \def\Geburtsort##1{\gdef\@Geburtsort{##1}}
     \def\Geburtsdatum##1{\gdef\@Geburtsdatum{##1}}
     \def\Betreuer##1{\gdef\@Betreuer{##1}}
+	\def\ZweiterBetreuer##1{\gdef\@ZweiterBetreuer{##2}}
     \def\Start##1{\gdef\@Start{##1}}
     \def\Ende##1{\gdef\@Ende{##1}}
 }
