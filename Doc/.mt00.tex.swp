@@ -122,9 +122,7 @@ In the last section, these criteria are applied on the formats defined in sectio
 \section{Description of leading formats}
 \label{sec2.1}
 
-Although companies, states and organizations are attempting to standardize electronic formats, there is no format which is used everywhere and by everyone. Many countries have their own formats and even industries developed their own standards, or subsets of a standard, in order to fulfill their needs.
-
-The description of all of these formats is beyond the scope of this thesis. Instead, formats the author sees as most useful are picked out and explained more in detail here. Especially formats, that are already used in Europe and / or Germany are thereby considered useful.
+%TODO: Write about all those formats out there, the impossibility to write about all of them and which criteria are used to decide which to take
 
 \subsection{UN/EDIFACT}
 \label{sec2.1.1}
@@ -135,7 +133,7 @@ The European Commission states that the UN/EDIFACT INVOIC message has been a cor
 
 There are several subsets of EDIFACT that have been developed for different industries. For instance, the chemical industry uses CEFIC/ESCom\footnote{see also: https://www.cefic.org/Industry-support/Implementing-reach/escom/} as their standard, while automotive industry is in charge with ODETTE/FTP2\footnote{see also: https://www.odette.org/services/oftp2}.
 
-EDIFACT has different message types such as \emph{ORDCHG} for a request to change an order or \emph{PAYORD} which contains a payment order. In the context of this thesis, the message type \emph{INVOIC} (containing an invoice) is the most interesting one.
+EDIFACT has different message types such as ORDCHG for a request to change an order or PAYORD which contains a payment order. In the context of this thesis, the message type INVOIC (containing an invoice) is the most interesting one.
 
 \subsection{XCBL}
 \label{sec2.1.2}

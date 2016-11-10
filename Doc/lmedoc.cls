@@ -87,7 +87,7 @@
     \def\Geburtsort##1{\gdef\@Geburtsort{##1}}
     \def\Geburtsdatum##1{\gdef\@Geburtsdatum{##1}}
     \def\Betreuer##1{\gdef\@Betreuer{##1}}
-	\def\ZweiterBetreuer##1{\gdef\@ZweiterBetreuer{##2}}
+    \def\ZweiterBetreuer##1{\gdef\@ZweiterBetreuer{##1}}
     \def\Start##1{\gdef\@Start{##1}}
     \def\Ende##1{\gdef\@Ende{##1}}
 }
@@ -146,6 +146,7 @@ Friedrich-Alexander-Universit"at Erlangen-N"urnberg.\\[5mm]
 \end{center}
 \begin{flushleft}
 \ifnum\language=\l@english\relax Advisor\else Betreuer\fi: \@Betreuer \\[2mm]
+\ifnum\language=\l@english\relax Second Advisor\else Zweiter Betreuer\fi: \@ZweiterBetreuer \\[2mm]
 \ifnum\language=\l@english\relax Started\else Beginn der Arbeit\fi: \@Start \\[2mm]
 \ifnum\language=\l@english\relax Finished\else Abgabe der Arbeit\fi: \@Ende \\
 \end{flushleft}
