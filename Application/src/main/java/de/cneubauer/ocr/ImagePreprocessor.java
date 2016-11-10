@@ -8,6 +8,15 @@ import java.awt.image.WritableRaster;
 /**
  * Created by Christoph Neubauer on 10.11.2016.
  * Preprocessor who deals with coloured images, removes gaussian noise and converts the image to a greyscale image
+ * Steps being made:
+ * 1. De-Skew and align horizontally
+ * 2. Despeckle the image: Remove singular points inside the image
+ * 3. Greyscaling the image
+ * 4. Removing lines that not contain words (lines, empty pages etc.)
+ * 5. Analyzation of the invoice layout
+ * 6. Find baseline for words and separate the words
+ * 7. Aspect Ratio and Scale is being normalised
+ * TODO: Dictionary that contains invoice words
  */
 public class ImagePreprocessor {
 
