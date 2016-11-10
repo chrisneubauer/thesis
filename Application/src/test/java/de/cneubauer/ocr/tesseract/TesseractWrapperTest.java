@@ -1,6 +1,7 @@
-package de.cneubauer.ocr;
+package de.cneubauer.ocr.tesseract;
 
 import de.cneubauer.AbstractTest;
+import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package de.cneubauer.ocr;
+package de.cneubauer.ocr.tesseract;
 
 import java.io.File;
 import java.util.ArrayList;

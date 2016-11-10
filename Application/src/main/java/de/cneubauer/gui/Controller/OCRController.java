@@ -2,7 +2,7 @@ package de.cneubauer.gui.controller;
 
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.service.OCRDataExtractorService;
-import de.cneubauer.ocr.TesseractWrapper;
+import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
