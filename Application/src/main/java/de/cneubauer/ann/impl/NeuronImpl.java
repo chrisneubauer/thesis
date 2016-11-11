@@ -9,7 +9,7 @@ import de.cneubauer.ann.NeuronStrategy;
 public class NeuronImpl implements Neuron {
     @Override
     public void setStrategy(NeuronStrategy ns) {
-        
+
     }
 
     @Override
