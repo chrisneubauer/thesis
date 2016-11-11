@@ -212,6 +212,7 @@
     <orderEntry type="library" name="Spring-4.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Spring MVC-4.3.3.RELEASE" level="project" />
     <orderEntry type="library" name="Hibernate 5.2.2-5.2.2" level="project" />
+    <orderEntry type="library" name="jmagick-6.6.9" level="project" />
     <orderEntry type="library" name="Maven: io.konik:konik:1.2.9" level="project" />
     <orderEntry type="library" name="Maven: io.konik:harness:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
@@ -229,5 +230,6 @@
     <orderEntry type="library" name="Maven: org.apache.pdfbox:fontbox:2.0.2" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.pdfbox:xmpbox:2.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.im4java:im4java:1.4.0" level="project" />
   </component>
 </module>
