@@ -6,17 +6,18 @@ import java.awt.image.DataBuffer;
 
 /**
  * Created by Christoph Neubauer on 11.11.2016.
+ * This class calculates the Radian for descewing
+ * TODO: link to sourcecode
  */
 public class DeSkewer {
-    public static double doIt(BufferedImage image) {
+    public static double calculateRadiant(BufferedImage image) {
         final double skewRadians;
-        BufferedImage black = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
-        final Graphics2D g = black.createGraphics();
+        BufferedImage greyScaled = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+        final Graphics2D g = greyScaled.createGraphics();
         g.drawImage(image, 0, 0, null);
         g.dispose();
 
-        skewRadians = findSkew(black);
-        System.out.println(-57.295779513082320876798154814105 * skewRadians);
+        skewRadians = findSkew(greyScaled);
         return skewRadians;
     }
 

@@ -1,21 +1,19 @@
 package de.cneubauer.ocr;
 
-import com.google.common.io.Files;
-
+import de.cneubauer.util.DeSkewer;
 import magick.MagickException;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.im4java.core.ConvertCmd;
 import org.im4java.core.IM4JavaException;
 import org.im4java.core.IMOperation;
 import org.im4java.core.Stream2BufferedImage;
-import org.im4java.process.Pipe;
 import org.im4java.process.ProcessStarter;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
-import java.awt.image.WritableRaster;
 import java.io.*;
 
 /**
@@ -32,114 +30,110 @@ import java.io.*;
  * TODO: Dictionary that contains invoice words
  */
 public class ImagePreprocessor {
-    //private MagickImage magickImage;
-    private IMOperation imOperation;
     private String tempPath = ".\\temp\\tempImage.png";
     private String tempPathConverted = ".\\temp\\tempImageConverted.png";
 
-    private BufferedImage colouredImage;
+    private BufferedImage inputFile;
+    private BufferedImage outputFile;
     private double gaussianRatio = 10.0;
 
     public ImagePreprocessor(BufferedImage imageToProcess) {
         ProcessStarter.setGlobalSearchPath(".\\portable\\imagemagick\\ImageMagick-7.0.3-6-portable-Q16-x86;");
-        this.colouredImage = imageToProcess;
+        this.inputFile = imageToProcess;
         File outputfile = new File(this.tempPath);
         File outputConvertedFile = new File(this.tempPathConverted);
         try {
-            ImageIO.write(this.colouredImage, "png", outputfile);
-            ImageIO.write(this.colouredImage, "png", outputConvertedFile);
+            ImageIO.write(this.inputFile, "png", outputfile);
+            ImageIO.write(this.inputFile, "png", outputConvertedFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*try {
-            //ImageInfo outputImage = new ImageInfo(tempPath);
-            //this.magickImage = new MagickImage(outputImage);
-        }
-        catch (MagickException e) {
-            e.printStackTrace();
-        }*/
     }
 
     public BufferedImage preprocess() {
         try {
-            this.deSkewImage();
-            this.replaceAfterConversion();
-            this.deSpeckleImage();
-            this.replaceAfterConversion();
-            this.greyScaleImage();
+            Logger.getLogger(this.getClass()).log(Level.INFO, "Preprocessing started...");
+            BufferedImage image = this.inputFile;
+            Logger.getLogger(this.getClass()).log(Level.INFO, "deskewing...");
+            this.outputFile = this.deSkewImage(image);
+
+            image = this.outputFile;
+            Logger.getLogger(this.getClass()).log(Level.INFO, "greyscaling...");
+            this.outputFile = this.greyScaleImage(image);
+
+            image = this.outputFile;
+            Logger.getLogger(this.getClass()).log(Level.INFO, "despeckling...");
+            this.outputFile = this.deSpeckleImage(image);
+
             /*this.removeLinesWithoutWords();
             this.analyzeInvoiceLayout();
             this.findBaselineForWords();
             this.separateWords();
             this.normaliseAspectRatioAndScale();*/
-        } catch (MagickException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (IM4JavaException e) {
+            Logger.getLogger(this.getClass()).log(Level.INFO, "Preprocessing done. Returning image...");
+            return this.outputFile;
+        } catch (MagickException | InterruptedException | IOException | IM4JavaException e) {
             e.printStackTrace();
         }
-        return this.colouredImage;
+        return null;
     }
 
-    private void greyScaleImage() throws MagickException, InterruptedException, IOException, IM4JavaException {
-        this.colouredImage = this.createImageFromBytes(Files.toByteArray(new File(this.tempPathConverted)));
-        //this.colouredImage = this.createImageFromBytes(this.magickImage.imageToBlob(new ImageInfo(this.tempPath)));
-        this.colouredImage = this.toGreyscaleImage();
+    private BufferedImage greyScaleImage(BufferedImage img) throws MagickException, InterruptedException, IOException, IM4JavaException {
+        BufferedImage image = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_BYTE_GRAY);
+        Graphics g = image.getGraphics();
+        g.drawImage(img, 0, 0, null);
+        g.dispose();
+        return image;
     }
 
-    private void deSpeckleImage() throws MagickException, InterruptedException, IOException, IM4JavaException {
-        this.imOperation = new IMOperation();
-        this.imOperation.addImage(this.tempPath);
-        this.imOperation.addImage(this.tempPathConverted);
-        this.imOperation.despeckle();
-        ConvertCmd cmd = new ConvertCmd();
+    private BufferedImage deSpeckleImage(BufferedImage img) throws MagickException, InterruptedException, IOException, IM4JavaException {
+        IMOperation op = new IMOperation();
+        op.addImage();
 
-        cmd.run(this.imOperation);
-        //this.magickImage = this.magickImage.despeckleImage();
-    }
+        op.despeckle();
+        op.addImage("png:-");
 
-    public void deSkewImage() throws MagickException, InterruptedException, IOException, IM4JavaException {
-
-        //double radians = DeSkewer.doIt(this.colouredImage);
-
-        /*InputStream is = new FileInputStream(this.tempPath);
-        Pipe pipeIn = new Pipe (is, null);
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        Pipe pipeOut = new Pipe(null, os);*/
+        // set up command
         ConvertCmd convert = new ConvertCmd();
 
-      //  convert.setInputProvider(pipeIn);
-      //  convert.setOutputConsumer(pipeOut);
+        Stream2BufferedImage s2b = new Stream2BufferedImage();
+        convert.setOutputConsumer(s2b);
 
-        this.imOperation = new IMOperation();
-        this.imOperation.addImage();
-        this.imOperation.deskew();
-        this.imOperation.addImage();
-        //this.imOperation.addImage(this.tempPath);
-        //this.imOperation.addImage(this.tempPathConverted);
-        //ConvertCmd cmd = new ConvertCmd();
-
-        convert.run(this.imOperation, this.tempPath, this.tempPathConverted);
-        //convert.run(this.imOperation, this.tempPath, this.tempPathConverted);
-        //cmd.run(this.imOperation);
-
-        //this.magickImage.rotateImage(radians);
+        // run command and extract BufferedImage from OutputConsumer
+        convert.run(op,img);
+        return s2b.getImage();
     }
 
-    public BufferedImage reduceNoise() {
-        Raster source = colouredImage.getRaster();
-        BufferedImage output = new BufferedImage(colouredImage.getWidth(), colouredImage.getHeight(), colouredImage.getType());
+    private BufferedImage deSkewImage(BufferedImage img) throws MagickException, InterruptedException, IOException, IM4JavaException {
+        IMOperation op = new IMOperation();
+        op.addImage();
+
+        double value = DeSkewer.calculateRadiant(img);
+        op.deskew(value);
+        op.addImage("png:-");
+
+        // set up command
+        ConvertCmd convert = new ConvertCmd();
+
+        Stream2BufferedImage s2b = new Stream2BufferedImage();
+        convert.setOutputConsumer(s2b);
+
+        // run command and extract BufferedImage from OutputConsumer
+        convert.run(op,img);
+        return s2b.getImage();
+    }
+
+    /*public BufferedImage reduceNoise() {
+        Raster source = inputFile.getRaster();
+        BufferedImage output = new BufferedImage(inputFile.getWidth(), inputFile.getHeight(), inputFile.getType());
         WritableRaster out = output.getRaster();
 
         int currVal;
         double newVal;
         double gaussian;
         int bands  = out.getNumBands();
-        int width  = colouredImage.getWidth();
-        int height = colouredImage.getHeight();
+        int width  = inputFile.getWidth();
+        int height = inputFile.getHeight();
         java.util.Random randGen = new java.util.Random();
 
         for (int j=0; j<height; j++) {
@@ -157,61 +151,10 @@ public class ImagePreprocessor {
                 }
             }
         }
-
         return output;
-    }
-
-    public BufferedImage anotherDeskewApproach() throws IOException, IM4JavaException, InterruptedException {
-        IMOperation op = new IMOperation();
-        op.addImage();
-        //op.resize(350);
-        //op.deskew();
-        op.addImage("png:-");
-        BufferedImage images = ImageIO.read(new File(this.tempPathConverted));
-
-        // set up command
-        ConvertCmd convert = new ConvertCmd();
-        Stream2BufferedImage s2b = new Stream2BufferedImage();
-        convert.setOutputConsumer(s2b);
-
-        // run command and extract BufferedImage from OutputConsumer
-        convert.run(op,images);
-        return s2b.getImage();
-    }
-
-    public BufferedImage toGreyscaleImage() {
-        BufferedImage image = new BufferedImage(colouredImage.getWidth(), colouredImage.getHeight(),
-                BufferedImage.TYPE_BYTE_GRAY);
-        Graphics g = image.getGraphics();
-        g.drawImage(colouredImage, 0, 0, null);
-        g.dispose();
-        return image;
-    }
+    }*/
 
     public BufferedImage getImage() {
-        return this.colouredImage;
-    }
-
-    private BufferedImage createImageFromBytes(byte[] imageData) {
-        ByteArrayInputStream bais = new ByteArrayInputStream(imageData);
-        try {
-            return ImageIO.read(bais);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void replaceAfterConversion() {
-        byte[] newImage = new byte[0];
-        try {
-            newImage = Files.toByteArray(new File(this.tempPathConverted));
-
-            BufferedImage newBufferedImage = this.createImageFromBytes(newImage);
-
-            File orig = new File(this.tempPath);
-            ImageIO.write(newBufferedImage, "png", orig);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return this.inputFile;
     }
 }
