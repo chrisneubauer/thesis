@@ -4,9 +4,9 @@ import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.domain.bo.*;
 import de.cneubauer.domain.dao.impl.*;
 import de.cneubauer.util.config.ConfigHelper;
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
+import org.apache.log4j.PropertyConfigurator;
 import org.hibernate.query.Query;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -24,8 +24,8 @@ public class AbstractTest {
 
     @Before
     public void setUp() throws Exception {
-        BasicConfigurator.configure();
-        LogManager.getRootLogger().setLevel(Level.ERROR);
+        PropertyConfigurator.configure("src\\test\\log4j.properties");
+        LogManager.getRootLogger().setLevel(Level.DEBUG);
         ConfigHelper.getConfig();
     }
 

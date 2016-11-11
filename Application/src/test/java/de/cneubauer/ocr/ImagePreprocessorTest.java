@@ -23,7 +23,7 @@ public class ImagePreprocessorTest extends AbstractTest {
 
     @Before
     public void setUp() throws Exception {
-        String path = "..\\data\\Datenwerk4.pdf";
+        String path = "..\\data\\Datenwerk5.pdf";
 
         //path = "..\\data\\20160830_Scans\\Scan_20160822_161042_003.jpg";
         //path = ".\\temp\\tempImage.png";

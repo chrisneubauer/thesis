@@ -2,15 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/sample/Controller.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/sample/Main.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/sample/SampleMenu.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/sample/pdfts/examples/GoogleHTMLOutputHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/sample/pdfts/examples/XMLFormExport.dtd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/sample/pdfts/examples/XMLFormExport.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/sample/pdfts/examples/XMLOutputTarget.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/sample/pdfts/examples/package-info.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/sample/sample.fxml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/log4j.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/log4j.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/ImagePreprocessor.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/ImagePreprocessor.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/util/DeSkewer$BitUtils.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/DeSkewer$BitUtils.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/util/DeSkewer.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/DeSkewer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/de/cneubauer/AbstractTest.class" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/AbstractTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/ImagePreprocessorTest.class" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/ImagePreprocessorTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/tempImage.png" afterPath="$PROJECT_DIR$/temp/tempImage.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/tempImageConverted.png" afterPath="$PROJECT_DIR$/temp/tempImageConverted.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/testI4.png" afterPath="$PROJECT_DIR$/temp/testI4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/ImagePreprocessorTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/ImagePreprocessorTest.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -89,66 +93,56 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImagePreprocessor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/ImagePreprocessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#ImagePreprocessor#0;class#ImagePreprocessor#0" expanded="false" />
-                <element signature="method#greyScaleImage#0;class#ImagePreprocessor#0" expanded="false" />
-                <element signature="method#deSpeckleImage#0;class#ImagePreprocessor#0" expanded="false" />
-                <element signature="method#deSkewImage#0;class#ImagePreprocessor#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AbstractTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
+            <state relative-caret-position="153">
+              <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+              <folding>
+                <element signature="method#clearDatabase#0;class#AbstractTest#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="log4j.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/log4j.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DeSkewer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/DeSkewer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
-              <folding>
-                <element signature="method#calculateRadiant#0;class#DeSkewer#0" expanded="false" />
-                <element signature="method#next_pow2#0;class#DeSkewer#0" expanded="false" />
-                <element signature="class#BitUtils#0;class#DeSkewer#0" expanded="false" />
-                <element signature="method#findSkew#0;class#DeSkewer#0" expanded="false" />
-                <element signature="method#radon#0;class#DeSkewer#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ImagePreprocessorTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/ImagePreprocessorTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="log4j.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/log4j.properties">
+        <entry file="file://$PROJECT_DIR$/src/test/log4j.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApplicationStart.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/ApplicationStart.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="203">
+              <caret line="50" column="27" selection-start-line="50" selection-start-column="27" selection-end-line="50" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImagePreprocessorTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/ImagePreprocessorTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -191,7 +185,6 @@
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/CountryDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/bo/LegalPerson.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/scanner/PDFScanner.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/InvoiceDaoImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/InvoiceDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/DatabaseController.java" />
@@ -233,6 +226,7 @@
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/ImagePreprocessor.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/util/DeSkewer.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/ImagePreprocessorTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java" />
       </list>
     </option>
   </component>
@@ -351,32 +345,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -410,6 +378,7 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="SearchEverywhereHistoryKey" value="ScratchFileBuffer&#9;PSI&#9;JAVA://org.apache.pdfbox.io.ScratchFileBuffer" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -426,18 +395,18 @@
       <recent name="de.cneubauer.domain.dao.impl" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\hbm" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\java" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test\resources" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\portable\imagemagick" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\lib" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\hbm" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\java\de\cneubauer\database\hbm" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="de.cneubauer.domain.dao.impl" />
@@ -919,34 +888,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ImagePreprocessorTest_anotherDeskec - 2016.11.11 at 16h 30m 01s.xml">
-      <configuration name="ImagePreprocessorTest.anotherDeskec" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ImagePreprocessorTest_anotherDeskec - 2016.11.11 at 16h 39m 02s.xml">
-      <configuration name="ImagePreprocessorTest.anotherDeskec" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ImagePreprocessorTest_anotherDeskec - 2016.11.11 at 16h 45m 07s.xml">
-      <configuration name="ImagePreprocessorTest.anotherDeskec" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ImagePreprocessorTest_anotherDeskec - 2016.11.11 at 16h 47m 02s.xml">
-      <configuration name="ImagePreprocessorTest.anotherDeskec" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ImagePreprocessorTest_anotherDeskec - 2016.11.11 at 16h 48m 41s.xml">
-      <configuration name="ImagePreprocessorTest.anotherDeskec" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 16h 55m 25s.xml">
-      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 16h 58m 58s.xml">
-      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 08m 33s.xml">
-      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 11m 31s.xml">
-      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 15m 53s.xml">
+      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 27m 07s.xml">
+      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 28m 28s.xml">
+      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 32m 13s.xml">
+      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 32m 46s.xml">
+      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 33m 00s.xml">
+      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 33m 13s.xml">
+      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 33m 20s.xml">
+      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 34m 22s.xml">
+      <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ImagePreprocessorTest_preprocess - 2016.11.11 at 17h 36m 40s.xml">
       <configuration name="ImagePreprocessorTest.preprocess" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -980,7 +949,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20982143" sideWeight="0.4340836" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21028744" sideWeight="0.5659164" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21028744" sideWeight="0.5659164" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1068,36 +1037,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/searchDatabase.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1071">
-          <caret line="63" column="24" selection-start-line="63" selection-start-column="24" selection-end-line="63" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showDatabaseResults.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showResults.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
@@ -1179,13 +1118,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="75" column="24" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/ApplicationStart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="65" column="5" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1401,25 +1333,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/Partitioner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="48" column="44" selection-start-line="48" selection-start-column="42" selection-end-line="48" selection-end-column="44" />
-          <folding>
-            <element signature="method#separateImageByLayoutAndChunk#0;class#Partitioner#0" expanded="false" />
-            <element signature="method#averageColor#0;class#Partitioner#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/DeSkewer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1431,14 +1344,6 @@
             <element signature="method#findSkew#0;class#DeSkewer#0" expanded="false" />
             <element signature="method#radon#0;class#DeSkewer#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="28" column="33" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1456,12 +1361,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/Partitioner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="48" column="44" selection-start-line="48" selection-start-column="42" selection-end-line="48" selection-end-column="44" />
+          <folding>
+            <element signature="method#separateImageByLayoutAndChunk#0;class#Partitioner#0" expanded="false" />
+            <element signature="method#averageColor#0;class#Partitioner#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/pdfbox/pdfbox/2.0.2/pdfbox-2.0.2.jar!/org/apache/pdfbox/io/ScratchFileBuffer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/ImagePreprocessorTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="204">
+          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/ApplicationStart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="50" column="27" selection-start-line="50" selection-start-column="27" selection-end-line="50" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/log4j.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+          <folding>
+            <element signature="method#clearDatabase#0;class#AbstractTest#0" expanded="false" />
           </folding>
         </state>
       </provider>
