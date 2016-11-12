@@ -93,13 +93,10 @@ public class ImagePreprocessor {
         op.despeckle();
         op.addImage("png:-");
 
-        // set up command
         ConvertCmd convert = new ConvertCmd();
-
         Stream2BufferedImage s2b = new Stream2BufferedImage();
         convert.setOutputConsumer(s2b);
 
-        // run command and extract BufferedImage from OutputConsumer
         convert.run(op,img);
         return s2b.getImage();
     }
@@ -112,13 +109,10 @@ public class ImagePreprocessor {
         op.deskew(value);
         op.addImage("png:-");
 
-        // set up command
         ConvertCmd convert = new ConvertCmd();
-
         Stream2BufferedImage s2b = new Stream2BufferedImage();
         convert.setOutputConsumer(s2b);
 
-        // run command and extract BufferedImage from OutputConsumer
         convert.run(op,img);
         return s2b.getImage();
     }
