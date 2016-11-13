@@ -8,6 +8,13 @@
     <artifactId>Application</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>cedarsoft-thirdparty</id>
+            <url>http://maven.cedarsoft.com/content/repositories/thirdparty/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>io.konik</groupId>
@@ -19,6 +26,12 @@
             <groupId>io.konik</groupId>
             <artifactId>pdfbox-carriage</artifactId>
             <version>1.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.im4java</groupId>
+            <artifactId>im4java</artifactId>
+            <version>1.4.0</version>
         </dependency>
     </dependencies>
     <build>
