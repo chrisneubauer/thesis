@@ -35,6 +35,48 @@ public class HistogramMaker {
         this.inputFile = imageToProcess;
     }
 
+    public BufferedImage makeVerticalHistogram(BufferedImage input) {
+        int height = input.getHeight();
+        int width = input.getWidth();
+        long[] values = new long[width];
+        this.importantRows = new boolean[width];
+        long maxValue = 0;
+
+        for (int col = 0; col < width; col++) {
+            long value = 0;
+            for (int row = 0; row < height; row++) {
+                value += new Color(input.getRGB(row, col)).getRed();
+            }
+            values[col] = value;
+            if (maxValue < value) {
+                maxValue = value;
+            }
+        }
+
+        if (maxValue > 400) {
+            for (int i = 0; i < values.length; i++) {
+                double diff = (double) values[i] / (double) maxValue;
+                double result = diff * 400;
+                values[i] = (int) result;
+            }
+            maxValue = 400;
+        }
+
+        BufferedImage output = new BufferedImage(height, 400, BufferedImage.TYPE_INT_RGB);
+        for (int col = 0; col < height; col++) {
+            // System.out.println("Calculating column for value " + values[col]);
+            for (int row = 0; row < 400; row++) {
+                // fill from the bottom until value reached
+                if (values[col] < row) {
+                    output.setRGB(col, row, 0);
+                } else {
+                    output.setRGB(col, row, new Color(255,255,255).getRGB());
+                }
+            }
+        }
+
+        return output;
+    }
 
     public BufferedImage makeHistogram(BufferedImage input) {
         int height = input.getHeight();

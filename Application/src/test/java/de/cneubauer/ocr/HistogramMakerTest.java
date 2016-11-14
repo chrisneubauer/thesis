@@ -35,4 +35,14 @@ public class HistogramMakerTest {
         ImageIO.write(output, "png", test);
     }
 
+    @Test
+    public void makeVerticalHistogram() throws Exception {
+        BufferedImage line = ImageIO.read(new File(".\\temp\\croppedLine.png"));
+        this.maker = new HistogramMaker(line);
+        BufferedImage output = this.maker.makeVerticalHistogram(line);
+
+        File test = new File(".\\temp\\histogramWords.png");
+        ImageIO.write(output, "png", test);
+    }
+
 }
