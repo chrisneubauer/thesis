@@ -3,24 +3,19 @@ import org.im4java.core.ConvertCmd;
 import org.im4java.core.IMOperation;
 import org.im4java.core.Stream2BufferedImage;
 
-import java.applet.*;
-import java.awt.*;
-import java.awt.image.*;
-import java.net.*;
-import java.util.*;
-import java.io.*;
-import java.lang.Math;
+import java.awt.image.BufferedImage;
 /**
  * Created by Christoph Neubauer on 14.11.2016.
+ * Creates a skeleton of the image
  */
-public class Skeletonizer {
+class Skeletonizer {
     private BufferedImage img;
 
-    public Skeletonizer(BufferedImage image) {
+    Skeletonizer(BufferedImage image) {
         this.img = image;
     }
 
-    public BufferedImage createSkeleton() {
+    BufferedImage createSkeleton() {
         IMOperation op = new IMOperation();
         op.addImage();
 

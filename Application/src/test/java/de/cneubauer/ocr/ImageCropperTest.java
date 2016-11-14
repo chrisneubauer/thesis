@@ -9,10 +9,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Files;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Christoph Neubauer on 14.11.2016.
+ * Test for ImageCropper
  */
 public class ImageCropperTest {
     private BufferedImage image;
@@ -25,9 +24,11 @@ public class ImageCropperTest {
         File imageFile = new File(path);
 
         this.image = ImageIO.read(imageFile);
-        this.maker = new HistogramMaker(this.image);
+        this.maker = new HistogramMaker();
+
         this.maker.setMinThreshold(0.2);
         this.maker.setMaxThreshold(0.7);
+
         this.maker.makeHistogram(this.image);
         boolean[] importantRows = this.maker.getImportantRows();
 

@@ -34,7 +34,6 @@ public class ImagePreprocessor {
     private String tempPathConverted = ".\\temp\\tempImageConverted.png";
 
     private BufferedImage inputFile;
-    private BufferedImage outputFile;
     private double gaussianRatio = 10.0;
 
     public ImagePreprocessor(BufferedImage imageToProcess) {
@@ -55,15 +54,15 @@ public class ImagePreprocessor {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Preprocessing started...");
             BufferedImage image = this.inputFile;
             Logger.getLogger(this.getClass()).log(Level.INFO, "deskewing...");
-            this.outputFile = this.deSkewImage(image);
+            BufferedImage outputFile = this.deSkewImage(image);
 
-            image = this.outputFile;
+            image = outputFile;
             Logger.getLogger(this.getClass()).log(Level.INFO, "greyscaling...");
-            this.outputFile = this.greyScaleImage(image);
+            outputFile = this.greyScaleImage(image);
 
-            image = this.outputFile;
+            image = outputFile;
             Logger.getLogger(this.getClass()).log(Level.INFO, "despeckling...");
-            this.outputFile = this.deSpeckleImage(image);
+            outputFile = this.deSpeckleImage(image);
 
             /*this.removeLinesWithoutWords();
             this.analyzeInvoiceLayout();
@@ -71,7 +70,7 @@ public class ImagePreprocessor {
             this.separateWords();
             this.normaliseAspectRatioAndScale();*/
             Logger.getLogger(this.getClass()).log(Level.INFO, "Preprocessing done. Returning image...");
-            return this.outputFile;
+            return outputFile;
         } catch (MagickException | InterruptedException | IOException | IM4JavaException e) {
             e.printStackTrace();
         }

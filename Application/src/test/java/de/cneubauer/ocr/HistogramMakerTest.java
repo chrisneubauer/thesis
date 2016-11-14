@@ -2,17 +2,14 @@ package de.cneubauer.ocr;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.util.Assert;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.file.Files;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Christoph Neubauer on 14.11.2016.
+ * Test for HistogramMaker
  */
 public class HistogramMakerTest {
     private BufferedImage image;
@@ -24,7 +21,7 @@ public class HistogramMakerTest {
         File imageFile = new File(path);
 
         this.image = ImageIO.read(imageFile);
-        this.maker = new HistogramMaker(this.image);
+        this.maker = new HistogramMaker();
     }
 
     @Test
@@ -38,7 +35,7 @@ public class HistogramMakerTest {
     @Test
     public void makeVerticalHistogram() throws Exception {
         BufferedImage line = ImageIO.read(new File(".\\temp\\croppedLine.png"));
-        this.maker = new HistogramMaker(line);
+        this.maker = new HistogramMaker();
         BufferedImage output = this.maker.makeVerticalHistogram(line);
 
         File test = new File(".\\temp\\histogramWords.png");

@@ -18,26 +18,21 @@ import java.io.IOException;
  * Body contains all the positions and services done
  * The footer has the total value to pay as well as payment information and skonto / tax information
  */
-public class Partitioner {
-    public byte[] getCompleteFile() {
+class Partitioner {
+    byte[] getCompleteFile() {
         return completeFile;
     }
 
     private byte[] completeFile;
-    private byte[] header;
-    private byte[] body;
-    private byte[] footer;
 
-    public Partitioner(byte[] completeFile) {
+    Partitioner(byte[] completeFile) {
         this.completeFile = completeFile;
     }
 
-    public void splitPage() throws IOException {
+    void splitPage() throws IOException {
         PDDocument pdf = PDDocument.load(this.completeFile);
-        //PDDocument pdf = PDDocument.load(this.pdfFile);
         PDFRenderer renderer = new PDFRenderer(pdf);
         BufferedImage image = renderer.renderImageWithDPI(0, 600);
-        //BufferedImage image = renderer.renderImage(0);
         int totalY = image.getHeight();
         int totalX = image.getWidth();
 
@@ -74,19 +69,7 @@ public class Partitioner {
         pdf.close();
     }
 
-    public byte[] getHeader() {
-        return this.header;
-    }
-
-    public byte[] getBody() {
-        return this.body;
-    }
-
-    public byte[] getFooter() {
-        return this.footer;
-    }
-
-    public void separateImageByLayout(BufferedImage img) {
+    void separateImageByLayout(BufferedImage img) {
         boolean separationMode = false;
 
         // if puffer capacity reached, we think that the area is done
@@ -103,9 +86,6 @@ public class Partitioner {
                     separationMode = true;
                     startAreaX = j;
                     startAreaY = i;
-                }
-                else if (!isWhite && separationMode) {
-                    //continue inside the area
                 }
                 else if (isWhite && separationMode) {
                     puffer--;
@@ -137,7 +117,7 @@ public class Partitioner {
         }
     }
 
-    public void separateImageByLayoutAndChunk(BufferedImage img) {
+    void separateImageByLayoutAndChunk(BufferedImage img) {
         boolean separationMode = false;
 
         // if puffer capacity reached, we think that the area is done

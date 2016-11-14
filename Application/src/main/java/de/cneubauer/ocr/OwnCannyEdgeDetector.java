@@ -18,13 +18,13 @@ import java.awt.image.WritableRaster;
  * Apply double threshold to determine potential edges
  * Track edge by hysteresis: Finalize the detection of edges by suppressing all the other edges that are weak and not connected to strong edges.
  */
-public class OwnCannyEdgeDetector {
+class OwnCannyEdgeDetector {
     private BufferedImage input;
     private BufferedImage output;
     private double threshold = 5.0;
     private double[][] weightedG;
 
-    public OwnCannyEdgeDetector(BufferedImage inputImage) {
+    OwnCannyEdgeDetector(BufferedImage inputImage) {
         this.input = inputImage;
         this.weightedG = new double[inputImage.getWidth()][inputImage.getHeight()];
     }
@@ -59,30 +59,26 @@ public class OwnCannyEdgeDetector {
     public BufferedImage removeHorizontalLinesManually(BufferedImage inputImage, int threshold, int size) {
         int width = input.getWidth();
         int height = input.getHeight();
-        BufferedImage outputImage = inputImage;
         int middle = (int) Math.floor(size / 2);
 
         for (int yPos = 0; yPos < height; yPos++) {
             for (int xPos = middle; xPos < width - size; xPos = xPos + size) {
-                if (ishorizontalLine(xPos, yPos, inputImage, threshold, size)) {
+                if (isHorizontalLine(xPos, yPos, inputImage, threshold, size)) {
                     for (int i = - middle; i < size; i ++) {
-                        outputImage.setRGB(xPos + i, yPos, 0);
+                        inputImage.setRGB(xPos + i, yPos, 0);
                     }
                 }
             }
         }
-        return outputImage;
+        return inputImage;
     }
 
     // using pixels above and beyond as a probability value
-    private boolean ishorizontalLine(int xPos, int yPos, BufferedImage img, int threshold, int size) {
+    // size should be odd
+    private boolean isHorizontalLine(int xPos, int yPos, BufferedImage img, int threshold, int size) {
         boolean isLine = true;
         double probabilityValue = 0.0;
         int middle = (int) Math.floor(size / 2);
-        // 9
-        // -> -4 -3 -2 -1 0 1 2 3 4
-        // 9 / 2 = 4
-        //
 
         for (int i = - middle; i < size; i ++) {
             isLine = isLine && new Color(img.getRGB(xPos + i, yPos)).getRed() < threshold;
@@ -143,7 +139,7 @@ public class OwnCannyEdgeDetector {
         }*/
     }
 
-    public BufferedImage removeLines(BufferedImage input) {
+    BufferedImage removeLines(BufferedImage input) {
         IMOperation op = new IMOperation();
         IMOperation op2 = new IMOperation();
         op.addImage();

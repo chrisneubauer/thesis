@@ -17,7 +17,6 @@ public class ImageCropper {
     private BufferedImage imageToCrop;
     private int counter = 1;
     private String outputDir = ".\\temp\\areas\\";
-    private String[] rows;
 
     public ImageCropper(int threshold) {
         this.threshold = threshold;
@@ -27,9 +26,9 @@ public class ImageCropper {
 
     public void cropImages() {
         int width = this.imageToCrop.getWidth();
-        this.rows = this.calcRows();
+        String[] rows = this.calcRows();
 
-        for (String s : this.rows) {
+        for (String s : rows) {
             if (s != null) {
                 int start = Integer.parseInt(s.split("-")[0]);
                 int end = Integer.parseInt(s.split("-")[1]);

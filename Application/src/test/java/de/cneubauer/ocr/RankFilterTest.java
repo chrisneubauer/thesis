@@ -1,8 +1,5 @@
 package de.cneubauer.ocr;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.ImageType;
-import org.apache.pdfbox.rendering.PDFRenderer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,10 +10,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Files;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Christoph Neubauer on 12.11.2016.
+ * Test for RankFilter
  */
 public class RankFilterTest {
     private BufferedImage origImage;

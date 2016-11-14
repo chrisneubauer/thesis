@@ -1,8 +1,5 @@
 package de.cneubauer.ocr;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.rendering.ImageType;
-import org.apache.pdfbox.rendering.PDFRenderer;
 import org.im4java.core.ConvertCmd;
 import org.im4java.core.IMOperation;
 import org.im4java.core.Stream2BufferedImage;
@@ -15,12 +12,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Files;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Christoph Neubauer on 14.11.2016.
+ * Test for Skeletonizer
  */
-public class SkeletonizerTest {    private OwnCannyEdgeDetector detector;
+public class SkeletonizerTest {
     private Skeletonizer skeletonizer;
     private BufferedImage origImage;
 
