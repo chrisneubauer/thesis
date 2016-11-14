@@ -86,7 +86,7 @@ public class ImagePreprocessor {
         return image;
     }
 
-    private BufferedImage deSpeckleImage(BufferedImage img) throws MagickException, InterruptedException, IOException, IM4JavaException {
+    public BufferedImage deSpeckleImage(BufferedImage img) throws MagickException, InterruptedException, IOException, IM4JavaException {
         IMOperation op = new IMOperation();
         op.addImage();
 

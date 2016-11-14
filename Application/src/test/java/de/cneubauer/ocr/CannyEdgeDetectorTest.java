@@ -19,7 +19,8 @@ import java.nio.file.Files;
  * Test for CannyEdgeDetector
  */
 public class CannyEdgeDetectorTest extends AbstractTest {
-    private CannyEdgeDetector detector;
+    private OwnCannyEdgeDetector detector;
+    private CannyEdgeDetector cannyEdgeDetector;
     private BufferedImage origImage;
 
     @Before
@@ -34,12 +35,26 @@ public class CannyEdgeDetectorTest extends AbstractTest {
         } else {
             this.origImage = ImageIO.read(imageFile);
         }
-        this.detector = new CannyEdgeDetector(this.origImage);
+        this.detector = new OwnCannyEdgeDetector(this.origImage);
+        this.cannyEdgeDetector = new CannyEdgeDetector();
     }
 
     @After
     public void tearDown() throws Exception {
         this.detector = null;
+    }
+
+    @Test
+    public void testCannyEdgeDetector() throws Exception {
+        this.cannyEdgeDetector.setLowThreshold(0.5f);
+        this.cannyEdgeDetector.setHighThreshold(1f);
+        this.cannyEdgeDetector.setSourceImage(this.origImage);
+        this.cannyEdgeDetector.process();
+        BufferedImage output = this.cannyEdgeDetector.getEdgesImage();
+        File test = new File(".\\temp\\testTGDetector.png");
+        ImageIO.write(output, "png", test);
+        Assert.isTrue(Files.exists(new File(".\\temp\\testTGDetector.png").toPath()));
+        Assert.isTrue(!this.origImage.equals(output));
     }
 
     @Test
@@ -51,4 +66,14 @@ public class CannyEdgeDetectorTest extends AbstractTest {
         Assert.isTrue(!this.origImage.equals(output));
     }
 
+    @Test
+    public void testRemoveLines() throws Exception {
+        String path = ".\\temp\\testTGDetector.png";
+        File imageFile = new File(path);
+        BufferedImage input = ImageIO.read(imageFile);
+        BufferedImage output = this.detector.removeLines(input);
+        File test = new File(".\\temp\\withoutEdgesTest.png");
+        ImageIO.write(output, "png", test);
+        Assert.isTrue(Files.exists(new File(".\\temp\\withoutEdgesTest.png").toPath()));
+    }
 }
