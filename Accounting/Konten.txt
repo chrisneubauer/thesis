@@ -1,0 +1,1195 @@
+0001	Ingangsetzungs- und Erweiterungsaufwand	1
+0002	Aufwendungen Waehrungsumstellung Euro	1
+0010	Konzessionen und gewerbl.Schutzrechte	1
+0015	Konzessionen	1
+0020	Gewerbliche Schutzrechte	1
+0025	Aehnliche Rechte und Werte	1
+0027	EDV-Software	1
+0030	Lizenzen an gewerblichen Schutzrechten	1
+0035	Geschaefts- oder Firmenwert	1
+0038	Anzahlungen auf Geschaefts-, Firmenwert	1
+0039	Anzahlungen immaterielle VermG	1
+0040	Verschmelzungsmehrwert	1
+0050	Grundstuecke,grndst.Rechte und Bauten	1
+0059	Grundstuecksanteil haeusl. Arbeitszimmer	1
+0060	Grundstuecke, grundstuecksgl. Rechte	1
+0065	Unbebaute Grundstuecke	1
+0070	Grundstuecksgleiche Rechte	1
+0075	Grundstuecke mit Substanzverzehr	1
+0079	Anzahlungen a.Grundstuecke ohne Bauten	1
+0080	Bauten auf eigenen Grundstuecken	1
+0085	Grundstueckswert bebauter Grundstuecke	1
+0090	Geschaeftsbauten	1
+0100	Fabrikbauten	1
+0110	Garagen	1
+0111	Aussenanlagen	1
+0112	Hof- und Wegebefestigungen	1
+0113	Einrichtung Fabrik- und Geschaeftsbauten	1
+0115	Andere Bauten	1
+0120	Geschaefts-,Fabrik-u.and. Bauten im Bau	1
+0129	Anzahlg. auf Bauten eigen. Grundstuecken	1
+0140	Wohnbauten	1
+0145	Garagen	1
+0146	Aussenanlagen	1
+0147	Hof- und Wegebefestigungen	1
+0148	Einrichtungen fuer Wohnbauten	1
+0149	Gebaeudeanteil haeusl. Arbeitszimmer	1
+0150	Wohnbauten im Bau	1
+0159	Anzahlg. auf Wohnbauten a.eig.Grundst	1
+0160	Bauten auf fremden Grundstuecken	1
+0165	Geschaeftsbauten	1
+0170	Fabrikbauten	1
+0175	Garagen	1
+0176	Aussenanlagen	1
+0177	Hof- und Wegebefestigungen	1
+0178	Einrichtung Fabrik- und Geschaeftsbauten	1
+0179	Andere Bauten	1
+0180	Geschaefts-,Fabrik-u.and. Bauten im Bau	1
+0189	Anzahlg. auf Bauten fremd. Grundstuecken	1
+0190	Wohnbauten	1
+0191	Garagen	1
+0192	Aussenanlagen	1
+0193	Hof- und Wegebefestigungen	1
+0194	Einrichtungen fuer Wohnbauten	1
+0195	Wohnbauten im Bau	1
+0199	Anzahlungen a. Wohnbauten a. fremd. Gr.	1
+0200	Technische Anlagen und Maschinen	1
+0210	Maschinen	1
+0220	Maschinengebundene Werkzeuge	1
+0240	Maschinelle Anlagen	1
+0260	Transportanlagen und aehnliches	1
+0280	Betriebsvorrichtungen	1
+0290	Technische Anlagen und Maschinen im Bau	1
+0299	Anzahlungen auf technische Anlagen	1
+0300	Betriebs- und Geschaeftsausstattung	1
+0310	Andere Anlagen	1
+0320	PKW	1
+0350	LKW	1
+0380	Sonstige Transportmittel	1
+0400	Betriebsausstattung	1
+0410	Geschaeftsausstattung	1
+0420	Bueroeinrichtung	1
+0430	Ladeneinrichtung	1
+0440	Werkzeuge	1
+0450	Einbauten	1
+0460	Geruest- und Schalungsmaterial	1
+0480	GWG bis 410 Euro	1
+0490	Sonstige Betriebs-u.Gesch.ausstattung	1
+0498	Betriebs- u. Gesch.ausstattung im Bau	1
+0499	Anzahlung Betriebs- u. Gesch.ausstattung	1
+0500	Anteile an verbundenen Unternehmen	1
+0504	Anteile a.herrschender Gesellschaft	1
+0505	Ausleihungen an verbundene Unternehmen	1
+0510	Beteiligungen	1
+0513	Typisch stille Beteiligungen	1
+0516	Atypische stille Beteiligungen	1
+0517	Andere Beteiligungen an Kapitalges.	1
+0518	Andere Beteiligungen an Personenges.	1
+0519	Beteiligung GmbH&Co.an Komplementaer GmbH	1
+0520	Ausleih. an UN mit Beteiligungsverh.	1
+0525	Wertpapiere des Anlagevermoegens	1
+0530	Wertpapiere mit Gewinnbeteil.anspruech.	1
+0535	Festverzinsliche Wertpapiere	1
+0540	Sonstige Ausleihungen	1
+0550	Darlehen	1
+0570	Genossenschaftsanteile z.lfr.Verbleib	1
+0580	Ausleihungen an Gesellschafter	1
+0590	Ausleihungen an nahe stehende Personen	1
+0595	LV-Rueckdeckungsansprueche z.lfr.Verbl.	1
+0600	Anleihen, nicht konvertibel	2
+0601	Anleihen, nicht konvertibel (b. 1 Jahr)	2
+0605	Anleihen, nicht konvertibel (1-5 Jahre)	2
+0610	Anleihen, nicht konvertibel (g.5 Jahre)	2
+0615	Anleihen konvertibel	2
+0616	Anleihen konvertibel(bis 1 Jahr)	2
+0620	Anleihen konvertibel(1-5 Jahre)	2
+0625	Anleihen konvertibel(groesser 5 Jahre)	2
+0630	Verbindlichkeiten gg. Kreditinstituten	2
+0631	Verbindlichkeiten Kreditinstitut(b.1J)	2
+0640	Verbindlichkeiten Kreditinstitut(1-5J)	2
+0650	Verbindlichkeiten Kreditinstitut(g.5J)	2
+0660	TZ-Verbindlichkeit. gg. Kreditinstituten	2
+0661	TZ-Verbindlichkeit. Kreditinstitut,b.1 J	2
+0670	TZ-Verbindlichkeit. Kreditinstitut,1-5 J	2
+0680	TZ-Verbindlichkeit. Kreditinstitut,g.5 J	2
+0690	(frei, in Bilanz kein Restlaufzeitvermerk)	2
+0699	Gegenkonto bei Aufteilung Kto 0690-98	2
+0700	Verbindlichk.gegenueber verbundenen UN	2
+0701	Verbindlichkeit. gg.verbundene UN(b.1 J)	2
+0705	Verbindlichkeit. gg.verbundene UN(1-5 J)	2
+0710	Verbindlichkeit. gg.verbundene UN(g.5 J)	2
+0715	Verbindl. gg.UN mit Beteiligungsverh.	2
+0716	Verbindl. gg.UN mit Beteiligg.verh. b.1J	2
+0720	Verbindl. gg.UN mit Beteiligg.verh. 1-5J	2
+0725	Verbindl. gg.UN mit Beteiligg.verh. g.5J	2
+0730	Verbindlichkeit.gg. Gesellschaftern	2
+0731	Verbindlichkeit.gg. Gesellschaftern b.1J	2
+0740	Verbindlichkeit.gg. Gesellschaftern 1-5J	2
+0750	Verbindlichkeit.gg. Gesellschaftern g.5J	2
+0755	Verb.gg.Gesellschaftern off.Ausschuettg.	2
+0760	Darlehen typ. stiller Gesellschafter	2
+0761	Darlehen typ. stiller Gesellsch.(b.1J)	2
+0764	Darlehen typ. stiller Gesellsch.(1-5J)	2
+0767	Darlehen typ. stiller Gesellsch.(g.5J)	2
+0770	Darlehen atyp. stiller Gesellschafter	2
+0771	Darlehen atyp. stiller Gesellsch.(b.1J)	2
+0774	Darlehen atyp. stiller Gesellsch.(1-5J)	2
+0777	Darlehen atyp. stiller Gesellsch.(g.5J)	2
+0780	Partiarische Darlehen	2
+0781	Partiarische Darlehen(bis 1 Jahr)	2
+0784	Partiarische Darlehen(1-5 Jahre)	2
+0787	Partiarische Darlehen(g. 5 Jahre)	2
+0790	(frei, in Bilanz kein Restlaufzeitvermerk)	2
+0799	Gegenkonto bei Aufteilung Kto 0790-98	2
+0800	Gezeichnetes Kapital	2
+0801	Ausstehende Einlagen nicht eingefordert (AKTIV)	1
+0809	Ausstehende Einlage nicht eingefordert	1
+0810	Ausstehende Einlagen eingefordert (AKTIV)	1
+0819	Ausstehende Einlagen eingefordert	1
+0820	Ausstehende Einlagen nicht eingefordert (Passiv)	1
+0829	Ausstehende Einlage nicht eingefordert	2
+0830	Ausstehende Einlagen eingefordert (Forderungen)	1
+0838	Ausstehende Einlage eingefordert	1
+0839	Eingeforderte Nachschuesse	1
+0840	Kapitalruecklage	2
+0841	Kapitalruecklage/Anteile ue. Nennbetrag	2
+0842	Kapitalrueckl./Ausgabe Schuldverschr.	2
+0843	Kapitalruecklage gg.Vorzugsgewaehrung	2
+0844	Kapital-RL durch andere Zuzahl.i.das EK	2
+0845	Eingefordertes Nachschusskapital	2
+0846	Gesetzliche Ruecklage	2
+0847	Gesetzl. Ruecklage 40% Vorbelastung	2
+0848	Gesetzl. Ruecklage (stl. Einlagekonto)	2
+0849	Gesetzl. Ruecklage 0% Vorbelastung EK02	2
+0850	Ruecklage fuer eigene Anteile	2
+0851	Satzungsmaessige Ruecklagen	2
+0852	Satzungsm.Ruecklagen 40% Vorbelastung	2
+0853	Satzungsm.Ruecklagen (stl. Einlagekonto)	2
+0854	Satzungsm.Ruecklagen 0% Vorbelastung EK02	2
+0855	Andere Gewinnrueckl. 40% Vorbelastung	2
+0856	Eigenkapitalanteil von Wertaufholungen	2
+0857	Andere Gewinnruecklagen	2
+0858	Andere Gewinnrueckl. (stl. Einlagekonto)	2
+0859	Andere Gewinnrueckl. 0% Vorbelastung EK02	2
+0860	Gewinnvortrag vor Verwendung	2
+0862	Gewinnvortrag 40% Vorbelastung	2
+0864	Gewinnvortrag (stl. Einlagekonto)	2
+0866	Gewinnvortrag  0% Vorbelastung EK02	2
+0868	Verlustvortrag vor Verwendung	2
+0869	Vortrag auf neue Rechnung (Bilanz)	2
+0870	Festkapital	2
+0880	Variables Kapital	2
+0890	Gesellschafter-Darlehen	2
+0900	Kommandit-Kapital	2
+0910	Verlustausgleich	2
+0920	Gesellschafter-Darlehen	2
+0930	SoPo m. Ruecklageanteil, stfr. Ruecklage	2
+0931	SoPo m. Ruecklageanteil § 6 b EStG	2
+0932	SoPo m. Ruecklageanteil Abschn. 35 EStR	2
+0933	SoPo m. Ruecklageanteil § 6 d EStG	2
+0934	SoPo m. Ruecklageanteil § 1 EntwLStG	2
+0935	SoPo aus Waehrungsumstellung auf Euro	2
+0936	SoPo m. Ruecklageanteil § 7 d EStG	2
+0937	SoPo m. Ruecklageanteil § 79 EStDV	2
+0938	SoPo m. Ruecklageanteil § 80 EStDV	2
+0939	SoPo m. Ruecklageanteil §52 Abs.16 EStG	2
+0940	SoPo m. Ruecklageanteil, Sonder-AfA	2
+0941	SoPo m. Ruecklageanteil § 82 a EStDV	2
+0942	SoPo m. Ruecklageanteil § 82 d EStDV	2
+0943	SoPo m. Ruecklageanteil § 82 e EStDV	2
+0944	SoPo m. Ruecklageanteil § 14 BerlinFG	2
+0945	Sopo m. Ruecklageanteil FoerdergebietsG.	2
+0946	SoPo mit Ruecklageanteil nach § 4d EStG	2
+0947	Sopo mit Ruecklageanteil § 7g Abs.1 EStG	2
+0948	SoPo mit Ruecklageanteil § 7g/3, 7 EStG	2
+0949	Sonderposten fuer Zuschuesse u. Zulagen	2
+0950	Pensions-und aehnliche Rueckstellungen	2
+0955	Steuerrueckstellungen	2
+0957	Gewerbesteuerrueckstellung	2
+0963	Koerperschaftsteuerrueckstellung	2
+0969	Rueckstellung fuer latente Steuern	2
+0970	Sonstige Rueckstellungen	2
+0971	Rueckstellungen Instandhaltung bis 3 M	2
+0972	Rueckstellungen Instandhaltung 4-12 M	2
+0973	Rueckstellungen Abraum-/Abfallbeseit.	2
+0974	Rueckstellungen f. Gewaehrleistungen	2
+0976	Rueckstellungen f. drohende Verluste	2
+0977	Rueckstellungen fuer Abschluss u. Pruefung	2
+0978	Aufwandsrueckstellungen § 249 II HGB	2
+0979	Rueckstellungen fuer Umweltschutz	2
+0980	Aktive Rechnungsabgrenzung	1
+0983	Abgrenzung aktive latente Steuern	1
+0984	Aufwand Zoelle und Verbrauchsteuern	1
+0985	Aufwand Umsatzsteuer auf Anzahlungen	1
+0986	Damnum/Disagio	1
+0990	Passive Rechnungsabgrenzung	2
+0992	Abgr. zur unterjaehrigen Kostenverrechnung BWA	2
+0996	Pauschalwertberichtigung Forderg./b.1J	1
+0997	Pauschalwertberichtigung Forderg./g.1J	1
+0998	Einzelwertberichtigung Forderung(b.1J)	1
+0999	Einzelwertberichtigung Forderung(g.1J)	1
+1000	Kasse	1
+1010	Nebenkasse 1	1
+1020	Nebenkasse 2	1
+1100	Postbank	1
+1110	Postbank 1	1
+1120	Postbank 2	1
+1130	Postbank 3	1
+1190	LZB-Guthaben	1
+1195	Bundesbankguthaben	1
+1200	Bank	1
+1210	Bank 1	1
+1220	Bank 2	1
+1230	Bank 3	1
+1240	Bank 4	1
+1250	Bank 5	1
+1290	Finanzmittelanlagen kurzfr. Disposition	1
+1300	Wechsel aus Lieferung und Leistung	1
+1301	Wechsel a. Lieferungen/Leistungen b.1 J	1
+1302	Wechsel a. Lieferungen/Leistungen g.1 J	1
+1305	Wechsel a. Lieferungen/Leistungen bbf.	1
+1310	Besitzwechsel gegen verbund. Unternehmen	1
+1311	Besitzwechsel gegen verbundene UN (b.1J)	1
+1312	Besitzwechsel gegen verbundene UN (g.1J)	1
+1315	Besitzwechs.gg.verb.UN, bundesbankfaehig	1
+1320	Besitzwechsel gg.UN m. Beteiligungsverh.	1
+1321	Besitzwechsel gg.UN m.Beteiligg.verh.b1J	1
+1322	Besitzwechsel gg.UN m.Beteiligg.verh.g1J	1
+1325	Besitzwechsel gg.UN m.Beteiligg.verh.bbf	1
+1327	Finanzwechsel	1
+1329	Wertpap. mit geringen Wertschwankungen	1
+1330	Schecks	1
+1340	Anteile an verbundenen Unternehmen	1
+1344	Anteile a.herrschender Gesellschaft	1
+1345	Eigene Anteile	1
+1348	Sonstige Wertpapiere	1
+1349	Wertpapieranlagen kurzfr. Disposition	1
+1350	GmbH-Anteile z.kurzfristigen Verbleib	1
+1352	Genossenschaftsanteile z.kfr.Verbleib	1
+1355	Ansprueche a. Rueckdeckungsversicherung	1
+1360	Geldtransit	1
+1370	Gewinnermittlung §4/3 ergebniswirksam	1
+1371	Gewinnermittlung §4/3 nicht ergebnisw	1
+1380	Ueberleitung Kostenstellen	1
+1390	Verrechnung Ist-Versteuerung	1
+1400	Forderungen aus Lieferungen u.Leistung	1
+1410	Forderungen aus Lieferungen u.Leistung	1
+1450	Forderungen nach § 11 EStG fuer § 4/3	1
+1451	Forderg.a. Lieferungen/Leistungen b.1 J	1
+1455	Forderg.a. Lieferungen/Leistungen g.1 J	1
+1460	Zweifelhafte Forderungen	1
+1461	Zweifelhafte Forderungen (bis 1 Jahr)	1
+1465	Zweifelhafte Forderungen (g. 1 Jahr)	1
+1470	Forderungen aus L+L gg. verbundenen UN	1
+1471	Forderungen aus L+L gg. verbund. UN b.1J	1
+1475	Forderungen aus L+L gg. verbund. UN g.1J	1
+1478	WB Forderungen gg. verbundene UN (b.1J)	1
+1479	WB Forderungen gg. verbundene UN (g.1J)	1
+1480	Forderg. L+L gg.UN m. Beteiligungsverh.	1
+1481	Forderg. L+L gg.UN m.Beteiligg.verh.b1J	1
+1485	Forderg. L+L gg.UN m.Beteiligg.verh.g1J	1
+1488	WB Forderg.gg.UN m.Beteiligg.verh. b.1J	1
+1489	WB Forderg.gg.UN m.Beteiligg.verh. g.1J	1
+1490	Forderungen aus L+L gg. Gesellschafter	1
+1491	Forderg. aus L+L gg.Gesellschafter b.1 J	1
+1495	Forderg. aus L+L gg.Gesellschafter g.1 J	1
+1498	Gegenkonto sonst.VG bei Buchung Debitor	1
+1499	Gegenkonto bei Aufteilung Debitoren	1
+1500	Sonstige Vermoegensgegenstaende	1
+1501	Sonstige Vermoegensgegenstaende (b.1 J)	1
+1502	Sonstige Vermoegensgegenstaende (g.1 J)	1
+1503	Forderungen gg. Geschaeftsf.(b.1J)	1
+1504	Forderungen gg. Geschaeftsf.(g.1J)	1
+1505	Forderungen gg. Aufsichtsratsm. (b.1 J)	1
+1506	Forderungen gg. Aufsichtsratsm. (g.1 J)	1
+1507	Forderungen gg. Gesellschafter (b.1J)	1
+1508	Forderungen gg. Gesellschafter (g.1J)	1
+1510	Geleistete Anzahlungen auf Vorraete	1
+1511	Geleistete Anzahlungen 7% Vorsteuer	1
+1516	Geleistete Anzahlungen 15% Vorsteuer	1
+1517	Geleistete Anzahlungen 16% Vorsteuer	1
+1518	Geleistete Anzahlungen 19% Vorsteuer	1
+1521	Agenturwarenabrechnung	1
+1525	Kautionen	1
+1526	Kautionen (bis 1 J)	1
+1527	Kautionen (g. 1 J)	1
+1530	Forderg. gg. Personal Lohn- u. Gehalt	1
+1531	Forderungen gegen Personal (bis 1Jahr)	1
+1537	Forderungen gegen Personal (g. 1Jahr)	1
+1540	Steuerueberzahlungen	1
+1542	Steuererst.anspruch gegen ander. EG-Land	1
+1543	Forderg. an FA aus abgefuehrtem Bauabzug	1
+1545	USt-Forderungen	1
+1547	Forderungen aus Verbrauchsteuern	1
+1548	Vorsteuer im Folgejahr abziehbar	1
+1549	Koerperschaftsteuerrueckforderung	1
+1550	Darlehen	1
+1551	Darlehen bis 1 Jahr	1
+1555	Darlehen g. 1 Jahr	1
+1556	Nachtraegl. abz. Vorsteuer, bewegl. WG	1
+1557	Zurueckzuzahlende Vorsteuer, bewegl.WG	1
+1558	Nachtraegl. abz. Vorsteuer, unbewegl. WG	1
+1559	Zurueckzuzahl. Vorsteuer, unbewegl. WG	1
+1560	Aufzuteilende Vorsteuer	1
+1561	Aufzuteilende Vorsteuer 7%	1
+1562	Aufzuteilende Vorsteuer aus EG-Erwerb	1
+1563	Aufzuteilende Vorsteuer aus EG-Erwerb 19%	1
+1565	Aufzuteilende Vorsteuer 16%	1
+1566	Aufzuteilende Vorsteuer 19%	1
+1567	Aufzuteilende Vorsteuer §§13a/13b UStG	1
+1568	Aufzuteilende Vorsteuer nach §§13a/13b UstG 16%	1
+1569	Aufzuteilende Vorsteuer nach §§13a/13b UStG 19%	1
+1570	Abziehbare Vorsteuer	1
+1571	Abziehbare Vorsteuer 7%	1
+1572	Abziehbare Vorsteuer aus EG-Erwerb	1
+1573	Abziehbare Vorsteuer aus EG-Erwerb 16%	1
+1574	Abziehbare Vorsteuer aus EG-Erwerb 19%	1
+1575	Abziehbare Vorsteuer 16%	1
+1576	Abziehbare Vorsteuer 19%	1
+1577	Abziehbare Vorsteuer nach § 13b UStG 19%	1
+1578	Abziehbare Vorsteuer § 13b UStG	1
+1579	Abziehbare Vorsteuer § 13b UStG 16%	1
+1580	Gegenkonto Vorsteuer § 4/3 EStG	1
+1581	Aufloesung Vorsteuer Vorjahr § 4/3 EStG	1
+1582	Vorsteuer aus Investitionen Par. 4/3 EStG	1
+1583	Gegenkonto fuer Vorsteuer  §4 Abs.3 EStG	1
+1584	Vorsteuer EG-Erwerb neue Kfz ohne UStID	1
+1586	Kuerzung BerlinFG	1
+1588	Bezahlte Einfuhrumsatzsteuer	1
+1589	Bezahlte Einfuhrumsatzsteuer (EG)	1
+1590	Durchlaufende Posten	1
+1592	Fremdgeld	1
+1593	Verrechnung erhaltene Anzahlungen	1
+1594	Forderungen gegen verbund.Unternehmen	1
+1595	Forderungen gg. verbundene UN(b. 1 J)	1
+1596	Forderungen gg. verbundene UN(g. 1 J)	1
+1597	Forderungen gg. UN m. Beteiligungsverh.	1
+1598	Forderg. gg. UN mit Beteiligg.verh. b.1J	1
+1599	Forderg. gg. UN mit Beteiligg.verh. g.1J	1
+1600	Verbindl. aus Lieferungen u. Leistungen	2
+1610	Verbindlichkeiten ohne Kontokorrent	2
+1623	Verbindl. aus Lieferungen u. Leistungen	2
+1624	Verbindlichk. Investitionen § 4/3 EStG	2
+1625	Verbindl.a.Lieferungen/Leistungen b.1 J	2
+1626	Verbindl.a.Lieferungen/Leistungen 1-5 J	2
+1628	Verbindl.a.Lieferungen/Leistungen g.5 J	2
+1630	Verbindl. aus L+L gg. verbundenen UN	2
+1631	Verbindl.aus L+L gg.verbundenen UN b. 1J	2
+1635	Verbindl.aus L+L gg.verbundenen UN 1-5 J	2
+1638	Verbindl.aus L+L gg.verbundenen UN g.5 J	2
+1640	Verbindl.aus L+L gg.UN m.Beteiligg.verh.	2
+1641	Verbindl.aus L+L gg.UN m. Bet.verh. b.1J	2
+1645	Verbindl.aus L+L gg.UN m. Bet.verh. 1-5J	2
+1648	Verbindl.aus L+L gg.UN m. Bet.verh. g.5J	2
+1650	Verbindl. aus L+L gg. Gesellschaftern	2
+1651	Verbindl. aus L+L gg. Gesellsch. b. 1J	2
+1655	Verbindl. aus L+L gg. Gesellsch. 1-5 J	2
+1658	Verbindl. aus L+L gg. Gesellsch. g. 5J	2
+1659	Gegenkonto bei Aufteilung Kreditoren	2
+1660	Schuldwechsel	2
+1661	Schuldwechsel (bis 1 Jahr)	2
+1680	Schuldwechsel (1-5 Jahre)	2
+1690	Schuldwechsel (groesser 5 Jahre)	2
+1700	Sonstige Verbindlichkeiten	2
+1701	Sonstige Verbindlichkeiten (bis 1 J)	2
+1702	Sonstige Verbindlichkeiten (1-5 J)	2
+1703	Sonstige Verbindlichkeiten (g. 5 J)	2
+1704	Sonst. Verbindlichkeiten nach §11 EStG	2
+1705	Darlehen	2
+1706	Darlehen bis 1 Jahr	2
+1707	Darlehen 1-5 Jahre	2
+1708	Darlehen g. 5 Jahre	2
+1709	Gewinnverfuegung stille Gesellschaft.	2
+1710	Erhaltene Anzahlungen	2
+1711	Erhaltene Anzahlungen 7% USt	2
+1717	Erhaltene Anzahlungen 16% USt	2
+1718	Erhaltene Anzahlungen 19% USt	2
+1719	Erhaltene Anzahlungen (bis 1 Jahr)	2
+1720	Erhaltene Anzahlungen (1-5 Jahre)	2
+1721	Erhaltene Anzahlungen (g. 5 Jahre)	2
+1722	Erhaltene Anzahlungen	2
+1730	Kreditkartenabrechnung	2
+1731	Agenturwarenabrechnung	2
+1732	Erhaltene Kautionen	2
+1733	Erhaltene Kautionen (bis 1 Jahr)	2
+1734	Erhaltene Kautionen (1-5 Jahre)	2
+1735	Erhaltene Kautionen (groesser 5 Jahre)	2
+1736	Verbindl. Betriebssteuern und -abgaben	2
+1737	Verbindl.Betriebsst.und -abgaben (b.1 J)	2
+1738	Verbindl.Betriebsst.und -abgaben (1-5 J)	2
+1739	Verbindl.Betriebsst.und -abgaben (g.5 J)	2
+1740	Verbindlichkeiten aus Lohn und Gehalt	2
+1741	Verbindlichk. Lohn- und Kirchensteuer	2
+1742	Verbindlichkeiten soziale Sicherheit	2
+1743	Verbindlichk. soziale Sicherheit(b.1J)	2
+1744	Verbindlichk. soziale Sicherheit(1-5J)	2
+1745	Verbindlichk. soziale Sicherheit(g.5J)	2
+1746	Verbindlichk. a.Einbehaltung (KapESt)	2
+1747	Verbindlichkeiten fuer Verbrauchsteuern	2
+1748	Verbindlichk. Einbehaltung Arbeitnehmer	2
+1749	Verbindl. an FA abzufuehrender Bauabzug	2
+1750	Verbindlichkeiten a.Vermoegensbildung	2
+1751	Verbindlichk. Vermoegensbildung(b.1J)	2
+1752	Verbindlichk. Vermoegensbildung(1-5J)	2
+1753	Verbindlichk. Vermoegensbildung(g.5J)	2
+1754	Steuerzahlungen an andere EG-Laender	2
+1755	Lohn- und Gehaltsverrechnungen	2
+1758	Umsatzsteuer nach § 13b Abs. 2 UStG 16% (Direkt)	2
+1759	USt-Abzugsverfahren, 15% Umsatzsteuer	2
+1760	Umsatzsteuer nicht faellig	2
+1761	Umsatzsteuer nicht faellig 7%	2
+1762	USt nicht faellig, EG-Lieferungen	2
+1763	USt nicht faellig, EG-Lieferungen 16%	2
+1764	USt nicht faellig, EG-Lieferungen 19%	2
+1765	Umsatzsteuer nicht faellig 16%	2
+1766	Umsatzsteuer nicht faellig 19%	2
+1767	USt im anderen EG-Land stpfl.Lieferung	2
+1768	USt im anderen EG-Land s.Leist./Werkl.	2
+1769	Steuerzahlungen an andere EG-Laender	2
+1770	Umsatzsteuer	2
+1771	Umsatzsteuer 7%	2
+1772	Umsatzsteuer aus EG-Erwerb 7%	2
+1773	Umsatzsteuer aus EG-Erwerb 16%	2
+1774	Umsatzsteuer aus EG-Erwerb 19%	2
+1775	Umsatzsteuer 16%	2
+1776	Umsatzsteuer 19%	2
+1777	Umsatzsteuer EG-Lieferungen 7%	2
+1778	USt aus im Inland steuerpfl. EG-Lieferungen 19%	2
+1779	USt aus EG-Erwerb ohne Vorsteuer-Abzug	2
+1780	Umsatzsteuervorauszahlungen	2
+1781	Umsatzsteuervorauszahlungen 1/11	2
+1782	Nachsteuer	2
+1783	Unber. ausgewiesene und geschuldete USt	2
+1784	USt EG-Erwerb Neufahrzeuge ohne UStID	2
+1785	Umsatzsteuer nach § 13b UStG	2
+1786	Umsatzsteuer nach § 13b UStG 16%	2
+1787	Umsatzsteuer nach § 13b UStG 19%	2
+1788	Aufgeschobene Einfuhr-Umsatzsteuer	2
+1789	Umsatzsteuer laufendes Jahr	2
+1790	Umsatzsteuer Vorjahr	2
+1791	Umsatzsteuer fruehere Jahre	2
+1792	Sonstige Verrechnung	2
+1793	Verrechnung geleistete Anzahlungen	2
+1800	Privatentnahmen allgemein	2
+1810	Privatsteuern	2
+1820	Sonderausgaben beschraenkt abzugsfaehig	2
+1830	Sonderausgaben unbeschraenkt abzugsfaehig	2
+1840	Zuwendungen, Spenden	2
+1850	Aussergewoehnliche Belastungen	2
+1860	Grundstuecksaufwand	2
+1869	Grundstuecksaufwand (Umsatzsteuerschluessel moeglich)	2
+1870	Grundstuecksertrag	2
+1880	Unentgeltliche Wertabgaben	2
+1890	Privateinlagen	2
+1900	Privatentnahmen allgemein	2
+1910	Privatsteuern	2
+1920	Sonderausgaben beschraenkt abzugsfaehig	2
+1930	Sonderausgaben unbeschraenkt abzugsfaehig	2
+1940	Zuwendungen, Spenden	2
+1950	Aussergewoehnliche Belastungen	2
+1960	Grundstuecksaufwand	2
+1970	Grundstuecksertrag	2
+1980	Unentgeltliche Wertabgaben	2
+1990	Privateinlagen	2
+2000	Ausserordentliche Aufwendungen	3
+2001	Ao. Aufwendungen finanzwirksam	3
+2005	Ao. Aufwendungen nicht finanzwirksam	3
+2010	Betriebsfremde Aufwendungen	3
+2020	Periodenfremde Aufwendungen	3
+2100	Zinsen und aehnliche Aufwendungen	3
+2103	Abzugsfaeh. and. Nebenleist. zu Steuern	3
+2104	Nicht abzugsfaeh.and.Nebenleist.z.Steuern	3
+2107	Zinsaufw. § 233a AO betriebliche Steuern	3
+2108	Zinsaufwendungen §§ 233a bis 237 AO	3
+2109	Zinsaufwendungen an verb.Unternehmen	3
+2110	Zinsaufwendungen f.kfr.Verbindlichkeit.	3
+2113	Nicht abzugsfaehige Schuldzinsen gemaess §4Abs.4a	3
+2114	Nicht abzugsfaehige Schuldzinsen gemaess P. 4 Abs.4a	3
+2115	Zinsen, Aufwendung.100/50% n. abzugsf.	3
+2116	Zinsen, Aufw. verb. UN 100/50% n.abzugsf	3
+2118	In Dauerschuldz. umqual.Zins. kfr.Verb.	3
+2119	Zinsaufwend. f.kfr. Verb.an verbund. UN	3
+2120	Zinsaufwendungen f.lfr.Verbindlichkeit.	3
+2125	Zinsaufwendungen f. Gebaeude d. zum Betribsvermoegen	3
+2126	Zinsen zur Finanzierung Anlagevermoegen	3
+2127	Renten/dauer. Lasten Grd./Erw. §8 GewStG	3
+2128	Zinsen a.Mituntern. f. lfr. Kap.§15 EStG	3
+2129	Zinsaufw. fuer lfr. Verbindlichk.verb.UN	3
+2130	Diskontaufwendungen	3
+2139	Diskontaufwendungen an verbundene UN	3
+2140	Zinsaehnliche Aufwendungen	3
+2149	Zinsaehnliche Aufwendungen an verb.UN	3
+2150	Aufwendungen aus Kursdifferenzen	3
+2165	Aufw. aus Waehrungsumstellung auf Euro	3
+2166	Aufwendg. Bewertung Finanzmittelfonds	3
+2170	Nicht abziehbare Vorsteuer	3
+2171	Nicht abziehbare Vorsteuer 7%	3
+2175	Nicht abziehbare Vorsteuer 16%	3
+2176	Nicht abziehbare Vorsteuer 19%	3
+2200	Koerperschaftsteuer	3
+2203	Koerperschaftsteuer fuer Vorjahre	3
+2204	Koerperschaftsteuererstattungen fuer Vorjahre	3
+2205	Koerperschaftsteuer auf Kapitalertraege	3
+2208	Solidaritaetszuschlag	3
+2209	Solidaritaetszuschlag fuer Vorjahre	3
+2210	Kapitalertragsteuer 25%	3
+2212	Kapitalertragsteuer 20%	3
+2213	SolZ auf Kapitalertragsteuer 25%	3
+2214	SolZ auf Kapitalertragsteuer 20%	3
+2215	Zinsabschlagsteuer	3
+2218	Solidaritaetszuschl. auf Zinsabschlagst.	3
+2220	Vermoegensteuer	3
+2223	Vermoegensteuer fuer Vorjahre	3
+2280	Steuernachzahlg. VJ Einkommen und Ertrag	3
+2282	Erstattung VJ fuer EK-/Ertragsteuern	3
+2284	Aufloesung Rueckstellung/EE-Steuern	3
+2285	Steuernachzahlg. VJ sonstige Steuern	3
+2287	Erstattung VJ fuer sonstige Steuern	3
+2289	Aufloesung Rueckstellung sonst. Steuern	3
+2300	Sonstige Aufwendungen	3
+2307	Sonst.Aufwendungen, betriebsfr.u.regelm.	3
+2309	Sonstige Aufwendungen unregelmaessig	3
+2310	Abgang Sachanlagevermoegen RBW Buchverlust	3
+2311	Abgaenge immat. Vermoegensgegenst. RBW	3
+2312	Abgaenge Finanzanlagen RBW	3
+2313	Abgang Finanzanl. 100/50% n. abz. RBW	3
+2315	Abgang Sachanlagevermoegen RBW Buchgewinn	3
+2316	Abgaenge immat. Vermoegensgegenst. RBW	3
+2317	Abgaenge Finanzanlagen Restbuchwert	3
+2318	Abgang Finanzanl. 100/50% st.frei RBW	3
+2320	Verluste aus Anlagenabgang	3
+2323	Verlust Veraeuss.Ant. KapGes 100/50% n.abz	3
+2325	Verluste aus Abgang von Umlaufvermoegen	3
+2340	Einstellungen SoPo mit Ruecklage-Anteil	3
+2341	Einstellungen SoPo Ansparabschreibungen	3
+2345	Einstellungen SoPo mit Ruecklage-Anteil	3
+2348	Aufwend. Zuschreibung  Verbindlichk.	3
+2349	Aufwend. Zuschreibung Rueckstellungen	3
+2350	Grundstuecksaufwendungen	3
+2358	Grundstuecksaufw. f. Gebaeude nicht Betriebsvermoegen	3
+2375	Grundsteuer	3
+2378	Grundsteuer f. Gebaeude nicht Betriebsvermoegen	3
+2380	Zuwendungen,Spenden steuerl. n. abziehb.	3
+2381	Zuwendg.Spenden wissensch./kult. Zweck	3
+2382	Zuwendungen,Spenden mildtaetige Zwecke	3
+2383	Zuwendungen,Spenden kirchl./rel./gemein.	3
+2384	Zuwendungen,Spenden an politische Partei	3
+2385	Nicht abziehbare AR-Verguetungen	3
+2386	Abziehbare Aufsichtsratsverguetung	3
+2387	Zuwendg. an Stiftg. gem. § 52/2/1-3 AO	3
+2388	Zuwendg. an Stiftg. gem. § 52/2/4 AO	3
+2389	Zuwendg. an Stiftg. kirchl./rel./gemein.	3
+2390	Zuwendg. an Stiftg. wiss./mildt./kultur.	3
+2400	Forderungsverluste	4
+2401	Forderungsverluste 7% USt	4
+2402	Forder.verlust aus stfr. EG-Lieferungen	4
+2403	Forderungsverluste EG-Lieferungen 7%	4
+2404	Forderungsverlust EG-Lieferung 16% USt	4
+2405	Forderungsverluste 16% USt	4
+2406	Forderungsverluste 19% USt (uebliche Hoehe)	4
+2407	Forderungsverluste 15% USt	4
+2408	Forderungsverl. a. im Inl. steuerpfl. EG-Lief. 19%	4
+2409	Forderungsverluste EG-Lieferung 15% USt	4
+2430	Forderungsverluste	4
+2450	Einstellung in die PWB zu Forderungen	3
+2451	Einstellung in die EWB zu Forderungen	3
+2490	Aufwendungen aus Verlustuebernahme	3
+2492	Abgef. Gewinne / Gewinngemeinschaft	3
+2493	Abgef. Gewinne stille Gesellschafter §8	3
+2494	Abgef. Gewinne / Gewinn-/Teilgewinnabf.	3
+2495	Einstellungen Kapitalruecklage	3
+2496	Einstellung gesetzliche Ruecklage	3
+2497	Einstellungen satzungsmaessige Rueckl.	3
+2498	Einstellung Ruecklage eigene Anteile	3
+2499	Einstellung in andere Gewinnruecklagen	3
+2500	Ausserordentliche Ertraege	4
+2501	Ao. Ertraege finanzwirksam	4
+2505	Ao. Ertraege nicht finanzwirksam	4
+2510	Betriebsfremde Ertraege	4
+2520	Periodenfremde Ertraege	4
+2600	Ertraege aus Beteiligungen	4
+2615	Ertraege a. Beteiligungen 100/50% stfr	4
+2616	Ertraege a.Beteilig. verb.UN 100/50% stfr	4
+2617	Gewinne a. Anteilen inl. Kapitalgesells.	4
+2618	Gewinnant. aus Mituntern.sch.§9 GewStG	4
+2619	Ertraege a.Beteilig. an verbundenen UN	4
+2620	Ertraege Wertpapiere/Ausleihungen FAV	4
+2625	Ertraege a.Beteilig.FAV 100/50% stfr	4
+2626	Ertraege a.Beteilig. verb.UN 100/50% stfr	4
+2649	Ertraege Wertpapiere/FAV-Ausl.verb.UN	4
+2650	Sonstige Zinsen und aehnliche Ertraege	4
+2655	Ertraege a.Beteilig.UV 100/50% stfr	4
+2656	Ertraege a.Beteilig. verb.UN 100/50% stfr	4
+2657	Zinsertraege §233 a AO betriebl. Steuern	4
+2658	Zinsertraege §233 a AO KSt/Vermoegenst.	4
+2659	Sonst. Zinsen u.ae. Ertraege aus verb.UN	4
+2660	Ertraege aus Kursdifferenzen	4
+2665	Ertraege a. Waehrungsumstellung auf Euro	4
+2666	Ertraege Bewertung Finanzmittelfonds	4
+2670	Diskontertraege	4
+2679	Diskontertraege verbundene Unternehmen	4
+2680	Zinsaehnliche Ertraege	4
+2689	Zinsaehnliche Ertraege verbundene UN	4
+2700	Sonstige Ertraege	4
+2705	Sonstige betriebl. regelm. Ertraege	4
+2707	Sonstige betriebsfr.regelm. Ertraege	4
+2709	Sonstige Ertraege unregelmaessig	4
+2710	Ertraege Zuschreibg. Sachanlagevermoegen	4
+2711	Ertraege Zuschreibg. immat. Anlagevermoeg.	4
+2712	Ertraege Zuschreibg. Finanzanlagevermoegen	4
+2713	Ertraege Zuschreibg. FAV 100/50% steuerfr	4
+2714	Ertraege Zuschreibg. AV 100/50% steuerfr.	4
+2715	Ertraege Zuschreibung Umlaufvermoegen	4
+2716	Ertraege Zuschreibg. UV 100/50% steuerfr.	4
+2720	Ertraege aus Abgang von AV-Gegenstaenden	4
+2723	Ertraege Veraeuss.Ant. KapGes 100/50% stfr.	4
+2725	Ertraege aus Abgang von UV-Gegenstaenden	4
+2730	Ertraege aus Herabsetzung PWB zu Ford.	4
+2731	Ertraege aus Herabsetzung EWB zu Ford.	4
+2732	Ertraege aus abgeschriebenen Forderg.	4
+2734	Ertraege Bewertung Verbindlichkeiten	4
+2735	Ertraege Aufloesung von Rueckstellungen	4
+2736	Ertraege steuerl. Bewertung Rueckstellung	4
+2737	Ertraege Aufl. SoPo mit Rueckl.ant. Euro	4
+2738	Ertr. Aufl. SoPo m. Rueckl.ant.§52/16EStG	4
+2739	Ertraege Aufloesung SoPo Ansparabschreib	4
+2740	Ertraege a.d.Aufl.v.S.m. Ruecklageanteil	4
+2741	Ertraege Aufloesung SoPo m. Ruecklageant.	4
+2742	Versicherungsentschaedigungen	4
+2743	Investitionszuschuesse	4
+2744	Investitionszulage	4
+2745	Ertraege a. Kapitalherabsetzung	4
+2746	Steuerfreie Ertraege Aufloesung Sonserposten	4
+2747	Sonstige steuerfreie Betriebseinnahmen	4
+2750	Grundstuecksertraege	4
+2780	Steuererstattung Vorjahre fuer Einkommen u. Ertrag	4
+2785	Steuererstattung Vorjahre sonstige Steuern	4
+2790	Ertraege aus Verlustuebernahme	4
+2792	Gewinne auf Grund Gewinngemeinschaft	4
+2794	Gewinne auf Grund Gewinn/Teilgewinnabf	4
+2795	Entnahmen aus Kapitalruecklagen	4
+2796	Entnahmen aus der gesetzl. Ruecklage	4
+2797	Entnahmen aus satzungsm.Ruecklagen	4
+2798	Entnahmen a.d.Ruecklage f.eig.Anteile	4
+2799	Entnahmen aus anderen Gewinnruecklagen	4
+2860	Gewinnvortrag nach Verwendung	4
+2862	Gewinnvortrag 40% Vorbelastung	4
+2864	Gewinnvortrag (steuerliches Einlagekto)	4
+2866	Gewinnvortrag 0% Vorbelastung EK02	4
+2868	Verlustvortrag nach Verwendung	4
+2869	Vortrag auf neue Rechnung (GuV)	4
+2870	Vorabausschuettung	4
+2890	Verrechneter kalkul.Unternehmerlohn	3
+2891	Verrechnete kalkul. Miete und Pacht	3
+2892	Verrechnete kalkulatorische Zinsen	3
+2893	Verrechnete kalkul. Abschreibungen	3
+2894	Verrechnete kalkulatorische Wagnisse	3
+2895	Verrechneter kalk. Lohn, unentgeltl. AN	3
+2990	Aufw./Ertraege aus Umrechnungsdifferenz	5
+3000	Roh-, Hilfs- und Betriebsstoffe	3
+3090	Energiestoffe	3
+3100	Fremdleistungen	3
+3110	Leistungen ausl. UN 7% Vorsteuer 7% USt	3
+3115	Erhaltene Leistungen nach § 13b, 7% VSt, 7% Ust	3
+3120	Bauleistungen Inland,19% VSt 19% USt	3
+3121	Bauleistungen Inland,19% VSt 19% USt	3
+3122	Bauleistungen Inland,16% VSt 16% USt	3
+3125	Leistungen Ausland, 19% VSt, 19% USt	3
+3126	Leistungen Ausland, 19% VSt, 19% USt	3
+3127	Leistungen Ausland, 16% VSt, 16% USt	3
+3130	Leistungen ausl. UN ohne Vorst. 7% USt	3
+3135	Erhaltene Leistungen nach § 13b, 0% VSt, 7% Ust	3
+3140	Bauleistungen Inland ohne Vorst. 19% USt	3
+3141	Bauleistungen Inland ohne Vorst. 19% USt	3
+3142	Bauleistungen Inland ohne Vorst. 16% USt	3
+3145	Leistungen Ausland, ohne VSt, 19%USt	3
+3146	Leistungen Ausland, ohne VSt, 19%USt	3
+3147	Leistungen Ausland, ohne VSt, 16%USt	3
+3150	Leist. v. auslaendischen Unternehmen (Nullregelung)	3
+3151	Erhaltene Skonti § 13b, 19% VSt, 19% USt	3
+3200	Wareneingang	3
+3300	Wareneingang 7% Vorsteuer	3
+3340	Wareneingang 16 % Vorsteuer	3
+3400	Wareneingang 19% Vorsteuer	3
+3410	Wareneingang 16 % Vorsteuer	3
+3420	EG-Erwerb 7% Vorsteuer und 7% USt	3
+3425	EG-Erwerb 19% Vorsteuer 19% USt	3
+3430	EG-Erwerb ohne Vorsteuer und 7% USt	3
+3431	EG Erwerb 16% Vorsteuer und 16% USt	3
+3433	EG Erwerb 16% Vorsteuer und 16% USt	3
+3435	EG-Erwerb ohne Vorsteuer und 19% USt	3
+3436	EG Erwerb o. Vorsteuerabz. 16 % USt	3
+3437	Innergem. Erwerb o. Vorsteuerabz. 15 % USt	3
+3440	EG-Erw. Nfz o.UStID 19% VSt, 19%USt	3
+3441	EG-Erw. Nfz o.UStID 16% VSt, 16%USt	3
+3500	Wareneingang 5% Vorsteuer	3
+3505	Wareneingang 5,5% Vorsteuer	3
+3520	Wareneingang 8% Vorsteuer	3
+3530	Wareneingang 9% Vorsteuer	3
+3535	Wareneingang 10% Vorsteuer	3
+3540	Wareneingang 10,7% Vorsteuer	3
+3550	Steuerfreier EG - Erwerb	3
+3559	Steuerfreier Einfuhren	3
+3560	Waren aus Umsatzsteuerlager §13a UStG 7%	3
+3565	Waren aus Umsatzsteuerlager §13a UStG 19%	3
+3566	Waren aus Umsatzsteuerlager §13a UStG 16%	3
+3600	Nicht abziehbare Vorsteuer	3
+3610	Nicht abziehbare Vorsteuer 7%	3
+3650	Nicht abziehbare Vorsteuer 16%	3
+3660	Nicht abziehbare Vorsteuer 19%	3
+3700	Nachlaesse	3
+3710	Nachlaesse 7% Vorsteuer	3
+3720	Nachlaesse 19% Vorsteuer	3
+3722	Nachlaesse 16% Vorsteuer	3
+3723	Nachlaesse 15% Vorsteuer	3
+3724	Nachl. a. EG-Erwerb 7% Vorsteuer/USt	3
+3725	Nachl. a. EG-Erwerb 19% Vorsteuer/USt	3
+3726	Nachl. a. EG-Erwerb 16% VSt u. 16% USt	3
+3727	Nachl. a. EG-Erwerb 15% Vorsteuer/USt	3
+3730	Erhaltene Skonti	3
+3731	Erhaltene Skonti 7% Vorsteuer	3
+3735	Erhaltene Skonti 16% Vorsteuer	3
+3736	Erhaltene Skonti 19% Vorsteuer	3
+3748	Erhaltene Skonti EG-Erwerb 19% VSt, 19% USt	3
+3750	Erhaltene Boni 7% Vorsteuer	3
+3760	Erhaltene Boni 19% Vorsteuer	3
+3762	Erhaltene Boni 16% Vorsteuer	3
+3764	Erhaltene Boni 16% Vorsteuer	3
+3770	Erhaltene Rabatte	3
+3780	Erhaltene Rabatte 7% Vorsteuer	3
+3790	Erhaltene Rabatte 19% Vorsteuer	3
+3792	Erhaltene Rabatte 16% Vorsteuer	3
+3794	Erhaltene Rabatte 16% Vorsteuer	3
+3800	Bezugsnebenkosten	3
+3830	Leergut	3
+3850	Zoelle und Einfuhrabgaben	3
+3960	Bestandsveraend.RHB-Stoffe/bezogene Ware	3
+3970	Bestand Roh-,Hilfs- und Betriebsstoffe	1
+3980	Bestand Waren	1
+3990	Verrechnete Stoffkosten	3
+4000	Material- und Stoffverbrauch	3
+4100	Loehne und Gehaelter	3
+4110	Loehne	3
+4120	Gehaelter	3
+4124	Geschaeftsfuehrergehaelter GmbH-Gesells.	3
+4125	Ehegattengehalt	3
+4126	Tantiemen	3
+4127	Geschaeftsfuehrergehaelter	3
+4128	Verguetg. angestellte Mituntern. §15 EStG	3
+4130	Gesetzliche Sozialaufwendungen	3
+4137	Ges. soz. Aufwendg. Mituntern. §15 EStG	3
+4138	Beitraege zur Berufsgenossenschaft	3
+4139	Ausgleichsabgabe SchwerbehindertenG	3
+4140	Freiwillige soziale Aufwendung. LSt-frei	3
+4145	Freiwillige soziale Aufwendung. LSt-pfl.	3
+4149	Pauschale Lohnsteuer f. Zuschuesse	3
+4150	Krankengeldzuschuesse	3
+4160	Versorgungskassen	3
+4165	Aufwendungen fuer Altersversorgung	3
+4167	Pauschale Lohnsteuer f. Versicherg	3
+4168	Aufw. Altersversorg. Mituntern. §15 EStG	3
+4169	Aufwendungen fuer Unterstuetzung	3
+4170	Vermoegenswirksame Leistungen	3
+4175	Fahrtkostenerstatt. Whg./Arbeitsstaette	3
+4180	Bedienungsgelder	3
+4190	Aushilfsloehne	3
+4199	Pauschale Lohnsteuer f. Aushilfen	3
+4200	Raumkosten	3
+4210	Miete	3
+4218	GewStl. zu beruecks. Miete §8 GewStG	3
+4219	Verguetung Mituntern. Miete WG § 15 EStG	3
+4220	Pacht	3
+4228	GewStl. zu beruecks. Pacht §8 GewStG	3
+4229	Verguetung Mituntern. Pacht WG § 15 EStG	3
+4230	Heizung	3
+4240	Gas, Strom, Wasser	3
+4248	Gas, Strom, Wasser  f. Gebaeude nicht Betriebsverm.	3
+4250	Reinigung	3
+4258	Reinigung in Gebaeuden nicht Betriebsvermoegen	3
+4260	Instandhaltung betrieblicher Raeume	3
+4268	Instandhaltung betriebl.Raeume n. Betriebsvermoegen	3
+4270	Abgaben betrieblich genutzt. Grundbesitz	3
+4278	Abgaben betriebl. genutzt. Grundb.n. Betriebsver.	3
+4280	Sonstige Raumkosten	3
+4286	Sonstige Raumkosten die nicht zum Betriebsvermoegen	3
+4288	Aufwendungen fuer ein haeusliches Arbeitszimmer	3
+4289	Aufw. f.ein haeusl. Arbeitszimmer nicht abz. Anteil	3
+4300	Nicht abziehbare Vorsteuer	3
+4301	Nicht abziehbare Vorsteuer 7%	3
+4305	Nicht abziehbare Vorsteuer 16%	3
+4306	Nicht abziehbare Vorsteuer 19%	3
+4320	Gewerbesteuer	3
+4330	Gewerbeertragsteuer	3
+4335	Gewerbekapitalsteuer	3
+4340	Sonstige Betriebssteuern	3
+4350	Verbrauchsteuer	3
+4355	Oekosteuer	3
+4360	Versicherungen	3
+4366	Versicherung. f. Gebaeude die zum Betriebsvermoegen	3
+4368	Versicher. f. Gebaeude d. nicht z. Betriebsvermoegen	3
+4370	Praemie Rueckdeckung f. Versorgungsleistg	3
+4380	Beitraege	3
+4390	Sonstige Abgaben	3
+4396	Abzugsf.Verspaetungszuschlag/Zwangsgeld	3
+4397	Nicht abzf.Verspaet.zuschlag/Zwangsgeld	3
+4400	(zur freien Verfuegung)	3
+4500	Fahrzeugkosten	3
+4510	Kfz-Steuern	3
+4520	Kfz-Versicherungen	3
+4530	Laufende Kfz-Betriebskosten	3
+4540	Kfz-Reparaturen	3
+4550	Garagenmieten	3
+4560	Mautgebuehren	3
+4570	Fremdfahrzeuge	3
+4580	Sonstige Kfz-Kosten	3
+4590	Kfz-Kosten Betriebl. genutzt ( KFZ Privatvermoegen	3
+4595	Fremdfahrzeugkosten	3
+4600	Werbe-u.Reisekosten	3
+4610	Werbekosten	3
+4630	Geschenke bis 40 Euro	3
+4635	Geschenke ueber 40 Euro	3
+4638	Geschenke ausschliesslich betrieblich genutzt	3
+4640	Repraesentationskosten	3
+4650	Bewirtungskosten	3
+4651	Sonstige eingeschraenkt abziehbare Betriebausgaben	3
+4652	Sonst. einges. abzieh. Betriebausg. n. abz. Anteil	3
+4653	Aufmerksamkeiten	3
+4654	Nicht abzugsfaehige Bewirtungskosten	3
+4655	Nicht abzugsfaehige Betriebsausgaben	3
+4660	Reisekosten Arbeitnehmer	3
+4663	Reisekosten mit Vorsteuer AN	3
+4664	Reisekosten AN Verpfleg.mehraufwand	3
+4666	Reisekosten AN Uebernachtungsaufwand	3
+4667	Reisekosten Arbeitnehmer	3
+4668	Kilometergelderstattung Arbeitnehmer	3
+4670	Reisekosten Unternehmer	3
+4673	Reisekosten mit Vorsteuer UN	3
+4674	Reisekosten UN Verpfleg.mehraufwand	3
+4675	Reisekosten Unternehmer	3
+4676	Reisekosten UN Uebernachtungsaufwand	3
+4677	Reisekosten Unternehmer	3
+4678	Kilometergelderstattung Unternehmer	3
+4680	Fahrten zwischen Wohnung und Arbeitsstaette	3
+4685	Km-Geld-Erstattung	3
+4700	Kosten Warenabgabe	3
+4710	Verpackungsmaterial	3
+4730	Ausgangsfrachten	3
+4750	Transportversicherungen	3
+4760	Verkaufsprovisionen	3
+4780	Fremdarbeiten	3
+4790	Aufwand fuer Gewaehrleistungen	3
+4800	Reparatur/Instandh. Anlagen u. Maschinen	3
+4805	Reparatur/Instandh. Betriebs- u. Gesch.	3
+4806	Wartungskosten fuer Hard- und Software	3
+4809	Sonst. Reparaturen und Instandhaltungen	3
+4810	Mietleasing	3
+4814	GewStl. zu beruecks. Mietleas. §8 GewStG	3
+4815	Kaufleasing	3
+4820	Abschreibung Ingangsetzung, Erweiterung	3
+4821	Abschreib. a. Aufw. Waehrungsumst. Euro	3
+4822	Abschreibung immaterielle VermG	3
+4824	Abschr. Geschaefts- oder Firmenwert	3
+4826	Apl. Abschreibungen immaterielle VermG	3
+4830	Abschreibungen auf Sachanlagen	3
+4831	Abschreibungen auf Gebaeude	3
+4832	Abschreibungen auf Kfz	3
+4840	Apl. Abschreibungen auf Sachanlagen	3
+4841	Absetz.f.auserg.Tech.u Wirtschaft Abnutzung Gebaeud	3
+4842	Absetz.f.auserg.Tech.u Wirtschaft Abnutzung Kfz	3
+4843	Absetz.f.auserg.Tech.u Wirtschaft Abnutzung sonst.	3
+4850	Abschreib.Sachanlagen/stl. So-Vorschr.	3
+4851	Sonderabschreibung §7g Abs.1und 2 EStG ohne Kfz	3
+4852	Sonderabschreibung §7g Abs.1und 2 EStG fuer Kfz	3
+4855	Sofortabschreibung GWG	3
+4860	Abschreibungen auf aktivierte GWG	3
+4865	Apl. Abschreibungen auf aktivierte GWG	3
+4870	Abschreibungen auf Finanzanlagen	3
+4871	Abschreibg. Finanzanl. 100/50% n.abz.	3
+4872	Abschr.Verl.Ant.Mituntern.sch.§8 GewStG	3
+4873	Abschr. auf Finanzanlagen steuerl. S-Vor	3
+4874	Abschreib.Finanzanlagen/stl.So-Vorsch.	3
+4875	Abschreibungen Wertpapiere des UV	3
+4876	Abschreibg. Wertpap.UV 100/50% n.abz.	3
+4879	Vorwegn.kuenft.Wertschwankg. b.Wertp.UV	3
+4880	Abschreibungen auf Umlaufvermoegen	3
+4882	Abschreibungen auf UV, steuerr. bedingt	3
+4885	Vorwegnahme kuenftiger UV-Wertschwankg.	3
+4886	Abschreibungen auf Umlaufvermoegen	3
+4887	Abschreibungen auf UV, steuerr. bedingt	3
+4890	Vorwegnahme kuenftiger UV-Wertschwankg.	3
+4900	Sonstige betriebliche Aufwendungen	3
+4905	Sonstige betriebl.u.regelm.Aufwendungen	3
+4909	Fremdleistungen	3
+4910	Porto	3
+4920	Telefon	3
+4925	Telefax	3
+4930	Buerobedarf	3
+4940	Zeitschriften, Buecher	3
+4945	Fortbildungskosten	3
+4946	Freiwillige Sozialleistungen	3
+4948	Verguetg.freiberufl. Mituntern. § 15 EStG	3
+4949	Haftungsverguetung an Mitunternehmer	3
+4950	Rechts- und Beratungskosten	3
+4955	Buchfuehrungskosten	3
+4957	Abschluss- und Pruefungskosten	3
+4960	Mieten fuer Einrichtungen	3
+4965	Mietleasing	3
+4966	Gewerbesteuerl. zu beruecksichtigendes Mietleasing	3
+4968	GewStl. zu beruecks. Miete Einr.§8 GewStG	3
+4969	Aufwand Abraum-/Abfallbeseitigung	3
+4970	Nebenkosten des Geldverkehrs	3
+4975	Aufwendg. Anteile KapGes 100/50% n.abz	3
+4976	Aufw. Veraeuss. Ant. KapGes 100/50% n.abz	3
+4980	Betriebsbedarf	3
+4985	Werkzeuge und Kleingeraete	3
+4990	Kalkulatorischer Unternehmerlohn	3
+4991	Kalkulatorische Miete und Pacht	3
+4992	Kalkulatorische Zinsen	3
+4993	Kalkulatorische Abschreibungen	3
+4994	Kalkulatorische Wagnisse	3
+4995	Kalkulatorischer Lohn, unentgeltl. AN	3
+4996	Herstellungskosten	3
+4997	Verwaltungskosten	3
+4998	Vertriebskosten	3
+4999	Gegenkonto zu 4996 bis 4998	3
+7000	Unfertige Erzeugnisse und Leistungen	1
+7050	Unfertige Erzeugnisse	1
+7080	Unfertige Leistungen	1
+7090	In Ausfuehrung befindl. Bauauftraege	1
+7095	In Arbeit befindliche Auftraege	1
+7100	Fertige Erzeugnisse und Waren	1
+7110	Fertige Erzeugnisse	1
+7140	Waren	1
+7833	Erloese a.i.and. EG-Land steuerpfl. sonst.Liefer.	4
+8000	(Zur freien Verfuegung)	4
+8100	Steuerfreie Umsaetze §4 Nr. 8 ff UStG	4
+8110	Sonstige steuerfr. Umsaetze Inland	4
+8120	Steuerfreie Umsaetze § 4 Nr. 1a UStG	4
+8125	Steuerfreie EG-Lieferungen §4, 1b UStG	4
+8128	Steuerfreie innergem. Lieferung, aktive Lohnver.	4
+8130	Innergemeinschaftl. Dreiecksgeschaeft	4
+8135	Steuerfr. EG-Lief.v.Neufahrzg.ohne UStID	4
+8140	Steuerfreie Umsaetze Offshore usw.	4
+8150	Steuerfreie Umsaetze § 4 Nr. 2-7 UStG	4
+8190	Erloese mit Durchschnittssaetzen §24 UStG versteuert	4
+8192	Erloese aus Geldspielautomaten 15% USt (Faktor 2,5)	4
+8195	Erloese aus Geldspielautomaten 16% USt	4
+8196	Erloese Geldspielautomaten 19% USt	4
+8197	Erloese Geldspielautomaten 16% USt	4
+8200	Erloese	4
+8300	Erloese 7% USt	4
+8310	Erloese EG-Lieferungen 7% USt	4
+8315	Erloese aus im Inland steuerpfl. EG-Liefer. 19% USt	4
+8320	Im anderen EG-Land stpfl. Lieferungen	4
+8330	Erloese aus im Inland steuerpfl. EG-Liefer. 16%	4
+8337	Erloese aus Leistungen nach § 13b	4
+8338	Erloese aus im Drittlandsteuerb. Leistungen, im In-	4
+8339	Im anderen EG-Land stpfl. sonst. Leist.	4
+8340	Erloese 16% Umsatzsteuer	4
+8400	Erloese 19% Umsatzsteuer	4
+8410	Erloese 16% Umsatzsteuer	4
+8500	Provisionserloese	4
+8504	Provisionserloese, steuerfrei §4 Nr.8ff	4
+8505	Provisionserloese, steuerfrei § 4 Nr.5	4
+8506	Provisionserloese 7% USt	4
+8507	Provisionserloese 15% USt	4
+8508	Provisionserloese 16% USt	4
+8509	Provisionserloese 16% USt	4
+8518	Provisionsumsaetze 16% USt	4
+8519	Provisionsumsaetze 19% USt	4
+8520	Erloese Abfallverwertung	4
+8540	Erloese Leergut	4
+8578	Provision, sonstige Umsaetze 16% USt	4
+8579	Provision, sonstige Umsaetze 19% USt	4
+8590	Verrechnete sonstige Sachbezuege	4
+8591	Sachbezuege 7% USt	4
+8595	Sachbezuege 19% USt (Waren)	4
+8596	Sachbezuege 16% Umsatzsteuer (Waren)	4
+8597	Sachbezuege 15% Umsatzsteuer (Waren)	4
+8600	Sonst. Erloese betr. u. regelmaessig	4
+8610	Verrechnete sonstige Sachbezuege	4
+8611	Verrechn. sonstige Sachbezuege 19% USt	4
+8612	Verrechnete sonstige Sachbezuege 16% USt (z.B. KFZ)	4
+8613	Verrechnete sonstige Sachbezuege 15% USt	4
+8614	Verrechn. sonstige Sachbezuege ohne USt	4
+8625	Sonst. Erloese betr. u. regelmaessig stfr.	4
+8630	Sonst. Erloese betr. u. regelmaessig 7%	4
+8640	Sonst. Erloese betr. u. regelmaessig 19%	4
+8648	Sonstige Erloese betrieblich und regelm. 16% USt	4
+8650	Erloese Zinsen und Diskontspesen	4
+8660	Erl.Zinsen /Diskontspesen aus verb.UN	4
+8700	Erloesschmaelerungen	4
+8705	Erloesschmaelerungen steuerfrei §4 Nr. 1a	4
+8710	Erloesschmaelerungen 7% USt	4
+8720	Erloesschmaelerungen 19% USt	4
+8723	Erloesschmaelerungen 16% Umsatzsteuer	4
+8724	Erloesschmaelerung EG-Lieferung steuerfrei	4
+8725	Erloesschmaelerung EG-Lieferung 7% USt	4
+8726	Erloesschmaelerung EG-Lieferung 19% USt	4
+8727	Erloesschmael.i.and. EG-Land stpfl. Lief.	4
+8728	Erloesschm. a. i. Inl. steuerpfl. EG-Liefer. 16%	4
+8729	Erloesschmaelerung EG-Lieferung 16% USt	4
+8730	Gewaehrte Skonti	4
+8731	Gewaehrte Skonti 7% USt	4
+8736	Gewaehrte Skonti 19% USt	4
+8748	Gewaehrte Skonti EG-Lieferung 19% USt	4
+8750	Gewaehrte Boni 7% USt	4
+8760	Gewaehrte Boni 19% USt	4
+8762	Gewaehrte Boni 16%  USt	4
+8764	Gewaehrte Boni 16% USt	4
+8770	Gewaehrte Rabatte	4
+8780	Gewaehrte Rabatte 7% USt	4
+8790	Gewaehrte Rabatte 19% USt	4
+8792	Gewaehrte Rabatte 16% USt	4
+8794	Gewaehrte Rabatte 16% USt	4
+8800	Erloese aus Anlagenverkaeufen	4
+8801	Erloese Sachanlageverkaeufe 19% USt (Buchverlust)	4
+8807	Erloese Verkaeufen Sachanlagevermoegen steuerfrei	4
+8808	Erloese Verkaeufen Sachanlagevermoegen steuerfrei	4
+8809	Erloese Sachanlageverkaeufe 16% USt (Buchverlust)	4
+8810	Erloese aus Anlagenverk. 16% USt. (Buchverlust)	4
+8815	Erloese aus Anlagenverk. 15% USt. (Buchverlust)	4
+8817	Erloese Verkaeufe immat.Vermoegensgegenst	4
+8818	Erloese a. Verkaeufen Finanzanlagen	4
+8819	Erl. Verkauf Finanzanl. 100/50% n. abz.	4
+8820	Erloese Sachanlageverkaeufe 19% USt (Buchgewinn)	4
+8826	Erloese Sachanlageverkaeufe 16% USt (Buchgewinn)	4
+8827	Erloese  Verkaeufen Sachanlagevermoegen steuerfrei	4
+8828	Erloese Verkaeufen Sachanlagevermoegen steuerfrei	4
+8829	Erloese Anlagenverkaeufe 19 %	4
+8830	Erloese aus Anlagenverk. 16% USt. (Buchgewinn)	4
+8835	Erloese aus Anlagenverk. 15% USt. (Buchgewinn)	4
+8837	Erloese Verkaeufe immat.Vermoegensgegenst	4
+8838	Erloese a. Verkaeufen Finanzanlagen	4
+8839	Erl. Verkauf Finanzanl. 100/50% st.frei	4
+8900	Unentgeltliche Wertabgaben	4
+8905	Entnahme von Gegenstaenden ohne USt	4
+8908	Entnahme von Gegenstaenden 16% Umsatzsteuer	4
+8909	Entnahme von Gegenstaenden 15% Umsatzsteuer	4
+8910	Entnahme Unternehmer (Waren) 19% USt	4
+8913	Entnahme Unternehmer (Waren) 19% USt	4
+8914	Entnahme Unternehmer (Waren) 16% USt	4
+8915	Entnahme Unternehmer (Waren) 7% USt	4
+8919	Entnahme Unternehmer (Waren) ohne USt	4
+8920	Verwendung von Gegenstaenden 19% USt	4
+8921	Verwendung von Gegenstaenden 19% USt (Kfz Nutzung)	4
+8922	Verwendung von Gegenstaenden 19% USt (Tel. Nutzung)	4
+8923	Verwendung von Gegenstaenden 16% USt	4
+8924	Verwendung von Gegenstaenden ohne USt	4
+8925	Unentgeltl. Erbringung Leist. 19% USt	4
+8927	Unentgeltl. Erbringung Leist. 19% USt	4
+8928	Unentgeltl. Erbringung Leist. 16% USt	4
+8929	Unentgeltl. Erbringung Leist. ohne USt	4
+8930	Verwendung von Gegenstaenden 7% USt	4
+8932	Unentgeltl. Erbringung Leist. 7% USt	4
+8934	Verwendung von Gegenstaenden 16% USt (Kfz Nutzung)	4
+8935	Unentgeltl. Zuwendung von Gegenstaenden 19% USt	4
+8937	Unentgeltl. Zuwendung von Gegenstaenden 19% USt	4
+8938	Unentgeltl. Zuwendung von Gegenstaenden 16% USt	4
+8939	Unentgeltl. Zuwend. Gegenstaende ohne USt	4
+8940	Unentgeltl. Zuwend. von Waren 19% USt	4
+8943	Unentgeltl. Zuwend. von Waren 19% USt	4
+8944	Unentgeltl. Zuwend. von Waren 16% USt	4
+8945	Unentgeltl. Zuwend. von Waren 7% USt	4
+8946	Unentgeltliche Leistungen 7% Umsatzsteuer	4
+8947	Unentgeltliche Leistungen 16% Umsatzsteuer	4
+8948	Verwendung von Gegenstaenden 16% USt (Telefon)	4
+8949	Unentgeltl. Zuwend. von Waren ohne USt	4
+8950	Nicht steuerbare Umsaetze	4
+8955	Umsatzsteuer-Verguetungen	4
+8960	Bestandsveraend.unfertige Erzeugnisse	4
+8970	Bestandsveraenderung unfertige Leistung	4
+8975	Bestandsveraenderung Bauauftraege	4
+8977	Bestandsveraenderung Auftraege in Arbeit	4
+8980	Bestandsveraenderung fertige Erzeugnisse	4
+8990	Andere aktivierte Eigenleistungen	4
+9000	Saldenvortraege Sachkonten	1
+9001	Saldovortraege, Sachkonten	1
+9008	Saldenvortraege Debitoren	1
+9009	Saldenvortraege Kreditoren	2
+9060	Offene Posten 1990	5
+9069	Offene Posten 1999	5
+9070	Offene Posten 2000	1
+9071	Offene Posten 2001	1
+9072	Offene Posten 2002	1
+9073	Offene Posten aus 2003	1
+9079	Offene Posten aus 1979	5
+9080	Offene Posten aus 1980	5
+9081	Offene Posten aus 1981	5
+9082	Offene Posten aus 1982	5
+9083	Offene Posten aus 1983	5
+9084	Offene Posten aus 1984	5
+9085	Offene Posten aus 1985	5
+9086	Offene Posten aus 1986	5
+9087	Offene Posten aus 1987	5
+9088	Offene Posten aus 1988	5
+9089	Offene Posten aus 1989	5
+9090	Summenvortrag	1
+9091	Offene Posten 1991	5
+9092	Offene Posten 1992	5
+9093	Offene Posten 1993	5
+9094	Offene Posten 1994	5
+9095	Offene Posten 1995	5
+9096	Offene Posten 1996	5
+9097	Offene Posten 1997	5
+9098	Offene Posten 1998	5
+9101	Verkaufstage	5
+9102	Anzahl der Barkunden	5
+9103	Beschaeftigte Personen	5
+9104	Unbezahlte Personen	5
+9105	Verkaufskraefte	5
+9106	Geschaeftsraum qm	5
+9107	Verkaufsraum qm	5
+9120	Erweiterungsinvestitionen	5
+9135	Auftragseingang im Geschaeftsjahr	5
+9140	Auftragsbestand	5
+9190	Gegenkto. zu Konten 9101-9107, 9116-9118	5
+9199	Gegenkonto zu Konten 9120, 9135-9140	5
+9200	Beschaeftigte Personen	5
+9209	Gegenkonto zu 9200	5
+9210	Produktive Loehne	5
+9219	Gegenkonto zu 9210	5
+9230	Passive RAP Baukostenzuschuesse	5
+9232	Passive RAP Investitionszulagen	5
+9234	Passive RAP Investitionszuschuesse	5
+9239	Gegenkonto zu Konten 9230-9238	5
+9240	Investitionsverbindlichk.b.Leistg.Verb.	5
+9244	Gegenkonto zu Konten 9240 - 43	5
+9245	Forderungen Sachanlagenverkaeufe	5
+9249	Gegenkonto zu Konten 9245 - 47	5
+9250	Eigenkapitalersetz. Gesellschafterdarl.	5
+9255	Ungesicherte Gesellschafterdarl. (g.5J)	5
+9259	Gegenkonto zu 9250 und 9255	5
+9260	Kurzfristige Rueckstellungen	5
+9262	Mittelfristige Rueckstellungen	5
+9264	Langfristige Rueckstellung o.Pensionen	5
+9269	Gegenkonto zu Konten 9260-9268	5
+9270	Gegenkonto zu 9271 bis 9278	5
+9271	Verbindl. Wechselbegebung/-uebertragung	5
+9272	Verbindl. Wechselbegebung/-uebertr.v.UN	5
+9273	Verbindl. Buergsch.,Wechsel-/Scheckbuerg.	5
+9274	Verbindl. Buergsch.,Wechsel-/Scheckb.vUN	5
+9275	Verbindl.a. Gewaehrleistungsvertraegen	5
+9276	Verbindl. Gewaehrleist.-vertrag v.UN	5
+9277	Haftung fremde Verbindlichkeiten	5
+9278	Haftung fremde Verbindlichk.gg.verb.UN	5
+9280	Gegenkonto zu Konten 9281-9284	5
+9281	Verpflichtungen Leasing u.Mietvertraegen	5
+9282	Verpflichtungen Leasing-/Mietvertr.v.UN	5
+9283	Andere Verpflichtungen gem.§285 Nr3 HGB	5
+9284	Andere Verpflichtungen §285 Nr3 HGB v.U	5
+9500	Anteil fuer Konto 0900	5
+9510	Anteil fuer Konto 0910	5
+9520	Anteil fuer Konto 0920	5
+9530	Anteil fuer Konto 0830	5
+9540	Anteil fuer Konto 0810	5
+9570	Anteil fuer Konto 0870	5
+9580	Anteil fuer Konto 0880	5
+9590	Anteil fuer Konto 0890	5
+9883	Nicht durch Vermoegenseinlagen gedeckte Entnahmen	5
+9884	Nicht durch Vermoegenseinlagen gedeckte Entnahmen	5
+9885	Verr.konto fuer nicht durchVermoegenseinl.gedeckte E	5
+9886	Verr.konto fuer nicht durchVermoegenseinlagen gedeck	5
+9899	Gegenkonto zu 9890	5
+9900	Anfangsbestand Forderungen §4 Abs.3 EStG	1
+9990	Gegenkonto Anfangs-/Endbestand Ford. §4 Abs.3 EStG	1
