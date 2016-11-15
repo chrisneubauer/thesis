@@ -1,12 +1,17 @@
 package de.cneubauer.ocr.tesseract;
 
 import de.cneubauer.AbstractTest;
+import de.cneubauer.ocr.ImagePreprocessor;
 import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class TesseractWrapperTest extends AbstractTest {
     private TesseractWrapper wrapper;
@@ -146,6 +151,20 @@ public class TesseractWrapperTest extends AbstractTest {
             Assert.assertTrue(germanResult.contains("26. Nov. 2015"));
         }
 
+    }
+
+    @Test
+    public void testImprovementByDictionaryAndPreprocessing() throws Exception{
+        String path = "..\\Data\\Datenwerk4.pdf";
+        //BufferedImage file = ImageIO.read(new File(path));
+        ImagePreprocessor preprocessor = new ImagePreprocessor(path);
+
+        BufferedImage inputImage = preprocessor.preprocess();
+
+        this.wrapper.setLanguage("deu+eng");
+        String output = this.wrapper.initOcr(inputImage);
+
+        System.out.println(output);
     }
 
     private boolean assertOCR(String ocrResult, String stringToCheck) {

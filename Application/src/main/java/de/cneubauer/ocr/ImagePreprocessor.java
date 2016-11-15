@@ -5,6 +5,8 @@ import magick.MagickException;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import org.im4java.core.ConvertCmd;
 import org.im4java.core.IM4JavaException;
 import org.im4java.core.IMOperation;
@@ -42,6 +44,28 @@ public class ImagePreprocessor {
         File outputfile = new File(this.tempPath);
         File outputConvertedFile = new File(this.tempPathConverted);
         try {
+            ImageIO.write(this.inputFile, "png", outputfile);
+            ImageIO.write(this.inputFile, "png", outputConvertedFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ImagePreprocessor(String path) {
+        try {
+        File imageFile = new File(path);
+        if (path.endsWith(".pdf")) {
+            PDDocument pdf = PDDocument.load(imageFile);
+            PDFRenderer renderer = new PDFRenderer(pdf);
+            this.inputFile = renderer.renderImageWithDPI(0, 600);
+        } else {
+            this.inputFile = ImageIO.read(imageFile);
+        }
+
+        ProcessStarter.setGlobalSearchPath(".\\portable\\imagemagick\\ImageMagick-7.0.3-6-portable-Q16-x86;");
+
+        File outputfile = new File(this.tempPath);
+        File outputConvertedFile = new File(this.tempPathConverted);
             ImageIO.write(this.inputFile, "png", outputfile);
             ImageIO.write(this.inputFile, "png", outputConvertedFile);
         } catch (IOException e) {
