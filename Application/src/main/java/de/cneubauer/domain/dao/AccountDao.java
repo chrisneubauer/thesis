@@ -7,4 +7,5 @@ import de.cneubauer.domain.bo.Account;
  * DAO for business object Account
  */
 public interface AccountDao extends IDao<Account> {
+    Account getByAccountNo(String accNo);
 }

@@ -2,6 +2,7 @@ package de.cneubauer.domain.bo;
 
 /**
  * Created by Christoph Neubauer on 15.11.2016.
+ * Business Object for table Account
  */
 public class Account {
     private int id;

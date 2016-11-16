@@ -23,6 +23,10 @@
         <property name="hibernate.show_sql">true</property>
 
         <!-- mapping files -->
+        <mapping resource="hbm/AccountType.hbm.xml"/>
+        <mapping resource="hbm/Account.hbm.xml"/>
+        <mapping resource="hbm/AccountingRecord.hbm.xml"/>
+
         <mapping resource="hbm/Country.hbm.xml"/>
         <mapping resource="hbm/CorporateForm.hbm.xml"/>
         <!--<mapping resource="hbm/CountryCorporateForm.hbm.xml"/>-->

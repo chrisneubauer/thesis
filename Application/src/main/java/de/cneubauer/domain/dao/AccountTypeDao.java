@@ -7,4 +7,18 @@ import de.cneubauer.domain.bo.AccountType;
  * DAO for business object AccountType
  */
 public interface AccountTypeDao extends IDao<AccountType> {
+    // Aktivkonto
+    public AccountType getAssetAccount();
+
+    // Passivkonto
+    public AccountType getLiabilityAccount();
+
+    // Aufwandskonto
+    public AccountType getExpenseAccount();
+
+    // Ertragskonto
+    public AccountType getRevenueAccount();
+
+    // Statistikkonto
+    public AccountType getStatisticalAccount();
 }
