@@ -44,8 +44,6 @@ public class Start extends Application {
         FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
         Parent root = loader.load();
 
-        //ResourceBundle bundle = ResourceBundle.getBundle("BasicApplication");
-        //Parent root = FXMLLoader.load(this.getClass().getResource("../../../FXML/BasicApplication_i18n/BasicApplication_i18n.fxml"), bundle);
         Scene scene = new Scene(root, 1280,700);
         Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
         scene.getStylesheets().add(String.valueOf(getClass().getResource("../../../css/validationError.css")));
