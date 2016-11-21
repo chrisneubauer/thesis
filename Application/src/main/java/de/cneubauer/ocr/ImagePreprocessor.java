@@ -58,6 +58,7 @@ public class ImagePreprocessor {
             PDDocument pdf = PDDocument.load(imageFile);
             PDFRenderer renderer = new PDFRenderer(pdf);
             this.inputFile = renderer.renderImageWithDPI(0, 600);
+            pdf.close();
         } else {
             this.inputFile = ImageIO.read(imageFile);
         }

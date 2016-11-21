@@ -29,7 +29,7 @@ public class TesseractWrapper {
 
         instance.setDatapath(".");
         instance.setLanguage(this.getLanguage());
-
+        instance.setTessVariable("tessedit_write_images", "true");
         instance.setOcrEngineMode(OEM_TESSERACT_ONLY);
         logger.log(Level.INFO, "Using language(s): " + this.getLanguage());
 
