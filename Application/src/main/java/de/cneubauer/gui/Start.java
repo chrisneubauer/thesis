@@ -16,7 +16,6 @@ import org.apache.log4j.PropertyConfigurator;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
@@ -38,8 +37,8 @@ public class Start extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/BasicApplication_i18n/BasicApplication_i18n.fxml");
-        InputStream inputStream = this.getClass().getClassLoader().getResource("FXML/BasicApplication_i18n/BasicApplication_en.properties").openStream();
+        URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/main.fxml");
+        InputStream inputStream = this.getClass().getClassLoader().getResource("bundles/Application_en.properties").openStream();
         ResourceBundle bundle = new PropertyResourceBundle(inputStream);
 
         FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);

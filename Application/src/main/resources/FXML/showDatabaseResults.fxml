@@ -14,7 +14,7 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="de.cneubauer.gui.controller.DatabaseResultsController">
-    <fx:include source="..\\FXML\\menubar.fxml"/>
+    <!--<fx:include source="..\\FXML\\menubar.fxml"/>-->
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
         <GridPane layoutX="7.0" layoutY="7.0" prefHeight="375.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0"
                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -46,14 +46,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <ButtonBar buttonMinWidth="120.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2"
-                       GridPane.columnSpan="4">
-                <buttons>
-                    <Button mnemonicParsing="false" onAction="#openScanFormMenu" text="Scan form"/>
-                    <Button mnemonicParsing="false" onAction="#openDatabaseMenu" text="Find in database"/>
-                    <Button mnemonicParsing="false" text="Create report"/>
-                </buttons>
-            </ButtonBar>
             <ButtonBar buttonMinWidth="120.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="10"
                        GridPane.rowIndex="1">
                 <buttons>
