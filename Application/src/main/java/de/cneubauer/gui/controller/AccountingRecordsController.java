@@ -1,5 +1,6 @@
 package de.cneubauer.gui.controller;
 
+import com.sun.javafx.collections.ObservableListWrapper;
 import de.cneubauer.domain.bo.Account;
 import de.cneubauer.domain.bo.AccountType;
 import de.cneubauer.domain.bo.AccountingRecord;
@@ -68,8 +69,9 @@ public class AccountingRecordsController extends GUIController {
     private void initialize() {
         AccountTypeDao accountTypeDao = new AccountTypeDaoImpl();
         AccountDao accountDao = new AccountDaoImpl();
-        ObservableList<AccountType> types = (ObservableList<AccountType>) accountTypeDao.getAll();
-        ObservableList<Account> accounts = (ObservableList<Account>) accountDao.getAll();
+
+        ObservableList<AccountType> types = new ObservableListWrapper<>(accountTypeDao.getAll());
+        ObservableList<Account> accounts = new ObservableListWrapper<>(accountDao.getAll());
 
         fromDropDownAccountType.setItems(types);
         fromDropDownAccount.setItems(accounts);
