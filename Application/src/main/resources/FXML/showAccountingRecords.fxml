@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.cneubauer.gui.controller.ResultsController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.cneubauer.gui.controller.AccountingRecordsController">
     <fx:include source="..\\FXML\\menubar.fxml" />
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
         <GridPane layoutX="7.0" layoutY="7.0" prefHeight="375.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -61,8 +61,8 @@
          <Label text="From" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label prefHeight="17.0" prefWidth="107.0" text="Account Type" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" />
          <ChoiceBox fx:id="fromDropDownAccountType" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <Label fx:id="fromDropDownAccount" prefHeight="17.0" prefWidth="107.0" text="Account" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
-         <ChoiceBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <Label prefHeight="17.0" prefWidth="107.0" text="Account" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+         <ChoiceBox fx:id="fromDropDownAccount" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4" />
          <Label text="To" GridPane.columnIndex="7" GridPane.rowIndex="2" />
          <Label prefHeight="17.0" prefWidth="107.0" text="Account Type" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="3" />
          <ChoiceBox fx:id="toDropDownAccountType" prefWidth="150.0" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.rowIndex="3" />

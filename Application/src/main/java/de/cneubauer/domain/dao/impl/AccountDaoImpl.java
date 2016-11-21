@@ -1,10 +1,14 @@
 package de.cneubauer.domain.dao.impl;
 
 import de.cneubauer.domain.bo.Account;
+import de.cneubauer.domain.bo.AccountType;
 import de.cneubauer.domain.dao.AccountDao;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.hibernate.query.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 15.11.2016.
@@ -29,5 +33,22 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao {
         q.setParameter(1, accNo);
 
         return (Account) q.getSingleResult();
+    }
+
+    @Override
+    public List<Account> getAllByType(AccountType type) {
+        String hql = "FROM Account a WHERE a.AccountType_Id = ?1";
+
+        Query q = this.getSession().createQuery(hql);
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Searching for Accounts of AccountType " + type.getName() + " with id " + type.getId());
+        q.setParameter(1, type.getId());
+
+        List accs = q.getResultList();
+        List<Account> result = new ArrayList<>(accs.size());
+
+        for (Object acc : accs) {
+            result.add((Account) acc);
+        }
+        return result;
     }
 }
