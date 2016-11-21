@@ -7,6 +7,7 @@ import de.cneubauer.domain.dao.AccountDao;
 import de.cneubauer.domain.dao.AccountTypeDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.domain.dao.impl.AccountTypeDaoImpl;
+import de.cneubauer.gui.model.AccountingRecordModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -18,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,10 +38,30 @@ public class AccountingRecordsController extends GUIController {
     public CheckBox recordRevised;
     public Label currentRecord;
 
-    private List<AccountingRecord> recordsFound;
+    private List<AccountingRecordModel> recordsFound;
 
     public void initData(List<AccountingRecord> data) {
-        this.recordsFound = data;
+        List<AccountingRecordModel> records = new ArrayList<>(data.size());
+        int index = 1;
+        for (AccountingRecord record : data) {
+            AccountingRecordModel model = new AccountingRecordModel(index++);
+            model.setRevised(false);
+            model.setRecord(record);
+            if (record.getCredit() != null) {
+                model.setToPossibleAccount(record.getCredit());
+                if (record.getCredit().getType() != null) {
+                    model.setToPossibleType(record.getCredit().getType());
+                }
+            }
+            if (record.getDebit() != null) {
+                model.setFromPossibleAccount(record.getDebit());
+                if (record.getDebit().getType() != null) {
+                    model.setFromPossibleType(record.getDebit().getType());
+                }
+            }
+            records.add(model);
+        }
+        this.setRecordsFound(records);
     }
 
     @FXML
@@ -81,7 +103,12 @@ public class AccountingRecordsController extends GUIController {
     }
 
     private boolean validateAccountingRecords() {
-        return false;
+        for (AccountingRecordModel record : this.getRecordsFound()) {
+            if (!record.isRevised()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void nextRecord(ActionEvent actionEvent) {
@@ -93,32 +120,43 @@ public class AccountingRecordsController extends GUIController {
         }
     }
 
+    public void prevRecord(ActionEvent actionEvent) {
+        int current = Integer.parseInt(this.getCurrentRecord().getText()) - 1;
+        if (this.getRecordsFound() != null && current > 0) {
+            this.saveCurrentValuesToRecord();
+            this.setCurrentRecord(new Label(String.valueOf(current - 1)));
+            this.updateAccountingRecordView(this.getRecordsFound().get(current - 1));
+        }
+    }
+
     private void saveCurrentValuesToRecord() {
-        AccountingRecord current = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord().getText()) - 1);
+        AccountingRecordModel current = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord().getText()) - 1);
+        AccountingRecord currentRecord = current.getRecord();
         if (this.getFromDropDownAccount() != null)
         {
-            current.setCredit(this.getFromDropDownAccount());
+            currentRecord.setCredit(this.getFromDropDownAccount());
         }
 
         if (this.getFromDropDownAccountType() != null) {
-            current.getCredit().setType(this.getFromDropDownAccountType());
+            currentRecord.getCredit().setType(this.getFromDropDownAccountType());
         }
 
         if (this.getToDropDownAccount() != null) {
-            current.setDebit(this.getToDropDownAccount());
+            currentRecord.setDebit(this.getToDropDownAccount());
         }
 
         if (this.getFromDropDownAccountType() != null) {
-            current.getCredit().setType(this.getFromDropDownAccountType());
+            currentRecord.getCredit().setType(this.getFromDropDownAccountType());
         }
 
         if (this.getPositionValue() > 0) {
-            current.setBruttoValue(this.getPositionValue());
+            currentRecord.setBruttoValue(this.getPositionValue());
         }
     }
 
     // core method to update the whole view when new information is present
-    private void updateAccountingRecordView(AccountingRecord accountingRecord) {
+    private void updateAccountingRecordView(AccountingRecordModel currentModel) {
+        AccountingRecord accountingRecord = currentModel.getRecord();
         if (accountingRecord.getCredit() != null) {
             if (accountingRecord.getCredit() != null && accountingRecord.getCredit().getType() != null) {
                 this.setFromDropDownAccountType(accountingRecord.getCredit().getType());
@@ -140,44 +178,36 @@ public class AccountingRecordsController extends GUIController {
         }
     }
 
-    public void prevRecord(ActionEvent actionEvent) {
-        int current = Integer.parseInt(this.getCurrentRecord().getText()) - 1;
-        if (this.getRecordsFound() != null && current > 0) {
-            this.saveCurrentValuesToRecord();
-            this.setCurrentRecord(new Label(String.valueOf(current - 1)));
-            this.updateAccountingRecordView(this.getRecordsFound().get(current - 1));
-        }
-    }
 
-    public Label getCurrentRecord() {
+    private Label getCurrentRecord() {
         return currentRecord;
     }
 
-    public void setCurrentRecord(Label currentRecord) {
+    private void setCurrentRecord(Label currentRecord) {
         this.currentRecord = currentRecord;
     }
 
-    public List<AccountingRecord> getRecordsFound() {
+    private List<AccountingRecordModel> getRecordsFound() {
         return recordsFound;
     }
 
-    public void setRecordsFound(List<AccountingRecord> recordsFound) {
+    private void setRecordsFound(List<AccountingRecordModel> recordsFound) {
         this.recordsFound = recordsFound;
     }
 
-    public AccountType getFromDropDownAccountType() {
+    private AccountType getFromDropDownAccountType() {
         return fromDropDownAccountType.getValue();
     }
 
-    public void setFromDropDownAccountType(AccountType fromDropDownAccountType) {
+    private void setFromDropDownAccountType(AccountType fromDropDownAccountType) {
         this.fromDropDownAccountType.setValue(fromDropDownAccountType);
     }
 
-    public Account getFromDropDownAccount() {
+    private Account getFromDropDownAccount() {
         return fromDropDownAccount.getValue();
     }
 
-    public void setFromDropDownAccount(Account fromDropDownAccount) {
+    private void setFromDropDownAccount(Account fromDropDownAccount) {
         this.fromDropDownAccount.setValue(fromDropDownAccount);
     }
 
@@ -189,7 +219,7 @@ public class AccountingRecordsController extends GUIController {
         this.toDropDownAccountType.setValue(toDropDownAccountType);
     }
 
-    public Account getToDropDownAccount() {
+    private Account getToDropDownAccount() {
         return toDropDownAccount.getValue();
     }
 
@@ -205,11 +235,26 @@ public class AccountingRecordsController extends GUIController {
         this.confidenceImage = confidenceImage;
     }
 
-    public double getPositionValue() {
+    private double getPositionValue() {
         return Double.valueOf(this.positionValue.getText());
     }
 
-    public void setPositionValue(double newValue) {
+    private void setPositionValue(double newValue) {
         this.positionValue.setText(String.valueOf(newValue));
+    }
+
+    // checks if accounting record can be set as revised
+    public void checkRevised(ActionEvent actionEvent) {
+        if (this.recordRevised.isSelected()) {
+            AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord().getText()));
+            AccountingRecord record = model.getRecord();
+
+            if (record.getCredit() != null && record.getDebit() != null && record.getBruttoValue() > 0) {
+                model.setRevised(true);
+            }
+        } else {
+            AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord().getText()));
+            model.setRevised(false);
+        }
     }
 }
