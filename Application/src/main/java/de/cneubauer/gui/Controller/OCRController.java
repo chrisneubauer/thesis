@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.log4j.Level;
@@ -22,7 +23,7 @@ import java.io.File;
  * Created by Christoph Neubauer on 04.10.2016.
  * Provides controls for performing OCR in the UI
  */
-public class OCRController extends GUIController {
+public class OCRController extends SplitPaneController {
     @FXML private TextField fileInput;
 
     @FXML
@@ -53,20 +54,19 @@ public class OCRController extends GUIController {
     @FXML
     private void openExtractionInformationMenu(Event e, Invoice extractedInformation) {
         try {
-
-            Node node = (Node) e.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/showResults.fxml"));
+            Node n = (Node) e.getSource();
+            Node parent = n.getParent().getParent().getParent();
+            AnchorPane leftPane = (AnchorPane) parent.getScene().lookup("#leftPane");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/tab.fxml"));
 
             Parent root = loader.load();
-            Scene scene = new Scene(root, 800, 600);
-            Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
-            scene.getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
-            stage.setScene(scene);
+            leftPane.getChildren().clear();
+            leftPane.getChildren().add(root);
 
-            ResultsController ctrl = loader.getController();
-            ctrl.initData(extractedInformation, this.fileInput.getText());
-            stage.show();
+            root.getScene().getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
+
+            TabController ctrl = loader.getController();
+            ctrl.initResults(extractedInformation, this.fileInput.getText());
 
         } catch (Exception ex) {
             ex.printStackTrace();

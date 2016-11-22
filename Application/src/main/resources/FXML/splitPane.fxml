@@ -13,30 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="de.cneubauer.gui.controller.GUIController">
-    <stylesheets>
-        <URL value="@BasicApplication_i18n/BasicApplication.css"/>
-    </stylesheets>
-    <fx:include source="..\\FXML\\menubar.fxml"/>
-    <ButtonBar buttonMinWidth="150.0" buttonOrder="U+FBIX_NCYOA_R" prefHeight="40.0" prefWidth="200.0">
-      <buttons>
-          <Button alignment="CENTER" mnemonicParsing="false" onAction="#openScanFormMenu" text="Scan form"/>
-          <Button mnemonicParsing="false" onAction="#openDatabaseMenu" text="Find in database"/>
-          <Button mnemonicParsing="false" text="Create report"/>
-      </buttons>
-        <VBox.margin>
-          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-        </VBox.margin>
-    </ButtonBar>
-    <AnchorPane VBox.vgrow="ALWAYS">
-        <Label alignment="CENTER" layoutX="58.0" layoutY="177.0" prefWidth="524.0" style="&#10;"
-               text="%label.text.drag.here" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-            <font>
-                <Font size="18.0"/>
-            </font>
-        </Label>
-        <SplitPane dividerPositions="0.5" prefHeight="700.0" prefWidth="1280.0">
+        <SplitPane fx:controller="de.cneubauer.gui.controller.SplitPaneController" fx:id="splitPane" dividerPositions="0.5" prefHeight="700.0" prefWidth="1280.0"  xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
             <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                 <fx:include source="..\\FXML\\empty.fxml"/>
                 <!--<TabPane prefHeight="700.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
@@ -49,7 +26,7 @@
                     </Tab>
                 </TabPane>-->
             </AnchorPane>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <AnchorPane fx:id="rightPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                 <ImageView fx:id="pdfImage" fitHeight="660.0" fitWidth="600.0" pickOnBounds="true"
                            preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
                            AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0"/>

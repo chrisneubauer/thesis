@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -22,19 +23,17 @@ import javafx.stage.StageStyle;
  * Contains UI logic
  */
 public class GUIController {
-    @FXML
-    private MenuBar menuBar;
+
+    @FXML public AnchorPane leftPane;
+
+    @FXML private MenuBar menuBar;
 
     // this method opens the page where the user can import files
     @FXML
     protected void openScanFormMenu(Event e) {
         try {
-            Node node = (Node) e.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("../../../../FXML/scanForm.fxml"));
-            Scene scene = new Scene(root, 800, 600);
-            stage.setScene(scene);
-            stage.show();
+            leftPane.getChildren().clear();
+            leftPane.getChildren().add(FXMLLoader.load(getClass().getResource("../../../../FXML/scanForm.fxml")));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -44,12 +43,14 @@ public class GUIController {
     @FXML
     protected void openDatabaseMenu(Event e) {
         try {
-            Node node = (Node) e.getSource();
+            leftPane.getChildren().clear();
+            leftPane.getChildren().add(FXMLLoader.load(getClass().getResource("../../../../FXML/searchDatabase.fxml")));
+            /*Node node = (Node) e.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource("../../../../FXML/searchDatabase.fxml"));
             Scene scene = new Scene(root, 800, 600);
             stage.setScene(scene);
-            stage.show();
+            stage.show();*/
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -80,5 +81,17 @@ public class GUIController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public FXMLLoader changeToResults() {
+        try {
+            leftPane.getChildren().clear();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/showResults.fxml"));
+            leftPane.getChildren().add(loader.load());
+            return loader;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 }
