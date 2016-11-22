@@ -5,10 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -36,24 +32,16 @@
                 <Font size="18.0"/>
             </font>
         </Label>
-        <SplitPane dividerPositions="0.5" prefHeight="700.0" prefWidth="1280.0">
+        <fx:include source="splitPane.fxml" fx:id="splitPaneInclude"/>
+        <!--<SplitPane dividerPositions="0.5" prefHeight="700.0" prefWidth="1280.0">
             <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                 <fx:include source="..\\FXML\\empty.fxml"/>
-                <!--<TabPane prefHeight="700.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
-                    <Tab closable="false" text="Accounting Records">
-                        <fx:include fx:id="accountingRecordsTab"
-                                    source="showAccountingRecords.fxml"/>
-                    </Tab>
-                    <Tab closable="false" text="Electronic Invoice">
-                        <fx:include fx:id="invoiceTab" source="showResults.fxml"/>
-                    </Tab>
-                </TabPane>-->
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                 <ImageView fx:id="pdfImage" fitHeight="660.0" fitWidth="600.0" pickOnBounds="true"
                            preserveRatio="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
                            AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0"/>
             </AnchorPane>
-        </SplitPane>
+        </SplitPane>-->
     </AnchorPane>
 </VBox>

@@ -1,19 +1,13 @@
 package de.cneubauer.gui.controller;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -24,7 +18,9 @@ import javafx.stage.StageStyle;
  */
 public class GUIController {
 
-    @FXML public AnchorPane leftPane;
+   // @FXML public AnchorPane leftPane;
+    @FXML public SplitPane splitPaneInclude;
+    @FXML private SplitPaneController splitPaneIncludeController;
 
     @FXML private MenuBar menuBar;
 
@@ -32,8 +28,7 @@ public class GUIController {
     @FXML
     protected void openScanFormMenu(Event e) {
         try {
-            leftPane.getChildren().clear();
-            leftPane.getChildren().add(FXMLLoader.load(getClass().getResource("../../../../FXML/scanForm.fxml")));
+            this.splitPaneIncludeController.openScanFormMenu(e);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -43,14 +38,7 @@ public class GUIController {
     @FXML
     protected void openDatabaseMenu(Event e) {
         try {
-            leftPane.getChildren().clear();
-            leftPane.getChildren().add(FXMLLoader.load(getClass().getResource("../../../../FXML/searchDatabase.fxml")));
-            /*Node node = (Node) e.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("../../../../FXML/searchDatabase.fxml"));
-            Scene scene = new Scene(root, 800, 600);
-            stage.setScene(scene);
-            stage.show();*/
+            this.splitPaneIncludeController.openDatabaseMenu(e);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -62,7 +50,7 @@ public class GUIController {
         Platform.exit();
     }
 
-    public void openSettings(ActionEvent e) {
+    public void openSettings() {
         try {
             Stage stage = (Stage) menuBar.getScene().getWindow();
 
@@ -81,17 +69,5 @@ public class GUIController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public FXMLLoader changeToResults() {
-        try {
-            leftPane.getChildren().clear();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/showResults.fxml"));
-            leftPane.getChildren().add(loader.load());
-            return loader;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
     }
 }

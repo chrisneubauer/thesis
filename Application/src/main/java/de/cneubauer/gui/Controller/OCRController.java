@@ -11,13 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,7 +64,6 @@ public class OCRController extends SplitPaneController {
             Node n = (Node) e.getSource();
             Node parent = n.getParent().getParent().getParent();
             AnchorPane leftPane = (AnchorPane) parent.getScene().lookup("#leftPane");
-            AnchorPane rightPane = (AnchorPane) parent.getScene().lookup("#rightPane");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/tab.fxml"));
 
             Parent root = loader.load();
@@ -77,8 +73,6 @@ public class OCRController extends SplitPaneController {
             root.getScene().getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
 
             TabController ctrl = loader.getController();
-            //ctrl.setLeftPane(leftPane);
-            //ctrl.setRightPane(rightPane);
             ctrl.initResults(extractedInformation, this.fileInput.getText());
 
         } catch (Exception ex) {
