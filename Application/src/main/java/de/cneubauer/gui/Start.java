@@ -1,5 +1,6 @@
 package de.cneubauer.gui;
 
+import de.cneubauer.gui.controller.GUIController;
 import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
 import de.cneubauer.util.enumeration.AppLang;
