@@ -13,18 +13,9 @@ import java.io.IOException;
  * Created by Christoph Neubauer on 22.11.2016.
  */
 public class SplitPaneController extends GUIController {
-    @FXML  public AnchorPane rightPane;
-    @FXML public  AnchorPane leftPane;
+    @FXML public AnchorPane rightPane;
+    @FXML public AnchorPane leftPane;
     @FXML public ImageView pdfImage;
-
-    public void switchToResults() {
-        try {
-            leftPane.getChildren().clear();
-            leftPane.getChildren().add(FXMLLoader.load(getClass().getResource("../../../../FXML/tab.fxml")));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     @FXML
     public void showScanForm() {

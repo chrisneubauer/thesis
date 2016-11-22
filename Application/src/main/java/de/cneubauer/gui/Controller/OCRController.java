@@ -1,6 +1,8 @@
 package de.cneubauer.gui.controller;
 
+import com.google.common.io.Files;
 import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.bo.Scan;
 import de.cneubauer.domain.service.OCRDataExtractorService;
 import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import javafx.event.ActionEvent;
@@ -18,6 +20,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Christoph Neubauer on 04.10.2016.
@@ -45,18 +48,26 @@ public class OCRController extends SplitPaneController {
             String result = wrapper.initOcr(fileToScan.getPath());
             System.out.println(result);
             OCRDataExtractorService service = new OCRDataExtractorService(result);
+            Scan scan = new Scan();
             Invoice extractedInformation = service.extractInformation();
-            this.openExtractionInformationMenu(e, extractedInformation);
+            scan.setInvoiceInformation(extractedInformation);
+            try {
+                scan.setFile(Files.toByteArray(fileToScan));
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            this.openExtractionInformationMenu(e, scan);
         }
     }
 
     //this method opens invoice information after ocr processing using ResultsController
     @FXML
-    private void openExtractionInformationMenu(Event e, Invoice extractedInformation) {
+    private void openExtractionInformationMenu(Event e, Scan extractedInformation) {
         try {
             Node n = (Node) e.getSource();
             Node parent = n.getParent().getParent().getParent();
             AnchorPane leftPane = (AnchorPane) parent.getScene().lookup("#leftPane");
+            AnchorPane rightPane = (AnchorPane) parent.getScene().lookup("#rightPane");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/tab.fxml"));
 
             Parent root = loader.load();
@@ -66,6 +77,8 @@ public class OCRController extends SplitPaneController {
             root.getScene().getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
 
             TabController ctrl = loader.getController();
+            //ctrl.setLeftPane(leftPane);
+            //ctrl.setRightPane(rightPane);
             ctrl.initResults(extractedInformation, this.fileInput.getText());
 
         } catch (Exception ex) {
