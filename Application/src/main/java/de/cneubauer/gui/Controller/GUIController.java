@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by Christoph Neubauer on 23.09.2016.
@@ -59,7 +60,9 @@ public class GUIController {
         try {
             Stage stage = (Stage) menuBar.getScene().getWindow();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/settings.fxml"));
+            Locale locale = this.getCurrentLocale();
+            ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/settings.fxml"), bundle);
             FlowPane f = loader.load();
             //FlowPane f = FXMLLoader.load(getClass().getResource("../../../../FXML/settings.fxml"));
             Scene scene = new Scene(f, 600, 400);

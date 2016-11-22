@@ -81,13 +81,13 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <Label prefHeight="17.0" prefWidth="329.0" text="The following information have been extracted:"
+            <Label prefHeight="17.0" prefWidth="329.0" text="%showResults.label.extractedInformation"
                    GridPane.columnSpan="7">
                 <GridPane.margin>
                     <Insets bottom="5.0" top="5.0"/>
                 </GridPane.margin>
             </Label>
-            <Label prefHeight="17.0" prefWidth="107.0" text="Invoice number:" GridPane.columnSpan="3"
+            <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.invoiceNo" GridPane.columnSpan="3"
                    GridPane.rowIndex="2"/>
             <TextField fx:id="extractedInvoiceNumber" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="3"
                        GridPane.columnSpan="2" GridPane.rowIndex="2">
@@ -98,7 +98,7 @@
                     <Insets left="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <Label prefHeight="17.0" prefWidth="107.0" text="Issue date:" GridPane.columnIndex="7"
+            <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.issueDate" GridPane.columnIndex="7"
                    GridPane.columnSpan="3" GridPane.rowIndex="2"/>
             <TextField fx:id="extractedIssueDate" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="9"
                        GridPane.columnSpan="2" GridPane.rowIndex="2">
@@ -109,7 +109,7 @@
                     <Insets left="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <Label prefHeight="17.0" prefWidth="107.0" text="Creditor:" GridPane.columnSpan="3"
+            <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.creditor" GridPane.columnSpan="3"
                    GridPane.rowIndex="4"/>
             <TextField fx:id="extractedCreditor" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="3"
                        GridPane.columnSpan="2" GridPane.rowIndex="4">
@@ -120,7 +120,7 @@
                     <Insets left="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <Label prefHeight="17.0" prefWidth="107.0" text="Debitor:" GridPane.columnIndex="7"
+            <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.debitor" GridPane.columnIndex="7"
                    GridPane.columnSpan="3" GridPane.rowIndex="4"/>
             <TextField fx:id="extractedDebitor" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="9"
                        GridPane.columnSpan="2" GridPane.rowIndex="4">
@@ -131,7 +131,7 @@
                     <Insets left="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <Label prefHeight="17.0" prefWidth="107.0" text="Line total:" GridPane.columnSpan="3"
+            <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.lineTotal" GridPane.columnSpan="3"
                    GridPane.rowIndex="6"/>
             <TextField fx:id="extractedLineTotal" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="3"
                        GridPane.columnSpan="2" GridPane.rowIndex="6">
@@ -142,7 +142,7 @@
                     <Insets left="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <Label prefHeight="17.0" prefWidth="107.0" text="Charge total:" GridPane.columnIndex="7"
+            <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.chargeTotal" GridPane.columnIndex="7"
                    GridPane.columnSpan="3" GridPane.rowIndex="6"/>
             <TextField fx:id="extractedChargeTotal" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="9"
                        GridPane.columnSpan="2" GridPane.rowIndex="6">
@@ -153,7 +153,7 @@
                     <Insets left="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <Label prefHeight="17.0" prefWidth="107.0" text="Tax basis total:" GridPane.columnSpan="3"
+            <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.taxBasisTotal" GridPane.columnSpan="3"
                    GridPane.rowIndex="8"/>
             <TextField fx:id="extractedTaxBasisTotal" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="3"
                        GridPane.columnSpan="2" GridPane.rowIndex="8">
@@ -164,7 +164,7 @@
                     <Insets left="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <Label prefHeight="17.0" prefWidth="130.0" text="Allowance total:" GridPane.columnIndex="7"
+            <Label prefHeight="17.0" prefWidth="130.0" text="%showResults.label.allowanceTotal" GridPane.columnIndex="7"
                    GridPane.columnSpan="3" GridPane.rowIndex="8"/>
             <TextField fx:id="extractedAllowanceTotal" prefHeight="25.0" prefWidth="121.0"
                        GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.rowIndex="8">
@@ -175,7 +175,7 @@
                     <Insets left="5.0"/>
                 </padding>
             </TextField>
-            <Label prefHeight="17.0" prefWidth="107.0" text="Tax total:" GridPane.columnSpan="3"
+            <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.taxTotal" GridPane.columnSpan="3"
                    GridPane.rowIndex="10"/>
             <TextField fx:id="extractedTaxTotal" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="3"
                        GridPane.columnSpan="2" GridPane.rowIndex="10">
@@ -186,7 +186,7 @@
                     <Insets left="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <Label prefHeight="17.0" prefWidth="107.0" text="Grand total:" GridPane.columnIndex="7"
+            <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.grandTotal" GridPane.columnIndex="7"
                    GridPane.columnSpan="3" GridPane.rowIndex="10"/>
             <TextField fx:id="extractedGrandTotal" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="9"
                        GridPane.columnSpan="2" GridPane.rowIndex="10">
@@ -197,7 +197,7 @@
                     <Insets left="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <Label prefHeight="17.0" prefWidth="107.0" text="Has Skonto?" GridPane.columnSpan="3"
+            <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.hasSkonto" GridPane.columnSpan="3"
                    GridPane.rowIndex="12"/>
             <CheckBox fx:id="extractedHasSkonto" mnemonicParsing="false" GridPane.columnIndex="3"
                       GridPane.rowIndex="12" onAction="#checkSkonto">
@@ -205,7 +205,7 @@
                     <Insets left="35.0"/>
                 </GridPane.margin>
             </CheckBox>
-            <Label fx:id="extractedSkontoLabel" prefHeight="17.0" prefWidth="107.0" text="Skonto:"
+            <Label fx:id="extractedSkontoLabel" prefHeight="17.0" prefWidth="107.0" text="%showResults.label.skonto"
                    GridPane.columnIndex="7" GridPane.rowIndex="12"/>
             <TextField fx:id="extractedSkonto" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="9"
                        GridPane.columnSpan="2" GridPane.rowIndex="12">
@@ -216,7 +216,7 @@
                     <Insets left="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <Label prefHeight="17.0" prefWidth="107.0" text="Delivery date:" GridPane.columnSpan="3"
+            <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.deliveryDate" GridPane.columnSpan="3"
                    GridPane.rowIndex="14"/>
             <TextField fx:id="extractedDeliveryDate" prefHeight="25.0" prefWidth="121.0" GridPane.columnIndex="3"
                        GridPane.columnSpan="2" GridPane.rowIndex="14">
@@ -262,7 +262,7 @@
                        GridPane.rowIndex="8">
                 <buttons>
                     <Button fx:id="SaveExtractedInvoiceToDatabase" mnemonicParsing="false"
-                            onAction="#saveToDatabase" text="Save"/>
+                            onAction="#saveToDatabase" text="%showResults.button.save"/>
                 </buttons>
                 <GridPane.margin>
                     <Insets left="25.0" top="35.0"/>
