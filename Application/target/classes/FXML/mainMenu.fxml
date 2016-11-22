@@ -45,9 +45,9 @@
             <ButtonBar buttonMinWidth="120.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2"
                        GridPane.columnSpan="4">
                 <buttons>
-                    <Button mnemonicParsing="false" onAction="#openScanFormMenu" text="Scan form"/>
-                    <Button mnemonicParsing="false" onAction="#openDatabaseMenu" text="Find in database"/>
-                    <Button mnemonicParsing="false" text="Create report"/>
+                    <Button mnemonicParsing="false" onAction="#openScanFormMenu" text="%mainMenu.button.scanForm"/>
+                    <Button mnemonicParsing="false" onAction="#openDatabaseMenu" text="%mainMenu.button.findInDatabase"/>
+                    <Button mnemonicParsing="false" text="%mainMenu.button.createReport"/>
                 </buttons>
             </ButtonBar>
         </GridPane>

@@ -8,7 +8,7 @@
 
 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER" xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="de.cneubauer.gui.controller.GUIController">
-    <Menu mnemonicParsing="false" text="File">
+    <Menu mnemonicParsing="false" text="%menu.title.file">
         <MenuItem mnemonicParsing="false" text="%menu.title.new"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.open"/>
         <Menu mnemonicParsing="false" text="%menu.title.open.recent"/>
@@ -22,7 +22,7 @@
         <SeparatorMenuItem mnemonicParsing="false"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.quit" onAction="#closeApplication"/>
     </Menu>
-    <Menu mnemonicParsing="false" text="Edit">
+    <Menu mnemonicParsing="false" text="%menu.title.edit">
         <MenuItem mnemonicParsing="false" text="%menu.title.undo"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.redo"/>
         <SeparatorMenuItem mnemonicParsing="false"/>

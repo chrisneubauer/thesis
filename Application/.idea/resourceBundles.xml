@@ -3,11 +3,10 @@
   <component name="ResourceBundleManager">
     <file url="file://$PROJECT_DIR$/src/main/resources/bundles/Application.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/bundles/Application_fr.properties" />
     <custom-resource-bundle>
       <file value="file://$PROJECT_DIR$/src/main/resources/bundles/Application.properties" />
+      <file value="file://$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" />
-      <file value="file://$PROJECT_DIR$/src/main/resources/bundles/Application_fr.properties" />
       <base-name>Application</base-name>
     </custom-resource-bundle>
   </component>

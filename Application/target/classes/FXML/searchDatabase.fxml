@@ -50,7 +50,7 @@
             <ButtonBar buttonMinWidth="120.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="5"
                        GridPane.rowIndex="6">
                 <buttons>
-                    <Button mnemonicParsing="false" onAction="#searchInDatabase" text="Search"/>
+                    <Button mnemonicParsing="false" onAction="#searchInDatabase" text="%searchDatabase.button.search"/>
                 </buttons>
             </ButtonBar>
         </GridPane>

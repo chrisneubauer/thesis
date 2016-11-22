@@ -1,5 +1,8 @@
 package de.cneubauer.gui.controller;
 
+import de.cneubauer.util.config.Cfg;
+import de.cneubauer.util.config.ConfigHelper;
+import de.cneubauer.util.enumeration.AppLang;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -11,6 +14,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.util.Locale;
 
 /**
  * Created by Christoph Neubauer on 23.09.2016.
@@ -54,7 +59,9 @@ public class GUIController {
         try {
             Stage stage = (Stage) menuBar.getScene().getWindow();
 
-            FlowPane f = FXMLLoader.load(getClass().getResource("../../../../FXML/settings.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/settings.fxml"));
+            FlowPane f = loader.load();
+            //FlowPane f = FXMLLoader.load(getClass().getResource("../../../../FXML/settings.fxml"));
             Scene scene = new Scene(f, 600, 400);
 
             Stage popupStage = new Stage(StageStyle.DECORATED);
@@ -65,9 +72,23 @@ public class GUIController {
             popupStage.initModality(Modality.APPLICATION_MODAL);
             popupStage.setScene(scene);
 
+            SettingsController ctrl = loader.getController();
+            ctrl.setPrimaryStage(stage);
+
             popupStage.show();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public Locale getCurrentLocale() {
+        Locale locale;
+        AppLang currentLanguage = AppLang.valueOf(ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue()));
+        if (currentLanguage.equals(AppLang.GERMAN)) {
+            locale = Locale.GERMANY;
+        } else {
+            locale = Locale.ENGLISH;
+        }
+        return locale;
     }
 }

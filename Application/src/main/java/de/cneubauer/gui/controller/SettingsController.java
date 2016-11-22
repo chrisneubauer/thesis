@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
  */
 public class SettingsController extends GUIController {
     @FXML FlowPane root;
+    private Stage primaryStage;
 
     // General settings
     @FXML public ChoiceBox<AppLang> applicationLanguageDropdown;
@@ -214,6 +215,24 @@ public class SettingsController extends GUIController {
                 locale = Locale.ENGLISH;
                 ConfigHelper.addOrUpdate(Cfg.APPLICATIONLANGUAGE.getValue(), AppLang.ENGLISH.name());
             }
+
+
+
+            // second approach
+            Logger.getLogger(this.getClass()).log(Level.INFO, "trying to apply new language:" + locale.toLanguageTag());
+            Scene oldScene = this.primaryStage.getScene();
+            ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
+            URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/main.fxml");
+            try {
+                oldScene.setRoot(FXMLLoader.load(fxmlURL, bundle));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+
+
             /*Logger.getLogger(this.getClass()).log(Level.INFO, "Using new language " + newLanguage);
             URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/settings.fxml");
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
@@ -278,5 +297,9 @@ public class SettingsController extends GUIController {
 
     private int getPortSettings() {
         return Integer.parseInt(this.portSettings.getText());
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 }

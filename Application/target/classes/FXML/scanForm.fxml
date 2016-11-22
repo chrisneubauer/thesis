@@ -50,8 +50,8 @@
             <ButtonBar buttonMinWidth="120.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="7"
                        GridPane.rowIndex="2">
                 <buttons>
-                    <Button mnemonicParsing="false" text="Search for file" onAction="#openFileChooser"/>
-                    <Button mnemonicParsing="false" text="Ok" onAction="#scanFile"/>
+                    <Button mnemonicParsing="false" text="%scanForm.button.searchForFile" onAction="#openFileChooser"/>
+                    <Button mnemonicParsing="false" text="%scanForm.button.ok" onAction="#scanFile"/>
                 </buttons>
             </ButtonBar>
         </GridPane>
