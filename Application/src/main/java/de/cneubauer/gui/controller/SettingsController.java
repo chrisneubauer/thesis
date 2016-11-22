@@ -8,14 +8,19 @@ import de.cneubauer.util.enumeration.FerdLevel;
 import de.cneubauer.util.enumeration.TessLang;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 /**
  * Created by Christoph Neubauer on 04.11.2016.
@@ -178,21 +183,36 @@ public class SettingsController extends GUIController {
 
     // updates all setting values in config.ini
     private void updateSettings() {
-        // first adjust language settings
+        ConfigHelper.addOrUpdate(Cfg.FERDPROFILE.getValue(), this.getDefaultFerdProfileDropDown());
+        ConfigHelper.addOrUpdate(Cfg.TESSERACTLANGUAGE.getValue(), this.getTesseractLanguageSettingDropDown());
+
         String selectedLanguage = this.getSelectedApplicationLanguage();
         String currentLanguage = ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue());
         if (!Objects.equals(selectedLanguage, currentLanguage)) {
             this.changeLanguage(selectedLanguage);
         }
 
-        ConfigHelper.addOrUpdate(Cfg.FERDPROFILE.getValue(), this.getDefaultFerdProfileDropDown());
-        ConfigHelper.addOrUpdate(Cfg.TESSERACTLANGUAGE.getValue(), this.getTesseractLanguageSettingDropDown());
     }
 
     // changes languages in the application
     // TODO: make internationalization
     private void changeLanguage(String newLanguage) {
-
+        try {
+            Locale locale;
+            if (newLanguage.equals(AppLang.GERMAN.toString())) {
+                locale = Locale.GERMANY;
+            } else {
+                locale = Locale.ENGLISH;
+            }
+            if(locale != null) {
+                URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/main.fxml");
+                ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
+                FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
+                loader.load();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(this.getClass()).log(Level.WARN, "No resource files found or language tag wrong: " + newLanguage + ".\n Ignoring language change.");
+        }
     }
 
     private String getSelectedApplicationLanguage() {
@@ -208,10 +228,14 @@ public class SettingsController extends GUIController {
     }
 
     private String getTesseractLanguageSettingDropDown() {
-        if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem().equals(TessLang.ENGLISH)) {
-            return "eng";
-        } else if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem().equals(TessLang.GERMAN)) {
-            return "deu";
+        if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem() != null) {
+            if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem().equals(TessLang.ENGLISH)) {
+                return "eng";
+            } else if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem().equals(TessLang.GERMAN)) {
+                return "deu";
+            } else {
+                return "eng+deu";
+            }
         } else {
             return "eng+deu";
         }
