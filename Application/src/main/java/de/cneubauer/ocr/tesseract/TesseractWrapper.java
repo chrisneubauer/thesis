@@ -78,6 +78,33 @@ public class TesseractWrapper {
         return result;
     }
 
+    public String initOcr(File file) {
+        logger.log(Level.INFO, "initiating tesseract instance");
+        long time = System.currentTimeMillis();
+        ITesseract instance = new Tesseract();
+        logger.log(Level.INFO, "initialization of tesseract completed. Time taken: " + (System.currentTimeMillis() - time));
+
+        instance.setDatapath(".");
+        instance.setLanguage(this.getLanguage());
+        instance.setOcrEngineMode(OEM_TESSERACT_ONLY);
+        logger.log(Level.INFO, "Using language(s): " + this.getLanguage());
+
+        List<String> configs = new ArrayList<>(4);
+        configs.add(0, "tessdata\\configs\\api_config");
+        configs.add(1, "tessdata\\configs\\digits");
+        configs.add(2, "tessdata\\configs\\letters");
+        configs.add(3, "tessdata\\configs\\hocr");
+        instance.setConfigs(configs);
+
+        String result = "";
+        try {
+            result = instance.doOCR(file);
+        } catch (TesseractException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+
     public String getLanguage() {
         return language;
     }
