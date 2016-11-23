@@ -15,9 +15,9 @@
     <fx:include source="..\\FXML\\menubar.fxml"/>
     <ButtonBar buttonMinWidth="150.0" buttonOrder="U+FBIX_NCYOA_R" prefHeight="40.0" prefWidth="200.0">
       <buttons>
-          <Button alignment="CENTER" mnemonicParsing="false" onAction="#openScanFormMenu" text="Scan form"/>
-          <Button mnemonicParsing="false" onAction="#openDatabaseMenu" text="Find in database"/>
-          <Button mnemonicParsing="false" text="Create report"/>
+          <Button alignment="CENTER" mnemonicParsing="false" onAction="#openScanFormMenu" text="%mainMenu.button.scanForm"/>
+          <Button mnemonicParsing="false" onAction="#openDatabaseMenu" text="%mainMenu.button.findInDatabase"/>
+          <Button mnemonicParsing="false" text="%mainMenu.button.createReport"/>
       </buttons>
         <VBox.margin>
           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>

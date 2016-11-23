@@ -204,9 +204,7 @@ public class SettingsController extends GUIController {
     }
 
     // changes languages in the application
-    // TODO: make internationalization
     private void changeLanguage(AppLang newLanguage) {
-        //try {
             Locale locale;
             if (newLanguage.equals(AppLang.GERMAN)) {
                 locale = Locale.GERMANY;
@@ -216,34 +214,17 @@ public class SettingsController extends GUIController {
                 ConfigHelper.addOrUpdate(Cfg.APPLICATIONLANGUAGE.getValue(), AppLang.ENGLISH.name());
             }
 
-
-
-            // second approach
             Logger.getLogger(this.getClass()).log(Level.INFO, "trying to apply new language:" + locale.toLanguageTag());
             Scene oldScene = this.primaryStage.getScene();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
             URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/main.fxml");
             try {
-                oldScene.setRoot(FXMLLoader.load(fxmlURL, bundle));
+                if (fxmlURL != null) {
+                    oldScene.setRoot(FXMLLoader.load(fxmlURL, bundle));
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-
-
-
-            /*Logger.getLogger(this.getClass()).log(Level.INFO, "Using new language " + newLanguage);
-            URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/settings.fxml");
-            ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-            FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
-
-            Scene s = root.getScene();
-            s.setRoot(loader.load());*/
-
-        //} catch (IOException ex) {
-        //    Logger.getLogger(this.getClass()).log(Level.WARN, "No resource files found or language tag wrong: " + newLanguage + ".\n Ignoring language change.");
-        //}
     }
 
     private AppLang getSelectedApplicationLanguage() {
@@ -299,7 +280,7 @@ public class SettingsController extends GUIController {
         return Integer.parseInt(this.portSettings.getText());
     }
 
-    public void setPrimaryStage(Stage primaryStage) {
+    void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 }

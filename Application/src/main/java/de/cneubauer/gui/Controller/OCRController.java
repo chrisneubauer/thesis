@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by Christoph Neubauer on 04.10.2016.
@@ -64,7 +66,11 @@ public class OCRController extends SplitPaneController {
             Node n = (Node) e.getSource();
             Node parent = n.getParent().getParent().getParent();
             AnchorPane leftPane = (AnchorPane) parent.getScene().lookup("#leftPane");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/tab.fxml"));
+
+            Locale locale = super.getCurrentLocale();
+            ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/tab.fxml"), bundle);
 
             Parent root = loader.load();
             leftPane.getChildren().clear();
