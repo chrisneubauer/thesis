@@ -37,11 +37,28 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao {
 
     @Override
     public List<Account> getAllByType(AccountType type) {
-        String hql = "FROM Account a WHERE a.AccountType_Id = ?1";
+        String hql = "FROM Account a WHERE a.type.id = ?1";
 
         Query q = this.getSession().createQuery(hql);
         Logger.getLogger(this.getClass()).log(Level.INFO, "Searching for Accounts of AccountType " + type.getName() + " with id " + type.getId());
         q.setParameter(1, type.getId());
+
+        List accs = q.getResultList();
+        List<Account> result = new ArrayList<>(accs.size());
+
+        for (Object acc : accs) {
+            result.add((Account) acc);
+        }
+        return result;
+    }
+
+    @Override
+    public List<Account> getAllByType(int typeId) {
+        String hql = "FROM Account a WHERE a.type.id = ?1";
+
+        Query q = this.getSession().createQuery(hql);
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Searching for Accounts of AccountType with id " + typeId);
+        q.setParameter(1, typeId);
 
         List accs = q.getResultList();
         List<Account> result = new ArrayList<>(accs.size());

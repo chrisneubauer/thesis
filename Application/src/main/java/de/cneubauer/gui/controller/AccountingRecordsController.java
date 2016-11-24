@@ -1,6 +1,5 @@
 package de.cneubauer.gui.controller;
 
-import com.sun.javafx.collections.ObservableListWrapper;
 import de.cneubauer.domain.bo.Account;
 import de.cneubauer.domain.bo.AccountType;
 import de.cneubauer.domain.bo.AccountingRecord;
@@ -11,14 +10,18 @@ import de.cneubauer.domain.dao.impl.AccountTypeDaoImpl;
 import de.cneubauer.gui.model.AccountingRecordModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.util.StringConverter;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,18 +33,20 @@ import java.util.Objects;
  */
 public class AccountingRecordsController extends GUIController {
 
-    public ChoiceBox<AccountType> fromDropDownAccountType;
-    public ChoiceBox<Account> fromDropDownAccount;
-    public ChoiceBox<AccountType> toDropDownAccountType;
-    public ChoiceBox<Account> toDropDownAccount;
-    public TextField positionValue;
-    public ImageView confidenceImage;
-    public CheckBox recordRevised;
-    public Label currentRecord;
+    @FXML public ComboBox<AccountType> fromDropDownAccountType;
+    @FXML public ComboBox<Account> fromDropDownAccount;
+    @FXML public ComboBox<AccountType> toDropDownAccountType;
+    @FXML public ComboBox<Account> toDropDownAccount;
+    @FXML public TextField positionValue;
+    @FXML public ImageView confidenceImage;
+    @FXML public CheckBox recordRevised;
+    @FXML public Label currentRecord;
 
     private List<AccountingRecordModel> recordsFound;
+    private List<AccountType> types;
 
-    public void initData(List<AccountingRecord> data) {
+    void initData(List<AccountingRecord> data) {
+        Logger.getLogger(this.getClass()).log(Level.INFO, "initiating AccountingRecordsController data");
         List<AccountingRecordModel> records = new ArrayList<>(data.size());
         int index = 1;
         for (AccountingRecord record : data) {
@@ -63,38 +68,107 @@ public class AccountingRecordsController extends GUIController {
             records.add(model);
         }
         this.setRecordsFound(records);
+        this.initiateDropdowns(records.get(0));
+        this.showAccountingRecords(data.get(0));
     }
 
-    @FXML
-    private void initialize() {
+    private void initiateDropdowns(AccountingRecordModel model) {
+        fromDropDownAccountType.setConverter(new StringConverter<AccountType>() {
+            @Override
+            public String toString(AccountType object) {
+                return object.getName();
+            }
+
+            @Override
+            public AccountType fromString(String string) {
+                throw new UnsupportedOperationException();
+            }
+        });
+        fromDropDownAccount.setConverter(new StringConverter<Account>() {
+            @Override
+            public String toString(Account object) {
+                return object.getAccountNo();
+            }
+
+            @Override
+            public Account fromString(String string) {
+                throw new UnsupportedOperationException();
+            }
+        });
+        toDropDownAccountType.setConverter(new StringConverter<AccountType>() {
+            @Override
+            public String toString(AccountType object) {
+                return object.getName();
+            }
+
+            @Override
+            public AccountType fromString(String string) {
+                throw new UnsupportedOperationException();
+            }
+        });
+        toDropDownAccount.setConverter(new StringConverter<Account>() {
+            @Override
+            public String toString(Account object) {
+                return object.getAccountNo();
+            }
+
+            @Override
+            public Account fromString(String string) {
+                throw new UnsupportedOperationException();
+            }
+        });
+
         AccountTypeDao accountTypeDao = new AccountTypeDaoImpl();
         AccountDao accountDao = new AccountDaoImpl();
 
-        ObservableList<AccountType> types = new ObservableListWrapper<>(accountTypeDao.getAll());
-        ObservableList<Account> accounts = new ObservableListWrapper<>(accountDao.getAll());
+        this.types = accountTypeDao.getAll();
 
-        fromDropDownAccountType.setItems(types);
+        ObservableList<Account> accounts = FXCollections.observableArrayList(accountDao.getAll());
+
+        Logger.getLogger(this.getClass()).log(Level.INFO, "adding " + types.size() + " elements to type dropdowns");
+        Logger.getLogger(this.getClass()).log(Level.INFO, "adding " + accounts.size() + " elements to account dropdowns");
+        fromDropDownAccountType.setItems(FXCollections.observableArrayList(this.types));
         fromDropDownAccount.setItems(accounts);
-        toDropDownAccountType.setItems(types);
+        toDropDownAccountType.setItems(FXCollections.observableArrayList(this.types));
         toDropDownAccount.setItems(accounts);
 
-        fromDropDownAccountType.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+        fromDropDownAccountType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<AccountType>() {
             @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if (!Objects.equals(oldValue, newValue)) {
-                    fromDropDownAccount.setItems((ObservableList<Account>) accountDao.getAllByType(accountTypeDao.getById(newValue.intValue())));
-                }
+            public void changed(ObservableValue<? extends AccountType> observable, AccountType oldValue, AccountType newValue) {
+                Logger.getLogger(this.getClass()).log(Level.INFO, "searching for accounts of account type with id " + newValue.getId());
+                fromDropDownAccount.setItems(FXCollections.observableArrayList(accountDao.getAllByType(newValue.getId())));
             }
         });
+        toDropDownAccountType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<AccountType>() {
+            @Override
+            public void changed(ObservableValue<? extends AccountType> observable, AccountType oldValue, AccountType newValue) {
+                Logger.getLogger(this.getClass()).log(Level.INFO, "searching for accounts of account type with id " + newValue.getId());
+                toDropDownAccount.setItems(FXCollections.observableArrayList(accountDao.getAllByType(newValue.getId())));
+            }
+        });
+    }
 
-        toDropDownAccountType.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if (!Objects.equals(oldValue, newValue)) {
-                    toDropDownAccount.setItems((ObservableList<Account>) accountDao.getAllByType(accountTypeDao.getById(newValue.intValue())));
-                }
+    // TODO: Necessary for validation
+    private void addAllListeners() {
+        /*this.fromDropDownAccountType.textProperty().addListener(this.addListenerToTextField(this.extractedInvoiceNumber));
+        this.fromDropDownAccount.textProperty().addListener(this.addListenerToTextField(this.extractedIssueDate));
+        this.toDropDownAccountType.textProperty().addListener(this.addListenerToTextField(this.extractedCreditor));
+        this.toDropDownAccount.textProperty().addListener(this.addListenerToTextField(this.extractedDebitor));
+        this.positionValue.textProperty().addListener(this.addListenerToTextField(this.extractedLineTotal));
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Listeners added to textfields");*/
+    }
+
+    private void showAccountingRecords(AccountingRecord record) {
+        if (recordsFound != null && recordsFound.size() > 0) {
+            positionValue.setText((String.valueOf(record.getBruttoValue())));
+
+            if (record.getCredit() != null) {
+                fromDropDownAccount.setValue(record.getCredit());
             }
-        });
+            if (record.getDebit() != null) {
+                toDropDownAccount.setValue(record.getDebit());
+            }
+        }
     }
 
     public void saveToDatabase(ActionEvent actionEvent) {
@@ -179,7 +253,6 @@ public class AccountingRecordsController extends GUIController {
             this.setPositionValue(accountingRecord.getBruttoValue());
         }
     }
-
 
     private Label getCurrentRecord() {
         return currentRecord;

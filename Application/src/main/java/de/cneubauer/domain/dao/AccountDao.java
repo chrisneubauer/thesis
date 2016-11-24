@@ -12,4 +12,5 @@ import java.util.List;
 public interface AccountDao extends IDao<Account> {
     Account getByAccountNo(String accNo);
     List<Account> getAllByType(AccountType type);
+    List<Account> getAllByType(int typeId);
 }

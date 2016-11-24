@@ -1,6 +1,7 @@
 package de.cneubauer.gui.controller;
 
 import com.google.common.io.Files;
+import de.cneubauer.domain.bo.AccountingRecord;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.Scan;
 import de.cneubauer.domain.service.OCRDataExtractorService;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -48,20 +50,21 @@ public class OCRController extends SplitPaneController {
             System.out.println(result);
             OCRDataExtractorService service = new OCRDataExtractorService(result);
             Scan scan = new Scan();
-            Invoice extractedInformation = service.extractInformation();
+            Invoice extractedInformation = service.extractInvoiceInformation();
+            List<AccountingRecord> recordList = service.extractAccountingRecordInformation();
             scan.setInvoiceInformation(extractedInformation);
             try {
                 scan.setFile(Files.toByteArray(fileToScan));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-            this.openExtractionInformationMenu(e, scan);
+            this.openExtractionInformationMenu(e, scan, recordList);
         }
     }
 
     //this method opens invoice information after ocr processing using ResultsController
     @FXML
-    private void openExtractionInformationMenu(Event e, Scan extractedInformation) {
+    private void openExtractionInformationMenu(Event e, Scan extractedInformation, List<AccountingRecord> recordList) {
         try {
             Node n = (Node) e.getSource();
             Node parent = n.getParent().getParent().getParent();
@@ -79,7 +82,7 @@ public class OCRController extends SplitPaneController {
             root.getScene().getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
 
             TabController ctrl = loader.getController();
-            ctrl.initResults(extractedInformation, this.fileInput.getText());
+            ctrl.initResults(extractedInformation, this.fileInput.getText(), recordList);
 
         } catch (Exception ex) {
             ex.printStackTrace();

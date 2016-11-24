@@ -1,8 +1,6 @@
 package de.cneubauer.domain.service;
 
-import de.cneubauer.domain.bo.CorporateForm;
-import de.cneubauer.domain.bo.Invoice;
-import de.cneubauer.domain.bo.LegalPerson;
+import de.cneubauer.domain.bo.*;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -11,8 +9,10 @@ import org.apache.log4j.Logger;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 20.10.2016.
@@ -45,7 +45,7 @@ public class OCRDataExtractorService {
         this.file = file;
     }
 
-    public Invoice extractInformation() {
+    public Invoice extractInvoiceInformation() {
         Invoice result = new Invoice();
         result.setInvoiceNumber(this.findInvoiceNumber());
         result.setIssueDate(this.findIssueDate());
@@ -350,5 +350,32 @@ public class OCRDataExtractorService {
 
     private String[] fileToArray() {
         return this.file.split("\n");
+    }
+
+    // method returns all recognized accounting records
+    public List<AccountingRecord> extractAccountingRecordInformation() {
+        AccountingRecord record = new AccountingRecord();
+        Account debit = new Account();
+        Account credit = new Account();
+        debit.setAccountNo("0473");
+        credit.setAccountNo("4821");
+        record.setDebit(debit);
+        record.setCredit(credit);
+        record.setBruttoValue(233);
+
+        AccountingRecord record2 = new AccountingRecord();
+        Account debit2 = new Account();
+        Account credit2 = new Account();
+        debit.setAccountNo("4373");
+        credit.setAccountNo("9821");
+        record.setDebit(debit2);
+        record.setCredit(credit2);
+        record.setBruttoValue(12);
+
+        ArrayList<AccountingRecord> records = new ArrayList<>(2);
+        records.add(0, record);
+        records.add(1, record2);
+
+        return records;
     }
 }

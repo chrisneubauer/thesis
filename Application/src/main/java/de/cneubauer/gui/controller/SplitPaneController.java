@@ -31,18 +31,6 @@ public class SplitPaneController extends GUIController {
         }
     }
 
-    @FXML
-    public void showScanForm() {
-        try {
-            this.leftPane.getChildren().clear();
-            Locale locale = super.getCurrentLocale();
-            ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-            this.leftPane.getChildren().add(FXMLLoader.load(getClass().getResource("../../../../FXML/scanForm.fxml"), bundle));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
     // this method opens the page where the user can search in the database
     @FXML
     protected void openDatabaseMenu(Event e) {
