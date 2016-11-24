@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import static org.junit.Assert.*;
@@ -64,5 +65,22 @@ public class AccountingRecordDaoImplTest extends AbstractTest {
         Assert.isTrue(record.getId() == record2.getId());
         Assert.isTrue(record.getBruttoValue() == record2.getBruttoValue());
         Assert.isTrue(Objects.equals(record2.getDebit().getName(), darlehen.getName()));
+    }
+
+    @Test
+    public void testAccountsFilteredByType() {
+        AccountType expense = this.accountTypeDao.getExpenseAccount();
+        List<Account> allAcounts = this.accountDao.getAll();
+        List<Account> onlyExpense = this.accountDao.getAllByType(expense);
+        List<Account> onlyExpenseById = this.accountDao.getAllByType(expense.getId());
+
+        Assert.notNull(allAcounts);
+        Assert.notNull(onlyExpense);
+        Assert.notNull(onlyExpenseById);
+        Assert.notEmpty(allAcounts);
+        Assert.notEmpty(onlyExpense);
+        Assert.notEmpty(onlyExpenseById);
+        Assert.isTrue(allAcounts.size() > onlyExpense.size());
+        Assert.isTrue(onlyExpense.size() == onlyExpenseById.size());
     }
 }
