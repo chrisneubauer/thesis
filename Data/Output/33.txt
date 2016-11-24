@@ -1,0 +1,33 @@
+AUDIA AKUSTIK GMBH 11 EranzeMehring-StraBe 13 :1: 99610 Sömmerda
+Höreck
+Markus Andrae
+Kalthorststr. 8
+68307 Mannheim
+SAMNIELRECHNUNG NR. 4 125267
+A RECHN.-DATUM 30.04.2015 SACHBEARB. THennig
+KUNDE 2908.000 UNSERE STEUER-NR 1511105100685
+WÄHRUNG EUR
+ARTIKEL MENGE LISTENPR RABATT PREIS1EINH GESAMT MWST
+Kalthorststr. 8, D-68307 Mannheim
+mx Lieferschem 3 7935 98 v. 01.04.15
+Kom.: Günderoth,A1exandra, Ident3002266, Box: 1239,DBAID:88101,Code:KGAP
+open F01ie,Thermotec7,1inks, 1 39,90 33,12 33,12 19,00
+Nebenkana1 gröBtmöglich 0110 19,00
+Strass 3 Steine 5,00 19,00
+Aufnahme für AuBenhörer 2,00 19,00
+open E01ie,Thermotec7,rechts, 1 39,90 33,12 33,12 19,00
+Nebenkanal gröBtmöglich 0,00 19,00
+A Aufnahme für AuBenhörer 2,00 19,00
+I, R Strass 3 Steine 5,00 19,00
+V anteilige Transportkosten 4,40 19,00
+Zwischensumme 84,64
+x Lieferschein 3794173 v. 07. 04.15
+Kom.: Heilmann,Egon, Identz002280, Bosz571,D.B-1D:88266,Cocle:KGKC
+open C1C,Thermotec7,1inks, 1 39,90 33,12 33,12 19,00
+Nebenkana1 gröBtmöglich 0,00 19500
+Aufnahme für Minisch1auch1C1ick Tube 0,00 119,00
+open C1C,Thermotec7,rechts, 1 39,90 33,12 33,12 19,00
+Nebenkanal 1,5 0,00 19,00
+Aufnahme für Minischlauch1C1ick Tube 0,00 19,00
+anteilige Transportkosten XM
+Zwischensumme 70164
