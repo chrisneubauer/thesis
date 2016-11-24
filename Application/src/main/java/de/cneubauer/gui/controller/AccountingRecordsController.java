@@ -7,6 +7,7 @@ import de.cneubauer.domain.dao.AccountDao;
 import de.cneubauer.domain.dao.AccountTypeDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.domain.dao.impl.AccountTypeDaoImpl;
+import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.gui.model.AccountingRecordModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -174,7 +175,9 @@ public class AccountingRecordsController extends GUIController {
     public void saveToDatabase(ActionEvent actionEvent) {
         // check if all records have been revised before saving
         if (this.validateAccountingRecords()) {
-
+            for (AccountingRecordModel acc : this.recordsFound) {
+                AccountFileHelper.write(acc.getRecord().getEntryText(), acc.getFromPossibleAccount().getAccountNo());
+            }
         }
     }
 
