@@ -21,20 +21,11 @@ import java.util.*;
  */
 public class OCRDataExtractorService {
     private String file;
-
     private double confidence = 1 - (Double.valueOf(ConfigHelper.getValue("confidenceRate")));
 
     public OCRDataExtractorService(String file) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Using confidence level: " + confidence*100 + "%");
         this.file = file;
-    }
-
-    private double getConfidence() {
-        return confidence;
-    }
-
-    public void setConfidence(double confidence) {
-        this.confidence = confidence;
     }
 
     public String getFile() {
@@ -45,6 +36,10 @@ public class OCRDataExtractorService {
         this.file = file;
     }
 
+    /*
+     * Method to search for invoice metadata in the scanned page
+     * @return the invoice metadata that has been found
+     */
     public Invoice extractInvoiceInformation() {
         Invoice result = new Invoice();
         result.setInvoiceNumber(this.findInvoiceNumber());
@@ -67,6 +62,80 @@ public class OCRDataExtractorService {
         result.setGrandTotal(helper.getGrandTotal());
 
         return result;
+    }
+
+    /*
+     * Uses scanned page and looks for several information regarding accounting records
+     * @return  returns a list of all AccountingRecords that has been found on the page
+     */
+    public List<AccountingRecord> extractAccountingRecordInformation() {
+        List<AccountingRecord> records = new LinkedList<>();
+        //TODO: Additional filtering through the branch of the company
+
+        //TODO: Filtering if invoice or voucher
+        AccountDao dao = new AccountDaoImpl();
+
+        List<Account> accountsLeft = dao.getAll();
+
+        int index = 0;
+        String[] lines = this.fileToArray();
+        for (String line : lines) {
+            if (this.getAverageDistanceOfSearchConditions(line, new String[] { "Art.-Nr.", "Artikel", "Beschreibung" }) < this.getConfidence()) {
+                if (lines.length > index) {
+                    String nextLine = lines[index + 1];
+                    while(!this.nextLineContainsValue(nextLine) && lines.length > index + 1) {
+                        // go on until we find a line with value or end of file reached
+                        index++;
+                    }
+                    // now we have a line with position information
+                    AccountingRecord r = new AccountingRecord();
+                    r.setEntryText(nextLine);
+                    records.add(r);
+                } else {
+                    // break on eof
+                    break;
+                }
+            } else {
+                index++;
+            }
+        }
+
+        Map<String, String> values = AccountFileHelper.getConfig();
+
+        for (AccountingRecord r : records) {
+            for (String key : values.keySet()) {
+                if (StringUtils.getLevenshteinDistance(key, r.getEntryText()) < this.getConfidence()) {
+                    for (Account a : accountsLeft) {
+                        if (a.getAccountNo().equals(values.get(key))) {
+                            r.setDebit(a);
+                        }
+                    }
+                }
+            }
+        }
+/*
+        AccountingRecord record = new AccountingRecord();
+        Account debit = new Account();
+        Account credit = new Account();
+        debit.setAccountNo("0473");
+        credit.setAccountNo("4821");
+        record.setDebit(debit);
+        record.setCredit(credit);
+        record.setBruttoValue(233);
+
+        AccountingRecord record2 = new AccountingRecord();
+        Account debit2 = new Account();
+        Account credit2 = new Account();
+        debit.setAccountNo("4373");
+        credit.setAccountNo("9821");
+        record.setDebit(debit2);
+        record.setCredit(credit2);
+        record.setBruttoValue(12);
+
+        records.add(0, record);
+        records.add(1, record2);
+*/
+        return records;
     }
 
     private InvoiceInformationHelper findInvoiceValues() {
@@ -352,77 +421,6 @@ public class OCRDataExtractorService {
         return this.file.split("\n");
     }
 
-    // method returns all recognized accounting records
-    public List<AccountingRecord> extractAccountingRecordInformation() {
-        List<AccountingRecord> records = new LinkedList<>();
-        //TODO: Additional filtering through the branch of the company
-
-        //TODO: Filtering if invoice or voucher
-        AccountDao dao = new AccountDaoImpl();
-
-        List<Account> accountsLeft = dao.getAll();
-
-        int index = 0;
-        String[] lines = this.fileToArray();
-        for (String line : lines) {
-            if (this.getAverageDistanceOfSearchConditions(line, new String[] { "Art.-Nr.", "Artikel", "Beschreibung" }) < this.getConfidence()) {
-                if (lines.length > index) {
-                    String nextLine = lines[index + 1];
-                    while(!this.nextLineContainsValue(nextLine) && lines.length > index + 1) {
-                        // go on until we find a line with value or end of file reached
-                        index++;
-                    }
-                    // now we have a line with position information
-                    AccountingRecord r = new AccountingRecord();
-                    r.setEntryText(nextLine);
-                    records.add(r);
-                } else {
-                    // break on eof
-                    break;
-                }
-            } else {
-                index++;
-            }
-        }
-
-        Map<String, String> values = AccountFileHelper.getConfig();
-
-        for (AccountingRecord r : records) {
-            for (String key : values.keySet()) {
-                if (StringUtils.getLevenshteinDistance(key, r.getEntryText()) < this.getConfidence()) {
-                    for (Account a : accountsLeft) {
-                        if (a.getAccountNo().equals(values.get(key))) {
-                            r.setDebit(a);
-                        }
-                    }
-                }
-            }
-        }
-/*
-        AccountingRecord record = new AccountingRecord();
-        Account debit = new Account();
-        Account credit = new Account();
-        debit.setAccountNo("0473");
-        credit.setAccountNo("4821");
-        record.setDebit(debit);
-        record.setCredit(credit);
-        record.setBruttoValue(233);
-
-        AccountingRecord record2 = new AccountingRecord();
-        Account debit2 = new Account();
-        Account credit2 = new Account();
-        debit.setAccountNo("4373");
-        credit.setAccountNo("9821");
-        record.setDebit(debit2);
-        record.setCredit(credit2);
-        record.setBruttoValue(12);
-
-        records.add(0, record);
-        records.add(1, record2);
-*/
-        return records;
-    }
-
     private boolean nextLineContainsValue(String nextLine) {
         if (nextLine.contains(",")) {
             String[] parts = nextLine.split(",");
@@ -437,4 +435,8 @@ public class OCRDataExtractorService {
         }
         return false;
     }
+    private double getConfidence() {
+        return confidence;
+    }
+
 }

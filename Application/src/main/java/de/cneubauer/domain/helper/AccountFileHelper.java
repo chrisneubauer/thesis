@@ -23,15 +23,6 @@ public final class AccountFileHelper {
         setLearningFile(System.getProperty("user.dir"));
     }
 
-    //TODO: Make cryptic
-    private static void setLearningFile(String path) {
-        try {
-            learningFile = Files.createFile(Paths.get(path + "\\accountingData.txt")).toFile();
-        } catch (IOException e) {
-            learningFile = new File(path + "\\accountingData.txt");
-        }
-    }
-
     public static String getValue(String property) {
         if (positionAccountMap == null) {
             new AccountFileHelper();
@@ -63,23 +54,13 @@ public final class AccountFileHelper {
         return positionAccountMap;
     }
 
-    public static void rewrite(Map<String, String> newConfiguration) {
-        try {
-            OutputStream out = new FileOutputStream(learningFile);
-            BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
-            for (Map.Entry<String, String> entry : newConfiguration.entrySet()) {
-                w.write("[" + entry.getKey() + "][" + entry.getValue() + "]");
-                w.newLine();
-            }
-            w.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to rewrite account settings! Please delete config.ini to reset to default settings");
-        }
-    }
 
-    // searches for key and adjusts value
-    // if no key could be found, a new line is added to the config file
+    /*
+     * searches for key and adjusts value
+     * if no key could be found, a new line is added to the config file
+     * @param   key     the position to be stored
+     * @param   value   the account that is used for the specified position
+     */
     public static void addOrUpdate(String key, String value) {
         if (getValue(key) == null) {
             positionAccountMap.put(key, value);
@@ -90,6 +71,11 @@ public final class AccountFileHelper {
         rewrite(positionAccountMap);
     }
 
+    /*
+     * Extend training data by the specified position account value
+     * @param   key     the position to be stored
+     * @param   value   the account that is used for the specified position
+     */
     // extends config file for one line
     public static void write(String key, String value) {
         try {
@@ -101,6 +87,30 @@ public final class AccountFileHelper {
         } catch (Exception e) {
             e.printStackTrace();
             Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to add account settings! Please delete config.ini to reset to default settings");
+        }
+    }
+
+    //TODO: Make cryptic
+    private static void setLearningFile(String path) {
+        try {
+            learningFile = Files.createFile(Paths.get(path + "\\accountingData.txt")).toFile();
+        } catch (IOException e) {
+            learningFile = new File(path + "\\accountingData.txt");
+        }
+    }
+
+    private static void rewrite(Map<String, String> newConfiguration) {
+        try {
+            OutputStream out = new FileOutputStream(learningFile);
+            BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
+            for (Map.Entry<String, String> entry : newConfiguration.entrySet()) {
+                w.write("[" + entry.getKey() + "][" + entry.getValue() + "]");
+                w.newLine();
+            }
+            w.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to rewrite account settings! Please delete config.ini to reset to default settings");
         }
     }
 }

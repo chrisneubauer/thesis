@@ -10,7 +10,21 @@ import java.util.List;
  * DAO for business object Account
  */
 public interface AccountDao extends IDao<Account> {
+    /*
+     * @param   accNo   the account number that should be searched for
+     * @return          the account object that has been searched for
+     */
     Account getByAccountNo(String accNo);
+
+    /*
+     * @param   type    the account type by which the accounts should be filtered
+     * @return          a list of all accounts that belong to the specified account type
+     */
     List<Account> getAllByType(AccountType type);
+
+    /*
+     * @param   typeId  the ID of the account tpe by which the accounts should be filtered
+     * @return          a list of all accounts that belong to the specified account type
+     */
     List<Account> getAllByType(int typeId);
 }
