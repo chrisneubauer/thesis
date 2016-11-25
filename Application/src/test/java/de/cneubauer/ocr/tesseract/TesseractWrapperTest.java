@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.file.Files;
+import java.util.Arrays;
 
 public class TesseractWrapperTest extends AbstractTest {
     private TesseractWrapper wrapper;
@@ -165,6 +167,48 @@ public class TesseractWrapperTest extends AbstractTest {
         String output = this.wrapper.initOcr(inputImage);
 
         System.out.println(output);
+    }
+
+    @Test
+    public void testDifferenceBetweenSplitPagesAndWholePage() throws Exception {
+        String path = ".\\src\\test\\resources\\invoice\\SplitPage\\";
+        String result = wrapper.initOcr(path + "original.jpg");
+        String lines[] = result.split("\\r?\\n");
+        File outputFile = new File(path + "original.txt");
+        Files.write(outputFile.toPath(), Arrays.asList(lines));
+
+        result = wrapper.initOcr(path + "header.jpg");
+        lines = result.split("\\r?\\n");
+        outputFile = new File(path + "header.txt");
+        Files.write(outputFile.toPath(), Arrays.asList(lines));
+
+        result = wrapper.initOcr(path + "body.jpg");
+        lines = result.split("\\r?\\n");
+        outputFile = new File(path + "body.txt");
+        Files.write(outputFile.toPath(), Arrays.asList(lines));
+
+        result = wrapper.initOcr(path + "footer.jpg");
+        lines = result.split("\\r?\\n");
+        outputFile = new File(path + "footer.txt");
+        Files.write(outputFile.toPath(), Arrays.asList(lines));
+    }
+
+    @Test
+    public void testDifferenceBetweenSize() throws Exception {
+        String path = ".\\src\\test\\resources\\invoice\\Resizing\\";
+        this.doOcrAndSave(path + "body.jpg", path + "body.txt");
+        this.doOcrAndSave(path + "body_75.jpg", path + "body_75.txt");
+        this.doOcrAndSave(path + "body_150.jpg", path + "body_150.txt");
+        this.doOcrAndSave(path + "footer.jpg", path + "footer.txt");
+        this.doOcrAndSave(path + "footer_75.jpg", path + "footer_75.txt");
+        this.doOcrAndSave(path + "footer_150.jpg", path + "footer_150.txt");
+    }
+
+    private void doOcrAndSave(String input, String output) throws Exception {
+        String result = wrapper.initOcr(input);
+        String[] lines = result.split("\\r?\\n");
+        File outputFile = new File(output);
+        Files.write(outputFile.toPath(), Arrays.asList(lines));
     }
 
     private boolean assertOCR(String ocrResult, String stringToCheck) {

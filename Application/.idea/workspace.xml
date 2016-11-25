@@ -2,11 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/dict/postprocessing.txt" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/scanner/PDFScanner.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/FXML/BasicApplication_i18n/BasicApplication_i18n.fxml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/DatabaseResultsService.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/DatabaseResultsService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/OCRDataExtractorService.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/OCRDataExtractorService.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/Controller/OCRController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/Controller/OCRController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$1.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$2.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$3.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$4.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$5.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$6.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/TabController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/TabController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/tesseract/TesseractWrapperTest.class" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/tesseract/TesseractWrapperTest.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/AccountDao.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/AccountDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/AccountFileHelper.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/AccountFileHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseResultsService.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseResultsService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/OCRDataExtractorService.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/OCRDataExtractorService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Controller/OCRController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Controller/OCRController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/ZugFerdTransformator.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/ZugFerdTransformator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/main.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/main.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" afterPath="$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" afterPath="$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractWrapperTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractWrapperTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/FXML/scanForm.fxml" afterPath="$PROJECT_DIR$/target/classes/FXML/scanForm.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/FXML/showAccountingRecords.fxml" afterPath="$PROJECT_DIR$/target/classes/FXML/showAccountingRecords.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/bundles/Application_de.properties" afterPath="$PROJECT_DIR$/target/classes/bundles/Application_de.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/bundles/Application_en.properties" afterPath="$PROJECT_DIR$/target/classes/bundles/Application_en.properties" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/FXML/BasicApplication_i18n/BasicApplication.css" afterPath="$PROJECT_DIR$/src/main/resources/FXML/BasicApplication.css" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -90,165 +114,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AccountingRecordsController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java">
+      <file leaf-file-name="TesseractWrapperTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractWrapperTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1411">
-              <caret line="179" column="13" lean-forward="false" selection-start-line="179" selection-start-column="13" selection-end-line="179" selection-end-column="13" />
+            <state relative-caret-position="3247">
+              <caret line="204" column="5" lean-forward="false" selection-start-line="204" selection-start-column="5" selection-end-line="204" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="false" />
-                <element signature="class#3042:3373" expanded="false" />
-                <element signature="e#3152#3153#0" expanded="false" />
-                <element signature="e#3207#3208#0" expanded="false" />
-                <element signature="e#3289#3290#0" expanded="false" />
-                <element signature="e#3362#3363#0" expanded="false" />
-                <element signature="class#3421:3745" expanded="false" />
-                <element signature="e#3523#3524#0" expanded="false" />
-                <element signature="e#3583#3584#0" expanded="false" />
-                <element signature="e#3661#3662#0" expanded="false" />
-                <element signature="e#3734#3735#0" expanded="false" />
-                <element signature="class#3795:4126" expanded="false" />
-                <element signature="e#3905#3906#0" expanded="false" />
-                <element signature="e#3960#3961#0" expanded="false" />
-                <element signature="e#4042#4043#0" expanded="false" />
-                <element signature="e#4115#4116#0" expanded="false" />
-                <element signature="class#4172:4496" expanded="false" />
-                <element signature="e#4274#4275#0" expanded="false" />
-                <element signature="e#4334#4335#0" expanded="false" />
-                <element signature="e#4412#4413#0" expanded="false" />
-                <element signature="e#4485#4486#0" expanded="false" />
-                <element signature="class#5370:5837" expanded="false" />
-                <element signature="class#5929:6394" expanded="false" />
-                <element signature="method#addAllListeners#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#showAccountingRecords#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#validateAccountingRecords#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#nextRecord#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#prevRecord#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#saveCurrentValuesToRecord#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#updateAccountingRecordView#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="e#11095#11096#0" expanded="false" />
-                <element signature="e#11131#11132#0" expanded="false" />
-                <element signature="e#11189#11190#0" expanded="false" />
-                <element signature="e#11239#11240#0" expanded="false" />
-                <element signature="e#11300#11301#0" expanded="false" />
-                <element signature="e#11335#11336#0" expanded="false" />
-                <element signature="e#11413#11414#0" expanded="false" />
-                <element signature="e#11461#11462#0" expanded="false" />
-                <element signature="e#11517#11518#0" expanded="false" />
-                <element signature="e#11574#11575#0" expanded="false" />
-                <element signature="e#11784#11785#0" expanded="false" />
-                <element signature="e#11837#11838#0" expanded="false" />
-                <element signature="e#12032#12033#0" expanded="false" />
-                <element signature="e#12087#12088#0" expanded="false" />
-                <element signature="e#12286#12287#0" expanded="false" />
-                <element signature="e#12337#12338#0" expanded="false" />
-                <element signature="e#12404#12405#0" expanded="false" />
-                <element signature="e#12470#12471#0" expanded="false" />
-                <element signature="e#12515#12516#0" expanded="false" />
-                <element signature="e#12553#12554#0" expanded="false" />
-                <element signature="e#12618#12619#0" expanded="false" />
-                <element signature="e#12672#12673#0" expanded="false" />
-                <element signature="e#12713#12714#0" expanded="false" />
-                <element signature="e#12780#12781#0" expanded="false" />
-                <element signature="e#12834#12835#0" expanded="false" />
-                <element signature="e#12902#12903#0" expanded="false" />
-                <element signature="method#checkRevised#0;class#AccountingRecordsController#0" expanded="false" />
+                <element signature="method#assertOCR#0;class#TesseractWrapperTest#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InvoiceInformationHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/InvoiceInformationHelper.java">
+      <file leaf-file-name="SplitPaneController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-112">
-              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DatabaseResultsService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseResultsService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="23" column="39" lean-forward="true" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OCRDataExtractorService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/OCRDataExtractorService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-61">
-              <caret line="40" column="36" lean-forward="false" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#OCRDataExtractorService#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#extractInvoiceInformation#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#extractAccountingRecordInformation#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#findInvoiceValues#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#findDeliveryDate#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#findSkontoValue#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#findSkontoInformation#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#findIssueDate#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#convertStringToCalendar#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#findCreditor#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#findCorporateFormIndex#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#findInvoiceNumber#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#findValueInString#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#getAverageDistanceOfSearchConditions#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#partContainsSearchConditions#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#findLineWithContainingInformation#0;class#OCRDataExtractorService#0" expanded="false" />
-                <element signature="method#nextLineContainsValue#0;class#OCRDataExtractorService#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZugFerdExtendService.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/ZugFerdExtendService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Account.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/bo/Account.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding>
-                <element signature="e#278#279#0" expanded="false" />
-                <element signature="e#303#304#0" expanded="false" />
-                <element signature="e#336#337#0" expanded="false" />
-                <element signature="e#364#365#0" expanded="false" />
-                <element signature="e#400#401#0" expanded="false" />
-                <element signature="e#432#433#0" expanded="false" />
-                <element signature="e#482#483#0" expanded="false" />
-                <element signature="e#524#525#0" expanded="false" />
-                <element signature="e#555#556#0" expanded="false" />
-                <element signature="e#582#583#0" expanded="false" />
-                <element signature="e#622#623#0" expanded="false" />
-                <element signature="e#654#655#0" expanded="false" />
-                <element signature="e#690#691#0" expanded="false" />
-                <element signature="e#717#718#0" expanded="false" />
-                <element signature="e#762#763#0" expanded="false" />
-                <element signature="e#794#795#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccountDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/AccountDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="26" column="25" lean-forward="false" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+            <state relative-caret-position="340">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="false" />
               </folding>
@@ -256,70 +139,85 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LegalPerson.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/bo/LegalPerson.java">
+      <file leaf-file-name="scanForm.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="850">
+              <caret line="50" column="64" lean-forward="false" selection-start-line="50" selection-start-column="64" selection-end-line="50" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OCRController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/OCRController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="765">
+              <caret line="92" column="35" lean-forward="false" selection-start-line="92" selection-start-column="35" selection-end-line="92" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZugFerdTransformator.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/ZugFerdTransformator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="55" column="25" lean-forward="true" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
               <folding>
-                <element signature="e#1220#1221#0" expanded="false" />
-                <element signature="e#1245#1246#0" expanded="false" />
-                <element signature="e#1278#1279#0" expanded="false" />
-                <element signature="e#1306#1307#0" expanded="false" />
-                <element signature="e#1343#1344#0" expanded="false" />
-                <element signature="e#1375#1376#0" expanded="false" />
-                <element signature="e#1426#1427#0" expanded="false" />
-                <element signature="e#1468#1469#0" expanded="false" />
-                <element signature="e#1506#1507#0" expanded="false" />
-                <element signature="e#1540#1541#0" expanded="false" />
-                <element signature="e#1594#1595#0" expanded="false" />
-                <element signature="e#1640#1641#0" expanded="false" />
-                <element signature="e#1671#1672#0" expanded="false" />
-                <element signature="e#1698#1699#0" expanded="false" />
-                <element signature="e#1738#1739#0" expanded="false" />
-                <element signature="e#1770#1771#0" expanded="false" />
-                <element signature="e#1811#1812#0" expanded="false" />
-                <element signature="e#1845#1846#0" expanded="false" />
-                <element signature="e#1902#1903#0" expanded="false" />
-                <element signature="e#1948#1949#0" expanded="false" />
-                <element signature="e#1990#1991#0" expanded="false" />
-                <element signature="e#2025#2026#0" expanded="false" />
-                <element signature="e#2084#2085#0" expanded="false" />
-                <element signature="e#2132#2133#0" expanded="false" />
-                <element signature="e#2676#2677#0" expanded="false" />
-                <element signature="e#2708#2709#0" expanded="false" />
-                <element signature="e#2758#2759#0" expanded="false" />
-                <element signature="e#2800#2801#0" expanded="false" />
-                <element signature="e#2847#2848#0" expanded="false" />
-                <element signature="e#2883#2884#0" expanded="false" />
-                <element signature="e#2948#2949#0" expanded="false" />
-                <element signature="e#2998#2999#0" expanded="false" />
-                <element signature="e#3033#3034#0" expanded="false" />
-                <element signature="e#3063#3064#0" expanded="false" />
-                <element signature="e#3110#3111#0" expanded="false" />
-                <element signature="e#3148#3149#0" expanded="false" />
+                <element signature="method#createMockInvoice#0;class#ZugFerdTransformator#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AccountFileHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/AccountFileHelper.java">
+      <file leaf-file-name="GUIController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="74" column="8" lean-forward="true" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
+            <state relative-caret-position="1139">
+              <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#1562#1563#0" expanded="false" />
+                <element signature="e#1593#1594#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConfigHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/config/ConfigHelper.java">
+      <file leaf-file-name="TabController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="98" selection-end-column="5" />
+            <state relative-caret-position="731">
+              <caret line="70" column="26" lean-forward="false" selection-start-line="70" selection-start-column="26" selection-end-line="71" selection-end-column="67" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="splitPane.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/splitPane.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="34" lean-forward="false" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TesseractDataCollectorTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractDataCollectorTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="47" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="false" />
               </folding>
@@ -356,9 +254,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/bo/Account.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/ImagePreprocessor.java" />
-        <option value="$PROJECT_DIR$/tessdata/configs/api_config" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/learning/P.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/learning/DataSample.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/learning/Label.java" />
@@ -379,27 +274,21 @@
         <option value="$PROJECT_DIR$/src/main/resources/FXML/splitPane.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/menubar.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/tab.fxml" />
-        <option value="$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/showResults.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/showDatabaseResults.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/settings.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/tesseract/TesseractWrapper.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractDataCollectorTest.java" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/searchDatabase.fxml" />
-        <option value="$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/util/config/ConfigHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SettingsController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/mainMenu.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/main.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Start.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/OCRController.java" />
         <option value="$PROJECT_DIR$/src/main/log4j.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/showAccountingRecords.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/AccountingRecordDaoImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AccountDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java" />
@@ -407,6 +296,15 @@
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/AccountFileHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseResultsService.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/OCRDataExtractorService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/dict/postprocessing.txt" />
+        <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractWrapperTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" />
+        <option value="$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/OCRController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/ZugFerdTransformator.java" />
       </list>
     </option>
   </component>
@@ -452,7 +350,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -476,66 +373,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -597,15 +434,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
+              <option name="myItemId" value="FXML" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -632,75 +465,12 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="PackagesPane" />
     </panes>
@@ -738,12 +508,6 @@
     <property name="js.eslint.eslintPackage" value="" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="de.cneubauer.domain.dao.impl" />
-      <recent name="de.cneubauer.ann.strategy" />
-      <recent name="de.cneubauer.ann.impl" />
-      <recent name="de.cneubauer.domain.service" />
-    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="de.cneubauer.learning" />
     </key>
@@ -762,6 +526,13 @@
       <recent name="de.cneubauer.ocr.tesseract" />
       <recent name="de.cneubauer.domain.dao.impl" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\bundles" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\hbm" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML\BasicApplication_i18n" />
@@ -772,67 +543,14 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="de.cneubauer.gui" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\bundles" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\hbm" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="de.cneubauer.domain.dao.impl" />
+      <recent name="de.cneubauer.ann.strategy" />
+      <recent name="de.cneubauer.ann.impl" />
+      <recent name="de.cneubauer.domain.service" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Start">
-    <configuration default="false" name="TesseractWrapperTest.testImprovementByDictionaryAndPreprocessing" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.cneubauer.ocr.tesseract.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Application" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="de.cneubauer.ocr.tesseract" />
-      <option name="MAIN_CLASS_NAME" value="de.cneubauer.ocr.tesseract.TesseractWrapperTest" />
-      <option name="METHOD_NAME" value="testImprovementByDictionaryAndPreprocessing" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="AccountingRecordDaoImplTest.testAccountingRecordCreation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.cneubauer.domain.dao.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Application" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="de.cneubauer.domain.dao.impl" />
-      <option name="MAIN_CLASS_NAME" value="de.cneubauer.domain.dao.impl.AccountingRecordDaoImplTest" />
-      <option name="METHOD_NAME" value="testAccountingRecordCreation" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
     <configuration default="false" name="Start" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -892,6 +610,58 @@
       <option name="PACKAGE_NAME" value="de.cneubauer.domain.dao.impl" />
       <option name="MAIN_CLASS_NAME" value="de.cneubauer.domain.dao.impl.AccountingRecordDaoImplTest" />
       <option name="METHOD_NAME" value="testAccountsFilteredByType" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="TesseractWrapperTest.testDifferenceBetweenSplitPagesAndWholePage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.cneubauer.ocr.tesseract.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Application" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="de.cneubauer.ocr.tesseract" />
+      <option name="MAIN_CLASS_NAME" value="de.cneubauer.ocr.tesseract.TesseractWrapperTest" />
+      <option name="METHOD_NAME" value="testDifferenceBetweenSplitPagesAndWholePage" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="TesseractWrapperTest.testDifferenceBetweenSize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.cneubauer.ocr.tesseract.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Application" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="de.cneubauer.ocr.tesseract" />
+      <option name="MAIN_CLASS_NAME" value="de.cneubauer.ocr.tesseract.TesseractWrapperTest" />
+      <option name="METHOD_NAME" value="testDifferenceBetweenSize" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1169,19 +939,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testImprovementByDictionaryAndPreprocessing" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.AccountingRecordDaoImplTest.testAccountingRecordCreation" />
-      <item index="3" class="java.lang.String" itemvalue="Application.Start" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.TesseractDataCollectorTest.execute" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.AccountingRecordDaoImplTest.testAccountsFilteredByType" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Start" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.TesseractDataCollectorTest.execute" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.AccountingRecordDaoImplTest.testAccountsFilteredByType" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSplitPagesAndWholePage" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSize" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.Start" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.AccountingRecordDaoImplTest.testAccountsFilteredByType" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.TesseractDataCollectorTest.execute" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testImprovementByDictionaryAndPreprocessing" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.AccountingRecordDaoImplTest.testAccountingRecordCreation" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSize" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSplitPagesAndWholePage" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.AccountingRecordDaoImplTest.testAccountsFilteredByType" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.TesseractDataCollectorTest.execute" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1207,15 +977,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AccountingRecordDaoImplTest_testAccountsFilteredByType - 2016.11.24 at 15h 32m 32s.xml">
-      <configuration name="AccountingRecordDaoImplTest.testAccountsFilteredByType" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="AccountingRecordDaoImplTest_testAccountsFilteredByType - 2016.11.24 at 15h 35m 05s.xml">
-      <configuration name="AccountingRecordDaoImplTest.testAccountsFilteredByType" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="AccountingRecordDaoImplTest_testAccountsFilteredByType - 2016.11.24 at 15h 40m 12s.xml">
-      <configuration name="AccountingRecordDaoImplTest.testAccountsFilteredByType" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="AccountingRecordDaoImplTest_testAccountsFilteredByType - 2016.11.24 at 15h 40m 55s.xml">
       <configuration name="AccountingRecordDaoImplTest.testAccountsFilteredByType" configurationId="JUnit" />
     </history-entry>
@@ -1227,6 +988,15 @@
     </history-entry>
     <history-entry file="TesseractDataCollectorTest_execute - 2016.11.23 at 14h 28m 54s.xml">
       <configuration name="TesseractDataCollectorTest.execute" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TesseractWrapperTest_testDifferenceBetweenSize - 2016.11.25 at 10h 45m 01s.xml">
+      <configuration name="TesseractWrapperTest.testDifferenceBetweenSize" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TesseractWrapperTest_testDifferenceBetweenSize - 2016.11.25 at 11h 13m 41s.xml">
+      <configuration name="TesseractWrapperTest.testDifferenceBetweenSize" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TesseractWrapperTest_testDifferenceBetweenSplitPagesAndWholePage - 2016.11.25 at 10h 32m 18s.xml">
+      <configuration name="TesseractWrapperTest.testDifferenceBetweenSplitPagesAndWholePage" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TesseractWrapperTest_testImprovementByDictionaryAndPreprocessing - 2016.11.16 at 13h 01m 23s.xml">
       <configuration name="TesseractWrapperTest.testImprovementByDictionaryAndPreprocessing" configurationId="JUnit" />
@@ -1266,7 +1036,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26626325" sideWeight="0.4537445" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28744328" sideWeight="0.5462555" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29198185" sideWeight="0.5462555" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1359,34 +1129,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/bo/Invoice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/ImagePreprocessorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="32" column="12" lean-forward="false" selection-start-line="32" selection-start-column="12" selection-end-line="37" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/ImageCropperTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="17" column="33" lean-forward="false" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/scene/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="723" column="0" lean-forward="false" selection-start-line="723" selection-start-column="0" selection-end-line="723" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/ApplicationStart.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1422,6 +1164,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1433,40 +1176,28 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/empty.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="15" lean-forward="false" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/splitPane.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="75" lean-forward="false" selection-start-line="11" selection-start-column="75" selection-end-line="11" selection-end-column="75" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showDatabaseResults.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
           <caret line="51" column="107" lean-forward="false" selection-start-line="51" selection-start-column="107" selection-end-line="51" selection-end-column="107" />
+          <folding>
+            <element signature="n#columnConstraints#0;n#GridPane#0;n#AnchorPane#0;n#VBox#0;n#!!top" expanded="false" />
+            <element signature="n#rowConstraints#0;n#GridPane#0;n#AnchorPane#0;n#VBox#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractWrapperTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2482">
-          <caret line="157" column="49" lean-forward="false" selection-start-line="157" selection-start-column="21" selection-end-line="157" selection-end-column="49" />
-        </state>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/tesseract/TesseractWrapper.java">
@@ -1477,97 +1208,67 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/searchDatabase.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="39" column="51" lean-forward="false" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="37" column="36" lean-forward="false" selection-start-line="37" selection-start-column="36" selection-end-line="37" selection-end-column="36" />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
+      <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/settings.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="215" column="49" lean-forward="false" selection-start-line="215" selection-start-column="49" selection-end-line="215" selection-end-column="49" />
+          <folding>
+            <element signature="n#columnConstraints#0;n#GridPane#0;n#Tab#0;n#TabPane#0;n#FlowPane#0;n#!!top" expanded="false" />
+            <element signature="n#rowConstraints#0;n#GridPane#0;n#Tab#0;n#TabPane#0;n#FlowPane#0;n#!!top" expanded="false" />
+            <element signature="n#columnConstraints#0;n#GridPane#0;n#Tab#1;n#TabPane#0;n#FlowPane#0;n#!!top" expanded="false" />
+            <element signature="n#rowConstraints#0;n#GridPane#0;n#Tab#1;n#TabPane#0;n#FlowPane#0;n#!!top" expanded="false" />
+            <element signature="n#columnConstraints#0;n#GridPane#0;n#Tab#2;n#TabPane#0;n#FlowPane#0;n#!!top" expanded="false" />
+            <element signature="n#rowConstraints#0;n#GridPane#0;n#Tab#2;n#TabPane#0;n#FlowPane#0;n#!!top" expanded="false" />
+            <element signature="n#columnConstraints#0;n#GridPane#0;n#Tab#3;n#TabPane#0;n#FlowPane#0;n#!!top" expanded="false" />
+            <element signature="n#rowConstraints#0;n#GridPane#0;n#Tab#3;n#TabPane#0;n#FlowPane#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="45" column="51" lean-forward="false" selection-start-line="45" selection-start-column="51" selection-end-line="45" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="79" column="50" lean-forward="false" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="50" />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractDataCollectorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="43" column="72" lean-forward="true" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="72" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/menubar.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
           <caret line="35" column="11" lean-forward="false" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
+          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/mainMenu.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
           <caret line="51" column="58" lean-forward="true" selection-start-line="51" selection-start-column="58" selection-end-line="51" selection-end-column="88" />
+          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/main.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/main.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="16" lean-forward="true" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="94" selection-end-column="22" />
-        </state>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Start.java">
@@ -1598,73 +1299,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/OCRController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#3456#3457#0" expanded="false" />
-            <element signature="e#3511#3512#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/tab.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="47" lean-forward="false" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="47" />
+          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showAccountingRecords.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-52">
           <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+          <folding>
+            <marker date="1480023687491" expanded="false" signature="7195:7215" ph="..." />
+          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showResults.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showResults.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+          <folding>
+            <element signature="n#columnConstraints#0;n#GridPane#0;n#AnchorPane#0;n#VBox#0;n#!!top" expanded="false" />
+            <element signature="n#rowConstraints#0;n#GridPane#0;n#AnchorPane#0;n#VBox#0;n#!!top" expanded="false" />
+            <element signature="n#columnConstraints#0;n#GridPane#1;n#AnchorPane#0;n#VBox#0;n#!!top" expanded="false" />
+            <element signature="n#rowConstraints#0;n#GridPane#1;n#AnchorPane#0;n#VBox#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="61" column="14" lean-forward="false" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="14" />
-        </state>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ResultsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="91">
           <caret line="49" column="21" lean-forward="true" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="21" />
-          <folding>
-            <element signature="method#addAllListeners#0;class#ResultsController#0" expanded="false" />
-            <element signature="method#addListenerToTextField#0;class#ResultsController#0" expanded="false" />
-            <element signature="method#saveToDatabase#0;class#ResultsController#0" expanded="false" />
-            <element signature="method#validateFieldsBeforeSave#0;class#ResultsController#0" expanded="false" />
-            <element signature="method#convertToInvoice#0;class#ResultsController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="35" column="32" lean-forward="true" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -1686,7 +1364,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="56" column="52" lean-forward="false" selection-start-line="56" selection-start-column="52" selection-end-line="56" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1701,12 +1378,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-          <folding>
-            <element signature="e#533#534#0" expanded="false" />
-            <element signature="e#567#568#0" expanded="false" />
-            <element signature="e#599#600#0" expanded="false" />
-            <element signature="e#627#628#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1714,9 +1385,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="98" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1724,65 +1392,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1411">
           <caret line="179" column="13" lean-forward="false" selection-start-line="179" selection-start-column="13" selection-end-line="179" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="class#3042:3373" expanded="false" />
-            <element signature="e#3152#3153#0" expanded="false" />
-            <element signature="e#3207#3208#0" expanded="false" />
-            <element signature="e#3289#3290#0" expanded="false" />
-            <element signature="e#3362#3363#0" expanded="false" />
-            <element signature="class#3421:3745" expanded="false" />
-            <element signature="e#3523#3524#0" expanded="false" />
-            <element signature="e#3583#3584#0" expanded="false" />
-            <element signature="e#3661#3662#0" expanded="false" />
-            <element signature="e#3734#3735#0" expanded="false" />
-            <element signature="class#3795:4126" expanded="false" />
-            <element signature="e#3905#3906#0" expanded="false" />
-            <element signature="e#3960#3961#0" expanded="false" />
-            <element signature="e#4042#4043#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="class#4172:4496" expanded="false" />
-            <element signature="e#4274#4275#0" expanded="false" />
-            <element signature="e#4334#4335#0" expanded="false" />
-            <element signature="e#4412#4413#0" expanded="false" />
-            <element signature="e#4485#4486#0" expanded="false" />
-            <element signature="class#5370:5837" expanded="false" />
-            <element signature="class#5929:6394" expanded="false" />
-            <element signature="method#addAllListeners#0;class#AccountingRecordsController#0" expanded="false" />
-            <element signature="method#showAccountingRecords#0;class#AccountingRecordsController#0" expanded="false" />
-            <element signature="method#validateAccountingRecords#0;class#AccountingRecordsController#0" expanded="false" />
-            <element signature="method#nextRecord#0;class#AccountingRecordsController#0" expanded="false" />
-            <element signature="method#prevRecord#0;class#AccountingRecordsController#0" expanded="false" />
-            <element signature="method#saveCurrentValuesToRecord#0;class#AccountingRecordsController#0" expanded="false" />
-            <element signature="method#updateAccountingRecordView#0;class#AccountingRecordsController#0" expanded="false" />
-            <element signature="e#11095#11096#0" expanded="false" />
-            <element signature="e#11131#11132#0" expanded="false" />
-            <element signature="e#11189#11190#0" expanded="false" />
-            <element signature="e#11239#11240#0" expanded="false" />
-            <element signature="e#11300#11301#0" expanded="false" />
-            <element signature="e#11335#11336#0" expanded="false" />
-            <element signature="e#11413#11414#0" expanded="false" />
-            <element signature="e#11461#11462#0" expanded="false" />
-            <element signature="e#11517#11518#0" expanded="false" />
-            <element signature="e#11574#11575#0" expanded="false" />
-            <element signature="e#11784#11785#0" expanded="false" />
-            <element signature="e#11837#11838#0" expanded="false" />
-            <element signature="e#12032#12033#0" expanded="false" />
-            <element signature="e#12087#12088#0" expanded="false" />
-            <element signature="e#12286#12287#0" expanded="false" />
-            <element signature="e#12337#12338#0" expanded="false" />
-            <element signature="e#12404#12405#0" expanded="false" />
-            <element signature="e#12470#12471#0" expanded="false" />
-            <element signature="e#12515#12516#0" expanded="false" />
-            <element signature="e#12553#12554#0" expanded="false" />
-            <element signature="e#12618#12619#0" expanded="false" />
-            <element signature="e#12672#12673#0" expanded="false" />
-            <element signature="e#12713#12714#0" expanded="false" />
-            <element signature="e#12780#12781#0" expanded="false" />
-            <element signature="e#12834#12835#0" expanded="false" />
-            <element signature="e#12902#12903#0" expanded="false" />
-            <element signature="method#checkRevised#0;class#AccountingRecordsController#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1790,44 +1399,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding>
-            <element signature="e#1220#1221#0" expanded="false" />
-            <element signature="e#1245#1246#0" expanded="false" />
-            <element signature="e#1278#1279#0" expanded="false" />
-            <element signature="e#1306#1307#0" expanded="false" />
-            <element signature="e#1343#1344#0" expanded="false" />
-            <element signature="e#1375#1376#0" expanded="false" />
-            <element signature="e#1426#1427#0" expanded="false" />
-            <element signature="e#1468#1469#0" expanded="false" />
-            <element signature="e#1506#1507#0" expanded="false" />
-            <element signature="e#1540#1541#0" expanded="false" />
-            <element signature="e#1594#1595#0" expanded="false" />
-            <element signature="e#1640#1641#0" expanded="false" />
-            <element signature="e#1671#1672#0" expanded="false" />
-            <element signature="e#1698#1699#0" expanded="false" />
-            <element signature="e#1738#1739#0" expanded="false" />
-            <element signature="e#1770#1771#0" expanded="false" />
-            <element signature="e#1811#1812#0" expanded="false" />
-            <element signature="e#1845#1846#0" expanded="false" />
-            <element signature="e#1902#1903#0" expanded="false" />
-            <element signature="e#1948#1949#0" expanded="false" />
-            <element signature="e#1990#1991#0" expanded="false" />
-            <element signature="e#2025#2026#0" expanded="false" />
-            <element signature="e#2084#2085#0" expanded="false" />
-            <element signature="e#2132#2133#0" expanded="false" />
-            <element signature="e#2676#2677#0" expanded="false" />
-            <element signature="e#2708#2709#0" expanded="false" />
-            <element signature="e#2758#2759#0" expanded="false" />
-            <element signature="e#2800#2801#0" expanded="false" />
-            <element signature="e#2847#2848#0" expanded="false" />
-            <element signature="e#2883#2884#0" expanded="false" />
-            <element signature="e#2948#2949#0" expanded="false" />
-            <element signature="e#2998#2999#0" expanded="false" />
-            <element signature="e#3033#3034#0" expanded="false" />
-            <element signature="e#3063#3064#0" expanded="false" />
-            <element signature="e#3110#3111#0" expanded="false" />
-            <element signature="e#3148#3149#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1835,24 +1406,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#278#279#0" expanded="false" />
-            <element signature="e#303#304#0" expanded="false" />
-            <element signature="e#336#337#0" expanded="false" />
-            <element signature="e#364#365#0" expanded="false" />
-            <element signature="e#400#401#0" expanded="false" />
-            <element signature="e#432#433#0" expanded="false" />
-            <element signature="e#482#483#0" expanded="false" />
-            <element signature="e#524#525#0" expanded="false" />
-            <element signature="e#555#556#0" expanded="false" />
-            <element signature="e#582#583#0" expanded="false" />
-            <element signature="e#622#623#0" expanded="false" />
-            <element signature="e#654#655#0" expanded="false" />
-            <element signature="e#690#691#0" expanded="false" />
-            <element signature="e#717#718#0" expanded="false" />
-            <element signature="e#762#763#0" expanded="false" />
-            <element signature="e#794#795#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1860,19 +1413,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="26" column="25" lean-forward="false" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/AccountFileHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="74" column="8" lean-forward="true" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="74" column="8" lean-forward="false" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -1880,15 +1427,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-112">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseResultsService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="23" column="39" lean-forward="true" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
-          <folding />
+          <caret line="23" column="39" lean-forward="false" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -1921,9 +1466,144 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/ZugFerdExtendService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="306">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/dict/invoice.de.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-561">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/dict/postprocessing.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractDataCollectorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="47" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractWrapperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3247">
+          <caret line="204" column="5" lean-forward="false" selection-start-line="204" selection-start-column="5" selection-end-line="204" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="method#assertOCR#0;class#TesseractWrapperTest#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="29" column="47" lean-forward="true" selection-start-line="29" selection-start-column="47" selection-end-line="32" selection-end-column="44" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="32" column="54" lean-forward="false" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/splitPane.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="34" lean-forward="false" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1139">
+          <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1562#1563#0" expanded="false" />
+            <element signature="e#1593#1594#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="70" column="26" lean-forward="false" selection-start-line="70" selection-start-column="26" selection-end-line="71" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="50" column="64" lean-forward="false" selection-start-line="50" selection-start-column="64" selection-end-line="50" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/OCRController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="92" column="35" lean-forward="false" selection-start-line="92" selection-start-column="35" selection-end-line="92" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/scanner/PDFScanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="11" column="6" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/ZugFerdTransformator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="55" column="25" lean-forward="true" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+          <folding>
+            <element signature="method#createMockInvoice#0;class#ZugFerdTransformator#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
