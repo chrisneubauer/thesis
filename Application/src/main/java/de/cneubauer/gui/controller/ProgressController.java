@@ -8,7 +8,11 @@ import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import de.cneubauer.util.enumeration.ScanStatus;
+import de.cneubauer.util.task.ScanTask;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,10 +22,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by Christoph Neubauer on 25.11.2016.
@@ -51,12 +52,23 @@ public class ProgressController extends GUIController {
         // TODO: results should be extracted and delivered with the processResult
         String[] results = new String[files.length];
         this.setFileName("");
-        this.progressBar.setProgress(0);
+        //this.progressBar.setProgress(0);
         int counter = 0;
         double percentage = 100 / files.length;
         double current = 0;
         List<ProcessResult> list = new ArrayList<>(files.length);
 
+        Task scanTask = new ScanTask(files);
+        progressBar.progressProperty().bind(scanTask.progressProperty());
+
+        List<ProcessResult> finalList = list;
+        scanTask.setOnSucceeded(t -> {
+            Object res1 = scanTask.getValue();
+            finalList.addAll((Collection<? extends ProcessResult>) res1);
+            ObservableList<ProcessResult> processResults = new ObservableListWrapper<>(list);
+            this.openProgressedList(processResults);
+        });
+        /*
         for (File f : files) {
             ProcessResult r = new ProcessResult();
             r.setDocName(f.getName());
@@ -78,7 +90,7 @@ public class ProgressController extends GUIController {
 
                 r.setExtractionModel(m);
 
-                this.progressBar.setProgress(current + percentage);
+                //this.progressBar.setProgress(current + percentage);
                 current += percentage;
                 r.setProblem("");
                 r.setStatus(ScanStatus.OK);
@@ -90,10 +102,9 @@ public class ProgressController extends GUIController {
             list.add(counter, r);
             counter++;
             this.setFilesScanned(counter);
-        }
-
-        ObservableList<ProcessResult> processResults = new ObservableListWrapper<>(list);
-        this.openProgressedList(processResults);
+        }*/
+        //ObservableList<ProcessResult> processResults = new ObservableListWrapper<>(list);
+        //this.openProgressedList(processResults);
     }
 
     private void openProgressedList(ObservableList<ProcessResult> processResults) {
@@ -126,4 +137,55 @@ public class ProgressController extends GUIController {
     public void startProgress() {
         this.progressFiles();
     }
+
+    /*private class ScanTask extends Task {
+        File[] filesToScan;
+        List<ProcessResult> processResults;
+        double percentage = 100 / filesToScan.length;
+        double current = 0;
+
+        public ScanTask(File[] filesToScan) {
+            this.filesToScan = filesToScan;
+            this.processResults = new ArrayList<>(filesToScan.length);
+        }
+
+        @Override
+        protected List<ProcessResult> call() throws Exception {
+            int counter = 0;
+            for (File f : filesToScan) {
+                ProcessResult r = new ProcessResult();
+                r.setDocName(f.getName());
+                r.setFile(f);
+                try {
+                    setFileName(f.getName());
+                    TesseractWrapper wrapper = new TesseractWrapper();
+                    String result = wrapper.initOcr(f);
+
+                    OCRDataExtractorService service = new OCRDataExtractorService(result);
+                    Invoice extractedInformation = service.extractInvoiceInformation();
+                    List<AccountingRecord> recordList = service.extractAccountingRecordInformation();
+
+                    ExtractionModel m = new ExtractionModel();
+                    m.setInvoiceInformation(extractedInformation);
+                    m.setAccountingRecords(recordList);
+
+                    r.setExtractionModel(m);
+
+                    //this.progressBar.setProgress(current + percentage);
+                    current += percentage;
+                    r.setProblem("");
+                    r.setStatus(ScanStatus.OK);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    r.setProblem(ex.getMessage());
+                    r.setStatus(ScanStatus.ERROR);
+                }
+                processResults.add(counter, r);
+                counter++;
+                setFilesScanned(counter);
+                updateProgress(current, filesToScan.length);
+            }
+            return processResults;
+        }
+    }*/
 }
