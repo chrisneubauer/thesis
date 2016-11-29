@@ -39,7 +39,7 @@ public class Start extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/main.fxml");
+        URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/startMenu.fxml");
 
         Locale locale;
         AppLang currentLanguage = AppLang.valueOf(ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue()));
@@ -50,8 +50,6 @@ public class Start extends Application {
         }
 
         ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-        //InputStream inputStream = this.getClass().getClassLoader().getResource("bundles/Application_en.properties").openStream();
-        //ResourceBundle bundle = new PropertyResourceBundle(inputStream);
 
         FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
         Parent root = loader.load();
