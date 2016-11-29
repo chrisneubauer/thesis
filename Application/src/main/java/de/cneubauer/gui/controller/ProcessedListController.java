@@ -2,7 +2,6 @@ package de.cneubauer.gui.controller;
 
 import de.cneubauer.gui.ApplicationStart;
 import de.cneubauer.gui.model.ProcessResult;
-import de.cneubauer.gui.model.SearchResult;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,15 +17,12 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 29.11.2016.
+ * ProcessedListController shows list of all processed files
  */
-public class ProgressedListController extends GUIController {
+public class ProcessedListController extends GUIController {
     public TableView<ProcessResult> progressedList;
     public TableColumn<ProcessResult, ScanStatus> statusColumn;
     public TableColumn<ProcessResult, String> documentColumn;
@@ -34,10 +30,6 @@ public class ProgressedListController extends GUIController {
     public TableColumn<ProcessResult, File> fileColumn;
     public Button saveRevised;
 
-    private ScanStatus state;
-    private String docName;
-    private String problem;
-    private File file;
     private ObservableList<ProcessResult> results;
 
     @FXML
@@ -52,16 +44,6 @@ public class ProgressedListController extends GUIController {
 
     void initData(ObservableList<ProcessResult> data) {
         this.results = data;
-
-        this.fillListWithValues();
-        this.initialize();
-    }
-
-    void initData(ScanStatus state, String docName, String problem, File file) {
-        this.state = state;
-        this.docName = docName;
-        this.problem = problem;
-        this.file = file;
 
         this.fillListWithValues();
         this.initialize();
@@ -91,7 +73,7 @@ public class ProgressedListController extends GUIController {
                     File file = fileChooser.showSaveDialog(new Stage());
 
                     if (file != null) {
-                        OutputStream out;
+                        //OutputStream out;
                         try {
                             //out = new FileOutputStream(file);
                             //out.write(getItem());

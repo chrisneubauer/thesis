@@ -4,7 +4,6 @@ import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
 import de.cneubauer.util.enumeration.AppLang;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
 import java.io.File;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -30,6 +28,7 @@ public class GUIController {
    // @FXML public AnchorPane leftPane;
     @FXML public SplitPane splitPaneInclude;
     public Button startScanButton;
+    public MenuBar menuBar;
     @FXML private SplitPaneController splitPaneIncludeController;
 
    // @FXML private MenuBar menuBar;
@@ -88,7 +87,7 @@ public class GUIController {
         }
     }
 
-    public Locale getCurrentLocale() {
+    Locale getCurrentLocale() {
         Locale locale;
         AppLang currentLanguage = AppLang.valueOf(ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue()));
         if (currentLanguage.equals(AppLang.GERMAN)) {
@@ -103,7 +102,7 @@ public class GUIController {
      * Called from start, should open a file dialog to select the directory to be scanned
      * @param   actionEvent     the event from where this method is called
      */
-    public void openFileDialog(ActionEvent actionEvent) {
+    public void openFileDialog() {
         DirectoryChooser dir = new DirectoryChooser();
         dir.setTitle("Select Directory");
         File directory = dir.showDialog(new Stage());
@@ -115,7 +114,7 @@ public class GUIController {
         }
     }
 
-    public void openProgress(File[] files) {
+    private void openProgress(File[] files) {
         try {
             Stage stage = (Stage) startScanButton.getScene().getWindow();
 

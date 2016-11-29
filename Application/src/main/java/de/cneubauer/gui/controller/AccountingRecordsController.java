@@ -15,10 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.util.StringConverter;
 import org.apache.log4j.Level;
@@ -26,7 +23,6 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Christoph Neubauer on 21.11.2016.
@@ -42,6 +38,7 @@ public class AccountingRecordsController extends GUIController {
     @FXML public ImageView confidenceImage;
     @FXML public CheckBox recordRevised;
     @FXML public Label currentRecord;
+    public Button SaveAccountingRecords;
 
     private List<AccountingRecordModel> recordsFound;
     private List<AccountType> types;

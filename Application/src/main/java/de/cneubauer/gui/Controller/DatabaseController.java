@@ -1,6 +1,5 @@
 package de.cneubauer.gui.controller;
 
-import de.cneubauer.domain.bo.Invoice;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;

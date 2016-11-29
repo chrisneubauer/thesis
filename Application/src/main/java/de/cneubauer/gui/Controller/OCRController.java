@@ -9,18 +9,12 @@ import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -31,10 +25,8 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -134,7 +126,7 @@ public class OCRController extends SplitPaneController {
     private boolean validateFileInput() {
         return this.fileInput.getText() != null;
     }
-
+/*
     double xStart = 0;
     double yStart = 0;
     double xEnd = 0;
@@ -174,13 +166,5 @@ public class OCRController extends SplitPaneController {
                 }
             }
         });
-    }
-
-    public void selectBody(ActionEvent actionEvent) {
-
-    }
-
-    public void selectFooter(ActionEvent actionEvent) {
-
-    }
+    }*/
 }
