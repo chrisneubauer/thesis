@@ -1,22 +1,22 @@
 package de.cneubauer.gui.controller;
 
-import de.cneubauer.gui.ApplicationStart;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.stage.FileChooser;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Created by Christoph Neubauer on 29.11.2016.
@@ -30,8 +30,6 @@ public class ProcessedListController extends GUIController {
     public TableColumn<ProcessResult, File> fileColumn;
     public Button saveRevised;
 
-    private ObservableList<ProcessResult> results;
-
     @FXML
     private void initialize() {
         // Initialize the table with the columns
@@ -43,16 +41,9 @@ public class ProcessedListController extends GUIController {
     }
 
     void initData(ObservableList<ProcessResult> data) {
-        this.results = data;
-
-        this.fillListWithValues();
+        progressedList.setItems(data);
         this.initialize();
     }
-
-    private void fillListWithValues() {
-        progressedList.setItems(results);
-    }
-
 
     // Holds logic for the open pdf button
     private class ButtonCell extends TableCell<ProcessResult, File> {
@@ -63,27 +54,34 @@ public class ProcessedListController extends GUIController {
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    FileChooser fileChooser = new FileChooser();
+                    try {
+                        TableRow row = (TableRow) button.getParent().getParent();
+                        ProcessResult selected = (ProcessResult) row.getItem();
 
-                    //Set extension filter
-                    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
-                    fileChooser.getExtensionFilters().add(extFilter);
+                        Stage stage = (Stage) button.getScene().getWindow();
 
-                    //Show save file dialog
-                    File file = fileChooser.showSaveDialog(new Stage());
+                        Locale locale = getCurrentLocale();
+                        ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/splitPane.fxml"), bundle);
+                        Parent root = loader.load();
+                       // FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/tab.fxml"), bundle);
+                        Scene scene = new Scene(root, 800, 600);
 
-                    if (file != null) {
-                        //OutputStream out;
-                        try {
-                            //out = new FileOutputStream(file);
-                            //out.write(getItem());
-                            //out.close();
-                            Logger.getLogger(this.getClass()).log(Level.INFO, "opening pdf on " + file.getPath());
+                        Stage popupStage = new Stage(StageStyle.DECORATED);
+                        popupStage.setX(stage.getX() + 100);
+                        popupStage.setY(stage.getY() + 100);
+                        popupStage.setTitle("Review");
+                        popupStage.initOwner(stage);
+                        popupStage.initModality(Modality.APPLICATION_MODAL);
+                        popupStage.setScene(scene);
+                        popupStage.show();
 
-                            ApplicationStart.getHostServicesInternal().showDocument(file.getPath());
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
+                        SplitPaneController ctrl = loader.getController();
+
+                        ctrl.initResults(selected.getExtractionModel(), selected.getFile());
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
                 }
             });

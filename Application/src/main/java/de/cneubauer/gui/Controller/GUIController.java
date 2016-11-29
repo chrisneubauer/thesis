@@ -24,14 +24,10 @@ import java.util.ResourceBundle;
  * Contains UI logic
  */
 public class GUIController {
-
-   // @FXML public AnchorPane leftPane;
     @FXML public SplitPane splitPaneInclude;
     public Button startScanButton;
     public MenuBar menuBar;
     @FXML private SplitPaneController splitPaneIncludeController;
-
-   // @FXML private MenuBar menuBar;
 
     // this method opens the page where the user can import files
     @FXML

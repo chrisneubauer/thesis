@@ -2,9 +2,7 @@ package de.cneubauer.gui.model;
 
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.beans.property.*;
-
 import java.io.File;
-import java.time.LocalDate;
 
 /**
  * Created by Christoph Neubauer on 29.11.2016.
@@ -16,6 +14,7 @@ public class ProcessResult {
     private StringProperty docName;
     private StringProperty problem;
     private ObjectProperty<java.io.File> file;
+    private ExtractionModel extractionModel;
 
     public ProcessResult() {
         this.status = new SimpleObjectProperty<>();
@@ -70,5 +69,13 @@ public class ProcessResult {
 
     public void setFile(File file) {
         this.file.set(file);
+    }
+
+    public ExtractionModel getExtractionModel() {
+        return extractionModel;
+    }
+
+    public void setExtractionModel(ExtractionModel extractionModel) {
+        this.extractionModel = extractionModel;
     }
 }

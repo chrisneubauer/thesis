@@ -28,7 +28,6 @@ import java.util.Locale;
  */
 public class ResultsController extends GUIController {
     public Button SaveExtractedInvoiceToDatabase;
-    private String filePath;
 
     @FXML private TextField extractedInvoiceNumber;
     @FXML private TextField extractedCreditor;
@@ -45,8 +44,8 @@ public class ResultsController extends GUIController {
     @FXML private TextField extractedSkonto;
     @FXML private TextField extractedDeliveryDate;
 
-    void initData(Invoice extractedInformation, String pdfPath) {
-        this.filePath = pdfPath;
+    void initData(Invoice extractedInformation) {
+        //this.filePath = pdfPath;
         this.showResultsBeforeSave(extractedInformation);
         this.addAllListeners();
     }
@@ -119,6 +118,7 @@ public class ResultsController extends GUIController {
     }
 
     @FXML
+    @Deprecated
     public void saveToDatabase() {
         if (this.validateFieldsBeforeSave()) {
             try {
@@ -126,10 +126,10 @@ public class ResultsController extends GUIController {
                 ZugFerdExtendService service = new ZugFerdExtendService();
 
                 Invoice i = this.convertToInvoice();
-                byte[] originalPdf = Files.readAllBytes(new File(this.filePath).toPath());
+                //byte[] originalPdf = Files.readAllBytes(new File(this.filePath).toPath());
 
-                byte[] pdf = service.appendInvoiceToPDF(originalPdf, i);
-                service.save(pdf, i);
+                //byte[] pdf = service.appendInvoiceToPDF(originalPdf, i);
+                //service.save(pdf, i);
                 this.generateSuccessMessage();
                 this.closeExtractionAfterSave();
             } catch (Exception ex){

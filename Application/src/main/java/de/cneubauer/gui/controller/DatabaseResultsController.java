@@ -28,30 +28,17 @@ import java.util.List;
  * It is called from the DatabaseController and returns a list of db entries
  */
 public class DatabaseResultsController extends GUIController {
-    //private Window currentStage;
-
     private LocalDate date;
     private String deb;
     private String cred;
     private double value;
 
-    @FXML
-    private TableView<SearchResult> dbResultList;
-
-    @FXML
-    private TableColumn<SearchResult, String> dateColumn;
-
-    @FXML
-    private TableColumn<SearchResult, Double> valueColumn;
-
-    @FXML
-    private TableColumn<SearchResult, String> debitorColumn;
-
-    @FXML
-    private TableColumn<SearchResult, String> creditorColumn;
-
-    @FXML
-    private TableColumn<SearchResult, byte[]> downloadColumn;
+    @FXML private TableView<SearchResult> dbResultList;
+    @FXML private TableColumn<SearchResult, String> dateColumn;
+    @FXML private TableColumn<SearchResult, Double> valueColumn;
+    @FXML private TableColumn<SearchResult, String> debitorColumn;
+    @FXML private TableColumn<SearchResult, String> creditorColumn;
+    @FXML private TableColumn<SearchResult, byte[]> downloadColumn;
 
     @FXML
     private void initialize() {

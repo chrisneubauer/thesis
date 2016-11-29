@@ -1,6 +1,10 @@
 package de.cneubauer.gui.controller;
 
 import com.sun.javafx.collections.ObservableListWrapper;
+import de.cneubauer.domain.bo.AccountingRecord;
+import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.service.OCRDataExtractorService;
+import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import de.cneubauer.util.enumeration.ScanStatus;
@@ -63,6 +67,17 @@ public class ProgressController extends GUIController {
                 TesseractWrapper wrapper = new TesseractWrapper();
                 String result = wrapper.initOcr(f);
                 results[counter] = result;
+
+                OCRDataExtractorService service = new OCRDataExtractorService(result);
+                Invoice extractedInformation = service.extractInvoiceInformation();
+                List<AccountingRecord> recordList = service.extractAccountingRecordInformation();
+
+                ExtractionModel m = new ExtractionModel();
+                m.setInvoiceInformation(extractedInformation);
+                m.setAccountingRecords(recordList);
+
+                r.setExtractionModel(m);
+
                 this.progressBar.setProgress(current + percentage);
                 current += percentage;
                 r.setProblem("");
@@ -87,7 +102,7 @@ public class ProgressController extends GUIController {
 
             Locale locale = this.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/progressedList.fxml"), bundle);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/processedList.fxml"), bundle);
 
             Parent root = loader.load();
             Scene scene = new Scene(root, 1200, 800);

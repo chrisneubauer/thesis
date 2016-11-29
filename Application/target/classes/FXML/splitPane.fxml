@@ -4,9 +4,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane fx:controller="de.cneubauer.gui.controller.SplitPaneController" fx:id="splitPaneInclude" dividerPositions="0.5" prefHeight="700.0" prefWidth="1280.0"  xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<SplitPane fx:controller="de.cneubauer.gui.controller.SplitPaneController" fx:id="splitPaneInclude" dividerPositions="0.5" prefHeight="700.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <AnchorPane fx:id="leftPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-        <fx:include source="..\\FXML\\empty.fxml"/>
+        <TabPane fx:id="tabPane" prefHeight="700.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+            <Tab closable="false" text="%tab.tab.electronicInvoice">
+                <fx:include fx:id="invoiceTab" source="showResults.fxml"/>
+            </Tab>
+            <Tab closable="false" text="%tab.tab.accountingRecords">
+                <fx:include fx:id="accountingRecordsTab" source="showAccountingRecords.fxml"/>
+            </Tab>
+        </TabPane>
+        <!--<fx:include source="..\\FXML\\empty.fxml"/>-->
     </AnchorPane>
     <AnchorPane fx:id="rightPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
         <ImageView fx:id="pdfImage" fitHeight="660.0" fitWidth="600.0" pickOnBounds="true"

@@ -77,7 +77,7 @@
          </CheckBox>
             <ButtonBar buttonMinWidth="120.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="8">
                 <buttons>
-                    <Button fx:id="SaveAccountRecords" mnemonicParsing="false" onAction="#saveToDatabase" text="%showAccountingRecords.button.save" />
+                    <Button fx:id="SaveAccountingRecords" mnemonicParsing="false" onAction="#saveToDatabase" text="%showAccountingRecords.button.save" />
                 </buttons>
                 <GridPane.margin>
                     <Insets left="25.0" top="35.0" />
