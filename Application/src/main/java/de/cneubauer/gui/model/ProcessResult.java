@@ -1,87 +1,74 @@
 package de.cneubauer.gui.model;
 
+import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.beans.property.*;
 
+import java.io.File;
 import java.time.LocalDate;
 
 /**
- * Created by Christoph Neubauer on 01.11.2016.
- * Model for Database SearchResults
- * UsedBy: DatabaseResultsController
+ * Created by Christoph Neubauer on 29.11.2016.
+ * Model for ProcessResult of OCR
+ * UsedBy: ProgressedListController
  */
-public class SearchResult {
-    private ObjectProperty<LocalDate> date;
-    private DoubleProperty value;
-    private StringProperty debitor;
-    private StringProperty creditor;
-    private ObjectProperty<byte[]> file;
+public class ProcessResult {
+    private ObjectProperty<de.cneubauer.util.enumeration.ScanStatus> status;
+    private StringProperty docName;
+    private StringProperty problem;
+    private ObjectProperty<java.io.File> file;
 
-    public SearchResult() {
-        this.date = new SimpleObjectProperty<>();
-        this.value = new SimpleDoubleProperty();
-        this.debitor = new SimpleStringProperty();
-        this.creditor = new SimpleStringProperty();
+    public ProcessResult() {
+        this.status = new SimpleObjectProperty<>();
+        this.docName = new SimpleStringProperty();
+        this.problem = new SimpleStringProperty();
         this.file = new SimpleObjectProperty<>();
     }
 
-    public LocalDate getDate() {
-        return date.get();
+    public ScanStatus getStatus() {
+        return status.get();
     }
 
-    public ObjectProperty<LocalDate> dateProperty() {
-        return date;
+    public ObjectProperty<ScanStatus> statusProperty() {
+        return status;
     }
 
-    public void setDate(LocalDate date) {
-        this.date.set(date);
+    public void setStatus(ScanStatus status) {
+        this.status.set(status);
     }
 
-    public double getValue() {
-        return value.get();
+    public String getDocName() {
+        return docName.get();
     }
 
-    public DoubleProperty valueProperty() {
-        return value;
+    public StringProperty docNameProperty() {
+        return docName;
     }
 
-    public void setValue(double value) {
-        this.value.set(value);
+    public void setDocName(String docName) {
+        this.docName.set(docName);
     }
 
-    public String getDebitor() {
-        return debitor.get();
+    public String getProblem() {
+        return problem.get();
     }
 
-    public StringProperty debitorProperty() {
-        return debitor;
+    public StringProperty problemProperty() {
+        return problem;
     }
 
-    public void setDebitor(String debitor) {
-        this.debitor.set(debitor);
+    public void setProblem(String problem) {
+        this.problem.set(problem);
     }
 
-    public String getCreditor() {
-        return creditor.get();
-    }
-
-    public StringProperty creditorProperty() {
-        return creditor;
-    }
-
-    public void setCreditor(String creditor) {
-        this.creditor.set(creditor);
-    }
-
-    public byte[] getFile() {
+    public File getFile() {
         return file.get();
     }
 
-    public ObjectProperty<byte[]> fileProperty() {
+    public ObjectProperty<File> fileProperty() {
         return file;
     }
 
-    public void setFile(byte[] file) {
+    public void setFile(File file) {
         this.file.set(file);
     }
-
 }
