@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -42,9 +43,15 @@ public class SplitPaneController extends GUIController {
     @FXML private AccountingRecordsController accountingRecordsTabController;
     @FXML public TabPane tabPane;
 
-    void initResults(ExtractionModel extractedInformation, File fileToScan) {
+    private int index;
+    private ExtractionModel model;
+    private ProcessedListController caller;
+
+    void initResults(int index, ExtractionModel extractedInformation, File fileToScan, ProcessedListController caller) {
+        this.caller = caller;
+        this.index = index;
         invoiceTabController.initData(extractedInformation.getInvoiceInformation());
-        this.initAccountingRecordResults(extractedInformation.getAccountingRecords());
+        accountingRecordsTabController.initData(extractedInformation.getAccountingRecords());
         try {
             byte[] img = Files.toByteArray(fileToScan);
             this.initImage(img);
@@ -52,6 +59,7 @@ public class SplitPaneController extends GUIController {
         catch (IOException e) {
             e.printStackTrace();
         }
+        model = extractedInformation;
     }
 
     // this method opens the page where the user can import files
@@ -80,8 +88,20 @@ public class SplitPaneController extends GUIController {
         }
     }
 
-    private void initAccountingRecordResults(List<AccountingRecord> data) {
-        accountingRecordsTabController.initData(data);
+    public void reviseAll() {
+        boolean accountingCorrect = accountingRecordsTabController.validateFieldsBeforeSave();
+        boolean invoiceCorrect = invoiceTabController.validateFieldsBeforeSave();
+        if (accountingCorrect && invoiceCorrect) {
+            updateAndReturn();
+        }
+    }
+
+    private void updateAndReturn() {
+        model.setAccountingRecords(accountingRecordsTabController.updateInformation());
+        model.setInvoiceInformation(invoiceTabController.updateInformation());
+        caller.updateSelected(index, model);
+        Stage popup = (Stage) this.pdfImage.getScene().getWindow();
+        popup.close();
     }
 
     private void initImage(byte[] image) {

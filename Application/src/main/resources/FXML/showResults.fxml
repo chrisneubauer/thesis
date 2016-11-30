@@ -262,7 +262,7 @@
                        GridPane.rowIndex="8">
                 <buttons>
                     <Button fx:id="SaveExtractedInvoiceToDatabase" mnemonicParsing="false"
-                            onAction="#saveToDatabase" text="%showResults.button.save"/>
+                            onAction="#setReviewed" text="%showResults.button.review"/>
                 </buttons>
                 <GridPane.margin>
                     <Insets left="25.0" top="35.0"/>

@@ -4,6 +4,7 @@ import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.LegalPerson;
 import de.cneubauer.domain.service.ZugFerdExtendService;
 import javafx.beans.value.ChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -155,7 +156,7 @@ public class ResultsController extends GUIController {
         alert.showAndWait();
     }
 
-    private boolean validateFieldsBeforeSave() {
+    protected boolean validateFieldsBeforeSave() {
         boolean result = true;
         if (this.extractedInvoiceNumber.getText() == null || this.extractedInvoiceNumber.getText().isEmpty()) {
             this.extractedInvoiceNumber.getStyleClass().add("error");
@@ -274,5 +275,15 @@ public class ResultsController extends GUIController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    // when called, invoice has been reviewed by the user
+    // set invoice to be reviewed and update all information given
+    public void setReviewed(ActionEvent actionEvent) {
+
+    }
+
+    public Invoice updateInformation() {
+        return null;
     }
 }

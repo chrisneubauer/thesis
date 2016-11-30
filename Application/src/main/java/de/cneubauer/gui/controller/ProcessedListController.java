@@ -1,5 +1,6 @@
 package de.cneubauer.gui.controller;
 
+import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.collections.ObservableList;
@@ -64,7 +65,6 @@ public class ProcessedListController extends GUIController {
                         ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/splitPane.fxml"), bundle);
                         Parent root = loader.load();
-                       // FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/tab.fxml"), bundle);
                         Scene scene = new Scene(root, 800, 600);
 
                         Stage popupStage = new Stage(StageStyle.DECORATED);
@@ -78,7 +78,7 @@ public class ProcessedListController extends GUIController {
 
                         SplitPaneController ctrl = loader.getController();
 
-                        ctrl.initResults(selected.getExtractionModel(), selected.getFile());
+                        ctrl.initResults(row.getIndex(), selected.getExtractionModel(), selected.getFile(), getControllerReference());
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -98,5 +98,13 @@ public class ProcessedListController extends GUIController {
                 setGraphic(null);
             }
         }
+    }
+
+    public ProcessedListController getControllerReference() {
+        return this;
+    }
+
+    protected void updateSelected(int index, ExtractionModel newModel) {
+        this.progressedList.getItems().get(index).setExtractionModel(newModel);
     }
 }

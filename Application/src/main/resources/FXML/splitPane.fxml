@@ -16,7 +16,6 @@
                 <fx:include fx:id="accountingRecordsTab" source="showAccountingRecords.fxml"/>
             </Tab>
         </TabPane>
-        <!--<fx:include source="..\\FXML\\empty.fxml"/>-->
     </AnchorPane>
     <AnchorPane fx:id="rightPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
         <ImageView fx:id="pdfImage" fitHeight="660.0" fitWidth="600.0" pickOnBounds="true"

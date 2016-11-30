@@ -28,7 +28,7 @@ import java.util.List;
  * Created by Christoph Neubauer on 21.11.2016.
  * Controller for managing extracted accounting records
  */
-public class AccountingRecordsController extends GUIController {
+public class AccountingRecordsController extends SplitPaneController {
 
     @FXML public ComboBox<AccountType> fromDropDownAccountType;
     @FXML public ComboBox<Account> fromDropDownAccount;
@@ -66,8 +66,11 @@ public class AccountingRecordsController extends GUIController {
             records.add(model);
         }
         this.setRecordsFound(records);
-        this.initiateDropdowns(records.get(0));
-        this.showAccountingRecords(data.get(0));
+
+        if (records.size() > 0) {
+            this.initiateDropdowns(records.get(0));
+            this.showAccountingRecords(data.get(0));
+        }
     }
 
     private void initiateDropdowns(AccountingRecordModel model) {
@@ -319,17 +322,36 @@ public class AccountingRecordsController extends GUIController {
     }
 
     // checks if accounting record can be set as revised
-    public void checkRevised(ActionEvent actionEvent) {
+    public boolean checkRevised(ActionEvent actionEvent) {
         if (this.recordRevised.isSelected()) {
             AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord().getText()));
             AccountingRecord record = model.getRecord();
 
             if (record.getCredit() != null && record.getDebit() != null && record.getBruttoValue() > 0) {
                 model.setRevised(true);
+                return  true;
+            } else {
+                return false;
             }
         } else {
             AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord().getText()));
             model.setRevised(false);
+            return false;
         }
+    }
+
+    // when called, invoice has been reviewed by the user
+    // set invoice to be reviewed and update all information given
+    public void setReviewed(ActionEvent actionEvent) {
+        super.reviseAll();
+    }
+
+    public boolean validateFieldsBeforeSave() {
+        // TODO: implement validation
+        return false;
+    }
+
+    public List<AccountingRecord> updateInformation() {
+        return null;
     }
 }
