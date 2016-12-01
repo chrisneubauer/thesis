@@ -18,6 +18,7 @@ public class AccountingRecordModel {
     private Account fromPossibleAccount;
     private int confidence;
     private int index;
+    private String position;
 
     public AccountingRecordModel(int index) {
         this.index = index;
@@ -85,5 +86,13 @@ public class AccountingRecordModel {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }

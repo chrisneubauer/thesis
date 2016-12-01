@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/img/Circle_Green.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/img/Circle_Red.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/Controller/OCRController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/Controller/OCRController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$1.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$2.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$3.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$3.class" />
@@ -9,19 +12,28 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$5.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$6.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$6.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProgressController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProgressController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$ButtonCell$1.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$ButtonCell$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$ButtonCell.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$ButtonCell.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ResultsController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ResultsController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/SplitPaneController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/SplitPaneController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/TabController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/TabController.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/model/AccountingRecordModel.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/model/AccountingRecordModel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Controller/OCRController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Controller/OCRController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ResultsController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ResultsController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/AccountingRecordModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/AccountingRecordModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/showAccountingRecords.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/showAccountingRecords.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/showResults.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/showResults.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/splitPane.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/splitPane.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/bundles/Application.properties" afterPath="$PROJECT_DIR$/src/main/resources/bundles/Application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" afterPath="$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" afterPath="$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/FXML/progress.fxml" afterPath="$PROJECT_DIR$/target/classes/FXML/progress.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/FXML/showAccountingRecords.fxml" afterPath="$PROJECT_DIR$/target/classes/FXML/showAccountingRecords.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/FXML/showResults.fxml" afterPath="$PROJECT_DIR$/target/classes/FXML/showResults.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/FXML/splitPane.fxml" afterPath="$PROJECT_DIR$/target/classes/FXML/splitPane.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/bundles/Application.properties" afterPath="$PROJECT_DIR$/target/classes/bundles/Application.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/bundles/Application_de.properties" afterPath="$PROJECT_DIR$/target/classes/bundles/Application_de.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/bundles/Application_en.properties" afterPath="$PROJECT_DIR$/target/classes/bundles/Application_en.properties" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -104,81 +116,7 @@
     <favorites_list name="JavaFxApplication" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProcessedListController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="106" column="9" lean-forward="false" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
-              <folding>
-                <element signature="method#initialize#0;class#ProcessedListController#0" expanded="false" />
-                <element signature="method#updateItem#0;class#ButtonCell#0;class#ProcessedListController#0" expanded="false" />
-                <element signature="e#4062#4063#0" expanded="true" />
-                <element signature="e#4089#4090#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SplitPaneController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="100" column="63" lean-forward="true" selection-start-line="100" selection-start-column="63" selection-end-line="100" selection-end-column="63" />
-              <folding>
-                <element signature="method#initImage#0;class#SplitPaneController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResultsController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ResultsController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="286" column="20" lean-forward="false" selection-start-line="286" selection-start-column="20" selection-end-line="286" selection-end-column="20" />
-              <folding>
-                <element signature="method#validateFieldsBeforeSave#0;class#ResultsController#0" expanded="false" />
-                <element signature="e#12734#12735#0" expanded="true" />
-                <element signature="e#12761#12762#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccountingRecordsController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="354" column="8" lean-forward="false" selection-start-line="354" selection-start-column="8" selection-end-line="354" selection-end-column="20" />
-              <folding>
-                <element signature="e#13841#13842#0" expanded="true" />
-                <element signature="e#13874#13875#0" expanded="true" />
-                <element signature="e#14046#14047#0" expanded="true" />
-                <element signature="e#14073#14074#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GUIController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
-              <folding>
-                <element signature="method#openScanFormMenu#0;class#GUIController#0" expanded="false" />
-                <element signature="method#openDatabaseMenu#0;class#GUIController#0" expanded="false" />
-                <element signature="method#openSettings#0;class#GUIController#0" expanded="false" />
-                <element signature="method#getCurrentLocale#0;class#GUIController#0" expanded="false" />
-                <element signature="method#openFileDialog#0;class#GUIController#0" expanded="false" />
-                <element signature="method#openProgress#0;class#GUIController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -207,7 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/FXML/menubar.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/tab.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/showDatabaseResults.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/settings.fxml" />
@@ -237,27 +174,28 @@
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/ScanStatus.java" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/progressedList.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/OCRController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProgressedListController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcressedListController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/processedList.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/ExtractionModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/DatabaseResultsController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/DatabaseController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/ProcessResult.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/progress.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProgressController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/splitPane.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/showResults.fxml" />
-        <option value="$PROJECT_DIR$/src/main/resources/FXML/showAccountingRecords.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/AccountingRecordModel.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/FXML/showAccountingRecords.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ResultsController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/OCRController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java" />
       </list>
     </option>
   </component>
@@ -314,8 +252,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -378,6 +314,118 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cneubauer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cneubauer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="task" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -413,6 +461,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cneubauer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -453,6 +535,8 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -489,13 +573,6 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="de.cneubauer.gui.model" />
-      <recent name="de.cneubauer.util.enumeration" />
-      <recent name="de.cneubauer.domain.dao.impl" />
-      <recent name="de.cneubauer.ann.strategy" />
-      <recent name="de.cneubauer.ann.impl" />
-    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="de.cneubauer.learning" />
     </key>
@@ -514,23 +591,30 @@
       <recent name="de.cneubauer.ocr.tesseract" />
       <recent name="de.cneubauer.domain.dao.impl" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML\BasicApplication_i18n" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\hbm" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test\resources" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="de.cneubauer.gui.model" />
-      <recent name="de.cneubauer.gui" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\bundles" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\hbm" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\img" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML\BasicApplication_i18n" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\hbm" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="de.cneubauer.gui.model" />
+      <recent name="de.cneubauer.gui" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="de.cneubauer.gui.model" />
+      <recent name="de.cneubauer.util.enumeration" />
+      <recent name="de.cneubauer.domain.dao.impl" />
+      <recent name="de.cneubauer.ann.strategy" />
+      <recent name="de.cneubauer.ann.impl" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Start">
@@ -1005,7 +1089,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1016,12 +1100,12 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22990353" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22990353" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23903178" sideWeight="0.46346554" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24659607" sideWeight="0.5365344" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25037822" sideWeight="0.5365344" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1062,7 +1146,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="71" />
+      <option name="time" value="76" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
@@ -1075,27 +1159,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/InvoiceInformationHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-112">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseResultsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="23" column="39" lean-forward="false" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/OCRDataExtractorService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
-          <caret line="40" column="36" lean-forward="false" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/ZugFerdExtendService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1118,13 +1181,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
           <caret line="50" column="64" lean-forward="false" selection-start-line="50" selection-start-column="64" selection-end-line="50" selection-end-column="64" />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/scanner/PDFScanner.java" />
@@ -1200,102 +1263,92 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/empty.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/main.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/mainMenu.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/mainMenu.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-515">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/menubar.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/menubar.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/searchDatabase.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/searchDatabase.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/settings.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/settings.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="939">
           <caret line="215" column="49" lean-forward="false" selection-start-line="215" selection-start-column="49" selection-end-line="215" selection-end-column="49" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties">
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="932">
           <caret line="120" column="0" lean-forward="true" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties">
       <provider editor-type-id="ResourceBundle">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
           <caret line="119" column="34" lean-forward="false" selection-start-line="119" selection-start-column="34" selection-end-line="119" selection-end-column="34" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/processedList.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="47" column="43" lean-forward="false" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
+      <provider editor-type-id="ResourceBundle">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/processedList.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding>
-            <element signature="method#initResults#1;class#TabController#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="204">
+          <caret line="47" column="43" lean-forward="false" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -1324,24 +1377,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/OCRController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="77" column="43" lean-forward="false" selection-start-line="77" selection-start-column="43" selection-end-line="77" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SettingsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-221">
           <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/AccountingRecordModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1359,125 +1398,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="84" column="30" lean-forward="false" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
-          <folding>
-            <element signature="e#3287#3288#0" expanded="false" />
-            <element signature="e#3324#3325#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/ProcessResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="37" column="22" lean-forward="false" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
-          <folding>
-            <element signature="e#1050#1051#0" expanded="false" />
-            <element signature="e#1086#1087#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/progress.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProgressController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="50" column="34" lean-forward="true" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/tab.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/startMenu.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/startMenu.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="45" column="96" lean-forward="false" selection-start-line="45" selection-start-column="96" selection-end-line="45" selection-end-column="96" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/splitPane.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="18" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="18" lean-forward="false" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showResults.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
           <caret line="264" column="50" lean-forward="false" selection-start-line="264" selection-start-column="50" selection-end-line="264" selection-end-column="50" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showDatabaseResults.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showDatabaseResults.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
           <caret line="50" column="47" lean-forward="false" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showAccountingRecords.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="803">
-          <caret line="82" column="45" lean-forward="true" selection-start-line="82" selection-start-column="45" selection-end-line="82" selection-end-column="45" />
-          <folding>
-            <element signature="n#columnConstraints#0;n#GridPane#0;n#AnchorPane#0;n#VBox#0;n#!!top" expanded="false" />
-            <element signature="n#rowConstraints#0;n#GridPane#0;n#AnchorPane#0;n#VBox#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="629">
           <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#openScanFormMenu#0;class#GUIController#0" expanded="false" />
             <element signature="method#openDatabaseMenu#0;class#GUIController#0" expanded="false" />
+            <element signature="e#1572#1573#0" expanded="false" />
+            <element signature="e#1603#1604#0" expanded="false" />
             <element signature="method#openSettings#0;class#GUIController#0" expanded="false" />
             <element signature="method#getCurrentLocale#0;class#GUIController#0" expanded="false" />
             <element signature="method#openFileDialog#0;class#GUIController#0" expanded="false" />
@@ -1486,51 +1479,226 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/AccountingRecordModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="106" column="9" lean-forward="false" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
+        <state relative-caret-position="935">
+          <caret line="95" column="8" lean-forward="false" selection-start-line="95" selection-start-column="8" selection-end-line="95" selection-end-column="33" />
           <folding>
-            <element signature="method#initialize#0;class#ProcessedListController#0" expanded="false" />
-            <element signature="method#updateItem#0;class#ButtonCell#0;class#ProcessedListController#0" expanded="false" />
-            <element signature="e#4062#4063#0" expanded="true" />
-            <element signature="e#4089#4090#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#697#698#0" expanded="false" />
+            <element signature="e#731#732#0" expanded="false" />
+            <element signature="e#774#775#0" expanded="false" />
+            <element signature="e#803#804#0" expanded="false" />
+            <element signature="e#857#858#0" expanded="false" />
+            <element signature="e#893#894#0" expanded="false" />
+            <element signature="e#927#928#0" expanded="false" />
+            <element signature="e#957#958#0" expanded="false" />
+            <element signature="e#1004#1005#0" expanded="false" />
+            <element signature="e#1042#1043#0" expanded="false" />
+            <element signature="e#1076#1077#0" expanded="false" />
+            <element signature="e#1109#1110#0" expanded="false" />
+            <element signature="e#1158#1159#0" expanded="false" />
+            <element signature="e#1202#1203#0" expanded="false" />
+            <element signature="e#1248#1249#0" expanded="false" />
+            <element signature="e#1285#1286#0" expanded="false" />
+            <element signature="e#1350#1351#0" expanded="false" />
+            <element signature="e#1402#1403#0" expanded="false" />
+            <element signature="e#1447#1448#0" expanded="false" />
+            <element signature="e#1487#1488#0" expanded="false" />
+            <element signature="e#1554#1555#0" expanded="false" />
+            <element signature="e#1612#1613#0" expanded="false" />
+            <element signature="e#1660#1661#0" expanded="false" />
+            <element signature="e#1699#1700#0" expanded="false" />
+            <element signature="e#1768#1769#0" expanded="false" />
+            <element signature="e#1824#1825#0" expanded="false" />
+            <element signature="e#1871#1872#0" expanded="false" />
+            <element signature="e#1913#1914#0" expanded="false" />
+            <element signature="e#1984#1985#0" expanded="false" />
+            <element signature="e#2046#2047#0" expanded="false" />
+            <element signature="e#2075#2076#0" expanded="false" />
+            <element signature="e#2103#2104#0" expanded="false" />
+            <element signature="e#2142#2143#0" expanded="false" />
+            <element signature="e#2176#2177#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showAccountingRecords.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="354" column="8" lean-forward="false" selection-start-line="354" selection-start-column="8" selection-end-line="354" selection-end-column="20" />
+        <state relative-caret-position="459">
+          <caret line="53" column="40" lean-forward="false" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
           <folding>
-            <element signature="e#13841#13842#0" expanded="true" />
-            <element signature="e#13874#13875#0" expanded="true" />
-            <element signature="e#14046#14047#0" expanded="true" />
-            <element signature="e#14073#14074#0" expanded="true" />
+            <element signature="n#columnConstraints#0;n#GridPane#0;n#AnchorPane#0;n#VBox#0;n#!!top" expanded="false" />
+            <element signature="n#rowConstraints#0;n#GridPane#0;n#AnchorPane#0;n#VBox#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="100" column="63" lean-forward="true" selection-start-line="100" selection-start-column="63" selection-end-line="100" selection-end-column="63" />
+        <state relative-caret-position="1054">
+          <caret line="88" column="5" lean-forward="false" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="method#initImage#0;class#SplitPaneController#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4250">
+          <caret line="332" column="48" lean-forward="false" selection-start-line="332" selection-start-column="48" selection-end-line="332" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="class#3280:3611" expanded="false" />
+            <element signature="e#3390#3391#0" expanded="false" />
+            <element signature="e#3445#3446#0" expanded="false" />
+            <element signature="e#3527#3528#0" expanded="false" />
+            <element signature="e#3600#3601#0" expanded="false" />
+            <element signature="class#3659:3983" expanded="false" />
+            <element signature="e#3761#3762#0" expanded="false" />
+            <element signature="e#3821#3822#0" expanded="false" />
+            <element signature="e#3899#3900#0" expanded="false" />
+            <element signature="e#3972#3973#0" expanded="false" />
+            <element signature="class#4033:4364" expanded="false" />
+            <element signature="e#4143#4144#0" expanded="false" />
+            <element signature="e#4198#4199#0" expanded="false" />
+            <element signature="e#4280#4281#0" expanded="false" />
+            <element signature="e#4353#4354#0" expanded="false" />
+            <element signature="class#4410:4734" expanded="false" />
+            <element signature="e#4512#4513#0" expanded="false" />
+            <element signature="e#4572#4573#0" expanded="false" />
+            <element signature="e#4650#4651#0" expanded="false" />
+            <element signature="e#4723#4724#0" expanded="false" />
+            <element signature="e#11943#11944#0" expanded="false" />
+            <element signature="e#11979#11980#0" expanded="false" />
+            <element signature="e#12037#12038#0" expanded="false" />
+            <element signature="e#12087#12088#0" expanded="false" />
+            <element signature="e#12148#12149#0" expanded="false" />
+            <element signature="e#12183#12184#0" expanded="false" />
+            <element signature="e#12261#12262#0" expanded="false" />
+            <element signature="e#12309#12310#0" expanded="false" />
+            <element signature="e#12365#12366#0" expanded="false" />
+            <element signature="e#12422#12423#0" expanded="false" />
+            <element signature="e#12632#12633#0" expanded="false" />
+            <element signature="e#12685#12686#0" expanded="false" />
+            <element signature="e#12880#12881#0" expanded="false" />
+            <element signature="e#12935#12936#0" expanded="false" />
+            <element signature="e#13134#13135#0" expanded="false" />
+            <element signature="e#13185#13186#0" expanded="false" />
+            <element signature="e#13252#13253#0" expanded="false" />
+            <element signature="e#13318#13319#0" expanded="false" />
+            <element signature="e#13363#13364#0" expanded="false" />
+            <element signature="e#13401#13402#0" expanded="false" />
+            <element signature="e#13466#13467#0" expanded="false" />
+            <element signature="e#13520#13521#0" expanded="false" />
+            <element signature="e#13561#13562#0" expanded="false" />
+            <element signature="e#13628#13629#0" expanded="false" />
+            <element signature="e#13682#13683#0" expanded="false" />
+            <element signature="e#13750#13751#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/img/Circle_Red.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ResultsController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="286" column="20" lean-forward="false" selection-start-line="286" selection-start-column="20" selection-end-line="286" selection-end-column="20" />
+        <state relative-caret-position="1306">
+          <caret line="283" column="30" lean-forward="false" selection-start-line="283" selection-start-column="30" selection-end-line="283" selection-end-column="30" />
           <folding>
             <element signature="method#validateFieldsBeforeSave#0;class#ResultsController#0" expanded="false" />
-            <element signature="e#12734#12735#0" expanded="true" />
-            <element signature="e#12761#12762#0" expanded="true" />
+            <element signature="e#12760#12761#0" expanded="true" />
+            <element signature="e#12797#12798#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/scene/control/Cell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="668" column="19" lean-forward="false" selection-start-line="668" selection-start-column="19" selection-end-line="668" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/scene/control/TableCell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="724" column="0" lean-forward="false" selection-start-line="724" selection-start-column="0" selection-end-line="724" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/ProcessResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="26" />
+          <folding>
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#1086#1087#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProgressController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31">
+          <caret line="50" column="34" lean-forward="true" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="60" column="45" lean-forward="false" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="45" />
+          <folding>
+            <element signature="e#3287#3288#0" expanded="true" />
+            <element signature="e#3324#3325#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="30" column="14" lean-forward="true" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+          <folding>
+            <element signature="e#1445#1762#0" expanded="true" />
+            <element signature="e#1761#1762#0" expanded="true" />
+            <element signature="method#setStatusImage#0;class#ProcessedListController#0" expanded="false" />
+            <element signature="method#updateItem#0;class#ButtonCell#0;class#ProcessedListController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/OCRController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="36" column="3" lean-forward="true" selection-start-line="36" selection-start-column="3" selection-end-line="36" selection-end-column="3" />
+          <folding>
+            <element signature="method#openFileChooser#0;class#OCRController#0" expanded="false" />
+            <element signature="method#scanFile#0;class#OCRController#0" expanded="false" />
+            <element signature="method#openExtractionInformationMenu#0;class#OCRController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

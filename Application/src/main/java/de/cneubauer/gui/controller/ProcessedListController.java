@@ -3,6 +3,7 @@ package de.cneubauer.gui.controller;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.util.enumeration.ScanStatus;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -34,11 +36,32 @@ public class ProcessedListController extends GUIController {
     @FXML
     private void initialize() {
         // Initialize the table with the columns
-        statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
+        statusColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getStatus()));
+        statusColumn.setCellFactory(column -> new TableCell<ProcessResult, ScanStatus>() {
+            @Override
+            protected void updateItem(ScanStatus item, boolean empty) {
+                if (!empty && item != null) {
+                    ImageView v = setStatusImage(item);
+                    setGraphic(v);
+                }
+            }
+        });
         documentColumn.setCellValueFactory(cellData -> cellData.getValue().docNameProperty());
         problemColumn.setCellValueFactory(cellData -> cellData.getValue().problemProperty());
         fileColumn.setCellValueFactory(cellData -> cellData.getValue().fileProperty());
         fileColumn.setCellFactory(p -> new ButtonCell());
+    }
+
+    private ImageView setStatusImage(ScanStatus state) {
+        ImageView view;
+        if (state.equals(ScanStatus.ERROR)) {
+            view = new ImageView("img/Circle_Red.png");
+        } else {
+            view = new ImageView("img/Circle_Green.png");
+        }
+        view.setFitHeight(32);
+        view.setFitWidth(32);
+        return view;
     }
 
     void initData(ObservableList<ProcessResult> data) {

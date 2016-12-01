@@ -39,11 +39,14 @@ public class AccountingRecordsController extends SplitPaneController {
     @FXML public CheckBox recordRevised;
     @FXML public Label currentRecord;
     public Button SaveAccountingRecords;
+    public TextField possiblePosition;
 
     private List<AccountingRecordModel> recordsFound;
     private List<AccountType> types;
+    private SplitPaneController superCtrl;
 
-    void initData(List<AccountingRecord> data) {
+    void initData(List<AccountingRecord> data, SplitPaneController superCtrl) {
+        this.superCtrl = superCtrl;
         Logger.getLogger(this.getClass()).log(Level.INFO, "initiating AccountingRecordsController data");
         List<AccountingRecordModel> records = new ArrayList<>(data.size());
         int index = 1;
@@ -51,6 +54,10 @@ public class AccountingRecordsController extends SplitPaneController {
             AccountingRecordModel model = new AccountingRecordModel(index++);
             model.setRevised(false);
             model.setRecord(record);
+            if (record.getEntryText() != null) {
+                this.possiblePosition.setText(record.getEntryText());
+            }
+
             if (record.getCredit() != null) {
                 model.setToPossibleAccount(record.getCredit());
                 if (record.getCredit().getType() != null) {
@@ -147,6 +154,20 @@ public class AccountingRecordsController extends SplitPaneController {
                 toDropDownAccount.setItems(FXCollections.observableArrayList(accountDao.getAllByType(newValue.getId())));
             }
         });
+    }
+
+    private List<AccountingRecord> convertToAccountingRecords() {
+        List<AccountingRecord> result = new ArrayList<>(this.recordsFound.size());
+        int index = 0;
+        for (AccountingRecordModel model : recordsFound) {
+            AccountingRecord newRecord = new AccountingRecord();
+            newRecord.setCredit(getFromDropDownAccount());
+            newRecord.setDebit(getToDropDownAccount());
+            newRecord.setBruttoValue(getPositionValue());
+            newRecord.setEntryText(model.getPosition());
+            result.add(index++, newRecord);
+        }
+        return result;
     }
 
     // TODO: Necessary for validation
@@ -343,15 +364,16 @@ public class AccountingRecordsController extends SplitPaneController {
     // when called, invoice has been reviewed by the user
     // set invoice to be reviewed and update all information given
     public void setReviewed(ActionEvent actionEvent) {
-        super.reviseAll();
+        superCtrl.reviseAll();
     }
 
-    public boolean validateFieldsBeforeSave() {
+    boolean validateFieldsBeforeSave() {
         // TODO: implement validation
         return false;
     }
 
-    public List<AccountingRecord> updateInformation() {
-        return null;
+    List<AccountingRecord> updateInformation() {
+        return this.convertToAccountingRecords();
     }
+
 }

@@ -92,7 +92,7 @@ public class OCRController extends SplitPaneController {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-            this.openExtractionInformationMenu(e, scan, recordList, fileToScan);
+            //this.openExtractionInformationMenu(e, scan, recordList, fileToScan);
         }
     }
 

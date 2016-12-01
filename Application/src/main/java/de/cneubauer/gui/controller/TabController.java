@@ -47,14 +47,14 @@ public class TabController extends SplitPaneController {
     @FXML public TabPane tabPane;
 
     void initResults(Scan extractedInformation, String text, List<AccountingRecord> recordList, File fileToScan) {
-        invoiceTabController.initData(extractedInformation.getInvoiceInformation()); // contained String text
+       // invoiceTabController.initData(extractedInformation.getInvoiceInformation()); // contained String text
         this.initAccountingRecordResults(recordList);
         this.initImage(extractedInformation.getFile());
         //this.initImage(fileToScan);
     }
 
     void initResults(ExtractionModel extractedInformation, File fileToScan) {
-        invoiceTabController.initData(extractedInformation.getInvoiceInformation());
+        //invoiceTabController.initData(extractedInformation.getInvoiceInformation());
         try {
             byte[] img = Files.toByteArray(fileToScan);
             this.initImage(img);
@@ -65,7 +65,7 @@ public class TabController extends SplitPaneController {
     }
 
     private void initAccountingRecordResults(List<AccountingRecord> data) {
-        accountingRecordsTabController.initData(data);
+       // accountingRecordsTabController.initData(data);
     }
 
     private void initImage(byte[] image) {

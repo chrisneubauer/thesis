@@ -50,8 +50,8 @@ public class SplitPaneController extends GUIController {
     void initResults(int index, ExtractionModel extractedInformation, File fileToScan, ProcessedListController caller) {
         this.caller = caller;
         this.index = index;
-        invoiceTabController.initData(extractedInformation.getInvoiceInformation());
-        accountingRecordsTabController.initData(extractedInformation.getAccountingRecords());
+        invoiceTabController.initData(extractedInformation.getInvoiceInformation(), this);
+        accountingRecordsTabController.initData(extractedInformation.getAccountingRecords(), this);
         try {
             byte[] img = Files.toByteArray(fileToScan);
             this.initImage(img);
@@ -88,7 +88,7 @@ public class SplitPaneController extends GUIController {
         }
     }
 
-    public void reviseAll() {
+    void reviseAll() {
         boolean accountingCorrect = accountingRecordsTabController.validateFieldsBeforeSave();
         boolean invoiceCorrect = invoiceTabController.validateFieldsBeforeSave();
         if (accountingCorrect && invoiceCorrect) {

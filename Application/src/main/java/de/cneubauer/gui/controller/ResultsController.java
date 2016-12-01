@@ -29,6 +29,7 @@ import java.util.Locale;
  */
 public class ResultsController extends GUIController {
     public Button SaveExtractedInvoiceToDatabase;
+    private SplitPaneController superCtrl;
 
     @FXML private TextField extractedInvoiceNumber;
     @FXML private TextField extractedCreditor;
@@ -45,8 +46,8 @@ public class ResultsController extends GUIController {
     @FXML private TextField extractedSkonto;
     @FXML private TextField extractedDeliveryDate;
 
-    void initData(Invoice extractedInformation) {
-        //this.filePath = pdfPath;
+    void initData(Invoice extractedInformation, SplitPaneController superCtrl) {
+        this.superCtrl = superCtrl;
         this.showResultsBeforeSave(extractedInformation);
         this.addAllListeners();
     }
@@ -280,10 +281,10 @@ public class ResultsController extends GUIController {
     // when called, invoice has been reviewed by the user
     // set invoice to be reviewed and update all information given
     public void setReviewed(ActionEvent actionEvent) {
-
+        superCtrl.reviseAll();
     }
 
     public Invoice updateInformation() {
-        return null;
+        return this.convertToInvoice();
     }
 }

@@ -51,7 +51,7 @@
                 </GridPane.margin>
             </Label>
          <Label text="%showAccountingRecords.label.position" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
-         <TextField GridPane.columnIndex="3" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+         <TextField fx:id="possiblePosition" GridPane.columnIndex="3" GridPane.columnSpan="4" GridPane.rowIndex="2" />
          <Label text="%showAccountingRecords.label.from" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label prefHeight="17.0" prefWidth="107.0" text="%showAccountingRecords.label.accountType" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
          <ComboBox fx:id="fromDropDownAccountType" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4" />
