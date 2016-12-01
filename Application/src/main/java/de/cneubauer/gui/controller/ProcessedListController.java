@@ -102,7 +102,6 @@ public class ProcessedListController extends GUIController {
                         SplitPaneController ctrl = loader.getController();
 
                         ctrl.initResults(row.getIndex(), selected.getExtractionModel(), selected.getFile(), getControllerReference());
-
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

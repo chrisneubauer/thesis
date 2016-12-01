@@ -47,4 +47,18 @@ public class TesseractDataCollectorTest extends AbstractTest {
             }
         }
     }
+
+    @Test
+    public void executeDatenwerk() throws Exception {
+        String path =  "..\\Data\\Datenwerk";
+        String outputPath = "..\\Data\\OutputDatenwerk\\";
+
+        for (int i = 1; i < 15; i++) {
+            File f = new File(path + i + ".pdf");
+            String result = wrapper.initOcr(f);
+            String lines[] = result.split("\\r?\\n");
+            File outputFile = new File(outputPath + i + ".txt");
+            Files.write(outputFile.toPath(), Arrays.asList(lines));
+        }
+    }
 }

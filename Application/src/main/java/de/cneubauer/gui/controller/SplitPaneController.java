@@ -7,7 +7,9 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
+import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -19,11 +21,9 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
  * Controller for the Splitpane
  */
 public class SplitPaneController extends GUIController {
+    @FXML public SplitPane splitPaneInclude;
     @FXML public AnchorPane rightPane;
     @FXML public AnchorPane leftPane;
     @FXML public ImageView pdfImage;
@@ -53,13 +54,15 @@ public class SplitPaneController extends GUIController {
         invoiceTabController.initData(extractedInformation.getInvoiceInformation(), this);
         accountingRecordsTabController.initData(extractedInformation.getAccountingRecords(), this);
         try {
-            byte[] img = Files.toByteArray(fileToScan);
-            this.initImage(img);
+            //byte[] img = Files.toByteArray(fileToScan);
+            //this.initImage(img);
+            this.initImage(fileToScan);
         }
-        catch (IOException e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
         model = extractedInformation;
+        //this.splitPaneInclude.getScene().getWindow().setOnCloseRequest(e -> pdfImage.setImage(null));
     }
 
     // this method opens the page where the user can import files
@@ -104,12 +107,35 @@ public class SplitPaneController extends GUIController {
         popup.close();
     }
 
+    private void initImage(File image) {
+        try {
+            Image i;
+            if (image.getName().endsWith("pdf")) {
+                PDDocument pdf = PDDocument.load(image);
+                PDFRenderer renderer = new PDFRenderer(pdf);
+                BufferedImage img = renderer.renderImageWithDPI(0, 300);
+                i = SwingFXUtils.toFXImage(img, null);
+                pdf.close();
+            } else {
+                InputStream in = new FileInputStream(image);
+                i = new Image(in);
+            }
+            pdfImage.setImage(i);
+            pdfImage.setPreserveRatio(true);
+            pdfImage.setSmooth(true);
+            pdfImage.setCache(true);
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to parse image!");
+        }
+    }
+
     private void initImage(byte[] image) {
         BufferedImage img = null;
         try {
             PDDocument pdf = PDDocument.load(image);
             PDFRenderer renderer = new PDFRenderer(pdf);
             img = renderer.renderImageWithDPI(0, 1200);
+            pdf.close();
         } catch (Exception ex) {
             // no pdf, try again as image
             try {

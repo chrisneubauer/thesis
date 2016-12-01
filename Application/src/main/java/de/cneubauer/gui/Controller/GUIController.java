@@ -24,7 +24,6 @@ import java.util.ResourceBundle;
  * Contains UI logic
  */
 public class GUIController {
-    @FXML public SplitPane splitPaneInclude;
     public Button startScanButton;
     public MenuBar menuBar;
     @FXML private SplitPaneController splitPaneIncludeController;

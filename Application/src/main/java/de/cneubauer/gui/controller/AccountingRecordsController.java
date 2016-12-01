@@ -29,7 +29,6 @@ import java.util.List;
  * Controller for managing extracted accounting records
  */
 public class AccountingRecordsController extends SplitPaneController {
-
     @FXML public ComboBox<AccountType> fromDropDownAccountType;
     @FXML public ComboBox<Account> fromDropDownAccount;
     @FXML public ComboBox<AccountType> toDropDownAccountType;
@@ -38,24 +37,36 @@ public class AccountingRecordsController extends SplitPaneController {
     @FXML public ImageView confidenceImage;
     @FXML public CheckBox recordRevised;
     @FXML public Label currentRecord;
-    public Button SaveAccountingRecords;
-    public TextField possiblePosition;
+    @FXML public Button SaveAccountingRecords;
+    @FXML public TextField possiblePosition;
 
     private List<AccountingRecordModel> recordsFound;
     private List<AccountType> types;
     private SplitPaneController superCtrl;
+    private int index = 1;
 
     void initData(List<AccountingRecord> data, SplitPaneController superCtrl) {
         this.superCtrl = superCtrl;
         Logger.getLogger(this.getClass()).log(Level.INFO, "initiating AccountingRecordsController data");
+        List<AccountingRecordModel> records = this.convertToAccountingRecordModel(data);
+        this.setRecordsFound(records);
+        Logger.getLogger(this.getClass()).log(Level.INFO, records.size() + " records found!");
+
+        if (records.size() > 0) {
+            this.initiateDropdowns(records.get(0));
+            this.updateAccountingRecordView(records.get(0));
+        }
+    }
+
+    private List<AccountingRecordModel> convertToAccountingRecordModel(List<AccountingRecord> data) {
         List<AccountingRecordModel> records = new ArrayList<>(data.size());
-        int index = 1;
+        int idx = 1;
         for (AccountingRecord record : data) {
-            AccountingRecordModel model = new AccountingRecordModel(index++);
+            AccountingRecordModel model = new AccountingRecordModel(idx++);
             model.setRevised(false);
             model.setRecord(record);
             if (record.getEntryText() != null) {
-                this.possiblePosition.setText(record.getEntryText());
+                model.setPosition(record.getEntryText());
             }
 
             if (record.getCredit() != null) {
@@ -72,12 +83,7 @@ public class AccountingRecordsController extends SplitPaneController {
             }
             records.add(model);
         }
-        this.setRecordsFound(records);
-
-        if (records.size() > 0) {
-            this.initiateDropdowns(records.get(0));
-            this.showAccountingRecords(data.get(0));
-        }
+        return records;
     }
 
     private void initiateDropdowns(AccountingRecordModel model) {
@@ -180,19 +186,6 @@ public class AccountingRecordsController extends SplitPaneController {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Listeners added to textfields");*/
     }
 
-    private void showAccountingRecords(AccountingRecord record) {
-        if (recordsFound != null && recordsFound.size() > 0) {
-            positionValue.setText((String.valueOf(record.getBruttoValue())));
-
-            if (record.getCredit() != null) {
-                fromDropDownAccount.setValue(record.getCredit());
-            }
-            if (record.getDebit() != null) {
-                toDropDownAccount.setValue(record.getDebit());
-            }
-        }
-    }
-
     public void saveToDatabase(ActionEvent actionEvent) {
         // check if all records have been revised before saving
         if (this.validateAccountingRecords()) {
@@ -211,26 +204,26 @@ public class AccountingRecordsController extends SplitPaneController {
         return true;
     }
 
-    public void nextRecord(ActionEvent actionEvent) {
-        int current = Integer.parseInt(this.getCurrentRecord().getText()) - 1;
-        if (this.getRecordsFound() != null && this.getRecordsFound().size() > current) {
+    public void nextRecord() {
+        if (this.getRecordsFound() != null && this.getRecordsFound().size() > this.index) {
             this.saveCurrentValuesToRecord();
-            this.setCurrentRecord(new Label(String.valueOf(current + 1)));
-            this.updateAccountingRecordView(this.getRecordsFound().get(current + 1));
+            this.index++;
+            this.setCurrentRecord(String.valueOf(this.index));
+            this.updateAccountingRecordView(this.getRecordsFound().get(this.index-1));
         }
     }
 
-    public void prevRecord(ActionEvent actionEvent) {
-        int current = Integer.parseInt(this.getCurrentRecord().getText()) - 1;
-        if (this.getRecordsFound() != null && current > 0) {
+    public void prevRecord() {
+        if (this.getRecordsFound() != null && this.index > 1) {
             this.saveCurrentValuesToRecord();
-            this.setCurrentRecord(new Label(String.valueOf(current - 1)));
-            this.updateAccountingRecordView(this.getRecordsFound().get(current - 1));
+            this.index--;
+            this.setCurrentRecord(String.valueOf(this.index));
+            this.updateAccountingRecordView(this.getRecordsFound().get(this.index-1));
         }
     }
 
     private void saveCurrentValuesToRecord() {
-        AccountingRecordModel current = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord().getText()) - 1);
+        AccountingRecordModel current = this.getRecordsFound().get(this.index-1);
         AccountingRecord currentRecord = current.getRecord();
         if (this.getFromDropDownAccount() != null)
         {
@@ -258,32 +251,34 @@ public class AccountingRecordsController extends SplitPaneController {
     private void updateAccountingRecordView(AccountingRecordModel currentModel) {
         AccountingRecord accountingRecord = currentModel.getRecord();
         if (accountingRecord.getCredit() != null) {
-            if (accountingRecord.getCredit() != null && accountingRecord.getCredit().getType() != null) {
+            if (accountingRecord.getCredit().getType() != null) {
                 this.setFromDropDownAccountType(accountingRecord.getCredit().getType());
             }
             this.setFromDropDownAccount(accountingRecord.getCredit());
         }
 
         if (accountingRecord.getDebit() != null) {
-
             if (accountingRecord.getDebit().getType() != null) {
-                this.setFromDropDownAccountType(accountingRecord.getDebit().getType());
-
+                this.setToDropDownAccountType(accountingRecord.getDebit().getType());
             }
-            this.setFromDropDownAccount(accountingRecord.getDebit());
+            this.setToDropDownAccount(accountingRecord.getDebit());
         }
 
         if (accountingRecord.getBruttoValue() > 0) {
             this.setPositionValue(accountingRecord.getBruttoValue());
         }
+
+        if (accountingRecord.getEntryText() != null) {
+            this.setPossiblePosition(accountingRecord.getEntryText());
+        }
     }
 
-    private Label getCurrentRecord() {
-        return currentRecord;
+    private String getCurrentRecord() {
+        return this.currentRecord.getText();
     }
 
-    private void setCurrentRecord(Label currentRecord) {
-        this.currentRecord = currentRecord;
+    private void setCurrentRecord(String currentRecord) {
+        this.currentRecord.setText(currentRecord);
     }
 
     private List<AccountingRecordModel> getRecordsFound() {
@@ -299,7 +294,7 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     private void setFromDropDownAccountType(AccountType fromDropDownAccountType) {
-        this.fromDropDownAccountType.setValue(fromDropDownAccountType);
+        this.fromDropDownAccountType.getSelectionModel().select(fromDropDownAccountType);
     }
 
     private Account getFromDropDownAccount() {
@@ -307,7 +302,7 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     private void setFromDropDownAccount(Account fromDropDownAccount) {
-        this.fromDropDownAccount.setValue(fromDropDownAccount);
+        this.fromDropDownAccount.getSelectionModel().select(fromDropDownAccount);
     }
 
     public AccountType getToDropDownAccountType() {
@@ -315,7 +310,7 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     public void setToDropDownAccountType(AccountType toDropDownAccountType) {
-        this.toDropDownAccountType.setValue(toDropDownAccountType);
+        this.toDropDownAccountType.getSelectionModel().select(toDropDownAccountType);
     }
 
     private Account getToDropDownAccount() {
@@ -323,7 +318,7 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     public void setToDropDownAccount(Account toDropDownAccount) {
-        this.toDropDownAccount.setValue(toDropDownAccount);
+        this.toDropDownAccount.getSelectionModel().select(toDropDownAccount);
     }
 
     public ImageView getConfidenceImage() {
@@ -335,7 +330,16 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     private double getPositionValue() {
-        return Double.valueOf(this.positionValue.getText());
+        if (this.positionValue.getText() != null) {
+            try {
+                return Double.valueOf(this.positionValue.getText());
+            } catch (NumberFormatException ex) {
+                Logger.getLogger(this.getClass()).log(Level.WARN, "Unable to parse value! Returning 0");
+                return 0;
+            }
+        } else {
+            return 0;
+        }
     }
 
     private void setPositionValue(double newValue) {
@@ -345,7 +349,7 @@ public class AccountingRecordsController extends SplitPaneController {
     // checks if accounting record can be set as revised
     public boolean checkRevised(ActionEvent actionEvent) {
         if (this.recordRevised.isSelected()) {
-            AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord().getText()));
+            AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord()));
             AccountingRecord record = model.getRecord();
 
             if (record.getCredit() != null && record.getDebit() != null && record.getBruttoValue() > 0) {
@@ -355,10 +359,18 @@ public class AccountingRecordsController extends SplitPaneController {
                 return false;
             }
         } else {
-            AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord().getText()));
+            AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord()));
             model.setRevised(false);
             return false;
         }
+    }
+
+    public String getPossiblePosition() {
+        return possiblePosition.getText();
+    }
+
+    public void setPossiblePosition(String possiblePosition) {
+        this.possiblePosition.setText(possiblePosition);
     }
 
     // when called, invoice has been reviewed by the user

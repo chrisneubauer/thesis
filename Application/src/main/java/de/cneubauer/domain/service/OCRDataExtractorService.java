@@ -64,6 +64,16 @@ public class OCRDataExtractorService {
         return result;
     }
 
+    // TODO: REMOVE METHOD! ONLY FOR TESTING GUI
+    private AccountingRecord fakeAccount(Account cred, Account deb) {
+        AccountingRecord mock = new AccountingRecord();
+        mock.setDebit(deb);
+        mock.setCredit(cred);
+        mock.setEntryText("MockPosition");
+        mock.setBruttoValue(200);
+        mock.setVat_rate(0.19);
+        return mock;
+    }
     /*
      * Uses scanned page and looks for several information regarding accounting records
      * @return  returns a list of all AccountingRecords that has been found on the page
@@ -113,28 +123,15 @@ public class OCRDataExtractorService {
                 }
             }
         }
-/*
-        AccountingRecord record = new AccountingRecord();
-        Account debit = new Account();
-        Account credit = new Account();
-        debit.setAccountNo("0473");
-        credit.setAccountNo("4821");
-        record.setDebit(debit);
-        record.setCredit(credit);
-        record.setBruttoValue(233);
 
-        AccountingRecord record2 = new AccountingRecord();
-        Account debit2 = new Account();
-        Account credit2 = new Account();
-        debit.setAccountNo("4373");
-        credit.setAccountNo("9821");
-        record.setDebit(debit2);
-        record.setCredit(credit2);
-        record.setBruttoValue(12);
+        //TODO: remove fakes
+        records.add(this.fakeAccount(accountsLeft.get(0), accountsLeft.get(4)));
+        records.add(this.fakeAccount(accountsLeft.get(1), accountsLeft.get(0)));
+        records.add(this.fakeAccount(accountsLeft.get(0), accountsLeft.get(1)));
+        records.add(this.fakeAccount(accountsLeft.get(3), accountsLeft.get(2)));
+        records.add(this.fakeAccount(accountsLeft.get(1), accountsLeft.get(2)));
+        records.add(this.fakeAccount(accountsLeft.get(6), accountsLeft.get(1)));
 
-        records.add(0, record);
-        records.add(1, record2);
-*/
         return records;
     }
 
@@ -435,8 +432,8 @@ public class OCRDataExtractorService {
         }
         return false;
     }
+
     private double getConfidence() {
         return confidence;
     }
-
 }
