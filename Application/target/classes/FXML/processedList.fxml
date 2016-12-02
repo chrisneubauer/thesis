@@ -51,7 +51,7 @@
             </TableView>
             <Label text="%progressedList.label.progressedFiles" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" />
          <Label text="%progressedList.label.reviseDocuments" GridPane.columnIndex="1" GridPane.columnSpan="10" GridPane.rowIndex="7" />
-         <Button fx:id="saveRevised" mnemonicParsing="false" text="%progressedList.button.saveRevised" GridPane.columnIndex="8" GridPane.columnSpan="5" GridPane.rowIndex="8" />
+         <Button fx:id="saveRevised" onAction="#saveRevised" mnemonicParsing="false" text="%progressedList.button.saveRevised" GridPane.columnIndex="8" GridPane.columnSpan="5" GridPane.rowIndex="8" />
         </GridPane>
     </AnchorPane>
 </VBox>

@@ -1,39 +1,32 @@
 package de.cneubauer.domain.service.validation;
 
-import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.bo.AccountingRecord;
+import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 02.12.2016.
- * Validates Invoice with minimum information
+ * Validates AccountingRecords with minimum information
  */
-public class InvoiceValidator {
-    private Invoice invoice;
-    public InvoiceValidator(Invoice i) {
-        this.invoice = i;
+public class AccountingRecordValidator {
+    private List<AccountingRecord> recordList;
+    public AccountingRecordValidator(List<AccountingRecord> records) {
+        this.recordList = records;
     }
 
     public boolean isValid() {
-        return this.validateInvoice();
+        return this.validateAccountingRecords();
     }
 
-    private boolean validateInvoice() {
+    private boolean validateAccountingRecords() {
         boolean valid = true;
-        if (this.invoice.getCreditor() != null) {
-            valid = this.invoice.getCreditor().getName() != null;
-        } else {
-            return false;
+
+        for (AccountingRecord r : this.recordList) {
+            valid = r.getBruttoValue() > 0;
+            valid = valid && r.getDebit() != null;
+            valid = valid && r.getCredit() != null;
+            valid = valid && r.getEntryText() != null;
         }
-        if (this.invoice.getDebitor() != null) {
-            valid = valid && this.invoice.getDebitor().getName() != null;
-        } else {
-            return false;
-        }
-        valid = valid && this.invoice.getInvoiceNumber() != null;
-        valid = valid && this.invoice.getIssueDate() != null;
-        valid = valid && this.invoice.getChargeTotal() > 0;
-        if (this.invoice.isHasSkonto()) {
-            valid = valid && this.invoice.getSkonto() > 0;
-        }
+
         return valid;
     }
 }

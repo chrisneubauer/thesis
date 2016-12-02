@@ -1,15 +1,13 @@
 package de.cneubauer.gui.controller;
 
-import com.google.common.io.Files;
-import de.cneubauer.domain.bo.AccountingRecord;
 import de.cneubauer.gui.model.ExtractionModel;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
-import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -20,11 +18,10 @@ import org.apache.log4j.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -53,16 +50,8 @@ public class SplitPaneController extends GUIController {
         this.index = index;
         invoiceTabController.initData(extractedInformation.getInvoiceInformation(), this);
         accountingRecordsTabController.initData(extractedInformation.getAccountingRecords(), this);
-        try {
-            //byte[] img = Files.toByteArray(fileToScan);
-            //this.initImage(img);
-            this.initImage(fileToScan);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.initImage(fileToScan);
         model = extractedInformation;
-        //this.splitPaneInclude.getScene().getWindow().setOnCloseRequest(e -> pdfImage.setImage(null));
     }
 
     // this method opens the page where the user can import files
@@ -92,16 +81,23 @@ public class SplitPaneController extends GUIController {
     }
 
     void reviseAll() {
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Reviewed Button clicked! Validating the fields");
         boolean accountingCorrect = accountingRecordsTabController.validateFieldsBeforeSave();
         boolean invoiceCorrect = invoiceTabController.validateFieldsBeforeSave();
         if (accountingCorrect && invoiceCorrect) {
-            updateAndReturn();
+            this.updateAndReturn();
+        } else {
+            Alert info = new Alert(Alert.AlertType.WARNING);
+            info.setContentText("Could not update the document! \\n Please review all fields again and make sure that there are no more errors.");
+            info.setHeaderText("Review Issue");
         }
     }
 
     private void updateAndReturn() {
         model.setAccountingRecords(accountingRecordsTabController.updateInformation());
         model.setInvoiceInformation(invoiceTabController.updateInformation());
+        accountingRecordsTabController.addRevisedToFile();
+        invoiceTabController.addRevisedToFile();
         caller.updateSelected(index, model);
         Stage popup = (Stage) this.pdfImage.getScene().getWindow();
         popup.close();
@@ -126,32 +122,6 @@ public class SplitPaneController extends GUIController {
             pdfImage.setCache(true);
         } catch (Exception e) {
             Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to parse image!");
-        }
-    }
-
-    private void initImage(byte[] image) {
-        BufferedImage img = null;
-        try {
-            PDDocument pdf = PDDocument.load(image);
-            PDFRenderer renderer = new PDFRenderer(pdf);
-            img = renderer.renderImageWithDPI(0, 1200);
-            pdf.close();
-        } catch (Exception ex) {
-            // no pdf, try again as image
-            try {
-                InputStream in = new ByteArrayInputStream(image);
-                img = ImageIO.read(in);
-            } catch (Exception ex2) {
-                Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to parse image!");
-            }
-        }
-
-        if (img != null) {
-            Image imageToView = SwingFXUtils.toFXImage(img, null);
-            pdfImage.setImage(imageToView);
-            pdfImage.setPreserveRatio(true);
-            pdfImage.setSmooth(true);
-            pdfImage.setCache(true);
         }
     }
 }

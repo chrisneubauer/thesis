@@ -1,5 +1,6 @@
 package de.cneubauer.gui.controller;
 
+import de.cneubauer.domain.service.DatabaseService;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.util.enumeration.ScanStatus;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -32,6 +34,7 @@ public class ProcessedListController extends GUIController {
     public TableColumn<ProcessResult, String> problemColumn;
     public TableColumn<ProcessResult, File> fileColumn;
     public Button saveRevised;
+    private List<ProcessResult> model;
 
     @FXML
     private void initialize() {
@@ -56,6 +59,8 @@ public class ProcessedListController extends GUIController {
         ImageView view;
         if (state.equals(ScanStatus.ERROR)) {
             view = new ImageView("img/Circle_Red.png");
+        } else if (state.equals(ScanStatus.ISSUE)) {
+            view = new ImageView("img/Circle_Yellow.png");
         } else {
             view = new ImageView("img/Circle_Green.png");
         }
@@ -66,7 +71,23 @@ public class ProcessedListController extends GUIController {
 
     void initData(ObservableList<ProcessResult> data) {
         progressedList.setItems(data);
+        this.model = data;
         this.initialize();
+    }
+
+    // if called, all results should be stored to the database except the ones that have not been revised yet
+    public void saveRevised() {
+        int counter = 0;
+        for (ProcessResult result : this.model) {
+            if (result.getStatus().equals(ScanStatus.OK)) {
+                DatabaseService service = new DatabaseService();
+                service.saveProcessResult(result);
+                counter++;
+            }
+        }
+        Alert information = new Alert(Alert.AlertType.INFORMATION);
+        information.setContentText(counter + " documents have been saved.");
+        information.setHeaderText("Saving successful");
     }
 
     // Holds logic for the open pdf button
@@ -122,11 +143,11 @@ public class ProcessedListController extends GUIController {
         }
     }
 
-    public ProcessedListController getControllerReference() {
+    private ProcessedListController getControllerReference() {
         return this;
     }
 
-    protected void updateSelected(int index, ExtractionModel newModel) {
+    void updateSelected(int index, ExtractionModel newModel) {
         this.progressedList.getItems().get(index).setExtractionModel(newModel);
     }
 }

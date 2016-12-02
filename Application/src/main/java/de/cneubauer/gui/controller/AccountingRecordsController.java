@@ -186,11 +186,13 @@ public class AccountingRecordsController extends SplitPaneController {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Listeners added to textfields");*/
     }
 
-    public void saveToDatabase(ActionEvent actionEvent) {
+    public void addRevisedToFile() {
         // check if all records have been revised before saving
         if (this.validateAccountingRecords()) {
             for (AccountingRecordModel acc : this.recordsFound) {
-                AccountFileHelper.write(acc.getRecord().getEntryText(), acc.getFromPossibleAccount().getAccountNo());
+                if (acc.isRevised()) {
+                    AccountFileHelper.write(acc.getRecord().getEntryText(), acc.getFromPossibleAccount().getAccountNo());
+                }
             }
         }
     }

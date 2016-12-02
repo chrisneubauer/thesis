@@ -2,7 +2,11 @@ package de.cneubauer.util.task;
 
 import de.cneubauer.domain.bo.AccountingRecord;
 import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.helper.InvoiceInformationHelper;
 import de.cneubauer.domain.service.OCRDataExtractorService;
+import de.cneubauer.domain.service.ZugFerdExtendService;
+import de.cneubauer.domain.service.validation.AccountingRecordValidator;
+import de.cneubauer.domain.service.validation.InvoiceValidator;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.ocr.tesseract.TesseractWrapper;
@@ -54,17 +58,22 @@ public class ScanTask extends Task {
                 String result = wrapper.initOcr(f);
 
                 OCRDataExtractorService service = new OCRDataExtractorService(result);
-                Invoice extractedInformation = service.extractInvoiceInformation();
+                Invoice i = service.extractInvoiceInformation();
                 List<AccountingRecord> recordList = service.extractAccountingRecordInformation();
 
                 ExtractionModel m = new ExtractionModel();
-                m.setInvoiceInformation(extractedInformation);
+                m.setInvoiceInformation(i);
                 m.setAccountingRecords(recordList);
 
                 r.setExtractionModel(m);
 
                 r.setProblem("");
-                r.setStatus(ScanStatus.OK);
+
+                if (this.resultValid(r)) {
+                    r.setStatus(ScanStatus.OK);
+                } else {
+                    r.setStatus(ScanStatus.ISSUE);
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
                 r.setProblem(ex.getMessage());
@@ -79,6 +88,14 @@ public class ScanTask extends Task {
             Platform.runLater(() -> progressBar.setProgress(current));
         }
         return processResults;
+    }
+
+    private boolean resultValid(ProcessResult r) {
+        InvoiceValidator invoiceValidator = new InvoiceValidator(r.getExtractionModel().getInvoiceInformation());
+        boolean invoiceValid = invoiceValidator.isValid();
+        AccountingRecordValidator accountingValidator = new AccountingRecordValidator(r.getExtractionModel().getAccountingRecords());
+        boolean accountingRecordsValid = accountingValidator.isValid();
+        return invoiceValid && accountingRecordsValid;
     }
 
     public List<ProcessResult> getResult() {
