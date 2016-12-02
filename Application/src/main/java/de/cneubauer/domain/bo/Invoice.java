@@ -11,7 +11,6 @@ public class Invoice {
     private String invoiceNumber;
     private LegalPerson debitor;
     private LegalPerson creditor;
-    //private List<LegalPerson> parties;
     private Timestamp issueDate;
     private Timestamp deliveryDate;
     private double lineTotal;
@@ -24,6 +23,7 @@ public class Invoice {
     private double skonto;
     private Timestamp createdDate;
     private Timestamp modifiedDate;
+    private boolean revised;
 
     public int getId() {
         return id;
@@ -151,6 +151,14 @@ public class Invoice {
 
     public void setGrandTotal(double grandTotal) {
         this.grandTotal = grandTotal;
+    }
+
+    public boolean isRevised() {
+        return revised;
+    }
+
+    public void setRevised(boolean revised) {
+        this.revised = revised;
     }
 /*
     public List<LegalPerson> getParties() {

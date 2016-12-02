@@ -34,9 +34,9 @@ import static org.apache.commons.lang3.time.DateUtils.addMonths;
  * Basic transformation class that provides methods to convert invoice information to zugferd
  */
 public class ZugFerdTransformator {
-
     private final Logger logger = Logger.getLogger(this.getClass());
 
+    @Deprecated
     void addMockInvoiceToPDF(String pdfPath, String pdfName) throws IOException {
         Invoice metaData = this.createMockInvoice();
         OutputStream outPdf = new FileOutputStream(".\\target\\test-classes\\generatedPDF\\" + pdfName + ".pdf");
@@ -200,6 +200,7 @@ public class ZugFerdTransformator {
         }
     }
 
+    @Deprecated
     Invoice createMockInvoice() {
 
         ZfDate today = new ZfDateDay();

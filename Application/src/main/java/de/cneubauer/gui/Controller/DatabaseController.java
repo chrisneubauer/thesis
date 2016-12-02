@@ -1,6 +1,5 @@
 package de.cneubauer.gui.controller;
 
-import de.cneubauer.domain.bo.Invoice;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -19,14 +18,10 @@ import org.apache.log4j.Logger;
  * Provides controls for searching the database in the UI
  */
 public class DatabaseController extends GUIController {
-    @FXML
-    private DatePicker date;
-    @FXML
-    private TextField creditor;
-    @FXML
-    private TextField debitor;
-    @FXML
-    private TextField value;
+    @FXML private DatePicker date;
+    @FXML private TextField creditor;
+    @FXML private TextField debitor;
+    @FXML private TextField value;
 
     @FXML
     protected void searchInDatabase(ActionEvent e) {

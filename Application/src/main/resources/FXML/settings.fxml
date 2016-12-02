@@ -16,13 +16,12 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+<FlowPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
           prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="de.cneubauer.gui.controller.SettingsController">
     <TabPane prefHeight="351.0" prefWidth="601.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="800.0"
              tabMaxWidth="1200.0">
-        <Tab text="General Settings">
+        <Tab text="%settings.tab.generalSettings">
             <GridPane>
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -45,7 +44,7 @@
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                 </padding>
-                <Label text="Application Language:" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                <Label text="%settings.label.applicationLanguage" GridPane.columnSpan="2" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets left="20.0"/>
                     </GridPane.margin>
@@ -56,9 +55,9 @@
                         <ContextMenu>
                             <items>
                                 <MenuItem fx:id="applicationLanguageGerman" mnemonicParsing="false"
-                                          text="German"/>
+                                          text="%settings.menuitem.german"/>
                                 <MenuItem fx:id="applicationLanguageEnglish" mnemonicParsing="false"
-                                          text="English"/>
+                                          text="%settings.menuitem.english"/>
                             </items>
                         </ContextMenu>
                     </contextMenu>
@@ -68,7 +67,7 @@
                 </ChoiceBox>
             </GridPane>
         </Tab>
-        <Tab text="Scan Settings">
+        <Tab text="%settings.tab.scanSettings">
             <GridPane>
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -91,14 +90,14 @@
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                 </padding>
-                <Label text="Confidence Interval:" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                <Label text="%settings.label.confidenceInterval" GridPane.columnSpan="2" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets left="20.0"/>
                     </GridPane.margin>
                 </Label>
                 <TextField fx:id="confidenceIntervalField" GridPane.columnIndex="2" GridPane.columnSpan="2"
                            GridPane.rowIndex="1"/>
-                <Label text="Used language packs for the OCR reader:" GridPane.columnSpan="4"
+                <Label text="%settings.label.usedLanguagePacks" GridPane.columnSpan="4"
                        GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="20.0"/>
@@ -110,18 +109,18 @@
                         <ContextMenu>
                             <items>
                                 <MenuItem fx:id="tesseractEnglishLanguage" mnemonicParsing="false"
-                                          text="English"/>
+                                          text="%settings.menuitem.tessEnglish"/>
                                 <MenuItem fx:id="tesseractGermanLanguage" mnemonicParsing="false"
-                                          text="German"/>
+                                          text="%settings.menuitem.tessGerman"/>
                                 <MenuItem fx:id="tesseractEnglishAndGerman" mnemonicParsing="false"
-                                          text="English+German"/>
+                                          text="%settings.menuitem.tessEnglishAndGerman"/>
                             </items>
                         </ContextMenu>
                     </contextMenu>
                 </ChoiceBox>
             </GridPane>
         </Tab>
-        <Tab text="ZugFerd Settings">
+        <Tab text="%settings.tab.zugFerdSettings">
             <GridPane>
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -144,7 +143,7 @@
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                 </padding>
-                <Label text="Default .ZugFerd profile:" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                <Label text="%settings.label.defaultProfile" GridPane.columnSpan="3" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets left="20.0"/>
                     </GridPane.margin>
@@ -154,16 +153,16 @@
                     <contextMenu>
                         <ContextMenu>
                             <items>
-                                <MenuItem fx:id="basicLevel" mnemonicParsing="false" text="Basic"/>
-                                <MenuItem fx:id="comfortLevel" mnemonicParsing="false" text="Comfort"/>
-                                <MenuItem fx:id="extendedLevel" mnemonicParsing="false" text="Extended"/>
+                                <MenuItem fx:id="basicLevel" mnemonicParsing="false" text="%settings.menuitem.basicLevel"/>
+                                <MenuItem fx:id="comfortLevel" mnemonicParsing="false" text="%settings.menuitem.comfortLevel"/>
+                                <MenuItem fx:id="extendedLevel" mnemonicParsing="false" text="%settings.menuitem.extendedLevel"/>
                             </items>
                         </ContextMenu>
                     </contextMenu>
                 </ChoiceBox>
             </GridPane>
         </Tab>
-        <Tab text="Database Settings">
+        <Tab text="%settings.tab.databaseSettings">
             <GridPane>
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -186,39 +185,39 @@
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                 </padding>
-                <Label text="Servername:" GridPane.rowIndex="1"/>
+                <Label text="%settings.label.servername" GridPane.rowIndex="1"/>
                 <TextField fx:id="servernameSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets left="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Label text="Database:" GridPane.rowIndex="2"/>
+                <Label text="%settings.label.database" GridPane.rowIndex="2"/>
                 <TextField fx:id="databaseNameSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets left="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Label text="User:" GridPane.rowIndex="3"/>
+                <Label text="%settings.label.user" GridPane.rowIndex="3"/>
                 <TextField fx:id="usernameSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets left="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Label text="Password:" GridPane.rowIndex="4"/>
+                <Label text="%settings.label.password" GridPane.rowIndex="4"/>
                 <TextField fx:id="passwordSettings" GridPane.columnIndex="1" GridPane.columnSpan="2"
                            GridPane.rowIndex="4">
                     <GridPane.margin>
                         <Insets left="10.0"/>
                     </GridPane.margin>
                 </TextField>
-                <Label text="Port:" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+                <Label text="%settings.label.port" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
                 <TextField fx:id="portSettings" GridPane.columnIndex="5" GridPane.columnSpan="2"
                            GridPane.rowIndex="1"/>
                 <Button fx:id="testDatabaseConnectionButton" mnemonicParsing="false"
-                        onAction="#testDatabaseConnection" text="Test database connection"
+                        onAction="#testDatabaseConnection" text="%settings.button.testDatabase"
                         GridPane.columnIndex="4" GridPane.columnSpan="4" GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets left="30.0"/>
@@ -231,11 +230,11 @@
         <ButtonBar layoutX="320.0" layoutY="5.0" prefHeight="40.0" prefWidth="268.0">
             <buttons>
                 <Button fx:id="okButtonSettings" mnemonicParsing="false" onAction="#closeAndSaveSettings"
-                        text="Ok"/>
+                        text="%settings.button.okButton"/>
                 <Button fx:id="cancelButtonSettings" mnemonicParsing="false" onAction="#closeAndIgnoreSettings"
-                        text="Cancel"/>
+                        text="%settings.button.cancelButton"/>
                 <Button fx:id="applyButtonSettings" mnemonicParsing="false" onAction="#applyNewSettings"
-                        text="Apply"/>
+                        text="%settings.button.applyButton"/>
             </buttons>
         </ButtonBar>
     </AnchorPane>

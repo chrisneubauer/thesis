@@ -8,20 +8,30 @@ import de.cneubauer.util.enumeration.FerdLevel;
 import de.cneubauer.util.enumeration.TessLang;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 /**
  * Created by Christoph Neubauer on 04.11.2016.
  * Controller to manage settings selected in the view
  */
 public class SettingsController extends GUIController {
+    @FXML FlowPane root;
+    private Stage primaryStage;
+
     // General settings
     @FXML public ChoiceBox<AppLang> applicationLanguageDropdown;
     
@@ -76,12 +86,14 @@ public class SettingsController extends GUIController {
 
     public void closeAndSaveSettings() {
         this.updateSettings();
-        Stage settingsWindow = (Stage) this.cancelButtonSettings.getScene().getWindow();
+        Stage settingsWindow = (Stage) root.getScene().getWindow();
+        //Stage settingsWindow = (Stage) this.cancelButtonSettings.getScene().getWindow();
         settingsWindow.close();
     }
 
     public void closeAndIgnoreSettings() {
-        Stage settingsWindow = (Stage) this.cancelButtonSettings.getScene().getWindow();
+        //Stage settingsWindow = (Stage) this.cancelButtonSettings.getScene().getWindow();
+        Stage settingsWindow = (Stage) root.getScene().getWindow();
         settingsWindow.close();
     }
 
@@ -178,40 +190,56 @@ public class SettingsController extends GUIController {
 
     // updates all setting values in config.ini
     private void updateSettings() {
-        // first adjust language settings
-        String selectedLanguage = this.getSelectedApplicationLanguage();
-        String currentLanguage = ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue());
+        ConfigHelper.addOrUpdate(Cfg.FERDPROFILE.getValue(), this.getDefaultFerdProfileDropDown());
+        ConfigHelper.addOrUpdate(Cfg.TESSERACTLANGUAGE.getValue(), this.getTesseractLanguageSettingDropDown());
+
+        AppLang selectedLanguage = this.getSelectedApplicationLanguage();
+        AppLang currentLanguage = AppLang.valueOf(ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue()));
+
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Comparing languages: " + selectedLanguage + " and " + currentLanguage);
         if (!Objects.equals(selectedLanguage, currentLanguage)) {
             this.changeLanguage(selectedLanguage);
         }
 
-        ConfigHelper.addOrUpdate(Cfg.FERDPROFILE.getValue(), this.getDefaultFerdProfileDropDown());
-        ConfigHelper.addOrUpdate(Cfg.TESSERACTLANGUAGE.getValue(), this.getTesseractLanguageSettingDropDown());
     }
 
     // changes languages in the application
-    // TODO: make internationalization
-    private void changeLanguage(String newLanguage) {
+    private void changeLanguage(AppLang newLanguage) {
+            Locale locale;
+            if (newLanguage.equals(AppLang.GERMAN)) {
+                locale = Locale.GERMANY;
+                ConfigHelper.addOrUpdate(Cfg.APPLICATIONLANGUAGE.getValue(), AppLang.GERMAN.name());
+            } else {
+                locale = Locale.ENGLISH;
+                ConfigHelper.addOrUpdate(Cfg.APPLICATIONLANGUAGE.getValue(), AppLang.ENGLISH.name());
+            }
 
+            Logger.getLogger(this.getClass()).log(Level.INFO, "trying to apply new language:" + locale.toLanguageTag());
+            Scene oldScene = this.primaryStage.getScene();
+            ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
+            URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/main.fxml");
+            try {
+                if (fxmlURL != null) {
+                    oldScene.setRoot(FXMLLoader.load(fxmlURL, bundle));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
-    private String getSelectedApplicationLanguage() {
-        if (this.applicationLanguageDropdown.getSelectionModel().getSelectedItem().equals(AppLang.ENGLISH)) {
-            return "eng";
-        }
-        else if (this.applicationLanguageDropdown.getSelectionModel().getSelectedItem().equals(AppLang.GERMAN)) {
-            return "deu";
-        }
-        else {
-            return "eng";
-        }
+    private AppLang getSelectedApplicationLanguage() {
+       return this.applicationLanguageDropdown.getSelectionModel().getSelectedItem();
     }
 
     private String getTesseractLanguageSettingDropDown() {
-        if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem().equals(TessLang.ENGLISH)) {
-            return "eng";
-        } else if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem().equals(TessLang.GERMAN)) {
-            return "deu";
+        if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem() != null) {
+            if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem().equals(TessLang.ENGLISH)) {
+                return "eng";
+            } else if (this.tesseractLanguageSettingDropDown.getSelectionModel().getSelectedItem().equals(TessLang.GERMAN)) {
+                return "deu";
+            } else {
+                return "eng+deu";
+            }
         } else {
             return "eng+deu";
         }
@@ -250,5 +278,9 @@ public class SettingsController extends GUIController {
 
     private int getPortSettings() {
         return Integer.parseInt(this.portSettings.getText());
+    }
+
+    void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 }

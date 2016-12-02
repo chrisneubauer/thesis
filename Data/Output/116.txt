@@ -1,0 +1,35 @@
+  EIN  
+, 3% 2075
+1, ., 1110 Seite
+1 1 1
+: Phonak GmbH Postfach 1725 70707 Fellbach-Oeffingen REChnung 2291 541389
+..... HÖRECK Rechnungsdatum: 30.01.2015
+.... Markus Andrae Kundennummer 20092867
+K i h USt.-IdNr.
+a t orststr. 8 Interne Referenz: GO4
+68307 Sand hOan Interne Referenz 2: Hörex
+fx
+. Betrag
+Nummer Bezeichnung ME MWST Einzelpreis EUR
+0020092867 HÖRECK 68307 Sandhofen Kalthorststr. 8
+Probelieferung 2282087907 vom 08.10.2014
+050-0150-P6 Phonak Audeb 030-312 2 ST 7% 276,50 553,00
+fsilbergraul
+SN: 1435X2AUD,1435X2AUE
+054-0106 Standard xHörer 2xS L 1 ST 19% 19,95 19,95
+054-0107 Standard xHörer 2XS R 1 ST 19% 19,95 19,95
+,A Warenwert Versand Nettosumme MwSt-% MwSt-Betrag Gesamt
+Warenwert 7% 553,00 0,00 553,00 7% 38,71 591,71
+Warenwert 19% 39,90 0,00 39,90 19% 7,58 47,48
+Endbetrag EUR 639,19
+Zahlungsbedingungen Bis zum 19.02.2015 erhalten Sie 3,000 % Skonto 1 EUR 19.171
+Bis zum 01.03.2015 ohne Abzug
+Zahlungsform Uberweisung
+Das Skonto bezieht sich auf den Warenwert der Positionen.
+Phonak GmbH Telefon: 0711l51070-101 Deutsche Bank Esslingen O 138 0991BLZ 611 700 761
+Max-Eyth-StraBe 20 Telefax: 0711l51070-151
+70736 Fellbach-Oeffingen E-Mail: verkaqugDphonakcom St.-Nr.90491I61138 BIC Code: DEUTDESS611
+bei Stuttgart Internet: www.phonak.de USt.-ldNr. DE251821339 IBANzDE48 6117 0076 0013 8099 00
+Gerichtsstand ist Stuttgart Amtsgericht Stuttgart HRB 721942 Geschäftsführer: Dr. Roger Baumann, Joachim Schönhofen . .
+Für Lieferungen, Leistungen und Angebote gelten ausschlieBlich unsere Geschäftsbedingungen. Das Lieferscheindatum entspricht dem Leistungsdatum. Das
+Fakturadatum der Probelieferung entspricht dem Leistungsdatum.

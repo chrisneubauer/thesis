@@ -81,6 +81,7 @@ public final class ConfigHelper {
         } else {
             config.replace(key, value);
         }
+        rewrite(config);
     }
 
     // extends config file for one line

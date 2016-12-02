@@ -1,0 +1,46 @@
+SAMMELRECHNUNG NR. 4127895 vom 31.07.2015 Kunde 2908.000 Seite 2 von 3
+m
+mx
+Abstützung 0,00 19,00
+Nebenkanal 2,0 0,00 19,00
+Aufnahme für Minischlaucthlick Tube 0,00 19,00
+anteilige Transportkosten 4,40 19,00
+Zwischensumme %
+M Lieferschein 3812450 v. 06.07.15
+Kom.: Mechnig,Harry, Ident:002380, Box:A650,DB-ID:96986,Code:LCKM
+open Folie 65 Fototec,links l 20,90 17,35 17,35 19,00
+Abstützung 0,00 19,00
+Nebenkanal 2,0 0,00 19,00
+Aufnahme für Minischlauch1Fix Tube 0,00 .1 9,00
+open Folie 65 Fototec,rechts 1 20,90 17,35 17,35 19,00
+,A Abstützung 0,00 19,00
+Nebenkanal 2,0 0,00 19,00
+Aufnahme für Minischlaucthix Tube 0,00 19,00
+anteilige Transportkosten 4,40 19,00
+Zwischensumme 39,10
+% Lieferschein 3812688 v. 06.07.15
+K0m.: Wittmann,Anna, Ident:002387, Box:D945,DB-ID:97475,Code:LDKS
+open Folie, Fototec,links, 1 29,90 24,82 24,82 19,00
+Abstützung 0,00 19,00
+Nebenkanal 1,5 0,00 19,00
+Aufnahme für AuBenhörer 2,00 19,00
+Strass 3 Steine 5,00 19,00
+anteilige Transportkosten 4,40 19,00
+Zwischensumme 36,22
+M Lieferschein 3817084 v. 28.07.15
+Kom.: Oehmig,Bernd, Ident:002400, Box:A549,DB-ID:991 11,Code:LGUB ,
+open Folie,Thermotec7,links, 1 39,90 33,12 33,12 19,00
+fx Abstützung 8,88 113,88
+Nebenkanal gröBtmöglich 0,00 19,00
+Aufnahme für Minischlauch1Click Tube , ,
+- . . l 39 90 33,12 33,12 19,00
+open Folie,Thermotec7,iechts, , 0,00 19,00
+Abstützung . . 0,00 19,00
+Nebenkanal gröBtmbglich . 0,00 19,00
+Aufnahme für Minischlauch1Click Tube 4,40 19,00
+anteilige Transportkosten T
+Zwischensumme
+284,94
+Steuer
+339,08
+W

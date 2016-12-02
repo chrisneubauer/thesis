@@ -1,8 +1,9 @@
 package de.cneubauer.domain.service;
 
-import de.cneubauer.domain.bo.CorporateForm;
-import de.cneubauer.domain.bo.Invoice;
-import de.cneubauer.domain.bo.LegalPerson;
+import de.cneubauer.domain.bo.*;
+import de.cneubauer.domain.dao.AccountDao;
+import de.cneubauer.domain.dao.impl.AccountDaoImpl;
+import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -11,8 +12,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by Christoph Neubauer on 20.10.2016.
@@ -21,20 +21,11 @@ import java.util.Date;
  */
 public class OCRDataExtractorService {
     private String file;
-
     private double confidence = 1 - (Double.valueOf(ConfigHelper.getValue("confidenceRate")));
 
     public OCRDataExtractorService(String file) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Using confidence level: " + confidence*100 + "%");
         this.file = file;
-    }
-
-    public double getConfidence() {
-        return confidence;
-    }
-
-    public void setConfidence(double confidence) {
-        this.confidence = confidence;
     }
 
     public String getFile() {
@@ -45,7 +36,11 @@ public class OCRDataExtractorService {
         this.file = file;
     }
 
-    public Invoice extractInformation() {
+    /*
+     * Method to search for invoice metadata in the scanned page
+     * @return the invoice metadata that has been found
+     */
+    public Invoice extractInvoiceInformation() {
         Invoice result = new Invoice();
         result.setInvoiceNumber(this.findInvoiceNumber());
         result.setIssueDate(this.findIssueDate());
@@ -67,6 +62,77 @@ public class OCRDataExtractorService {
         result.setGrandTotal(helper.getGrandTotal());
 
         return result;
+    }
+
+    // TODO: REMOVE METHOD! ONLY FOR TESTING GUI
+    private AccountingRecord fakeAccount(Account cred, Account deb) {
+        AccountingRecord mock = new AccountingRecord();
+        mock.setDebit(deb);
+        mock.setCredit(cred);
+        mock.setEntryText("MockPosition");
+        mock.setBruttoValue(200);
+        mock.setVat_rate(0.19);
+        return mock;
+    }
+    /*
+     * Uses scanned page and looks for several information regarding accounting records
+     * @return  returns a list of all AccountingRecords that has been found on the page
+     */
+    public List<AccountingRecord> extractAccountingRecordInformation() {
+        List<AccountingRecord> records = new LinkedList<>();
+        //TODO: Additional filtering through the branch of the company
+
+        //TODO: Filtering if invoice or voucher
+        AccountDao dao = new AccountDaoImpl();
+
+        List<Account> accountsLeft = dao.getAll();
+
+        int index = 0;
+        String[] lines = this.fileToArray();
+        for (String line : lines) {
+            if (this.getAverageDistanceOfSearchConditions(line, new String[] { "Art.-Nr.", "Artikel", "Beschreibung" }) < this.getConfidence()) {
+                if (lines.length > index) {
+                    String nextLine = lines[index + 1];
+                    while(!this.nextLineContainsValue(nextLine) && lines.length > index + 1) {
+                        // go on until we find a line with value or end of file reached
+                        index++;
+                    }
+                    // now we have a line with position information
+                    AccountingRecord r = new AccountingRecord();
+                    r.setEntryText(nextLine);
+                    records.add(r);
+                } else {
+                    // break on eof
+                    break;
+                }
+            } else {
+                index++;
+            }
+        }
+
+        Map<String, String> values = AccountFileHelper.getConfig();
+
+        for (AccountingRecord r : records) {
+            for (String key : values.keySet()) {
+                if (StringUtils.getLevenshteinDistance(key, r.getEntryText()) < this.getConfidence()) {
+                    for (Account a : accountsLeft) {
+                        if (a.getAccountNo().equals(values.get(key))) {
+                            r.setDebit(a);
+                        }
+                    }
+                }
+            }
+        }
+
+        //TODO: remove fakes
+        records.add(this.fakeAccount(accountsLeft.get(0), accountsLeft.get(4)));
+        records.add(this.fakeAccount(accountsLeft.get(1), accountsLeft.get(0)));
+        records.add(this.fakeAccount(accountsLeft.get(0), accountsLeft.get(1)));
+        records.add(this.fakeAccount(accountsLeft.get(3), accountsLeft.get(2)));
+        records.add(this.fakeAccount(accountsLeft.get(1), accountsLeft.get(2)));
+        records.add(this.fakeAccount(accountsLeft.get(6), accountsLeft.get(1)));
+
+        return records;
     }
 
     private InvoiceInformationHelper findInvoiceValues() {
@@ -340,7 +406,7 @@ public class OCRDataExtractorService {
     private String findLineWithContainingInformation(String[] searchConditions) {
         String[] lines = this.fileToArray();
         for (String line : lines) {
-            if (this.getAverageDistanceOfSearchConditions(line, searchConditions) < 0.2) {
+            if (this.getAverageDistanceOfSearchConditions(line, searchConditions) < this.getConfidence()) {
                 return line;
             }
         }
@@ -350,5 +416,24 @@ public class OCRDataExtractorService {
 
     private String[] fileToArray() {
         return this.file.split("\n");
+    }
+
+    private boolean nextLineContainsValue(String nextLine) {
+        if (nextLine.contains(",")) {
+            String[] parts = nextLine.split(",");
+            for (int i = 0; i < parts.length - 1; i++) {
+                String part = parts[i];
+                part = part.substring(part.length() - 1, part.length());
+                String nextPart = parts[i+1];
+                if (StringUtils.isNumeric(part) && StringUtils.isNumeric(nextPart.substring(0,1))) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private double getConfidence() {
+        return confidence;
     }
 }

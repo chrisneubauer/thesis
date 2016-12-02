@@ -2,8 +2,10 @@ package de.cneubauer.gui.controller;
 
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.LegalPerson;
+import de.cneubauer.domain.helper.InvoiceFileHelper;
 import de.cneubauer.domain.service.ZugFerdExtendService;
 import javafx.beans.value.ChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,7 +30,7 @@ import java.util.Locale;
  */
 public class ResultsController extends GUIController {
     public Button SaveExtractedInvoiceToDatabase;
-    private String filePath;
+    private SplitPaneController superCtrl;
 
     @FXML private TextField extractedInvoiceNumber;
     @FXML private TextField extractedCreditor;
@@ -44,9 +46,11 @@ public class ResultsController extends GUIController {
     @FXML private Label extractedSkontoLabel;
     @FXML private TextField extractedSkonto;
     @FXML private TextField extractedDeliveryDate;
+    private Invoice model;
 
-    void initData(Invoice extractedInformation, String pdfPath) {
-        this.filePath = pdfPath;
+    void initData(Invoice extractedInformation, SplitPaneController superCtrl) {
+        this.superCtrl = superCtrl;
+        this.model = extractedInformation;
         this.showResultsBeforeSave(extractedInformation);
         this.addAllListeners();
     }
@@ -119,6 +123,7 @@ public class ResultsController extends GUIController {
     }
 
     @FXML
+    @Deprecated
     public void saveToDatabase() {
         if (this.validateFieldsBeforeSave()) {
             try {
@@ -126,10 +131,6 @@ public class ResultsController extends GUIController {
                 ZugFerdExtendService service = new ZugFerdExtendService();
 
                 Invoice i = this.convertToInvoice();
-                byte[] originalPdf = Files.readAllBytes(new File(this.filePath).toPath());
-
-                byte[] pdf = service.appendInvoiceToPDF(originalPdf, i);
-                service.save(pdf, i);
                 this.generateSuccessMessage();
                 this.closeExtractionAfterSave();
             } catch (Exception ex){
@@ -155,7 +156,7 @@ public class ResultsController extends GUIController {
         alert.showAndWait();
     }
 
-    private boolean validateFieldsBeforeSave() {
+    boolean validateFieldsBeforeSave() {
         boolean result = true;
         if (this.extractedInvoiceNumber.getText() == null || this.extractedInvoiceNumber.getText().isEmpty()) {
             this.extractedInvoiceNumber.getStyleClass().add("error");
@@ -274,5 +275,28 @@ public class ResultsController extends GUIController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    // when called, invoice has been reviewed by the user
+    // set invoice to be reviewed and update all information given
+    public void setReviewed(ActionEvent actionEvent) {
+        superCtrl.reviseAll();
+    }
+
+    Invoice updateInformation() {
+        return this.convertToInvoice();
+    }
+
+    void addRevisedToFile() {
+        // check if all records have been revised before saving
+        if (this.validateFieldsBeforeSave()) {
+            if (this.model.isRevised()) {
+                InvoiceFileHelper.write(this.model.getDebitor().getName(), this.model.getCreditor().getName());
+            }
+        }
+    }
+
+    public void checkReviewed(ActionEvent actionEvent) {
+        this.model.setRevised(true);
     }
 }

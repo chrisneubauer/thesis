@@ -1,0 +1,10 @@
+Art.-Nr.Bezeichnung Menge Einzelpreis
+EUR
+R010 Fehlerdiagnose 1 6,15
+R230 Leistungskontrolle 1 5,00
+R210 Kleinmaterial 1 3,00
+R310 Reinigung 1 9,50
+W R021 Mikrofone für Mehrmic.-System 1 62,00
+R030 Höredpassiv 1 44,00
+antl. Versandkosten 1 5,90
+W

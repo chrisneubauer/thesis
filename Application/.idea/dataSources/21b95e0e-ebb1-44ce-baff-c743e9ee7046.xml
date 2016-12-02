@@ -4,133 +4,383 @@
     <schema id="1" name="ferd_transformator">
       <visible>1</visible>
     </schema>
-    <table id="2" parent="1" name="invoice"/>
-    <table id="3" parent="1" name="legalperson"/>
-    <table id="4" parent="1" name="scan"/>
-    <column id="5" parent="2" name="Id">
+    <schema id="2" name="information_schema"/>
+    <schema id="3" name="mysql"/>
+    <schema id="4" name="performance_schema"/>
+    <schema id="5" name="sys"/>
+    <table id="6" parent="1" name="invoice"/>
+    <table id="7" parent="1" name="legalperson"/>
+    <table id="8" parent="1" name="scan"/>
+    <table id="9" parent="1" name="account"/>
+    <table id="10" parent="1" name="accounttype"/>
+    <table id="11" parent="1" name="address"/>
+    <table id="12" parent="1" name="corporateform"/>
+    <table id="13" parent="1" name="country"/>
+    <table id="14" parent="1" name="country_corporateform"/>
+    <column id="15" parent="6" name="Id">
       <mandatory>1</mandatory>
-      <data-type>INT UNSIGNED(10)|4</data-type>
+      <data-type>int(6) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="6" parent="2" name="Debitor">
-      <data-type>INT UNSIGNED(10)|4</data-type>
+    <column id="16" parent="6" name="InvoiceNumber">
+      <data-type>varchar(50)|0</data-type>
     </column>
-    <column id="7" parent="2" name="Creditor">
-      <data-type>INT UNSIGNED(10)|4</data-type>
+    <column id="17" parent="6" name="DeliveryDate">
+      <data-type>timestamp|0</data-type>
     </column>
-    <column id="8" parent="2" name="Date">
+    <column id="18" parent="6" name="LineTotal">
+      <data-type>decimal(15,2)|0</data-type>
+    </column>
+    <column id="19" parent="6" name="ChargeTotal">
+      <data-type>decimal(15,2)|0</data-type>
+    </column>
+    <column id="20" parent="6" name="AllowanceTotal">
+      <data-type>decimal(15,2)|0</data-type>
+    </column>
+    <column id="21" parent="6" name="TaxBasisTotal">
+      <data-type>decimal(15,2)|0</data-type>
+    </column>
+    <column id="22" parent="6" name="TaxTotal">
+      <data-type>decimal(15,2)|0</data-type>
+    </column>
+    <column id="23" parent="6" name="HasSkonto">
+      <data-type>tinyint(1)|0</data-type>
+    </column>
+    <column id="24" parent="6" name="Skonto">
+      <data-type>decimal(2,1)|0</data-type>
+    </column>
+    <column id="25" parent="6" name="CreatedDate">
       <mandatory>1</mandatory>
-      <data-type>TIMESTAMP(19)|93</data-type>
-      <default-expression>CURRENT_TIMESTAMP</default-expression>
-    </column>
-    <column id="9" parent="2" name="MoneyValue">
-      <data-type>DECIMAL(15,2)|3</data-type>
-    </column>
-    <column id="10" parent="2" name="HasSkonto">
-      <data-type>TINYINT(3)|-6</data-type>
-    </column>
-    <column id="11" parent="2" name="Skonto">
-      <data-type>DECIMAL(2,1)|3</data-type>
-    </column>
-    <column id="12" parent="2" name="CreatedDate">
-      <mandatory>1</mandatory>
-      <data-type>TIMESTAMP(19)|93</data-type>
+      <data-type>timestamp|0</data-type>
       <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
     </column>
-    <column id="13" parent="2" name="ModifiedDate">
+    <column id="26" parent="6" name="ModifiedDate">
       <mandatory>1</mandatory>
-      <data-type>TIMESTAMP(19)|93</data-type>
+      <data-type>timestamp|0</data-type>
       <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
     </column>
-    <key id="14" parent="2" name="PRIMARY">
+    <column id="27" parent="6" name="GrandTotal">
+      <data-type>decimal(15,2)|0</data-type>
+    </column>
+    <column id="28" parent="6" name="IssueDate">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="29" parent="6" name="Debitor">
+      <data-type>int(6) unsigned|0</data-type>
+    </column>
+    <column id="30" parent="6" name="Creditor">
+      <data-type>int(6) unsigned|0</data-type>
+    </column>
+    <index id="31" parent="6" name="Creditor">
+      <columns>Creditor</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="32" parent="6" name="Debitor">
+      <columns>Debitor</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="33" parent="6" name="PRIMARY">
       <columns>Id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="15" parent="2" name="invoice_ibfk_1">
+    <foreign-key id="34" parent="6" name="invoice_ibfk_2">
       <columns>Debitor</columns>
       <ref-key>~.legalperson.PRIMARY</ref-key>
-      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="16" parent="2" name="invoice_ibfk_2">
+    <foreign-key id="35" parent="6" name="invoice_ibfk_3">
       <columns>Creditor</columns>
       <ref-key>~.legalperson.PRIMARY</ref-key>
-      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <column id="17" parent="3" name="Id">
+    <column id="36" parent="7" name="Id">
       <mandatory>1</mandatory>
-      <data-type>INT UNSIGNED(10)|4</data-type>
+      <data-type>int(6) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="18" parent="3" name="IsCompany">
+    <column id="37" parent="7" name="IsCompany">
       <mandatory>1</mandatory>
-      <data-type>TINYINT(3)|-6</data-type>
+      <data-type>tinyint(1)|0</data-type>
     </column>
-    <column id="19" parent="3" name="CompanyName">
-      <data-type>VARCHAR(100)|12</data-type>
+    <column id="38" parent="7" name="CompanyName">
+      <data-type>varchar(100)|0</data-type>
     </column>
-    <column id="20" parent="3" name="CorporateForm">
-      <data-type>VARCHAR(30)|12</data-type>
+    <column id="39" parent="7" name="CorporateForm">
+      <data-type>int(6) unsigned|0</data-type>
     </column>
-    <column id="21" parent="3" name="Name">
-      <data-type>VARCHAR(100)|12</data-type>
+    <column id="40" parent="7" name="Name">
+      <data-type>varchar(100)|0</data-type>
     </column>
-    <column id="22" parent="3" name="SurName">
-      <data-type>VARCHAR(100)|12</data-type>
+    <column id="41" parent="7" name="FirstName">
+      <data-type>varchar(100)|0</data-type>
     </column>
-    <column id="23" parent="3" name="Street">
-      <data-type>VARCHAR(100)|12</data-type>
+    <column id="42" parent="7" name="Address">
+      <data-type>int(6) unsigned|0</data-type>
     </column>
-    <column id="24" parent="3" name="ZipCode">
-      <data-type>INT(10)|4</data-type>
-    </column>
-    <column id="25" parent="3" name="City">
-      <data-type>VARCHAR(100)|12</data-type>
-    </column>
-    <column id="26" parent="3" name="CreatedDate">
+    <column id="43" parent="7" name="CreatedDate">
       <mandatory>1</mandatory>
-      <data-type>TIMESTAMP(19)|93</data-type>
+      <data-type>timestamp|0</data-type>
       <default-expression>CURRENT_TIMESTAMP</default-expression>
     </column>
-    <column id="27" parent="3" name="ModifiedDate">
+    <column id="44" parent="7" name="ModifiedDate">
       <mandatory>1</mandatory>
-      <data-type>TIMESTAMP(19)|93</data-type>
+      <data-type>timestamp|0</data-type>
       <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
     </column>
-    <key id="28" parent="3" name="PRIMARY">
+    <index id="45" parent="7" name="Address">
+      <columns>Address</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="46" parent="7" name="CorporateForm">
+      <columns>CorporateForm</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="47" parent="7" name="PRIMARY">
       <columns>Id</columns>
       <primary>1</primary>
     </key>
-    <column id="29" parent="4" name="Id">
+    <foreign-key id="48" parent="7" name="legalperson_ibfk_1">
+      <columns>CorporateForm</columns>
+      <ref-key>~.corporateform.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="49" parent="7" name="legalperson_ibfk_2">
+      <columns>Address</columns>
+      <ref-key>~.address.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="50" parent="8" name="Id">
       <mandatory>1</mandatory>
-      <data-type>INT UNSIGNED(10)|4</data-type>
+      <data-type>int(6) unsigned|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="30" parent="4" name="File">
-      <data-type>BLOB(65535)|-4</data-type>
+    <column id="51" parent="8" name="File">
+      <data-type>mediumblob|0</data-type>
     </column>
-    <column id="31" parent="4" name="InvoiceInformation">
-      <data-type>INT UNSIGNED(10)|4</data-type>
+    <column id="52" parent="8" name="InvoiceInformation">
+      <data-type>int(6) unsigned|0</data-type>
     </column>
-    <column id="32" parent="4" name="CreatedDate">
+    <column id="53" parent="8" name="CreatedDate">
       <mandatory>1</mandatory>
-      <data-type>TIMESTAMP(19)|93</data-type>
+      <data-type>timestamp|0</data-type>
       <default-expression>CURRENT_TIMESTAMP</default-expression>
     </column>
-    <column id="33" parent="4" name="ModifiedDate">
+    <column id="54" parent="8" name="ModifiedDate">
       <mandatory>1</mandatory>
-      <data-type>TIMESTAMP(19)|93</data-type>
+      <data-type>timestamp|0</data-type>
       <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
     </column>
-    <key id="34" parent="4" name="PRIMARY">
+    <index id="55" parent="8" name="InvoiceInformation">
+      <columns>InvoiceInformation</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="56" parent="8" name="PRIMARY">
       <columns>Id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="35" parent="4" name="scan_ibfk_1">
+    <foreign-key id="57" parent="8" name="scan_ibfk_1">
       <columns>InvoiceInformation</columns>
       <ref-key>~.invoice.PRIMARY</ref-key>
-      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="58" parent="9" name="Id">
+      <mandatory>1</mandatory>
+      <data-type>int(6) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="59" parent="9" name="AccountNo">
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="60" parent="9" name="Name">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="61" parent="9" name="AccountType_Id">
+      <mandatory>1</mandatory>
+      <data-type>int(6) unsigned|0</data-type>
+    </column>
+    <index id="62" parent="9" name="AccountType_Id">
+      <columns>AccountType_Id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="63" parent="9" name="PRIMARY">
+      <columns>Id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="64" parent="9" name="account_ibfk_1">
+      <columns>AccountType_Id</columns>
+      <ref-key>~.accounttype.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="65" parent="10" name="Id">
+      <mandatory>1</mandatory>
+      <data-type>int(6) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="66" parent="10" name="Type">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="67" parent="10" name="Name">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <key id="68" parent="10" name="PRIMARY">
+      <columns>Id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="69" parent="11" name="Id">
+      <mandatory>1</mandatory>
+      <data-type>int(6) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="70" parent="11" name="Street">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="71" parent="11" name="ZipCode">
+      <data-type>int(5)|0</data-type>
+    </column>
+    <column id="72" parent="11" name="City">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="73" parent="11" name="Country">
+      <data-type>int(6) unsigned|0</data-type>
+    </column>
+    <column id="74" parent="11" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="75" parent="11" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
+    </column>
+    <index id="76" parent="11" name="Country">
+      <columns>Country</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="77" parent="11" name="PRIMARY">
+      <columns>Id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="78" parent="11" name="address_ibfk_1">
+      <columns>Country</columns>
+      <ref-key>~.country.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="79" parent="12" name="Id">
+      <mandatory>1</mandatory>
+      <data-type>int(6) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="80" parent="12" name="Name">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="81" parent="12" name="ShortName">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="82" parent="12" name="UsedInCountries">
+      <data-type>int(6) unsigned|0</data-type>
+    </column>
+    <column id="83" parent="12" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="84" parent="12" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
+    </column>
+    <index id="85" parent="12" name="UsedInCountries">
+      <columns>UsedInCountries</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="86" parent="12" name="PRIMARY">
+      <columns>Id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="87" parent="12" name="corporateform_ibfk_1">
+      <columns>UsedInCountries</columns>
+      <ref-key>~.country_corporateform.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="88" parent="13" name="Id">
+      <mandatory>1</mandatory>
+      <data-type>int(6) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="89" parent="13" name="Name">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="90" parent="13" name="Abbreviation">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="91" parent="13" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="92" parent="13" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
+    </column>
+    <key id="93" parent="13" name="PRIMARY">
+      <columns>Id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="94" parent="14" name="Id">
+      <mandatory>1</mandatory>
+      <data-type>int(6) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="95" parent="14" name="Country_Id">
+      <mandatory>1</mandatory>
+      <data-type>int(6) unsigned|0</data-type>
+    </column>
+    <column id="96" parent="14" name="CorporateForm_Id">
+      <mandatory>1</mandatory>
+      <data-type>int(6) unsigned|0</data-type>
+    </column>
+    <column id="97" parent="14" name="CreatedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="98" parent="14" name="ModifiedDate">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
+    </column>
+    <index id="99" parent="14" name="CorporateForm_Id">
+      <columns>CorporateForm_Id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="100" parent="14" name="Country_Id">
+      <columns>Country_Id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="101" parent="14" name="PRIMARY">
+      <columns>Id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="102" parent="14" name="country_corporateform_ibfk_1">
+      <columns>Country_Id</columns>
+      <ref-key>~.country.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="103" parent="14" name="country_corporateform_ibfk_2">
+      <columns>CorporateForm_Id</columns>
+      <ref-key>~.corporateform.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
   </database-model>

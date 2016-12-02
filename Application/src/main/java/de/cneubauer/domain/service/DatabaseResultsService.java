@@ -20,6 +20,15 @@ public class DatabaseResultsService {
     private ScanDao scanDao;
     private InvoiceDao invoiceDao;
 
+    /*
+     * Calls database and searches for Scans that match the specified values
+     * @param   date    the date when the invoice has been specified
+     * TODO: dateFrom and dateTo
+     * @param   deb     the debitor to search for
+     * @param   cred    the creditor to search for
+     * @param   value   the value the total sum of the invoice has
+     * @return  a list of all scans that match the specified criteria
+     */
     public List<Scan> getFromDatabase(LocalDate date, String deb, String cred, double value) {
         scanDao = new ScanDaoImpl();
         invoiceDao = new InvoiceDaoImpl();
