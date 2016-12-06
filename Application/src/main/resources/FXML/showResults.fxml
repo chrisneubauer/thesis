@@ -168,11 +168,11 @@
                 </GridPane.margin>
             </TextField>
          <Label prefHeight="17.0" prefWidth="107.0" text="%showResults.label.reviewed" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="14" />
-         <CheckBox mnemonicParsing="false" onAction="#checkReviewed" GridPane.columnIndex="9" GridPane.rowIndex="14">
+         <!--<CheckBox mnemonicParsing="false" onAction="#checkReviewed" GridPane.columnIndex="9" GridPane.rowIndex="14">
             <GridPane.margin>
                <Insets left="35.0" />
             </GridPane.margin>
-         </CheckBox>
+         </CheckBox>-->
         </GridPane>
            <Button fx:id="SaveExtractedInvoiceToDatabase" alignment="TOP_CENTER" layoutX="457.0" layoutY="362.0" mnemonicParsing="false" onAction="#setReviewed" text="%showResults.button.review" />
     </AnchorPane>

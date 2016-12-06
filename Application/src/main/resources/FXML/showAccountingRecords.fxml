@@ -56,12 +56,12 @@
             <Label prefHeight="17.0" prefWidth="107.0" text="%showAccountingRecords.label.accountType" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4" />
          <ComboBox fx:id="fromDropDownAccountType" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4" />
             <Label prefHeight="17.0" prefWidth="107.0" text="%showAccountingRecords.label.account" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-         <ComboBox fx:id="fromDropDownAccount" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+         <ComboBox fx:id="fromDropDownAccount" editable="true" prefWidth="150.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="5" />
          <Label text="%showAccountingRecords.label.to" GridPane.columnIndex="7" GridPane.rowIndex="3" />
          <Label prefHeight="17.0" prefWidth="107.0" text="%showAccountingRecords.label.accountType" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="4" />
          <ComboBox fx:id="toDropDownAccountType" prefWidth="150.0" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.rowIndex="4" />
          <Label prefHeight="17.0" prefWidth="107.0" text="%showAccountingRecords.label.account" GridPane.columnIndex="7" GridPane.rowIndex="5" />
-         <ComboBox fx:id="toDropDownAccount" prefWidth="150.0" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+         <ComboBox fx:id="toDropDownAccount" editable="true" prefWidth="150.0" GridPane.columnIndex="9" GridPane.columnSpan="2" GridPane.rowIndex="5" />
          <Label prefHeight="17.0" prefWidth="107.0" text="%showAccountingRecords.label.value" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          <TextField fx:id="positionValue" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6" />
          <ImageView fx:id="confidenceImage" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
@@ -70,11 +70,11 @@
             </GridPane.margin>
          </ImageView>
          <Label prefHeight="17.0" prefWidth="107.0" text="%showAccountingRecords.label.confidenceLevel" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="7" />
-         <CheckBox fx:id="recordRevised" mnemonicParsing="false" onAction="#checkRevised" text="%showAccountingRecords.checkbox.recordRevised" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="7">
+         <!--<CheckBox fx:id="recordRevised" mnemonicParsing="false" onAction="#checkRevised" text="%showAccountingRecords.checkbox.recordRevised" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="7">
             <GridPane.margin>
                <Insets left="20.0" />
             </GridPane.margin>
-         </CheckBox>
+         </CheckBox>-->
             <ButtonBar buttonMinWidth="120.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="7" GridPane.rowIndex="8">
                 <buttons>
                     <Button fx:id="SaveAccountingRecords" mnemonicParsing="false" onAction="#setReviewed" text="%showAccountingRecords.button.reviewed" />
