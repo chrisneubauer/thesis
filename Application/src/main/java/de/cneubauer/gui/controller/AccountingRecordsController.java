@@ -50,6 +50,8 @@ public class AccountingRecordsController extends SplitPaneController {
         Logger.getLogger(this.getClass()).log(Level.INFO, "initiating AccountingRecordsController data");
         List<AccountingRecordModel> records = this.convertToAccountingRecordModel(data);
         this.setRecordsFound(records);
+        this.possiblePosition.getScene().getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
+
         Logger.getLogger(this.getClass()).log(Level.INFO, records.size() + " records found!");
 
         if (records.size() > 0) {
@@ -186,7 +188,7 @@ public class AccountingRecordsController extends SplitPaneController {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Listeners added to textfields");*/
     }
 
-    public void addRevisedToFile() {
+    void addRevisedToFile() {
         // check if all records have been revised before saving
         if (this.validateAccountingRecords()) {
             for (AccountingRecordModel acc : this.recordsFound) {
@@ -273,6 +275,8 @@ public class AccountingRecordsController extends SplitPaneController {
         if (accountingRecord.getEntryText() != null) {
             this.setPossiblePosition(accountingRecord.getEntryText());
         }
+
+        Logger.getLogger(this.getClass()).log(Level.INFO, "current confidence: " + currentModel.getConfidence());
     }
 
     private String getCurrentRecord() {
@@ -382,8 +386,33 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     boolean validateFieldsBeforeSave() {
-        // TODO: implement validation
-        return false;
+        boolean result = true;
+
+        if (this.fromDropDownAccountType.getSelectionModel().getSelectedItem() == null) {
+            this.fromDropDownAccountType.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.fromDropDownAccount.getSelectionModel().getSelectedItem() == null) {
+            this.fromDropDownAccount.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.toDropDownAccountType.getSelectionModel().getSelectedItem() == null) {
+            this.toDropDownAccountType.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.toDropDownAccount.getSelectionModel().getSelectedItem() == null) {
+            this.toDropDownAccount.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.positionValue.getText() == null || this.positionValue.getText().isEmpty()) {
+            this.positionValue.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.possiblePosition.getText() == null || this.possiblePosition.getText().isEmpty()) {
+            this.possiblePosition.getStyleClass().add("error");
+            result = false;
+        }
+        return result;
     }
 
     List<AccountingRecord> updateInformation() {

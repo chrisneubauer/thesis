@@ -5,7 +5,7 @@ import de.cneubauer.domain.bo.LegalPerson;
 import de.cneubauer.domain.helper.InvoiceFileHelper;
 import de.cneubauer.domain.service.ZugFerdExtendService;
 import javafx.beans.value.ChangeListener;
-import javafx.event.ActionEvent;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,8 +15,6 @@ import javafx.stage.Stage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.io.File;
-import java.nio.file.Files;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,6 +50,7 @@ public class ResultsController extends GUIController {
         this.superCtrl = superCtrl;
         this.model = extractedInformation;
         this.showResultsBeforeSave(extractedInformation);
+        this.extractedDebitor.getScene().getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
         this.addAllListeners();
     }
 
@@ -158,11 +157,14 @@ public class ResultsController extends GUIController {
 
     boolean validateFieldsBeforeSave() {
         boolean result = true;
+
         if (this.extractedInvoiceNumber.getText() == null || this.extractedInvoiceNumber.getText().isEmpty()) {
             this.extractedInvoiceNumber.getStyleClass().add("error");
             result = false;
         }
         if (this.extractedCreditor.getText() == null || this.extractedCreditor.getText().isEmpty()) {
+            ObservableList<String> styles = this.extractedCreditor.getStyleClass();
+            styles.add("error");
             this.extractedCreditor.getStyleClass().add("error");
             result = false;
         }
@@ -279,7 +281,7 @@ public class ResultsController extends GUIController {
 
     // when called, invoice has been reviewed by the user
     // set invoice to be reviewed and update all information given
-    public void setReviewed(ActionEvent actionEvent) {
+    public void setReviewed() {
         superCtrl.reviseAll();
     }
 
@@ -296,7 +298,7 @@ public class ResultsController extends GUIController {
         }
     }
 
-    public void checkReviewed(ActionEvent actionEvent) {
+    public void checkReviewed() {
         this.model.setRevised(true);
     }
 }
