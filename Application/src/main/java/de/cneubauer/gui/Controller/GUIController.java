@@ -119,23 +119,12 @@ public class GUIController {
             VBox v = loader.load();
 
 
-            Scene scene = new Scene(v, 1200, 800);
+            Scene scene = new Scene(v, 600, 200);
             stage.setScene(scene);
-
-            /*
-            Stage popupStage = new Stage(StageStyle.DECORATED);
-            popupStage.setX(stage.getX() + 100);
-            popupStage.setY(stage.getY() + 100);
-            popupStage.setTitle("Settings");
-            popupStage.initOwner(stage);
-            popupStage.initModality(Modality.APPLICATION_MODAL);
-            popupStage.setScene(scene);*/
+            stage.setMaximized(false);
 
             ProgressController ctrl = loader.getController();
             ctrl.initData(files);
-
-            //popupStage.show();
-            //ctrl.progressFiles();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

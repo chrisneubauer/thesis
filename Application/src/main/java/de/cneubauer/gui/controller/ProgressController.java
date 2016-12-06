@@ -61,8 +61,9 @@ public class ProgressController extends GUIController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/processedList.fxml"), bundle);
 
             Parent root = loader.load();
-            Scene scene = new Scene(root, 1200, 800);
+            Scene scene = new Scene(root, 800, 600);
             stage.setScene(scene);
+            stage.setMaximized(true);
 
             ProcessedListController ctrl = loader.getController();
             ctrl.initData(processResults);

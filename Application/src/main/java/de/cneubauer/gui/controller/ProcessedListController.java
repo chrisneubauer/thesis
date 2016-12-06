@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -109,11 +110,11 @@ public class ProcessedListController extends GUIController {
                         ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/splitPane.fxml"), bundle);
                         Parent root = loader.load();
-                        Scene scene = new Scene(root, 800, 600);
+                        Scene scene = new Scene(root, Screen.getPrimary().getVisualBounds().getMaxX() - 100, Screen.getPrimary().getVisualBounds().getMaxY() - 100);
 
                         Stage popupStage = new Stage(StageStyle.DECORATED);
-                        popupStage.setX(stage.getX() + 100);
-                        popupStage.setY(stage.getY() + 100);
+                        popupStage.setX(stage.getX() + 20);
+                        popupStage.setY(stage.getY() + 20);
                         popupStage.setTitle("Review");
                         popupStage.initOwner(stage);
                         popupStage.initModality(Modality.APPLICATION_MODAL);

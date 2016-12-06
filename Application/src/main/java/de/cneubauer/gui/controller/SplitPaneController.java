@@ -88,8 +88,9 @@ public class SplitPaneController extends GUIController {
             this.updateAndReturn();
         } else {
             Alert info = new Alert(Alert.AlertType.WARNING);
-            info.setContentText("Could not update the document! \\n Please review all fields again and make sure that there are no more errors.");
+            info.setContentText("Could not update the document! \n Please review all fields again and make sure that there are no more errors.");
             info.setHeaderText("Review Issue");
+            info.show();
         }
     }
 
