@@ -125,12 +125,12 @@ public class OCRDataExtractorService {
         }
 
         //TODO: remove fakes
-        records.add(this.fakeAccount(accountsLeft.get(0), accountsLeft.get(4)));
+        /*records.add(this.fakeAccount(accountsLeft.get(0), accountsLeft.get(4)));
         records.add(this.fakeAccount(accountsLeft.get(1), accountsLeft.get(0)));
         records.add(this.fakeAccount(accountsLeft.get(0), accountsLeft.get(1)));
         records.add(this.fakeAccount(accountsLeft.get(3), accountsLeft.get(2)));
         records.add(this.fakeAccount(accountsLeft.get(1), accountsLeft.get(2)));
-        records.add(this.fakeAccount(accountsLeft.get(6), accountsLeft.get(1)));
+        records.add(this.fakeAccount(accountsLeft.get(6), accountsLeft.get(1)));*/
 
         return records;
     }

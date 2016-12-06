@@ -126,45 +126,5 @@ public class OCRController extends SplitPaneController {
     private boolean validateFileInput() {
         return this.fileInput.getText() != null;
     }
-/*
-    double xStart = 0;
-    double yStart = 0;
-    double xEnd = 0;
-    double yEnd = 0;
 
-    public void selectHeader(ActionEvent actionEvent) {
-        Node n = (Node) actionEvent.getSource();
-        n.getScene().setCursor(Cursor.CROSSHAIR);
-        // start and end points of image
-        double minX = pdfImage.getX();
-        double minY = pdfImage.getY();
-        double maxX = pdfImage.getX() + pdfImage.getFitWidth();
-        double maxY = pdfImage.getY() + pdfImage.getFitHeight();
-
-        n.getScene().onMouseDragEnteredProperty().setValue(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.getX() < minX || event.getX() > maxX || event.getY() < minY || event.getY() > maxY) {
-                    n.getScene().setCursor(Cursor.DEFAULT);
-                } else {
-                    xStart = event.getX();
-                    yStart = event.getY();
-                }
-            }
-        });
-
-        n.getScene().onMouseDragExitedProperty().setValue(new EventHandler<MouseDragEvent>() {
-            @Override
-            public void handle(MouseDragEvent event) {
-                if (event.getX() < minX || event.getX() > maxX || event.getY() < minY || event.getY() > maxY) {
-                    n.getScene().setCursor(Cursor.DEFAULT);
-                } else {
-                    xEnd = event.getX();
-                    yEnd = event.getY();
-                    Rectangle2D headerRectangle = new Rectangle2D(xStart, yStart, xEnd - xStart, yEnd - yStart);
-                    Logger.getLogger(this.getClass()).log(Level.INFO, "header selected, from " + xStart + "," + yStart + " to " + xEnd + "," + yEnd);
-                }
-            }
-        });
-    }*/
 }

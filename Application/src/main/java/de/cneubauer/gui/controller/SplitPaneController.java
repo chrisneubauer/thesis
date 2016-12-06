@@ -94,6 +94,7 @@ public class SplitPaneController extends GUIController {
         }
     }
 
+    // updates all reviewed information and return to list view
     private void updateAndReturn() {
         model.setAccountingRecords(accountingRecordsTabController.updateInformation());
         model.setInvoiceInformation(invoiceTabController.updateInformation());

@@ -9,6 +9,7 @@ import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.domain.dao.impl.AccountTypeDaoImpl;
 import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.gui.model.AccountingRecordModel;
+import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -51,6 +52,7 @@ public class AccountingRecordsController extends SplitPaneController {
         List<AccountingRecordModel> records = this.convertToAccountingRecordModel(data);
         this.setRecordsFound(records);
         this.possiblePosition.getScene().getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
+        this.addAllListeners();
 
         Logger.getLogger(this.getClass()).log(Level.INFO, records.size() + " records found!");
 
@@ -103,7 +105,11 @@ public class AccountingRecordsController extends SplitPaneController {
         fromDropDownAccount.setConverter(new StringConverter<Account>() {
             @Override
             public String toString(Account object) {
-                return object.getAccountNo();
+                if (object != null) {
+                    return object.getAccountNo();
+                } else {
+                    return "";
+                }
             }
 
             @Override
@@ -125,7 +131,11 @@ public class AccountingRecordsController extends SplitPaneController {
         toDropDownAccount.setConverter(new StringConverter<Account>() {
             @Override
             public String toString(Account object) {
-                return object.getAccountNo();
+                if (object != null) {
+                    return object.getAccountNo();
+                } else {
+                    return "";
+                }
             }
 
             @Override
@@ -178,14 +188,44 @@ public class AccountingRecordsController extends SplitPaneController {
         return result;
     }
 
-    // TODO: Necessary for validation
     private void addAllListeners() {
-        /*this.fromDropDownAccountType.textProperty().addListener(this.addListenerToTextField(this.extractedInvoiceNumber));
-        this.fromDropDownAccount.textProperty().addListener(this.addListenerToTextField(this.extractedIssueDate));
-        this.toDropDownAccountType.textProperty().addListener(this.addListenerToTextField(this.extractedCreditor));
-        this.toDropDownAccount.textProperty().addListener(this.addListenerToTextField(this.extractedDebitor));
-        this.positionValue.textProperty().addListener(this.addListenerToTextField(this.extractedLineTotal));
-        Logger.getLogger(this.getClass()).log(Level.INFO, "Listeners added to textfields");*/
+        this.fromDropDownAccountType.valueProperty().addListener(this.addListenerToComboBoxType(this.fromDropDownAccountType));
+        this.fromDropDownAccount.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccount));
+        this.toDropDownAccountType.valueProperty().addListener(this.addListenerToComboBoxType(this.toDropDownAccountType));
+        this.toDropDownAccount.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccount));
+        this.positionValue.textProperty().addListener(this.addListenerToTextField(this.positionValue));
+        this.possiblePosition.textProperty().addListener(this.addListenerToTextField(this.possiblePosition));
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Listeners added to textfields");
+    }
+
+    private ChangeListener<Account> addListenerToComboBox(ComboBox<Account> comboBox) {
+        return (observable, oldValue, newValue) -> {
+            if (newValue != null && comboBox.getItems().contains(newValue)) {
+                comboBox.getStyleClass().remove("error");
+            } else {
+                comboBox.getStyleClass().add("error");
+            }
+        };
+    }
+
+    private ChangeListener<AccountType> addListenerToComboBoxType(ComboBox<AccountType> comboBox) {
+        return (observable, oldValue, newValue) -> {
+            if (newValue != null && this.types.contains(newValue)) {
+                comboBox.getStyleClass().remove("error");
+            } else {
+                comboBox.getStyleClass().add("error");
+            }
+        };
+    }
+
+    private ChangeListener<String> addListenerToTextField(TextField field) {
+        return (observable, oldValue, newValue) -> {
+            if (newValue != null && newValue.length() > 0) {
+                field.getStyleClass().remove("error");
+            } else {
+                field.getStyleClass().add("error");
+            }
+        };
     }
 
     void addRevisedToFile() {

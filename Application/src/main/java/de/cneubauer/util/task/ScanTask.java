@@ -2,9 +2,7 @@ package de.cneubauer.util.task;
 
 import de.cneubauer.domain.bo.AccountingRecord;
 import de.cneubauer.domain.bo.Invoice;
-import de.cneubauer.domain.helper.InvoiceInformationHelper;
 import de.cneubauer.domain.service.OCRDataExtractorService;
-import de.cneubauer.domain.service.ZugFerdExtendService;
 import de.cneubauer.domain.service.validation.AccountingRecordValidator;
 import de.cneubauer.domain.service.validation.InvoiceValidator;
 import de.cneubauer.gui.model.ExtractionModel;

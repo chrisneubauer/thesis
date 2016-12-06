@@ -150,5 +150,7 @@ public class ProcessedListController extends GUIController {
 
     void updateSelected(int index, ExtractionModel newModel) {
         this.progressedList.getItems().get(index).setExtractionModel(newModel);
+        this.progressedList.getItems().get(index).setStatus(ScanStatus.OK);
+        this.progressedList.refresh();
     }
 }
