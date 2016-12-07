@@ -5,6 +5,7 @@ import de.cneubauer.domain.bo.AccountingRecord;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.Scan;
 import de.cneubauer.domain.service.OCRDataExtractorService;
+import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -35,6 +36,7 @@ import java.util.ResourceBundle;
  * Created by Christoph Neubauer on 04.10.2016.
  * Provides controls for performing OCR in the UI
  */
+@Deprecated
 public class OCRController extends SplitPaneController {
     @FXML private TextField fileInput;
 
@@ -107,7 +109,7 @@ public class OCRController extends SplitPaneController {
             Locale locale = super.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/tab.fxml"), bundle);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/splitPane.fxml"), bundle);
 
             Parent root = loader.load();
             leftPane.getChildren().clear();
@@ -115,8 +117,13 @@ public class OCRController extends SplitPaneController {
 
             root.getScene().getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
 
-            TabController ctrl = loader.getController();
-            ctrl.initResults(extractedInformation, this.fileInput.getText(), recordList, fileToScan);
+            SplitPaneController ctrl = loader.getController();
+
+            ExtractionModel temp = new ExtractionModel();
+            temp.setInvoiceInformation(extractedInformation.getInvoiceInformation());
+            temp.setAccountingRecords(recordList);
+            // TODO: Remove OCR Controller
+            ctrl.initResults(0, temp, fileToScan, new ProcessedListController());
 
         } catch (Exception ex) {
             ex.printStackTrace();

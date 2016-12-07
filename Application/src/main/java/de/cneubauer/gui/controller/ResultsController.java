@@ -266,7 +266,7 @@ public class ResultsController extends GUIController {
     private void closeExtractionAfterSave() {
         try {
             Stage stage = (Stage) this.extractedSkontoLabel.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/scanForm.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/mainMenu.fxml"));
 
             Parent root = loader.load();
             Scene scene = new Scene(root, 800, 600);

@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 02.12.2016.
+ * Service for saving revised documents to the database
  */
 public class DatabaseService {
     public void saveProcessResult(ProcessResult result) {
