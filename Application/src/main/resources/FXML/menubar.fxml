@@ -9,7 +9,7 @@
 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER" xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="de.cneubauer.gui.controller.GUIController">
     <Menu mnemonicParsing="false" text="%menu.title.file">
-        <MenuItem mnemonicParsing="false" text="%menu.title.new"/>
+        <!--<MenuItem mnemonicParsing="false" text="%menu.title.new"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.open"/>
         <Menu mnemonicParsing="false" text="%menu.title.open.recent"/>
         <SeparatorMenuItem mnemonicParsing="false"/>
@@ -17,12 +17,18 @@
         <MenuItem mnemonicParsing="false" text="%menu.title.save"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.save.as"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.revert"/>
-        <SeparatorMenuItem mnemonicParsing="false"/>
+        <SeparatorMenuItem mnemonicParsing="false"/>-->
         <MenuItem mnemonicParsing="false" text="%menu.title.preferences" onAction="#openSettings"/>
         <SeparatorMenuItem mnemonicParsing="false"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.quit" onAction="#closeApplication"/>
     </Menu>
-    <Menu mnemonicParsing="false" text="%menu.title.edit">
+    <Menu mnemonicParsing="false" text="%menu.title.actions">
+        <MenuItem mnemonicParsing="false" text="%menu.title.start"/>
+        <MenuItem mnemonicParsing="false" text="%menu.title.scan"/>
+        <MenuItem mnemonicParsing="false" text="%menu.title.search"/>
+        <MenuItem mnemonicParsing="false" text="%menu.title.export"/>
+    </Menu>
+    <!--<Menu mnemonicParsing="false" text="%menu.title.edit">
         <MenuItem mnemonicParsing="false" text="%menu.title.undo"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.redo"/>
         <SeparatorMenuItem mnemonicParsing="false"/>
@@ -33,8 +39,9 @@
         <SeparatorMenuItem mnemonicParsing="false"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.select.all"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.unselect.all"/>
-    </Menu>
+    </Menu>-->
     <Menu mnemonicParsing="false" text="%menu.title.help">
+        <MenuItem mnemonicParsing="false" text="%menu.title.help"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.about"/>
     </Menu>
 </MenuBar>
