@@ -2,39 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/ApplicationStart.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/TabController.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/FXML/tab.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/FXML/tab.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/ApplicationStart.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/TabController.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/Controller/OCRController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/Controller/OCRController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/Start.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/Start.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/DatabaseResultsController$ButtonCell$1.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/DatabaseResultsController$ButtonCell$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/DatabaseResultsController$ButtonCell.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/DatabaseResultsController$ButtonCell.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/DatabaseResultsController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/DatabaseResultsController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$1.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$ButtonCell$1.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$ButtonCell$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$ButtonCell.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$ButtonCell.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ResultsController.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ResultsController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/service/DatabaseServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/DatabaseService.class" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/DatabaseService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseService.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Controller/OCRController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Controller/OCRController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Start.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Start.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/DatabaseResultsController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/DatabaseResultsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ResultsController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ResultsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/menubar.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/menubar.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/processedList.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/processedList.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/startMenu.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/startMenu.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/bundles/Application.properties" afterPath="$PROJECT_DIR$/src/main/resources/bundles/Application.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" afterPath="$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" afterPath="$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/FXML/processedList.fxml" afterPath="$PROJECT_DIR$/target/classes/FXML/processedList.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/FXML/scanForm.fxml" afterPath="$PROJECT_DIR$/target/classes/FXML/scanForm.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/FXML/startMenu.fxml" afterPath="$PROJECT_DIR$/target/classes/FXML/startMenu.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/FXML/menubar.fxml" afterPath="$PROJECT_DIR$/target/classes/FXML/menubar.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/bundles/Application.properties" afterPath="$PROJECT_DIR$/target/classes/bundles/Application.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/bundles/Application_de.properties" afterPath="$PROJECT_DIR$/target/classes/bundles/Application_de.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/bundles/Application_en.properties" afterPath="$PROJECT_DIR$/target/classes/bundles/Application_en.properties" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,16 +37,6 @@
     <option name="SHOW_TABLE_DETAILS" value="true" />
     <option name="SHOW_EMPTY_GROUPS" value="false" />
     <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="hibernate.cfg.xml/Hibernate" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-    </PATH>
   </component>
   <component name="DebuggerManager">
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
@@ -118,19 +82,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SplitPaneController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1190">
-              <caret line="102" column="11" lean-forward="false" selection-start-line="102" selection-start-column="11" selection-end-line="102" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="method#openDatabaseMenu#0;class#SplitPaneController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ProcessedListController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -203,107 +154,45 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InvoiceFileHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/InvoiceFileHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DatabaseService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DatabaseService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="24" column="52" lean-forward="false" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+            <state relative-caret-position="153">
+              <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AccountingRecordsController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java">
+      <file leaf-file-name="DatabaseServiceTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/service/DatabaseServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+            <state relative-caret-position="217">
+              <caret line="58" column="44" lean-forward="true" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="class#3844:4175" expanded="false" />
-                <element signature="e#3954#3955#0" expanded="false" />
-                <element signature="e#4009#4010#0" expanded="false" />
-                <element signature="e#4091#4092#0" expanded="false" />
-                <element signature="e#4164#4165#0" expanded="false" />
-                <element signature="e#4579#4580#0" expanded="false" />
-                <element signature="e#4652#4653#0" expanded="false" />
-                <element signature="class#4713:5044" expanded="false" />
-                <element signature="e#4823#4824#0" expanded="false" />
-                <element signature="e#4878#4879#0" expanded="false" />
-                <element signature="e#4960#4961#0" expanded="false" />
-                <element signature="e#5033#5034#0" expanded="false" />
-                <element signature="e#5446#5447#0" expanded="false" />
-                <element signature="e#5519#5520#0" expanded="false" />
-                <element signature="method#convertToAccountingRecords#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#addListenerToComboBox#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#addListenerToComboBoxType#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#addListenerToTextField#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#nextRecord#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#prevRecord#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="method#saveCurrentValuesToRecord#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="e#13498#13499#0" expanded="false" />
-                <element signature="e#13549#13550#0" expanded="false" />
-                <element signature="e#13608#13609#0" expanded="false" />
-                <element signature="e#13665#13666#0" expanded="false" />
-                <element signature="e#13726#13727#0" expanded="false" />
-                <element signature="e#13761#13762#0" expanded="false" />
-                <element signature="e#13839#13840#0" expanded="false" />
-                <element signature="e#13887#13888#0" expanded="false" />
-                <element signature="e#13943#13944#0" expanded="false" />
-                <element signature="e#14000#14001#0" expanded="false" />
-                <element signature="e#14228#14229#0" expanded="false" />
-                <element signature="e#14281#14282#0" expanded="false" />
-                <element signature="method#setFromDropDownAccount#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="e#14494#14495#0" expanded="false" />
-                <element signature="e#14549#14550#0" expanded="false" />
-                <element signature="method#setToDropDownAccountType#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="e#14766#14767#0" expanded="false" />
-                <element signature="e#14817#14818#0" expanded="false" />
-                <element signature="method#setToDropDownAccount#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="e#15013#15014#0" expanded="false" />
-                <element signature="e#15051#15052#0" expanded="false" />
-                <element signature="e#15116#15117#0" expanded="false" />
-                <element signature="e#15170#15171#0" expanded="false" />
-                <element signature="method#getPositionValue#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="e#15653#15654#0" expanded="false" />
-                <element signature="e#15721#15722#0" expanded="false" />
-                <element signature="method#checkRevised#0;class#AccountingRecordsController#0" expanded="false" />
-                <element signature="e#16547#16548#0" expanded="false" />
-                <element signature="e#16596#16597#0" expanded="false" />
-                <element signature="e#16660#16661#0" expanded="false" />
-                <element signature="e#16723#16724#0" expanded="false" />
-                <element signature="e#16904#16905#0" expanded="false" />
-                <element signature="e#16941#16942#0" expanded="false" />
-                <element signature="e#18261#18262#0" expanded="false" />
-                <element signature="e#18317#18318#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#createRecord#0;class#DatabaseServiceTest#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InvoiceValidator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/validation/InvoiceValidator.java">
+      <file leaf-file-name="AccountingRecordDaoImplTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/AccountingRecordDaoImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding>
-                <element signature="e#291#292#0" expanded="false" />
-                <element signature="e#323#324#0" expanded="false" />
-                <element signature="e#355#356#0" expanded="false" />
-                <element signature="e#400#401#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="99">
+              <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InvoiceDaoImplTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/InvoiceDaoImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="61" column="30" lean-forward="true" selection-start-line="44" selection-start-column="8" selection-end-line="61" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -315,9 +204,9 @@
       <list>
         <option value="CSS File" />
         <option value="Interface" />
-        <option value="JUnit4 Test Class" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -337,7 +226,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/log4j.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/AccountingRecordDaoImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AccountDaoImpl.java" />
@@ -388,6 +276,7 @@
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/FXML/menubar.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseService.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/service/DatabaseServiceTest.java" />
       </list>
     </option>
   </component>
@@ -467,6 +356,104 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cneubauer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cneubauer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="domain" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cneubauer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="domain" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="impl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -825,15 +812,22 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="de.cneubauer.domain.service" />
+      <recent name="de.cneubauer.gui.model" />
+      <recent name="de.cneubauer.util.enumeration" />
+      <recent name="de.cneubauer.domain.dao.impl" />
+      <recent name="de.cneubauer.ann.strategy" />
+    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="de.cneubauer.learning" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="de.cneubauer.domain.service" />
       <recent name="de.cneubauer.learning" />
       <recent name="de.cneubauer.domain.dao.impl" />
       <recent name="de.cneubauer.domain.bo" />
       <recent name="de.cneubauer.util" />
-      <recent name="de.cneubauer.ocr" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -842,13 +836,6 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="de.cneubauer.ocr.tesseract" />
       <recent name="de.cneubauer.domain.dao.impl" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\css" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\bundles" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\img" />
@@ -863,15 +850,15 @@
       <recent name="de.cneubauer.gui.model" />
       <recent name="de.cneubauer.gui" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="de.cneubauer.domain.service" />
-      <recent name="de.cneubauer.gui.model" />
-      <recent name="de.cneubauer.util.enumeration" />
-      <recent name="de.cneubauer.domain.dao.impl" />
-      <recent name="de.cneubauer.ann.strategy" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\css" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\bundles" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Start">
+  <component name="RunManager" selected="JUnit.DatabaseServiceTest.saveProcessResult">
     <configuration default="false" name="Start" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -890,32 +877,6 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="Application" />
       <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="AccountingRecordDaoImplTest.testAccountsFilteredByType" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.cneubauer.domain.dao.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Application" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="de.cneubauer.domain.dao.impl" />
-      <option name="MAIN_CLASS_NAME" value="de.cneubauer.domain.dao.impl.AccountingRecordDaoImplTest" />
-      <option name="METHOD_NAME" value="testAccountsFilteredByType" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
       <method />
     </configuration>
     <configuration default="false" name="TesseractWrapperTest.testDifferenceBetweenSplitPagesAndWholePage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -983,6 +944,32 @@
       <option name="PACKAGE_NAME" value="de.cneubauer.ocr.tesseract" />
       <option name="MAIN_CLASS_NAME" value="de.cneubauer.ocr.tesseract.TesseractDataCollectorTest" />
       <option name="METHOD_NAME" value="executeDatenwerk" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="DatabaseServiceTest.saveProcessResult" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.cneubauer.domain.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Application" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="de.cneubauer.domain.service" />
+      <option name="MAIN_CLASS_NAME" value="de.cneubauer.domain.service.DatabaseServiceTest" />
+      <option name="METHOD_NAME" value="saveProcessResult" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1261,18 +1248,18 @@
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
       <item index="1" class="java.lang.String" itemvalue="Application.Start" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.AccountingRecordDaoImplTest.testAccountsFilteredByType" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSplitPagesAndWholePage" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSize" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.TesseractDataCollectorTest.executeDatenwerk" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSplitPagesAndWholePage" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSize" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TesseractDataCollectorTest.executeDatenwerk" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.DatabaseServiceTest.saveProcessResult" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Start" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.TesseractDataCollectorTest.executeDatenwerk" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSize" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSplitPagesAndWholePage" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.AccountingRecordDaoImplTest.testAccountsFilteredByType" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.DatabaseServiceTest.saveProcessResult" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Start" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.TesseractDataCollectorTest.executeDatenwerk" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSize" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.TesseractWrapperTest.testDifferenceBetweenSplitPagesAndWholePage" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1298,8 +1285,8 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TesseractDataCollectorTest_execute - 2016.11.23 at 10h 38m 18s.xml">
-      <configuration name="TesseractDataCollectorTest.execute" configurationId="JUnit" />
+    <history-entry file="DatabaseServiceTest_saveProcessResult - 2016.12.07 at 11h 03m 52s.xml">
+      <configuration name="DatabaseServiceTest.saveProcessResult" configurationId="JUnit" />
     </history-entry>
     <history-entry file="TesseractDataCollectorTest_execute - 2016.11.23 at 10h 43m 02s.xml">
       <configuration name="TesseractDataCollectorTest.execute" configurationId="JUnit" />
@@ -1361,7 +1348,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25718608" sideWeight="0.5365344" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1413,27 +1400,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/scene/control/Cell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="668" column="19" lean-forward="false" selection-start-line="668" selection-start-column="19" selection-end-line="668" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/javafx-src.zip!/javafx/scene/control/TableCell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="724" column="0" lean-forward="false" selection-start-line="724" selection-start-column="0" selection-end-line="724" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractDataCollectorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="15" column="3" lean-forward="true" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/img/Circle_Red.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1826,16 +1792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/InvoiceFileHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/AccountFileHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1428">
@@ -1898,11 +1854,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/InvoiceFileHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="24" column="52" lean-forward="false" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+        <state relative-caret-position="153">
+          <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/AccountingRecordDaoImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/InvoiceDaoImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="61" column="30" lean-forward="true" selection-start-line="44" selection-start-column="8" selection-end-line="61" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/service/DatabaseServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="58" column="44" lean-forward="true" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#createRecord#0;class#DatabaseServiceTest#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
