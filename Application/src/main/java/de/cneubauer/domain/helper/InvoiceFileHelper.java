@@ -79,6 +79,9 @@ public final class InvoiceFileHelper {
     // extends config file for one line
     public static void write(String key, String value) {
         try {
+            if (invoiceMap == null) {
+                new InvoiceFileHelper();
+            }
             OutputStream out = new FileOutputStream(learningFile, true);
             BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
             w.write("[" + key + "][" + value + "]");
