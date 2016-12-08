@@ -120,7 +120,7 @@ public class ProcessedListController extends GUIController {
                         ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/splitPane.fxml"), bundle);
                         Parent root = loader.load();
-                        Scene scene = new Scene(root, Screen.getPrimary().getVisualBounds().getMaxX() - 100, Screen.getPrimary().getVisualBounds().getMaxY() - 100);
+                        Scene scene = new Scene(root, Screen.getPrimary().getVisualBounds().getMaxX() - 100, Screen.getPrimary().getVisualBounds().getMaxY() - 20);
 
                         Stage popupStage = new Stage(StageStyle.DECORATED);
                         popupStage.setX(stage.getX() + 20);

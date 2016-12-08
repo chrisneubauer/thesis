@@ -1,6 +1,8 @@
 package de.cneubauer.gui.controller;
 
 import de.cneubauer.gui.model.ExtractionModel;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -10,6 +12,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -37,6 +40,12 @@ public class SplitPaneController extends GUIController {
 
     @FXML public VBox invoiceTab;
     @FXML public VBox accountingRecordsTab;
+
+    // values for image scaling
+    private final DoubleProperty zoomProperty = new SimpleDoubleProperty(300);
+    private double oldX;
+    private double oldY;
+
     @FXML private ResultsController invoiceTabController;
     @FXML private AccountingRecordsController accountingRecordsTabController;
     @FXML public TabPane tabPane;
@@ -119,9 +128,34 @@ public class SplitPaneController extends GUIController {
                 i = new Image(in);
             }
             pdfImage.setImage(i);
+            pdfImage.setFitWidth(zoomProperty.get() * 3);
+            pdfImage.setFitHeight(zoomProperty.get() * 4);
             pdfImage.setPreserveRatio(true);
             pdfImage.setSmooth(true);
             pdfImage.setCache(true);
+
+            pdfImage.setOnDragDetected(event -> {
+                oldX = event.getX();
+                oldY = event.getY();
+            });
+
+            pdfImage.setOnMouseReleased(event -> {
+                pdfImage.setTranslateX(event.getX() - oldX);
+                pdfImage.setTranslateY(event.getY() - oldY);
+            });
+
+            pdfImage.addEventFilter(ScrollEvent.ANY, event -> {
+                if (event.getDeltaY() > 0) {
+                    zoomProperty.set(zoomProperty.get() * 1.1);
+                } else if (event.getDeltaY() < 0) {
+                    zoomProperty.set(zoomProperty.get() / 1.1);
+                }
+            });
+
+            zoomProperty.addListener(arg0 -> {
+                pdfImage.setFitWidth(zoomProperty.get() * 3);
+                pdfImage.setFitHeight(zoomProperty.get() * 4);
+            });
         } catch (Exception e) {
             Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to parse image!");
         }
