@@ -4,9 +4,11 @@ import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
 import de.cneubauer.util.enumeration.AppLang;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -26,8 +29,8 @@ import java.util.ResourceBundle;
  * Contains UI logic
  */
 public class GUIController {
-    public Button startScanButton;
-    public MenuBar menuBar;
+    @FXML public Button startScanButton;
+    @FXML public MenuBar menuBar;
     @FXML private SplitPaneController splitPaneIncludeController;
 
     // this method opens the page where the user can import files
@@ -40,11 +43,48 @@ public class GUIController {
         }
     }
 
+    @FXML
+    protected void openStartMenu(Event e) {
+        try {
+            Stage stage = (Stage) menuBar.getScene().getWindow();
+            URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/startMenu.fxml");
+
+            Locale locale = this.getCurrentLocale();
+            ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
+            FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
+            VBox v = loader.load();
+
+
+            Scene scene = new Scene(v, 600, 200);
+           // Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
+           // scene.getStylesheets().add(String.valueOf(getClass().getResource("../../../css/validationError.css")));
+            stage.setScene(scene);
+            stage.setMaximized(false);
+            stage.setMaximized(true);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     // this method opens the page where the user can search in the database
     @FXML
     protected void openDatabaseMenu(Event e) {
         try {
-            this.splitPaneIncludeController.openDatabaseMenu(e);
+            Stage stage = (Stage) menuBar.getScene().getWindow();
+            URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/searchDatabase.fxml");
+
+            Locale locale = this.getCurrentLocale();
+            ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
+            FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
+            Parent p = loader.load();
+
+            Scene scene = new Scene(p, 200, 300);
+           // Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
+           // scene.getStylesheets().add(String.valueOf(getClass().getClassLoader().getResource("css/validationError.css")));
+            stage.setScene(scene);
+            stage.setMaximized(false);
+            stage.setMaximized(true);
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -58,13 +98,12 @@ public class GUIController {
 
     public void openSettings() {
         try {
-            Stage stage = (Stage) startScanButton.getScene().getWindow();
+            Stage stage = (Stage) menuBar.getScene().getWindow();
 
             Locale locale = this.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/settings.fxml"), bundle);
             FlowPane f = loader.load();
-            //FlowPane f = FXMLLoader.load(getClass().getResource("../../../../FXML/settings.fxml"));
             Scene scene = new Scene(f, 600, 400);
 
             Stage popupStage = new Stage(StageStyle.DECORATED);
@@ -132,4 +171,8 @@ public class GUIController {
         }
     }
 
+    //TODO: Implement
+    public void openExportMenu(ActionEvent actionEvent) {
+
+    }
 }

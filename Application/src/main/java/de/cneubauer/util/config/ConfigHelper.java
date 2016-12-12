@@ -87,6 +87,9 @@ public final class ConfigHelper {
     // extends config file for one line
     private static void write(String key, String value) {
         try {
+            if (configFile == null) {
+                new ConfigHelper();
+            }
             OutputStream out = new FileOutputStream(configFile, true);
             BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
             w.write(key + "=" + value);

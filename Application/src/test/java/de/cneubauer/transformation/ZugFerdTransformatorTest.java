@@ -69,6 +69,14 @@ public class ZugFerdTransformatorTest extends AbstractTest {
         Assert.assertEquals(i.getCreditor().getName(), valid.getTrade().getAgreement().getSeller().getName());
     }
 
+    @Test
+    public void createFullConformalComfortInvoiceTest() {
+        de.cneubauer.domain.bo.Invoice i = this.createInvoiceForTesting();
+
+        Invoice valid = transformator.createFullConformalComfortInvoice(i);
+        Assert.assertNotNull(valid);
+    }
+
     private de.cneubauer.domain.bo.Invoice createInvoiceForTesting() {
         de.cneubauer.domain.bo.Invoice i = new de.cneubauer.domain.bo.Invoice();
         i.setInvoiceNumber(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE) + "_" + ((int) (Math.random()*10)));

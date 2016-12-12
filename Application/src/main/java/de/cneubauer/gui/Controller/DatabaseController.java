@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 /**
  * Created by Christoph Neubauer on 04.10.2016.
  * Provides controls for searching the database in the UI
@@ -40,9 +43,12 @@ public class DatabaseController extends GUIController {
     @FXML
     private void openDatabaseResults(Event e) {
         try {
+            Locale locale = super.getCurrentLocale();
+            ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
+
             Node node = (Node) e.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/showDatabaseResults.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/showDatabaseResults.fxml"), bundle);
 
             Parent root = loader.load();
             Scene scene = new Scene(root, 800, 600);

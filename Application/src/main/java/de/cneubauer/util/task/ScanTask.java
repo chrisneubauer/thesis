@@ -7,6 +7,7 @@ import de.cneubauer.domain.service.validation.AccountingRecordValidator;
 import de.cneubauer.domain.service.validation.InvoiceValidator;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
+import de.cneubauer.ocr.tesseract.TesseractWorker;
 import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.application.Platform;
@@ -45,7 +46,19 @@ public class ScanTask extends Task {
     @Override
     protected List<ProcessResult> call() throws Exception {
         int counter = 0;
+        int cores = Runtime.getRuntime().availableProcessors();
         Platform.runLater(() -> filesScanned.setText("0 / " + filesToScan.length));
+        /*if (filesToScan.length > 1) {
+            for (File f : filesToScan) {
+                TesseractWorker worker = new TesseractWorker(f);
+                Thread anotherThread = new Thread(worker);
+                anotherThread.run();
+                if (anotherThread.getState().equals(Thread.State.TERMINATED)) {
+                    String s = worker.getResultIfFinished();
+                }
+            }
+        }
+        else {*/
         for (File f : filesToScan) {
             Platform.runLater(() -> currentFile.setText(f.getName()));
             ProcessResult r = new ProcessResult();
@@ -71,6 +84,7 @@ public class ScanTask extends Task {
                     r.setStatus(ScanStatus.OK);
                 } else {
                     r.setStatus(ScanStatus.ISSUE);
+                    r.setProblem("Missing Information");
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();

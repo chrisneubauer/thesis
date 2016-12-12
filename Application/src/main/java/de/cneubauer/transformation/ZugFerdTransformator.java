@@ -24,6 +24,7 @@ import java.util.Set;
 import static com.neovisionaries.i18n.CountryCode.DE;
 import static com.neovisionaries.i18n.CurrencyCode.EUR;
 import static io.konik.zugferd.profile.ConformanceLevel.BASIC;
+import static io.konik.zugferd.profile.ConformanceLevel.COMFORT;
 import static io.konik.zugferd.unece.codes.DocumentCode._380;
 import static io.konik.zugferd.unece.codes.Reference.FC;
 import static io.konik.zugferd.unece.codes.UnitOfMeasurement.UNIT;
@@ -141,6 +142,62 @@ public class ZugFerdTransformator {
         result.setAddress(a);
 
         return result;
+    }
+
+    public Invoice createFullConformalComfortInvoice(de.cneubauer.domain.bo.Invoice inv) {
+        Invoice i = new Invoice(COMFORT);
+
+        Context con = new Context(COMFORT);
+        Profile guideline = new Profile(COMFORT);
+        guideline.setVersion(ProfileVersion.V1P0);
+        con.setGuideline(guideline);
+
+        Header h = new Header();
+        h.setName("RECHNUNG");
+        h.setInvoiceNumber(inv.getInvoiceNumber());
+        h.setCode(_380);
+        h.setIssued(new ZfDateDay(inv.getIssueDate().getTime()));
+
+        Trade tr = new Trade();
+
+        Agreement a = new Agreement();
+        a.setBuyer(new TradeParty().setName(inv.getDebitor().toString()));
+        a.setSeller(new TradeParty().setName(inv.getCreditor().toString()));
+
+        Delivery d;
+        if (inv.getDeliveryDate() == null) {
+            d = new Delivery(new ZfDateDay(inv.getIssueDate().getTime()));
+        } else {
+            d = new Delivery(new ZfDateDay(inv.getDeliveryDate().getTime()));
+        }
+
+        MonetarySummation sum = new MonetarySummation();
+        sum.setLineTotal(new Amount(BigDecimal.valueOf(inv.getLineTotal()), EUR));
+        sum.setChargeTotal(new Amount(BigDecimal.valueOf(inv.getChargeTotal()), EUR));
+        sum.setAllowanceTotal(new Amount(BigDecimal.valueOf(inv.getAllowanceTotal()), EUR));
+        sum.setTaxBasisTotal(new Amount(BigDecimal.valueOf(inv.getTaxBasisTotal()), EUR));
+        sum.setTaxTotal(new Amount(BigDecimal.valueOf(inv.getTaxTotal()), EUR));
+        sum.setGrandTotal(new Amount(BigDecimal.valueOf(inv.getGrandTotal()), EUR));
+
+        Settlement s = new Settlement();
+        s.setCurrency(EUR);
+        s.setMonetarySummation(sum);
+
+        Item item = new Item();
+        tr.addItem(item);
+        tr.setAgreement(a);
+        tr.setDelivery(d);
+        tr.setSettlement(s);
+
+        i.setContext(con);
+        i.setHeader(h);
+        i.setTrade(tr);
+
+        if (this.isInvoiceValid(i)) {
+            return i;
+        } else {
+            return null;
+        }
     }
 
     public Invoice createFullConformalBasicInvoice(de.cneubauer.domain.bo.Invoice inv) {

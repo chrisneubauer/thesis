@@ -2,9 +2,13 @@ package de.cneubauer.domain.service;
 
 import de.cneubauer.domain.bo.*;
 import de.cneubauer.domain.dao.AccountDao;
+import de.cneubauer.domain.dao.LegalPersonDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
+import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import de.cneubauer.domain.helper.AccountFileHelper;
+import de.cneubauer.domain.helper.InvoiceFileHelper;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
+import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
@@ -123,15 +127,6 @@ public class OCRDataExtractorService {
                 }
             }
         }
-
-        //TODO: remove fakes
-        /*records.add(this.fakeAccount(accountsLeft.get(0), accountsLeft.get(4)));
-        records.add(this.fakeAccount(accountsLeft.get(1), accountsLeft.get(0)));
-        records.add(this.fakeAccount(accountsLeft.get(0), accountsLeft.get(1)));
-        records.add(this.fakeAccount(accountsLeft.get(3), accountsLeft.get(2)));
-        records.add(this.fakeAccount(accountsLeft.get(1), accountsLeft.get(2)));
-        records.add(this.fakeAccount(accountsLeft.get(6), accountsLeft.get(1)));*/
-
         return records;
     }
 
@@ -247,8 +242,27 @@ public class OCRDataExtractorService {
         return text.length() > 0;
     }
 
-    private LegalPerson findDebitor() {
+    private LegalPerson getFromDatabase(String line) {
+        LegalPersonDao dao = new LegalPersonDaoImpl();
+        List<LegalPerson> list = dao.getAll();
+        for (LegalPerson p : list) {
+            if (line.contains(p.getName())) {
+                return p;
+            } else {
+                // refine search if we have some ocr probs
+                double confidenceRate = Double.valueOf(ConfigHelper.getValue(Cfg.CONFIDENCERATE.getValue()));
+                if (StringUtils.getLevenshteinDistance(line, p.getName()) > confidenceRate) {
+                    return p;
+                }
+            }
+        }
         return null;
+    }
+
+    private LegalPerson findDebitor() {
+        // TODO: how to differentiate between deb and cred?
+        String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" });
+        return this.getFromDatabase(line);
     }
 
     private Timestamp findIssueDate() {
@@ -288,9 +302,11 @@ public class OCRDataExtractorService {
         // TODO: More intelligent approach to find creditor and debitor
         // Currently we are just searching for the first company
         // Creditor is always a company.
+
         String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" });
-        int index = this.findCorporateFormIndex(line);
-        if (index > 0) {
+        return this.getFromDatabase(line);
+        //int index = this.findCorporateFormIndex(line);
+        /*if (index > 0) {
             LegalPerson result = new LegalPerson();
             result.setIsCompany(true);
             // TODO: Store cf in beforehand in db and receive it here by calling the db
@@ -298,11 +314,11 @@ public class OCRDataExtractorService {
             cf.setShortName(line.substring(index).split(" ")[0]);
             result.setCorporateForm(cf);
             result.setCompanyName(line.substring(0, index - 1));
-            return result;
-        } else {
+            return result;*/
+        /*} else {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find creditor information in OCR. Using default value");
             return null;
-        }
+        }*/
     }
 
     private int findCorporateFormIndex(String line) {
