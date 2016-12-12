@@ -7,7 +7,9 @@ import org.apache.log4j.Logger;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -115,5 +117,16 @@ public final class InvoiceFileHelper {
             e.printStackTrace();
             Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to rewrite invoice settings! Please delete config.ini to reset to default settings");
         }
+    }
+
+    // returns all keys and values as a List
+    public static List<String> createListOfValues() {
+        if (invoiceMap == null) {
+            new InvoiceFileHelper();
+        }
+        List<String> result = new ArrayList<>(invoiceMap.size() * 2);
+        result.addAll(invoiceMap.keySet());
+        result.addAll(invoiceMap.values());
+        return result;
     }
 }
