@@ -23,10 +23,10 @@
         <MenuItem mnemonicParsing="false" text="%menu.title.quit" onAction="#closeApplication"/>
     </Menu>
     <Menu mnemonicParsing="false" text="%menu.title.actions">
-        <MenuItem mnemonicParsing="false" text="%menu.title.start"/>
-        <MenuItem mnemonicParsing="false" text="%menu.title.scan"/>
-        <MenuItem mnemonicParsing="false" text="%menu.title.search"/>
-        <MenuItem mnemonicParsing="false" text="%menu.title.export"/>
+        <!--<MenuItem mnemonicParsing="false" text="%menu.title.start"/>-->
+        <MenuItem mnemonicParsing="false" text="%menu.title.scan" onAction="#openStartMenu"/>
+        <MenuItem mnemonicParsing="false" text="%menu.title.search" onAction="#openDatabaseMenu"/>
+        <MenuItem mnemonicParsing="false" text="%menu.title.export" onAction="#openExportMenu"/>
     </Menu>
     <!--<Menu mnemonicParsing="false" text="%menu.title.edit">
         <MenuItem mnemonicParsing="false" text="%menu.title.undo"/>
