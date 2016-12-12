@@ -40,7 +40,7 @@ public class ProgressController extends GUIController {
     private void progressFiles() {
         List<ProcessResult> list = new ArrayList<>(files.length);
 
-        ScanTask scanTask = new ScanTask(files, fileName, filesScanned, progressBar);
+        ScanTask scanTask = new ScanTask(files, fileName, filesScanned, progressBar, status);
 
         scanTask.setOnSucceeded(t -> {
             list.addAll(scanTask.getResult());

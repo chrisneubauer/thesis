@@ -40,7 +40,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <Label text="%progress.label.progressingFiles" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="2" />
-         <Label fx:id="status" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+         <Label fx:id="status" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.columnSpan="7" />
          <Label text="%progress.label.file" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          <Label fx:id="fileName" GridPane.columnIndex="3" GridPane.columnSpan="8" GridPane.rowIndex="6" />
          <Label fx:id="filesScanned" text="0 / 0" GridPane.columnIndex="1" GridPane.rowIndex="4" />

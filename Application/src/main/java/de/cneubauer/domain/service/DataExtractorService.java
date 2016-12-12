@@ -1,12 +1,14 @@
 package de.cneubauer.domain.service;
 
-import de.cneubauer.domain.bo.*;
+import de.cneubauer.domain.bo.Account;
+import de.cneubauer.domain.bo.AccountingRecord;
+import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.bo.LegalPerson;
 import de.cneubauer.domain.dao.AccountDao;
 import de.cneubauer.domain.dao.LegalPersonDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import de.cneubauer.domain.helper.AccountFileHelper;
-import de.cneubauer.domain.helper.InvoiceFileHelper;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
 import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
@@ -23,29 +25,19 @@ import java.util.*;
  * This service contains methods for extracting multiple information from a processed form
  * Output is a possible invoice filled with as much information as possible
  */
-public class OCRDataExtractorService {
-    private String file;
+public class DataExtractorService {
     private String leftHeader;
     private String rightHeader;
     private String body;
     private String footer;
     private double confidence = 1 - (Double.valueOf(ConfigHelper.getValue("confidenceRate")));
 
-    public OCRDataExtractorService(String file) {
+    public DataExtractorService(String[] parts) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Using confidence level: " + confidence*100 + "%");
-        this.file = file;
-    }
-
-    public OCRDataExtractorService(String[] parts) {
-        Logger.getLogger(this.getClass()).log(Level.INFO, "Using confidence level: " + confidence*100 + "%");
-    }
-
-    public String getFile() {
-        return file;
-    }
-
-    public void setFile(String file) {
-        this.file = file;
+        this.leftHeader = parts[0];
+        this.rightHeader = parts[1];
+        this.body = parts[2];
+        this.footer = parts[3];
     }
 
     /*
@@ -76,16 +68,6 @@ public class OCRDataExtractorService {
         return result;
     }
 
-    // TODO: REMOVE METHOD! ONLY FOR TESTING GUI
-    private AccountingRecord fakeAccount(Account cred, Account deb) {
-        AccountingRecord mock = new AccountingRecord();
-        mock.setDebit(deb);
-        mock.setCredit(cred);
-        mock.setEntryText("MockPosition");
-        mock.setBruttoValue(200);
-        mock.setVat_rate(0.19);
-        return mock;
-    }
     /*
      * Uses scanned page and looks for several information regarding accounting records
      * @return  returns a list of all AccountingRecords that has been found on the page
@@ -100,7 +82,7 @@ public class OCRDataExtractorService {
         List<Account> accountsLeft = dao.getAll();
 
         int index = 0;
-        String[] lines = this.fileToArray();
+        String[] lines = this.body.split("\n");
         for (String line : lines) {
             if (this.getAverageDistanceOfSearchConditions(line, new String[] { "Art.-Nr.", "Artikel", "Beschreibung" }) < this.getConfidence()) {
                 if (lines.length > index) {
@@ -141,7 +123,7 @@ public class OCRDataExtractorService {
     private InvoiceInformationHelper findInvoiceValues() {
         InvoiceInformationHelper result = new InvoiceInformationHelper();
         try {
-            String lineTotal = this.findValueInString(new String[] { "Zwischensumme" });
+            String lineTotal = this.findValueInString(new String[] { "Zwischensumme" }, this.footer);
             if (lineTotal.contains(",")) {
                 String[] values = lineTotal.split(",");
                 lineTotal = values[0] + "." + values[1];
@@ -152,7 +134,7 @@ public class OCRDataExtractorService {
             result.setLineTotal(0);
         }
         try {
-            String taxBasis = this.findValueInString(new String[]{"Nettobetrag", "Netto", "Nettosumme"});
+            String taxBasis = this.findValueInString(new String[]{"Nettobetrag", "Netto", "Nettosumme"}, this.footer);
             if (taxBasis.contains(",")) {
                 String[] values = taxBasis.split(",");
                 taxBasis = values[0] + "." + values[1];
@@ -163,7 +145,7 @@ public class OCRDataExtractorService {
             result.setTaxBasisTotal(0);
         }
         try {
-            String tax = this.findValueInString(new String[] { "MwSt", "USt", "Mehrwertsteuer" });
+            String tax = this.findValueInString(new String[] { "MwSt", "USt", "Mehrwertsteuer" }, this.footer);
             if (tax.contains(",")) {
                 String[] values = tax.split(",");
                 tax = values[0] + "." + values[1];
@@ -174,11 +156,11 @@ public class OCRDataExtractorService {
             result.setTaxTotal(0);
         }
         try {
-            String grandTotal = this.findValueInString(new String[] { "Gesamtbetrag", "Gesamt", "Rechnungsbetrag"});
+            String grandTotal = this.findValueInString(new String[] { "Gesamtbetrag", "Gesamt", "Rechnungsbetrag"}, this.footer);
 
             if (grandTotal.length() == 0) {
                 // second approach:
-                for (String line : fileToArray()) {
+                for (String line : this.footer.split("\n")) {
                     if (this.getAverageDistanceOfSearchConditions(line, new String[] {"Zu zahlender Betrag"}) < 0.2) {
                         grandTotal = line.replaceAll("[^0-9]+","");
                         break;
@@ -201,7 +183,7 @@ public class OCRDataExtractorService {
     }
 
     private Timestamp findDeliveryDate() {
-        String date = this.findValueInString(new String[] { "Lieferdatum"});
+        String date = this.findValueInString(new String[] { "Lieferdatum"}, this.rightHeader);
         Calendar cal = this.convertStringToCalendar(date);
 
         Date deliveryDate = cal.getTime();
@@ -219,7 +201,7 @@ public class OCRDataExtractorService {
         String skonto = "";
         boolean found = false;
         try {
-            String[] lines = this.fileToArray();
+            String[] lines = this.footer.split("\n");
             for (String line : lines) {
                 if (!found) {
                     // try again with levenshtein distance
@@ -246,7 +228,7 @@ public class OCRDataExtractorService {
     }
 
     private boolean findSkontoInformation() {
-        String text = this.findValueInString(new String[] { "Skonto" });
+        String text = this.findValueInString(new String[] { "Skonto" }, this.footer);
         return text.length() > 0;
     }
 
@@ -268,14 +250,14 @@ public class OCRDataExtractorService {
     }
 
     private LegalPerson findDebitor() {
-        // TODO: how to differentiate between deb and cred?
-        String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" });
+        // Debitor is usually in the left part of the invoice header
+        String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" }, this.leftHeader);
         return this.getFromDatabase(line);
     }
 
     private Timestamp findIssueDate() {
 
-        String date = this.findValueInString(new String[] { "Rechnungsdatum"});
+        String date = this.findValueInString(new String[] { "Rechnungsdatum"}, this.rightHeader);
         Calendar cal = this.convertStringToCalendar(date);
 
         Date issueDate = cal.getTime();
@@ -307,11 +289,8 @@ public class OCRDataExtractorService {
     }
 
     private LegalPerson findCreditor() {
-        // TODO: More intelligent approach to find creditor and debitor
-        // Currently we are just searching for the first company
-        // Creditor is always a company.
-
-        String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" });
+        // Creditor is usually in the right part of the invoice header.
+        String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" }, this.rightHeader);
         return this.getFromDatabase(line);
         //int index = this.findCorporateFormIndex(line);
         /*if (index > 0) {
@@ -353,7 +332,8 @@ public class OCRDataExtractorService {
     }
 
     private String findInvoiceNumber() {
-        String[] lines = this.fileToArray();
+        String header = this.leftHeader + "\n" + this.rightHeader;
+        String[] lines = header.split("\n");
         for (String line : lines) {
             String[] parts = line.split(" ");
             for (int i = 0; i < parts.length; i++) {
@@ -381,8 +361,8 @@ public class OCRDataExtractorService {
         return "";
     }
 
-    private String findValueInString(String[] searchConditions) {
-        String[] lines = this.fileToArray();
+    private String findValueInString(String[] searchConditions, String searchPosition) {
+        String[] lines = searchPosition.split("\n");
         for (String line : lines) {
             String[] parts = line.split(" ");
             for (int i = 0; i < parts.length; i++) {
@@ -427,8 +407,8 @@ public class OCRDataExtractorService {
         return false;
     }
 
-    private String findLineWithContainingInformation(String[] searchConditions) {
-        String[] lines = this.fileToArray();
+    private String findLineWithContainingInformation(String[] searchConditions, String searchPosition) {
+        String[] lines = searchPosition.split("\n");
         for (String line : lines) {
             if (this.getAverageDistanceOfSearchConditions(line, searchConditions) < this.getConfidence()) {
                 return line;
@@ -436,10 +416,6 @@ public class OCRDataExtractorService {
         }
         // if we are here we have not found an invoice number
         return "";
-    }
-
-    private String[] fileToArray() {
-        return this.file.split("\n");
     }
 
     private boolean nextLineContainsValue(String nextLine) {

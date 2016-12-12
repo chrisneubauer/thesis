@@ -23,6 +23,7 @@ import java.util.*;
  * This service contains methods for extracting multiple information from a processed form
  * Output is a possible invoice filled with as much information as possible
  */
+@Deprecated
 public class OCRDataExtractorService {
     private String file;
     private double confidence = 1 - (Double.valueOf(ConfigHelper.getValue("confidenceRate")));
