@@ -94,7 +94,7 @@ public class LegalPerson {
         if (isCompany) {
             result = this.getCompanyName();
             if (this.getCorporateForm() != null) {
-                result += " " + this.getCorporateForm();
+                result += " " + this.getCorporateForm().getShortName();
             }
         } else {
             if (this.getFirstName() != null) {
