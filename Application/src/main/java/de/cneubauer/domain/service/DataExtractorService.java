@@ -232,17 +232,28 @@ public class DataExtractorService {
         return text.length() > 0;
     }
 
-    private LegalPerson getFromDatabase(String line) {
+    private LegalPerson getLegalPersonFromDatabase(String lines) {
         LegalPersonDao dao = new LegalPersonDaoImpl();
         List<LegalPerson> list = dao.getAll();
-        for (LegalPerson p : list) {
-            if (line.contains(p.getName())) {
-                return p;
-            } else {
-                // refine search if we have some ocr probs
-                double confidenceRate = Double.valueOf(ConfigHelper.getValue(Cfg.CONFIDENCERATE.getValue()));
-                if (StringUtils.getLevenshteinDistance(line, p.getName()) > confidenceRate) {
+        for (String line : lines.split("\n")) {
+            for (LegalPerson p : list) {
+                if (line.contains(p.toString())) {
                     return p;
+                } else {
+                    // refine search if we have some ocr probs
+                    /* calculation explanation:
+                     * Comparing "18:1 Telecom GmbH" with "Telekom"
+                     * Levenshtein-Distance would be: 11
+                     * String length: 17
+                     * 11 of 17 are incorrect (65%) which means 35% correct
+                     * When confidence 80% we need less errors, maximum: 0/17 -> 0% < 20%
+                    */
+                    double confidenceRate = Double.valueOf(ConfigHelper.getValue(Cfg.CONFIDENCERATE.getValue()));
+                    double distance = StringUtils.getLevenshteinDistance(line, p.toString());
+                    double comparison = distance / line.length();
+                    if (comparison < confidenceRate) {
+                        return p;
+                    }
                 }
             }
         }
@@ -251,8 +262,8 @@ public class DataExtractorService {
 
     private LegalPerson findDebitor() {
         // Debitor is usually in the left part of the invoice header
-        String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" }, this.leftHeader);
-        return this.getFromDatabase(line);
+        //String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" }, this.leftHeader);
+        return this.getLegalPersonFromDatabase(this.leftHeader);
     }
 
     private Timestamp findIssueDate() {
@@ -297,8 +308,8 @@ public class DataExtractorService {
      */
     private LegalPerson findCreditor() {
         // Creditor is usually in the right part of the invoice header.
-        String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" }, this.rightHeader);
-        return this.getFromDatabase(line);
+        //String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" }, this.rightHeader);
+        return this.getLegalPersonFromDatabase(this.rightHeader);
         //int index = this.findCorporateFormIndex(line);
         /*if (index > 0) {
             LegalPerson result = new LegalPerson();

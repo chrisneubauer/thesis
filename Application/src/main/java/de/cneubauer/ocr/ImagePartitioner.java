@@ -43,11 +43,11 @@ public class ImagePartitioner {
             this.separateHeader(header);
             this.cropBody();
             this.cropFooter();
-            if (Boolean.valueOf(ConfigHelper.getValue(Cfg.DEBUG.name()))) {
-                File leftHeaderFile = new File("\\temp\\leftHeader.png");
-                File rightHeaderFile = new File("\\temp\\rightHeader.png");
-                File bodyFile = new File("\\temp\\body.png");
-                File footerFile = new File("\\temp\\footer.png");
+            if (Boolean.valueOf(ConfigHelper.getValue(Cfg.DEBUG.getValue()))) {
+                File leftHeaderFile = new File(".\\temp\\leftHeader.png");
+                File rightHeaderFile = new File(".\\temp\\rightHeader.png");
+                File bodyFile = new File(".\\temp\\body.png");
+                File footerFile = new File(".\\temp\\footer.png");
                 ImageIO.write(this.leftHeader, "png", leftHeaderFile);
                 ImageIO.write(this.rightHeader, "png", rightHeaderFile);
                 ImageIO.write(this.body, "png", bodyFile);
