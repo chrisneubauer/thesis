@@ -11,7 +11,7 @@
         <property name="modifiedDate" column="ModifiedDate" />
         <set name="usedInCountries" table="country_corporateform" lazy="true" access="field" fetch="select">
             <key>
-                <column name="corporateform_id" not-null="true" />
+                <column name="corporateform_id" not-null="false" />
             </key>
             <many-to-many column="country_id" class="de.cneubauer.domain.bo.Country" />
         </set>
