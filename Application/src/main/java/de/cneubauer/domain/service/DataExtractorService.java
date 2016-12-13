@@ -288,6 +288,13 @@ public class DataExtractorService {
         return cal;
     }
 
+    /*  Finds creditor in image
+     *  The following steps are performed:
+     *  Get stored LegalPersons in db
+     *  Compare with found creditor
+     *  if existent, use existing one -> return LP
+     *  if not existent, user has to create new one manually -> return null
+     */
     private LegalPerson findCreditor() {
         // Creditor is usually in the right part of the invoice header.
         String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" }, this.rightHeader);

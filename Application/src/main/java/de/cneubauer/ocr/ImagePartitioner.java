@@ -1,5 +1,7 @@
 package de.cneubauer.ocr;
 
+import de.cneubauer.util.config.Cfg;
+import de.cneubauer.util.config.ConfigHelper;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -41,6 +43,16 @@ public class ImagePartitioner {
             this.separateHeader(header);
             this.cropBody();
             this.cropFooter();
+            if (Boolean.valueOf(ConfigHelper.getValue(Cfg.DEBUG.name()))) {
+                File leftHeaderFile = new File("\\temp\\leftHeader.png");
+                File rightHeaderFile = new File("\\temp\\rightHeader.png");
+                File bodyFile = new File("\\temp\\body.png");
+                File footerFile = new File("\\temp\\footer.png");
+                ImageIO.write(this.leftHeader, "png", leftHeaderFile);
+                ImageIO.write(this.rightHeader, "png", rightHeaderFile);
+                ImageIO.write(this.body, "png", bodyFile);
+                ImageIO.write(this.footer, "png", footerFile);
+            }
             return new BufferedImage[] { this.leftHeader, this.rightHeader, this.body, this.footer};
         } catch (Exception ex) {
             Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to process image! Error: " + ex.getMessage());
