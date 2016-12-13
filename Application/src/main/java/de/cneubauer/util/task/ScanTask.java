@@ -3,14 +3,12 @@ package de.cneubauer.util.task;
 import de.cneubauer.domain.bo.AccountingRecord;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.service.DataExtractorService;
-import de.cneubauer.domain.service.OCRDataExtractorService;
 import de.cneubauer.domain.service.validation.AccountingRecordValidator;
 import de.cneubauer.domain.service.validation.InvoiceValidator;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.ocr.ImagePartitioner;
 import de.cneubauer.ocr.tesseract.TesseractWorker;
-import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -51,19 +49,7 @@ public class ScanTask extends Task {
     @Override
     protected List<ProcessResult> call() throws Exception {
         int counter = 0;
-        int cores = Runtime.getRuntime().availableProcessors();
         Platform.runLater(() -> filesScanned.setText("0 / " + filesToScan.length));
-        /*if (filesToScan.length > 1) {
-            for (File f : filesToScan) {
-                TesseractWorker worker = new TesseractWorker(f);
-                Thread anotherThread = new Thread(worker);
-                anotherThread.run();
-                if (anotherThread.getState().equals(Thread.State.TERMINATED)) {
-                    String s = worker.getResultIfFinished();
-                }
-            }
-        }
-        else {*/
         for (File f : filesToScan) {
             Platform.runLater(() -> currentFile.setText(f.getName()));
             ProcessResult r = new ProcessResult();
@@ -75,62 +61,8 @@ public class ScanTask extends Task {
                 Logger.getLogger(this.getClass()).log(Level.INFO, "initiating ocr threads...");
                 Platform.runLater(() -> this.status.setText("Scanning header, body and footer..."));
 
-                TesseractWorker leftHeaderWorker = new TesseractWorker(imageParts[0]);
-                Thread leftHeaderThread = new Thread(leftHeaderWorker);
+                String[] ocrParts = this.performOCR(imageParts);
 
-                TesseractWorker rightHeaderWorker = new TesseractWorker(imageParts[1]);
-                Thread rightHeaderThread = new Thread(rightHeaderWorker);
-
-                TesseractWorker bodyWorker = new TesseractWorker(imageParts[2]);
-                Thread bodyThread = new Thread(bodyWorker);
-
-                TesseractWorker footerWorker = new TesseractWorker(imageParts[3]);
-                Thread footerThread = new Thread(footerWorker);
-
-                boolean leftHeaderFinished = false;
-                boolean rightHeaderFinished = false;
-                boolean bodyFinished = false;
-                boolean footerFinished = false;
-                boolean allFinished = false;
-
-                String[] ocrParts = new String[4];
-
-                leftHeaderThread.start();
-                rightHeaderThread.start();
-                bodyThread.start();
-                footerThread.start();
-
-                while (!allFinished) {
-                    if (leftHeaderThread.getState() == Thread.State.TERMINATED) {
-                        ocrParts[0] = leftHeaderWorker.getResultIfFinished();
-                        leftHeaderFinished = true;
-                        if (rightHeaderFinished) {
-                            String statusText = this.status.getText();
-                            Platform.runLater(() -> status.setText(statusText.replace("header, ", "")));
-                        }
-                    }
-                    if (rightHeaderThread.getState()== Thread.State.TERMINATED) {
-                        ocrParts[1] = rightHeaderWorker.getResultIfFinished();
-                        rightHeaderFinished = true;
-                        if (leftHeaderFinished) {
-                            String statusText = this.status.getText();
-                            Platform.runLater(() -> status.setText(statusText.replace("header, ", "")));
-                        }
-                    }
-                    if (bodyThread.getState() == Thread.State.TERMINATED) {
-                        ocrParts[2] = bodyWorker.getResultIfFinished();
-                        bodyFinished = true;
-                        String statusText = this.status.getText();
-                        Platform.runLater(() -> status.setText(statusText.replace("body ", "")));
-                    }
-                    if (footerThread.getState() == Thread.State.TERMINATED) {
-                        ocrParts[3] = footerWorker.getResultIfFinished();
-                        footerFinished = true;
-                        String statusText = this.status.getText();
-                        Platform.runLater(() -> status.setText(statusText.replace("and footer", "")));
-                    }
-                    allFinished = leftHeaderFinished && rightHeaderFinished && bodyFinished && footerFinished;
-                }
                 Platform.runLater(() -> status.setText("Extracting information..."));
                 DataExtractorService service = new DataExtractorService(ocrParts);
                 Invoice i = service.extractInvoiceInformation();
@@ -141,7 +73,6 @@ public class ScanTask extends Task {
                 m.setAccountingRecords(recordList);
 
                 r.setExtractionModel(m);
-
                 r.setProblem("");
 
                 if (this.resultValid(r)) {
@@ -164,6 +95,67 @@ public class ScanTask extends Task {
             Platform.runLater(() -> progressBar.setProgress(current));
         }
         return processResults;
+    }
+
+    private String[] performOCR(BufferedImage[] imageParts) {
+
+        TesseractWorker leftHeaderWorker = new TesseractWorker(imageParts[0]);
+        Thread leftHeaderThread = new Thread(leftHeaderWorker);
+
+        TesseractWorker rightHeaderWorker = new TesseractWorker(imageParts[1]);
+        Thread rightHeaderThread = new Thread(rightHeaderWorker);
+
+        TesseractWorker bodyWorker = new TesseractWorker(imageParts[2]);
+        Thread bodyThread = new Thread(bodyWorker);
+
+        TesseractWorker footerWorker = new TesseractWorker(imageParts[3]);
+        Thread footerThread = new Thread(footerWorker);
+
+        boolean leftHeaderFinished = false;
+        boolean rightHeaderFinished = false;
+        boolean bodyFinished = false;
+        boolean footerFinished = false;
+        boolean allFinished = false;
+
+        String[] ocrParts = new String[4];
+
+        leftHeaderThread.start();
+        rightHeaderThread.start();
+        bodyThread.start();
+        footerThread.start();
+
+        while (!allFinished) {
+            if (leftHeaderThread.getState() == Thread.State.TERMINATED) {
+                ocrParts[0] = leftHeaderWorker.getResultIfFinished();
+                leftHeaderFinished = true;
+                if (rightHeaderFinished) {
+                    String statusText = this.status.getText();
+                    Platform.runLater(() -> status.setText(statusText.replace("header, ", "")));
+                }
+            }
+            if (rightHeaderThread.getState()== Thread.State.TERMINATED) {
+                ocrParts[1] = rightHeaderWorker.getResultIfFinished();
+                rightHeaderFinished = true;
+                if (leftHeaderFinished) {
+                    String statusText = this.status.getText();
+                    Platform.runLater(() -> status.setText(statusText.replace("header, ", "")));
+                }
+            }
+            if (bodyThread.getState() == Thread.State.TERMINATED) {
+                ocrParts[2] = bodyWorker.getResultIfFinished();
+                bodyFinished = true;
+                String statusText = this.status.getText();
+                Platform.runLater(() -> status.setText(statusText.replace("body ", "")));
+            }
+            if (footerThread.getState() == Thread.State.TERMINATED) {
+                ocrParts[3] = footerWorker.getResultIfFinished();
+                footerFinished = true;
+                String statusText = this.status.getText();
+                Platform.runLater(() -> status.setText(statusText.replace("and footer", "")));
+            }
+            allFinished = leftHeaderFinished && rightHeaderFinished && bodyFinished && footerFinished;
+        }
+        return ocrParts;
     }
 
     private boolean resultValid(ProcessResult r) {
