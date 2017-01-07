@@ -27,4 +27,10 @@ public interface AccountDao extends IDao<Account> {
      * @return          a list of all accounts that belong to the specified account type
      */
     List<Account> getAllByType(int typeId);
+
+    /*
+     * @param   accountName  the account name the searched account has
+     * @return               the account matching the account name
+     */
+    Account getByName(String accountName);
 }

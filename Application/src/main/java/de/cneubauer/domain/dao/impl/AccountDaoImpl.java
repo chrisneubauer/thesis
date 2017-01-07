@@ -68,4 +68,15 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao {
         }
         return result;
     }
+
+    @Override
+    public Account getByName(String accountName) {
+        String hql = "FROM Account a WHERE a.name = ?1";
+
+        Query q = this.getSession().createQuery(hql);
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Searching for Account with name " + accountName);
+        q.setParameter(1, accountName);
+
+        return (Account) q.getSingleResult();
+    }
 }

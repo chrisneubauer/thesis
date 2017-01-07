@@ -1,5 +1,10 @@
 package de.cneubauer.domain.helper;
 
+import de.cneubauer.domain.bo.Account;
+import de.cneubauer.domain.bo.AccountingRecord;
+import de.cneubauer.domain.dao.AccountDao;
+import de.cneubauer.domain.dao.impl.AccountDaoImpl;
+import de.cneubauer.util.RecordTrainingEntry;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -7,8 +12,7 @@ import org.apache.log4j.Logger;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Christoph Neubauer on 24.11.2016.
@@ -90,6 +94,89 @@ public final class AccountFileHelper {
         } catch (Exception e) {
             e.printStackTrace();
             Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to add account settings! Please delete config.ini to reset to default settings");
+        }
+    }
+
+    public static void addAccountingRecord(String line) {
+        try {
+            if (learningFile == null) {
+                new AccountFileHelper();
+            }
+            OutputStream out = new FileOutputStream(learningFile, true);
+            BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
+            w.newLine();
+            w.write(line);
+            //TODO: Here should be some logic about the chosen accounts
+            w.newLine();
+            w.write("ENDRECORD");
+            w.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to add account settings! Please delete config.ini to reset to default settings");
+        }
+    }
+
+    public static RecordTrainingEntry findAccountingRecord(String line) {
+        for (RecordTrainingEntry entry : getAllRecords()) {
+            if (entry.getPosition().equals(line)) {
+                return entry;
+            }
+        }
+        return null;
+    }
+
+    private static List<RecordTrainingEntry> getAllRecords() {
+        List<RecordTrainingEntry> result = new ArrayList<>();
+        try {
+            if (learningFile == null) {
+            new AccountFileHelper();
+            }
+            RecordTrainingEntry r = new RecordTrainingEntry();
+            BufferedReader reader = new BufferedReader(new FileReader(learningFile));
+            String currentLine = reader.readLine();
+            boolean newRecord = true;
+            while (currentLine != null) {
+                if (newRecord) {
+                    r.setPosition(currentLine);
+                    newRecord = false;
+                }
+                else if (Objects.equals(currentLine, "ENDRECORD")) {
+                    result.add(r);
+                    newRecord = true;
+                } else {
+                    if (currentLine.contains(" an ")) {
+                        String debitAcc = currentLine.split(" an ")[0];
+                        String creditAcc = currentLine.split(" an ")[1];
+                        extractEntryInformation(debitAcc, true, r);
+                        extractEntryInformation(creditAcc, false, r);
+                    } else {
+                        extractEntryInformation(currentLine, true, r);
+                    }
+                }
+                currentLine = reader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  result;
+    }
+
+    private static void extractEntryInformation(String currentLine, boolean isDebit, RecordTrainingEntry r) {
+        String[] parts = currentLine.split(" ");
+        int length = parts.length;
+        String value = parts[length-1].replace("€", "").replace("$", "").replace(",",".");
+        String accountName = "";
+        for (int i = 0; i < parts.length - 1; i++) {
+            accountName += parts[i];
+        }
+        //AccountDao dao = new AccountDaoImpl();
+        //Account a = dao.getByName(accountName);
+        if (isDebit) {
+            r.setDebitAccount(accountName, Double.valueOf(value));
+        } else {
+            r.setCreditAccount(accountName, Double.valueOf(value));
         }
     }
 

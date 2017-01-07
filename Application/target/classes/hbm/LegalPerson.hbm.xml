@@ -11,7 +11,7 @@
         <property name="firstName" column="FirstName" />
         <property name="createdDate" column="CreatedDate" />
         <property name="modifiedDate" column="ModifiedDate" />
-        <many-to-one name="corporateForm" class="de.cneubauer.domain.bo.CorporateForm" column="CorporateForm"/>
+        <many-to-one name="corporateForm" class="de.cneubauer.domain.bo.CorporateForm" column="CorporateForm" fetch="join"/>
         <many-to-one name="address" class="de.cneubauer.domain.bo.Address" cascade="save-update" column="Address"/>
     </class>
 </hibernate-mapping>

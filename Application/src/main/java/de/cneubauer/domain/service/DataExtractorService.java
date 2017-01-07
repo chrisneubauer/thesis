@@ -93,7 +93,8 @@ public class DataExtractorService {
                     }
                     // now we have a line with position information
                     AccountingRecord r = new AccountingRecord();
-                    r.setEntryText(nextLine);
+                    String existing = this.recordInLearningFile(nextLine);
+                    r.setEntryText(existing);
                     records.add(r);
                 } else {
                     // break on eof
@@ -118,6 +119,15 @@ public class DataExtractorService {
             }
         }
         return records;
+    }
+
+    // checks if record already exists in learning file
+    // if this is the case, the existing string is being returned
+    // if not, the given string is returned again
+    private String recordInLearningFile(String nextLine) {
+        AccountFileHelper.getConfig().containsValue(nextLine);
+
+        return nextLine;
     }
 
     private InvoiceInformationHelper findInvoiceValues() {
