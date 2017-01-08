@@ -131,32 +131,30 @@ public final class AccountFileHelper {
             if (learningFile == null) {
             new AccountFileHelper();
             }
-            RecordTrainingEntry r = new RecordTrainingEntry();
             BufferedReader reader = new BufferedReader(new FileReader(learningFile));
             String currentLine = reader.readLine();
-            boolean newRecord = true;
             while (currentLine != null) {
-                if (newRecord) {
-                    r.setPosition(currentLine);
-                    newRecord = false;
-                }
-                else if (Objects.equals(currentLine, "ENDRECORD")) {
-                    result.add(r);
-                    newRecord = true;
-                } else {
-                    if (currentLine.contains(" an ")) {
-                        String debitAcc = currentLine.split(" an ")[0];
-                        String creditAcc = currentLine.split(" an ")[1];
-                        extractEntryInformation(debitAcc, true, r);
-                        extractEntryInformation(creditAcc, false, r);
+                RecordTrainingEntry r = new RecordTrainingEntry();
+                boolean newRecord = true;
+                while (!Objects.equals(currentLine, "ENDRECORD")) {
+                    if (newRecord) {
+                        r.setPosition(currentLine);
+                        newRecord = false;
                     } else {
-                        extractEntryInformation(currentLine, true, r);
+                        if (currentLine.contains(" an ")) {
+                            String debitAcc = currentLine.split(" an ")[0];
+                            String creditAcc = currentLine.split(" an ")[1];
+                            extractEntryInformation(debitAcc, true, r);
+                            extractEntryInformation(creditAcc, false, r);
+                        } else {
+                            extractEntryInformation(currentLine, true, r);
+                        }
                     }
+                    currentLine = reader.readLine();
                 }
+                result.add(r);
                 currentLine = reader.readLine();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -166,11 +164,14 @@ public final class AccountFileHelper {
     private static void extractEntryInformation(String currentLine, boolean isDebit, RecordTrainingEntry r) {
         String[] parts = currentLine.split(" ");
         int length = parts.length;
-        String value = parts[length-1].replace("€", "").replace("$", "").replace(",",".");
+        String value = parts[length-1].replace("€", "").replace("$", "").replace(".", "").replace(",",".");
         String accountName = "";
         for (int i = 0; i < parts.length - 1; i++) {
-            accountName += parts[i];
+            accountName += parts[i] + " ";
         }
+        // remove last additional whitespace
+        accountName = accountName.substring(0, accountName.length() - 1);
+
         //AccountDao dao = new AccountDaoImpl();
         //Account a = dao.getByName(accountName);
         if (isDebit) {

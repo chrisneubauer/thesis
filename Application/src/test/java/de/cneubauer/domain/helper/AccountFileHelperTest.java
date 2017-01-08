@@ -12,13 +12,14 @@ import static org.junit.Assert.*;
 public class AccountFileHelperTest {
     @Test
     public void addAccountingRecord() throws Exception {
-
+        AccountFileHelper.addAccountingRecord("Erdbeeren");
     }
 
     @Test
     public void findAccountingRecord() throws Exception {
         RecordTrainingEntry entry = AccountFileHelper.findAccountingRecord("Kartoffeln");
         Assert.notNull(entry);
+        Assert.isTrue(entry.isValid());
     }
 
 }

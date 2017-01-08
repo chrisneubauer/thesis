@@ -3,3 +3,5 @@ Wareneingang 8403,36€
 Bezugskosten 840,34€
 Vorsteuer 19% 1756,30€ an Verbindlichkeiten aus LuL 11.000€
 ENDRECORD
+Erdbeeren
+ENDRECORD
