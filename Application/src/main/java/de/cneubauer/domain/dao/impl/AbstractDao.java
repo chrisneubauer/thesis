@@ -3,6 +3,7 @@ package de.cneubauer.domain.dao.impl;
 import de.cneubauer.domain.dao.IDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
@@ -19,6 +20,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
     private SessionFactory sessionFactory;
     private Configuration config;
     private Class<T> clazz;
+    public int sessions = 0;
 
     AbstractDao(Class<T> paramClass) {
         this.clazz = paramClass;
@@ -26,11 +28,19 @@ public abstract class AbstractDao<T> implements IDao<T> {
         File configFile = new File("src/main/resources/hibernate.cfg.xml");
         this.getConfig().configure(configFile);
         this.sessionFactory = this.getConfig().buildSessionFactory();
-        this.session = this.getSessionFactory().openSession();
+        /*if (sessions < 1) {
+            this.session = this.getSessionFactory().openSession();
+            sessions++;
+        } else {
+            this.session = this.getSessionFactory().getCurrentSession();
+        }*/
     }
 
     public Session getSession() {
-        return session;
+        if (this.session == null) {
+            this.session = this.getSessionFactory().openSession();
+        }
+        return this.session;
     }
 
     private SessionFactory getSessionFactory() {
@@ -57,12 +67,20 @@ public abstract class AbstractDao<T> implements IDao<T> {
     }
 
     public void save(T entity) {
-        this.getSession().beginTransaction();
+        Transaction tx = null;
+        try {
+            tx = this.getSession().beginTransaction();
 
-        this.onSave(entity);
+            this.onSave(entity);
 
-        this.getSession().save(entity);
-        this.getSession().getTransaction().commit();
+            this.getSession().save(entity);
+            this.getSession().getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        }
     }
 
     protected abstract void onSave(T entity);

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="de.cneubauer.domain.bo.AccountRecord" table="account_Record">
+        <id name="id" column="Id" >
+            <generator class="increment"/>
+        </id>
+        <property name="bruttoValue" column="BruttoValue" />
+        <property name="isDebit" column="IsDebit"/>
+        <many-to-one name="account" class="de.cneubauer.domain.bo.Account" column="Account"/>
+        <many-to-one name="record" class="de.cneubauer.domain.bo.Record" column="Record"/>
+    </class>
+</hibernate-mapping>

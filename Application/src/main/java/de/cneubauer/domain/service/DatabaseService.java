@@ -1,10 +1,10 @@
 package de.cneubauer.domain.service;
 
-import de.cneubauer.domain.bo.AccountingRecord;
+import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.bo.Invoice;
-import de.cneubauer.domain.dao.AccountingRecordDao;
+import de.cneubauer.domain.dao.RecordDao;
 import de.cneubauer.domain.dao.InvoiceDao;
-import de.cneubauer.domain.dao.impl.AccountingRecordDaoImpl;
+import de.cneubauer.domain.dao.impl.RecordDaoImpl;
 import de.cneubauer.domain.dao.impl.InvoiceDaoImpl;
 import de.cneubauer.gui.model.ProcessResult;
 
@@ -17,13 +17,13 @@ import java.util.List;
 public class DatabaseService {
     public void saveProcessResult(ProcessResult result) {
         Invoice i = result.getExtractionModel().getInvoiceInformation();
-        List<AccountingRecord> records = result.getExtractionModel().getAccountingRecords();
+        List<Record> records = result.getExtractionModel().getRecords();
 
         InvoiceDao invoiceDao = new InvoiceDaoImpl();
         invoiceDao.save(i);
 
-        AccountingRecordDao accountDao = new AccountingRecordDaoImpl();
-        for (AccountingRecord r : records) {
+        RecordDao accountDao = new RecordDaoImpl();
+        for (Record r : records) {
             accountDao.save(r);
         }
     }

@@ -58,7 +58,7 @@ public class SplitPaneController extends GUIController {
         this.caller = caller;
         this.index = index;
         invoiceTabController.initData(extractedInformation.getInvoiceInformation(), this);
-        accountingRecordsTabController.initData(extractedInformation.getAccountingRecords(), this);
+        accountingRecordsTabController.initData(extractedInformation.getRecords(), this);
         this.initImage(fileToScan);
         model = extractedInformation;
     }
@@ -105,7 +105,7 @@ public class SplitPaneController extends GUIController {
 
     // updates all reviewed information and return to list view
     private void updateAndReturn() {
-        model.setAccountingRecords(accountingRecordsTabController.updateInformation());
+        model.setRecords(accountingRecordsTabController.updateInformation());
         model.setInvoiceInformation(invoiceTabController.updateInformation());
         accountingRecordsTabController.addRevisedToFile();
         invoiceTabController.addRevisedToFile();

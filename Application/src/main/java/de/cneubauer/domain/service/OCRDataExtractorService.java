@@ -6,7 +6,6 @@ import de.cneubauer.domain.dao.LegalPersonDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import de.cneubauer.domain.helper.AccountFileHelper;
-import de.cneubauer.domain.helper.InvoiceFileHelper;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
 import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
@@ -69,22 +68,12 @@ public class OCRDataExtractorService {
         return result;
     }
 
-    // TODO: REMOVE METHOD! ONLY FOR TESTING GUI
-    private AccountingRecord fakeAccount(Account cred, Account deb) {
-        AccountingRecord mock = new AccountingRecord();
-        mock.setDebit(deb);
-        mock.setCredit(cred);
-        mock.setEntryText("MockPosition");
-        mock.setBruttoValue(200);
-        mock.setVat_rate(0.19);
-        return mock;
-    }
     /*
      * Uses scanned page and looks for several information regarding accounting records
      * @return  returns a list of all AccountingRecords that has been found on the page
      */
-    public List<AccountingRecord> extractAccountingRecordInformation() {
-        List<AccountingRecord> records = new LinkedList<>();
+    public List<Record> extractAccountingRecordInformation() {
+        List<Record> records = new LinkedList<>();
         //TODO: Additional filtering through the branch of the company
 
         //TODO: Filtering if invoice or voucher
@@ -103,7 +92,7 @@ public class OCRDataExtractorService {
                         index++;
                     }
                     // now we have a line with position information
-                    AccountingRecord r = new AccountingRecord();
+                    Record r = new Record();
                     r.setEntryText(nextLine);
                     records.add(r);
                 } else {
@@ -117,12 +106,14 @@ public class OCRDataExtractorService {
 
         Map<String, String> values = AccountFileHelper.getConfig();
 
-        for (AccountingRecord r : records) {
+        for (Record r : records) {
             for (String key : values.keySet()) {
                 if (StringUtils.getLevenshteinDistance(key, r.getEntryText()) < this.getConfidence()) {
                     for (Account a : accountsLeft) {
                         if (a.getAccountNo().equals(values.get(key))) {
-                            r.setDebit(a);
+                            AccountRecord record = new AccountRecord();
+                            record.setAccount(a);
+                            r.getRecordAccounts().add(record);
                         }
                     }
                 }

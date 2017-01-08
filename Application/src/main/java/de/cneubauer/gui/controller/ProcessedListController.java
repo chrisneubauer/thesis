@@ -1,6 +1,6 @@
 package de.cneubauer.gui.controller;
 
-import de.cneubauer.domain.bo.AccountingRecord;
+import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.domain.helper.InvoiceFileHelper;
@@ -89,9 +89,10 @@ public class ProcessedListController extends GUIController {
                 service.saveProcessResult(result);
                 Invoice i = result.getExtractionModel().getInvoiceInformation();
                 InvoiceFileHelper.write(i.getCreditor().getName(), i.getDebitor().getName());
-                List<AccountingRecord> recordList = result.getExtractionModel().getAccountingRecords();
-                for (AccountingRecord accountingRecord : recordList) {
-                    AccountFileHelper.write(accountingRecord.getEntryText(), accountingRecord.getDebit().getAccountNo());
+                List<Record> recordList = result.getExtractionModel().getRecords();
+                for (Record record : recordList) {
+                    // TODO: update to new version
+                    //AccountFileHelper.write(record.getEntryText(), record.getDebit().getAccountNo());
                 }
                 counter++;
             }

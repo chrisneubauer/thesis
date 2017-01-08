@@ -1,6 +1,6 @@
 package de.cneubauer.gui.model;
 
-import de.cneubauer.domain.bo.AccountingRecord;
+import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.bo.Invoice;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ExtractionModel {
     private Invoice invoiceInformation;
-    private List<AccountingRecord> accountingRecords;
+    private List<Record> records;
 
     public Invoice getInvoiceInformation() {
         return invoiceInformation;
@@ -21,11 +21,11 @@ public class ExtractionModel {
         this.invoiceInformation = invoiceInformation;
     }
 
-    public List<AccountingRecord> getAccountingRecords() {
-        return accountingRecords;
+    public List<Record> getRecords() {
+        return records;
     }
 
-    public void setAccountingRecords(List<AccountingRecord> accountingRecords) {
-        this.accountingRecords = accountingRecords;
+    public void setRecords(List<Record> records) {
+        this.records = records;
     }
 }

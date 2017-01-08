@@ -1,7 +1,7 @@
 package de.cneubauer.gui.controller;
 
 import com.google.common.io.Files;
-import de.cneubauer.domain.bo.AccountingRecord;
+import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.Scan;
 import de.cneubauer.domain.service.OCRDataExtractorService;
@@ -87,7 +87,7 @@ public class OCRController extends SplitPaneController {
             OCRDataExtractorService service = new OCRDataExtractorService(result);
             Scan scan = new Scan();
             Invoice extractedInformation = service.extractInvoiceInformation();
-            List<AccountingRecord> recordList = service.extractAccountingRecordInformation();
+            List<Record> recordList = service.extractAccountingRecordInformation();
             scan.setInvoiceInformation(extractedInformation);
             try {
                 scan.setFile(Files.toByteArray(fileToScan));
@@ -100,7 +100,7 @@ public class OCRController extends SplitPaneController {
 
     //this method opens invoice information after ocr processing using ResultsController
     @FXML
-    private void openExtractionInformationMenu(Event e, Scan extractedInformation, List<AccountingRecord> recordList, File fileToScan) {
+    private void openExtractionInformationMenu(Event e, Scan extractedInformation, List<Record> recordList, File fileToScan) {
         try {
             Node n = (Node) e.getSource();
             Node parent = n.getParent().getParent().getParent();
@@ -121,7 +121,7 @@ public class OCRController extends SplitPaneController {
 
             ExtractionModel temp = new ExtractionModel();
             temp.setInvoiceInformation(extractedInformation.getInvoiceInformation());
-            temp.setAccountingRecords(recordList);
+            temp.setRecords(recordList);
             // TODO: Remove OCR Controller
             ctrl.initResults(0, temp, fileToScan, new ProcessedListController());
 

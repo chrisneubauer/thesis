@@ -2,15 +2,14 @@ package de.cneubauer.gui.model;
 
 import de.cneubauer.domain.bo.Account;
 import de.cneubauer.domain.bo.AccountType;
-import de.cneubauer.domain.bo.AccountingRecord;
-import javafx.collections.ObservableList;
+import de.cneubauer.domain.bo.Record;
 
 /**
  * Created by Christoph Neubauer on 21.11.2016.
  * Model for the AccountingRecordsController
  */
 public class AccountingRecordModel {
-    private AccountingRecord record;
+    private Record record;
     private boolean revised;
     private AccountType toPossibleType;
     private Account toPossibleAccount;
@@ -24,11 +23,11 @@ public class AccountingRecordModel {
         this.index = index;
     }
 
-    public AccountingRecord getRecord() {
+    public Record getRecord() {
         return record;
     }
 
-    public void setRecord(AccountingRecord record) {
+    public void setRecord(Record record) {
         this.record = record;
     }
 

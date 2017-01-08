@@ -2,16 +2,14 @@ package de.cneubauer.gui.controller;
 
 import de.cneubauer.domain.bo.Account;
 import de.cneubauer.domain.bo.AccountType;
-import de.cneubauer.domain.bo.AccountingRecord;
+import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.dao.AccountDao;
 import de.cneubauer.domain.dao.AccountTypeDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.domain.dao.impl.AccountTypeDaoImpl;
 import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.gui.model.AccountingRecordModel;
-import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,11 +28,26 @@ import java.util.List;
  * Controller for managing extracted accounting records
  */
 public class AccountingRecordsController extends SplitPaneController {
-    @FXML public ComboBox<AccountType> fromDropDownAccountType;
-    @FXML public ComboBox<Account> fromDropDownAccount;
-    @FXML public ComboBox<AccountType> toDropDownAccountType;
-    @FXML public ComboBox<Account> toDropDownAccount;
-    @FXML public TextField positionValue;
+    //@FXML public ComboBox<AccountType> fromDropDownAccountType;
+    //@FXML public ComboBox<AccountType> toDropDownAccountType;
+    @FXML public ComboBox<Account> fromDropDownAccountOne;
+    @FXML public ComboBox<Account> fromDropDownAccountTwo;
+    @FXML public ComboBox<Account> fromDropDownAccountThree;
+    @FXML public ComboBox<Account> fromDropDownAccountFour;
+    @FXML public ComboBox<Account> toDropDownAccountOne;
+    @FXML public ComboBox<Account> toDropDownAccountTwo;
+    @FXML public ComboBox<Account> toDropDownAccountThree;
+    @FXML public ComboBox<Account> toDropDownAccountFour;
+
+    @FXML public TextField positionValueFromAccountOne;
+    @FXML public TextField positionValueFromAccountTwo;
+    @FXML public TextField positionValueFromAccountThree;
+    @FXML public TextField positionValueFromAccountFour;
+    @FXML public TextField positionValueToAccountOne;
+    @FXML public TextField positionValueToAccountTwo;
+    @FXML public TextField positionValueToAccountThree;
+    @FXML public TextField positionValueToAccountFour;
+
     @FXML public ImageView confidenceImage;
     @FXML public CheckBox recordRevised;
     @FXML public Label currentRecord;
@@ -46,7 +59,7 @@ public class AccountingRecordsController extends SplitPaneController {
     private SplitPaneController superCtrl;
     private int index = 1;
 
-    void initData(List<AccountingRecord> data, SplitPaneController superCtrl) {
+    void initData(List<Record> data, SplitPaneController superCtrl) {
         this.superCtrl = superCtrl;
         Logger.getLogger(this.getClass()).log(Level.INFO, "initiating AccountingRecordsController data");
         List<AccountingRecordModel> records = this.convertToAccountingRecordModel(data);
@@ -62,10 +75,10 @@ public class AccountingRecordsController extends SplitPaneController {
         }
     }
 
-    private List<AccountingRecordModel> convertToAccountingRecordModel(List<AccountingRecord> data) {
+    private List<AccountingRecordModel> convertToAccountingRecordModel(List<Record> data) {
         List<AccountingRecordModel> records = new ArrayList<>(data.size());
         int idx = 1;
-        for (AccountingRecord record : data) {
+        for (Record record : data) {
             AccountingRecordModel model = new AccountingRecordModel(idx++);
             model.setRevised(false);
             model.setRecord(record);
@@ -73,7 +86,7 @@ public class AccountingRecordsController extends SplitPaneController {
                 model.setPosition(record.getEntryText());
             }
 
-            if (record.getCredit() != null) {
+            /*if (record.getCredit() != null) {
                 model.setToPossibleAccount(record.getCredit());
                 if (record.getCredit().getType() != null) {
                     model.setToPossibleType(record.getCredit().getType());
@@ -84,14 +97,32 @@ public class AccountingRecordsController extends SplitPaneController {
                 if (record.getDebit().getType() != null) {
                     model.setFromPossibleType(record.getDebit().getType());
                 }
-            }
+            }*/
             records.add(model);
         }
         return records;
     }
 
+    private StringConverter<Account> createAccountConverter() {
+        return new StringConverter<Account>() {
+            @Override
+            public String toString(Account object) {
+                if (object != null) {
+                    return object.getAccountNo();
+                } else {
+                    return "";
+                }
+            }
+
+            @Override
+            public Account fromString(String string) {
+                throw new UnsupportedOperationException();
+            }
+        };
+    }
+
     private void initiateDropdowns(AccountingRecordModel model) {
-        fromDropDownAccountType.setConverter(new StringConverter<AccountType>() {
+        /*fromDropDownAccountType.setConverter(new StringConverter<AccountType>() {
             @Override
             public String toString(AccountType object) {
                 return object.getName();
@@ -101,23 +132,12 @@ public class AccountingRecordsController extends SplitPaneController {
             public AccountType fromString(String string) {
                 throw new UnsupportedOperationException();
             }
-        });
-        fromDropDownAccount.setConverter(new StringConverter<Account>() {
-            @Override
-            public String toString(Account object) {
-                if (object != null) {
-                    return object.getAccountNo();
-                } else {
-                    return "";
-                }
-            }
-
-            @Override
-            public Account fromString(String string) {
-                throw new UnsupportedOperationException();
-            }
-        });
-        toDropDownAccountType.setConverter(new StringConverter<AccountType>() {
+        });*/
+        fromDropDownAccountOne.setConverter(this.createAccountConverter());
+        fromDropDownAccountTwo.setConverter(this.createAccountConverter());
+        fromDropDownAccountThree.setConverter(this.createAccountConverter());
+        fromDropDownAccountFour.setConverter(this.createAccountConverter());
+        /*toDropDownAccountType.setConverter(new StringConverter<AccountType>() {
             @Override
             public String toString(AccountType object) {
                 return object.getName();
@@ -127,22 +147,11 @@ public class AccountingRecordsController extends SplitPaneController {
             public AccountType fromString(String string) {
                 throw new UnsupportedOperationException();
             }
-        });
-        toDropDownAccount.setConverter(new StringConverter<Account>() {
-            @Override
-            public String toString(Account object) {
-                if (object != null) {
-                    return object.getAccountNo();
-                } else {
-                    return "";
-                }
-            }
-
-            @Override
-            public Account fromString(String string) {
-                throw new UnsupportedOperationException();
-            }
-        });
+        });*/
+        toDropDownAccountOne.setConverter(this.createAccountConverter());
+        toDropDownAccountTwo.setConverter(this.createAccountConverter());
+        toDropDownAccountThree.setConverter(this.createAccountConverter());
+        toDropDownAccountFour.setConverter(this.createAccountConverter());
 
         AccountTypeDao accountTypeDao = new AccountTypeDaoImpl();
         AccountDao accountDao = new AccountDaoImpl();
@@ -153,12 +162,18 @@ public class AccountingRecordsController extends SplitPaneController {
 
         Logger.getLogger(this.getClass()).log(Level.INFO, "adding " + types.size() + " elements to type dropdowns");
         Logger.getLogger(this.getClass()).log(Level.INFO, "adding " + accounts.size() + " elements to account dropdowns");
-        fromDropDownAccountType.setItems(FXCollections.observableArrayList(this.types));
-        fromDropDownAccount.setItems(accounts);
-        toDropDownAccountType.setItems(FXCollections.observableArrayList(this.types));
-        toDropDownAccount.setItems(accounts);
+        //fromDropDownAccountType.setItems(FXCollections.observableArrayList(this.types));
+        fromDropDownAccountOne.setItems(accounts);
+        fromDropDownAccountTwo.setItems(accounts);
+        fromDropDownAccountThree.setItems(accounts);
+        fromDropDownAccountFour.setItems(accounts);
+        //toDropDownAccountType.setItems(FXCollections.observableArrayList(this.types));
+        toDropDownAccountOne.setItems(accounts);
+        toDropDownAccountTwo.setItems(accounts);
+        toDropDownAccountThree.setItems(accounts);
+        toDropDownAccountFour.setItems(accounts);
 
-        fromDropDownAccountType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<AccountType>() {
+        /*fromDropDownAccountType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<AccountType>() {
             @Override
             public void changed(ObservableValue<? extends AccountType> observable, AccountType oldValue, AccountType newValue) {
                 Logger.getLogger(this.getClass()).log(Level.INFO, "searching for accounts of account type with id " + newValue.getId());
@@ -171,17 +186,17 @@ public class AccountingRecordsController extends SplitPaneController {
                 Logger.getLogger(this.getClass()).log(Level.INFO, "searching for accounts of account type with id " + newValue.getId());
                 toDropDownAccount.setItems(FXCollections.observableArrayList(accountDao.getAllByType(newValue.getId())));
             }
-        });
+        });*/
     }
 
-    private List<AccountingRecord> convertToAccountingRecords() {
-        List<AccountingRecord> result = new ArrayList<>(this.recordsFound.size());
+    private List<Record> convertToAccountingRecords() {
+        List<Record> result = new ArrayList<>(this.recordsFound.size());
         int index = 0;
         for (AccountingRecordModel model : recordsFound) {
-            AccountingRecord newRecord = new AccountingRecord();
-            newRecord.setCredit(getFromDropDownAccount());
-            newRecord.setDebit(getToDropDownAccount());
-            newRecord.setBruttoValue(getPositionValue());
+            Record newRecord = new Record();
+            /*newRecord.setCredit(getFromDropDownAccountOne());
+            newRecord.setDebit(getToDropDownAccountOne());
+            newRecord.setBruttoValue(getPositionValueFromAccountOne());*/
             newRecord.setEntryText(model.getPosition());
             result.add(index++, newRecord);
         }
@@ -189,11 +204,25 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     private void addAllListeners() {
-        this.fromDropDownAccountType.valueProperty().addListener(this.addListenerToComboBoxType(this.fromDropDownAccountType));
-        this.fromDropDownAccount.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccount));
-        this.toDropDownAccountType.valueProperty().addListener(this.addListenerToComboBoxType(this.toDropDownAccountType));
-        this.toDropDownAccount.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccount));
-        this.positionValue.textProperty().addListener(this.addListenerToTextField(this.positionValue));
+        //this.fromDropDownAccountType.valueProperty().addListener(this.addListenerToComboBoxType(this.fromDropDownAccountType));
+        this.fromDropDownAccountOne.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountOne));
+        this.fromDropDownAccountTwo.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountTwo));
+        this.fromDropDownAccountThree.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountThree));
+        this.fromDropDownAccountFour.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountFour));
+        //this.toDropDownAccountType.valueProperty().addListener(this.addListenerToComboBoxType(this.toDropDownAccountType));
+        this.toDropDownAccountOne.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountOne));
+        this.toDropDownAccountTwo.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountTwo));
+        this.toDropDownAccountThree.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountThree));
+        this.toDropDownAccountFour.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountFour));
+
+        this.positionValueFromAccountOne.textProperty().addListener(this.addListenerToTextField(this.positionValueFromAccountOne));
+        this.positionValueFromAccountTwo.textProperty().addListener(this.addListenerToTextField(this.positionValueFromAccountTwo));
+        this.positionValueFromAccountThree.textProperty().addListener(this.addListenerToTextField(this.positionValueFromAccountThree));
+        this.positionValueFromAccountFour.textProperty().addListener(this.addListenerToTextField(this.positionValueFromAccountFour));
+        this.positionValueToAccountOne.textProperty().addListener(this.addListenerToTextField(this.positionValueToAccountOne));
+        this.positionValueToAccountTwo.textProperty().addListener(this.addListenerToTextField(this.positionValueToAccountTwo));
+        this.positionValueToAccountThree.textProperty().addListener(this.addListenerToTextField(this.positionValueToAccountThree));
+        this.positionValueToAccountFour.textProperty().addListener(this.addListenerToTextField(this.positionValueToAccountFour));
         this.possiblePosition.textProperty().addListener(this.addListenerToTextField(this.possiblePosition));
         Logger.getLogger(this.getClass()).log(Level.INFO, "Listeners added to textfields");
     }
@@ -268,52 +297,52 @@ public class AccountingRecordsController extends SplitPaneController {
 
     private void saveCurrentValuesToRecord() {
         AccountingRecordModel current = this.getRecordsFound().get(this.index-1);
-        AccountingRecord currentRecord = current.getRecord();
-        if (this.getFromDropDownAccount() != null)
+        Record currentRecord = current.getRecord();
+        if (this.getFromDropDownAccountOne() != null)
         {
-            currentRecord.setCredit(this.getFromDropDownAccount());
+            //currentRecord.setCredit(this.getFromDropDownAccountOne());
         }
 
-        if (this.getFromDropDownAccountType() != null) {
+        /*if (this.getFromDropDownAccountType() != null) {
             currentRecord.getCredit().setType(this.getFromDropDownAccountType());
+        }*/
+
+        if (this.getToDropDownAccountOne() != null) {
+            //currentRecord.setDebit(this.getToDropDownAccountOne());
         }
 
-        if (this.getToDropDownAccount() != null) {
-            currentRecord.setDebit(this.getToDropDownAccount());
-        }
-
-        if (this.getFromDropDownAccountType() != null) {
+        /*if (this.getFromDropDownAccountType() != null) {
             currentRecord.getCredit().setType(this.getFromDropDownAccountType());
-        }
+        }*/
 
-        if (this.getPositionValue() > 0) {
-            currentRecord.setBruttoValue(this.getPositionValue());
+        if (this.getPositionValueFromAccountOne() > 0) {
+            //currentRecord.setBruttoValue(this.getPositionValueFromAccountOne());
         }
     }
 
     // core method to update the whole view when new information is present
     private void updateAccountingRecordView(AccountingRecordModel currentModel) {
-        AccountingRecord accountingRecord = currentModel.getRecord();
-        if (accountingRecord.getCredit() != null) {
-            if (accountingRecord.getCredit().getType() != null) {
-                this.setFromDropDownAccountType(accountingRecord.getCredit().getType());
+        Record record = currentModel.getRecord();
+        /*if (record.getCredit() != null) {
+             if (record.getCredit().getType() != null) {
+                this.setFromDropDownAccountType(record.getCredit().getType());
             }
-            this.setFromDropDownAccount(accountingRecord.getCredit());
+            this.setFromDropDownAccountOne(record.getCredit());
         }
 
-        if (accountingRecord.getDebit() != null) {
-            if (accountingRecord.getDebit().getType() != null) {
-                this.setToDropDownAccountType(accountingRecord.getDebit().getType());
+        if (record.getDebit() != null) {
+            if (record.getDebit().getType() != null) {
+                this.setToDropDownAccountType(record.getDebit().getType());
             }
-            this.setToDropDownAccount(accountingRecord.getDebit());
+            this.setToDropDownAccountOne(record.getDebit());
         }
 
-        if (accountingRecord.getBruttoValue() > 0) {
-            this.setPositionValue(accountingRecord.getBruttoValue());
-        }
+        if (record.getBruttoValue() > 0) {
+            this.setPositionValueFromAccountOne(record.getBruttoValue());
+        }*/
 
-        if (accountingRecord.getEntryText() != null) {
-            this.setPossiblePosition(accountingRecord.getEntryText());
+        if (record.getEntryText() != null) {
+            this.setPossiblePosition(record.getEntryText());
         }
 
         Logger.getLogger(this.getClass()).log(Level.INFO, "current confidence: " + currentModel.getConfidence());
@@ -335,36 +364,84 @@ public class AccountingRecordsController extends SplitPaneController {
         this.recordsFound = recordsFound;
     }
 
-    private AccountType getFromDropDownAccountType() {
+    /*private AccountType getFromDropDownAccountType() {
         return fromDropDownAccountType.getValue();
-    }
+    }*/
 
-    private void setFromDropDownAccountType(AccountType fromDropDownAccountType) {
+    /*private void setFromDropDownAccountType(AccountType fromDropDownAccountType) {
         this.fromDropDownAccountType.getSelectionModel().select(fromDropDownAccountType);
+    }*/
+
+    private Account getFromDropDownAccountOne() {
+        return fromDropDownAccountOne.getValue();
     }
 
-    private Account getFromDropDownAccount() {
-        return fromDropDownAccount.getValue();
+    private void setFromDropDownAccountOne(Account fromDropDownAccount) {
+        this.fromDropDownAccountOne.getSelectionModel().select(fromDropDownAccount);
     }
 
-    private void setFromDropDownAccount(Account fromDropDownAccount) {
-        this.fromDropDownAccount.getSelectionModel().select(fromDropDownAccount);
+    private Account getFromDropDownAccountTwo() {
+        return fromDropDownAccountTwo.getValue();
     }
 
-    public AccountType getToDropDownAccountType() {
+    private void setFromDropDownAccountTwo(Account fromDropDownAccount) {
+        this.fromDropDownAccountTwo.getSelectionModel().select(fromDropDownAccount);
+    }
+
+    private Account getFromDropDownAccountThree() {
+        return fromDropDownAccountThree.getValue();
+    }
+
+    private void setFromDropDownAccountThree(Account fromDropDownAccount) {
+        this.fromDropDownAccountThree.getSelectionModel().select(fromDropDownAccount);
+    }
+
+    private Account getFromDropDownAccountFour() {
+        return fromDropDownAccountFour.getValue();
+    }
+
+    private void setFromDropDownAccountFour(Account fromDropDownAccount) {
+        this.fromDropDownAccountFour.getSelectionModel().select(fromDropDownAccount);
+    }
+
+   /* public AccountType getToDropDownAccountType() {
         return toDropDownAccountType.getValue();
     }
 
     public void setToDropDownAccountType(AccountType toDropDownAccountType) {
         this.toDropDownAccountType.getSelectionModel().select(toDropDownAccountType);
+    }*/
+
+    private Account getToDropDownAccountOne() {
+        return toDropDownAccountOne.getValue();
     }
 
-    private Account getToDropDownAccount() {
-        return toDropDownAccount.getValue();
+    public void setToDropDownAccountOne(Account toDropDownAccount) {
+        this.toDropDownAccountOne.getSelectionModel().select(toDropDownAccount);
     }
 
-    public void setToDropDownAccount(Account toDropDownAccount) {
-        this.toDropDownAccount.getSelectionModel().select(toDropDownAccount);
+    private Account getToDropDownAccountTwo() {
+        return toDropDownAccountTwo.getValue();
+    }
+
+    public void setToDropDownAccountTwo(Account toDropDownAccount) {
+        this.toDropDownAccountTwo.getSelectionModel().select(toDropDownAccount);
+    }
+
+    private Account getToDropDownAccountThree() {
+        return toDropDownAccountThree.getValue();
+    }
+
+    public void setToDropDownAccountThree(Account toDropDownAccount) {
+        this.toDropDownAccountThree.getSelectionModel().select(toDropDownAccount);
+    }
+
+    private Account getToDropDownAccountFour() {
+        return toDropDownAccountFour.getValue();
+    }
+
+    public void setToDropDownAccountFour(Account toDropDownAccount) {
+        this.toDropDownAccountFour.getSelectionModel().select(toDropDownAccount);
     }
 
     public ImageView getConfidenceImage() {
@@ -375,10 +452,10 @@ public class AccountingRecordsController extends SplitPaneController {
         this.confidenceImage = confidenceImage;
     }
 
-    private double getPositionValue() {
-        if (this.positionValue.getText() != null) {
+    private double getPositionValueFromAccountOne() {
+        if (this.positionValueFromAccountOne.getText() != null) {
             try {
-                return Double.valueOf(this.positionValue.getText());
+                return Double.valueOf(this.positionValueFromAccountOne.getText());
             } catch (NumberFormatException ex) {
                 Logger.getLogger(this.getClass()).log(Level.WARN, "Unable to parse value! Returning 0");
                 return 0;
@@ -388,22 +465,22 @@ public class AccountingRecordsController extends SplitPaneController {
         }
     }
 
-    private void setPositionValue(double newValue) {
-        this.positionValue.setText(String.valueOf(newValue));
+    private void setPositionValueFromAccountOne(double newValue) {
+        this.positionValueFromAccountOne.setText(String.valueOf(newValue));
     }
 
     // checks if accounting record can be set as revised
     public boolean checkRevised(ActionEvent actionEvent) {
         if (this.recordRevised.isSelected()) {
             AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord()));
-            AccountingRecord record = model.getRecord();
+            Record record = model.getRecord();
 
-            if (record.getCredit() != null && record.getDebit() != null && record.getBruttoValue() > 0) {
+            //if (record.getCredit() != null && record.getDebit() != null && record.getBruttoValue() > 0) {
                 model.setRevised(true);
                 return  true;
-            } else {
+            /*} else {
                 return false;
-            }
+            }*/
         } else {
             AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord()));
             model.setRevised(false);
@@ -428,24 +505,24 @@ public class AccountingRecordsController extends SplitPaneController {
     boolean validateFieldsBeforeSave() {
         boolean result = true;
 
-        if (this.fromDropDownAccountType.getSelectionModel().getSelectedItem() == null) {
+        /*if (this.fromDropDownAccountType.getSelectionModel().getSelectedItem() == null) {
             this.fromDropDownAccountType.getStyleClass().add("error");
             result = false;
-        }
-        if (this.fromDropDownAccount.getSelectionModel().getSelectedItem() == null) {
-            this.fromDropDownAccount.getStyleClass().add("error");
+        }*/
+        if (this.fromDropDownAccountOne.getSelectionModel().getSelectedItem() == null) {
+            this.fromDropDownAccountOne.getStyleClass().add("error");
             result = false;
         }
-        if (this.toDropDownAccountType.getSelectionModel().getSelectedItem() == null) {
+        /*if (this.toDropDownAccountType.getSelectionModel().getSelectedItem() == null) {
             this.toDropDownAccountType.getStyleClass().add("error");
             result = false;
-        }
-        if (this.toDropDownAccount.getSelectionModel().getSelectedItem() == null) {
-            this.toDropDownAccount.getStyleClass().add("error");
+        }*/
+        if (this.toDropDownAccountOne.getSelectionModel().getSelectedItem() == null) {
+            this.toDropDownAccountOne.getStyleClass().add("error");
             result = false;
         }
-        if (this.positionValue.getText() == null || this.positionValue.getText().isEmpty()) {
-            this.positionValue.getStyleClass().add("error");
+        if (this.positionValueFromAccountOne.getText() == null || this.positionValueFromAccountOne.getText().isEmpty()) {
+            this.positionValueFromAccountOne.getStyleClass().add("error");
             result = false;
         }
         if (this.possiblePosition.getText() == null || this.possiblePosition.getText().isEmpty()) {
@@ -455,7 +532,7 @@ public class AccountingRecordsController extends SplitPaneController {
         return result;
     }
 
-    List<AccountingRecord> updateInformation() {
+    List<Record> updateInformation() {
         return this.convertToAccountingRecords();
     }
 

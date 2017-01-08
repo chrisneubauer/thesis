@@ -1,22 +1,32 @@
 package de.cneubauer.domain.bo;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 /**
  * Created by Christoph Neubauer on 15.11.2016.
- * Business Object for AccountRecord table
+ * Business Object for Record table
  */
-public class AccountingRecord {
+public class Record {
     private int id;
     private Timestamp entryDate;
     private String documentNo;
     private byte[] document;
     private String entryText;
-    private Account debit;
-    private Account credit;
-    private double bruttoValue;
-    private double vat_rate;
-    private String salesTaxId;
+    //private Account debit;
+    //private Account credit;
+    //private double bruttoValue;
+    //private double vat_rate;
+    //private String salesTaxId;
+    private Set<AccountRecord> recordAccounts;
+
+    public Set<AccountRecord> getRecordAccounts() {
+        return recordAccounts;
+    }
+
+    public void setRecordAccounts(Set<AccountRecord> recordAccounts) {
+        this.recordAccounts = recordAccounts;
+    }
 
     public int getId() {
         return id;
@@ -58,7 +68,7 @@ public class AccountingRecord {
         this.entryText = entryText;
     }
 
-    public Account getDebit() {
+    /* public Account getDebit() {
         return debit;
     }
 
@@ -96,5 +106,5 @@ public class AccountingRecord {
 
     public void setSalesTaxId(String salesTaxId) {
         this.salesTaxId = salesTaxId;
-    }
+    }*/
 }

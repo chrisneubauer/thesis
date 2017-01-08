@@ -1,6 +1,7 @@
 package de.cneubauer.domain.service.validation;
 
-import de.cneubauer.domain.bo.AccountingRecord;
+import de.cneubauer.domain.bo.AccountRecord;
+import de.cneubauer.domain.bo.Record;
 import java.util.List;
 
 /**
@@ -8,8 +9,8 @@ import java.util.List;
  * Validates AccountingRecords with minimum information
  */
 public class AccountingRecordValidator {
-    private List<AccountingRecord> recordList;
-    public AccountingRecordValidator(List<AccountingRecord> records) {
+    private List<Record> recordList;
+    public AccountingRecordValidator(List<Record> records) {
         this.recordList = records;
     }
 
@@ -20,13 +21,29 @@ public class AccountingRecordValidator {
     private boolean validateAccountingRecords() {
         boolean valid = true;
 
-        for (AccountingRecord r : this.recordList) {
-            valid = r.getBruttoValue() > 0;
-            valid = valid && r.getDebit() != null;
-            valid = valid && r.getCredit() != null;
+        for (Record r : this.recordList) {
+            valid = this.validateEntries(r);
             valid = valid && r.getEntryText() != null;
         }
 
         return valid;
+    }
+
+    private boolean validateEntries(Record r) {
+        double debitSum = 0;
+        double creditSum = 0;
+        boolean valid = true;
+
+        for (AccountRecord record : r.getRecordAccounts()) {
+            valid = valid && record.getBruttoValue() != 0;
+            valid = valid && record.getAccount() != null;
+            if (record.getIsDebit()) {
+                debitSum += record.getBruttoValue();
+            } else {
+                creditSum += record.getBruttoValue();
+            }
+        }
+
+        return valid && debitSum == creditSum;
     }
 }

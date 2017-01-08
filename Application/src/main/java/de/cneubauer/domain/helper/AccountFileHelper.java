@@ -1,9 +1,5 @@
 package de.cneubauer.domain.helper;
 
-import de.cneubauer.domain.bo.Account;
-import de.cneubauer.domain.bo.AccountingRecord;
-import de.cneubauer.domain.dao.AccountDao;
-import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.util.RecordTrainingEntry;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.log4j.Level;

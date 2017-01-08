@@ -1,15 +1,13 @@
 package de.cneubauer.domain.service;
 
-import de.cneubauer.domain.bo.Account;
-import de.cneubauer.domain.bo.AccountingRecord;
-import de.cneubauer.domain.bo.Invoice;
-import de.cneubauer.domain.bo.LegalPerson;
+import de.cneubauer.domain.bo.*;
 import de.cneubauer.domain.dao.AccountDao;
 import de.cneubauer.domain.dao.LegalPersonDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
+import de.cneubauer.util.RecordTrainingEntry;
 import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -72,8 +70,8 @@ public class DataExtractorService {
      * Uses scanned page and looks for several information regarding accounting records
      * @return  returns a list of all AccountingRecords that has been found on the page
      */
-    public List<AccountingRecord> extractAccountingRecordInformation() {
-        List<AccountingRecord> records = new LinkedList<>();
+    public List<Record> extractAccountingRecordInformation() {
+        List<Record> records = new LinkedList<>();
         //TODO: Additional filtering through the branch of the company
 
         //TODO: Filtering if invoice or voucher
@@ -92,9 +90,13 @@ public class DataExtractorService {
                         index++;
                     }
                     // now we have a line with position information
-                    AccountingRecord r = new AccountingRecord();
-                    String existing = this.recordInLearningFile(nextLine);
-                    r.setEntryText(existing);
+                    Record r = new Record();
+                    RecordTrainingEntry entry = this.recordInLearningFile(nextLine);
+                    if (entry == null) {
+                        r.setEntryText(nextLine);
+                    } else {
+                        r.setEntryText(entry.getPosition());
+                    }
                     records.add(r);
                 } else {
                     // break on eof
@@ -105,14 +107,17 @@ public class DataExtractorService {
             }
         }
 
+        // Index out of bounds, Map String String doesn't exist anymore
         Map<String, String> values = AccountFileHelper.getConfig();
 
-        for (AccountingRecord r : records) {
+        for (Record r : records) {
             for (String key : values.keySet()) {
                 if (StringUtils.getLevenshteinDistance(key, r.getEntryText()) < this.getConfidence()) {
                     for (Account a : accountsLeft) {
                         if (a.getAccountNo().equals(values.get(key))) {
-                            r.setDebit(a);
+                            AccountRecord accountRecord = new AccountRecord();
+                            accountRecord.setAccount(a);
+                            r.getRecordAccounts().add(accountRecord);
                         }
                     }
                 }
@@ -124,10 +129,9 @@ public class DataExtractorService {
     // checks if record already exists in learning file
     // if this is the case, the existing string is being returned
     // if not, the given string is returned again
-    private String recordInLearningFile(String nextLine) {
-        AccountFileHelper.getConfig().containsValue(nextLine);
-
-        return nextLine;
+    private RecordTrainingEntry recordInLearningFile(String nextLine) {
+        // AccountFileHelper.getConfig().containsValue(nextLine);
+       return AccountFileHelper.findAccountingRecord(nextLine);
     }
 
     private InvoiceInformationHelper findInvoiceValues() {

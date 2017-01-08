@@ -1,6 +1,6 @@
 package de.cneubauer.util.task;
 
-import de.cneubauer.domain.bo.AccountingRecord;
+import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.service.DataExtractorService;
 import de.cneubauer.domain.service.validation.AccountingRecordValidator;
@@ -66,11 +66,11 @@ public class ScanTask extends Task {
                 Platform.runLater(() -> status.setText("Extracting information..."));
                 DataExtractorService service = new DataExtractorService(ocrParts);
                 Invoice i = service.extractInvoiceInformation();
-                List<AccountingRecord> recordList = service.extractAccountingRecordInformation();
+                List<Record> recordList = service.extractAccountingRecordInformation();
 
                 ExtractionModel m = new ExtractionModel();
                 m.setInvoiceInformation(i);
-                m.setAccountingRecords(recordList);
+                m.setRecords(recordList);
 
                 r.setExtractionModel(m);
                 r.setProblem("");
@@ -161,7 +161,7 @@ public class ScanTask extends Task {
     private boolean resultValid(ProcessResult r) {
         InvoiceValidator invoiceValidator = new InvoiceValidator(r.getExtractionModel().getInvoiceInformation());
         boolean invoiceValid = invoiceValidator.isValid();
-        AccountingRecordValidator accountingValidator = new AccountingRecordValidator(r.getExtractionModel().getAccountingRecords());
+        AccountingRecordValidator accountingValidator = new AccountingRecordValidator(r.getExtractionModel().getRecords());
         boolean accountingRecordsValid = accountingValidator.isValid();
         return invoiceValid && accountingRecordsValid;
     }
