@@ -1,6 +1,13 @@
 package de.cneubauer.domain.bo;
 
+import de.cneubauer.domain.dao.impl.AccountDaoImpl;
+import de.cneubauer.util.RecordTrainingEntry;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -8,16 +15,15 @@ import java.util.Set;
  * Business Object for Record table
  */
 public class Record {
+    public Record() {
+        this.recordAccounts = new HashSet<>(0);
+    }
+
     private int id;
     private Timestamp entryDate;
     private String documentNo;
     private byte[] document;
     private String entryText;
-    //private Account debit;
-    //private Account credit;
-    //private double bruttoValue;
-    //private double vat_rate;
-    //private String salesTaxId;
     private Set<AccountRecord> recordAccounts;
 
     public Set<AccountRecord> getRecordAccounts() {
@@ -66,6 +72,34 @@ public class Record {
 
     public void setEntryText(String entryText) {
         this.entryText = entryText;
+    }
+
+    public void addRecordTrainingEntry(RecordTrainingEntry entry) {
+        for (Map.Entry<String, Double> mapEntry : entry.getDebitAccounts().entrySet()) {
+            try {
+                AccountRecord record = new AccountRecord();
+                AccountDaoImpl accountDao = new AccountDaoImpl();
+                record.setIsDebit(true);
+                record.setAccount(accountDao.getByName(mapEntry.getKey()));
+                record.setBruttoValue(mapEntry.getValue());
+                this.getRecordAccounts().add(record);
+            } catch (Exception e) {
+                Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to parse account from string, skipping..");
+            }
+        }
+
+        for (Map.Entry<String, Double> mapEntry : entry.getCreditAccounts().entrySet()) {
+            try {
+                AccountRecord record = new AccountRecord();
+                AccountDaoImpl accountDao = new AccountDaoImpl();
+                record.setIsDebit(false);
+                record.setAccount(accountDao.getByName(mapEntry.getKey()));
+                record.setBruttoValue(mapEntry.getValue());
+                this.getRecordAccounts().add(record);
+            } catch (Exception e) {
+                Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to parse account from string, skipping..");
+            }
+        }
     }
 
     /* public Account getDebit() {

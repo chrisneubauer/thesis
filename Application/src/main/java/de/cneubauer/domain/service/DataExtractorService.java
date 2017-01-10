@@ -17,6 +17,8 @@ import org.apache.log4j.Logger;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Christoph Neubauer on 20.10.2016.
@@ -75,32 +77,44 @@ public class DataExtractorService {
         //TODO: Additional filtering through the branch of the company
 
         //TODO: Filtering if invoice or voucher
-        AccountDao dao = new AccountDaoImpl();
+        //AccountDao dao = new AccountDaoImpl();
 
-        List<Account> accountsLeft = dao.getAll();
+        //List<Account> accountsLeft = dao.getAll();
 
         int index = 0;
+        boolean found = false;
+        this.body = this.body.replace("\n\n", "\n");
         String[] lines = this.body.split("\n");
-        for (String line : lines) {
-            if (this.getAverageDistanceOfSearchConditions(line, new String[] { "Art.-Nr.", "Artikel", "Beschreibung" }) < this.getConfidence()) {
-                if (lines.length > index) {
+        while (!found) {
+            String line = lines[index];
+            if (this.getAverageDistanceOfSearchConditions(line, new String[] { "Art.-Nr.", "Artikel", "Beschreibung", "Pos" }) < 1 - this.getConfidence()) {
+                found = true;
+                while (lines.length > index + 1) {
                     String nextLine = lines[index + 1];
-                    while(!this.nextLineContainsValue(nextLine) && lines.length > index + 1) {
+                    if(!this.nextLineContainsValue(nextLine) && lines.length > index + 1) {
                         // go on until we find a line with value or end of file reached
                         index++;
                     }
-                    // now we have a line with position information
-                    Record r = new Record();
-                    RecordTrainingEntry entry = this.recordInLearningFile(nextLine);
-                    if (entry == null) {
-                        r.setEntryText(nextLine);
-                    } else {
-                        r.setEntryText(entry.getPosition());
+                    else {
+                        // now we have a line with position information
+                        // or the end if there are keywords like "Betrag" or "Summe"
+                        // check these before going on
+                        //double avg = this.getAverageDistanceOfSearchConditions(nextLine, new String[] { "Betrag", "Summe", "Zwischensumme", "Gesamtbetrag", "Bruttobetrag", "Nettobetrag"});
+                        //if (this.getAverageDistanceOfSearchConditions(nextLine, new String[] { "Betrag", "Summe", "Zwischensumme", "Gesamtbetrag", "Bruttobetrag", "Nettobetrag"}) < 1- this.getConfidence()) {
+                            Record r = new Record();
+                            String recordLine = this.removeFinancialInformationFromRecordLine(nextLine);
+                            RecordTrainingEntry entry = this.recordInLearningFile(recordLine);
+                            if (entry == null) {
+                                r.setEntryText(nextLine);
+                            } else {
+                                r.setEntryText(entry.getPosition());
+                            }
+                            records.add(r);
+                            index++;
+                        //} else {
+                        //    break;
+                        //}
                     }
-                    records.add(r);
-                } else {
-                    // break on eof
-                    break;
                 }
             } else {
                 index++;
@@ -108,22 +122,47 @@ public class DataExtractorService {
         }
 
         // Index out of bounds, Map String String doesn't exist anymore
-        Map<String, String> values = AccountFileHelper.getConfig();
+        List<RecordTrainingEntry> values = AccountFileHelper.getAllRecords();
+        //Map<String, String> values = AccountFileHelper.getConfig();
 
         for (Record r : records) {
-            for (String key : values.keySet()) {
+            for (RecordTrainingEntry entry : values) {// key : values..keySet()) {
+                String key = entry.getPosition();
                 if (StringUtils.getLevenshteinDistance(key, r.getEntryText()) < this.getConfidence()) {
-                    for (Account a : accountsLeft) {
-                        if (a.getAccountNo().equals(values.get(key))) {
+                    // distance right, take the entry
+                    r.addRecordTrainingEntry(entry);
+                    //for (Account a : accountsLeft) {
+                        /*if (a.getAccountNo().equals(values.get(key))) {
                             AccountRecord accountRecord = new AccountRecord();
                             accountRecord.setAccount(a);
                             r.getRecordAccounts().add(accountRecord);
-                        }
-                    }
+                        }*/
+                    //}
                 }
             }
         }
         return records;
+    }
+
+    // adjusts the string to be checked and removes unnecessary columns with financial information
+    private String removeFinancialInformationFromRecordLine(String nextLine) {
+        nextLine = nextLine.replace("EUR", "");
+        nextLine = nextLine.replace("€","");
+        // regex that replaces all occurances of numbers up to 100 million + "," and two digits afterwards
+        Pattern p = Pattern.compile("\\d{1,9}(,\\d{2})");
+        Matcher m = p.matcher(nextLine);
+
+        nextLine = m.replaceAll("");
+        /*
+        nextLine = nextLine.replaceAll("^\\d{1,9}(,\\d{2})", "");
+        nextLine = nextLine.replaceAll("(.*)(^\\d{1,9},\\d{2}(.*)", "");
+        String newString = "";
+        for (String part : nextLine.split(" ")) {
+            if (!part.matches("^\\d{1,9}(,\\d{2})\"")) {
+                newString += part + " ";
+            }
+        }*/
+        return nextLine;
     }
 
     // checks if record already exists in learning file
@@ -422,12 +461,23 @@ public class DataExtractorService {
     }
 
     private double getAverageDistanceOfSearchConditions(String part, String[] searchConditions) {
-        double result = 0;
+        double result = 100;
+        double min = 100;
+        double oldMin = 100;
+        // we want to find signal words in the string
+        // therefore the whole line has to be separated into each word
+        String[] lines = part.split(" ");
         for (String con : searchConditions) {
-            int amountOfChanges = StringUtils.getLevenshteinDistance(part, con);
-            result += ((double) amountOfChanges) / (Math.max(part.length(), con.length()));
+            for (String line : lines) {
+                min = StringUtils.getLevenshteinDistance(line, con);
+                if (min < oldMin) {
+                    result = min / line.length();
+                    oldMin = min;
+                }
+                //result += ((double) amountOfChanges) / (Math.max(part.length(), con.length()));
+            }
         }
-        return result / (double) searchConditions.length;
+        return result / 2; // additional divisor to adjust number influence level // / (double) searchConditions.length;
     }
 
     private boolean partContainsSearchConditions(String part, String[] searchConditions) {

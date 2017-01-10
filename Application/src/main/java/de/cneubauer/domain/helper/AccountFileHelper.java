@@ -1,7 +1,9 @@
 package de.cneubauer.domain.helper;
 
 import de.cneubauer.util.RecordTrainingEntry;
+import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -114,14 +116,18 @@ public final class AccountFileHelper {
 
     public static RecordTrainingEntry findAccountingRecord(String line) {
         for (RecordTrainingEntry entry : getAllRecords()) {
-            if (entry.getPosition().equals(line)) {
+            //if (entry.getPosition().equals(line)) {
+            double distance = StringUtils.getLevenshteinDistance(entry.getPosition(), line);
+            distance = (double) (distance / Double.valueOf(line.length()));
+            double confidenceRate = 1 - Double.valueOf(ConfigHelper.getValue(Cfg.CONFIDENCERATE.getValue()));
+            if (distance < confidenceRate ) {
                 return entry;
             }
         }
         return null;
     }
 
-    private static List<RecordTrainingEntry> getAllRecords() {
+    public static List<RecordTrainingEntry> getAllRecords() {
         List<RecordTrainingEntry> result = new ArrayList<>();
         try {
             if (learningFile == null) {

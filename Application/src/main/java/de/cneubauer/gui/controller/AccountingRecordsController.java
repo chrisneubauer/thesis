@@ -1,6 +1,7 @@
 package de.cneubauer.gui.controller;
 
 import de.cneubauer.domain.bo.Account;
+import de.cneubauer.domain.bo.AccountRecord;
 import de.cneubauer.domain.bo.AccountType;
 import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.dao.AccountDao;
@@ -20,8 +21,7 @@ import javafx.util.StringConverter;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Christoph Neubauer on 21.11.2016.
@@ -187,6 +187,55 @@ public class AccountingRecordsController extends SplitPaneController {
                 toDropDownAccount.setItems(FXCollections.observableArrayList(accountDao.getAllByType(newValue.getId())));
             }
         });*/
+
+        if (model.getRecord().getRecordAccounts().size() > 0) {
+            int idxDebit = 0;
+            int idxCredit = 0;
+            Set<AccountRecord> entries = model.getRecord().getRecordAccounts();
+            for (AccountRecord current : entries) {
+                if (current.getIsDebit()) {
+                    switch (idxDebit) {
+                        case 0:
+                            fromDropDownAccountOne.setValue(current.getAccount());
+                            positionValueFromAccountOne.setText(String.valueOf(current.getBruttoValue()));
+                            break;
+                        case 1:
+                            fromDropDownAccountTwo.setValue(current.getAccount());
+                            positionValueFromAccountTwo.setText(String.valueOf(current.getBruttoValue()));
+                            break;
+                        case 2:
+                            fromDropDownAccountThree.setValue(current.getAccount());
+                            positionValueFromAccountThree.setText(String.valueOf(current.getBruttoValue()));
+                            break;
+                        case 3:
+                            fromDropDownAccountFour.setValue(current.getAccount());
+                            positionValueFromAccountFour.setText(String.valueOf(current.getBruttoValue()));
+                            break;
+                    }
+                    idxDebit++;
+                } else {
+                    switch (idxCredit) {
+                        case 0:
+                            toDropDownAccountOne.setValue(current.getAccount());
+                            positionValueToAccountOne.setText(String.valueOf(current.getBruttoValue()));
+                            break;
+                        case 1:
+                            toDropDownAccountTwo.setValue(current.getAccount());
+                            positionValueToAccountTwo.setText(String.valueOf(current.getBruttoValue()));
+                            break;
+                        case 2:
+                            toDropDownAccountThree.setValue(current.getAccount());
+                            positionValueToAccountThree.setText(String.valueOf(current.getBruttoValue()));
+                            break;
+                        case 3:
+                            toDropDownAccountFour.setValue(current.getAccount());
+                            positionValueToAccountFour.setText(String.valueOf(current.getBruttoValue()));
+                            break;
+                    }
+                    idxCredit++;
+                }
+            }
+        }
     }
 
     private List<Record> convertToAccountingRecords() {
@@ -307,17 +356,73 @@ public class AccountingRecordsController extends SplitPaneController {
             currentRecord.getCredit().setType(this.getFromDropDownAccountType());
         }*/
 
-        if (this.getToDropDownAccountOne() != null) {
-            //currentRecord.setDebit(this.getToDropDownAccountOne());
+        if (this.getToDropDownAccountOne() != null && this.getPositionValueToAccountOne() > 0) {
+            AccountRecord record = new AccountRecord();
+            record.setAccount(this.getToDropDownAccountOne());
+            record.setBruttoValue(this.getPositionValueToAccountOne());
+            record.setIsDebit(false);
+            currentRecord.getRecordAccounts().add(record);
+        }
+
+        if (this.getToDropDownAccountTwo() != null && this.getPositionValueToAccountTwo() > 0) {
+            AccountRecord record = new AccountRecord();
+            record.setAccount(this.getToDropDownAccountTwo());
+            record.setBruttoValue(this.getPositionValueToAccountTwo());
+            record.setIsDebit(false);
+            currentRecord.getRecordAccounts().add(record);
+        }
+
+        if (this.getToDropDownAccountThree() != null && this.getPositionValueToAccountThree() > 0) {
+            AccountRecord record = new AccountRecord();
+            record.setAccount(this.getToDropDownAccountThree());
+            record.setBruttoValue(this.getPositionValueToAccountThree());
+            record.setIsDebit(false);
+            currentRecord.getRecordAccounts().add(record);
+        }
+
+        if (this.getToDropDownAccountFour() != null && this.getPositionValueToAccountFour() > 0) {
+            AccountRecord record = new AccountRecord();
+            record.setAccount(this.getToDropDownAccountFour());
+            record.setBruttoValue(this.getPositionValueToAccountFour());
+            record.setIsDebit(false);
+            currentRecord.getRecordAccounts().add(record);
+        }
+
+        if (this.getFromDropDownAccountOne() != null && this.getPositionValueFromAccountOne() > 0) {
+            AccountRecord record = new AccountRecord();
+            record.setAccount(this.getFromDropDownAccountOne());
+            record.setBruttoValue(this.getPositionValueFromAccountOne());
+            record.setIsDebit(true);
+            currentRecord.getRecordAccounts().add(record);
+        }
+
+        if (this.getFromDropDownAccountTwo() != null && this.getPositionValueFromAccountTwo() > 0) {
+            AccountRecord record = new AccountRecord();
+            record.setAccount(this.getFromDropDownAccountTwo());
+            record.setBruttoValue(this.getPositionValueFromAccountTwo());
+            record.setIsDebit(true);
+            currentRecord.getRecordAccounts().add(record);
+        }
+
+        if (this.getFromDropDownAccountThree() != null && this.getPositionValueFromAccountThree() > 0) {
+            AccountRecord record = new AccountRecord();
+            record.setAccount(this.getFromDropDownAccountThree());
+            record.setBruttoValue(this.getPositionValueFromAccountThree());
+            record.setIsDebit(true);
+            currentRecord.getRecordAccounts().add(record);
+        }
+
+        if (this.getFromDropDownAccountFour() != null && this.getPositionValueFromAccountFour() > 0) {
+            AccountRecord record = new AccountRecord();
+            record.setAccount(this.getFromDropDownAccountFour());
+            record.setBruttoValue(this.getPositionValueFromAccountFour());
+            record.setIsDebit(true);
+            currentRecord.getRecordAccounts().add(record);
         }
 
         /*if (this.getFromDropDownAccountType() != null) {
             currentRecord.getCredit().setType(this.getFromDropDownAccountType());
         }*/
-
-        if (this.getPositionValueFromAccountOne() > 0) {
-            //currentRecord.setBruttoValue(this.getPositionValueFromAccountOne());
-        }
     }
 
     // core method to update the whole view when new information is present
@@ -467,6 +572,125 @@ public class AccountingRecordsController extends SplitPaneController {
 
     private void setPositionValueFromAccountOne(double newValue) {
         this.positionValueFromAccountOne.setText(String.valueOf(newValue));
+    }
+
+    private double getPositionValueFromAccountTwo() {
+        if (this.positionValueFromAccountTwo.getText() != null) {
+            try {
+                return Double.valueOf(this.positionValueFromAccountTwo.getText());
+            } catch (NumberFormatException ex) {
+                Logger.getLogger(this.getClass()).log(Level.WARN, "Unable to parse value! Returning 0");
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    private void setPositionValueFromAccountTwo(double newValue) {
+        this.positionValueFromAccountTwo.setText(String.valueOf(newValue));
+    }
+
+    private double getPositionValueFromAccountThree() {
+        if (this.positionValueFromAccountThree.getText() != null) {
+            try {
+                return Double.valueOf(this.positionValueFromAccountThree.getText());
+            } catch (NumberFormatException ex) {
+                Logger.getLogger(this.getClass()).log(Level.WARN, "Unable to parse value! Returning 0");
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    private void setPositionValueFromAccountThree(double newValue) {
+        this.positionValueFromAccountThree.setText(String.valueOf(newValue));
+    }
+
+    private double getPositionValueFromAccountFour() {
+        if (this.positionValueFromAccountFour.getText() != null) {
+            try {
+                return Double.valueOf(this.positionValueFromAccountFour.getText());
+            } catch (NumberFormatException ex) {
+                Logger.getLogger(this.getClass()).log(Level.WARN, "Unable to parse value! Returning 0");
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    private void setPositionValueFromAccountFour(double newValue) {
+        this.positionValueFromAccountFour.setText(String.valueOf(newValue));
+    }
+
+    private double getPositionValueToAccountOne() {
+        if (this.positionValueToAccountOne.getText() != null) {
+            try {
+                return Double.valueOf(this.positionValueToAccountOne.getText());
+            } catch (NumberFormatException ex) {
+                Logger.getLogger(this.getClass()).log(Level.WARN, "Unable to parse value! Returning 0");
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    private void setPositionValueToAccountOne(double newValue) {
+        this.positionValueToAccountOne.setText(String.valueOf(newValue));
+    }
+
+    private double getPositionValueToAccountTwo() {
+        if (this.positionValueToAccountTwo.getText() != null) {
+            try {
+                return Double.valueOf(this.positionValueToAccountTwo.getText());
+            } catch (NumberFormatException ex) {
+                Logger.getLogger(this.getClass()).log(Level.WARN, "Unable to parse value! Returning 0");
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    private void setPositionValueToAccountTwo(double newValue) {
+        this.positionValueToAccountTwo.setText(String.valueOf(newValue));
+    }
+
+    private double getPositionValueToAccountThree() {
+        if (this.positionValueToAccountThree.getText() != null) {
+            try {
+                return Double.valueOf(this.positionValueToAccountThree.getText());
+            } catch (NumberFormatException ex) {
+                Logger.getLogger(this.getClass()).log(Level.WARN, "Unable to parse value! Returning 0");
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    private void setPositionValueToAccountThree(double newValue) {
+        this.positionValueToAccountThree.setText(String.valueOf(newValue));
+    }
+
+    private double getPositionValueToAccountFour() {
+        if (this.positionValueToAccountFour.getText() != null) {
+            try {
+                return Double.valueOf(this.positionValueToAccountFour.getText());
+            } catch (NumberFormatException ex) {
+                Logger.getLogger(this.getClass()).log(Level.WARN, "Unable to parse value! Returning 0");
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    private void setPositionValueToAccountFour(double newValue) {
+        this.positionValueToAccountFour.setText(String.valueOf(newValue));
     }
 
     // checks if accounting record can be set as revised
