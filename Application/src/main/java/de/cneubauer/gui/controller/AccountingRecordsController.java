@@ -13,7 +13,6 @@ import de.cneubauer.gui.model.AccountingRecordModel;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -196,40 +195,40 @@ public class AccountingRecordsController extends SplitPaneController {
                 if (current.getIsDebit()) {
                     switch (idxDebit) {
                         case 0:
-                            fromDropDownAccountOne.setValue(current.getAccount());
-                            positionValueFromAccountOne.setText(String.valueOf(current.getBruttoValue()));
+                            this.setFromDropDownAccountOne(current.getAccount());
+                            this.setPositionValueFromAccountOne(current.getBruttoValue());
                             break;
                         case 1:
-                            fromDropDownAccountTwo.setValue(current.getAccount());
-                            positionValueFromAccountTwo.setText(String.valueOf(current.getBruttoValue()));
+                            this.setFromDropDownAccountTwo(current.getAccount());
+                            this.setPositionValueFromAccountTwo(current.getBruttoValue());
                             break;
                         case 2:
-                            fromDropDownAccountThree.setValue(current.getAccount());
-                            positionValueFromAccountThree.setText(String.valueOf(current.getBruttoValue()));
+                            this.setFromDropDownAccountThree(current.getAccount());
+                            this.setPositionValueFromAccountThree(current.getBruttoValue());
                             break;
                         case 3:
-                            fromDropDownAccountFour.setValue(current.getAccount());
-                            positionValueFromAccountFour.setText(String.valueOf(current.getBruttoValue()));
+                            this.setFromDropDownAccountFour(current.getAccount());
+                            this.setPositionValueFromAccountFour(current.getBruttoValue());
                             break;
                     }
                     idxDebit++;
                 } else {
                     switch (idxCredit) {
                         case 0:
-                            toDropDownAccountOne.setValue(current.getAccount());
-                            positionValueToAccountOne.setText(String.valueOf(current.getBruttoValue()));
+                            this.setToDropDownAccountOne(current.getAccount());
+                            this.setPositionValueToAccountOne(current.getBruttoValue());
                             break;
                         case 1:
-                            toDropDownAccountTwo.setValue(current.getAccount());
-                            positionValueToAccountTwo.setText(String.valueOf(current.getBruttoValue()));
+                            this.setToDropDownAccountTwo(current.getAccount());
+                            this.setPositionValueToAccountTwo(current.getBruttoValue());
                             break;
                         case 2:
-                            toDropDownAccountThree.setValue(current.getAccount());
-                            positionValueToAccountThree.setText(String.valueOf(current.getBruttoValue()));
+                            this.setToDropDownAccountThree(current.getAccount());
+                            this.setPositionValueToAccountThree(current.getBruttoValue());
                             break;
                         case 3:
-                            toDropDownAccountFour.setValue(current.getAccount());
-                            positionValueToAccountFour.setText(String.valueOf(current.getBruttoValue()));
+                            this.setToDropDownAccountFour(current.getAccount());
+                            this.setPositionValueToAccountFour(current.getBruttoValue());
                             break;
                     }
                     idxCredit++;
@@ -347,10 +346,10 @@ public class AccountingRecordsController extends SplitPaneController {
     private void saveCurrentValuesToRecord() {
         AccountingRecordModel current = this.getRecordsFound().get(this.index-1);
         Record currentRecord = current.getRecord();
-        if (this.getFromDropDownAccountOne() != null)
+        /*if (this.getFromDropDownAccountOne() != null)
         {
             //currentRecord.setCredit(this.getFromDropDownAccountOne());
-        }
+        }*/
 
         /*if (this.getFromDropDownAccountType() != null) {
             currentRecord.getCredit().setType(this.getFromDropDownAccountType());
@@ -521,7 +520,7 @@ public class AccountingRecordsController extends SplitPaneController {
         return toDropDownAccountOne.getValue();
     }
 
-    public void setToDropDownAccountOne(Account toDropDownAccount) {
+    private void setToDropDownAccountOne(Account toDropDownAccount) {
         this.toDropDownAccountOne.getSelectionModel().select(toDropDownAccount);
     }
 
@@ -529,7 +528,7 @@ public class AccountingRecordsController extends SplitPaneController {
         return toDropDownAccountTwo.getValue();
     }
 
-    public void setToDropDownAccountTwo(Account toDropDownAccount) {
+    private void setToDropDownAccountTwo(Account toDropDownAccount) {
         this.toDropDownAccountTwo.getSelectionModel().select(toDropDownAccount);
     }
 
@@ -537,7 +536,7 @@ public class AccountingRecordsController extends SplitPaneController {
         return toDropDownAccountThree.getValue();
     }
 
-    public void setToDropDownAccountThree(Account toDropDownAccount) {
+    private void setToDropDownAccountThree(Account toDropDownAccount) {
         this.toDropDownAccountThree.getSelectionModel().select(toDropDownAccount);
     }
 
@@ -545,7 +544,7 @@ public class AccountingRecordsController extends SplitPaneController {
         return toDropDownAccountFour.getValue();
     }
 
-    public void setToDropDownAccountFour(Account toDropDownAccount) {
+    private void setToDropDownAccountFour(Account toDropDownAccount) {
         this.toDropDownAccountFour.getSelectionModel().select(toDropDownAccount);
     }
 
@@ -694,7 +693,7 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     // checks if accounting record can be set as revised
-    public boolean checkRevised(ActionEvent actionEvent) {
+    /*public boolean checkRevised(ActionEvent actionEvent) {
         if (this.recordRevised.isSelected()) {
             AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord()));
             Record record = model.getRecord();
@@ -704,25 +703,25 @@ public class AccountingRecordsController extends SplitPaneController {
                 return  true;
             /*} else {
                 return false;
-            }*/
+            }
         } else {
             AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord()));
             model.setRevised(false);
             return false;
         }
-    }
+    }*/
 
     public String getPossiblePosition() {
         return possiblePosition.getText();
     }
 
-    public void setPossiblePosition(String possiblePosition) {
+    private void setPossiblePosition(String possiblePosition) {
         this.possiblePosition.setText(possiblePosition);
     }
 
     // when called, invoice has been reviewed by the user
     // set invoice to be reviewed and update all information given
-    public void setReviewed(ActionEvent actionEvent) {
+    public void setReviewed() {
         superCtrl.reviseAll();
     }
 
