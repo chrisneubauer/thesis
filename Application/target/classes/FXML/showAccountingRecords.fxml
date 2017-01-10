@@ -93,6 +93,8 @@
          <TextField fx:id="positionValueFromAccountFour" layoutX="190.0" layoutY="258.0" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="7" />
          <ComboBox fx:id="toDropDownAccountFour" editable="true" layoutX="328.0" layoutY="258.0" prefHeight="25.0" prefWidth="139.0" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="7" />
          <TextField fx:id="positionValueToAccountFour" layoutX="466.0" layoutY="258.0" prefHeight="25.0" prefWidth="94.0" GridPane.columnIndex="10" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+         <Button fx:id="addEntryButton" mnemonicParsing="false" text="+" GridPane.columnIndex="12" onAction="#addNewEntry"/>
+         <Button fx:id="deleteCurrentEntryButton" mnemonicParsing="false" text="X" GridPane.columnIndex="13" onAction="#deleteCurrentEntry"/>
         </GridPane>
     </AnchorPane>
 </VBox>

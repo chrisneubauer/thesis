@@ -13,6 +13,7 @@ import de.cneubauer.gui.model.AccountingRecordModel;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -27,8 +28,6 @@ import java.util.*;
  * Controller for managing extracted accounting records
  */
 public class AccountingRecordsController extends SplitPaneController {
-    //@FXML public ComboBox<AccountType> fromDropDownAccountType;
-    //@FXML public ComboBox<AccountType> toDropDownAccountType;
     @FXML public ComboBox<Account> fromDropDownAccountOne;
     @FXML public ComboBox<Account> fromDropDownAccountTwo;
     @FXML public ComboBox<Account> fromDropDownAccountThree;
@@ -53,8 +52,10 @@ public class AccountingRecordsController extends SplitPaneController {
     @FXML public Button SaveAccountingRecords;
     @FXML public TextField possiblePosition;
 
+    @FXML public Button addEntryButton;
+    @FXML public Button deleteCurrentEntryButton;
+
     private List<AccountingRecordModel> recordsFound;
-    private List<AccountType> types;
     private SplitPaneController superCtrl;
     private int index = 1;
 
@@ -107,7 +108,7 @@ public class AccountingRecordsController extends SplitPaneController {
             @Override
             public String toString(Account object) {
                 if (object != null) {
-                    return object.getAccountNo();
+                    return object.getAccountNo() + " - " + object.getName();
                 } else {
                     return "";
                 }
@@ -121,32 +122,11 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     private void initiateDropdowns(AccountingRecordModel model) {
-        /*fromDropDownAccountType.setConverter(new StringConverter<AccountType>() {
-            @Override
-            public String toString(AccountType object) {
-                return object.getName();
-            }
-
-            @Override
-            public AccountType fromString(String string) {
-                throw new UnsupportedOperationException();
-            }
-        });*/
         fromDropDownAccountOne.setConverter(this.createAccountConverter());
         fromDropDownAccountTwo.setConverter(this.createAccountConverter());
         fromDropDownAccountThree.setConverter(this.createAccountConverter());
         fromDropDownAccountFour.setConverter(this.createAccountConverter());
-        /*toDropDownAccountType.setConverter(new StringConverter<AccountType>() {
-            @Override
-            public String toString(AccountType object) {
-                return object.getName();
-            }
 
-            @Override
-            public AccountType fromString(String string) {
-                throw new UnsupportedOperationException();
-            }
-        });*/
         toDropDownAccountOne.setConverter(this.createAccountConverter());
         toDropDownAccountTwo.setConverter(this.createAccountConverter());
         toDropDownAccountThree.setConverter(this.createAccountConverter());
@@ -155,18 +135,17 @@ public class AccountingRecordsController extends SplitPaneController {
         AccountTypeDao accountTypeDao = new AccountTypeDaoImpl();
         AccountDao accountDao = new AccountDaoImpl();
 
-        this.types = accountTypeDao.getAll();
+        //this.types = accountTypeDao.getAll();
 
         ObservableList<Account> accounts = FXCollections.observableArrayList(accountDao.getAll());
 
-        Logger.getLogger(this.getClass()).log(Level.INFO, "adding " + types.size() + " elements to type dropdowns");
+        //Logger.getLogger(this.getClass()).log(Level.INFO, "adding " + types.size() + " elements to type dropdowns");
         Logger.getLogger(this.getClass()).log(Level.INFO, "adding " + accounts.size() + " elements to account dropdowns");
-        //fromDropDownAccountType.setItems(FXCollections.observableArrayList(this.types));
+
         fromDropDownAccountOne.setItems(accounts);
         fromDropDownAccountTwo.setItems(accounts);
         fromDropDownAccountThree.setItems(accounts);
         fromDropDownAccountFour.setItems(accounts);
-        //toDropDownAccountType.setItems(FXCollections.observableArrayList(this.types));
         toDropDownAccountOne.setItems(accounts);
         toDropDownAccountTwo.setItems(accounts);
         toDropDownAccountThree.setItems(accounts);
@@ -242,9 +221,6 @@ public class AccountingRecordsController extends SplitPaneController {
         int index = 0;
         for (AccountingRecordModel model : recordsFound) {
             Record newRecord = new Record();
-            /*newRecord.setCredit(getFromDropDownAccountOne());
-            newRecord.setDebit(getToDropDownAccountOne());
-            newRecord.setBruttoValue(getPositionValueFromAccountOne());*/
             newRecord.setEntryText(model.getPosition());
             result.add(index++, newRecord);
         }
@@ -252,12 +228,10 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     private void addAllListeners() {
-        //this.fromDropDownAccountType.valueProperty().addListener(this.addListenerToComboBoxType(this.fromDropDownAccountType));
         this.fromDropDownAccountOne.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountOne));
         this.fromDropDownAccountTwo.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountTwo));
         this.fromDropDownAccountThree.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountThree));
         this.fromDropDownAccountFour.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountFour));
-        //this.toDropDownAccountType.valueProperty().addListener(this.addListenerToComboBoxType(this.toDropDownAccountType));
         this.toDropDownAccountOne.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountOne));
         this.toDropDownAccountTwo.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountTwo));
         this.toDropDownAccountThree.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountThree));
@@ -285,7 +259,7 @@ public class AccountingRecordsController extends SplitPaneController {
         };
     }
 
-    private ChangeListener<AccountType> addListenerToComboBoxType(ComboBox<AccountType> comboBox) {
+    /*private ChangeListener<AccountType> addListenerToComboBoxType(ComboBox<AccountType> comboBox) {
         return (observable, oldValue, newValue) -> {
             if (newValue != null && this.types.contains(newValue)) {
                 comboBox.getStyleClass().remove("error");
@@ -293,7 +267,7 @@ public class AccountingRecordsController extends SplitPaneController {
                 comboBox.getStyleClass().add("error");
             }
         };
-    }
+    }*/
 
     private ChangeListener<String> addListenerToTextField(TextField field) {
         return (observable, oldValue, newValue) -> {
@@ -468,14 +442,6 @@ public class AccountingRecordsController extends SplitPaneController {
         this.recordsFound = recordsFound;
     }
 
-    /*private AccountType getFromDropDownAccountType() {
-        return fromDropDownAccountType.getValue();
-    }*/
-
-    /*private void setFromDropDownAccountType(AccountType fromDropDownAccountType) {
-        this.fromDropDownAccountType.getSelectionModel().select(fromDropDownAccountType);
-    }*/
-
     private Account getFromDropDownAccountOne() {
         return fromDropDownAccountOne.getValue();
     }
@@ -507,14 +473,6 @@ public class AccountingRecordsController extends SplitPaneController {
     private void setFromDropDownAccountFour(Account fromDropDownAccount) {
         this.fromDropDownAccountFour.getSelectionModel().select(fromDropDownAccount);
     }
-
-   /* public AccountType getToDropDownAccountType() {
-        return toDropDownAccountType.getValue();
-    }
-
-    public void setToDropDownAccountType(AccountType toDropDownAccountType) {
-        this.toDropDownAccountType.getSelectionModel().select(toDropDownAccountType);
-    }*/
 
     private Account getToDropDownAccountOne() {
         return toDropDownAccountOne.getValue();
@@ -728,26 +686,78 @@ public class AccountingRecordsController extends SplitPaneController {
     boolean validateFieldsBeforeSave() {
         boolean result = true;
 
-        /*if (this.fromDropDownAccountType.getSelectionModel().getSelectedItem() == null) {
-            this.fromDropDownAccountType.getStyleClass().add("error");
-            result = false;
-        }*/
         if (this.fromDropDownAccountOne.getSelectionModel().getSelectedItem() == null) {
             this.fromDropDownAccountOne.getStyleClass().add("error");
-            result = false;
-        }
-        /*if (this.toDropDownAccountType.getSelectionModel().getSelectedItem() == null) {
-            this.toDropDownAccountType.getStyleClass().add("error");
-            result = false;
-        }*/
-        if (this.toDropDownAccountOne.getSelectionModel().getSelectedItem() == null) {
-            this.toDropDownAccountOne.getStyleClass().add("error");
             result = false;
         }
         if (this.positionValueFromAccountOne.getText() == null || this.positionValueFromAccountOne.getText().isEmpty()) {
             this.positionValueFromAccountOne.getStyleClass().add("error");
             result = false;
         }
+
+        if (this.fromDropDownAccountTwo.getSelectionModel().getSelectedItem() == null) {
+            this.fromDropDownAccountTwo.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.positionValueFromAccountTwo.getText() == null || this.positionValueFromAccountTwo.getText().isEmpty()) {
+            this.positionValueFromAccountTwo.getStyleClass().add("error");
+            result = false;
+        }
+
+        if (this.fromDropDownAccountThree.getSelectionModel().getSelectedItem() == null) {
+            this.fromDropDownAccountThree.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.positionValueFromAccountThree.getText() == null || this.positionValueFromAccountThree.getText().isEmpty()) {
+            this.positionValueFromAccountThree.getStyleClass().add("error");
+            result = false;
+        }
+
+        if (this.fromDropDownAccountFour.getSelectionModel().getSelectedItem() == null) {
+            this.fromDropDownAccountFour.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.positionValueFromAccountFour.getText() == null || this.positionValueFromAccountFour.getText().isEmpty()) {
+            this.positionValueFromAccountFour.getStyleClass().add("error");
+            result = false;
+        }
+
+        if (this.toDropDownAccountOne.getSelectionModel().getSelectedItem() == null) {
+            this.toDropDownAccountOne.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.positionValueToAccountOne.getText() == null || this.positionValueToAccountOne.getText().isEmpty()) {
+            this.positionValueToAccountOne.getStyleClass().add("error");
+            result = false;
+        }
+
+        if (this.toDropDownAccountTwo.getSelectionModel().getSelectedItem() == null) {
+            this.toDropDownAccountTwo.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.positionValueToAccountTwo.getText() == null || this.positionValueToAccountTwo.getText().isEmpty()) {
+            this.positionValueToAccountTwo.getStyleClass().add("error");
+            result = false;
+        }
+
+        if (this.toDropDownAccountThree.getSelectionModel().getSelectedItem() == null) {
+            this.toDropDownAccountThree.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.positionValueToAccountThree.getText() == null || this.positionValueToAccountThree.getText().isEmpty()) {
+            this.positionValueToAccountThree.getStyleClass().add("error");
+            result = false;
+        }
+
+        if (this.toDropDownAccountFour.getSelectionModel().getSelectedItem() == null) {
+            this.toDropDownAccountFour.getStyleClass().add("error");
+            result = false;
+        }
+        if (this.positionValueToAccountFour.getText() == null || this.positionValueToAccountFour.getText().isEmpty()) {
+            this.positionValueToAccountFour.getStyleClass().add("error");
+            result = false;
+        }
+
         if (this.possiblePosition.getText() == null || this.possiblePosition.getText().isEmpty()) {
             this.possiblePosition.getStyleClass().add("error");
             result = false;
@@ -759,4 +769,14 @@ public class AccountingRecordsController extends SplitPaneController {
         return this.convertToAccountingRecords();
     }
 
+    public void addNewEntry(ActionEvent actionEvent) {
+        AccountingRecordModel model = new AccountingRecordModel(this.getRecordsFound().size() + 1);
+        model.setRecord(new Record());
+        this.getRecordsFound().add(model);
+    }
+
+    public void deleteCurrentEntry(ActionEvent actionEvent) {
+        this.prevRecord();
+        this.getRecordsFound().remove(this.index);
+    }
 }
