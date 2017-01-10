@@ -5,3 +5,7 @@ Vorsteuer 19% 1756,30€ an Verbindlichkeiten aus LuL 11.000€
 ENDRECORD
 Erdbeeren
 ENDRECORD
+Grundgebühr 1&1 Surf & Phone 16.000 Office
+Rohstoffe 25,20€
+Wareneingang 19% Vorsteuer 4,79€ an Bank 29,99€
+ENDRECORD
