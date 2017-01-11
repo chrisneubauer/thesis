@@ -41,4 +41,9 @@ public class Account {
     public void setType(AccountType type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return this.getAccountNo() + " - " + this.getName();
+    }
 }

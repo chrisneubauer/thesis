@@ -20,6 +20,8 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -156,64 +158,64 @@ public class ResultsController extends GUIController {
         alert.showAndWait();
     }
 
-    ValidationStatus validateFieldsBeforeSave() {
-        ValidationStatus result = ValidationStatus.OK;
+    List<ValidationStatus> validateFieldsBeforeSave() {
+        List<ValidationStatus> errors = new LinkedList<>();
 
         if (this.extractedInvoiceNumber.getText() == null || this.extractedInvoiceNumber.getText().isEmpty()) {
             this.extractedInvoiceNumber.getStyleClass().add("error");
-            result = ValidationStatus.UNKNOWNISSUE;
+            errors.add(ValidationStatus.UNKNOWNISSUE);
         }
         if (this.extractedCreditor.getText() == null || this.extractedCreditor.getText().isEmpty()) {
             ObservableList<String> styles = this.extractedCreditor.getStyleClass();
             styles.add("error");
             this.extractedCreditor.getStyleClass().add("error");
-            result = ValidationStatus.UNKNOWNISSUE;
+            errors.add(ValidationStatus.UNKNOWNISSUE);
         }
         if (this.extractedDebitor.getText() == null || this.extractedDebitor.getText().isEmpty()) {
             this.extractedDebitor.getStyleClass().add("error");
-            result = ValidationStatus.UNKNOWNISSUE;
+            errors.add(ValidationStatus.UNKNOWNISSUE);
         }
         if (this.extractedIssueDate.getText() == null || this.extractedIssueDate.getText().isEmpty()) {
             this.extractedIssueDate.getStyleClass().add("error");
-            result = ValidationStatus.UNKNOWNISSUE;
+            errors.add(ValidationStatus.UNKNOWNISSUE);
         }
         if (this.extractedLineTotal.getText() == null || this.extractedLineTotal.getText().isEmpty()) {
             this.extractedLineTotal.getStyleClass().add("error");
-            result = ValidationStatus.UNKNOWNISSUE;
+            errors.add(ValidationStatus.UNKNOWNISSUE);
         }
         if (this.extractedChargeTotal.getText() == null || this.extractedChargeTotal.getText().isEmpty()) {
             this.extractedChargeTotal.getStyleClass().add("error");
-            result = ValidationStatus.UNKNOWNISSUE;
+            errors.add(ValidationStatus.UNKNOWNISSUE);
         }
         if (this.extractedTaxBasisTotal.getText() == null || this.extractedTaxBasisTotal.getText().isEmpty()) {
             this.extractedTaxBasisTotal.getStyleClass().add("error");
-            result = ValidationStatus.UNKNOWNISSUE;
+            errors.add(ValidationStatus.UNKNOWNISSUE);
         }
         if (this.extractedTaxTotal.getText() == null || this.extractedTaxTotal.getText().isEmpty()) {
             this.extractedTaxTotal.getStyleClass().add("error");
-            result = ValidationStatus.UNKNOWNISSUE;
+            errors.add(ValidationStatus.UNKNOWNISSUE);
         } else {
             this.extractedTaxTotal.getStyleClass().remove("error");
         }
         if (this.extractedAllowanceTotal.getText() == null || this.extractedAllowanceTotal.getText().isEmpty()) {
             this.extractedAllowanceTotal.getStyleClass().add("error");
-            result = ValidationStatus.UNKNOWNISSUE;
+            errors.add(ValidationStatus.UNKNOWNISSUE);
         }
         if (this.extractedGrandTotal.getText() == null || this.extractedGrandTotal.getText().isEmpty()) {
             this.extractedGrandTotal.getStyleClass().add("error");
-            result = ValidationStatus.UNKNOWNISSUE;
+            errors.add(ValidationStatus.UNKNOWNISSUE);
         }
         if (this.extractedHasSkonto.isSelected()) {
             if (this.extractedSkonto.getText() == null || this.extractedSkonto.getText().isEmpty()) {
                 this.extractedSkonto.getStyleClass().add("error");
-                result = ValidationStatus.UNKNOWNISSUE;
+                errors.add(ValidationStatus.UNKNOWNISSUE);
             }
         }
         if (this.extractedDeliveryDate.getText() == null || this.extractedDeliveryDate.getText().isEmpty()) {
             this.extractedDeliveryDate.getStyleClass().add("error");
-            result = ValidationStatus.UNKNOWNISSUE;
+            errors.add(ValidationStatus.UNKNOWNISSUE);
         }
-        return result;
+        return errors;
     }
 
     private Invoice convertToInvoice() {

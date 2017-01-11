@@ -26,6 +26,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -92,13 +93,38 @@ public class SplitPaneController extends GUIController {
 
     void reviseAll() {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Reviewed Button clicked! Validating the fields");
-        ValidationStatus accountingCorrect = accountingRecordsTabController.validateFieldsBeforeSave();
-        ValidationStatus invoiceCorrect = invoiceTabController.validateFieldsBeforeSave();
-        if (accountingCorrect.equals(ValidationStatus.OK) && invoiceCorrect.equals(ValidationStatus.OK)) {
+        List<ValidationStatus> accountingErrors = accountingRecordsTabController.validateFieldsBeforeSave();
+        List<ValidationStatus> invoiceErrors = invoiceTabController.validateFieldsBeforeSave();
+        if (accountingErrors.size() == 0 && invoiceErrors.size() == 0) {
             this.updateAndReturn();
         } else {
             Alert info = new Alert(Alert.AlertType.WARNING);
-            info.setContentText("Could not update the document! \n Please review all fields again and make sure that there are no more errors. \n Error: " + accountingCorrect.name() + " " + invoiceCorrect.name());
+            String content = "Could not update the document! \n Please review the following errors: \n";
+            StringBuilder sb = new StringBuilder();
+            sb.append(content);
+            //TODO: Build errors for invoice errors
+            /*for (ValidationStatus error : invoiceErrors) {
+                switch (error) {
+                    case (ValidationStatus.UNKNOWNISSUE)
+                }
+            }*/
+            for (ValidationStatus error : accountingErrors) {
+                switch (error) {
+                    case MALFORMEDVALUE:
+                        sb.append("Aktiva and Passiva values do not sum up to zero! \n");
+                        break;
+                    case MISSINGACCOUNTS:
+                        sb.append("At least one side of accounts is empty! There must be at least one account on both sides \n");
+                        break;
+                    case MISSINGPOSITION:
+                        sb.append("No accounting position has been filled in. This is a mandatory field. \n");
+                        break;
+                    case MISSINGVALUES:
+                        sb.append("There are accounts selected but no values have been given. Please revise the accounts. \n");
+                        break;
+                }
+            }
+            info.setContentText(sb.toString());
             info.setHeaderText("Review Issue");
             info.show();
         }

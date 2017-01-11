@@ -2,19 +2,16 @@ package de.cneubauer.gui.controller;
 
 import de.cneubauer.domain.bo.Account;
 import de.cneubauer.domain.bo.AccountRecord;
-import de.cneubauer.domain.bo.AccountType;
 import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.dao.AccountDao;
-import de.cneubauer.domain.dao.AccountTypeDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
-import de.cneubauer.domain.dao.impl.AccountTypeDaoImpl;
 import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.gui.model.AccountingRecordModel;
+import de.cneubauer.gui.util.AutoCompleteComboBoxListener;
 import de.cneubauer.util.enumeration.ValidationStatus;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -87,18 +84,6 @@ public class AccountingRecordsController extends SplitPaneController {
                 model.setPosition(record.getEntryText());
             }
 
-            /*if (record.getCredit() != null) {
-                model.setToPossibleAccount(record.getCredit());
-                if (record.getCredit().getType() != null) {
-                    model.setToPossibleType(record.getCredit().getType());
-                }
-            }
-            if (record.getDebit() != null) {
-                model.setFromPossibleAccount(record.getDebit());
-                if (record.getDebit().getType() != null) {
-                    model.setFromPossibleType(record.getDebit().getType());
-                }
-            }*/
             records.add(model);
         }
         return records;
@@ -133,14 +118,9 @@ public class AccountingRecordsController extends SplitPaneController {
         toDropDownAccountThree.setConverter(this.createAccountConverter());
         toDropDownAccountFour.setConverter(this.createAccountConverter());
 
-        //AccountTypeDao accountTypeDao = new AccountTypeDaoImpl();
         AccountDao accountDao = new AccountDaoImpl();
-
-        //this.types = accountTypeDao.getAll();
-
         ObservableList<Account> accounts = FXCollections.observableArrayList(accountDao.getAll());
 
-        //Logger.getLogger(this.getClass()).log(Level.INFO, "adding " + types.size() + " elements to type dropdowns");
         Logger.getLogger(this.getClass()).log(Level.INFO, "adding " + accounts.size() + " elements to account dropdowns");
 
         fromDropDownAccountOne.setItems(accounts);
@@ -151,21 +131,6 @@ public class AccountingRecordsController extends SplitPaneController {
         toDropDownAccountTwo.setItems(accounts);
         toDropDownAccountThree.setItems(accounts);
         toDropDownAccountFour.setItems(accounts);
-
-        /*fromDropDownAccountType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<AccountType>() {
-            @Override
-            public void changed(ObservableValue<? extends AccountType> observable, AccountType oldValue, AccountType newValue) {
-                Logger.getLogger(this.getClass()).log(Level.INFO, "searching for accounts of account type with id " + newValue.getId());
-                fromDropDownAccount.setItems(FXCollections.observableArrayList(accountDao.getAllByType(newValue.getId())));
-            }
-        });
-        toDropDownAccountType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<AccountType>() {
-            @Override
-            public void changed(ObservableValue<? extends AccountType> observable, AccountType oldValue, AccountType newValue) {
-                Logger.getLogger(this.getClass()).log(Level.INFO, "searching for accounts of account type with id " + newValue.getId());
-                toDropDownAccount.setItems(FXCollections.observableArrayList(accountDao.getAllByType(newValue.getId())));
-            }
-        });*/
 
         if (model.getRecord().getRecordAccounts().size() > 0) {
             int idxDebit = 0;
@@ -229,14 +194,22 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     private void addAllListeners() {
-        this.fromDropDownAccountOne.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountOne));
-        this.fromDropDownAccountTwo.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountTwo));
-        this.fromDropDownAccountThree.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountThree));
-        this.fromDropDownAccountFour.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountFour));
-        this.toDropDownAccountOne.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountOne));
+        this.addAutoCompleteListener(this.fromDropDownAccountOne);
+        this.addAutoCompleteListener(this.fromDropDownAccountTwo);
+        this.addAutoCompleteListener(this.fromDropDownAccountThree);
+        this.addAutoCompleteListener(this.fromDropDownAccountFour);
+        //this.fromDropDownAccountOne.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountOne));
+        //this.fromDropDownAccountTwo.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountTwo));
+        //this.fromDropDownAccountThree.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountThree));
+        //this.fromDropDownAccountFour.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountFour));
+        this.addAutoCompleteListener(this.toDropDownAccountOne);
+        this.addAutoCompleteListener(this.toDropDownAccountTwo);
+        this.addAutoCompleteListener(this.toDropDownAccountThree);
+        this.addAutoCompleteListener(this.toDropDownAccountFour);
+        /*this.toDropDownAccountOne.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountOne));
         this.toDropDownAccountTwo.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountTwo));
         this.toDropDownAccountThree.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountThree));
-        this.toDropDownAccountFour.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountFour));
+        this.toDropDownAccountFour.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountFour));*/
 
         this.positionValueFromAccountOne.textProperty().addListener(this.addListenerToTextField(this.positionValueFromAccountOne));
         this.positionValueFromAccountTwo.textProperty().addListener(this.addListenerToTextField(this.positionValueFromAccountTwo));
@@ -250,19 +223,13 @@ public class AccountingRecordsController extends SplitPaneController {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Listeners added to textfields");
     }
 
-    private ChangeListener<Account> addListenerToComboBox(ComboBox<Account> comboBox) {
-        return (observable, oldValue, newValue) -> {
-            if (newValue != null && comboBox.getItems().contains(newValue)) {
-                comboBox.getStyleClass().remove("error");
-            } else {
-                comboBox.getStyleClass().add("error");
-            }
-        };
+    private AutoCompleteComboBoxListener addAutoCompleteListener(ComboBox<Account> comboBox) {
+        return new AutoCompleteComboBoxListener(comboBox);
     }
 
-    /*private ChangeListener<AccountType> addListenerToComboBoxType(ComboBox<AccountType> comboBox) {
+    /*private ChangeListener<Account> addListenerToComboBox(ComboBox<Account> comboBox) {
         return (observable, oldValue, newValue) -> {
-            if (newValue != null && this.types.contains(newValue)) {
+            if (newValue != null && comboBox.getItems().contains(newValue)) {
                 comboBox.getStyleClass().remove("error");
             } else {
                 comboBox.getStyleClass().add("error");
@@ -321,6 +288,11 @@ public class AccountingRecordsController extends SplitPaneController {
     private void saveCurrentValuesToRecord() {
         AccountingRecordModel current = this.getRecordsFound().get(this.index-1);
         Record currentRecord = current.getRecord();
+        if (this.getPossiblePosition() != null) {
+            currentRecord.setEntryText(this.getPossiblePosition());
+        }
+
+        currentRecord.getRecordAccounts().clear();
 
         if (this.getToDropDownAccountOne() != null && this.getPositionValueToAccountOne() > 0) {
             AccountRecord record = new AccountRecord();
@@ -391,23 +363,6 @@ public class AccountingRecordsController extends SplitPaneController {
     private void updateAccountingRecordView(AccountingRecordModel currentModel) {
         Record record = currentModel.getRecord();
         // TODO: revise this method
-        /*if (record.getCredit() != null) {
-             if (record.getCredit().getType() != null) {
-                this.setFromDropDownAccountType(record.getCredit().getType());
-            }
-            this.setFromDropDownAccountOne(record.getCredit());
-        }
-
-        if (record.getDebit() != null) {
-            if (record.getDebit().getType() != null) {
-                this.setToDropDownAccountType(record.getDebit().getType());
-            }
-            this.setToDropDownAccountOne(record.getDebit());
-        }
-
-        if (record.getBruttoValue() > 0) {
-            this.setPositionValueFromAccountOne(record.getBruttoValue());
-        }*/
 
         if (record.getEntryText() != null) {
             this.setPossiblePosition(record.getEntryText());
@@ -508,12 +463,8 @@ public class AccountingRecordsController extends SplitPaneController {
         this.toDropDownAccountFour.getSelectionModel().select(toDropDownAccount);
     }
 
-    public ImageView getConfidenceImage() {
-        return confidenceImage;
-    }
-
-    public void setConfidenceImage(ImageView confidenceImage) {
-
+    private void setConfidenceImage(ImageView confidenceImage) {
+        this.confidenceImage = confidenceImage;
     }
 
     private double getPositionValueFromAccountOne() {
@@ -652,26 +603,7 @@ public class AccountingRecordsController extends SplitPaneController {
         this.positionValueToAccountFour.setText(String.valueOf(newValue));
     }
 
-    // checks if accounting record can be set as revised
-    /*public boolean checkRevised(ActionEvent actionEvent) {
-        if (this.recordRevised.isSelected()) {
-            AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord()));
-            Record record = model.getRecord();
-
-            //if (record.getCredit() != null && record.getDebit() != null && record.getBruttoValue() > 0) {
-                model.setRevised(true);
-                return  true;
-            /*} else {
-                return false;
-            }
-        } else {
-            AccountingRecordModel model = this.getRecordsFound().get(Integer.valueOf(this.getCurrentRecord()));
-            model.setRevised(false);
-            return false;
-        }
-    }*/
-
-    public String getPossiblePosition() {
+    private String getPossiblePosition() {
         return possiblePosition.getText();
     }
 
@@ -682,112 +614,53 @@ public class AccountingRecordsController extends SplitPaneController {
     // when called, invoice has been reviewed by the user
     // set invoice to be reviewed and update all information given
     public void setReviewed() {
+        this.saveCurrentValuesToRecord();
         superCtrl.reviseAll();
     }
 
-    ValidationStatus validateFieldsBeforeSave() {
+    List<ValidationStatus> validateFieldsBeforeSave() {
+        List<ValidationStatus> errors = new LinkedList<>();
+        for (AccountingRecordModel record : this.getRecordsFound()) {
+            Record current = record.getRecord();
+            if (current.getEntryText() == null || Objects.equals(current.getEntryText(), "")) {
+                errors.add(ValidationStatus.MISSINGPOSITION);
+            }
+            double debitSum = 0;
+            double creditSum = 0;
+            for (AccountRecord entry : current.getRecordAccounts()) {
 
-        if (this.fromDropDownAccountOne.getSelectionModel().getSelectedItem() == null) {
-            this.fromDropDownAccountOne.getStyleClass().add("error");
-            return ValidationStatus.MISSINGACCOUNTS;
-        }
-        if (this.positionValueFromAccountOne.getText() == null || this.positionValueFromAccountOne.getText().isEmpty()) {
-            this.positionValueFromAccountOne.getStyleClass().add("error");
-            return ValidationStatus.MISSINGVALUES;
-        }
+                if (entry.getIsDebit()) {
+                    debitSum += entry.getBruttoValue();
+                } else {
+                    creditSum += entry.getBruttoValue();
+                }
 
-        /*if (this.fromDropDownAccountTwo.getSelectionModel().getSelectedItem() == null) {
-            this.fromDropDownAccountTwo.getStyleClass().add("error");
-            result = false;
-        }
-        if (this.positionValueFromAccountTwo.getText() == null || this.positionValueFromAccountTwo.getText().isEmpty()) {
-            this.positionValueFromAccountTwo.getStyleClass().add("error");
-            result = false;
-        }
-
-        if (this.fromDropDownAccountThree.getSelectionModel().getSelectedItem() == null) {
-            this.fromDropDownAccountThree.getStyleClass().add("error");
-            result = false;
-        }
-        if (this.positionValueFromAccountThree.getText() == null || this.positionValueFromAccountThree.getText().isEmpty()) {
-            this.positionValueFromAccountThree.getStyleClass().add("error");
-            result = false;
-        }
-
-        if (this.fromDropDownAccountFour.getSelectionModel().getSelectedItem() == null) {
-            this.fromDropDownAccountFour.getStyleClass().add("error");
-            result = false;
-        }
-        if (this.positionValueFromAccountFour.getText() == null || this.positionValueFromAccountFour.getText().isEmpty()) {
-            this.positionValueFromAccountFour.getStyleClass().add("error");
-            result = false;
-        }*/
-
-        if (this.toDropDownAccountOne.getSelectionModel().getSelectedItem() == null) {
-            this.toDropDownAccountOne.getStyleClass().add("error");
-            return ValidationStatus.MISSINGACCOUNTS;
-        }
-        if (this.positionValueToAccountOne.getText() == null || this.positionValueToAccountOne.getText().isEmpty()) {
-            this.positionValueToAccountOne.getStyleClass().add("error");
-            return ValidationStatus.MISSINGVALUES;
-        }
-/*
-        if (this.toDropDownAccountTwo.getSelectionModel().getSelectedItem() == null) {
-            this.toDropDownAccountTwo.getStyleClass().add("error");
-            result = false;
-        }
-        if (this.positionValueToAccountTwo.getText() == null || this.positionValueToAccountTwo.getText().isEmpty()) {
-            this.positionValueToAccountTwo.getStyleClass().add("error");
-            result = false;
+                if (entry.getAccount() == null) {
+                    errors.add(ValidationStatus.MISSINGACCOUNTS);
+                }
+                if (entry.getBruttoValue() == 0) {
+                    errors.add(ValidationStatus.MISSINGVALUES);
+                }
+            }
+            if (debitSum != creditSum) {
+                errors.add(ValidationStatus.MALFORMEDVALUE);
+            }
         }
 
-        if (this.toDropDownAccountThree.getSelectionModel().getSelectedItem() == null) {
-            this.toDropDownAccountThree.getStyleClass().add("error");
-            result = false;
-        }
-        if (this.positionValueToAccountThree.getText() == null || this.positionValueToAccountThree.getText().isEmpty()) {
-            this.positionValueToAccountThree.getStyleClass().add("error");
-            result = false;
-        }
-
-        if (this.toDropDownAccountFour.getSelectionModel().getSelectedItem() == null) {
-            this.toDropDownAccountFour.getStyleClass().add("error");
-            result = false;
-        }
-        if (this.positionValueToAccountFour.getText() == null || this.positionValueToAccountFour.getText().isEmpty()) {
-            this.positionValueToAccountFour.getStyleClass().add("error");
-            result = false;
-        }
-*/
-        if (this.possiblePosition.getText() == null || this.possiblePosition.getText().isEmpty()) {
-            this.possiblePosition.getStyleClass().add("error");
-            return ValidationStatus.MISSINGPOSITION;
-        }
-
-        return this.validateCalculation();
-    }
-
-    private ValidationStatus validateCalculation() {
-        double debitSum = this.getPositionValueFromAccountOne() + this.getPositionValueFromAccountTwo() + this.getPositionValueFromAccountThree() + this.getPositionValueFromAccountFour();
-        double creditSum = this.getPositionValueToAccountOne() + this.getPositionValueToAccountTwo() + this.getPositionValueToAccountThree() + this.getPositionValueToAccountFour();
-        if (debitSum != creditSum) {
-            return ValidationStatus.MALFORMEDVALUE;
-        } else {
-            return ValidationStatus.OK;
-        }
+        return errors;
     }
 
     List<Record> updateInformation() {
         return this.convertToAccountingRecords();
     }
 
-    public void addNewEntry(ActionEvent actionEvent) {
+    public void addNewEntry() {
         AccountingRecordModel model = new AccountingRecordModel(this.getRecordsFound().size() + 1);
         model.setRecord(new Record());
         this.getRecordsFound().add(model);
     }
 
-    public void deleteCurrentEntry(ActionEvent actionEvent) {
+    public void deleteCurrentEntry() {
         this.prevRecord();
         this.getRecordsFound().remove(this.index);
     }
