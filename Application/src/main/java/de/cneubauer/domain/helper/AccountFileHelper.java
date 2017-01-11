@@ -1,5 +1,7 @@
 package de.cneubauer.domain.helper;
 
+import de.cneubauer.domain.bo.AccountRecord;
+import de.cneubauer.gui.model.AccountingRecordModel;
 import de.cneubauer.util.RecordTrainingEntry;
 import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
@@ -204,6 +206,37 @@ public final class AccountFileHelper {
         } catch (Exception e) {
             e.printStackTrace();
             Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to rewrite account settings! Please delete config.ini to reset to default settings");
+        }
+    }
+
+    public static void addAccountingRecordModel(AccountingRecordModel acc) {
+        try {
+            if (learningFile == null) {
+                new AccountFileHelper();
+            }
+            OutputStream out = new FileOutputStream(learningFile, true);
+            BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
+            w.newLine();
+            w.write(acc.getPosition());
+            Set<AccountRecord> accountRecords = acc.getRecord().getRecordAccounts();
+            for(AccountRecord record : accountRecords) {
+                if(record.getIsDebit()) {
+                    w.write(record.getAccount().getName() + record.getBruttoValue());
+                    w.newLine();
+                }
+            }
+            for (AccountRecord record : accountRecords) {
+                if (!record.getIsDebit()) {
+                    w.write("an " + record.getAccount().getName() + record.getBruttoValue());
+                    w.newLine();
+                }
+            }
+            w.newLine();
+            w.write("ENDRECORD");
+            w.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to add account settings! Please delete config.ini to reset to default settings");
         }
     }
 }

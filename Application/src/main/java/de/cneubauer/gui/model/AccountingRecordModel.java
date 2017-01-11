@@ -15,7 +15,7 @@ public class AccountingRecordModel {
     private Account toPossibleAccount;
     private AccountType fromPossibleType;
     private Account fromPossibleAccount;
-    private int confidence;
+    private double confidence;
     private int index;
     private String position;
 
@@ -39,11 +39,11 @@ public class AccountingRecordModel {
         this.revised = revised;
     }
 
-    public int getConfidence() {
+    public double getConfidence() {
         return confidence;
     }
 
-    public void setConfidence(int confidence) {
+    public void setConfidence(double confidence) {
         this.confidence = confidence;
     }
 

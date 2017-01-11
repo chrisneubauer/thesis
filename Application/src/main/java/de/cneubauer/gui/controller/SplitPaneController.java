@@ -1,6 +1,7 @@
 package de.cneubauer.gui.controller;
 
 import de.cneubauer.gui.model.ExtractionModel;
+import de.cneubauer.util.enumeration.ValidationStatus;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.SwingFXUtils;
@@ -91,13 +92,13 @@ public class SplitPaneController extends GUIController {
 
     void reviseAll() {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Reviewed Button clicked! Validating the fields");
-        boolean accountingCorrect = accountingRecordsTabController.validateFieldsBeforeSave();
-        boolean invoiceCorrect = invoiceTabController.validateFieldsBeforeSave();
-        if (accountingCorrect && invoiceCorrect) {
+        ValidationStatus accountingCorrect = accountingRecordsTabController.validateFieldsBeforeSave();
+        ValidationStatus invoiceCorrect = invoiceTabController.validateFieldsBeforeSave();
+        if (accountingCorrect.equals(ValidationStatus.OK) && invoiceCorrect.equals(ValidationStatus.OK)) {
             this.updateAndReturn();
         } else {
             Alert info = new Alert(Alert.AlertType.WARNING);
-            info.setContentText("Could not update the document! \n Please review all fields again and make sure that there are no more errors.");
+            info.setContentText("Could not update the document! \n Please review all fields again and make sure that there are no more errors. \n Error: " + accountingCorrect.name() + " " + invoiceCorrect.name());
             info.setHeaderText("Review Issue");
             info.show();
         }

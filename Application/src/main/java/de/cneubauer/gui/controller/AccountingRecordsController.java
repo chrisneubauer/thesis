@@ -10,6 +10,7 @@ import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.domain.dao.impl.AccountTypeDaoImpl;
 import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.gui.model.AccountingRecordModel;
+import de.cneubauer.util.enumeration.ValidationStatus;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -132,7 +133,7 @@ public class AccountingRecordsController extends SplitPaneController {
         toDropDownAccountThree.setConverter(this.createAccountConverter());
         toDropDownAccountFour.setConverter(this.createAccountConverter());
 
-        AccountTypeDao accountTypeDao = new AccountTypeDaoImpl();
+        //AccountTypeDao accountTypeDao = new AccountTypeDaoImpl();
         AccountDao accountDao = new AccountDaoImpl();
 
         //this.types = accountTypeDao.getAll();
@@ -284,7 +285,7 @@ public class AccountingRecordsController extends SplitPaneController {
         if (this.validateAccountingRecords()) {
             for (AccountingRecordModel acc : this.recordsFound) {
                 if (acc.isRevised()) {
-                    AccountFileHelper.write(acc.getRecord().getEntryText(), acc.getFromPossibleAccount().getAccountNo());
+                    AccountFileHelper.addAccountingRecordModel(acc);
                 }
             }
         }
@@ -320,14 +321,6 @@ public class AccountingRecordsController extends SplitPaneController {
     private void saveCurrentValuesToRecord() {
         AccountingRecordModel current = this.getRecordsFound().get(this.index-1);
         Record currentRecord = current.getRecord();
-        /*if (this.getFromDropDownAccountOne() != null)
-        {
-            //currentRecord.setCredit(this.getFromDropDownAccountOne());
-        }*/
-
-        /*if (this.getFromDropDownAccountType() != null) {
-            currentRecord.getCredit().setType(this.getFromDropDownAccountType());
-        }*/
 
         if (this.getToDropDownAccountOne() != null && this.getPositionValueToAccountOne() > 0) {
             AccountRecord record = new AccountRecord();
@@ -392,15 +385,12 @@ public class AccountingRecordsController extends SplitPaneController {
             record.setIsDebit(true);
             currentRecord.getRecordAccounts().add(record);
         }
-
-        /*if (this.getFromDropDownAccountType() != null) {
-            currentRecord.getCredit().setType(this.getFromDropDownAccountType());
-        }*/
     }
 
     // core method to update the whole view when new information is present
     private void updateAccountingRecordView(AccountingRecordModel currentModel) {
         Record record = currentModel.getRecord();
+        // TODO: revise this method
         /*if (record.getCredit() != null) {
              if (record.getCredit().getType() != null) {
                 this.setFromDropDownAccountType(record.getCredit().getType());
@@ -424,6 +414,18 @@ public class AccountingRecordsController extends SplitPaneController {
         }
 
         Logger.getLogger(this.getClass()).log(Level.INFO, "current confidence: " + currentModel.getConfidence());
+
+        ImageView view;
+        if (currentModel.getConfidence() < 0.5) {
+            view = new ImageView("img/Circle_Red.png");
+        } else if (currentModel.getConfidence() < 0.8 && currentModel.getConfidence() >= 0.5) {
+            view = new ImageView("img/Circle_Yellow.png");
+        } else {
+            view = new ImageView("img/Circle_Green.png");
+        }
+        view.setFitHeight(32);
+        view.setFitWidth(32);
+        this.setConfidenceImage(view);
     }
 
     private String getCurrentRecord() {
@@ -511,7 +513,7 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     public void setConfidenceImage(ImageView confidenceImage) {
-        this.confidenceImage = confidenceImage;
+
     }
 
     private double getPositionValueFromAccountOne() {
@@ -683,19 +685,18 @@ public class AccountingRecordsController extends SplitPaneController {
         superCtrl.reviseAll();
     }
 
-    boolean validateFieldsBeforeSave() {
-        boolean result = true;
+    ValidationStatus validateFieldsBeforeSave() {
 
         if (this.fromDropDownAccountOne.getSelectionModel().getSelectedItem() == null) {
             this.fromDropDownAccountOne.getStyleClass().add("error");
-            result = false;
+            return ValidationStatus.MISSINGACCOUNTS;
         }
         if (this.positionValueFromAccountOne.getText() == null || this.positionValueFromAccountOne.getText().isEmpty()) {
             this.positionValueFromAccountOne.getStyleClass().add("error");
-            result = false;
+            return ValidationStatus.MISSINGVALUES;
         }
 
-        if (this.fromDropDownAccountTwo.getSelectionModel().getSelectedItem() == null) {
+        /*if (this.fromDropDownAccountTwo.getSelectionModel().getSelectedItem() == null) {
             this.fromDropDownAccountTwo.getStyleClass().add("error");
             result = false;
         }
@@ -720,17 +721,17 @@ public class AccountingRecordsController extends SplitPaneController {
         if (this.positionValueFromAccountFour.getText() == null || this.positionValueFromAccountFour.getText().isEmpty()) {
             this.positionValueFromAccountFour.getStyleClass().add("error");
             result = false;
-        }
+        }*/
 
         if (this.toDropDownAccountOne.getSelectionModel().getSelectedItem() == null) {
             this.toDropDownAccountOne.getStyleClass().add("error");
-            result = false;
+            return ValidationStatus.MISSINGACCOUNTS;
         }
         if (this.positionValueToAccountOne.getText() == null || this.positionValueToAccountOne.getText().isEmpty()) {
             this.positionValueToAccountOne.getStyleClass().add("error");
-            result = false;
+            return ValidationStatus.MISSINGVALUES;
         }
-
+/*
         if (this.toDropDownAccountTwo.getSelectionModel().getSelectedItem() == null) {
             this.toDropDownAccountTwo.getStyleClass().add("error");
             result = false;
@@ -757,12 +758,23 @@ public class AccountingRecordsController extends SplitPaneController {
             this.positionValueToAccountFour.getStyleClass().add("error");
             result = false;
         }
-
+*/
         if (this.possiblePosition.getText() == null || this.possiblePosition.getText().isEmpty()) {
             this.possiblePosition.getStyleClass().add("error");
-            result = false;
+            return ValidationStatus.MISSINGPOSITION;
         }
-        return result;
+
+        return this.validateCalculation();
+    }
+
+    private ValidationStatus validateCalculation() {
+        double debitSum = this.getPositionValueFromAccountOne() + this.getPositionValueFromAccountTwo() + this.getPositionValueFromAccountThree() + this.getPositionValueFromAccountFour();
+        double creditSum = this.getPositionValueToAccountOne() + this.getPositionValueToAccountTwo() + this.getPositionValueToAccountThree() + this.getPositionValueToAccountFour();
+        if (debitSum != creditSum) {
+            return ValidationStatus.MALFORMEDVALUE;
+        } else {
+            return ValidationStatus.OK;
+        }
     }
 
     List<Record> updateInformation() {
