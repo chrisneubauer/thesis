@@ -76,8 +76,8 @@
                     <Insets left="25.0" top="35.0" />
                 </GridPane.margin>
             </ButtonBar>
-         <Button mnemonicParsing="false" onAction="#nextRecord" text="&gt;&gt;" GridPane.columnIndex="12" GridPane.rowIndex="1" />
-       <Button mnemonicParsing="false" onAction="#prevRecord" text="&lt;&lt;" GridPane.columnIndex="10" GridPane.rowIndex="1" />
+         <Button fx:id="nextRecordButton" mnemonicParsing="false" onAction="#nextRecord" text="&gt;&gt;" GridPane.columnIndex="12" GridPane.rowIndex="1" />
+       <Button fx:id="prevRecordButton" mnemonicParsing="false" onAction="#prevRecord" text="&lt;&lt;" GridPane.columnIndex="10" GridPane.rowIndex="1" />
          <Label fx:id="currentRecord" alignment="CENTER" minWidth="20.0" text="1" GridPane.columnIndex="11" GridPane.rowIndex="1" />
          <Label layoutX="190.0" layoutY="142.0" prefHeight="17.0" prefWidth="107.0" text="%showAccountingRecords.label.value" GridPane.columnIndex="10" GridPane.rowIndex="3" />
          <TextField fx:id="positionValueToAccountOne" layoutX="190.0" layoutY="178.0" prefHeight="25.0" prefWidth="94.0" GridPane.columnIndex="10" GridPane.columnSpan="2" GridPane.rowIndex="4" />

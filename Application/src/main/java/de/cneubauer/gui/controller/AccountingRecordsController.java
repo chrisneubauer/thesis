@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.StringConverter;
 import org.apache.log4j.Level;
@@ -52,6 +53,8 @@ public class AccountingRecordsController extends SplitPaneController {
 
     @FXML public Button addEntryButton;
     @FXML public Button deleteCurrentEntryButton;
+    @FXML public Button nextRecordButton;
+    @FXML public Button prevRecordButton;
 
     private List<AccountingRecordModel> recordsFound;
     private SplitPaneController superCtrl;
@@ -198,18 +201,10 @@ public class AccountingRecordsController extends SplitPaneController {
         this.addAutoCompleteListener(this.fromDropDownAccountTwo);
         this.addAutoCompleteListener(this.fromDropDownAccountThree);
         this.addAutoCompleteListener(this.fromDropDownAccountFour);
-        //this.fromDropDownAccountOne.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountOne));
-        //this.fromDropDownAccountTwo.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountTwo));
-        //this.fromDropDownAccountThree.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountThree));
-        //this.fromDropDownAccountFour.valueProperty().addListener(this.addListenerToComboBox(this.fromDropDownAccountFour));
         this.addAutoCompleteListener(this.toDropDownAccountOne);
         this.addAutoCompleteListener(this.toDropDownAccountTwo);
         this.addAutoCompleteListener(this.toDropDownAccountThree);
         this.addAutoCompleteListener(this.toDropDownAccountFour);
-        /*this.toDropDownAccountOne.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountOne));
-        this.toDropDownAccountTwo.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountTwo));
-        this.toDropDownAccountThree.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountThree));
-        this.toDropDownAccountFour.valueProperty().addListener(this.addListenerToComboBox(this.toDropDownAccountFour));*/
 
         this.positionValueFromAccountOne.textProperty().addListener(this.addListenerToTextField(this.positionValueFromAccountOne));
         this.positionValueFromAccountTwo.textProperty().addListener(this.addListenerToTextField(this.positionValueFromAccountTwo));
@@ -226,16 +221,6 @@ public class AccountingRecordsController extends SplitPaneController {
     private AutoCompleteComboBoxListener addAutoCompleteListener(ComboBox<Account> comboBox) {
         return new AutoCompleteComboBoxListener(comboBox);
     }
-
-    /*private ChangeListener<Account> addListenerToComboBox(ComboBox<Account> comboBox) {
-        return (observable, oldValue, newValue) -> {
-            if (newValue != null && comboBox.getItems().contains(newValue)) {
-                comboBox.getStyleClass().remove("error");
-            } else {
-                comboBox.getStyleClass().add("error");
-            }
-        };
-    }*/
 
     private ChangeListener<String> addListenerToTextField(TextField field) {
         return (observable, oldValue, newValue) -> {
@@ -359,10 +344,74 @@ public class AccountingRecordsController extends SplitPaneController {
         }
     }
 
+    private void clearTextfields() {
+        this.setFromDropDownAccountOne(null);
+        this.setFromDropDownAccountTwo(null);
+        this.setFromDropDownAccountThree(null);
+        this.setFromDropDownAccountFour(null);
+        this.setPositionValueFromAccountOne(0);
+        this.setPositionValueFromAccountTwo(0);
+        this.setPositionValueFromAccountThree(0);
+        this.setPositionValueFromAccountFour(0);
+        this.setToDropDownAccountOne(null);
+        this.setToDropDownAccountTwo(null);
+        this.setToDropDownAccountThree(null);
+        this.setToDropDownAccountFour(null);
+        this.setPositionValueToAccountOne(0);
+        this.setPositionValueToAccountTwo(0);
+        this.setPositionValueToAccountThree(0);
+        this.setPositionValueToAccountFour(0);
+    }
+
     // core method to update the whole view when new information is present
     private void updateAccountingRecordView(AccountingRecordModel currentModel) {
         Record record = currentModel.getRecord();
-        // TODO: revise this method
+
+        this.clearTextfields();
+        this.setPossiblePosition(record.getEntryText());
+        int debitIdx = 0;
+        int creditIdx = 0;
+        for (AccountRecord entry : record.getRecordAccounts()) {
+            if (entry.getIsDebit()) {
+                switch (debitIdx) {
+                    case 0: this.setFromDropDownAccountOne(entry.getAccount());
+                            this.setPositionValueFromAccountOne(entry.getBruttoValue());
+                            debitIdx++;
+                            break;
+                    case 1: this.setFromDropDownAccountTwo(entry.getAccount());
+                            this.setPositionValueFromAccountTwo(entry.getBruttoValue());
+                            debitIdx++;
+                            break;
+                    case 2: this.setFromDropDownAccountThree(entry.getAccount());
+                            this.setPositionValueFromAccountThree(entry.getBruttoValue());
+                            debitIdx++;
+                            break;
+                    case 3: this.setFromDropDownAccountFour(entry.getAccount());
+                            this.setPositionValueFromAccountFour(entry.getBruttoValue());
+                            debitIdx++;
+                            break;
+                }
+            } else {
+                switch (creditIdx) {
+                    case 0: this.setToDropDownAccountOne(entry.getAccount());
+                            this.setPositionValueToAccountOne(entry.getBruttoValue());
+                            creditIdx++;
+                            break;
+                    case 1: this.setToDropDownAccountTwo(entry.getAccount());
+                            this.setPositionValueToAccountTwo(entry.getBruttoValue());
+                            creditIdx++;
+                            break;
+                    case 2: this.setToDropDownAccountThree(entry.getAccount());
+                            this.setPositionValueToAccountThree(entry.getBruttoValue());
+                            creditIdx++;
+                            break;
+                    case 3: this.setToDropDownAccountFour(entry.getAccount());
+                            this.setPositionValueToAccountFour(entry.getBruttoValue());
+                            creditIdx++;
+                            break;
+                }
+            }
+        }
 
         if (record.getEntryText() != null) {
             this.setPossiblePosition(record.getEntryText());
@@ -370,21 +419,15 @@ public class AccountingRecordsController extends SplitPaneController {
 
         Logger.getLogger(this.getClass()).log(Level.INFO, "current confidence: " + currentModel.getConfidence());
 
-        ImageView view;
+        Image img;
         if (currentModel.getConfidence() < 0.5) {
-            view = new ImageView("img/Circle_Red.png");
+            img = new Image("img/Circle_Red.png");
         } else if (currentModel.getConfidence() < 0.8 && currentModel.getConfidence() >= 0.5) {
-            view = new ImageView("img/Circle_Yellow.png");
+            img = new Image("img/Circle_Yellow.png");
         } else {
-            view = new ImageView("img/Circle_Green.png");
+            img = new Image("img/Circle_Green.png");
         }
-        view.setFitHeight(32);
-        view.setFitWidth(32);
-        this.setConfidenceImage(view);
-    }
-
-    private String getCurrentRecord() {
-        return this.currentRecord.getText();
+        this.getConfidenceImage().setImage(img);
     }
 
     private void setCurrentRecord(String currentRecord) {
@@ -463,8 +506,8 @@ public class AccountingRecordsController extends SplitPaneController {
         this.toDropDownAccountFour.getSelectionModel().select(toDropDownAccount);
     }
 
-    private void setConfidenceImage(ImageView confidenceImage) {
-        this.confidenceImage = confidenceImage;
+    private ImageView getConfidenceImage() {
+        return confidenceImage;
     }
 
     private double getPositionValueFromAccountOne() {
@@ -621,14 +664,27 @@ public class AccountingRecordsController extends SplitPaneController {
     List<ValidationStatus> validateFieldsBeforeSave() {
         List<ValidationStatus> errors = new LinkedList<>();
         for (AccountingRecordModel record : this.getRecordsFound()) {
+            boolean currentlyShownRecord = this.getRecordsFound().indexOf(record) == this.index - 1;
             Record current = record.getRecord();
             if (current.getEntryText() == null || Objects.equals(current.getEntryText(), "")) {
                 errors.add(ValidationStatus.MISSINGPOSITION);
+                if (currentlyShownRecord) {
+                    this.possiblePosition.getStyleClass().add("error");
+                } else {
+                    if(record.getIndex() < this.index - 1) {
+                        this.prevRecordButton.getStyleClass().add("error");
+                    } else {
+                        this.nextRecordButton.getStyleClass().add("error");
+                    }
+                }
+            } else {
+                if (currentlyShownRecord) {
+                    this.possiblePosition.getStyleClass().remove("error");
+                }
             }
             double debitSum = 0;
             double creditSum = 0;
             for (AccountRecord entry : current.getRecordAccounts()) {
-
                 if (entry.getIsDebit()) {
                     debitSum += entry.getBruttoValue();
                 } else {
@@ -637,13 +693,52 @@ public class AccountingRecordsController extends SplitPaneController {
 
                 if (entry.getAccount() == null) {
                     errors.add(ValidationStatus.MISSINGACCOUNTS);
+                    if (!currentlyShownRecord) {
+                        if(record.getIndex() < this.index - 1) {
+                            this.prevRecordButton.getStyleClass().add("error");
+                        } else {
+                            this.nextRecordButton.getStyleClass().add("error");
+                        }
+                    }
                 }
                 if (entry.getBruttoValue() == 0) {
                     errors.add(ValidationStatus.MISSINGVALUES);
+                    if (!currentlyShownRecord) {
+                        if(record.getIndex() < this.index - 1) {
+                            this.prevRecordButton.getStyleClass().add("error");
+                        } else {
+                            this.nextRecordButton.getStyleClass().add("error");
+                        }
+                    }
+                }
+            }
+            if (current.getRecordAccounts().size() == 0) {
+                errors.add(ValidationStatus.MISSINGACCOUNTS);
+                if (!currentlyShownRecord) {
+                    if(record.getIndex() < this.index - 1) {
+                        this.prevRecordButton.getStyleClass().add("error");
+                    } else {
+                        this.nextRecordButton.getStyleClass().add("error");
+                    }
+                }
+                errors.add(ValidationStatus.MISSINGVALUES);
+                if (!currentlyShownRecord) {
+                    if(record.getIndex() < this.index - 1) {
+                        this.prevRecordButton.getStyleClass().add("error");
+                    } else {
+                        this.nextRecordButton.getStyleClass().add("error");
+                    }
                 }
             }
             if (debitSum != creditSum) {
                 errors.add(ValidationStatus.MALFORMEDVALUE);
+                if (!currentlyShownRecord) {
+                    if(record.getIndex() < this.index - 1) {
+                        this.prevRecordButton.getStyleClass().add("error");
+                    } else {
+                        this.nextRecordButton.getStyleClass().add("error");
+                    }
+                }
             }
         }
 
