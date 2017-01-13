@@ -91,7 +91,7 @@ public class ProcessedListController extends GUIController {
                 InvoiceFileHelper.write(i.getCreditor().getName(), i.getDebitor().getName());
                 List<Record> recordList = result.getExtractionModel().getRecords();
                 for (Record record : recordList) {
-                    // TODO: update to new version
+                    AccountFileHelper.addAccountingRecord(record);
                     //AccountFileHelper.write(record.getEntryText(), record.getDebit().getAccountNo());
                 }
                 counter++;
@@ -162,6 +162,7 @@ public class ProcessedListController extends GUIController {
     void updateSelected(int index, ExtractionModel newModel) {
         this.progressedList.getItems().get(index).setExtractionModel(newModel);
         this.progressedList.getItems().get(index).setStatus(ScanStatus.OK);
+        this.progressedList.getItems().get(index).setProblem("No Problems detected");
         this.progressedList.refresh();
     }
 }

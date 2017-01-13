@@ -1,6 +1,7 @@
 package de.cneubauer.domain.helper;
 
 import de.cneubauer.domain.bo.AccountRecord;
+import de.cneubauer.domain.bo.Record;
 import de.cneubauer.gui.model.AccountingRecordModel;
 import de.cneubauer.util.RecordTrainingEntry;
 import de.cneubauer.util.config.Cfg;
@@ -145,10 +146,10 @@ public final class AccountFileHelper {
                         r.setPosition(currentLine);
                         newRecord = false;
                     } else {
-                        if (currentLine.contains(" an ")) {
-                            String debitAcc = currentLine.split(" an ")[0];
-                            String creditAcc = currentLine.split(" an ")[1];
-                            extractEntryInformation(debitAcc, true, r);
+                        if (currentLine.startsWith("an")) {
+                            //String debitAcc = currentLine.split(" an ")[0];
+                            String creditAcc = currentLine.split("an ")[1];
+                            //extractEntryInformation(debitAcc, true, r);
                             extractEntryInformation(creditAcc, false, r);
                         } else {
                             extractEntryInformation(currentLine, true, r);
@@ -168,7 +169,7 @@ public final class AccountFileHelper {
     private static void extractEntryInformation(String currentLine, boolean isDebit, RecordTrainingEntry r) {
         String[] parts = currentLine.split(" ");
         int length = parts.length;
-        String value = parts[length-1].replace("€", "").replace("$", "").replace(".", "").replace(",",".");
+        String value = parts[length-1].replace("€", "").replace("$", "").replace(",",".");
         String accountName = "";
         for (int i = 0; i < parts.length - 1; i++) {
             accountName += parts[i] + " ";
@@ -218,20 +219,51 @@ public final class AccountFileHelper {
             BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
             w.newLine();
             w.write(acc.getPosition());
+            w.newLine();
             Set<AccountRecord> accountRecords = acc.getRecord().getRecordAccounts();
             for(AccountRecord record : accountRecords) {
                 if(record.getIsDebit()) {
-                    w.write(record.getAccount().getName() + record.getBruttoValue());
+                    w.write(record.getAccount().getName() + " " + record.getBruttoValue() + "€");
                     w.newLine();
                 }
             }
             for (AccountRecord record : accountRecords) {
                 if (!record.getIsDebit()) {
-                    w.write("an " + record.getAccount().getName() + record.getBruttoValue());
+                    w.write("an " + record.getAccount().getName() + " " + record.getBruttoValue() + "€");
                     w.newLine();
                 }
             }
+            w.write("ENDRECORD");
+            w.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to add account settings! Please delete config.ini to reset to default settings");
+        }
+    }
+
+    public static void addAccountingRecord(Record record) {
+        try {
+            if (learningFile == null) {
+                new AccountFileHelper();
+            }
+            OutputStream out = new FileOutputStream(learningFile, true);
+            BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
             w.newLine();
+            w.write(record.getEntryText());
+            w.newLine();
+            Set<AccountRecord> accountRecords = record.getRecordAccounts();
+            for(AccountRecord accountRecord : accountRecords) {
+                if(accountRecord.getIsDebit()) {
+                    w.write(accountRecord.getAccount().getName() + " " + accountRecord.getBruttoValue() + "€");
+                    w.newLine();
+                }
+            }
+            for (AccountRecord accountRecord : accountRecords) {
+                if (!accountRecord.getIsDebit()) {
+                    w.write("an " + accountRecord.getAccount().getName() + " " + accountRecord.getBruttoValue() + "€");
+                    w.newLine();
+                }
+            }
             w.write("ENDRECORD");
             w.close();
         } catch (Exception e) {

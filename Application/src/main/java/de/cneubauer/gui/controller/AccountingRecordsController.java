@@ -5,7 +5,6 @@ import de.cneubauer.domain.bo.AccountRecord;
 import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.dao.AccountDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
-import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.gui.model.AccountingRecordModel;
 import de.cneubauer.gui.util.AutoCompleteComboBoxListener;
 import de.cneubauer.util.enumeration.ValidationStatus;
@@ -27,34 +26,59 @@ import java.util.*;
  * Controller for managing extracted accounting records
  */
 public class AccountingRecordsController extends SplitPaneController {
-    @FXML public ComboBox<Account> fromDropDownAccountOne;
-    @FXML public ComboBox<Account> fromDropDownAccountTwo;
-    @FXML public ComboBox<Account> fromDropDownAccountThree;
-    @FXML public ComboBox<Account> fromDropDownAccountFour;
-    @FXML public ComboBox<Account> toDropDownAccountOne;
-    @FXML public ComboBox<Account> toDropDownAccountTwo;
-    @FXML public ComboBox<Account> toDropDownAccountThree;
-    @FXML public ComboBox<Account> toDropDownAccountFour;
+    @FXML
+    public ComboBox<Account> fromDropDownAccountOne;
+    @FXML
+    public ComboBox<Account> fromDropDownAccountTwo;
+    @FXML
+    public ComboBox<Account> fromDropDownAccountThree;
+    @FXML
+    public ComboBox<Account> fromDropDownAccountFour;
+    @FXML
+    public ComboBox<Account> toDropDownAccountOne;
+    @FXML
+    public ComboBox<Account> toDropDownAccountTwo;
+    @FXML
+    public ComboBox<Account> toDropDownAccountThree;
+    @FXML
+    public ComboBox<Account> toDropDownAccountFour;
 
-    @FXML public TextField positionValueFromAccountOne;
-    @FXML public TextField positionValueFromAccountTwo;
-    @FXML public TextField positionValueFromAccountThree;
-    @FXML public TextField positionValueFromAccountFour;
-    @FXML public TextField positionValueToAccountOne;
-    @FXML public TextField positionValueToAccountTwo;
-    @FXML public TextField positionValueToAccountThree;
-    @FXML public TextField positionValueToAccountFour;
+    @FXML
+    public TextField positionValueFromAccountOne;
+    @FXML
+    public TextField positionValueFromAccountTwo;
+    @FXML
+    public TextField positionValueFromAccountThree;
+    @FXML
+    public TextField positionValueFromAccountFour;
+    @FXML
+    public TextField positionValueToAccountOne;
+    @FXML
+    public TextField positionValueToAccountTwo;
+    @FXML
+    public TextField positionValueToAccountThree;
+    @FXML
+    public TextField positionValueToAccountFour;
 
-    @FXML public ImageView confidenceImage;
-    @FXML public CheckBox recordRevised;
-    @FXML public Label currentRecord;
-    @FXML public Button SaveAccountingRecords;
-    @FXML public TextField possiblePosition;
+    @FXML
+    public ImageView confidenceImage;
+    @FXML
+    public CheckBox recordRevised;
+    @FXML
+    public Label currentRecord;
+    @FXML
+    public Button SaveAccountingRecords;
+    @FXML
+    public TextField possiblePosition;
 
-    @FXML public Button addEntryButton;
-    @FXML public Button deleteCurrentEntryButton;
-    @FXML public Button nextRecordButton;
-    @FXML public Button prevRecordButton;
+    @FXML
+    public Button addEntryButton;
+    @FXML
+    public Button deleteCurrentEntryButton;
+    @FXML
+    public Button nextRecordButton;
+    @FXML
+    public Button prevRecordButton;
 
     private List<AccountingRecordModel> recordsFound;
     private SplitPaneController superCtrl;
@@ -189,9 +213,9 @@ public class AccountingRecordsController extends SplitPaneController {
         List<Record> result = new ArrayList<>(this.recordsFound.size());
         int index = 0;
         for (AccountingRecordModel model : recordsFound) {
-            Record newRecord = new Record();
-            newRecord.setEntryText(model.getPosition());
-            result.add(index++, newRecord);
+            //Record newRecord = new Record();
+            //newRecord.setEntryText(model.getPosition());
+            result.add(index++, model.getRecord());
         }
         return result;
     }
@@ -232,32 +256,32 @@ public class AccountingRecordsController extends SplitPaneController {
         };
     }
 
-    void addRevisedToFile() {
+    /*void addRevisedToFile() {
         // check if all records have been revised before saving
-        if (this.validateAccountingRecords()) {
+        //if (this.validateAccountingRecords()) {
             for (AccountingRecordModel acc : this.recordsFound) {
-                if (acc.isRevised()) {
+                //if (acc.isRevised()) {
                     AccountFileHelper.addAccountingRecordModel(acc);
-                }
+                //}
             }
-        }
-    }
+        //}
+    }*/
 
-    private boolean validateAccountingRecords() {
+    /*private boolean validateAccountingRecords() {
         for (AccountingRecordModel record : this.getRecordsFound()) {
             if (!record.isRevised()) {
                 return false;
             }
         }
         return true;
-    }
+    }*/
 
     public void nextRecord() {
         if (this.getRecordsFound() != null && this.getRecordsFound().size() > this.index) {
             this.saveCurrentValuesToRecord();
             this.index++;
             this.setCurrentRecord(String.valueOf(this.index));
-            this.updateAccountingRecordView(this.getRecordsFound().get(this.index-1));
+            this.updateAccountingRecordView(this.getRecordsFound().get(this.index - 1));
         }
     }
 
@@ -266,12 +290,12 @@ public class AccountingRecordsController extends SplitPaneController {
             this.saveCurrentValuesToRecord();
             this.index--;
             this.setCurrentRecord(String.valueOf(this.index));
-            this.updateAccountingRecordView(this.getRecordsFound().get(this.index-1));
+            this.updateAccountingRecordView(this.getRecordsFound().get(this.index - 1));
         }
     }
 
     private void saveCurrentValuesToRecord() {
-        AccountingRecordModel current = this.getRecordsFound().get(this.index-1);
+        AccountingRecordModel current = this.getRecordsFound().get(this.index - 1);
         Record currentRecord = current.getRecord();
         if (this.getPossiblePosition() != null) {
             currentRecord.setEntryText(this.getPossiblePosition());
@@ -342,6 +366,10 @@ public class AccountingRecordsController extends SplitPaneController {
             record.setIsDebit(true);
             currentRecord.getRecordAccounts().add(record);
         }
+
+        for (AccountRecord a : currentRecord.getRecordAccounts()) {
+            a.setRecord(currentRecord);
+        }
     }
 
     private void clearTextfields() {
@@ -361,6 +389,26 @@ public class AccountingRecordsController extends SplitPaneController {
         this.setPositionValueToAccountTwo(0);
         this.setPositionValueToAccountThree(0);
         this.setPositionValueToAccountFour(0);
+
+        this.positionValueFromAccountOne.getStyleClass().remove("error");
+        this.positionValueFromAccountTwo.getStyleClass().remove("error");
+        this.positionValueFromAccountThree.getStyleClass().remove("error");
+        this.positionValueFromAccountFour.getStyleClass().remove("error");
+        this.positionValueToAccountOne.getStyleClass().remove("error");
+        this.positionValueToAccountTwo.getStyleClass().remove("error");
+        this.positionValueToAccountThree.getStyleClass().remove("error");
+        this.positionValueToAccountFour.getStyleClass().remove("error");
+        this.fromDropDownAccountOne.getStyleClass().remove("error");
+        this.fromDropDownAccountTwo.getStyleClass().remove("error");
+        this.fromDropDownAccountThree.getStyleClass().remove("error");
+        this.fromDropDownAccountFour.getStyleClass().remove("error");
+        this.toDropDownAccountOne.getStyleClass().remove("error");
+        this.toDropDownAccountTwo.getStyleClass().remove("error");
+        this.toDropDownAccountThree.getStyleClass().remove("error");
+        this.toDropDownAccountFour.getStyleClass().remove("error");
+
+        this.prevRecordButton.getStyleClass().remove("error");
+        this.nextRecordButton.getStyleClass().remove("error");
     }
 
     // core method to update the whole view when new information is present
@@ -374,41 +422,49 @@ public class AccountingRecordsController extends SplitPaneController {
         for (AccountRecord entry : record.getRecordAccounts()) {
             if (entry.getIsDebit()) {
                 switch (debitIdx) {
-                    case 0: this.setFromDropDownAccountOne(entry.getAccount());
-                            this.setPositionValueFromAccountOne(entry.getBruttoValue());
-                            debitIdx++;
-                            break;
-                    case 1: this.setFromDropDownAccountTwo(entry.getAccount());
-                            this.setPositionValueFromAccountTwo(entry.getBruttoValue());
-                            debitIdx++;
-                            break;
-                    case 2: this.setFromDropDownAccountThree(entry.getAccount());
-                            this.setPositionValueFromAccountThree(entry.getBruttoValue());
-                            debitIdx++;
-                            break;
-                    case 3: this.setFromDropDownAccountFour(entry.getAccount());
-                            this.setPositionValueFromAccountFour(entry.getBruttoValue());
-                            debitIdx++;
-                            break;
+                    case 0:
+                        this.setFromDropDownAccountOne(entry.getAccount());
+                        this.setPositionValueFromAccountOne(entry.getBruttoValue());
+                        debitIdx++;
+                        break;
+                    case 1:
+                        this.setFromDropDownAccountTwo(entry.getAccount());
+                        this.setPositionValueFromAccountTwo(entry.getBruttoValue());
+                        debitIdx++;
+                        break;
+                    case 2:
+                        this.setFromDropDownAccountThree(entry.getAccount());
+                        this.setPositionValueFromAccountThree(entry.getBruttoValue());
+                        debitIdx++;
+                        break;
+                    case 3:
+                        this.setFromDropDownAccountFour(entry.getAccount());
+                        this.setPositionValueFromAccountFour(entry.getBruttoValue());
+                        debitIdx++;
+                        break;
                 }
             } else {
                 switch (creditIdx) {
-                    case 0: this.setToDropDownAccountOne(entry.getAccount());
-                            this.setPositionValueToAccountOne(entry.getBruttoValue());
-                            creditIdx++;
-                            break;
-                    case 1: this.setToDropDownAccountTwo(entry.getAccount());
-                            this.setPositionValueToAccountTwo(entry.getBruttoValue());
-                            creditIdx++;
-                            break;
-                    case 2: this.setToDropDownAccountThree(entry.getAccount());
-                            this.setPositionValueToAccountThree(entry.getBruttoValue());
-                            creditIdx++;
-                            break;
-                    case 3: this.setToDropDownAccountFour(entry.getAccount());
-                            this.setPositionValueToAccountFour(entry.getBruttoValue());
-                            creditIdx++;
-                            break;
+                    case 0:
+                        this.setToDropDownAccountOne(entry.getAccount());
+                        this.setPositionValueToAccountOne(entry.getBruttoValue());
+                        creditIdx++;
+                        break;
+                    case 1:
+                        this.setToDropDownAccountTwo(entry.getAccount());
+                        this.setPositionValueToAccountTwo(entry.getBruttoValue());
+                        creditIdx++;
+                        break;
+                    case 2:
+                        this.setToDropDownAccountThree(entry.getAccount());
+                        this.setPositionValueToAccountThree(entry.getBruttoValue());
+                        creditIdx++;
+                        break;
+                    case 3:
+                        this.setToDropDownAccountFour(entry.getAccount());
+                        this.setPositionValueToAccountFour(entry.getBruttoValue());
+                        creditIdx++;
+                        break;
                 }
             }
         }
@@ -428,6 +484,230 @@ public class AccountingRecordsController extends SplitPaneController {
             img = new Image("img/Circle_Green.png");
         }
         this.getConfidenceImage().setImage(img);
+    }
+
+    // when called, invoice has been reviewed by the user
+    // set invoice to be reviewed and update all information given
+    public void setReviewed() {
+        this.saveCurrentValuesToRecord();
+        superCtrl.reviseAll();
+    }
+
+    List<ValidationStatus> validateFieldsBeforeSave() {
+        List<ValidationStatus> errors = new LinkedList<>();
+        for (AccountingRecordModel record : this.getRecordsFound()) {
+            boolean currentlyShownRecord = this.getRecordsFound().indexOf(record) == this.index - 1;
+            Record current = record.getRecord();
+            if (current.getEntryText() == null || Objects.equals(current.getEntryText(), "")) {
+                errors.add(ValidationStatus.MISSINGPOSITION);
+                if (currentlyShownRecord) {
+                    this.possiblePosition.getStyleClass().add("error");
+                } else {
+                    if (record.getIndex() < this.index - 1) {
+                        this.prevRecordButton.getStyleClass().add("error");
+                    } else {
+                        this.nextRecordButton.getStyleClass().add("error");
+                    }
+                }
+            } else {
+                if (currentlyShownRecord) {
+                    this.possiblePosition.getStyleClass().remove("error");
+                }
+            }
+            double debitSum = 0;
+            double creditSum = 0;
+            for (AccountRecord entry : current.getRecordAccounts()) {
+                if (entry.getIsDebit()) {
+                    debitSum += entry.getBruttoValue();
+                } else {
+                    creditSum += entry.getBruttoValue();
+                }
+
+                if (entry.getAccount() == null) {
+                    errors.add(ValidationStatus.MISSINGACCOUNTS);
+                    if (!currentlyShownRecord) {
+                        if (record.getIndex() < this.index - 1) {
+                            this.prevRecordButton.getStyleClass().add("error");
+                        } else {
+                            this.nextRecordButton.getStyleClass().add("error");
+                        }
+                    }
+                }
+                if (entry.getBruttoValue() == 0) {
+                    errors.add(ValidationStatus.MISSINGVALUES);
+                    if (!currentlyShownRecord) {
+                        if (record.getIndex() < this.index - 1) {
+                            this.prevRecordButton.getStyleClass().add("error");
+                        } else {
+                            this.nextRecordButton.getStyleClass().add("error");
+                        }
+                    }
+                }
+            }
+            if (current.getRecordAccounts().size() == 0) {
+                errors.add(ValidationStatus.MISSINGACCOUNTS);
+                if (!currentlyShownRecord) {
+                    if (record.getIndex() < this.index - 1) {
+                        this.prevRecordButton.getStyleClass().add("error");
+                    } else {
+                        this.nextRecordButton.getStyleClass().add("error");
+                    }
+                }
+                errors.add(ValidationStatus.MISSINGVALUES);
+                if (!currentlyShownRecord) {
+                    if (record.getIndex() < this.index - 1) {
+                        this.prevRecordButton.getStyleClass().add("error");
+                    } else {
+                        this.nextRecordButton.getStyleClass().add("error");
+                    }
+                }
+            }
+            if (debitSum != creditSum) {
+                errors.add(ValidationStatus.MALFORMEDVALUE);
+                if (!currentlyShownRecord) {
+                    if (record.getIndex() < this.index - 1) {
+                        this.prevRecordButton.getStyleClass().add("error");
+                    } else {
+                        this.nextRecordButton.getStyleClass().add("error");
+                    }
+                }
+            }
+
+            if (currentlyShownRecord) {
+                // styles for account
+                if(this.getFromDropDownAccountOne() == null && this.getPositionValueFromAccountOne() != 0) {
+                    if (this.fromDropDownAccountOne.getStyleClass().contains("error")) {
+                        this.fromDropDownAccountOne.getStyleClass().add("error");
+                    }
+                } else {
+                    this.fromDropDownAccountOne.getStyleClass().remove("error");
+                }
+                if(this.getFromDropDownAccountTwo() == null && this.getPositionValueFromAccountTwo() != 0) {
+                    if (this.fromDropDownAccountTwo.getStyleClass().contains("error")) {
+                        this.fromDropDownAccountTwo.getStyleClass().add("error");
+                    }
+                } else {
+                    this.fromDropDownAccountTwo.getStyleClass().remove("error");
+                }
+                if(this.getFromDropDownAccountThree() == null && this.getPositionValueFromAccountThree() != 0) {
+                    if (this.fromDropDownAccountThree.getStyleClass().contains("error")) {
+                        this.fromDropDownAccountThree.getStyleClass().add("error");
+                    }
+                } else {
+                    this.fromDropDownAccountThree.getStyleClass().remove("error");
+                }
+                if(this.getFromDropDownAccountFour() == null && this.getPositionValueFromAccountFour() != 0) {
+                    if (this.fromDropDownAccountFour.getStyleClass().contains("error")) {
+                        this.fromDropDownAccountFour.getStyleClass().add("error");
+                    }
+                } else {
+                    this.fromDropDownAccountFour.getStyleClass().remove("error");
+                }
+                if(this.getToDropDownAccountOne() == null && this.getPositionValueToAccountOne() != 0) {
+                    if (this.toDropDownAccountOne.getStyleClass().contains("error")) {
+                        this.toDropDownAccountOne.getStyleClass().add("error");
+                    }
+                } else {
+                    this.toDropDownAccountOne.getStyleClass().remove("error");
+                }
+                if(this.getToDropDownAccountTwo() == null && this.getPositionValueToAccountTwo() != 0) {
+                    if (this.toDropDownAccountTwo.getStyleClass().contains("error")) {
+                        this.toDropDownAccountTwo.getStyleClass().add("error");
+                    }
+                } else {
+                    this.toDropDownAccountTwo.getStyleClass().remove("error");
+                }
+                if(this.getToDropDownAccountThree() == null && this.getPositionValueToAccountThree() != 0) {
+                    if (this.toDropDownAccountThree.getStyleClass().contains("error")) {
+                        this.toDropDownAccountThree.getStyleClass().add("error");
+                    }
+                } else {
+                    this.toDropDownAccountThree.getStyleClass().remove("error");
+                }
+                if(this.getToDropDownAccountFour() == null && this.getPositionValueToAccountFour() != 0) {
+                    if (this.toDropDownAccountFour.getStyleClass().contains("error")) {
+                        this.toDropDownAccountFour.getStyleClass().add("error");
+                    }
+                } else {
+                    this.toDropDownAccountFour.getStyleClass().remove("error");
+                }
+
+                // styles for positions
+                if(this.getFromDropDownAccountOne() != null && this.getPositionValueFromAccountOne() == 0) {
+                    if (this.positionValueFromAccountOne.getStyleClass().contains("error")) {
+                        this.positionValueFromAccountOne.getStyleClass().add("error");
+                    }
+                } else {
+                    this.positionValueFromAccountOne.getStyleClass().remove("error");
+                }
+                if(this.getFromDropDownAccountTwo() != null && this.getPositionValueFromAccountTwo() == 0) {
+                    if (this.positionValueFromAccountTwo.getStyleClass().contains("error")) {
+                        this.positionValueFromAccountTwo.getStyleClass().add("error");
+                    }
+                } else {
+                    this.positionValueFromAccountTwo.getStyleClass().remove("error");
+                }
+                if(this.getFromDropDownAccountThree() != null && this.getPositionValueFromAccountThree() == 0) {
+                    if (this.positionValueFromAccountThree.getStyleClass().contains("error")) {
+                        this.positionValueFromAccountThree.getStyleClass().add("error");
+                    }
+                } else {
+                    this.positionValueFromAccountThree.getStyleClass().remove("error");
+                }
+                if(this.getFromDropDownAccountFour() != null && this.getPositionValueFromAccountFour() == 0) {
+                    if (this.positionValueFromAccountFour.getStyleClass().contains("error")) {
+                        this.positionValueFromAccountFour.getStyleClass().add("error");
+                    }
+                } else {
+                    this.positionValueFromAccountFour.getStyleClass().remove("error");
+                }
+                if(this.getToDropDownAccountOne() != null && this.getPositionValueToAccountOne() == 0) {
+                    if (this.positionValueToAccountOne.getStyleClass().contains("error")) {
+                        this.positionValueToAccountOne.getStyleClass().add("error");
+                    }
+                } else {
+                    this.positionValueToAccountOne.getStyleClass().remove("error");
+                }
+                if(this.getToDropDownAccountTwo() != null && this.getPositionValueToAccountTwo() == 0) {
+                    if (this.positionValueToAccountTwo.getStyleClass().contains("error")) {
+                        this.positionValueToAccountTwo.getStyleClass().add("error");
+                    }
+                } else {
+                    this.positionValueToAccountTwo.getStyleClass().remove("error");
+                }
+                if(this.getToDropDownAccountThree() != null && this.getPositionValueToAccountThree() == 0) {
+                    if (this.positionValueToAccountThree.getStyleClass().contains("error")) {
+                        this.positionValueToAccountThree.getStyleClass().add("error");
+                    }
+                } else {
+                    this.positionValueToAccountThree.getStyleClass().remove("error");
+                }
+                if(this.getToDropDownAccountFour() != null && this.getPositionValueToAccountFour() == 0) {
+                    if (this.positionValueToAccountFour.getStyleClass().contains("error")) {
+                        this.positionValueToAccountFour.getStyleClass().add("error");
+                    }
+                } else {
+                    this.positionValueToAccountFour.getStyleClass().remove("error");
+                }
+            }
+        }
+
+        return errors;
+    }
+
+    List<Record> updateInformation() {
+        return this.convertToAccountingRecords();
+    }
+
+    public void addNewEntry() {
+        AccountingRecordModel model = new AccountingRecordModel(this.getRecordsFound().size() + 1);
+        model.setRecord(new Record());
+        this.getRecordsFound().add(model);
+    }
+
+    public void deleteCurrentEntry() {
+        this.prevRecord();
+        this.getRecordsFound().remove(this.index);
     }
 
     private void setCurrentRecord(String currentRecord) {
@@ -652,111 +932,5 @@ public class AccountingRecordsController extends SplitPaneController {
 
     private void setPossiblePosition(String possiblePosition) {
         this.possiblePosition.setText(possiblePosition);
-    }
-
-    // when called, invoice has been reviewed by the user
-    // set invoice to be reviewed and update all information given
-    public void setReviewed() {
-        this.saveCurrentValuesToRecord();
-        superCtrl.reviseAll();
-    }
-
-    List<ValidationStatus> validateFieldsBeforeSave() {
-        List<ValidationStatus> errors = new LinkedList<>();
-        for (AccountingRecordModel record : this.getRecordsFound()) {
-            boolean currentlyShownRecord = this.getRecordsFound().indexOf(record) == this.index - 1;
-            Record current = record.getRecord();
-            if (current.getEntryText() == null || Objects.equals(current.getEntryText(), "")) {
-                errors.add(ValidationStatus.MISSINGPOSITION);
-                if (currentlyShownRecord) {
-                    this.possiblePosition.getStyleClass().add("error");
-                } else {
-                    if(record.getIndex() < this.index - 1) {
-                        this.prevRecordButton.getStyleClass().add("error");
-                    } else {
-                        this.nextRecordButton.getStyleClass().add("error");
-                    }
-                }
-            } else {
-                if (currentlyShownRecord) {
-                    this.possiblePosition.getStyleClass().remove("error");
-                }
-            }
-            double debitSum = 0;
-            double creditSum = 0;
-            for (AccountRecord entry : current.getRecordAccounts()) {
-                if (entry.getIsDebit()) {
-                    debitSum += entry.getBruttoValue();
-                } else {
-                    creditSum += entry.getBruttoValue();
-                }
-
-                if (entry.getAccount() == null) {
-                    errors.add(ValidationStatus.MISSINGACCOUNTS);
-                    if (!currentlyShownRecord) {
-                        if(record.getIndex() < this.index - 1) {
-                            this.prevRecordButton.getStyleClass().add("error");
-                        } else {
-                            this.nextRecordButton.getStyleClass().add("error");
-                        }
-                    }
-                }
-                if (entry.getBruttoValue() == 0) {
-                    errors.add(ValidationStatus.MISSINGVALUES);
-                    if (!currentlyShownRecord) {
-                        if(record.getIndex() < this.index - 1) {
-                            this.prevRecordButton.getStyleClass().add("error");
-                        } else {
-                            this.nextRecordButton.getStyleClass().add("error");
-                        }
-                    }
-                }
-            }
-            if (current.getRecordAccounts().size() == 0) {
-                errors.add(ValidationStatus.MISSINGACCOUNTS);
-                if (!currentlyShownRecord) {
-                    if(record.getIndex() < this.index - 1) {
-                        this.prevRecordButton.getStyleClass().add("error");
-                    } else {
-                        this.nextRecordButton.getStyleClass().add("error");
-                    }
-                }
-                errors.add(ValidationStatus.MISSINGVALUES);
-                if (!currentlyShownRecord) {
-                    if(record.getIndex() < this.index - 1) {
-                        this.prevRecordButton.getStyleClass().add("error");
-                    } else {
-                        this.nextRecordButton.getStyleClass().add("error");
-                    }
-                }
-            }
-            if (debitSum != creditSum) {
-                errors.add(ValidationStatus.MALFORMEDVALUE);
-                if (!currentlyShownRecord) {
-                    if(record.getIndex() < this.index - 1) {
-                        this.prevRecordButton.getStyleClass().add("error");
-                    } else {
-                        this.nextRecordButton.getStyleClass().add("error");
-                    }
-                }
-            }
-        }
-
-        return errors;
-    }
-
-    List<Record> updateInformation() {
-        return this.convertToAccountingRecords();
-    }
-
-    public void addNewEntry() {
-        AccountingRecordModel model = new AccountingRecordModel(this.getRecordsFound().size() + 1);
-        model.setRecord(new Record());
-        this.getRecordsFound().add(model);
-    }
-
-    public void deleteCurrentEntry() {
-        this.prevRecord();
-        this.getRecordsFound().remove(this.index);
     }
 }

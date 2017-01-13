@@ -3,6 +3,7 @@ package de.cneubauer.gui.controller;
 import com.sun.javafx.collections.ObservableListWrapper;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.util.task.ScanTask;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +45,7 @@ public class ProgressController extends GUIController {
 
         scanTask.setOnSucceeded(t -> {
             list.addAll(scanTask.getResult());
+            Platform.runLater(() -> status.setText("Extracting information..."));
             ObservableList<ProcessResult> processResults = new ObservableListWrapper<>(list);
             this.openProgressedList(processResults);
         });

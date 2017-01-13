@@ -85,7 +85,7 @@ public class DataExtractorService {
         boolean found = false;
         this.body = this.body.replace("\n\n", "\n");
         String[] lines = this.body.split("\n");
-        while (!found) {
+        while (!found && lines.length > index) {
             String line = lines[index];
             if (this.getAverageDistanceOfSearchConditions(line, new String[] { "Art.-Nr.", "Artikel", "Beschreibung", "Pos" }) < 1 - this.getConfidence()) {
                 found = true;

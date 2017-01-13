@@ -155,7 +155,6 @@ public class ScanTask extends Task {
             }
             allFinished = leftHeaderFinished && rightHeaderFinished && bodyFinished && footerFinished;
         }
-        Platform.runLater(() -> status.setText("Extracting information..."));
         return ocrParts;
     }
 

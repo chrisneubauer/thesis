@@ -134,7 +134,7 @@ public class SplitPaneController extends GUIController {
     private void updateAndReturn() {
         model.setRecords(accountingRecordsTabController.updateInformation());
         model.setInvoiceInformation(invoiceTabController.updateInformation());
-        accountingRecordsTabController.addRevisedToFile();
+        //accountingRecordsTabController.addRevisedToFile();
         invoiceTabController.addRevisedToFile();
         caller.updateSelected(index, model);
         Stage popup = (Stage) this.pdfImage.getScene().getWindow();
