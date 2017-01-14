@@ -7,7 +7,8 @@ import junit.framework.AssertionFailedError;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -80,8 +81,8 @@ public class ZugFerdTransformatorTest extends AbstractTest {
     private de.cneubauer.domain.bo.Invoice createInvoiceForTesting() {
         de.cneubauer.domain.bo.Invoice i = new de.cneubauer.domain.bo.Invoice();
         i.setInvoiceNumber(LocalDateTime.now().format(DateTimeFormatter.ISO_DATE) + "_" + ((int) (Math.random()*10)));
-        i.setIssueDate(Timestamp.valueOf(LocalDateTime.now()));
-        i.setDeliveryDate(Timestamp.valueOf(LocalDateTime.now()));
+        i.setIssueDate(Date.valueOf(LocalDate.now()));
+        i.setDeliveryDate(Date.valueOf(LocalDate.now()));
 
         LegalPerson creditor = new LegalPerson();
         creditor.setName("Kreditor");

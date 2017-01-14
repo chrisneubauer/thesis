@@ -13,9 +13,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Christoph Neubauer on 20.10.2016.
@@ -184,16 +187,15 @@ public class OCRDataExtractorService {
         return result;
     }
 
-    private Timestamp findDeliveryDate() {
+    private Date findDeliveryDate() {
         String date = this.findValueInString(new String[] { "Lieferdatum"});
         Calendar cal = this.convertStringToCalendar(date);
 
-        Date deliveryDate = cal.getTime();
-        Timestamp result;
-        if (deliveryDate.getTime() > 0) {
-            result = new Timestamp(deliveryDate.getTime());
+        Date result;
+        if (cal.getTimeInMillis() > 0) {
+            result = new Date(cal.getTimeInMillis());
         } else {
-            result = Timestamp.valueOf(LocalDateTime.now());
+            result = Date.valueOf(LocalDate.now());
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find delivery date in OCR. Using default value");
         }
         return result;
@@ -257,18 +259,16 @@ public class OCRDataExtractorService {
         return this.getFromDatabase(line);
     }
 
-    private Timestamp findIssueDate() {
-
+    private Date findIssueDate() {
         String date = this.findValueInString(new String[] { "Rechnungsdatum"});
         Calendar cal = this.convertStringToCalendar(date);
 
-        Date issueDate = cal.getTime();
-        Timestamp result;
-        if (issueDate.getTime() > 0) {
-            result = new Timestamp(issueDate.getTime());
+        Date result;
+        if (cal.getTimeInMillis() > 0) {
+            result = new Date(cal.getTimeInMillis());
         } else {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find issue date in OCR. Using default value");
-            result = Timestamp.valueOf(LocalDateTime.now());
+            result = Date.valueOf(LocalDate.now());
         }
         return result;
     }

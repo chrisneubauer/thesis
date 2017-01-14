@@ -1,6 +1,6 @@
 package de.cneubauer.domain.bo;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  * Created by Christoph Neubauer on 05.10.2016.
@@ -14,8 +14,8 @@ public class LegalPerson {
     private Address address;
     private String name;
     private String firstName;
-    private Timestamp createdDate;
-    private Timestamp modifiedDate;
+    private Date createdDate;
+    private Date modifiedDate;
 
     public LegalPerson() {
 
@@ -72,19 +72,19 @@ public class LegalPerson {
         this.name = name;
     }
 
-    public Timestamp getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Timestamp createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Timestamp getModifiedDate() {
+    public Date getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Timestamp modifiedDate) {
+    public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 

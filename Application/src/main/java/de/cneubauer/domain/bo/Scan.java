@@ -1,6 +1,6 @@
 package de.cneubauer.domain.bo;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  * Created by Christoph Neubauer on 05.10.2016.
@@ -10,8 +10,8 @@ public class Scan {
     private int id;
     private byte[] file;
     private Invoice invoiceInformation;
-    private Timestamp createdDate;
-    private Timestamp modifiedDate;
+    private Date createdDate;
+    private Date modifiedDate;
 
     public int getId() {
         return id;
@@ -37,19 +37,19 @@ public class Scan {
         this.invoiceInformation = invoiceInformation;
     }
 
-    public Timestamp getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Timestamp createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Timestamp getModifiedDate() {
+    public Date getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Timestamp modifiedDate) {
+    public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 }

@@ -1,6 +1,6 @@
 package de.cneubauer.domain.bo;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.Set;
 
 /**
@@ -13,8 +13,8 @@ public class CorporateForm {
     private String name;
     private String shortName;
     private Set<Country> usedInCountries;
-    private Timestamp createdDate;
-    private Timestamp modifiedDate;
+    private Date createdDate;
+    private Date modifiedDate;
 
     public int getId() {
         return id;
@@ -48,19 +48,19 @@ public class CorporateForm {
         this.usedInCountries = usedInCountries;
     }
 
-    public Timestamp getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Timestamp createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Timestamp getModifiedDate() {
+    public Date getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Timestamp modifiedDate) {
+    public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 }

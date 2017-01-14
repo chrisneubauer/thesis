@@ -15,8 +15,8 @@ import org.springframework.util.Assert;
 import java.io.File;
 import java.nio.file.Files;
 import java.sql.Connection;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -109,8 +109,8 @@ public class ScanDaoImplTest extends AbstractTest {
     public void testGetByInvoiceId() {
         Invoice correctInvoice = new Invoice();
         Invoice wrongInvoice = new Invoice();
-        correctInvoice.setIssueDate(Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
-        wrongInvoice.setIssueDate(Timestamp.valueOf(LocalDateTime.now()));
+        correctInvoice.setIssueDate(Date.valueOf(LocalDate.now().minusDays(1)));
+        wrongInvoice.setIssueDate(Date.valueOf(LocalDate.now()));
 
         Scan scan1 = new Scan();
         scan1.setInvoiceInformation(correctInvoice);

@@ -220,12 +220,11 @@ public class ResultsController extends GUIController {
 
     private Invoice convertToInvoice() {
         Invoice result = new Invoice();
-        //TODO Check conversation from dd-mm-yyyy to timestamp works
-        result.setIssueDate(this.convertDateToTimestamp(this.extractedIssueDate.getText()));
+        result.setIssueDate(this.convertStringToDate(this.extractedIssueDate.getText()));
         result.setInvoiceNumber(this.extractedInvoiceNumber.getText());
         result.setDebitor(new LegalPerson(this.extractedDebitor.getText()));
         result.setCreditor(new LegalPerson(this.extractedCreditor.getText()));
-        result.setDeliveryDate(this.convertDateToTimestamp(this.extractedDeliveryDate.getText()));
+        result.setDeliveryDate(this.convertStringToDate(this.extractedDeliveryDate.getText()));
         result.setLineTotal(Double.valueOf(this.extractedLineTotal.getText()));
         result.setAllowanceTotal(Double.valueOf(this.extractedAllowanceTotal.getText()));
         result.setChargeTotal(Double.valueOf(this.extractedChargeTotal.getText()));
@@ -241,15 +240,15 @@ public class ResultsController extends GUIController {
         return result;
     }
 
-    private Timestamp convertDateToTimestamp(String date) {
+    private java.sql.Date convertStringToDate(String date) {
         DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
         Date d;
         try {
             d = format.parse(date);
         } catch (Exception e) {
-            d = new Date(System.currentTimeMillis());
+            d = new java.sql.Date(System.currentTimeMillis());
         }
-        return new Timestamp(d.getTime());
+        return new java.sql.Date(d.getTime());
     }
 
     @FXML

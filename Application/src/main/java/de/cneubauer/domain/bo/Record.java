@@ -5,7 +5,7 @@ import de.cneubauer.util.RecordTrainingEntry;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -20,7 +20,7 @@ public class Record {
     }
 
     private int id;
-    private Timestamp entryDate;
+    private Date entryDate;
     private String documentNo;
     private byte[] document;
     private String entryText;
@@ -42,11 +42,11 @@ public class Record {
         this.id = id;
     }
 
-    public Timestamp getEntryDate() {
+    public Date getEntryDate() {
         return entryDate;
     }
 
-    public void setEntryDate(Timestamp entryDate) {
+    public void setEntryDate(Date entryDate) {
         this.entryDate = entryDate;
     }
 

@@ -10,8 +10,8 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 import java.sql.Connection;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 
 /**
@@ -124,15 +124,15 @@ public class FullApplicationPersistenceTest extends AbstractTest {
         Invoice invoice1 = new Invoice();
         Invoice invoice2 = new Invoice();
 
-        invoice1.setIssueDate(Timestamp.valueOf(LocalDateTime.now().minusDays(3)));
-        invoice1.setDeliveryDate(Timestamp.valueOf(LocalDateTime.now()));
+        invoice1.setIssueDate(Date.valueOf(LocalDate.now().minusDays(3)));
+        invoice1.setDeliveryDate(Date.valueOf(LocalDate.now()));
         invoice1.setChargeTotal(2999);
         invoice1.setDebitor(consumer);
         invoice1.setCreditor(company1);
         invoice1.setInvoiceNumber("4839745");
 
-        invoice2.setIssueDate(Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
-        invoice2.setDeliveryDate(Timestamp.valueOf(LocalDateTime.now()));
+        invoice2.setIssueDate(Date.valueOf(LocalDate.now().minusDays(1)));
+        invoice2.setDeliveryDate(Date.valueOf(LocalDate.now()));
         invoice2.setChargeTotal(11);
         invoice2.setDebitor(consumer);
         invoice2.setCreditor(company2);

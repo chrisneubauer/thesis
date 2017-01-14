@@ -2,7 +2,7 @@ package de.cneubauer.gui.model;
 
 import javafx.beans.property.*;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  * Created by Christoph Neubauer on 01.11.2016.
@@ -10,7 +10,7 @@ import java.time.LocalDate;
  * UsedBy: DatabaseResultsController
  */
 public class SearchResult {
-    private ObjectProperty<LocalDate> date;
+    private ObjectProperty<Date> date;
     private DoubleProperty value;
     private StringProperty debitor;
     private StringProperty creditor;
@@ -24,15 +24,15 @@ public class SearchResult {
         this.file = new SimpleObjectProperty<>();
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date.get();
     }
 
-    public ObjectProperty<LocalDate> dateProperty() {
+    public ObjectProperty<Date> dateProperty() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date.set(date);
     }
 

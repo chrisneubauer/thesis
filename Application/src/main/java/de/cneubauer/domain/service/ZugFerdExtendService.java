@@ -7,8 +7,8 @@ import de.cneubauer.domain.dao.impl.ScanDaoImpl;
 import de.cneubauer.transformation.ZugFerdTransformator;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Created by Christoph Neubauer on 21.10.2016.
@@ -32,8 +32,8 @@ public class ZugFerdExtendService {
 
     public void save(byte[] pdf, Invoice i) {
         Scan scanToSave = new Scan();
-        scanToSave.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
-        scanToSave.setModifiedDate(Timestamp.valueOf(LocalDateTime.now()));
+        scanToSave.setCreatedDate(Date.valueOf(LocalDate.now()));
+        scanToSave.setModifiedDate(Date.valueOf(LocalDate.now()));
         scanToSave.setFile(pdf);
         scanToSave.setInvoiceInformation(i);
         dao.save(scanToSave);

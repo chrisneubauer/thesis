@@ -15,8 +15,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -62,8 +62,8 @@ public class DatabaseServiceTest extends AbstractTest {
 
     private Invoice createInvoice() {
         Invoice i = new Invoice();
-        i.setIssueDate(Timestamp.valueOf(LocalDateTime.now()));
-        i.setDeliveryDate(Timestamp.valueOf(LocalDateTime.now()));
+        i.setIssueDate(Date.valueOf(LocalDate.now()));
+        i.setDeliveryDate(Date.valueOf(LocalDate.now()));
 
         LegalPerson creditor = new LegalPerson();
         creditor.setName("Kreditor");

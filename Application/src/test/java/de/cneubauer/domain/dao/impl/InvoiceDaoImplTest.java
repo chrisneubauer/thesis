@@ -10,8 +10,7 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 import java.sql.Connection;
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -43,8 +42,8 @@ public class InvoiceDaoImplTest extends AbstractTest {
     @Test
     public void testSave() throws Exception {
         Invoice i = new Invoice();
-        i.setIssueDate(Timestamp.valueOf(LocalDateTime.now()));
-        i.setDeliveryDate(Timestamp.valueOf(LocalDateTime.now()));
+        i.setIssueDate(Date.valueOf(LocalDate.now()));
+        i.setDeliveryDate(Date.valueOf(LocalDate.now()));
 
         LegalPerson creditor = new LegalPerson();
         creditor.setName("Kreditor");
@@ -90,8 +89,8 @@ public class InvoiceDaoImplTest extends AbstractTest {
         Invoice wrong = new Invoice();
         LocalDate testDate = LocalDateTime.now().toLocalDate();
         LocalDate wrongTestDate = LocalDateTime.now().minusDays(2).toLocalDate();
-        test.setIssueDate(Timestamp.valueOf(LocalDateTime.from(testDate)));
-        wrong.setIssueDate(Timestamp.valueOf(LocalDateTime.from(wrongTestDate)));
+        test.setIssueDate(Date.valueOf(LocalDate.from(testDate)));
+        wrong.setIssueDate(Date.valueOf(LocalDate.from(wrongTestDate)));
         this.dao.save(test);
         this.dao.save(test);
         this.dao.save(wrong);

@@ -14,9 +14,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.sql.Timestamp;
+import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -235,16 +237,16 @@ public class DataExtractorService {
         return result;
     }
 
-    private Timestamp findDeliveryDate() {
+    private java.sql.Date findDeliveryDate() {
         String date = this.findValueInString(new String[] { "Lieferdatum"}, this.rightHeader);
         Calendar cal = this.convertStringToCalendar(date);
 
         Date deliveryDate = cal.getTime();
-        Timestamp result;
+        java.sql.Date result;
         if (deliveryDate.getTime() > 0) {
-            result = new Timestamp(deliveryDate.getTime());
+            result = new java.sql.Date(deliveryDate.getTime());
         } else {
-            result = Timestamp.valueOf(LocalDateTime.now());
+            result = java.sql.Date.valueOf(LocalDate.now());
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find delivery date in OCR. Using default value");
         }
         return result;
@@ -319,18 +321,18 @@ public class DataExtractorService {
         return this.getLegalPersonFromDatabase(this.leftHeader);
     }
 
-    private Timestamp findIssueDate() {
+    private java.sql.Date findIssueDate() {
 
         String date = this.findValueInString(new String[] { "Rechnungsdatum"}, this.rightHeader);
         Calendar cal = this.convertStringToCalendar(date);
 
         Date issueDate = cal.getTime();
-        Timestamp result;
+        java.sql.Date result;
         if (issueDate.getTime() > 0) {
-            result = new Timestamp(issueDate.getTime());
+            result = new java.sql.Date(issueDate.getTime());
         } else {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find issue date in OCR. Using default value");
-            result = Timestamp.valueOf(LocalDateTime.now());
+            result = java.sql.Date.valueOf(LocalDate.now());
         }
         return result;
     }

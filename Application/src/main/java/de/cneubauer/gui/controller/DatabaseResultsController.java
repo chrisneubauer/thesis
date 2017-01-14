@@ -83,7 +83,7 @@ public class DatabaseResultsController extends GUIController {
         ObservableList<SearchResult> allData = FXCollections.observableArrayList();
         for (Scan s : scanList) {
             SearchResult sr = new SearchResult();
-            sr.setDate(s.getInvoiceInformation().getIssueDate().toLocalDateTime().toLocalDate());
+            sr.setDate(s.getInvoiceInformation().getIssueDate());
             sr.setValue(s.getInvoiceInformation().getGrandTotal());
             sr.setCreditor(s.getInvoiceInformation().getCreditor().toString());
             sr.setDebitor(s.getInvoiceInformation().getDebitor().toString());

@@ -3,8 +3,8 @@ package de.cneubauer.domain.dao.impl;
 import de.cneubauer.domain.bo.LegalPerson;
 import de.cneubauer.domain.dao.LegalPersonDao;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Created by Christoph Neubauer on 05.10.2016.
@@ -20,8 +20,8 @@ public class LegalPersonDaoImpl extends AbstractDao<LegalPerson> implements Lega
     @Override
     public void onSave(LegalPerson entity) {
         if(entity.getCreatedDate() == null) {
-            entity.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
+            entity.setCreatedDate(Date.valueOf(LocalDate.now()));
         }
-        entity.setModifiedDate(Timestamp.valueOf(LocalDateTime.now()));
+        entity.setModifiedDate(Date.valueOf(LocalDate.now()));
     }
 }

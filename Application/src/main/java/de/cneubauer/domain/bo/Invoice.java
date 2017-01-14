@@ -1,6 +1,6 @@
 package de.cneubauer.domain.bo;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /**
  * Created by Christoph Neubauer on 05.10.2016.
@@ -11,8 +11,8 @@ public class Invoice {
     private String invoiceNumber;
     private LegalPerson debitor;
     private LegalPerson creditor;
-    private Timestamp issueDate;
-    private Timestamp deliveryDate;
+    private Date issueDate;
+    private Date deliveryDate;
     private double lineTotal;
     private double chargeTotal;
     private double allowanceTotal;
@@ -21,8 +21,8 @@ public class Invoice {
     private double grandTotal;
     private boolean hasSkonto;
     private double skonto;
-    private Timestamp createdDate;
-    private Timestamp modifiedDate;
+    private Date createdDate;
+    private Date modifiedDate;
     private boolean revised;
 
     public int getId() {
@@ -57,11 +57,11 @@ public class Invoice {
         this.creditor = creditor;
     }
 
-    public Timestamp getIssueDate() {
+    public Date getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(Timestamp issueDate) {
+    public void setIssueDate(Date issueDate) {
         this.issueDate = issueDate;
     }
 
@@ -81,27 +81,27 @@ public class Invoice {
         this.skonto = skonto;
     }
 
-    public Timestamp getCreatedDate() {
+    public Date getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Timestamp createdDate) {
+    public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Timestamp getModifiedDate() {
+    public Date getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Timestamp modifiedDate) {
+    public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 
-    public Timestamp getDeliveryDate() {
+    public Date getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(Timestamp deliveryDate) {
+    public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 

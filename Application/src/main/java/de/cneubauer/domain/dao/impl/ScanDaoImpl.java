@@ -6,8 +6,8 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.hibernate.query.Query;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,9 +25,9 @@ public class ScanDaoImpl extends AbstractDao<Scan> implements ScanDao {
     @Override
     public void onSave(Scan entity) {
         if(entity.getCreatedDate() == null) {
-            entity.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()));
+            entity.setCreatedDate(Date.valueOf(LocalDate.now()));
         }
-        entity.setModifiedDate(Timestamp.valueOf(LocalDateTime.now()));
+        entity.setModifiedDate(Date.valueOf(LocalDate.now()));
     }
 
     @Override

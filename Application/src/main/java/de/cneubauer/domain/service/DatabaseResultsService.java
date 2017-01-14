@@ -6,6 +6,8 @@ import de.cneubauer.domain.dao.InvoiceDao;
 import de.cneubauer.domain.dao.ScanDao;
 import de.cneubauer.domain.dao.impl.InvoiceDaoImpl;
 import de.cneubauer.domain.dao.impl.ScanDaoImpl;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -30,6 +32,7 @@ public class DatabaseResultsService {
      * @return  a list of all scans that match the specified criteria
      */
     public List<Scan> getFromDatabase(LocalDate date, String deb, String cred, double value) {
+        Logger.getLogger(this.getClass()).log(Level.INFO, "calling database..");
         scanDao = new ScanDaoImpl();
         invoiceDao = new InvoiceDaoImpl();
         List<Invoice> invoiceResults;
