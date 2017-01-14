@@ -56,8 +56,6 @@ public class GUIController {
 
 
             Scene scene = new Scene(v, 600, 200);
-           // Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
-           // scene.getStylesheets().add(String.valueOf(getClass().getResource("../../../css/validationError.css")));
             stage.setScene(scene);
             stage.setMaximized(false);
             stage.setMaximized(true);
@@ -70,7 +68,14 @@ public class GUIController {
     @FXML
     protected void openDatabaseMenu(Event e) {
         try {
-            Stage stage = (Stage) menuBar.getScene().getWindow();
+
+            Stage stage;
+            if (menuBar == null) {
+                Button b = (Button) e.getSource();
+                stage = (Stage) b.getScene().getWindow();
+            } else {
+                stage = (Stage) menuBar.getScene().getWindow();
+            }
             URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/searchDatabase.fxml");
 
             Locale locale = this.getCurrentLocale();
@@ -79,8 +84,6 @@ public class GUIController {
             Parent p = loader.load();
 
             Scene scene = new Scene(p, 200, 300);
-           // Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
-           // scene.getStylesheets().add(String.valueOf(getClass().getClassLoader().getResource("css/validationError.css")));
             stage.setScene(scene);
             stage.setMaximized(false);
             stage.setMaximized(true);
