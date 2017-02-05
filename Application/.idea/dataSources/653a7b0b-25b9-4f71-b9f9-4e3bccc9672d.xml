@@ -143,14 +143,12 @@
     </column>
     <column id="44" parent="10" name="CreatedDate">
       <Position>6</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="45" parent="10" name="ModifiedDate">
       <Position>7</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
     <index id="46" parent="10" name="Country">
@@ -188,14 +186,12 @@
     </column>
     <column id="53" parent="11" name="CreatedDate">
       <Position>5</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="54" parent="11" name="ModifiedDate">
       <Position>6</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
     <index id="55" parent="11" name="UsedInCountries">
@@ -228,14 +224,12 @@
     </column>
     <column id="61" parent="12" name="CreatedDate">
       <Position>4</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="62" parent="12" name="ModifiedDate">
       <Position>5</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
     <key id="63" parent="12" name="PRIMARY">
@@ -260,14 +254,12 @@
     </column>
     <column id="67" parent="13" name="CreatedDate">
       <Position>4</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="68" parent="13" name="ModifiedDate">
       <Position>5</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
     <index id="69" parent="13" name="CorporateForm_Id">
@@ -308,7 +300,7 @@
     </column>
     <column id="76" parent="14" name="DeliveryDate">
       <Position>3</Position>
-      <DataType>timestamp|0</DataType>
+      <DataType>date|0</DataType>
     </column>
     <column id="77" parent="14" name="LineTotal">
       <Position>4</Position>
@@ -340,14 +332,12 @@
     </column>
     <column id="84" parent="14" name="CreatedDate">
       <Position>11</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
     <column id="85" parent="14" name="ModifiedDate">
       <Position>12</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
     <column id="86" parent="14" name="GrandTotal">
@@ -356,7 +346,7 @@
     </column>
     <column id="87" parent="14" name="IssueDate">
       <Position>14</Position>
-      <DataType>timestamp|0</DataType>
+      <DataType>date|0</DataType>
     </column>
     <column id="88" parent="14" name="Debitor">
       <Position>15</Position>
@@ -425,14 +415,12 @@
     </column>
     <column id="102" parent="15" name="CreatedDate">
       <Position>8</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="103" parent="15" name="ModifiedDate">
       <Position>9</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
     <index id="104" parent="15" name="Address">
@@ -469,8 +457,7 @@
     </column>
     <column id="110" parent="16" name="EntryDate">
       <Position>2</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="111" parent="16" name="DocumentNo">
@@ -505,14 +492,12 @@
     </column>
     <column id="118" parent="17" name="CreatedDate">
       <Position>4</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="119" parent="17" name="ModifiedDate">
       <Position>5</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
     <index id="120" parent="17" name="InvoiceInformation">

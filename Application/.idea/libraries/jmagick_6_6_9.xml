@@ -2,6 +2,7 @@
   <library name="jmagick-6.6.9">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/jmagick-6.6.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javaml-0.1.7.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
