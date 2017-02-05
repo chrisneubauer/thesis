@@ -51,12 +51,8 @@ public class DatabaseController extends GUIController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/showDatabaseResults.fxml"), bundle);
 
             Parent root = loader.load();
-            Scene scene = new Scene(root, 800, 600);
-            Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
-            scene.getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
-            stage.setScene(scene);
-
             DatabaseResultsController ctrl = loader.getController();
+
             double filterValue;
             try {
                 filterValue = Double.valueOf(this.value.getText());
@@ -65,6 +61,11 @@ public class DatabaseController extends GUIController {
                 filterValue = 0;
             }
             ctrl.initData(this.date.getValue(), this.debitor.getText(), this.creditor.getText(), filterValue);
+
+            Scene scene = new Scene(root, 800, 600);
+            Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
+            scene.getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
+            stage.setScene(scene);
             stage.show();
 
         } catch (Exception ex) {

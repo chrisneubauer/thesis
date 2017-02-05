@@ -98,7 +98,7 @@ public class ScanTask extends Task {
     }
 
     private String[] performOCR(BufferedImage[] imageParts) {
-
+        // TODO: put stuff out of gui
         TesseractWorker leftHeaderWorker = new TesseractWorker(imageParts[0]);
         Thread leftHeaderThread = new Thread(leftHeaderWorker);
 

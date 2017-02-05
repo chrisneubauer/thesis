@@ -8,6 +8,12 @@ import java.io.IOException;
  */
 public class LearningService {
 
+    public boolean exists(String position) {
+        Model fakeModel = new Model();
+        fakeModel.setPosition(position);
+        return this.isModelExisting(fakeModel);
+    }
+
     public boolean isModelExisting(Model model) {
         ModelReader reader = new ModelReader();
         //TODO: url of the reader

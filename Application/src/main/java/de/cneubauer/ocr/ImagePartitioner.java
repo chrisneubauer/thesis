@@ -31,6 +31,11 @@ public class ImagePartitioner {
         this.scanFile = fileToScan;
     }
 
+    public ImagePartitioner(BufferedImage fileToScan) {
+        this.scanFile = null;
+        this.fullImage = fileToScan;
+    }
+
     // @return array of images in the following order:
     // 1. left header image
     // 2. right header image
@@ -38,7 +43,9 @@ public class ImagePartitioner {
     // 4. footer image
     public BufferedImage[] process() {
         try {
-            this.convertFileToImage();
+            if (this.scanFile != null) {
+                this.convertFileToImage();
+            }
             BufferedImage header = this.cropHeader();
             this.separateHeader(header);
             this.cropBody();

@@ -1,13 +1,20 @@
 package de.cneubauer.domain.service;
 
+import com.google.common.io.Files;
 import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.bo.Scan;
 import de.cneubauer.domain.dao.RecordDao;
 import de.cneubauer.domain.dao.InvoiceDao;
+import de.cneubauer.domain.dao.ScanDao;
 import de.cneubauer.domain.dao.impl.RecordDaoImpl;
 import de.cneubauer.domain.dao.impl.InvoiceDaoImpl;
+import de.cneubauer.domain.dao.impl.ScanDaoImpl;
 import de.cneubauer.gui.model.ProcessResult;
 
+import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -21,6 +28,17 @@ public class DatabaseService {
 
         InvoiceDao invoiceDao = new InvoiceDaoImpl();
         invoiceDao.save(i);
+
+        Scan scan = new Scan();
+        try {
+            scan.setFile(Files.toByteArray(result.getFile()));
+            scan.setCreatedDate(Date.valueOf(LocalDate.now()));
+            scan.setInvoiceInformation(i);
+            ScanDao scanDao = new ScanDaoImpl();
+            scanDao.save(scan);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         RecordDao accountDao = new RecordDaoImpl();
         for (Record r : records) {

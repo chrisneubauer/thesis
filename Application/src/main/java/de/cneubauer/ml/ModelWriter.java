@@ -11,7 +11,7 @@ import java.nio.file.Paths;
  * Created by Christoph Neubauer on 02.02.2017.
  * This class enables writing models to the learning file
  */
-class ModelWriter {
+public class ModelWriter {
     //private String url;
 
     private File openFile() throws IOException {
@@ -23,7 +23,7 @@ class ModelWriter {
         }
     }
 
-    void writeToFile(Model model) {
+    public void writeToFile(Model model) {
         try {
             File modelFile = this.openFile();
             //OutputStream out = new FileOutputStream(modelFile);

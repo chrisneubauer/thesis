@@ -60,7 +60,6 @@ public class DatabaseResultsController extends GUIController {
         this.value = value;
 
         this.fillListWithValues();
-        this.initialize();
     }
 
     public void returnToDatabaseSearch(ActionEvent e) {
@@ -73,7 +72,7 @@ public class DatabaseResultsController extends GUIController {
 
     private void fillListWithValues() {
         ObservableList<SearchResult> data = this.getFromDb();
-        dbResultList.setItems(data);
+        this.dbResultList.setItems(data);
     }
 
     private ObservableList<SearchResult> getFromDb() {

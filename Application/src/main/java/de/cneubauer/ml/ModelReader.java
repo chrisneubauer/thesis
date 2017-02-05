@@ -18,11 +18,11 @@ import java.util.regex.Pattern;
  * Created by Christoph Neubauer on 02.02.2017.
  * This class is responsible for reading in the file that contains the already stored models
  */
-class ModelReader {
+public class ModelReader {
     private List<Model> models;
     private List<Account> accounts;
 
-    ModelReader() {
+    public ModelReader() {
         AccountDao accountDao = new AccountDaoImpl();
         this.accounts = accountDao.getAll();
     }
@@ -84,7 +84,7 @@ class ModelReader {
         return list;
     }
 
-    List<Model> getModels() throws IOException {
+    public List<Model> getModels() throws IOException {
         if (this.models == null) {
             this.readModel();
         }
