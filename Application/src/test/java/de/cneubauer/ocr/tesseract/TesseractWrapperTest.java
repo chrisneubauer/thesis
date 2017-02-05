@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 
 public class TesseractWrapperTest extends AbstractTest {
+
     private TesseractWrapper wrapper;
 
     @Before
@@ -203,6 +204,12 @@ public class TesseractWrapperTest extends AbstractTest {
         this.doOcrAndSave(path + "footer_75.jpg", path + "footer_75.txt");
         this.doOcrAndSave(path + "footer_150.jpg", path + "footer_150.txt");
     }
+
+    @Test
+    public void getLayoutInformation() throws Exception {
+        this.wrapper.getLayoutInformation("..\\Data\\Datenwerk4.pdf", "deu+eng", new File("..\\Data\\Datenwerk4.pdf"));
+    }
+
 
     private void doOcrAndSave(String input, String output) throws Exception {
         String result = wrapper.initOcr(input);
