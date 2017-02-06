@@ -13,6 +13,10 @@
             <id>cedarsoft-thirdparty</id>
             <url>http://maven.cedarsoft.com/content/repositories/thirdparty/</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -33,6 +37,12 @@
             <artifactId>im4java</artifactId>
             <version>1.4.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.ptnplanet</groupId>
+            <artifactId>Java-Naive-Bayes-Classifier</artifactId>
+            <version>1.0.4</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -46,4 +56,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

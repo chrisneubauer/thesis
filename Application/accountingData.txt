@@ -16,3 +16,8 @@ Lizenzen an gewerblichen Schutzrechten 25.2€
 Wareneingang 19% Vorsteuer 4.79€
 an Bank 29.99€
 ENDRECORD
+Grundgebühr 1&1 Surf & Phone 16.000 Office
+Lizenzen an gewerblichen Schutzrechten 25.2€
+Wareneingang 19% Vorsteuer 4.79€
+an Bank 29.99€
+ENDRECORD
