@@ -44,7 +44,7 @@ public class Start extends Application {
         URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/startMenu.fxml");
 
         Locale locale;
-        AppLang currentLanguage = AppLang.valueOf(ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue()));
+        AppLang currentLanguage = ConfigHelper.getApplicationLanguage();
         if (currentLanguage.equals(AppLang.GERMAN)) {
             locale = Locale.GERMANY;
         } else {

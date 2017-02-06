@@ -22,7 +22,7 @@ import static net.sourceforge.tess4j.ITessAPI.TessOcrEngineMode.OEM_TESSERACT_ON
  * Uses Tess4J as a wrapper for googles Tesseract
  */
 public class TesseractWrapper {
-    private String language = ConfigHelper.getValue("tesseractLanguage");
+    private String language = ConfigHelper.getTesseractLanguages().getValue();
     private final Logger logger = Logger.getLogger(this.getClass());
 
     public String initOcr(BufferedImage file) {

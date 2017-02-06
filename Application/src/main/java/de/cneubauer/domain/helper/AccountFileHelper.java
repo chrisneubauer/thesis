@@ -121,8 +121,8 @@ public final class AccountFileHelper {
         for (RecordTrainingEntry entry : getAllRecords()) {
             //if (entry.getPosition().equals(line)) {
             double distance = StringUtils.getLevenshteinDistance(entry.getPosition(), line);
-            distance = (double) (distance / Double.valueOf(line.length()));
-            double confidenceRate = 1 - Double.valueOf(ConfigHelper.getValue(Cfg.CONFIDENCERATE.getValue()));
+            distance = distance / (double) line.length();
+            double confidenceRate = 1 - ConfigHelper.getConfidenceRate();
             if (distance < confidenceRate ) {
                 return entry;
             }

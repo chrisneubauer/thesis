@@ -12,7 +12,7 @@ import java.util.LinkedList;
  */
 public class PostProcessor {
     private final String DICTIONARYPATH = ".\\src\\main\\resources\\dict\\invoice.de.txt";
-    private double confidence = 1 - (Double.valueOf(ConfigHelper.getValue("confidenceRate")));
+    private double confidence = 1 - ConfigHelper.getConfidenceRate();
     private String textToProcess;
 
     public PostProcessor(String text) {

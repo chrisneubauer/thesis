@@ -128,7 +128,7 @@ public class GUIController {
 
     Locale getCurrentLocale() {
         Locale locale;
-        AppLang currentLanguage = AppLang.valueOf(ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue()));
+        AppLang currentLanguage = ConfigHelper.getApplicationLanguage();
         if (currentLanguage.equals(AppLang.GERMAN)) {
             locale = Locale.GERMANY;
         } else {

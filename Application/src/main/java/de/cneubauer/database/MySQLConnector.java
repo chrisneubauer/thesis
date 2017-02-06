@@ -26,11 +26,11 @@ public class MySQLConnector {
     }
 
     public MySQLConnector() {
-        this.USERNAME = ConfigHelper.getValue(Cfg.DBUSER.getValue());
-        this.PW = ConfigHelper.getValue(Cfg.DBPASSWORD.getValue());
-        this.SERVERNAME = ConfigHelper.getValue(Cfg.DBSERVER.getValue());
-        this.DATABASE = ConfigHelper.getValue(Cfg.DBNAME.getValue());
-        this.PORT = Integer.valueOf(ConfigHelper.getValue(Cfg.DBPORT.getValue()));
+        this.USERNAME = ConfigHelper.getDBUserName();
+        this.PW = ConfigHelper.getDBPassword();
+        this.SERVERNAME = ConfigHelper.getDBServerName();
+        this.DATABASE = ConfigHelper.getDBName();
+        this.PORT = ConfigHelper.getDBPort();
     }
 
     public Connection connect() {

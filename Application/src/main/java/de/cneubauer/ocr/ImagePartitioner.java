@@ -1,6 +1,5 @@
 package de.cneubauer.ocr;
 
-import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -50,7 +49,7 @@ public class ImagePartitioner {
             this.separateHeader(header);
             this.cropBody();
             this.cropFooter();
-            if (Boolean.valueOf(ConfigHelper.getValue(Cfg.DEBUG.getValue()))) {
+            if (ConfigHelper.isDebugMode()) {
                 File leftHeaderFile = new File(".\\temp\\leftHeader.png");
                 File rightHeaderFile = new File(".\\temp\\rightHeader.png");
                 File bodyFile = new File(".\\temp\\body.png");

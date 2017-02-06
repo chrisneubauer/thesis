@@ -58,26 +58,21 @@ public class SettingsController extends GUIController {
     // load settings from configuration file
     @FXML
     private void initialize() {
-        this.databaseNameSettings.setText(ConfigHelper.getValue(Cfg.DBNAME.getValue()));
-        this.servernameSettings.setText(ConfigHelper.getValue(Cfg.DBSERVER.getValue()));
-        this.usernameSettings.setText(ConfigHelper.getValue(Cfg.DBUSER.getValue()));
-        this.passwordSettings.setText(ConfigHelper.getValue(Cfg.DBPASSWORD.getValue()));
-        this.portSettings.setText(ConfigHelper.getValue(Cfg.DBPORT.getValue()));
-        this.confidenceIntervalField.setText(ConfigHelper.getValue(Cfg.CONFIDENCERATE.getValue()));
+        this.databaseNameSettings.setText(ConfigHelper.getDBName());
+        this.servernameSettings.setText(ConfigHelper.getDBServerName());
+        this.usernameSettings.setText(ConfigHelper.getDBUserName());
+        this.passwordSettings.setText(ConfigHelper.getDBPassword());
+        this.portSettings.setText(String.valueOf(ConfigHelper.getDBPort()));
+        this.confidenceIntervalField.setText(String.valueOf(ConfigHelper.getConfidenceRate()));
 
         this.applicationLanguageDropdown.setItems(FXCollections.observableArrayList(AppLang.ENGLISH, AppLang.GERMAN));
         this.tesseractLanguageSettingDropDown.setItems(FXCollections.observableArrayList(TessLang.ENGLISH, TessLang.GERMAN, TessLang.ENGLISHANDGERMAN));
         this.defaultFerdProfileDropDown.setItems(FXCollections.observableArrayList(FerdLevel.BASIC, FerdLevel.COMFORT, FerdLevel.EXTENDED));
 
         // populating dropdowns with values from config
-        String appLang = ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue());
-        this.applicationLanguageDropdown.setValue(AppLang.valueOf(appLang));
-
-        String tesLang = ConfigHelper.getValue(Cfg.TESSERACTLANGUAGE.getValue());
-        this.tesseractLanguageSettingDropDown.setValue(TessLang.ofValue(tesLang));
-
-        String ferdLevel = ConfigHelper.getValue(Cfg.FERDPROFILE.getValue()).toUpperCase();
-        this.defaultFerdProfileDropDown.setValue(FerdLevel.valueOf(ferdLevel));
+        this.applicationLanguageDropdown.setValue(ConfigHelper.getApplicationLanguage());
+        this.tesseractLanguageSettingDropDown.setValue(ConfigHelper.getTesseractLanguages());
+        this.defaultFerdProfileDropDown.setValue(ConfigHelper.getPreferredFerdLevel());
     }
 
     public void applyNewSettings() {
@@ -194,7 +189,7 @@ public class SettingsController extends GUIController {
         ConfigHelper.addOrUpdate(Cfg.TESSERACTLANGUAGE.getValue(), this.getTesseractLanguageSettingDropDown());
 
         AppLang selectedLanguage = this.getSelectedApplicationLanguage();
-        AppLang currentLanguage = AppLang.valueOf(ConfigHelper.getValue(Cfg.APPLICATIONLANGUAGE.getValue()));
+        AppLang currentLanguage = ConfigHelper.getApplicationLanguage();
 
         Logger.getLogger(this.getClass()).log(Level.INFO, "Comparing languages: " + selectedLanguage + " and " + currentLanguage);
         if (!Objects.equals(selectedLanguage, currentLanguage)) {

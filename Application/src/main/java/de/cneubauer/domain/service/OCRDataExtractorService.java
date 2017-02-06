@@ -28,7 +28,7 @@ import java.util.Map;
 @Deprecated
 public class OCRDataExtractorService {
     private String file;
-    private double confidence = 1 - (Double.valueOf(ConfigHelper.getValue("confidenceRate")));
+    private double confidence = 1 - ConfigHelper.getConfidenceRate();
 
     public OCRDataExtractorService(String file) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Using confidence level: " + confidence*100 + "%");
@@ -244,7 +244,7 @@ public class OCRDataExtractorService {
                 return p;
             } else {
                 // refine search if we have some ocr probs
-                double confidenceRate = Double.valueOf(ConfigHelper.getValue(Cfg.CONFIDENCERATE.getValue()));
+                double confidenceRate = ConfigHelper.getConfidenceRate();
                 if (StringUtils.getLevenshteinDistance(line, p.getName()) > confidenceRate) {
                     return p;
                 }

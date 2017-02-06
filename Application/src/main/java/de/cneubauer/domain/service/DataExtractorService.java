@@ -7,6 +7,9 @@ import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
+import de.cneubauer.ml.LearningService;
+import de.cneubauer.ml.Model;
+import de.cneubauer.ml.ModelReader;
 import de.cneubauer.util.RecordTrainingEntry;
 import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
@@ -32,7 +35,7 @@ public class DataExtractorService {
     private String rightHeader;
     private String body;
     private String footer;
-    private double confidence = 1 - (Double.valueOf(ConfigHelper.getValue("confidenceRate")));
+    private double confidence = 1 - ConfigHelper.getConfidenceRate();
 
     public DataExtractorService(String[] parts) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Using confidence level: " + confidence*100 + "%");
@@ -171,6 +174,11 @@ public class DataExtractorService {
     // if this is the case, the existing string is being returned
     // if not, the given string is returned again
     private RecordTrainingEntry recordInLearningFile(String nextLine) {
+
+        LearningService service = new LearningService();
+
+        Model m = service.getMostLikelyModel(nextLine);
+
         // AccountFileHelper.getConfig().containsValue(nextLine);
        return AccountFileHelper.findAccountingRecord(nextLine);
     }
@@ -303,7 +311,7 @@ public class DataExtractorService {
                      * 11 of 17 are incorrect (65%) which means 35% correct
                      * When confidence 80% we need less errors, maximum: 0/17 -> 0% < 20%
                     */
-                    double confidenceRate = Double.valueOf(ConfigHelper.getValue(Cfg.CONFIDENCERATE.getValue()));
+                    double confidenceRate = ConfigHelper.getConfidenceRate();
                     double distance = StringUtils.getLevenshteinDistance(line, p.toString());
                     double comparison = distance / line.length();
                     if (comparison < confidenceRate) {
