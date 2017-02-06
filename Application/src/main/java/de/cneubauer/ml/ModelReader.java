@@ -90,4 +90,29 @@ public class ModelReader {
         }
         return this.models;
     }
+
+    public Model getModelByStringAndAccounts(String position, List<Account> category) throws IOException {
+        if (this.models == null) {
+            this.getModels();
+        }
+        for (Model m : models) {
+            if (m.getPosition().equals(position)) {
+                List<Account> deleteableList = new LinkedList<>(category);
+                for (Account debitAcc : m.getDebit()) {
+                    if (deleteableList.contains(debitAcc)) {
+                        deleteableList.remove(debitAcc);
+                    }
+                }
+                for (Account creditAcc : m.getCredit()) {
+                    if (deleteableList.contains(creditAcc)) {
+                        deleteableList.remove(creditAcc);
+                    }
+                }
+                if (deleteableList.size() == 0) {
+                    return m;
+                }
+            }
+        }
+        return null;
+    }
 }

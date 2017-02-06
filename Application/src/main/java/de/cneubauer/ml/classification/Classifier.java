@@ -362,12 +362,14 @@ public abstract class Classifier<T, K> implements IFeatureProbability<T, K> {
                 (calculator == null)
                     ? this.featureProbability(feature, category)
                             : calculator.featureProbability(feature, category);
-
+        return basicProbability;
+/*
         Integer totals = this.totalFeatureCount.get(feature);
-        if (totals == null)
+        if (totals == null) {
             totals = 0;
+        }
         return (weight * assumedProbability + totals  * basicProbability)
-                / (weight + totals);
+                / (weight + totals);*/
     }
 
     /**
