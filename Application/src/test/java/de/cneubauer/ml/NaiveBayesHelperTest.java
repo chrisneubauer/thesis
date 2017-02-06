@@ -34,7 +34,7 @@ public class NaiveBayesHelperTest {
         category.addAll(models.get(0).getDebit());
 
         this.helper.learnMockData(models);
-        System.out.println("abc probability is: " + this.helper.getFeatureProbability("a", category));
+        System.out.println("a probability is: " + this.helper.getFeatureProbability("a", category));
     }
 
 }

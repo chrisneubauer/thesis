@@ -1,5 +1,6 @@
 package de.cneubauer.ml;
 
+import de.cneubauer.AbstractTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,11 +12,14 @@ import java.util.List;
  * Created by Christoph Neubauer on 03.02.2017.
  * Test for LearningService class
  */
-public class LearningServiceTest {
+public class LearningServiceTest extends AbstractTest {
+
     private LearningService service;
 
     @Before
     public void setUp() throws Exception {
+        super.setUp();
+        databaseChanged = false;
         this.service = new LearningService();
     }
 
@@ -34,6 +38,19 @@ public class LearningServiceTest {
                 Assert.isTrue(this.service.isModelExisting(m));
             }
         }
+    }
+
+    @Test
+    public void getMostLikelyModel() throws Exception {
+        ModelReader reader = new ModelReader();
+        List<Model> models = reader.getModels();
+
+        if (models.size() > 0) {
+            Model m = models.get(0);
+            Model result = this.service.getMostLikelyModel(m.getPosition());
+            Assert.isTrue(result != null);
+        }
+
     }
 
 }
