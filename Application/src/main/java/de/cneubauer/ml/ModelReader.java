@@ -27,6 +27,10 @@ public class ModelReader {
         this.accounts = accountDao.getAll();
     }
 
+    /**
+     * @return the file containing model information
+     * @throws IOException if there is a problem reading the textfile
+     */
     private File openFile() throws IOException {
         Path path = Paths.get(System.getProperty("user.dir") + "\\models.txt");
         if (Files.exists(path)) {
@@ -36,6 +40,10 @@ public class ModelReader {
         }
     }
 
+    /**
+     * Reads in model information from the learning file
+     * @throws IOException if there is a problem reading the textfile
+     */
     private void readModel() throws IOException {
         models = new LinkedList<>();
         InputStream in = new FileInputStream(this.openFile());
@@ -71,8 +79,17 @@ public class ModelReader {
         }
     }
 
+    /**
+     * splits a line consisting of position, credit acc numbers and debit acc numbers into three strings
+     * <p><ul>
+     *     <li>[0]: the position</li>
+     *     <li>[1]: the credit account numbers</li>
+     *     <li>[2]: the debit account numbers</li>
+     * </ul></p>
+     * @param line  the line consisting with the information
+     * @return  the list of values
+     */
     private List<String> getValues(String line) {
-        // splits a line consisting of position, credit acc numbers and debit acc numbers into three strings
         List<String> list = new ArrayList<>(3);
         Pattern p = Pattern.compile("\\[(.*?)\\]");
         Matcher m = p.matcher(line);
@@ -84,6 +101,11 @@ public class ModelReader {
         return list;
     }
 
+    /**
+     * Reads the learning file and returns all models as a list
+     * @return the list of models existing in the learning file
+     * @throws IOException if there is a problem reading the textfile
+     */
     public List<Model> getModels() throws IOException {
         if (this.models == null) {
             this.readModel();
@@ -91,7 +113,13 @@ public class ModelReader {
         return this.models;
     }
 
-    public Model getModelByStringAndAccounts(String position, List<Account> category) throws IOException {
+    /**
+     * @param position  the position to be searched for
+     * @param category  the accounts that define a model to be in this category
+     * @return the model found that is existing in the learning file or null if not existent
+     * @throws IOException if there is a problem reading the textfile
+     */
+    Model getModelByStringAndAccounts(String position, List<Account> category) throws IOException {
         if (this.models == null) {
             this.getModels();
         }

@@ -16,12 +16,20 @@ import java.util.List;
  */
 public class LearningService {
 
+    /**
+     * @param position  the position to be checked
+     * @return  true if the position is in the learning file, false if otherwise
+     */
     public boolean exists(String position) {
         Model fakeModel = new Model();
         fakeModel.setPosition(position);
         return this.isModelExisting(fakeModel);
     }
 
+    /**
+     * @param model  the model that should be checked if it is saved in the learning file
+     * @return  true if the model already exists, false if otherwise
+     */
     public boolean isModelExisting(Model model) {
         ModelReader reader = new ModelReader();
         //TODO: url of the reader
@@ -38,8 +46,12 @@ public class LearningService {
         return false;
     }
 
-    // uses naive bayes to search for the most likely Model
-    // returns null if there is none
+    /**
+     * uses naive bayes to search for the most likely Model
+     * returns null if there is none or the confidence is too low
+     * @param feature  the position that should be checked
+     * @return  the model that is most likely to be used, null if the confidence is not reached
+     */
     public Model getMostLikelyModel(String feature) {
         NaiveBayesHelper helper = new NaiveBayesHelper();
         ModelReader reader = new ModelReader();

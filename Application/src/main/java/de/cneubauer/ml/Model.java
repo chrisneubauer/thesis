@@ -21,39 +21,68 @@ public class Model {
         this.credit = new HashSet<>();
     }
 
+    /**
+     * Looks up if a given string could be equal to the position of this model
+     * @param positionToCompare  the string to be compared
+     * @return  true if it is likely the same position, false otherwise
+     */
     boolean positionEqualsWith(String positionToCompare) {
         return position.equals(positionToCompare);
         // TODO: intelligent approach, using not only levenshtein distance but also wordnet
     }
 
+    /**
+     * @param a  the account that should be added to the list of debit accounts
+     */
     void addDebitAccount(Account a) {
         this.debit.add(a);
     }
 
+    /**
+     * @param a  the account that should be added to the list of credit accounts
+     */
     void addCreditAccount(Account a) {
         this.credit.add(a);
     }
 
+    /**
+     * @return  the position of this model
+     */
     public String getPosition() {
         return position;
     }
 
+    /**
+     * @param position  the position the model should have
+     */
     public void setPosition(String position) {
         this.position = position;
     }
 
+    /**
+     * @return  a set of all debit accounts for this model
+     */
     Set<Account> getDebit() {
         return debit;
     }
 
+    /**
+     * @param debit  a set of debit accounts that should belong to this model
+     */
     public void setDebit(Set<Account> debit) {
         this.debit = debit;
     }
 
+    /**
+     * @return  a set of all credit accounts for this model
+     */
     Set<Account> getCredit() {
         return credit;
     }
 
+    /**
+     * @param credit  a set of credit accounts that should belong to this model
+     */
     public void setCredit(Set<Account> credit) {
         this.credit = credit;
     }

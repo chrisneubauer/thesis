@@ -12,8 +12,10 @@ import java.nio.file.Paths;
  * This class enables writing models to the learning file
  */
 public class ModelWriter {
-    //private String url;
-
+    /**
+     * @return the file containing model information
+     * @throws IOException if there is a problem reading the textfile
+     */
     private File openFile() throws IOException {
         Path path = Paths.get(System.getProperty("user.dir") + "\\models.txt");
         if (Files.exists(path)) {
@@ -23,11 +25,13 @@ public class ModelWriter {
         }
     }
 
+    /**
+     * Writes the model information to the learning file
+     * @param model the model to be saved
+     */
     public void writeToFile(Model model) {
         try {
             File modelFile = this.openFile();
-            //OutputStream out = new FileOutputStream(modelFile);
-            //BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
             FileWriter fw = new FileWriter(modelFile, true);
             StringBuilder sb = new StringBuilder();
             sb.append("[");
