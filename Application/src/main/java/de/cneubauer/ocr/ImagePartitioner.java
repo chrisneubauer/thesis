@@ -35,11 +35,16 @@ public class ImagePartitioner {
         this.fullImage = fileToScan;
     }
 
-    // @return array of images in the following order:
-    // 1. left header image
-    // 2. right header image
-    // 3. body image
-    // 4. footer image
+    /**
+     * Processes the file, splits it into the following parts and temporarily saves it as a .png
+     * <p><ul>
+     *     <li>[0]: left header image</li>
+     *     <li>[1]: right header image</li>
+     *     <li>[2]: body image</li>
+     *     <li>[3]: footer image</li>
+     * </ul></p>
+     * @return the array of images in the given order
+     */
     public BufferedImage[] process() {
         try {
             if (this.scanFile != null) {

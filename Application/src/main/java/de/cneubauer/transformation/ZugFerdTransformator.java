@@ -47,12 +47,14 @@ public class ZugFerdTransformator {
         pdfHandler.appendInvoice(metaData, reader, outPdf);
     }
 
+    @Deprecated
     Invoice extractInvoiceFromMockPdf(String pdfName) {
         PdfHandler handler = new PdfHandler();
         InputStream inputZugferdPdfStream = getClass().getResourceAsStream("../../../../../target/test-classes/generatedPDF/" + pdfName + ".pdf");
         return handler.extractInvoice(inputZugferdPdfStream);
     }
 
+    @Deprecated
     public void appendInvoiceToPdf(String pdfPath, String pdfName, Invoice i) throws IOException {
         OutputStream outPdf = new FileOutputStream(".\\target\\test-classes\\generatedPDF\\" + pdfName + ".pdf");
         InputStream reader = this.getClass().getResourceAsStream(pdfPath);
@@ -61,6 +63,12 @@ public class ZugFerdTransformator {
         pdfHandler.appendInvoice(i, reader, outPdf);
     }
 
+    /**
+     * Writes a new pdf file with additional invoice information
+     * @param pdf  the original scanned file
+     * @param i  the invoice information that should be added to the file
+     * @return  the new file with additional invoice information
+     */
     public byte[] appendInvoiceToPdf(byte[] pdf, Invoice i) {
         ByteArrayOutputStream outPdf = new ByteArrayOutputStream();
         InputStream reader = new ByteArrayInputStream(pdf);
@@ -70,6 +78,7 @@ public class ZugFerdTransformator {
         return outPdf.toByteArray();
     }
 
+    @Deprecated
     void validateMockInvoiceFromPdf(String pdfName) {
         //setup
         Invoice invoice = extractInvoiceFromMockPdf(pdfName);
@@ -85,6 +94,11 @@ public class ZugFerdTransformator {
         System.out.println("Violations: " + violations.size());
     }
 
+    /**
+     * Also see the ZUGFerD documentation
+     * @param invInfo  the invoice information needed to create the invoice
+     * @return  an invoice that is conformal with the basic level of the ZUGFeRD-format
+     */
     public Invoice createInvoice(de.cneubauer.domain.bo.Invoice invInfo) {
         Invoice invoice = new Invoice(BASIC);
         invoice.setHeader(new Header().setInvoiceNumber(String.valueOf(invInfo.getId())).setCode(_380));
@@ -103,6 +117,10 @@ public class ZugFerdTransformator {
         return invoice;
     }
 
+    /**
+     * @param i  the invoice to be checked
+     * @return  true if the invoice is valid, false if otherwise
+     */
     private boolean isInvoiceValid(Invoice i) {
         InvoiceValidator invoiceValidator = new InvoiceValidator();
 
@@ -117,6 +135,11 @@ public class ZugFerdTransformator {
         return violations.size() < 1;
     }
 
+    /**
+     * Converts the existing LegalPerson to the TradeParty, used from the ZUGFeRD standard
+     * @param p  the person that should be converted
+     * @return  the converted legal person as a TradeParty
+     */
     private TradeParty convertLegalPersonToTradeParty(LegalPerson p) {
         TradeParty result = new TradeParty();
         if (p.getIsCompany()) {
@@ -144,6 +167,7 @@ public class ZugFerdTransformator {
         return result;
     }
 
+    //TODO: add conformal invoice creation
     public Invoice createFullConformalComfortInvoice(de.cneubauer.domain.bo.Invoice inv) {
         Invoice i = new Invoice(COMFORT);
 
@@ -200,6 +224,11 @@ public class ZugFerdTransformator {
         }
     }
 
+    /**
+     * Creates a complete ZUGFeRD invoice of basic level
+     * @param inv  the invoice that should be converted
+     * @return  the valid ZUGFeRD invoice or null if violations of the format occured
+     */
     public Invoice createFullConformalBasicInvoice(de.cneubauer.domain.bo.Invoice inv) {
         Invoice i = new Invoice(BASIC);
 

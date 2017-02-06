@@ -25,6 +25,10 @@ public class TesseractWorker implements Runnable {
         this.fileToScan = null;
     }
 
+    /**
+     * Executes tesseract ocr using a wrapper
+     * The result can be obtained using the getResultIfFinished() method
+     */
     @Override
     public void run() {
         TesseractWrapper wrapper = new TesseractWrapper();
@@ -36,6 +40,9 @@ public class TesseractWorker implements Runnable {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Finished OCR");
     }
 
+    /**
+     * @return  the ocr result as a String or null when still in ocr process
+     */
     public String getResultIfFinished() {
         return this.result;
     }
