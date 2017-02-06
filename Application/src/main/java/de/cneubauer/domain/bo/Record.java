@@ -26,54 +26,9 @@ public class Record {
     private String entryText;
     private Set<AccountRecord> recordAccounts;
 
-    public Set<AccountRecord> getRecordAccounts() {
-        return recordAccounts;
-    }
-
-    public void setRecordAccounts(Set<AccountRecord> recordAccounts) {
-        this.recordAccounts = recordAccounts;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getEntryDate() {
-        return entryDate;
-    }
-
-    public void setEntryDate(Date entryDate) {
-        this.entryDate = entryDate;
-    }
-
-    public String getDocumentNo() {
-        return documentNo;
-    }
-
-    public void setDocumentNo(String documentNo) {
-        this.documentNo = documentNo;
-    }
-
-    public byte[] getDocument() {
-        return document;
-    }
-
-    public void setDocument(byte[] document) {
-        this.document = document;
-    }
-
-    public String getEntryText() {
-        return entryText;
-    }
-
-    public void setEntryText(String entryText) {
-        this.entryText = entryText;
-    }
-
+    /**
+     * @param entry  the account-record relation entry to be used for training instances
+     */
     public void addRecordTrainingEntry(RecordTrainingEntry entry) {
         for (Map.Entry<String, Double> mapEntry : entry.getDebitAccounts().entrySet()) {
             try {
@@ -100,6 +55,89 @@ public class Record {
                 Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to parse account from string, skipping..");
             }
         }
+    }
+
+    /**
+     * @return  returns a set of account-record relations
+     */
+    public Set<AccountRecord> getRecordAccounts() {
+        return recordAccounts;
+    }
+
+    /**
+     * @param recordAccounts  the set of account-record relations to be stored
+     */
+    public void setRecordAccounts(Set<AccountRecord> recordAccounts) {
+        this.recordAccounts = recordAccounts;
+    }
+
+    /**
+     * @return  the id of this object stored in the database table
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Do not use this method. It is used by Hibernate internally
+     * @param id  the id for this object to be stored in the database table
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     *
+     * @return //TODO: whats entrydate?
+     */
+    public Date getEntryDate() {
+        return entryDate;
+    }
+
+    public void setEntryDate(Date entryDate) {
+        this.entryDate = entryDate;
+    }
+
+    /**
+     * @return  the identification number of the document
+     */
+    public String getDocumentNo() {
+        return documentNo;
+    }
+
+    /**
+     * @param documentNo  the identification number of the document
+     */
+    public void setDocumentNo(String documentNo) {
+        this.documentNo = documentNo;
+    }
+
+    /**
+     * @return  the scanned document stored as a byte[]
+     */
+    public byte[] getDocument() {
+        return document;
+    }
+
+    /**
+     * @param document  the scanned document stored as a byte[]
+     */
+    public void setDocument(byte[] document) {
+        this.document = document;
+    }
+
+    /**
+     * @return  the text of this position
+     */
+    public String getEntryText() {
+        return entryText;
+    }
+
+    /**
+     * @param entryText  the position string
+     */
+    public void setEntryText(String entryText) {
+        this.entryText = entryText;
     }
 
     /* public Account getDebit() {
