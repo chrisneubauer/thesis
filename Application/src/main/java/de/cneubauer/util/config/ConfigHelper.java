@@ -1,5 +1,8 @@
 package de.cneubauer.util.config;
 
+import de.cneubauer.util.enumeration.AppLang;
+import de.cneubauer.util.enumeration.FerdLevel;
+import de.cneubauer.util.enumeration.TessLang;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -17,9 +20,19 @@ public final class ConfigHelper {
     private static File configFile;
     private static Map<String, String> config;
 
+    static {
+        Logger.getLogger(ConfigHelper.class).log(Level.INFO, "initiating configuration file on path: " + System.getProperty("user.dir") + "\\config.ini");
+        setConfigFile(System.getProperty("user.dir"));
+        if (config == null) {
+            getConfig();
+        }
+    }
     private ConfigHelper() {
         Logger.getLogger(ConfigHelper.class).log(Level.INFO, "initiating configuration file on path: " + System.getProperty("user.dir") + "\\config.ini");
         setConfigFile(System.getProperty("user.dir"));
+        if (config == null) {
+            getConfig();
+        }
     }
 
     private static void setConfigFile(String path) {
@@ -30,7 +43,82 @@ public final class ConfigHelper {
         }
     }
 
-    public static String getValue(String property) {
+    public static float getConfidenceRate() {
+        if (config == null) {
+            new ConfigHelper();
+        }
+        String rate = config.get(Cfg.CONFIDENCERATE.getValue());
+        return Float.valueOf(rate);
+    }
+
+    public static String getDBUserName() {
+        if (config == null) {
+            new ConfigHelper();
+        }
+        return config.get(Cfg.DBUSER.getValue());
+    }
+
+    public static String getDBPassword() {
+        if (config == null) {
+            new ConfigHelper();
+        }
+        return config.get(Cfg.DBPASSWORD.getValue());
+    }
+
+    public static String getDBName() {
+        if (config == null) {
+            new ConfigHelper();
+        }
+        return config.get(Cfg.DBNAME.getValue());
+    }
+
+    public static String getDBServerName() {
+        if (config == null) {
+            new ConfigHelper();
+        }
+        return config.get(Cfg.DBSERVER.getValue());
+    }
+
+    public static int getDBPort() {
+        if (config == null) {
+            new ConfigHelper();
+        }
+        return Integer.valueOf(config.get(Cfg.DBPORT.getValue()));
+    }
+
+    public static AppLang getApplicationLanguage() {
+        if (config == null) {
+            new ConfigHelper();
+        }
+        return AppLang.valueOf(config.get(Cfg.APPLICATIONLANGUAGE.getValue()));
+    }
+
+    public static TessLang getTesseractLanguages() {
+        if (config == null) {
+            new ConfigHelper();
+        }
+        return TessLang.valueOf(config.get(Cfg.TESSERACTLANGUAGE.getValue()));
+    }
+
+    public static FerdLevel getPreferredFerdLevel() {
+        if (config == null) {
+            new ConfigHelper();
+        }
+        return FerdLevel.valueOf(config.get(Cfg.FERDPROFILE.getValue()));
+    }
+
+    public static boolean isDebugMode() {
+        if (config == null) {
+            new ConfigHelper();
+        }
+        try {
+            return Boolean.valueOf(config.get(Cfg.DEBUG.getValue()));
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private static String getValue(String property) {
         if (config == null) {
             new ConfigHelper();
         }
@@ -100,4 +188,5 @@ public final class ConfigHelper {
             Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to add configuration settings! Please delete config.ini to reset to default settings");
         }
     }
+
 }
