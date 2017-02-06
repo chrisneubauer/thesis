@@ -7,7 +7,9 @@ import java.io.File;
 /**
  * Created by Christoph Neubauer on 29.11.2016.
  * This class can be used as a thread to execute ocr
+ * Replaced by ScanTask
  */
+@Deprecated
 public class OCRThreadRunner implements Runnable {
     private File[] files;
     private volatile String[] results;

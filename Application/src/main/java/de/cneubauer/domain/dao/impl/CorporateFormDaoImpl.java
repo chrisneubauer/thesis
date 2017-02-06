@@ -15,6 +15,10 @@ public class CorporateFormDaoImpl extends AbstractDao<CorporateForm> implements 
         super(CorporateForm.class);
     }
 
+    /**
+     * Hook method to apply additional logic upon save
+     * @param entity  the corporate form that should be saved
+     */
     @Override
     public void onSave(CorporateForm entity) {
         if(entity.getCreatedDate() == null) {

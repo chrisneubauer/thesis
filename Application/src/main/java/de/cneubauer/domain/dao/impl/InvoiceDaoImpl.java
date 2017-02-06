@@ -21,7 +21,10 @@ public class InvoiceDaoImpl extends AbstractDao<Invoice> implements InvoiceDao {
         super(Invoice.class);
     }
 
-    // hook-method before saving
+    /**
+     * Hook method to apply additional logic upon save
+     * @param entity  the invoice that should be saved
+     */
     @Override
     public void onSave(Invoice entity) {
         if(entity.getCreatedDate() == null) {
@@ -30,25 +33,21 @@ public class InvoiceDaoImpl extends AbstractDao<Invoice> implements InvoiceDao {
         entity.setModifiedDate(Date.valueOf(LocalDate.now()));
     }
 
+    /**
+     *
+     * @param date  the issue date that invoices should be filtered for
+     * @return  a list of invoices that have the given issue date
+     */
     @Override
     public List<Invoice> getAllByDate(LocalDate date) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "getting all by date: " + date.toString());
-        // TODO: do we need this formatter?
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-DD");
 
-        /*LocalDateTime before = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0);
-        before = before.minusDays(1);
-        LocalDateTime after = LocalDateTime.of(date.getYear(), date.getMonth(), date.getDayOfMonth(), 0, 0);
-        after = after.plusDays(1);*/
-        //String hql = "FROM Invoice I WHERE I.issueDate >?1 AND I.issueDate <?2";
         String hql = "FROM Invoice I WHERE I.issueDate = ?1";
 
         Query q = this.getSession().createQuery(hql);
-        q.setParameter(1, Date.valueOf(date)); //.valueOf())
-        //q.setParameter(1, Timestamp.valueOf(before), TemporalType.TIMESTAMP);
-        //q.setParameter(2, Timestamp.valueOf(after), TemporalType.TIMESTAMP);
+        q.setParameter(1, Date.valueOf(date));
 
-        List results = q.getResultList(); //q.list();
+        List results = q.getResultList();
         List<Invoice> result = new ArrayList<>(results.size());
 
         for (Object o : results) {

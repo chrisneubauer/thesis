@@ -12,6 +12,10 @@ public class RecordDaoImpl extends AbstractDao<Record> implements RecordDao {
         super(Record.class);
     }
 
+    /**
+     * Hook method to apply additional logic upon save
+     * @param entity  the record that should be saved
+     */
     @Override
     protected void onSave(Record entity) {
     }

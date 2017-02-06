@@ -16,7 +16,10 @@ public class LegalPersonDaoImpl extends AbstractDao<LegalPerson> implements Lega
         super(LegalPerson.class);
     }
 
-    // hook-method before saving
+    /**
+     * Hook method to apply additional logic upon save
+     * @param entity  the legal person that should be saved
+     */
     @Override
     public void onSave(LegalPerson entity) {
         if(entity.getCreatedDate() == null) {

@@ -36,6 +36,9 @@ public abstract class AbstractDao<T> implements IDao<T> {
         }*/
     }
 
+    /**
+     * @return  the session to the database. Opens a new session if there is none
+     */
     public Session getSession() {
         if (this.session == null) {
             this.session = this.getSessionFactory().openSession();

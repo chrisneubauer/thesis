@@ -8,14 +8,27 @@ import de.cneubauer.domain.bo.Invoice;
  */
 public class InvoiceValidator {
     private Invoice invoice;
+
+    /**
+     * Constructor of the InvoiceValidator class
+     * @param i  the invoice that should be validated
+     */
     public InvoiceValidator(Invoice i) {
         this.invoice = i;
     }
 
+    /**
+     * Validates the invoice
+     * @return  true if the invoice is valid, false if otherwise
+     */
     public boolean isValid() {
         return this.validateInvoice();
     }
 
+    /**
+     * Checks invoice for creditor and debitor information as well as invoice no, issue date and charge
+     * @return  true if the invoice is valid, false if otherwise
+     */
     private boolean validateInvoice() {
         boolean valid;
         if (this.invoice.getCreditor() != null) {

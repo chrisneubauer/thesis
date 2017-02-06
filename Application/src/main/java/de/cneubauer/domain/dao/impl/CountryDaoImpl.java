@@ -15,6 +15,10 @@ public class CountryDaoImpl extends AbstractDao<Country> implements CountryDao {
         super(Country.class);
     }
 
+    /**
+     * Hook method to apply additional logic upon save
+     * @param entity  the country that should be saved
+     */
     @Override
     public void onSave(Country entity) {
         if(entity.getCreatedDate() == null) {

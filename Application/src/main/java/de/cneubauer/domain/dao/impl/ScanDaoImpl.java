@@ -21,7 +21,10 @@ public class ScanDaoImpl extends AbstractDao<Scan> implements ScanDao {
         super(Scan.class);
     }
 
-    // hook-method before saving
+    /**
+     * Hook method to apply additional logic upon save
+     * @param entity  the scan that should be saved
+     */
     @Override
     public void onSave(Scan entity) {
         if(entity.getCreatedDate() == null) {
@@ -30,6 +33,10 @@ public class ScanDaoImpl extends AbstractDao<Scan> implements ScanDao {
         entity.setModifiedDate(Date.valueOf(LocalDate.now()));
     }
 
+    /**
+     * @param id  the invoice id that should be filtered for
+     * @return  a collection of scans that contain the invoice
+     */
     @Override
     public Collection<Scan> getByInvoiceId(int id) {
         String hql = "FROM Scan s WHERE s.invoiceInformation.id = ?1";

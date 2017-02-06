@@ -19,6 +19,7 @@ import java.util.*;
  * Created by Christoph Neubauer on 24.11.2016.
  * This class is responsible for retrieving and writing values to the learning file
  */
+@Deprecated
 public final class AccountFileHelper {
     private static File learningFile;
     private static Map<String, String> positionAccountMap;

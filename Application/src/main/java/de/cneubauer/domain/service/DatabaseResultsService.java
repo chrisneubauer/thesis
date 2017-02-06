@@ -22,7 +22,7 @@ public class DatabaseResultsService {
     private ScanDao scanDao;
     private InvoiceDao invoiceDao;
 
-    /*
+    /**
      * Calls database and searches for Scans that match the specified values
      * @param   date    the date when the invoice has been specified
      * TODO: dateFrom and dateTo

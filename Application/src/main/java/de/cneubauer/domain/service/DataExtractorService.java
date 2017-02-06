@@ -1,27 +1,25 @@
 package de.cneubauer.domain.service;
 
-import de.cneubauer.domain.bo.*;
-import de.cneubauer.domain.dao.AccountDao;
+import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.bo.LegalPerson;
+import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.dao.LegalPersonDao;
-import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
 import de.cneubauer.ml.LearningService;
 import de.cneubauer.ml.Model;
-import de.cneubauer.ml.ModelReader;
 import de.cneubauer.util.RecordTrainingEntry;
-import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,6 +35,16 @@ public class DataExtractorService {
     private String footer;
     private double confidence = 1 - ConfigHelper.getConfidenceRate();
 
+    /**
+     * Constructor of the DataExtractorService class
+     * @param parts  the resulting strings from the ocr in the following order:
+     * <p><ul>
+     *    <li>[0]: left header string</li>
+     *    <li>[1]: right header string</li>
+     *    <li>[2]: body string</li>
+     *    <li>[3]: footer string</li>
+     * </ul></p>
+     */
     public DataExtractorService(String[] parts) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Using confidence level: " + confidence*100 + "%");
         this.leftHeader = parts[0];
@@ -45,7 +53,7 @@ public class DataExtractorService {
         this.footer = parts[3];
     }
 
-    /*
+    /**
      * Method to search for invoice metadata in the scanned page
      * @return the invoice metadata that has been found
      */
@@ -73,7 +81,7 @@ public class DataExtractorService {
         return result;
     }
 
-    /*
+    /**
      * Uses scanned page and looks for several information regarding accounting records
      * @return  returns a list of all AccountingRecords that has been found on the page
      */
@@ -149,40 +157,52 @@ public class DataExtractorService {
         return records;
     }
 
-    // adjusts the string to be checked and removes unnecessary columns with financial information
-    private String removeFinancialInformationFromRecordLine(String nextLine) {
-        nextLine = nextLine.replace("EUR", "");
-        nextLine = nextLine.replace("€","");
+    /**
+     * Removes unnecessary columns with financial information
+     * @param line  the line that should be checked
+     * @return  the original line cleared by financial information
+     */
+    private String removeFinancialInformationFromRecordLine(String line) {
+        line = line.replace("EUR", "");
+        line = line.replace("€","");
         // regex that replaces all occurances of numbers up to 100 million + "," and two digits afterwards
         Pattern p = Pattern.compile("\\d{1,9}(,\\d{2})");
-        Matcher m = p.matcher(nextLine);
+        Matcher m = p.matcher(line);
 
-        nextLine = m.replaceAll("");
+        line = m.replaceAll("");
         /*
-        nextLine = nextLine.replaceAll("^\\d{1,9}(,\\d{2})", "");
-        nextLine = nextLine.replaceAll("(.*)(^\\d{1,9},\\d{2}(.*)", "");
+        line = line.replaceAll("^\\d{1,9}(,\\d{2})", "");
+        line = line.replaceAll("(.*)(^\\d{1,9},\\d{2}(.*)", "");
         String newString = "";
-        for (String part : nextLine.split(" ")) {
+        for (String part : line.split(" ")) {
             if (!part.matches("^\\d{1,9}(,\\d{2})\"")) {
                 newString += part + " ";
             }
         }*/
-        return nextLine;
+        return line;
     }
 
-    // checks if record already exists in learning file
-    // if this is the case, the existing string is being returned
-    // if not, the given string is returned again
-    private RecordTrainingEntry recordInLearningFile(String nextLine) {
+    /**
+     * checks if record already exists in learning file
+     * if this is the case, the existing string is being returned
+     * if not, the given string is returned again
+     * @param position  the position to be searched for
+     * @return  the RecordTrainingEntry with the position found in the learning file
+     */
+    private RecordTrainingEntry recordInLearningFile(String position) {
 
         LearningService service = new LearningService();
 
-        Model m = service.getMostLikelyModel(nextLine);
+        Model m = service.getMostLikelyModel(position);
 
-        // AccountFileHelper.getConfig().containsValue(nextLine);
-       return AccountFileHelper.findAccountingRecord(nextLine);
+        // AccountFileHelper.getConfig().containsValue(position);
+       return AccountFileHelper.findAccountingRecord(position);
     }
 
+    /**
+     * Searches for various financial information and returns them as an InvoiceInformationHelper class
+     * @return  an InvoiceInformationHelper containing the found values
+     */
     private InvoiceInformationHelper findInvoiceValues() {
         InvoiceInformationHelper result = new InvoiceInformationHelper();
         try {
@@ -245,6 +265,10 @@ public class DataExtractorService {
         return result;
     }
 
+    /**
+     * Searchs for the delivery date in the string
+     * @return  the date that has been found, or the current date if nothing has been found
+     */
     private java.sql.Date findDeliveryDate() {
         String date = this.findValueInString(new String[] { "Lieferdatum"}, this.rightHeader);
         Calendar cal = this.convertStringToCalendar(date);
@@ -260,6 +284,10 @@ public class DataExtractorService {
         return result;
     }
 
+    /**
+     * Searches for Skonto in the invoice
+     * @return  the found skonto value of there is Skonto, 0.0 otherwise
+     */
     private double findSkontoValue() {
         String skonto = "";
         boolean found = false;
@@ -290,11 +318,19 @@ public class DataExtractorService {
         }
     }
 
+    /**
+     * @return  true if "Skonto" is in the footer text, false if otherwise
+     */
     private boolean findSkontoInformation() {
         String text = this.findValueInString(new String[] { "Skonto" }, this.footer);
         return text.length() > 0;
     }
 
+    /**
+     * Searches for legal persons and compares them with the lines
+     * @param lines  the ocr result
+     * @return  the legal person that occurs in the lines
+     */
     private LegalPerson getLegalPersonFromDatabase(String lines) {
         LegalPersonDao dao = new LegalPersonDaoImpl();
         List<LegalPerson> list = dao.getAll();
@@ -323,14 +359,22 @@ public class DataExtractorService {
         return null;
     }
 
+    /**
+     * Searches for debitor in the left header part of the document
+     * Uses the getLegalPersonFromDatabase() method to retrieve the result
+     * @return  the debitor that has been found or null if none has been found
+     */
     private LegalPerson findDebitor() {
         // Debitor is usually in the left part of the invoice header
         //String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" }, this.leftHeader);
         return this.getLegalPersonFromDatabase(this.leftHeader);
     }
 
+    /**
+     * Searches for the issue date in the right header of the document
+     * @return  the issue date if it has been found, the current date if not
+     */
     private java.sql.Date findIssueDate() {
-
         String date = this.findValueInString(new String[] { "Rechnungsdatum"}, this.rightHeader);
         Calendar cal = this.convertStringToCalendar(date);
 
@@ -345,6 +389,11 @@ public class DataExtractorService {
         return result;
     }
 
+    /**
+     * Converts a string containing date information to a Calendar object
+     * @param date  the date that should be converted
+     * @return  the Calendar object with the given date
+     */
     private Calendar convertStringToCalendar(String date) {
         Calendar cal = new Calendar.Builder().build();
         if (date.contains(".")) {
@@ -362,12 +411,10 @@ public class DataExtractorService {
         return cal;
     }
 
-    /*  Finds creditor in image
-     *  The following steps are performed:
-     *  Get stored LegalPersons in db
-     *  Compare with found creditor
-     *  if existent, use existing one -> return LP
-     *  if not existent, user has to create new one manually -> return null
+    /**
+     * Searches for creditor in the left header part of the document
+     * Uses the getLegalPersonFromDatabase() method to retrieve the result
+     * @return  the creditor that has been found or null if none has been found
      */
     private LegalPerson findCreditor() {
         // Creditor is usually in the right part of the invoice header.
@@ -389,6 +436,7 @@ public class DataExtractorService {
         }*/
     }
 
+    @Deprecated
     private int findCorporateFormIndex(String line) {
         int result = 0;
         if (line.indexOf("GmbH") > 0) {
@@ -412,6 +460,10 @@ public class DataExtractorService {
         return result;
     }
 
+    /**
+     * Searche for the invoice number in both header strings
+     * @return  the invoice number or an empty string if nothing has been found
+     */
     private String findInvoiceNumber() {
         String header = this.leftHeader + "\n" + this.rightHeader;
         String[] lines = header.split("\n");
@@ -442,6 +494,12 @@ public class DataExtractorService {
         return "";
     }
 
+    /**
+     * This method goes through the searchPosition and tries to find any of the given search conditions
+     * @param searchConditions  the conditions that should be searched for
+     * @param searchPosition  the string where the conditions should be in
+     * @return  the next word after the found search condition, or an empty string if nothing has been found
+     */
     private String findValueInString(String[] searchConditions, String searchPosition) {
         String[] lines = searchPosition.split("\n");
         for (String line : lines) {
@@ -470,10 +528,17 @@ public class DataExtractorService {
         return "";
     }
 
+    /**
+     * Calculates the average distance of all given searchConditions
+     * This enables an overall check for multiple words
+     * @param part  the string where the conditions should be in
+     * @param searchConditions  the conditions that should be searched for
+     * @return  the average distance as a double value
+     */
     private double getAverageDistanceOfSearchConditions(String part, String[] searchConditions) {
-        double result = 100;
-        double min = 100;
+        double min;
         double oldMin = 100;
+        double result = 100;
         // we want to find signal words in the string
         // therefore the whole line has to be separated into each word
         String[] lines = part.split(" ");
@@ -490,6 +555,12 @@ public class DataExtractorService {
         return result / 2; // additional divisor to adjust number influence level // / (double) searchConditions.length;
     }
 
+    /**
+     *
+     * @param part  the part to be checked
+     * @param searchConditions  the search conditions to be searched for
+     * @return  true if at least one of the search conditions are in the given part, false if otherwise
+     */
     private boolean partContainsSearchConditions(String part, String[] searchConditions) {
         for (String con : searchConditions) {
             if (part.contains(con)) {
@@ -499,6 +570,12 @@ public class DataExtractorService {
         return false;
     }
 
+    /**
+     * Searches for the search condition in the search position using the average distance method
+     * @param searchConditions  the conditions to be searched for
+     * @param searchPosition  the position where to search in
+     * @return  the found line if the average is higher than the confidence, an empty string if not
+     */
     private String findLineWithContainingInformation(String[] searchConditions, String searchPosition) {
         String[] lines = searchPosition.split("\n");
         for (String line : lines) {
@@ -506,10 +583,14 @@ public class DataExtractorService {
                 return line;
             }
         }
-        // if we are here we have not found an invoice number
+        // if we are here we have not found the given conditions
         return "";
     }
 
+    /**
+     * @param nextLine  the line that should be searched in
+     * @return  true if the next line contains a numeric value
+     */
     private boolean nextLineContainsValue(String nextLine) {
         if (nextLine.contains(",")) {
             String[] parts = nextLine.split(",");
@@ -525,6 +606,9 @@ public class DataExtractorService {
         return false;
     }
 
+    /**
+     * @return  the confidence that should be reached at least
+     */
     private double getConfidence() {
         return confidence;
     }

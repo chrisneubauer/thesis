@@ -19,11 +19,19 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao {
         super(Account.class);
     }
 
+    /**
+     * Hook method to apply additional logic upon save
+     * @param entity  the account that should be saved
+     */
     @Override
     protected void onSave(Account entity) {
 
     }
 
+    /**
+     * @param   accNo   the account number that should be searched for
+     * @return  the account that has been found for the given account number. Null if nothing has been found
+     */
     @Override
     public Account getByAccountNo(String accNo) {
         String hql = "FROM Account a WHERE a.accountNo = ?1";
@@ -35,6 +43,10 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao {
         return (Account) q.getSingleResult();
     }
 
+    /**
+     * @param   type    the account type by which the accounts should be filtered
+     * @return  a list of accounts that belong to the given account type
+     */
     @Override
     public List<Account> getAllByType(AccountType type) {
         String hql = "FROM Account a WHERE a.type.id = ?1";
@@ -52,6 +64,10 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao {
         return result;
     }
 
+    /**
+     * @param   typeId  the ID of the account tpe by which the accounts should be filtered
+     * @return  a list of accounts that belong to the given account type
+     */
     @Override
     public List<Account> getAllByType(int typeId) {
         String hql = "FROM Account a WHERE a.type.id = ?1";
@@ -69,6 +85,10 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao {
         return result;
     }
 
+    /**
+     * @param   accountName  the account name the searched account has
+     * @return  the account with the given name. Null if there is no such account
+     */
     @Override
     public Account getByName(String accountName) {
         String hql = "FROM Account a WHERE a.name = ?1";

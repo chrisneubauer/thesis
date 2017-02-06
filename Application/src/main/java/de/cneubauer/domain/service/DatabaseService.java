@@ -22,6 +22,10 @@ import java.util.List;
  * Service for saving revised documents to the database
  */
 public class DatabaseService {
+    /**
+     * Saves the process result in the database completely
+     * @param result  the process result that should be saved
+     */
     public void saveProcessResult(ProcessResult result) {
         Invoice i = result.getExtractionModel().getInvoiceInformation();
         List<Record> records = result.getExtractionModel().getRecords();

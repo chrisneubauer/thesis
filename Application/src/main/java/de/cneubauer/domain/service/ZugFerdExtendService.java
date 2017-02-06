@@ -30,11 +30,16 @@ public class ZugFerdExtendService {
         return transformator.appendInvoiceToPdf(originalPdf, konikInvoice);
     }
 
-    public void save(byte[] pdf, Invoice i) {
+    /**
+     * Links the invoice to the file and saves it as a scan in the database
+     * @param file  the file that should be saved
+     * @param i  the invoice that should be linked and saved
+     */
+    public void save(byte[] file, Invoice i) {
         Scan scanToSave = new Scan();
         scanToSave.setCreatedDate(Date.valueOf(LocalDate.now()));
         scanToSave.setModifiedDate(Date.valueOf(LocalDate.now()));
-        scanToSave.setFile(pdf);
+        scanToSave.setFile(file);
         scanToSave.setInvoiceInformation(i);
         dao.save(scanToSave);
     }

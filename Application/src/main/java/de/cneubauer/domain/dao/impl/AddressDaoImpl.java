@@ -15,6 +15,10 @@ public class AddressDaoImpl extends AbstractDao<Address> implements AddressDao {
         super(Address.class);
     }
 
+    /**
+     * Hook method to apply additional logic upon save
+     * @param entity  the address that should be saved
+     */
     @Override
     public void onSave(Address entity) {
         if(entity.getCreatedDate() == null) {
