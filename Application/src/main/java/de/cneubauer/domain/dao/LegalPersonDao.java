@@ -8,5 +8,4 @@ import de.cneubauer.domain.bo.LegalPerson;
  * Defines specific methods for LegalPerson
  */
 public interface LegalPersonDao extends IDao<LegalPerson> {
-
 }

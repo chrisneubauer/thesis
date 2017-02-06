@@ -11,6 +11,9 @@ import java.util.List;
  * Defines specific methods for Invoice
  */
 public interface InvoiceDao extends IDao<Invoice> {
-
+    /**
+     * @param date  the issue date that invoices should be filtered for
+     * @return  a list of invoices that are issued on the given date
+     */
     List<Invoice> getAllByDate(LocalDate date);
 }

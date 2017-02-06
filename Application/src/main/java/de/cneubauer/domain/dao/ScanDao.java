@@ -10,5 +10,9 @@ import java.util.Collection;
  * Defines specific methods for Scan
  */
 public interface ScanDao extends IDao<Scan> {
+    /**
+     * @param id  the invoice id that should be filtered for
+     * @return  a collection of scans that contain the invoice id
+     */
     Collection<Scan> getByInvoiceId(int id);
 }

@@ -9,5 +9,8 @@ import java.util.Set;
  * DAO for business object AccountRecord
  */
 public interface AccountRecordDao extends IDao<AccountRecord> {
+    /**
+     * @param recordAccounts  the accounts that should be stored
+     */
     void saveAll(Set<AccountRecord> recordAccounts);
 }
