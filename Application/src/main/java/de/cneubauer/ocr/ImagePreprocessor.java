@@ -1,5 +1,8 @@
 package de.cneubauer.ocr;
 
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGEncodeParam;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import de.cneubauer.util.DeSkewer;
 import magick.MagickException;
 
@@ -82,6 +85,9 @@ public class ImagePreprocessor {
             BufferedImage outputFile = this.deSkewImage(image);
 
             image = outputFile;
+            outputFile = this.adjustDPI(image);
+
+            image = outputFile;
             Logger.getLogger(this.getClass()).log(Level.INFO, "greyscaling...");
             outputFile = this.greyScaleImage(image);
 
@@ -139,6 +145,31 @@ public class ImagePreprocessor {
 
         convert.run(op,img);
         return s2b.getImage();
+    }
+
+    private BufferedImage adjustDPI(BufferedImage image) throws FileNotFoundException {
+        File imageFile = new File(tempPath + "300dpi" + ".jpeg");
+        FileOutputStream fos = new FileOutputStream(imageFile);
+        JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(fos);
+        JPEGEncodeParam jpegEncodeParam = jpegEncoder.getDefaultJPEGEncodeParam(image);
+        jpegEncodeParam.setDensityUnit(JPEGEncodeParam.DENSITY_UNIT_DOTS_INCH);
+        jpegEncoder.setJPEGEncodeParam(jpegEncodeParam);
+        jpegEncodeParam.setQuality(0.75f, false);
+        jpegEncodeParam.setXDensity(300); //DPI rate 100, 200 or 300
+        jpegEncodeParam.setYDensity(300); //DPI rate 100, 200 or 300
+        try {
+            jpegEncoder.encode(image, jpegEncodeParam);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        image.flush();
+        try {
+            fos.close();
+            return ImageIO.read(imageFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /*public BufferedImage reduceNoise() {

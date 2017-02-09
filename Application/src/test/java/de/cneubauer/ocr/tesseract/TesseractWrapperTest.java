@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
 
@@ -208,6 +209,27 @@ public class TesseractWrapperTest extends AbstractTest {
     @Test
     public void getLayoutInformation() throws Exception {
         this.wrapper.getLayoutInformation("..\\Data\\Datenwerk4.pdf", "deu+eng", new File("..\\Data\\Datenwerk4.pdf"));
+    }
+
+    @Test
+    public void testHOCROutput() {
+        String path = "..\\Temp\\Datenwerk9.pdf";
+        //BufferedImage file = ImageIO.read(new File(path));
+        ImagePreprocessor preprocessor = new ImagePreprocessor(path);
+
+        BufferedImage inputImage = preprocessor.preprocess();
+        String result = this.wrapper.initOcr(inputImage, true);
+
+        String lines[] = result.split("\\r?\\n");
+
+        File outputFile = new File("..\\hocrOutput.xml");
+        File outputFile2 = new File("..\\hocrOutput.jpg");
+        try {
+            Files.write(outputFile.toPath(), Arrays.asList(lines));
+            ImageIO.write(inputImage, "jpg", outputFile2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

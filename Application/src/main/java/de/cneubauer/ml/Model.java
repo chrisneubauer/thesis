@@ -1,6 +1,8 @@
 package de.cneubauer.ml;
 
 import de.cneubauer.domain.bo.Account;
+import de.cneubauer.util.config.ConfigHelper;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,8 +29,17 @@ public class Model {
      * @return  true if it is likely the same position, false otherwise
      */
     boolean positionEqualsWith(String positionToCompare) {
-        return position.equals(positionToCompare);
         // TODO: intelligent approach, using not only levenshtein distance but also wordnet
+        int levDistance = StringUtils.getLevenshteinDistance(this.getPosition(), positionToCompare);
+        int length = this.getPosition().length();
+        double distance = (double) levDistance / (double) length;
+        if (distance < ConfigHelper.getConfidenceRate()) {
+            return true;
+        } else {
+            return false;
+        }
+
+        //return position.equals(positionToCompare);
     }
 
     /**

@@ -13,34 +13,44 @@ import java.awt.image.BufferedImage;
  */
 public class HistogramMaker {
     private boolean[] importantRows;
+    private long[] values;
+    private long maxValue;
     private double minThreshold = 0.2;
     private double maxThreshold = 0.8;
 
-    public void setMinThreshold(double minThreshold) {
+    void setMinThreshold(double minThreshold) {
         this.minThreshold = minThreshold;
     }
 
-    public void setMaxThreshold(double maxThreshold) {
+    void setMaxThreshold(double maxThreshold) {
         this.maxThreshold = maxThreshold;
     }
 
-    public BufferedImage makeVerticalHistogram(BufferedImage input) {
+    BufferedImage makeWhiteHistogram(BufferedImage input) {
+        return this.makeHistogram(input, true);
+    }
+
+    BufferedImage makeHistogram(BufferedImage input) {
+        return this.makeHistogram(input, false);
+    }
+
+    BufferedImage makeVerticalHistogram(BufferedImage input, boolean whiteHistogram) {
         int width = input.getWidth();
-        long[] values = new long[width];
+        this.values = new long[width];
         this.importantRows = new boolean[width];
-        long maxValue = 0;
+        this.maxValue = 0;
 
         for (int col = 0; col < width; col++) {
-            long value = this.sumValuesInRow(input, false, col);
-            values[col] = value;
-            if (maxValue < value) {
-                maxValue = value;
+            long value = this.sumValuesInRow(input, false, col, whiteHistogram);
+            this.values[col] = value;
+            if (this.maxValue < value) {
+                this.maxValue = value;
             }
         }
 
-        if (maxValue > 400) {
-            this.adjustValues(values, maxValue);
-            maxValue = 400;
+        if (this.maxValue > 400) {
+            this.adjustValues(this.values, this.maxValue);
+            this.maxValue = 400;
         }
 
         BufferedImage output = new BufferedImage(width, 400, BufferedImage.TYPE_INT_RGB);
@@ -55,24 +65,24 @@ public class HistogramMaker {
         return output;
     }
 
-    public BufferedImage makeHistogram(BufferedImage input) {
+    private BufferedImage makeHistogram(BufferedImage input, boolean whiteHistogram) {
         int length = input.getHeight();
-        long[] values = new long[length];
+        this.values = new long[length];
         this.importantRows = new boolean[length];
-        long maxValue = 0;
+        this.maxValue = 0;
 
         for (int row = 0; row < length; row++) {
-            long value = this.sumValuesInRow(input, true, row);
-            values[row] = value;
-            if (maxValue < value) {
-                maxValue = value;
+            long value = this.sumValuesInRow(input, true, row, whiteHistogram);
+            this.values[row] = value;
+            if (this.maxValue < value) {
+                this.maxValue = value;
             }
         }
 
         // adjust values to 400 pixel
         if (maxValue > 400) {
-            this.adjustValues(values, maxValue);
-            maxValue = 400;
+            this.adjustValues(this.values, maxValue);
+            this.maxValue = 400;
         }
 
         BufferedImage output = new BufferedImage(length, 400, BufferedImage.TYPE_INT_RGB);
@@ -85,26 +95,47 @@ public class HistogramMaker {
         }
 
         for (int row = 0; row < values.length; row++) {
-            long value = values[row];
+            long value = this.values[row];
             this.importantRows[row] = value > maxValue * minThreshold && value < maxValue * maxThreshold;
         }
         return output;
     }
 
-    public boolean[] getImportantRows() {
+    boolean[] getImportantRows() {
         return importantRows;
     }
 
     // true when in row, false when in column
-    private long sumValuesInRow(BufferedImage input, boolean inRow, int rowOrCol) {
+    private long sumValuesInRow(BufferedImage input, boolean inRow, int rowOrCol, boolean whiteHistogram) {
         long value = 0;
+        if (whiteHistogram) {
+            value = 255;
+        }
         if (inRow) {
             for (int col = 0; col < input.getWidth(); col++) {
-                value += new Color(input.getRGB(col, rowOrCol)).getRed();
+                Color cur = new Color(input.getRGB(col, rowOrCol));
+                if (whiteHistogram) {
+                    if (cur.getRed() < 255 * maxThreshold) {
+                        value += cur.getRed();
+                    }
+                } else {
+                    if (cur.getRed() > 255 * maxThreshold) {
+                        value += cur.getRed();
+                    }
+                }
             }
         } else {
             for (int row = 0; row < input.getHeight(); row++) {
-                value += new Color(input.getRGB(rowOrCol, row)).getRed();
+                Color cur = new Color(input.getRGB(rowOrCol, row));
+                if (whiteHistogram) {
+                    if (cur.getRed() < 255 * maxThreshold) {
+                        value += cur.getRed();
+                    }
+                } else {
+                    if (cur.getRed() > 255 * maxThreshold) {
+                        value += cur.getRed();
+                    }
+                }
             }
         }
         return value;
@@ -126,4 +157,11 @@ public class HistogramMaker {
         }
     }
 
+    public long[] getValues() {
+        return values;
+    }
+
+    long getMaxValue() {
+        return maxValue;
+    }
 }

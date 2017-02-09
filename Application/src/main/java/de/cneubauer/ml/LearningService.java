@@ -53,14 +53,26 @@ public class LearningService {
      * @return  the model that is most likely to be used, null if the confidence is not reached
      */
     public Model getMostLikelyModel(String feature) {
+        String replacedString = feature;
         NaiveBayesHelper helper = new NaiveBayesHelper();
         ModelReader reader = new ModelReader();
         try {
             helper.learnMockData(reader.getModels());
+
+            // replace string if it is equal with an existing value
+            for (Model m : reader.getModels()) {
+                if (m.positionEqualsWith(feature)) {
+                    replacedString = m.getPosition();
+                    break;
+                }
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Classification<String, List<Account>> classification = helper.getClassifier().classify(Collections.singleton(feature));
+
+
+        Classification<String, List<Account>> classification = helper.getClassifier().classify(Collections.singleton(replacedString));
         Logger.getLogger(this.getClass()).log(Level.INFO, "Probability of classification: " + classification.getProbability()*100 + "%");
         if (classification.getProbability() > ConfigHelper.getConfidenceRate()) {
             try {

@@ -1,10 +1,16 @@
 package de.cneubauer.ocr.tesseract;
 
 import de.cneubauer.AbstractTest;
+import de.cneubauer.ocr.ImagePartitioner;
+import de.cneubauer.ocr.ImagePreprocessor;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -50,14 +56,53 @@ public class TesseractDataCollectorTest extends AbstractTest {
 
     @Test
     public void executeDatenwerk() throws Exception {
-        String path =  "..\\Data\\Datenwerk";
-        String outputPath = "..\\Data\\OutputDatenwerk\\";
+        String path =  "..\\temp\\Datenwerk";
+        String outputPath = "..\\";
 
-        for (int i = 1; i < 15; i++) {
-            File f = new File(path + i + ".pdf");
-            String result = wrapper.initOcr(f);
+        for (int i = 11; i <= 20; i++) {
+            File imageFile = new File(path + i + ".pdf");
+            BufferedImage image;
+
+            PDDocument pdf = PDDocument.load(imageFile);
+            PDFRenderer renderer = new PDFRenderer(pdf);
+            image = renderer.renderImageWithDPI(0, 300);
+
+            ImagePreprocessor preprocessor = new ImagePreprocessor(image);
+            image = preprocessor.preprocess();
+            ImagePartitioner partitioner = new ImagePartitioner(image);
+            image = partitioner.findTableInInvoice(image, false);
+            String result = wrapper.initOcr(image);
             String lines[] = result.split("\\r?\\n");
             File outputFile = new File(outputPath + i + ".txt");
+            Files.write(outputFile.toPath(), Arrays.asList(lines));
+        }
+    }
+
+    @Test
+    public void executeDatenwerkHeader() throws Exception {
+        String path =  "..\\temp\\Datenwerk";
+        String outputPath = "..\\";
+
+        for (int i = 1; i <= 20; i++) {
+            File imageFile = new File(path + i + ".pdf");
+            BufferedImage image;
+
+            PDDocument pdf = PDDocument.load(imageFile);
+            PDFRenderer renderer = new PDFRenderer(pdf);
+            image = renderer.renderImageWithDPI(0, 300);
+
+            ImagePreprocessor preprocessor = new ImagePreprocessor(image);
+            image = preprocessor.preprocess();
+            ImagePartitioner partitioner = new ImagePartitioner(image);
+            BufferedImage[] parts = partitioner.process();
+            String result = wrapper.initOcr(parts[0]);
+            String lines[] = result.split("\\r?\\n");
+            File outputFile = new File(outputPath + i + "left.txt");
+            Files.write(outputFile.toPath(), Arrays.asList(lines));
+
+            result = wrapper.initOcr(parts[1]);
+            lines = result.split("\\r?\\n");
+            outputFile = new File(outputPath + i + "right.txt");
             Files.write(outputFile.toPath(), Arrays.asList(lines));
         }
     }

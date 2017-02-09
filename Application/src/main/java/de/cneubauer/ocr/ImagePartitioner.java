@@ -25,6 +25,7 @@ public class ImagePartitioner {
     private BufferedImage rightHeader;
     private BufferedImage body;
     private BufferedImage footer;
+    private BufferedImage table;
 
     public ImagePartitioner(File fileToScan) {
         this.scanFile = fileToScan;
@@ -54,10 +55,15 @@ public class ImagePartitioner {
             this.separateHeader(header);
             this.cropBody();
             this.cropFooter();
+            this.table = this.findTableInInvoice(this.body, false);
+            if (this.table != null) {
+                this.body = this.table;
+                this.table.flush();
+            }
             if (ConfigHelper.isDebugMode()) {
                 File leftHeaderFile = new File(".\\temp\\leftHeader.png");
                 File rightHeaderFile = new File(".\\temp\\rightHeader.png");
-                File bodyFile = new File(".\\temp\\body.png");
+                File bodyFile = new File(".\\temp\\body" + System.currentTimeMillis() + ".png");
                 File footerFile = new File(".\\temp\\footer.png");
                 ImageIO.write(this.leftHeader, "png", leftHeaderFile);
                 ImageIO.write(this.rightHeader, "png", rightHeaderFile);
@@ -69,6 +75,62 @@ public class ImagePartitioner {
             Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to process image! Error: " + ex.getMessage());
         }
         return null;
+    }
+
+    public BufferedImage findTableInInvoice(BufferedImage image, boolean whiteTable) {
+        //int xPosOfFirstHorizontalLine = 0;
+        int yPosOfFirstHorizontalLine = 0;
+        //int xPosOfFirstVerticalLine;
+        //int yPosOfFirstVerticalLine;
+
+        //int xPosOfLastHorizontalLine = 0;
+        int yPosOfLastHorizontalLine = 0;
+        //int xPosOfLastVerticalLine;
+        //int yPosOfLastVerticalLine;
+
+
+        //Normalizer normalizer = new Normalizer();
+        //BufferedImage normalizedImage = normalizer.process(image);
+        //BufferedImage thickened = this.thickenImage(normalizedImage);
+        HistogramMaker maker = new HistogramMaker();
+        ImagePreprocessor preprocessor = new ImagePreprocessor(image);
+        BufferedImage processedImage = preprocessor.preprocess();
+        BufferedImage histogram;
+        BufferedImage tobeRemoved = maker.makeVerticalHistogram(processedImage, true);
+        if (whiteTable) {
+            histogram = maker.makeWhiteHistogram(processedImage);
+        } else {
+            histogram = maker.makeHistogram(processedImage);
+        }
+        long[] values = maker.getValues();
+        long max = maker.getMaxValue();
+
+        int maxWidth = image.getWidth();
+        int maxHeight = image.getHeight();
+
+        String outputDir = ".\\temp\\";
+        File test = new File(outputDir + "histogram.png");
+        try {
+            ImageIO.write(tobeRemoved, "png", test);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] < max * 0.5) {
+                if (yPosOfFirstHorizontalLine == 0) {
+                    yPosOfFirstHorizontalLine = i;
+                } else {
+                    yPosOfLastHorizontalLine = i;
+                }
+            }
+        }
+        if (yPosOfFirstHorizontalLine == 0) {
+            // original image return since no table has been found
+            return processedImage;
+        } else {
+            return processedImage.getSubimage(0, yPosOfFirstHorizontalLine, maxWidth, yPosOfLastHorizontalLine - yPosOfFirstHorizontalLine);
+        }
     }
 
     private void convertFileToImage() throws IOException {

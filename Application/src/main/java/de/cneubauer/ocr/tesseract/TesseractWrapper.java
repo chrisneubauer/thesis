@@ -48,6 +48,40 @@ public class TesseractWrapper {
         return instance;
     }
 
+    public String initOcr(BufferedImage file, String config, String value) {
+        ITesseract instance = this.getTesseractInstance();
+        if (config != null && value != null) {
+            instance.setTessVariable(config, value);
+        }
+
+        String result = "";
+        try {
+            result = instance.doOCR(file);
+        } catch (TesseractException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+
+    public String initOcr(BufferedImage file, boolean hocr) {
+        Tesseract instance = (Tesseract) this.getTesseractInstance();
+
+
+        if (hocr) {
+            instance.setHocr(true);
+            instance.setPageSegMode(3);
+            instance.setOcrEngineMode();
+        }
+
+        String result = "";
+        try {
+            result = instance.doOCR(file);
+        } catch (TesseractException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;
+    }
+
     /**
      * @param file  the file to be scanned
      * @return  the ocr result as a String

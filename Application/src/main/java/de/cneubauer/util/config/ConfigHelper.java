@@ -97,7 +97,7 @@ public final class ConfigHelper {
         if (config == null) {
             new ConfigHelper();
         }
-        return TessLang.valueOf(config.get(Cfg.TESSERACTLANGUAGE.getValue()));
+        return TessLang.ofValue(config.get(Cfg.TESSERACTLANGUAGE.getValue()));
     }
 
     public static FerdLevel getPreferredFerdLevel() {

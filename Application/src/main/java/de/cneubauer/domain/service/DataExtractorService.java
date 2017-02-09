@@ -192,8 +192,8 @@ public class DataExtractorService {
     private RecordTrainingEntry recordInLearningFile(String position) {
 
         LearningService service = new LearningService();
-
         Model m = service.getMostLikelyModel(position);
+
 
         // AccountFileHelper.getConfig().containsValue(position);
        return AccountFileHelper.findAccountingRecord(position);

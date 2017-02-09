@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,12 +31,18 @@ public class Record {
      * @param entry  the account-record relation entry to be used for training instances
      */
     public void addRecordTrainingEntry(RecordTrainingEntry entry) {
+        AccountDaoImpl accountDao = new AccountDaoImpl();
+        List<Account> accountList = accountDao.getAll();
         for (Map.Entry<String, Double> mapEntry : entry.getDebitAccounts().entrySet()) {
             try {
                 AccountRecord record = new AccountRecord();
-                AccountDaoImpl accountDao = new AccountDaoImpl();
                 record.setIsDebit(true);
-                record.setAccount(accountDao.getByName(mapEntry.getKey()));
+                for (Account a : accountList) {
+                    if (mapEntry.getKey().equals(a.getName())) {
+                        record.setAccount(a);
+                        break;
+                    }
+                }
                 record.setBruttoValue(mapEntry.getValue());
                 this.getRecordAccounts().add(record);
             } catch (Exception e) {
@@ -46,8 +53,13 @@ public class Record {
         for (Map.Entry<String, Double> mapEntry : entry.getCreditAccounts().entrySet()) {
             try {
                 AccountRecord record = new AccountRecord();
-                AccountDaoImpl accountDao = new AccountDaoImpl();
                 record.setIsDebit(false);
+                for (Account a : accountList) {
+                    if (mapEntry.getKey().equals(a.getName())) {
+                        record.setAccount(a);
+                        break;
+                    }
+                }
                 record.setAccount(accountDao.getByName(mapEntry.getKey()));
                 record.setBruttoValue(mapEntry.getValue());
                 this.getRecordAccounts().add(record);

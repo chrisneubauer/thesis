@@ -1,10 +1,13 @@
 package de.cneubauer.ml;
 
 import de.cneubauer.domain.bo.Account;
+import de.cneubauer.ml.classification.Classification;
+import de.cneubauer.ml.classification.Classifier;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +37,9 @@ public class NaiveBayesHelperTest {
         category.addAll(models.get(0).getDebit());
 
         this.helper.learnMockData(models);
-        System.out.println("a probability is: " + this.helper.getFeatureProbability("a", category));
-    }
 
+        Classification classification = this.helper.getClassifier().classify(Collections.singleton("Grundgebühr 1&1 Surf & Phone 16.000 Office"));
+        System.out.println(classification.getProbability());
+        //System.out.println("a probability is: " + this.helper.getFeatureProbability("Grundgebühr 1&1 Surf & Phone 16.000 Office", category));
+    }
 }
