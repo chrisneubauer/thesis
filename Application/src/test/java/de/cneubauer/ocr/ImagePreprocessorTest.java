@@ -23,7 +23,7 @@ public class ImagePreprocessorTest extends AbstractTest {
 
     @Before
     public void setUp() throws Exception {
-        String path = "..\\data\\Datenwerk5.pdf";
+        String path = "..\\data\\Datenwerk4.pdf";
 
         //path = "..\\data\\20160830_Scans\\Scan_20160822_161042_003.jpg";
         //path = ".\\temp\\tempImage.png";
@@ -32,7 +32,7 @@ public class ImagePreprocessorTest extends AbstractTest {
         if (path.endsWith(".pdf")) {
             PDDocument pdf = PDDocument.load(imageFile);
             PDFRenderer renderer = new PDFRenderer(pdf);
-            this.origImage = renderer.renderImageWithDPI(0, 600);
+            this.origImage = renderer.renderImageWithDPI(0, 300);
         } else {
             this.origImage = ImageIO.read(imageFile);
         }

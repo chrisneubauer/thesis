@@ -213,19 +213,22 @@ public class TesseractWrapperTest extends AbstractTest {
 
     @Test
     public void testHOCROutput() {
-        String path = "..\\Temp\\Datenwerk9.pdf";
+        String path = "..\\Temp\\Datenwerk7.pdf";
         //BufferedImage file = ImageIO.read(new File(path));
         ImagePreprocessor preprocessor = new ImagePreprocessor(path);
 
         BufferedImage inputImage = preprocessor.preprocess();
-        String result = this.wrapper.initOcr(inputImage, true);
+        //String result = this.wrapper.initOcr(inputImage, true);
+        String resultNoOcr = this.wrapper.initOcr(inputImage, false);
+        File noocrFile = new File("..\\hocrStringOutput.txt");
 
-        String lines[] = result.split("\\r?\\n");
+        //String lines[] = result.split("\\r?\\n");
 
         File outputFile = new File("..\\hocrOutput.xml");
         File outputFile2 = new File("..\\hocrOutput.jpg");
         try {
-            Files.write(outputFile.toPath(), Arrays.asList(lines));
+            Files.write(noocrFile.toPath(), Arrays.asList(resultNoOcr.split("\\r?\\n!")));
+            //Files.write(outputFile.toPath(), Arrays.asList(lines));
             ImageIO.write(inputImage, "jpg", outputFile2);
         } catch (IOException e) {
             e.printStackTrace();
