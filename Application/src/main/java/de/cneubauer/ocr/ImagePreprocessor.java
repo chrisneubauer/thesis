@@ -60,7 +60,7 @@ public class ImagePreprocessor {
         if (path.endsWith(".pdf")) {
             PDDocument pdf = PDDocument.load(imageFile);
             PDFRenderer renderer = new PDFRenderer(pdf);
-            this.inputFile = renderer.renderImageWithDPI(0, 600);
+            this.inputFile = renderer.renderImageWithDPI(0, 300);
             pdf.close();
         } else {
             this.inputFile = ImageIO.read(imageFile);
@@ -81,11 +81,17 @@ public class ImagePreprocessor {
         try {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Preprocessing started...");
             BufferedImage image = this.inputFile;
-            Logger.getLogger(this.getClass()).log(Level.INFO, "deskewing...");
-            BufferedImage outputFile = this.deSkewImage(image);
+
+            Logger.getLogger(this.getClass()).log(Level.INFO, "resizing...");
+            BufferedImage outputFile = this.resizeImage(image);
 
             image = outputFile;
+            Logger.getLogger(this.getClass()).log(Level.INFO, "adjusting to 300dpi...");
             outputFile = this.adjustDPI(image);
+
+            image = outputFile;
+            Logger.getLogger(this.getClass()).log(Level.INFO, "deskewing...");
+            outputFile = this.deSkewImage(image);
 
             image = outputFile;
             Logger.getLogger(this.getClass()).log(Level.INFO, "greyscaling...");
@@ -106,6 +112,21 @@ public class ImagePreprocessor {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private BufferedImage resizeImage(BufferedImage image) throws InterruptedException, IOException, IM4JavaException {
+        IMOperation op = new IMOperation();
+        op.addImage();
+
+        op.adaptiveResize(3508, 2480);
+        op.addImage("png:-");
+
+        ConvertCmd convert = new ConvertCmd();
+        Stream2BufferedImage s2b = new Stream2BufferedImage();
+        convert.setOutputConsumer(s2b);
+
+        convert.run(op,image);
+        return s2b.getImage();
     }
 
     private BufferedImage greyScaleImage(BufferedImage img) throws MagickException, InterruptedException, IOException, IM4JavaException {
@@ -153,10 +174,12 @@ public class ImagePreprocessor {
         JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(fos);
         JPEGEncodeParam jpegEncodeParam = jpegEncoder.getDefaultJPEGEncodeParam(image);
         jpegEncodeParam.setDensityUnit(JPEGEncodeParam.DENSITY_UNIT_DOTS_INCH);
-        jpegEncoder.setJPEGEncodeParam(jpegEncodeParam);
-        jpegEncodeParam.setQuality(0.75f, false);
+        //jpegEncodeParam.setQuality(0.75f, false);
+
+        jpegEncodeParam.setQuality(1, false);
         jpegEncodeParam.setXDensity(300); //DPI rate 100, 200 or 300
         jpegEncodeParam.setYDensity(300); //DPI rate 100, 200 or 300
+        jpegEncoder.setJPEGEncodeParam(jpegEncodeParam);
         try {
             jpegEncoder.encode(image, jpegEncodeParam);
         } catch (IOException e) {

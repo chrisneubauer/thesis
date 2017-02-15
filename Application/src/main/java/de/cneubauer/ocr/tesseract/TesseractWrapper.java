@@ -70,7 +70,6 @@ public class TesseractWrapper {
         if (hocr) {
             instance.setHocr(true);
             instance.setPageSegMode(3);
-            instance.setOcrEngineMode();
         }
 
         String result = "";
