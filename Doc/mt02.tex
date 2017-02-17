@@ -3,14 +3,97 @@
 % Electronic invoice formats - A comparison
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{InvoiceFormats}
+\label{Electronic invoice formats - A comparison}
 
-\chapter{Electronic invoice formats - A comparison}
-\label{InvoiceFormats}
+During the technologization of companies over the world, electronic invoices (also known as e-invoice) have become more and more important. E-Invoicing offers companies the possibility to improve their business processes, making invoicing faster and more efficient and enables a direct connection to other tools like ERP-Software. 
 
-During the technologization of companies over the world, electronic invoices (also known as e-invoice) have become more and more important.
+To enable companies these benefits and in order to make the communication between companies even possible a comprehensive standard has to be defined. With an invoice standard at hand, companies can use invoices from their business partners and read them into their systems (in case of B2B). 
+
+There are several invoice standards in action at the moment. The next section will deal with the most important ones and describes them as well as pointing out the benefits and drawbacks of the format.
+After that, the next section defines criteria that are relevant for the application and how to measure them.
+In the last section, these criteria are applied on the formats defined in section \ref{sec2.1} and compared against each other. Eventually a decision regarding the usage of one of these formats is made.
 
 \section{Description of leading formats}
+\label{sec2.1}
+
+%TODO: Write about all those formats out there, the impossibility to write about all of them and which criteria are used to decide which to take
+
+\subsection{UN/EDIFACT}
+\label{sec2.1.1}
+
+EDIFACT is a well-established \cite{basware} subset of standards from CEFACT regarding the electronic interchange of structured data. It is developed and maintained by the United Nations Economic Comission for Europe (UNECE) \cite{unece}.
+
+The European Commission states that the UN/EDIFACT INVOIC message has been a cornerstone in electronic invoicing over the past years \cite{ECInvcStandardization, page 14}.
+
+There are several subsets of EDIFACT that have been developed for different industries. For instance, the chemical industry uses CEFIC/ESCom\footnote{see also: https://www.cefic.org/Industry-support/Implementing-reach/escom/} as their standard, while automotive industry is in charge with ODETTE/FTP2\footnote{see also: https://www.odette.org/services/oftp2}.
+
+EDIFACT has different message types such as ORDCHG for a request to change an order or PAYORD which contains a payment order. In the context of this thesis, the message type INVOIC (containing an invoice) is the most interesting one.
+
+\subsection{XCBL}
+\label{sec2.1.2}
+
+The XML Common Business Library is an extension of the CBL which originally has been devloped by Veo Systems Inc. \cite{coverpages}. The company has been bought by Commerce One Inc. in 1999 \cite{co}, page 29. 
+
+xCBL currently exists in version 4.0 (since 2003)\footnote{see also: https://www.xcbl.org}. Since the company has gone bancrupt in 2004 \ref{scm} it is not very likely that this format gains more interest in the future.
+
+\subsection{OASIS/UBL}
+\label{sec2.1.3}
+
+UBL stands for Universal Business Language and is being developed by OASIS. The current version is 2.1 and is normed by the international standardization organization\footnote{see ISO/IEC 19845:2015}.
+
+Several countries developed their own subset of this format. Especially interesting in this case is a project called PEPPOL (Pan-European Public Procurement Online project) that aims at developing a format for public sectors in the whole European Union\footnote {see also: https://www.peppol.eu/about\textunderscore peppol/about-openpeppol-1}. 
+
+Also interesting in the context of invoice interchange is the UBL-based project called \emph{simplerinvoicing} that aims at connecting ERP systems with accounting and e-invoicing software by providing an own invoicing standard\footnote {see also: www.simplerinvoicing.org/en/}. 
+
+\subsection{ZugFerd}
+\label{sec.2.1.4}
+
+This invoice format has been published initially in 2014 \cite{ferdIntro}. The name is a german acronym, containing the name of the corresponding forum (FeRD). It can be translated to ''Central User Guide of the Forum for electronic Invoicing in Germany''. 
+Although this invoice format is rather young it tries to fulfill the directive 2014/55/EU of the european parliament \cite{dir1455} while still being flexible and simple. This directive states that the use of electronic invoice formats should be adopted by all member states of the european union until the 27. of November 2018 \cite{dir1455, Article 11}. 
+ 
+The approach of the ZugFerd-format enables not only big companies to work with that format, but also smaller and medium companies (SME's) that are in need of such a format but are normally not able to implement a complex electronic invoice standard. 
+Furthermore three levels of conformance are defined: Basic, Comfort and Extended. Each of those levels have a different amount of required information fields, that have to be set in order to be a valid ZugFerd-format. Nevertheless, in all of the three formats, it is possible to define more information in free text fields. 
+
+This enables extensibility of the format and the possible business areas in which this standard can be used.
+
+The German Forum for electronic invoice (FeRD) states that this format has been accepted as a core standard in Germany to be used in the future such that every company, that wants to start business relations with a german company, has to use this standard \ref{ferd}. Furthermore, the possibility to extend this standard to all European Countries is in sight, as stated in \ref{ferd2}.
 
 \section{Definition of decision criteria}
+\label{sec2.2}
+
+While the standards defined in the section before focus on specific areas or try to combine multiple fields, this section defines the criteria that are most relevant for the application that is developed.
+
+% Zukunftssicherheit / Aussichtsreichtum
+\subsection{Future Potential}
+\label{sec2.2.1}
+One of the major criteria for a suitable invoice standard should be its future potential. Developing an application that deals with a standard that is not being used 10 years later does not make sense. Therefore, any standard that is going to be replaced should not be considered useful.
+
+% Relevanz in Deutschland + Relevanz in Europa
+\subsection{Relevance in Germany (and Europe)}
+\label{sec2.2.2}
+As this thesis is being written at a German university, the chosen standard should be relevant in Germany. Even better if it is relevant in Europe as well. On the other Hand, standards that are not of interest for Europe should be excluded.
+
+% Möglichkeiten der Erweiterung in Bezug auf die Länder
+\subsection{Extendability to more countries}
+\label{sec2.2.3}
+The possibilities of a standard to be used in other countries will also affect its importance over the next decades. Standards that only suits the requirements of one country are not important enough. The focus lies on standards with a wide (possible) range of countries to be affected, instead.
+
+% Erweiterbarkeit des Standards allgemein bzw. was deckt er ab?
+\subsection{Extendability of the standard itself}
+\label{sec2.2.4}
+Last but not least, the extendability of the standard itself is an important criterion. The world is changing and new requirements are coming while older ones are getting broken up. A valuable standard should be able to deal with these changes and should be extensible towards new requirements, or special requirements in specific business areas.
+
+% Komplexität
+\subsection{Complexity}
+\label{sec2.2.5}
+The complexity of the standard is important for this thesis too. Not only is the development of the application limited by time, but also makes a complex standard it hard to understand it and less error-prone.
 
 \section{Comparison and decision finding}
+\label{sec2.3}
+
+\subsection{Application of the criteria}
+\label{sec2.3.1}
+
+\subsection{Decision and explanation}
+\label{sec2.3.2}
