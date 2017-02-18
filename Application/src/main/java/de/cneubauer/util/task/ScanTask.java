@@ -7,8 +7,12 @@ import de.cneubauer.domain.service.validation.AccountingRecordValidator;
 import de.cneubauer.domain.service.validation.InvoiceValidator;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
+import de.cneubauer.ocr.HOCRExtractor;
 import de.cneubauer.ocr.ImagePartitioner;
+import de.cneubauer.ocr.ImagePreprocessor;
+import de.cneubauer.ocr.hocr.HocrDocument;
 import de.cneubauer.ocr.tesseract.TesseractWorker;
+import de.cneubauer.util.DocumentCaseSet;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -17,6 +21,7 @@ import javafx.scene.control.ProgressBar;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -46,9 +51,81 @@ public class ScanTask extends Task {
         this.progressBar = progress;
     }
 
-    @Override
-    protected List<ProcessResult> call() throws Exception {
+    protected List<ProcessResult> callNew() throws Exception {
         int counter = 0;
+        Platform.runLater(() -> filesScanned.setText("0 / " + filesToScan.length));
+        for (File f : filesToScan) {
+            Platform.runLater(() -> currentFile.setText(f.getName()));
+            ProcessResult r = new ProcessResult();
+            r.setDocName(f.getName());
+            r.setFile(f);
+            try {
+                Logger.getLogger(this.getClass()).log(Level.INFO, "reading file on path: " + f.getPath());
+                ImagePreprocessor preprocessor = new ImagePreprocessor(f.getPath());
+                BufferedImage preprocessedImage = preprocessor.preprocess();
+
+                Logger.getLogger(this.getClass()).log(Level.INFO, "initiating ocr threads...");
+                Platform.runLater(() -> this.status.setText("Scanning header, body and footer..."));
+
+                TesseractWorker worker = new TesseractWorker(preprocessedImage, true);
+                String document = null;
+                worker.run();
+                while (document == null) {
+                    document = worker.getResultIfFinished();
+                }
+
+                HocrDocument hocrDocument = new HocrDocument(document);
+
+                // TODO: remove partitioning
+                ImagePartitioner partitioner = new ImagePartitioner(preprocessedImage);
+                BufferedImage[] imageParts = partitioner.process();
+                String[] ocrParts = this.performOCR(imageParts);
+
+                Platform.runLater(() -> status.setText("Extracting information..."));
+
+                // TODO: parallelize account records and invoice information
+                DataExtractorService service = new DataExtractorService(hocrDocument, ocrParts);
+                Invoice i = service.extractInvoiceInformationFromHocr();
+                List<Record> recordList = service.extractAccountingRecordInformation();
+                DocumentCaseSet caseSet = service.getCaseSet();
+
+                ExtractionModel m = new ExtractionModel();
+                m.setInvoiceInformation(i);
+                m.setRecords(recordList);
+                m.setHocrDocument(hocrDocument);
+                m.setCaseSet(caseSet);
+
+                r.setExtractionModel(m);
+                r.setProblem("");
+                //r.getExtractionModel().setCaseSet(caseSet);
+
+                if (this.resultValid(r)) {
+                    r.setStatus(ScanStatus.OK);
+                } else {
+                    r.setStatus(ScanStatus.ISSUE);
+                    r.setProblem("Missing Information");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                r.setProblem(ex.getMessage());
+                r.setStatus(ScanStatus.ERROR);
+            }
+            current += percentage;
+            processResults.add(counter, r);
+            counter++;
+            int finalCounter = counter;
+            Platform.runLater(() -> filesScanned.setText(String.valueOf(finalCounter) + " / " + filesToScan.length));
+            Logger.getLogger(this.getClass()).log(Level.INFO, "new progress: " + current * 100 + "%.");
+            Platform.runLater(() -> progressBar.setProgress(current));
+        }
+        return processResults;
+    }
+
+    @Override
+    @Deprecated
+    protected List<ProcessResult> call() throws Exception {
+        return this.callNew();
+        /*int counter = 0;
         Platform.runLater(() -> filesScanned.setText("0 / " + filesToScan.length));
         for (File f : filesToScan) {
             Platform.runLater(() -> currentFile.setText(f.getName()));
@@ -94,21 +171,21 @@ public class ScanTask extends Task {
             Logger.getLogger(this.getClass()).log(Level.INFO, "new progress: " + current * 100 + "%.");
             Platform.runLater(() -> progressBar.setProgress(current));
         }
-        return processResults;
+        return processResults;*/
     }
 
     private String[] performOCR(BufferedImage[] imageParts) {
         // TODO: put stuff out of gui
-        TesseractWorker leftHeaderWorker = new TesseractWorker(imageParts[0]);
+        TesseractWorker leftHeaderWorker = new TesseractWorker(imageParts[0], false);
         Thread leftHeaderThread = new Thread(leftHeaderWorker);
 
-        TesseractWorker rightHeaderWorker = new TesseractWorker(imageParts[1]);
+        TesseractWorker rightHeaderWorker = new TesseractWorker(imageParts[1], false);
         Thread rightHeaderThread = new Thread(rightHeaderWorker);
 
-        TesseractWorker bodyWorker = new TesseractWorker(imageParts[2]);
+        TesseractWorker bodyWorker = new TesseractWorker(imageParts[2], false);
         Thread bodyThread = new Thread(bodyWorker);
 
-        TesseractWorker footerWorker = new TesseractWorker(imageParts[3]);
+        TesseractWorker footerWorker = new TesseractWorker(imageParts[3], false);
         Thread footerThread = new Thread(footerWorker);
 
         boolean leftHeaderFinished = false;

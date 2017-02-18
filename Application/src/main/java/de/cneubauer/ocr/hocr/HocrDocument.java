@@ -11,7 +11,7 @@ public class HocrDocument {
     private List<HocrPage> pages;
 
     public HocrDocument(String document) {
-        String[] lines = document.split("\\n");
+        String[] lines = document.split("\\r?\\n");
         this.pages = new LinkedList<>();
         int currentPage = -1;
         String currentArea = "";

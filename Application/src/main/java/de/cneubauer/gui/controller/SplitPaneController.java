@@ -1,5 +1,6 @@
 package de.cneubauer.gui.controller;
 
+import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.util.enumeration.ValidationStatus;
 import javafx.beans.property.DoubleProperty;
@@ -132,8 +133,12 @@ public class SplitPaneController extends GUIController {
 
     // updates all reviewed information and return to list view
     private void updateAndReturn() {
-        model.setRecords(accountingRecordsTabController.updateInformation());
-        model.setInvoiceInformation(invoiceTabController.updateInformation());
+        Invoice oldInfo = model.getInvoiceInformation();
+        //model.setRecords(accountingRecordsTabController.updateInformation());
+        model.setUpdatedRecords(accountingRecordsTabController.updateInformation());
+        //model.setInvoiceInformation(invoiceTabController.updateInformation());
+        model.setUpdatedInvoiceInformation(invoiceTabController.updateInformation());
+
         //accountingRecordsTabController.addRevisedToFile();
         invoiceTabController.addRevisedToFile();
         caller.updateSelected(index, model);

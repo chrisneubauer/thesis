@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
  * ProcessedListController shows list of all processed files
  */
 public class ProcessedListController extends GUIController {
-    public TableView<ProcessResult> progressedList;
+    public TableView<ProcessResult> processedList;
     public TableColumn<ProcessResult, ScanStatus> statusColumn;
     public TableColumn<ProcessResult, String> documentColumn;
     public TableColumn<ProcessResult, String> problemColumn;
@@ -75,7 +75,7 @@ public class ProcessedListController extends GUIController {
     }
 
     void initData(ObservableList<ProcessResult> data) {
-        progressedList.setItems(data);
+        processedList.setItems(data);
         this.model = data;
         this.initialize();
     }
@@ -87,19 +87,21 @@ public class ProcessedListController extends GUIController {
             if (result.getStatus().equals(ScanStatus.OK)) {
                 DatabaseService service = new DatabaseService();
                 service.saveProcessResult(result);
-                Invoice i = result.getExtractionModel().getInvoiceInformation();
-                InvoiceFileHelper.write(i.getCreditor().getName(), i.getDebitor().getName());
-                List<Record> recordList = result.getExtractionModel().getRecords();
-                for (Record record : recordList) {
-                    AccountFileHelper.addAccountingRecord(record);
+                //Invoice i = result.getExtractionModel().getInvoiceInformation();
+               // InvoiceFileHelper.write(i.getCreditor().getName(), i.getDebitor().getName());
+                //List<Record> recordList = result.getExtractionModel().getRecords();
+                //for (Record record : recordList) {
+
+                 //   AccountFileHelper.addAccountingRecord(record);
                     //AccountFileHelper.write(record.getEntryText(), record.getDebit().getAccountNo());
-                }
+                //}
                 counter++;
             }
         }
         Alert information = new Alert(Alert.AlertType.INFORMATION);
         information.setContentText(counter + " documents have been saved.");
         information.setHeaderText("Saving successful");
+        information.show();
     }
 
     // Holds logic for the open pdf button
@@ -160,9 +162,9 @@ public class ProcessedListController extends GUIController {
     }
 
     void updateSelected(int index, ExtractionModel newModel) {
-        this.progressedList.getItems().get(index).setExtractionModel(newModel);
-        this.progressedList.getItems().get(index).setStatus(ScanStatus.OK);
-        this.progressedList.getItems().get(index).setProblem("No Problems detected");
-        this.progressedList.refresh();
+        this.processedList.getItems().get(index).setExtractionModel(newModel);
+        this.processedList.getItems().get(index).setStatus(ScanStatus.OK);
+        this.processedList.getItems().get(index).setProblem("No Problems detected");
+        this.processedList.refresh();
     }
 }

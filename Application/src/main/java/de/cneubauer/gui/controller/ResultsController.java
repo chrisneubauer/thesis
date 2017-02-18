@@ -2,21 +2,17 @@ package de.cneubauer.gui.controller;
 
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.LegalPerson;
+import de.cneubauer.domain.dao.LegalPersonDao;
+import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import de.cneubauer.domain.helper.InvoiceFileHelper;
-import de.cneubauer.domain.service.ZugFerdExtendService;
 import de.cneubauer.util.enumeration.ValidationStatus;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,11 +44,13 @@ public class ResultsController extends GUIController {
     @FXML private TextField extractedSkonto;
     @FXML private TextField extractedDeliveryDate;
     private Invoice model;
+    private Invoice oldModel;
 
     void initData(Invoice extractedInformation, SplitPaneController superCtrl) {
         this.superCtrl = superCtrl;
         this.model = extractedInformation;
-        this.showResultsBeforeSave(extractedInformation);
+        this.oldModel = extractedInformation;
+        this.updateModel(extractedInformation);
         this.extractedDebitor.getScene().getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
         this.addAllListeners();
     }
@@ -84,7 +82,7 @@ public class ResultsController extends GUIController {
     }
 
     @FXML
-    private void showResultsBeforeSave(Invoice invInfo) {
+    private void updateModel(Invoice invInfo) {
         if(invInfo.getInvoiceNumber() != null) {
             this.extractedInvoiceNumber.setText(invInfo.getInvoiceNumber());
         }
@@ -122,40 +120,6 @@ public class ResultsController extends GUIController {
             String date = formatter.format(new Date(invInfo.getDeliveryDate().getTime()));
             this.extractedDeliveryDate.setText(date);
         }
-    }
-
-    @FXML
-    @Deprecated
-    public void saveToDatabase() {
-        //if (this.validateFieldsBeforeSave()) {
-            try {
-                Logger.getLogger(this.getClass()).log(Level.INFO, "Fields valid. Initiating save sequence");
-                ZugFerdExtendService service = new ZugFerdExtendService();
-
-                Invoice i = this.convertToInvoice();
-                this.generateSuccessMessage();
-                this.closeExtractionAfterSave();
-            } catch (Exception ex){
-                this.generateErrorMessage(ex.getMessage());
-            }
-        //} else {
-            // make message and validation errors
-        //    this.generateErrorMessage("Validation failed! Please correct the errors.");
-        //}
-    }
-
-    private void generateErrorMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setHeaderText("Could not save!");
-        alert.setContentText(message);
-        alert.show();
-    }
-
-    private void generateSuccessMessage() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText("Saved successfully");
-        alert.setContentText("The invoice has been successfully saved!");
-        alert.showAndWait();
     }
 
     List<ValidationStatus> validateFieldsBeforeSave() {
@@ -222,8 +186,25 @@ public class ResultsController extends GUIController {
         Invoice result = new Invoice();
         result.setIssueDate(this.convertStringToDate(this.extractedIssueDate.getText()));
         result.setInvoiceNumber(this.extractedInvoiceNumber.getText());
-        result.setDebitor(new LegalPerson(this.extractedDebitor.getText()));
-        result.setCreditor(new LegalPerson(this.extractedCreditor.getText()));
+        LegalPersonDao legalPersonDao = new LegalPersonDaoImpl();
+        List<LegalPerson> lpList = legalPersonDao.getAll();
+        if (lpList != null && lpList.size() > 0) {
+            for (LegalPerson p : lpList) {
+                if (p.getName() != null) {
+                    if (p.getName().equals(this.extractedDebitor.getText())) {
+                        result.setDebitor(p);
+                    } else if (p.getName().equals(this.extractedCreditor.getText())) {
+                        result.setCreditor(p);
+                    }
+                }
+            }
+        }
+        if (result.getDebitor() == null) {
+            result.setDebitor(new LegalPerson(this.extractedDebitor.getText()));
+        }
+        if (result.getCreditor() == null) {
+            result.setCreditor(new LegalPerson(this.extractedCreditor.getText()));
+        }
         result.setDeliveryDate(this.convertStringToDate(this.extractedDeliveryDate.getText()));
         result.setLineTotal(Double.valueOf(this.extractedLineTotal.getText()));
         result.setAllowanceTotal(Double.valueOf(this.extractedAllowanceTotal.getText()));
@@ -259,25 +240,6 @@ public class ResultsController extends GUIController {
         } else {
             this.extractedSkonto.setVisible(false);
             this.extractedSkontoLabel.setVisible(false);
-        }
-    }
-
-
-    //this method closes the view from ResultsController after save
-    @FXML
-    private void closeExtractionAfterSave() {
-        try {
-            Stage stage = (Stage) this.extractedSkontoLabel.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/mainMenu.fxml"));
-
-            Parent root = loader.load();
-            Scene scene = new Scene(root, 800, 600);
-            stage.setScene(scene);
-
-            stage.show();
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 

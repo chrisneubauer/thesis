@@ -27,8 +27,8 @@ public class LegalPerson {
      * @param name  the name of the legal person. Can contain corporate form information
      */
     public LegalPerson(String name) {
-        if (name.contains(" ")) {
-            if (this.checkCorporateForm(name.split(" ")[1])) {
+        /*if (name.contains(" ")) {
+            if (this.checkCorporateForm(name)) {
                 this.setIsCompany(true);
                 this.setCompanyName(name.split(" ")[0]);
                 //this.setCorporateForm(name.split(" ")[1]);
@@ -38,6 +38,10 @@ public class LegalPerson {
             }
         } else {
             this.setName(name);
+        }*/
+        this.setName(name);
+        if (this.checkCorporateForm(name)) {
+            this.setIsCompany(true);
         }
     }
 
@@ -50,7 +54,7 @@ public class LegalPerson {
     @Override
     public String toString() {
         String result;
-        if (isCompany) {
+        if (this.getIsCompany() && this.getCompanyName() != null) {
             result = this.getCompanyName();
             if (this.getCorporateForm() != null) {
                 result += " " + this.getCorporateForm().getShortName();

@@ -1,5 +1,12 @@
 package de.cneubauer.gui;
 
+import de.cneubauer.database.DBInformationHolder;
+import de.cneubauer.domain.bo.Creditor;
+import de.cneubauer.domain.bo.Keyword;
+import de.cneubauer.domain.dao.CreditorDao;
+import de.cneubauer.domain.dao.KeywordDao;
+import de.cneubauer.domain.dao.impl.CreditorDaoImpl;
+import de.cneubauer.domain.dao.impl.KeywordDaoImpl;
 import de.cneubauer.gui.controller.GUIController;
 import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
@@ -19,10 +26,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Locale;
-import java.util.Map;
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by Christoph Neubauer on 24.09.2016.
@@ -30,6 +34,7 @@ import java.util.ResourceBundle;
  */
 public class Start extends Application {
     private static HostServices hostServices;
+    private static DBInformationHolder holder;
 
     private static void setHostServicesInternal(HostServices s){
         hostServices = s;
@@ -40,7 +45,7 @@ public class Start extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/startMenu.fxml");
 
         Locale locale;
@@ -56,11 +61,19 @@ public class Start extends Application {
         FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 600,200);
+        Scene scene = new Scene(root, 600, 200);
         Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");
         scene.getStylesheets().add(String.valueOf(getClass().getResource("../../../css/validationError.css")));
 
         setHostServicesInternal(this.getHostServices());
+/*
+        KeywordDao keywordDao = new KeywordDaoImpl();
+        List<Keyword> keywordList = keywordDao.getAll();
+
+        CreditorDao creditorDao = new CreditorDaoImpl();
+        List<Creditor> creditorList = creditorDao.getAll();
+
+        setDBInformationHolder(new DBInformationHolder(keywordList, creditorList));*/
 
         primaryStage.setTitle("Ferd-Transformator");
         primaryStage.setScene(scene);
@@ -87,5 +100,13 @@ public class Start extends Application {
         config.putIfAbsent(Cfg.TESSERACTLANGUAGE.getValue(), TessLang.ENGLISHANDGERMAN.getValue());
         config.putIfAbsent(Cfg.APPLICATIONLANGUAGE.getValue(), AppLang.ENGLISH.name());
         ConfigHelper.rewrite(config);
+    }
+
+    public void setDBInformationHolder(DBInformationHolder dBInformationHolder) {
+        holder = dBInformationHolder;
+    }
+
+    public static DBInformationHolder getHolder() {
+        return holder;
     }
 }

@@ -2,6 +2,8 @@ package de.cneubauer.gui.model;
 
 import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.ocr.hocr.HocrDocument;
+import de.cneubauer.util.DocumentCaseSet;
 
 import java.util.List;
 
@@ -11,7 +13,15 @@ import java.util.List;
  */
 public class ExtractionModel {
     private Invoice invoiceInformation;
+    private Invoice updatedInvoiceInformation;
+
     private List<Record> records;
+    private List<Record> updatedRecords;
+
+    private HocrDocument hocrDocument;
+    private DocumentCaseSet caseSet;
+
+    private byte[] file;
 
     public Invoice getInvoiceInformation() {
         return invoiceInformation;
@@ -27,5 +37,45 @@ public class ExtractionModel {
 
     public void setRecords(List<Record> records) {
         this.records = records;
+    }
+
+    public DocumentCaseSet getCaseSet() {
+        return caseSet;
+    }
+
+    public void setCaseSet(DocumentCaseSet caseSet) {
+        this.caseSet = caseSet;
+    }
+
+    public void setHocrDocument(HocrDocument hocrDocument) {
+        this.hocrDocument = hocrDocument;
+    }
+
+    public void setUpdatedInvoiceInformation(Invoice updatedInvoiceInformation) {
+        this.updatedInvoiceInformation = updatedInvoiceInformation;
+    }
+
+    public void setUpdatedRecords(List<Record> updatedRecords) {
+        this.updatedRecords = updatedRecords;
+    }
+
+    public Invoice getUpdatedInvoiceInformation() {
+        return updatedInvoiceInformation;
+    }
+
+    public List<Record> getUpdatedRecords() {
+        return updatedRecords;
+    }
+
+    public HocrDocument getHocrDocument() {
+        return hocrDocument;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
     }
 }

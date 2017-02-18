@@ -1,16 +1,13 @@
 package de.cneubauer.domain.service;
 
 import com.google.common.io.Files;
-import de.cneubauer.domain.bo.Record;
-import de.cneubauer.domain.bo.Invoice;
-import de.cneubauer.domain.bo.Scan;
-import de.cneubauer.domain.dao.RecordDao;
-import de.cneubauer.domain.dao.InvoiceDao;
-import de.cneubauer.domain.dao.ScanDao;
-import de.cneubauer.domain.dao.impl.RecordDaoImpl;
-import de.cneubauer.domain.dao.impl.InvoiceDaoImpl;
-import de.cneubauer.domain.dao.impl.ScanDaoImpl;
+import de.cneubauer.domain.bo.*;
+import de.cneubauer.domain.dao.*;
+import de.cneubauer.domain.dao.impl.*;
+import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
+import de.cneubauer.ocr.hocr.HocrDocument;
+import de.cneubauer.util.DocumentCaseSet;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -22,13 +19,18 @@ import java.util.List;
  * Service for saving revised documents to the database
  */
 public class DatabaseService {
+    private List<Keyword> keywordList;
+    private List<Creditor> creditorList;
+    private CreditorDao creditorDao;
+    private DocumentCaseDao caseDao;
+
     /**
      * Saves the process result in the database completely
      * @param result  the process result that should be saved
      */
     public void saveProcessResult(ProcessResult result) {
-        Invoice i = result.getExtractionModel().getInvoiceInformation();
-        List<Record> records = result.getExtractionModel().getRecords();
+        Invoice i = result.getExtractionModel().getUpdatedInvoiceInformation();
+        List<Record> records = result.getExtractionModel().getUpdatedRecords();
 
         InvoiceDao invoiceDao = new InvoiceDaoImpl();
         invoiceDao.save(i);
@@ -48,5 +50,111 @@ public class DatabaseService {
         for (Record r : records) {
             accountDao.save(r);
         }
+
+        DocumentCaseSet additionalSet;
+        DocumentCaseSet oldSet = result.getExtractionModel().getCaseSet();
+        this.caseDao = new DocumentCaseDaoImpl();
+
+        KeywordDao keywordDao = new KeywordDaoImpl();
+        keywordList = keywordDao.getAll();
+
+        this.creditorDao = new CreditorDaoImpl();
+        this.creditorList = creditorDao.getAll();
+        // oldSet == null if there was no information to the creditor or the creditor has not been found
+        if (oldSet == null) {
+            additionalSet = this.checkCaseSet(result.getExtractionModel(), false);
+        } else {
+            additionalSet = this.checkCaseSet(result.getExtractionModel(), true);
+            caseDao.saveCases(oldSet);
+        }
+        caseDao.saveCases(additionalSet);
+    }
+
+    private DocumentCaseSet checkCaseSet(ExtractionModel extractionModel, boolean compareWithOldSet) {
+        Invoice newI = extractionModel.getUpdatedInvoiceInformation();
+        Invoice oldI = extractionModel.getInvoiceInformation();
+        HocrDocument doc = extractionModel.getHocrDocument();
+        DocumentCaseSet additionalSet = new DocumentCaseSet();
+        DocumentCaseSet oldSet = extractionModel.getCaseSet();
+        int caseId = this.caseDao.getHighestCaseId() + 1;
+
+        if (compareWithOldSet && oldSet.getBuyerCase() != null && oldI.getDebitor() != null && newI.getDebitor() != null) {
+            oldSet.getBuyerCase().setIsCorrect(newI.getDebitor().getId() == oldI.getDebitor().getId());
+        }
+        DocumentCase buyerCase = new DocumentCase();
+        String pos = doc.getPage(0).findPosition(newI.getDebitor().getName());
+        if (pos != null) {
+            buyerCase.setPosition(pos);
+            buyerCase.setKeyword(this.keywordList.get(4));
+            buyerCase.setIsCorrect(true);
+            buyerCase.setCreatedDate(Date.valueOf(LocalDate.now()));
+            buyerCase.setCreditor(this.findCreditor(newI.getCreditor()));
+            buyerCase.setCaseId(caseId);
+            additionalSet.setBuyerCase(buyerCase);
+        }
+
+        if (compareWithOldSet && oldSet.getInvoiceNoCase() != null && newI.getInvoiceNumber() != null && oldI.getInvoiceNumber() != null) {
+            oldSet.getInvoiceNoCase().setIsCorrect(newI.getInvoiceNumber().equals(oldI.getInvoiceNumber()));
+        }
+        DocumentCase invoiceNoCase = new DocumentCase();
+        pos = doc.getPage(0).findPosition(newI.getInvoiceNumber());
+        if (pos != null) {
+            invoiceNoCase.setPosition(pos);
+            invoiceNoCase.setKeyword(this.keywordList.get(1));
+            invoiceNoCase.setIsCorrect(true);
+            invoiceNoCase.setCreatedDate(Date.valueOf(LocalDate.now()));
+            invoiceNoCase.setCreditor(this.findCreditor(newI.getCreditor()));
+            invoiceNoCase.setCaseId(caseId);
+            additionalSet.setInvoiceNoCase(invoiceNoCase);
+        }
+
+        if (compareWithOldSet && oldSet.getInvoiceDateCase() != null && newI.getIssueDate() != null && oldI.getIssueDate() != null) {
+            oldSet.getInvoiceDateCase().setIsCorrect(newI.getIssueDate().equals(oldI.getIssueDate()));
+        }
+        DocumentCase invoiceDateCase = new DocumentCase();
+        pos = doc.getPage(0).findPosition(this.convertDateToString(newI.getIssueDate()));
+        if (pos != null) {
+            invoiceDateCase.setPosition(pos);
+            invoiceDateCase.setKeyword(this.keywordList.get(2));
+            invoiceDateCase.setIsCorrect(true);
+            invoiceDateCase.setCreatedDate(Date.valueOf(LocalDate.now()));
+            invoiceDateCase.setCreditor(this.findCreditor(newI.getCreditor()));
+            invoiceDateCase.setCaseId(caseId);
+            additionalSet.setInvoiceDateCase(invoiceDateCase);
+        }
+
+        return additionalSet;
+    }
+
+    private Creditor findCreditor(LegalPerson p) {
+        for (Creditor c : creditorList) {
+            if (c.getLegalPerson().getId() == p.getId()) {
+                return c;
+            }
+        }
+        // at this point, the legal person is not yet registered as a creditor
+        Creditor c = new Creditor();
+        c.setLegalPerson(p);
+        c.setName(p.getName());
+        creditorDao.save(c);
+        this.creditorList = creditorDao.getAll();
+        return c;
+    }
+
+    private String convertDateToString(Date date) {
+        LocalDate ld = date.toLocalDate();
+        StringBuilder sb = new StringBuilder();
+        if (ld.getDayOfMonth() > 9) {
+            sb.append(ld.getDayOfMonth()).append(".");
+        } else {
+            sb.append("0").append(ld.getDayOfMonth()).append(".");
+        }
+        if (ld.getMonthValue() > 9) {
+            sb.append(ld.getMonthValue()).append(".");
+        } else {
+            sb.append("0").append(ld.getMonthValue()).append(".");
+        }
+        sb.append(ld.getYear());
+        return sb.toString();
     }
 }

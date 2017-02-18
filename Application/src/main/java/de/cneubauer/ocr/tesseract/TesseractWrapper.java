@@ -66,7 +66,6 @@ public class TesseractWrapper {
     public String initOcr(BufferedImage file, boolean hocr) {
         Tesseract instance = (Tesseract) this.getTesseractInstance();
 
-
         if (hocr) {
             instance.setHocr(true);
             instance.setPageSegMode(3);
@@ -86,7 +85,8 @@ public class TesseractWrapper {
      * @return  the ocr result as a String
      */
     public String initOcr(BufferedImage file) {
-        ITesseract instance = this.getTesseractInstance();
+        return this.initOcr(file, true);
+        /*ITesseract instance = this.getTesseractInstance();
 
         String result = "";
         try {
@@ -94,13 +94,14 @@ public class TesseractWrapper {
         } catch (TesseractException e) {
             System.err.println(e.getMessage());
         }
-        return result;
+        return result;*/
     }
 
     /**
      * @param path  the path where the file to be scanned is located
      * @return  the ocr result as a String
      */
+    @Deprecated
     public String initOcr(String path) {
         File imageFile = new File(path);
         return this.initOcr(imageFile);
@@ -111,7 +112,25 @@ public class TesseractWrapper {
      * @return  the ocr result as a String
      */
     public String initOcr(File file) {
-        ITesseract instance = this.getTesseractInstance();
+        return this.initOcr(file, true);
+        /*ITesseract instance = this.getTesseractInstance();
+
+        String result = "";
+        try {
+            result = instance.doOCR(file);
+        } catch (TesseractException e) {
+            System.err.println(e.getMessage());
+        }
+        return result;*/
+    }
+
+    public String initOcr(File file, boolean hocr) {
+        Tesseract instance = (Tesseract) this.getTesseractInstance();
+
+        if (hocr) {
+            instance.setHocr(true);
+            instance.setPageSegMode(3);
+        }
 
         String result = "";
         try {
@@ -120,28 +139,6 @@ public class TesseractWrapper {
             System.err.println(e.getMessage());
         }
         return result;
-    }
-
-    public void getLayoutInformation(String path, String lang, File file) throws IOException {
-        ITessAPI.TessBaseAPI api = TessAPI1.TessBaseAPICreate();
-        TessAPI1.TessBaseAPIInit3(api, path, lang);
-        TessAPI1.TessBaseAPISetPageSegMode(api, TessAPI1.TessPageSegMode.PSM_AUTO);
-        FileChannel fc = FileChannel.open(file.toPath());
-        fc.map(FileChannel.MapMode.READ_ONLY, 23,23);
-        ByteBuffer image = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
-        int w1 = image.get(6);
-        int w2 = image.get(7);
-        int h1 = image.get(8);
-        int h2 = image.get(9);
-        int w = (w2 << 8) | w1;
-        int h = (h2 << 8) | h1;
-        TessAPI1.TessBaseAPISetImage(api, image, w, h, 8, 8*w);
-        //TessAPI1.TessBaseAPISetImage(api, img, w, h, bpp, bpp*w);
-        TessAPI1.TessBaseAPIGetUTF8Text(api);
-        TessAPI1.TessBaseAPIInitForAnalysePage(api);
-        ITessAPI.TessPageIterator iterator = TessAPI1.TessBaseAPIAnalyseLayout(api);
-        ITessAPI.TessResultIterator ri = TessAPI1.TessBaseAPIGetIterator(api);
-        ITessAPI.TessPageIterator pi = TessAPI1.TessResultIteratorGetPageIterator(ri);
     }
 
     /**

@@ -14,6 +14,7 @@ public class TesseractWorker implements Runnable {
     private String result;
     private File fileToScan;
     private BufferedImage imgToScan;
+    private boolean runWithHocr;
 
     public TesseractWorker(File f) {
         this.fileToScan = f;
@@ -25,6 +26,12 @@ public class TesseractWorker implements Runnable {
         this.fileToScan = null;
     }
 
+    public TesseractWorker(BufferedImage img, boolean hocr) {
+        this.imgToScan = img;
+        this.fileToScan = null;
+        this.runWithHocr = hocr;
+    }
+
     /**
      * Executes tesseract ocr using a wrapper
      * The result can be obtained using the getResultIfFinished() method
@@ -33,9 +40,9 @@ public class TesseractWorker implements Runnable {
     public void run() {
         TesseractWrapper wrapper = new TesseractWrapper();
         if (this.imgToScan == null) {
-            this.result = wrapper.initOcr(this.fileToScan);
+            this.result = wrapper.initOcr(this.fileToScan, runWithHocr);
         } else {
-            this.result = wrapper.initOcr(this.imgToScan);
+            this.result = wrapper.initOcr(this.imgToScan, runWithHocr);
         }
         Logger.getLogger(this.getClass()).log(Level.INFO, "Finished OCR");
     }

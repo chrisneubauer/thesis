@@ -46,8 +46,7 @@ public class HocrDocumentTest extends AbstractTest {
         for (HocrArea area : document.getPage(0).getAreas()) {
             wordlist.addAll(area.getAllWordsInArea());
         }
-        Assert.isTrue(wordlist != null);
-
+        Assert.isTrue(wordlist.size() > 0);
     }
 
 }

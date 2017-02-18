@@ -7,9 +7,9 @@ import java.util.List;
  * Created by Christoph Neubauer on 14.02.2017.
  * Represents a line in the HOCR output format
  */
-public class HocrLine {
+public class HocrLine extends HocrElement {
     private String id;
-    private String position;
+    //private String position;
 
     private List<HocrWord> words;
 
@@ -40,7 +40,79 @@ public class HocrLine {
         }
     }
 
+    @Override
+    public String getValue() {
+        return this.getWordsAsString();
+    }
+
     public List<HocrWord> getWords() {
         return words;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public HocrWord getWordByPosition(int[] position) {
+        for (HocrWord word : this.words) {
+            String[] stringPos = word.getPosition().split("\\+");
+            // 0: startX, 1: startY, 2: endX, 3: endY
+            int[] pos = new int[] {Integer.valueOf(stringPos[0]), Integer.valueOf(stringPos[1]), Integer.valueOf(stringPos[2]), Integer.valueOf(stringPos[3])};
+
+            boolean xStartsEarlier = pos[0] <= position[0];
+            boolean yStartsEarlier = pos[1] <= position[1];
+            boolean xEndsLater = pos[2] >= position[2];
+            boolean yEndsLater = pos[3] >= position[3];
+
+            if (xStartsEarlier && yStartsEarlier && xEndsLater && yEndsLater) {
+                return word;
+            }
+        }
+        return null;
+    }
+
+    public String getWordsAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (HocrWord word : this.words) {
+            sb.append(word.getValue());
+            sb.append(" ");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
+
+    public HocrWord getWordsByPosition(int[] linePos) {
+        List<HocrWord> possibleWords = new LinkedList<>();
+        int xStart = linePos[0];
+        int yStart = linePos[1];
+        int xEnd = linePos[2];
+        int yEnd = linePos[3];
+        for (HocrWord word : this.words) {
+            String[] stringPos = word.getPosition().split("\\+");
+            // 0: startX, 1: startY, 2: endX, 3: endY
+            int[] pos = new int[] {Integer.valueOf(stringPos[0]), Integer.valueOf(stringPos[1]), Integer.valueOf(stringPos[2]), Integer.valueOf(stringPos[3])};
+
+            boolean xStartsEarlier = xStart <= pos[0];
+            boolean yStartsEarlier = yStart <= pos[1];
+            boolean xEndsLater = xEnd >= pos[2];
+            boolean yEndsLater = yEnd >= pos[3];
+
+            if (xStartsEarlier && yStartsEarlier && xEndsLater && yEndsLater) {
+                possibleWords.add(word);
+            }
+        }
+
+        if (possibleWords.size() > 0) {
+            HocrWord combinedWord = new HocrWord();
+            StringBuilder sb = new StringBuilder();
+            for (HocrWord word : possibleWords) {
+                sb.append(word.getValue() + " ");
+            }
+            combinedWord.setValue(sb.toString());
+            String pos = linePos[0] + "+" + linePos[1] + "+" + linePos[2] + "+" + linePos[3];
+            combinedWord.setPosition(pos);
+            return combinedWord;
+        }
+        return null;
     }
 }

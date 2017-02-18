@@ -40,5 +40,9 @@
         <mapping resource="hbm/LegalPerson.hbm.xml"/>
         <mapping resource="hbm/Invoice.hbm.xml"/>
         <mapping resource="hbm/Scan.hbm.xml"/>
+
+        <mapping resource="hbm/Keyword.hbm.xml"/>
+        <mapping resource="hbm/Creditor.hbm.xml"/>
+        <mapping resource="hbm/DocumentCase.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

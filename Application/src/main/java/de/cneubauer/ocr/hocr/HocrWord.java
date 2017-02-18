@@ -9,10 +9,12 @@ import java.lang.reflect.InvocationTargetException;
  * Created by Christoph Neubauer on 14.02.2017.
  * Represents a word in the HOCR output format
  */
-public class HocrWord {
+public class HocrWord extends HocrElement {
     private String id;
-    private String value;
-    private String position;
+   // private String value;
+    //private String position;
+
+    public HocrWord() {}
 
     public HocrWord(String line) {
         String[] words = line.split(" ");
@@ -22,7 +24,12 @@ public class HocrWord {
             if (word.contains("</span>")) {
                 try {
                     String temp = word.split("</span>")[0];
-                    value = temp.split(">")[1];
+                    if (temp.contains("<strong>")) {
+                        temp = temp.split("<strong>")[1];
+                        this.value = temp.split("</strong>")[0];
+                    } else {
+                        this.value = temp.split(">")[1];
+                    }
                 } catch (Exception e) {
                     Logger.getLogger(this.getClass()).log(Level.ERROR, "Error parsing line: " + word + "\n Using empty value");
                     value = "";
@@ -41,6 +48,18 @@ public class HocrWord {
                 this.position = position.substring(0, position.length() -1);
             }
         }
+        this.replaceHTMLCodes();
+    }
+
+    /**
+     * Replaces all html code occurrences in the value
+     */
+    private void replaceHTMLCodes() {
+        this.value = this.value.replace("&amp;", "&");
+        this.value = this.value.replace("&euro;", "€");
+        this.value = this.value.replace("&gt;" , ">");
+        this.value = this.value.replace("&lt;" , "<");
+        this.value = this.value.replace("&sect;", "§");
     }
 
     public String getValue() {
@@ -49,5 +68,9 @@ public class HocrWord {
 
     public String getId() {
         return id;
+    }
+
+    public String getPosition() {
+        return position;
     }
 }

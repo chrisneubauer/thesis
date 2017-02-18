@@ -97,6 +97,8 @@ public class AccountingRecordsController extends SplitPaneController {
         if (records.size() > 0) {
             this.initiateDropdowns(records.get(0));
             this.updateAccountingRecordView(records.get(0));
+        } else {
+            this.initiateDropdowns(null);
         }
     }
 
@@ -159,7 +161,7 @@ public class AccountingRecordsController extends SplitPaneController {
         toDropDownAccountThree.setItems(accounts);
         toDropDownAccountFour.setItems(accounts);
 
-        if (model.getRecord().getRecordAccounts().size() > 0) {
+        if (model != null && model.getRecord().getRecordAccounts().size() > 0) {
             int idxDebit = 0;
             int idxCredit = 0;
             Set<AccountRecord> entries = model.getRecord().getRecordAccounts();
@@ -295,8 +297,24 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     private void saveCurrentValuesToRecord() {
-        AccountingRecordModel current = this.getRecordsFound().get(this.index - 1);
-        Record currentRecord = current.getRecord();
+        AccountingRecordModel current;
+        Record currentRecord;
+        try {
+            current = this.getRecordsFound().get(this.index - 1);
+            currentRecord = current.getRecord();
+        } catch (IndexOutOfBoundsException ex) {
+            // when no current model exists -> No records found at all
+            current = new AccountingRecordModel(this.index - 1);
+            currentRecord = new Record();
+            current.setRecord(currentRecord);
+
+            if (this.getRecordsFound() == null) {
+                this.setRecordsFound(new LinkedList<>(Collections.singleton(current)));
+            } else if (this.getRecordsFound().size() == 0) {
+                this.getRecordsFound().add(current);
+            }
+        }
+
         if (this.getPossiblePosition() != null) {
             currentRecord.setEntryText(this.getPossiblePosition());
         }

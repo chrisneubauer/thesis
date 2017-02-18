@@ -93,8 +93,11 @@ public class ImagePartitioner {
         //BufferedImage normalizedImage = normalizer.process(image);
         //BufferedImage thickened = this.thickenImage(normalizedImage);
         HistogramMaker maker = new HistogramMaker();
-        ImagePreprocessor preprocessor = new ImagePreprocessor(image);
-        BufferedImage processedImage = preprocessor.preprocess();
+
+        //expect image to be preprocessed
+        //ImagePreprocessor preprocessor = new ImagePreprocessor(image);
+        //BufferedImage processedImage = preprocessor.preprocess();
+        BufferedImage processedImage = image;
         BufferedImage histogram;
         BufferedImage tobeRemoved = maker.makeVerticalHistogram(processedImage, true);
         if (whiteTable) {

@@ -1,0 +1,11 @@
+Rechnung
+Invoice
+Rechnungsdatum
+invoice date
+Rechnungsnummer
+Rechnungs-Nr.
+Rechnungsnr.
+Invoice no
+invoice number
+Lieferdatum
+Delivery date
