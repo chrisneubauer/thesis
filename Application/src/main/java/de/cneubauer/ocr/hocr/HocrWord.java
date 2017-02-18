@@ -3,20 +3,14 @@ package de.cneubauer.ocr.hocr;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * Created by Christoph Neubauer on 14.02.2017.
  * Represents a word in the HOCR output format
  */
 public class HocrWord extends HocrElement {
-    private String id;
-   // private String value;
-    //private String position;
+    HocrWord() {}
 
-    public HocrWord() {}
-
-    public HocrWord(String line) {
+    HocrWord(String line) {
         String[] words = line.split(" ");
         this.position = "";
         for (int i = 0; i < words.length; i++) {
@@ -44,7 +38,6 @@ public class HocrWord extends HocrElement {
                     this.position += words[i+j] + "+";
                 }
                 this.position = this.position.replaceAll("[^+0-9]", "");
-                //this.position = this.position.replace(";", "");
                 this.position = position.substring(0, position.length() -1);
             }
         }

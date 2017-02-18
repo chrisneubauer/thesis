@@ -233,13 +233,13 @@ public class DataExtractorService {
                 // 0: startX, 1: startY, 2: endX, 3: endY
                 int[] pos = new int[] {Integer.valueOf(position[0]), Integer.valueOf(position[1]), Integer.valueOf(position[2]), Integer.valueOf(position[3])};
 
-                HocrArea possibleArea = this.document.getPage(0).getAreaByPosition(pos);
+                HocrElement possibleArea = this.document.getPage(0).getByPosition(pos);
                 if (possibleArea != null) {
-                    HocrParagraph possibleParagraph = possibleArea.getParagraphByPosition(pos);
+                    HocrParagraph possibleParagraph = (HocrParagraph) possibleArea.getByPosition(pos);
                     if (possibleParagraph != null) {
-                        HocrLine possibleLine = possibleParagraph.getLineByPosition(pos);
+                        HocrLine possibleLine = (HocrLine) possibleParagraph.getByPosition(pos);
                         if (possibleLine != null) {
-                            HocrWord possibleWord = possibleLine.getWordByPosition(pos);
+                            HocrWord possibleWord = (HocrWord) possibleLine.getByPosition(pos);
                             if (possibleWord != null) {
                                 return possibleWord;
                             } else {
@@ -521,10 +521,11 @@ public class DataExtractorService {
             }
         } else {
             try {
-            for (HocrArea area : this.document.getPage(0).getAreas()) {
-                for (HocrParagraph p : area.getParagraphs()) {
-                    for (HocrLine line : p.getLines()) {
-                        String lineAsString = line.getWordsAsString();
+            for (HocrElement area : this.document.getPage(0).getSubElements()) { //.getAreas()) {
+                for (HocrElement p : area.getSubElements()) { //.getParagraphs()) {
+                    for (HocrElement line : p.getSubElements()) { //p.getLines()) {
+                        HocrLine currentLine = (HocrLine) line;
+                        String lineAsString = currentLine.getWordsAsString();
                         if (!found) {
                             // try again with levenshtein distance
                             int amountOfChanges = StringUtils.getLevenshteinDistance(lineAsString, "Bei Zahlung innerhalb von Tagen gewähren wir %");
@@ -559,8 +560,9 @@ public class DataExtractorService {
         if (!ConfigHelper.isDebugMode()) {
             text = this.findValueInString(new String[]{"Skonto"}, this.footer);
         } else {
-            for (HocrArea area : this.document.getPage(0).getAreas()) {
-                for (String word : area.getAllWordsInArea()) {
+            for (HocrElement area : this.document.getPage(0).getSubElements()) { //.getAreas()) {
+                HocrArea currentArea = (HocrArea) area;
+                for (String word : currentArea.getAllWordsInArea()) {
                     if (word.contains("Skonto")) {
                         return true;
                     }
@@ -575,10 +577,11 @@ public class DataExtractorService {
         List<LegalPerson> list = dao.getAll();
 
         List<String> lines = new LinkedList<>();
-        for (HocrArea area : document.getPage(0).getAreas()) {
-            for (HocrParagraph paragraph : area.getParagraphs()) {
-                for (HocrLine line : paragraph.getLines()) {
-                    lines.add(line.getWordsAsString());
+        for (HocrElement area : document.getPage(0).getSubElements()) { //.getAreas()) {
+            for (HocrElement paragraph : area.getSubElements()) { //.getParagraphs()) {
+                for (HocrElement line : paragraph.getSubElements()) { //.getLines()) {
+                    HocrLine currentLine = (HocrLine) line;
+                    lines.add(currentLine.getWordsAsString());
                 }
             }
         }
@@ -765,8 +768,9 @@ public class DataExtractorService {
     }
 
     private LegalPerson getLegalPersonFromDatabase(HocrDocument document) {
-        for (HocrArea area : document.getPage(0).getAreas()) {
-            List<String> allWordsInArea = area.getAllWordsInArea();
+        for (HocrElement area : document.getPage(0).getSubElements()) { //getAreas()) {
+            HocrArea currentArea = (HocrArea) area;
+            List<String> allWordsInArea = currentArea.getAllWordsInArea();
             for (int i = 0; i < allWordsInArea.size(); i++) {
                 String word = allWordsInArea.get(i);
                 for (LegalPerson p : list) {

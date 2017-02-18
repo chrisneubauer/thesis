@@ -8,14 +8,8 @@ import java.util.List;
  * Represents a line in the HOCR output format
  */
 public class HocrLine extends HocrElement {
-    private String id;
-    //private String position;
-
-    private List<HocrWord> words;
-
-    public HocrLine(String line) {
+    HocrLine(String line) {
         String[] parts = line.split("<span");
-        this.words = new LinkedList<>();
         this.position = "";
         for (String part : parts) {
             if(part.contains("class='ocr_line'")) {
@@ -29,13 +23,12 @@ public class HocrLine extends HocrElement {
                             this.position += words[i+j] + "+";
                         }
                         this.position = this.position.replaceAll("[^+0-9]", "");
-                        //this.position = this.position.replace(";", "");
                         this.position = this.position.substring(0, position.length() -1);
                     }
                 }
             } else if (part.contains("class='ocrx_word'")) {
                 HocrWord word = new HocrWord(part);
-                this.words.add(word);
+                this.addSubElement(word);
             }
         }
     }
@@ -45,35 +38,9 @@ public class HocrLine extends HocrElement {
         return this.getWordsAsString();
     }
 
-    public List<HocrWord> getWords() {
-        return words;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public HocrWord getWordByPosition(int[] position) {
-        for (HocrWord word : this.words) {
-            String[] stringPos = word.getPosition().split("\\+");
-            // 0: startX, 1: startY, 2: endX, 3: endY
-            int[] pos = new int[] {Integer.valueOf(stringPos[0]), Integer.valueOf(stringPos[1]), Integer.valueOf(stringPos[2]), Integer.valueOf(stringPos[3])};
-
-            boolean xStartsEarlier = pos[0] <= position[0];
-            boolean yStartsEarlier = pos[1] <= position[1];
-            boolean xEndsLater = pos[2] >= position[2];
-            boolean yEndsLater = pos[3] >= position[3];
-
-            if (xStartsEarlier && yStartsEarlier && xEndsLater && yEndsLater) {
-                return word;
-            }
-        }
-        return null;
-    }
-
     public String getWordsAsString() {
         StringBuilder sb = new StringBuilder();
-        for (HocrWord word : this.words) {
+        for (HocrElement word : this.getSubElements()) {
             sb.append(word.getValue());
             sb.append(" ");
         }
@@ -87,7 +54,7 @@ public class HocrLine extends HocrElement {
         int yStart = linePos[1];
         int xEnd = linePos[2];
         int yEnd = linePos[3];
-        for (HocrWord word : this.words) {
+        for (HocrElement word : this.getSubElements()) {
             String[] stringPos = word.getPosition().split("\\+");
             // 0: startX, 1: startY, 2: endX, 3: endY
             int[] pos = new int[] {Integer.valueOf(stringPos[0]), Integer.valueOf(stringPos[1]), Integer.valueOf(stringPos[2]), Integer.valueOf(stringPos[3])};
@@ -98,7 +65,7 @@ public class HocrLine extends HocrElement {
             boolean yEndsLater = yEnd >= pos[3];
 
             if (xStartsEarlier && yStartsEarlier && xEndsLater && yEndsLater) {
-                possibleWords.add(word);
+                possibleWords.add((HocrWord) word);
             }
         }
 
@@ -106,7 +73,7 @@ public class HocrLine extends HocrElement {
             HocrWord combinedWord = new HocrWord();
             StringBuilder sb = new StringBuilder();
             for (HocrWord word : possibleWords) {
-                sb.append(word.getValue() + " ");
+                sb.append(word.getValue()).append(" ");
             }
             combinedWord.setValue(sb.toString());
             String pos = linePos[0] + "+" + linePos[1] + "+" + linePos[2] + "+" + linePos[3];

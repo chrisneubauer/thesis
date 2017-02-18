@@ -25,17 +25,17 @@ public class HocrDocument {
             if (line.contains("<div class='ocr_carea'")) {
                 HocrArea area = new HocrArea(line);
 
-                this.getPage(currentPage).addArea(area);
+                this.getPage(currentPage).addSubElement(area);
                 currentArea = area.getId();
             }
             if (line.contains("<p class='ocr_par")) {
                 HocrParagraph paragraph = new HocrParagraph(line);
-                this.getPage(currentPage).getArea(currentArea).addParagraph(paragraph);
+                this.getPage(currentPage).getSubElement(currentArea).addSubElement(paragraph);
                 currentParagraph = paragraph.getId();
             }
             if (line.contains("<span class='ocr_line'")) {
                 HocrLine hocrLine = new HocrLine(line);
-                this.getPage(currentPage).getArea(currentArea).getPararaph(currentParagraph).addLine(hocrLine);
+                this.getPage(currentPage).getSubElement(currentArea).getSubElement(currentParagraph).addSubElement(hocrLine);
             }
         }
     }

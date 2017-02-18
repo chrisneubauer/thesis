@@ -1,11 +1,17 @@
 package de.cneubauer.ocr.hocr;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by Christoph Neubauer on 16.02.2017.
+ * Abstract structure of an HocrElement
  */
 public abstract class HocrElement {
+    String id;
     String position;
     String value;
+    private List<HocrElement> subElements;
 
     public String getValue() {
         return this.value;
@@ -21,5 +27,47 @@ public abstract class HocrElement {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public HocrElement getByPosition(int[] position) {
+        for (HocrElement element : this.subElements) {
+            String[] stringPos = element.getPosition().split("\\+");
+            // 0: startX, 1: startY, 2: endX, 3: endY
+            int[] pos = new int[] {Integer.valueOf(stringPos[0]), Integer.valueOf(stringPos[1]), Integer.valueOf(stringPos[2]), Integer.valueOf(stringPos[3])};
+
+            boolean xStartsEarlier = pos[0] <= position[0];
+            boolean yStartsEarlier = pos[1] <= position[1];
+            boolean xEndsLater = pos[2] >= position[2];
+            boolean yEndsLater = pos[3] >= position[3];
+
+            if (xStartsEarlier && yStartsEarlier && xEndsLater && yEndsLater) {
+                return element;
+            }
+        }
+        return null;
+    }
+
+    void addSubElement(HocrElement sub) {
+        if (this.subElements == null) {
+            this.subElements = new LinkedList<>();
+        }
+        this.subElements.add(sub);
+    }
+
+    public List<HocrElement> getSubElements() {
+        return subElements;
+    }
+
+    HocrElement getSubElement(String elementId) {
+        for (HocrElement element : this.getSubElements()) {
+            if (element.getId().equals(elementId)) {
+                return element;
+            }
+        }
+        return null;
+    }
+
+    public String getId() {
+        return id;
     }
 }

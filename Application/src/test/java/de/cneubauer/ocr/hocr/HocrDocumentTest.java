@@ -33,8 +33,8 @@ public class HocrDocumentTest extends AbstractTest {
         String content = new Scanner(hocr).useDelimiter("\\Z").next();
         HocrDocument document = new HocrDocument(content);
         Assert.notNull(document);
-        Assert.isTrue(document.getPage(0).getAreas().size() > 0);
-        Assert.isTrue(document.getPage(0).getAreas().get(0).getParagraphs().size() > 0);
+        Assert.isTrue(document.getPage(0).getSubElements().size() > 0);
+        Assert.isTrue(document.getPage(0).getSubElements().get(0).getSubElements().size() > 0);
     }
 
     @Test
@@ -43,8 +43,9 @@ public class HocrDocumentTest extends AbstractTest {
         String content = new Scanner(hocr).useDelimiter("\\Z").next();
         HocrDocument document = new HocrDocument(content);
         List<String> wordlist = new LinkedList<>();
-        for (HocrArea area : document.getPage(0).getAreas()) {
-            wordlist.addAll(area.getAllWordsInArea());
+        for (HocrElement area : document.getPage(0).getSubElements()) {
+            HocrArea currentArea = (HocrArea) area;
+            wordlist.addAll(currentArea.getAllWordsInArea());
         }
         Assert.isTrue(wordlist.size() > 0);
     }
