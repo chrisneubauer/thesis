@@ -5,8 +5,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Introduction}
-% 4-5 pages
-
+% 5-8 pages
+% Some general information on the context and setting.
 Optical Character Recognition (OCR) has been the topic of research for many years, even decades. Several workshops, papers and journals have been published, conferences hold on issues in this field. While there are still many open problems (for instance the accurate recognition of arabic texts, symbols, mathematic formulas or handwriting), the knowledge in this area has already led to the development of several highly accurate systems (especially based on English text).
 While already a lot of companies use those systems, there is still a majority of others that do not. But, as these systems grow more accurate each year, it is very likely that the need for ocr systems will grow.
 As companies are getting connected and globalized, more and more data have to be handled. Modern keywords such as 'Big Data' or 'Data Mining' show, that there is currently a need for solutions to handle those data.
@@ -14,34 +14,21 @@ One of those problems is the management of invoices. Companies all over the worl
 In order to facilitate and accelerate the process of invoice recognition electronic invoice formats have been introduced. If invoices are sent in such a format, a company is recognize the required fields and handle this invoice. Again, this is often the case for big companies, that have defined contracts with their suppliers or customers and have therefore been able to define an electronic invoicing format to automatically process an invoice.
 For every other company, there are still problems: Not every invoice is sent in an electronic format, some are still sent as a normal pdf document or even per post.
 
- 
-- ocr is nowadays more accurate and can be used in business
-- machine learning allows further improvements
-- the hardware specifications of standard pcs nowadays allow more complex calculations in lesser time
-- electronic invoice as a future standard for companies
-Some general information on the context and setting. %\blindtext{}
-
-%\Blindtext[2][2]
-
 \section{Motivation}
+%Specific motivation for the problem at hand.
 
--> new format of FERD which is likely to be introduced as a de-factor standard for european countries
--Costs for invoice processing are high
--> Manual processing costs a lot of time, is error-prone, needs employees
-- how to deal with lots of invoices?
+Although still invoices exist, that do not meet any electronic invoicing standard, it is to be expected that electronic invoice formats will be a future standard for all invoices to be sent. But even though electronic invoice formats have already been introduced, there are still a variety of formats and no real standard defined. Therefore, depending on the country or area, different formats are used. To address this issue inside the European Union, the Forum für elektronische Rechnung Deutschland (FeRD) developed a new format which will be very likely a new de-facto standard for companies inside the European Union. Small and medium sized companies can make use of this format as well as bigger companies. Chapter 2 will explain the different levels of the format more deeply.
 
-Specific motivation for the problem at hand. %\blindtext{}
+While hardware parts and devices improve over time, we are now on a point were even household computers (also known as personal computers) are able to process complex calculations in lesser time. With this in mind, it would be a profit to automate invoice processing, even for small companies. Invoices that are processed manually does not only need employees, but also much more time and is (due to the human factor) error-prone. 
 
-%\blindtext[2]
+With the use of machine learning techniques it should be possible to develop an application that works on a personal computer, can handle lots of invoices and transforms them into an electronic invoice format.
 
 \section{Task}
 
-The task of this master thesis is to evaluate different electronic invoice formats. An application shall be designed and implemented that processes invoice forms and is capable of storing them in the invoice format that suits the most.
-The application should use machine learning in order to improve processing accuracy over time. Nevertheless, errors during the scan process should be handled by the application itself.
-The output of this application should be conform with the definition of the electronic invoice format that has been decided in beforehand.
-
-%\blindtext{}
-
+The task of this master thesis is to develop an application which can handle various invoices that are present as a pdf file, extract necessary invoice information and transform and store those invoices enriched by the electronic invoice format. The advantages and disadvantages of this format should be evaluated first.
+During the processing of the invoice, optical character recognition should be used to extract the information from the file. During this process, machine learning should be used where it enables the most benefit for the application.
+The occurrence of errors during the scan process should also be handled by the application itself.
+The stored invoices should be retrievable again, enhanced and conform with the electronic invoice format, so that it is possible to process them further.
 
 \section{Related Work}
 
@@ -55,16 +42,16 @@ example %\citet{shannon_diff} and %\citet{blowfish}. Distinguish between
 
 \section{Results}
 
-What has been achieved in this work? %\blindtext{}
-- open source application
-- able to process multiple invoices
-- machine learning concept to improve quality over time
+What has been achieved in this work?
+%- open source application
+%- able to process multiple invoices
+%- machine learning concept to improve quality over time
 
 %\blindtext[2][1]
 
 \section{Outline}
 
-How is the thesis structured and why? %\blindtext{}
+%How is the thesis structured and why? 
 This document is structured in the following way: In the beginning, several electronic invoice formats are presented, explained and compared against each other. Important criteria for the selection of a format are defined and based on those criteria a decision is being made.
 After that, we will explain how we want to process a file to a document in the selected electronic invoice format. Chapter 3 will deal with OCR, the available systems at this time as well as a comparison between them and the selection of one of them (including the explanation why this selection has been made).
 As the application should learn and improve results over time, we will also deal with machine learning techniques and choose an appropriate one. Chapter 4 will focus on this issue.
