@@ -125,7 +125,26 @@ In the interest of the application, we want to use solutions that are up-to-date
 
 The following table shows the solutions again, but with underlying colors regarding their ability to fit to our problem. Green is used as a best fit, whereas red significates a major problem. Yellow shows that this attribute is not as good as others but no kick-out criterion. 
 
-%TODO{Table}
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\hline
+Application                                                               & \textbf{GOCR}                                                                           & \textbf{Tesseract}                                                                           & \textbf{OCROpus}                                                               & \textbf{MathOCR}                                                                        & \textbf{OCRad}                                                                          \\ \hline
+Version                                                                   & \cellcolor[HTML]{FFFE65}0.5                                                             & \cellcolor[HTML]{34FF34}3.04.01                                                              & \cellcolor[HTML]{34FF34}1.0                                                    & \cellcolor[HTML]{FE0000}0.0.3                                                           & \cellcolor[HTML]{FFFE65}0.25                                                            \\ \hline
+Release Date                                                              & \cellcolor[HTML]{FE0000}03.2013                                                         & \cellcolor[HTML]{34FF34}02.2016                                                              & \cellcolor[HTML]{FFFE65}11.2014                                                & \cellcolor[HTML]{34FF34}05.2015                                                         & \cellcolor[HTML]{34FF34}04.2015                                                         \\ \hline
+\begin{tabular}[c]{@{}l@{}}Supported Programming\\ Languages\end{tabular} & \cellcolor[HTML]{FE0000}C                                                               & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}C/C++, \\ Java (with Tess4J)\end{tabular} & \cellcolor[HTML]{FE0000}\begin{tabular}[c]{@{}c@{}}C++, \\ Python\end{tabular} & \cellcolor[HTML]{34FF34}Java                                                            & \cellcolor[HTML]{FE0000}C++                                                             \\ \hline
+\begin{tabular}[c]{@{}l@{}}Supported Operating\\ Systems\end{tabular}     & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular}      & \cellcolor[HTML]{FFFE65}Linux                                                  & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} \\ \hline
+License                                                                   & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   & \cellcolor[HTML]{34FF34}Apache 2.0                                                           & \cellcolor[HTML]{34FF34}Apache 2.0                                             & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   \\ \hline
+\end{tabular}%
+}
+\caption{My caption}
+\label{my-label}
+\end{table}
 
 As shown in the table, MathOCR will not fit our needs as it is a pre-alpha version. GOCR is outdated and also supports only C as a programming language. OCROpus and OCRad only support C++ (and in the case of OCROpus Python). In addition to that, OCROpus could be of a problem when porting the application to other operating systems whereas OCRad is licensed under the GNU Public License. 
 
