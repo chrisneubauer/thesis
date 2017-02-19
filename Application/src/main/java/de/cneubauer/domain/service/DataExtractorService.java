@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
  * This service contains methods for extracting multiple information from a processed form
  * Output is a possible invoice filled with as much information as possible
  */
-public class DataExtractorService {
+public class DataExtractorService implements Runnable {
     private String leftHeader;
     private String rightHeader;
     private String body;
@@ -47,6 +47,7 @@ public class DataExtractorService {
     private List<Keyword> keywordList;
     private List<LegalPerson> list;
     private DocumentCaseSet caseSet;
+    public boolean extractInvoice;
 
     /**
      * Constructor of the DataExtractorService class
@@ -127,6 +128,7 @@ public class DataExtractorService {
             return result;
         }
         List<DocumentCase> invoiceNo = new LinkedList<>();
+        //TODO: doctype information
         List<DocumentCase> docType = new LinkedList<>();
         List<DocumentCase> invoiceDate = new LinkedList<>();
         List<DocumentCase> buyer = new LinkedList<>();
@@ -372,15 +374,6 @@ public class DataExtractorService {
         Matcher m = p.matcher(line);
 
         line = m.replaceAll("");
-        /*
-        line = line.replaceAll("^\\d{1,9}(,\\d{2})", "");
-        line = line.replaceAll("(.*)(^\\d{1,9},\\d{2}(.*)", "");
-        String newString = "";
-        for (String part : line.split(" ")) {
-            if (!part.matches("^\\d{1,9}(,\\d{2})\"")) {
-                newString += part + " ";
-            }
-        }*/
         return line;
     }
 
@@ -392,10 +385,8 @@ public class DataExtractorService {
      * @return  the RecordTrainingEntry with the position found in the learning file
      */
     private RecordTrainingEntry recordInLearningFile(String position) {
-
         LearningService service = new LearningService();
         Model m = service.getMostLikelyModel(position);
-
 
         // AccountFileHelper.getConfig().containsValue(position);
        return AccountFileHelper.findAccountingRecord(position);
@@ -492,57 +483,40 @@ public class DataExtractorService {
      */
     private double findSkontoValue() {
         String skonto = "";
-        boolean found = false;
         if (!ConfigHelper.isDebugMode()) {
             try {
                 String[] lines = this.footer.split("\n");
                 for (String line : lines) {
-                    if (!found) {
-                        // try again with levenshtein distance
-                        int amountOfChanges = StringUtils.getLevenshteinDistance(line, "Bei Zahlung innerhalb von Tagen gewähren wir %");
-                        double ratio = ((double) amountOfChanges) / (Math.max(line.length(), "Bei Zahlung innerhalb von Tagen gewähren wir %".length() + 2));
-                        // take the line if ratio > 80%
-                        if (ratio < confidence) {
-                            int startIndex = line.indexOf("gewähren wir");
-                            skonto = line.substring(startIndex + 1, startIndex + 3);
-                            found = true;
+                    skonto = this.findSkontoString(line);
+                    if (skonto != null) {
+                        // normally skonto information starts with "Bei Zahlung innerhalb.. gewähren wir X% Skonto
+                        if (skonto.contains("%")) {
+                            skonto = skonto.split("%")[0];
                         }
+                        return Double.valueOf(skonto);
                     }
                 }
-
-                // normally skonto information starts with "Bei Zahlung innerhalb.. gewähren wir X% Skonto
-                if (skonto.contains("%")) {
-                    skonto = skonto.split("%")[0];
-                }
-                return Double.valueOf(skonto);
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find skonto value in OCR. Using default value");
                 return 0;
             }
         } else {
             try {
-            for (HocrElement area : this.document.getPage(0).getSubElements()) { //.getAreas()) {
-                for (HocrElement p : area.getSubElements()) { //.getParagraphs()) {
-                    for (HocrElement line : p.getSubElements()) { //p.getLines()) {
+            for (HocrElement area : this.document.getPage(0).getSubElements()) {
+                for (HocrElement p : area.getSubElements()) {
+                    for (HocrElement line : p.getSubElements()) {
                         HocrLine currentLine = (HocrLine) line;
                         String lineAsString = currentLine.getWordsAsString();
-                        if (!found) {
-                            // try again with levenshtein distance
-                            int amountOfChanges = StringUtils.getLevenshteinDistance(lineAsString, "Bei Zahlung innerhalb von Tagen gewähren wir %");
-                            double ratio = ((double) amountOfChanges) / (Math.max(lineAsString.length(), "Bei Zahlung innerhalb von Tagen gewähren wir %".length() + 2));
-                            // take the line if ratio > 80%
-                            if (ratio < confidence) {
-                                int startIndex = lineAsString.indexOf("gewähren wir");
-                                skonto = lineAsString.substring(startIndex + 1, startIndex + 3);
-                                found = true;
+                        skonto = this.findSkontoString(lineAsString);
+                        if (skonto != null) {
+                            if (skonto.contains("%")) {
+                                // normally skonto information starts with "Bei Zahlung innerhalb.. gewähren wir X% Skonto
+                                skonto = skonto.split("%")[0];
                             }
+                            return Double.valueOf(skonto);
                         }
                     }
-                }// normally skonto information starts with "Bei Zahlung innerhalb.. gewähren wir X% Skonto
-                if (skonto.contains("%")) {
-                    skonto = skonto.split("%")[0];
                 }
-                return Double.valueOf(skonto);
             }
         } catch(Exception ex){
                 Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find skonto value in OCR. Using default value");
@@ -550,6 +524,18 @@ public class DataExtractorService {
             }
         }
         return 0;
+    }
+
+    private String findSkontoString(String line) {
+        // try again with levenshtein distance
+        int amountOfChanges = StringUtils.getLevenshteinDistance(line, "Bei Zahlung innerhalb von Tagen gewähren wir %");
+        double ratio = ((double) amountOfChanges) / (Math.max(line.length(), "Bei Zahlung innerhalb von Tagen gewähren wir %".length() + 2));
+        // take the line if ratio > 80%
+        if (ratio < confidence) {
+            int startIndex = line.indexOf("gewähren wir");
+            return line.substring(startIndex + 1, startIndex + 3);
+        }
+        return null;
     }
 
     /**
@@ -560,7 +546,7 @@ public class DataExtractorService {
         if (!ConfigHelper.isDebugMode()) {
             text = this.findValueInString(new String[]{"Skonto"}, this.footer);
         } else {
-            for (HocrElement area : this.document.getPage(0).getSubElements()) { //.getAreas()) {
+            for (HocrElement area : this.document.getPage(0).getSubElements()) {
                 HocrArea currentArea = (HocrArea) area;
                 for (String word : currentArea.getAllWordsInArea()) {
                     if (word.contains("Skonto")) {
@@ -577,9 +563,9 @@ public class DataExtractorService {
         List<LegalPerson> list = dao.getAll();
 
         List<String> lines = new LinkedList<>();
-        for (HocrElement area : document.getPage(0).getSubElements()) { //.getAreas()) {
-            for (HocrElement paragraph : area.getSubElements()) { //.getParagraphs()) {
-                for (HocrElement line : paragraph.getSubElements()) { //.getLines()) {
+        for (HocrElement area : document.getPage(0).getSubElements()) {
+            for (HocrElement paragraph : area.getSubElements()) {
+                for (HocrElement line : paragraph.getSubElements()) {
                     HocrLine currentLine = (HocrLine) line;
                     lines.add(currentLine.getWordsAsString());
                 }
@@ -588,8 +574,6 @@ public class DataExtractorService {
 
         if (searchForCreditor) {
             for (String line : lines) {
-                String listString = creditorList.toString();
-                String lpString = list.toString();
                 if (creditorList.toString().contains(line)) {
                     for (LegalPerson p : list) {
                         if (p.getName() != null && p.getName().equals(line)) {
@@ -606,17 +590,7 @@ public class DataExtractorService {
             for (String line : lines) {
                 for (LegalPerson p : list) {
                     if (p.getName() != null && line.contains(p.getName())) {
-                    /*if (searchForCreditor) {
-                        for (Creditor c : creditorList) {
-                            if (c.getLegalPerson().getId() == p.getId()) {
-                                return p;
-                            } else {
-                                return null;
-                            }
-                        }
-                    } else {*/
                         return p;
-                        //}
                     } else {
                         if (this.refineSearch(line, p.getName())) {
                             return p;
@@ -644,48 +618,6 @@ public class DataExtractorService {
         double distance = StringUtils.getLevenshteinDistance(checkString, compareWith);
         double comparison = distance / checkString.length();
         return comparison < confidenceRate;
-    }
-
-    /**
-     * Searches for legal persons and compares them with the lines
-     * @param lines  the ocr result
-     * @return  the legal person that occurs in the lines
-     */
-    private LegalPerson getLegalPersonFromDatabase(String lines, boolean searchForCreditor) {
-        LegalPersonDao dao = new LegalPersonDaoImpl();
-        List<LegalPerson> list = dao.getAll();
-
-        for (String line : lines.split("\n")) {
-            for (LegalPerson p : list) {
-                if (line.contains(p.toString())) {
-                    if (searchForCreditor) {
-                        for (Creditor c : creditorList) {
-                            if (c.getLegalPerson().equals(p)) {
-                                return p;
-                            }
-                        }
-                    } else {
-                        return p;
-                    }
-                } else {
-                    // refine search if we have some ocr probs
-                    /* calculation explanation:
-                     * Comparing "18:1 Telecom GmbH" with "Telekom"
-                     * Levenshtein-Distance would be: 11
-                     * String length: 17
-                     * 11 of 17 are incorrect (65%) which means 35% correct
-                     * When confidence 80% we need less errors, maximum: 0/17 -> 0% < 20%
-                    */
-                    double confidenceRate = ConfigHelper.getConfidenceRate();
-                    double distance = StringUtils.getLevenshteinDistance(line, p.toString());
-                    double comparison = distance / line.length();
-                    if (comparison < confidenceRate) {
-                        return p;
-                    }
-                }
-            }
-        }
-        return null;
     }
 
     /**
@@ -748,88 +680,6 @@ public class DataExtractorService {
      */
     private LegalPerson findCreditor() {
         return this.getLegalPersonFromDatabase(this.document, true);
-        // Creditor is usually in the right part of the invoice header.
-        //String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" }, this.rightHeader);
-        //return this.getLegalPersonFromDatabase(this.rightHeader);
-        //int index = this.findCorporateFormIndex(line);
-        /*if (index > 0) {
-            LegalPerson result = new LegalPerson();
-            result.setIsCompany(true);
-            // TODO: Store cf in beforehand in db and receive it here by calling the db
-            CorporateForm cf = new CorporateForm();
-            cf.setShortName(line.substring(index).split(" ")[0]);
-            result.setCorporateForm(cf);
-            result.setCompanyName(line.substring(0, index - 1));
-            return result;*/
-        /*} else {
-            Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find creditor information in OCR. Using default value");
-            return null;
-        }*/
-    }
-
-    private LegalPerson getLegalPersonFromDatabase(HocrDocument document) {
-        for (HocrElement area : document.getPage(0).getSubElements()) { //getAreas()) {
-            HocrArea currentArea = (HocrArea) area;
-            List<String> allWordsInArea = currentArea.getAllWordsInArea();
-            for (int i = 0; i < allWordsInArea.size(); i++) {
-                String word = allWordsInArea.get(i);
-                for (LegalPerson p : list) {
-                    if (p.getName() != null) {
-                        if (p.getName().contains(" ")) {
-                            int parts = p.getName().split(" ").length;
-                            if (i+parts < allWordsInArea.size()) {
-                                for (int j = 1; j <= parts - 1; j++) {
-                                    word += " " + allWordsInArea.get(i+j);
-                                }
-                            }
-                        }
-                        if (word.equals(p.getName())) {
-                            return p;
-                        } else {
-                            // refine search if we have some ocr probs
-                    /* calculation explanation:
-                     * Comparing "18:1 Telecom GmbH" with "Telekom"
-                     * Levenshtein-Distance would be: 11
-                     * String length: 17
-                     * 11 of 17 are incorrect (65%) which means 35% correct
-                     * When confidence 80% we need less errors, maximum: 0/17 -> 0% < 20%
-                    */
-                            double confidenceRate = ConfigHelper.getConfidenceRate();
-                            double distance = StringUtils.getLevenshteinDistance(word, p.getName());
-                            double comparison = distance / word.length();
-                            if (comparison < confidenceRate) {
-                                return p;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    @Deprecated
-    private int findCorporateFormIndex(String line) {
-        int result = 0;
-        if (line.indexOf("GmbH") > 0) {
-            result = line.indexOf("GmbH");
-        }
-        else if (line.indexOf("AG") > 0) {
-            result = line.indexOf("AG");
-        }
-        else if (line.indexOf("KG") > 0) {
-            result = line.indexOf("KG");
-        }
-        else if (line.indexOf("KGaA") > 0) {
-            result = line.indexOf("KgaA");
-        }
-        else if (line.indexOf("OHG") > 0) {
-            result = line.indexOf("OHG");
-        }
-        else if (line.indexOf("GbR") > 0) {
-            result = line.indexOf("GbR");
-        }
-        return result;
     }
 
     /**
@@ -942,22 +792,6 @@ public class DataExtractorService {
         return false;
     }
 
-    /**
-     * Searches for the search condition in the search position using the average distance method
-     * @param searchConditions  the conditions to be searched for
-     * @param searchPosition  the position where to search in
-     * @return  the found line if the average is higher than the confidence, an empty string if not
-     */
-    private String findLineWithContainingInformation(String[] searchConditions, String searchPosition) {
-        String[] lines = searchPosition.split("\n");
-        for (String line : lines) {
-            if (this.getAverageDistanceOfSearchConditions(line, searchConditions) < this.getConfidence()) {
-                return line;
-            }
-        }
-        // if we are here we have not found the given conditions
-        return "";
-    }
 
     /**
      * @param nextLine  the line that should be searched in
@@ -988,4 +822,147 @@ public class DataExtractorService {
     public DocumentCaseSet getCaseSet() {
         return caseSet;
     }
+
+
+    private LegalPerson getLegalPersonFromDatabase(HocrDocument document) {
+        for (HocrElement area : document.getPage(0).getSubElements()) { //getAreas()) {
+            HocrArea currentArea = (HocrArea) area;
+            List<String> allWordsInArea = currentArea.getAllWordsInArea();
+            for (int i = 0; i < allWordsInArea.size(); i++) {
+                String word = allWordsInArea.get(i);
+                for (LegalPerson p : list) {
+                    if (p.getName() != null) {
+                        if (p.getName().contains(" ")) {
+                            int parts = p.getName().split(" ").length;
+                            if (i+parts < allWordsInArea.size()) {
+                                for (int j = 1; j <= parts - 1; j++) {
+                                    word += " " + allWordsInArea.get(i+j);
+                                }
+                            }
+                        }
+                        if (word.equals(p.getName())) {
+                            return p;
+                        } else {
+                            // refine search if we have some ocr probs
+                    /* calculation explanation:
+                     * Comparing "18:1 Telecom GmbH" with "Telekom"
+                     * Levenshtein-Distance would be: 11
+                     * String length: 17
+                     * 11 of 17 are incorrect (65%) which means 35% correct
+                     * When confidence 80% we need less errors, maximum: 0/17 -> 0% < 20%
+                    */
+                            double confidenceRate = ConfigHelper.getConfidenceRate();
+                            double distance = StringUtils.getLevenshteinDistance(word, p.getName());
+                            double comparison = distance / word.length();
+                            if (comparison < confidenceRate) {
+                                return p;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    @Deprecated
+    private int findCorporateFormIndex(String line) {
+        int result = 0;
+        if (line.indexOf("GmbH") > 0) {
+            result = line.indexOf("GmbH");
+        }
+        else if (line.indexOf("AG") > 0) {
+            result = line.indexOf("AG");
+        }
+        else if (line.indexOf("KG") > 0) {
+            result = line.indexOf("KG");
+        }
+        else if (line.indexOf("KGaA") > 0) {
+            result = line.indexOf("KgaA");
+        }
+        else if (line.indexOf("OHG") > 0) {
+            result = line.indexOf("OHG");
+        }
+        else if (line.indexOf("GbR") > 0) {
+            result = line.indexOf("GbR");
+        }
+        return result;
+    }
+
+    /**
+     * Searches for legal persons and compares them with the lines
+     * @param lines  the ocr result
+     * @return  the legal person that occurs in the lines
+     */
+    private LegalPerson getLegalPersonFromDatabase(String lines, boolean searchForCreditor) {
+        LegalPersonDao dao = new LegalPersonDaoImpl();
+        List<LegalPerson> list = dao.getAll();
+
+        for (String line : lines.split("\n")) {
+            for (LegalPerson p : list) {
+                if (line.contains(p.toString())) {
+                    if (searchForCreditor) {
+                        for (Creditor c : creditorList) {
+                            if (c.getLegalPerson().equals(p)) {
+                                return p;
+                            }
+                        }
+                    } else {
+                        return p;
+                    }
+                } else {
+                    // refine search if we have some ocr probs
+                    /* calculation explanation:
+                     * Comparing "18:1 Telecom GmbH" with "Telekom"
+                     * Levenshtein-Distance would be: 11
+                     * String length: 17
+                     * 11 of 17 are incorrect (65%) which means 35% correct
+                     * When confidence 80% we need less errors, maximum: 0/17 -> 0% < 20%
+                    */
+                    double confidenceRate = ConfigHelper.getConfidenceRate();
+                    double distance = StringUtils.getLevenshteinDistance(line, p.toString());
+                    double comparison = distance / line.length();
+                    if (comparison < confidenceRate) {
+                        return p;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Searches for the search condition in the search position using the average distance method
+     * @param searchConditions  the conditions to be searched for
+     * @param searchPosition  the position where to search in
+     * @return  the found line if the average is higher than the confidence, an empty string if not
+     */
+    private String findLineWithContainingInformation(String[] searchConditions, String searchPosition) {
+        String[] lines = searchPosition.split("\n");
+        for (String line : lines) {
+            if (this.getAverageDistanceOfSearchConditions(line, searchConditions) < this.getConfidence()) {
+                return line;
+            }
+        }
+        // if we are here we have not found the given conditions
+        return "";
+    }
+
+    public HocrDocument getHocrDoument() {
+        return this.document;
+    }
+
+    @Override
+    public void run() {
+        if (this.extractInvoice) {
+            this.threadInvoice = this.extractInvoiceInformationFromHocr();
+        } else {
+            this.threadRecord = this.extractAccountingRecordInformation();
+        }
+    }
+    public Invoice threadInvoice;
+    public List<Record> threadRecord;
+
+    public Invoice getThreadInvoice() {return this.threadInvoice;}
+    public List<Record> getThreadRecord() {return this.threadRecord;}
 }

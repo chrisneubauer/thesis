@@ -1,13 +1,5 @@
 package de.cneubauer.gui;
 
-import de.cneubauer.database.DBInformationHolder;
-import de.cneubauer.domain.bo.Creditor;
-import de.cneubauer.domain.bo.Keyword;
-import de.cneubauer.domain.dao.CreditorDao;
-import de.cneubauer.domain.dao.KeywordDao;
-import de.cneubauer.domain.dao.impl.CreditorDaoImpl;
-import de.cneubauer.domain.dao.impl.KeywordDaoImpl;
-import de.cneubauer.gui.controller.GUIController;
 import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
 import de.cneubauer.util.enumeration.AppLang;
@@ -15,18 +7,17 @@ import de.cneubauer.util.enumeration.TessLang;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import java.io.InputStream;
 import java.net.URL;
-import java.util.*;
+import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * Created by Christoph Neubauer on 24.09.2016.
@@ -34,7 +25,6 @@ import java.util.*;
  */
 public class Start extends Application {
     private static HostServices hostServices;
-    private static DBInformationHolder holder;
 
     private static void setHostServicesInternal(HostServices s){
         hostServices = s;
@@ -66,14 +56,6 @@ public class Start extends Application {
         scene.getStylesheets().add(String.valueOf(getClass().getResource("../../../css/validationError.css")));
 
         setHostServicesInternal(this.getHostServices());
-/*
-        KeywordDao keywordDao = new KeywordDaoImpl();
-        List<Keyword> keywordList = keywordDao.getAll();
-
-        CreditorDao creditorDao = new CreditorDaoImpl();
-        List<Creditor> creditorList = creditorDao.getAll();
-
-        setDBInformationHolder(new DBInformationHolder(keywordList, creditorList));*/
 
         primaryStage.setTitle("Ferd-Transformator");
         primaryStage.setScene(scene);
@@ -100,13 +82,5 @@ public class Start extends Application {
         config.putIfAbsent(Cfg.TESSERACTLANGUAGE.getValue(), TessLang.ENGLISHANDGERMAN.getValue());
         config.putIfAbsent(Cfg.APPLICATIONLANGUAGE.getValue(), AppLang.ENGLISH.name());
         ConfigHelper.rewrite(config);
-    }
-
-    public void setDBInformationHolder(DBInformationHolder dBInformationHolder) {
-        holder = dBInformationHolder;
-    }
-
-    public static DBInformationHolder getHolder() {
-        return holder;
     }
 }

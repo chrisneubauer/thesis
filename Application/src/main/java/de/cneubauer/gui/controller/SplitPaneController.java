@@ -60,8 +60,14 @@ public class SplitPaneController extends GUIController {
     void initResults(int index, ExtractionModel extractedInformation, File fileToScan, ProcessedListController caller) {
         this.caller = caller;
         this.index = index;
-        invoiceTabController.initData(extractedInformation.getInvoiceInformation(), this);
-        accountingRecordsTabController.initData(extractedInformation.getRecords(), this);
+        if (extractedInformation.getUpdatedInvoiceInformation() == null && extractedInformation.getUpdatedRecords() == null) {
+            invoiceTabController.initData(extractedInformation.getInvoiceInformation(), this);
+            accountingRecordsTabController.initData(extractedInformation.getRecords(), this);
+        } else {
+            // after first time updated
+            invoiceTabController.initData(extractedInformation.getUpdatedInvoiceInformation(), this);
+            accountingRecordsTabController.initData(extractedInformation.getUpdatedRecords(), this);
+        }
         this.initImage(fileToScan);
         model = extractedInformation;
     }
@@ -126,7 +132,6 @@ public class SplitPaneController extends GUIController {
         Invoice oldInfo = model.getInvoiceInformation();
         model.setUpdatedRecords(accountingRecordsTabController.updateInformation());
         model.setUpdatedInvoiceInformation(invoiceTabController.updateInformation());
-
         //accountingRecordsTabController.addRevisedToFile();
         invoiceTabController.addRevisedToFile();
         caller.updateSelected(index, model);

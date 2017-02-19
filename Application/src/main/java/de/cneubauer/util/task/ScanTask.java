@@ -49,7 +49,48 @@ public class ScanTask extends Task {
         this.progressBar = progress;
     }
 
-    protected List<ProcessResult> callNew() throws Exception {
+    private ExtractionModel extractInformation(HocrDocument doc, String[] parts) {
+        DataExtractorService copy = new DataExtractorService(doc, parts);
+        DataExtractorService copy2 = new DataExtractorService(doc, parts);
+        copy.extractInvoice = true;
+        copy2.extractInvoice = false;
+        Thread invoiceThread = new Thread(copy);
+        Thread recordThread = new Thread(copy2);
+
+        boolean allFinished = false;
+        boolean invoiceFinished = false;
+        boolean recordFinished = false;
+        Invoice i = null;
+        List<Record> recordList = null;
+        DocumentCaseSet caseSet;
+
+        invoiceThread.start();
+        recordThread.start();
+
+        while (!allFinished) {
+            if (!invoiceFinished && invoiceThread.getState() == Thread.State.TERMINATED) {
+                i = copy.getThreadInvoice();
+                invoiceFinished = true;
+            }
+            if (!recordFinished && recordThread.getState() == Thread.State.TERMINATED) {
+                recordList = copy2.getThreadRecord();
+                recordFinished = true;
+            }
+            allFinished = invoiceFinished &&  recordFinished;
+        }
+        caseSet = copy.getCaseSet();
+
+        ExtractionModel m = new ExtractionModel();
+        m.setInvoiceInformation(i);
+        m.setRecords(recordList);
+        m.setHocrDocument(doc);
+        m.setCaseSet(caseSet);
+        return m;
+    }
+
+    @Override
+    @Deprecated
+    protected List<ProcessResult> call() throws Exception {
         int counter = 0;
         Platform.runLater(() -> filesScanned.setText("0 / " + filesToScan.length));
         for (File f : filesToScan) {
@@ -65,37 +106,19 @@ public class ScanTask extends Task {
                 Logger.getLogger(this.getClass()).log(Level.INFO, "initiating ocr threads...");
                 Platform.runLater(() -> this.status.setText("Scanning header, body and footer..."));
 
-                TesseractWorker worker = new TesseractWorker(preprocessedImage, true);
-                String document = null;
-                worker.run();
-                while (document == null) {
-                    document = worker.getResultIfFinished();
-                }
-
-                HocrDocument hocrDocument = new HocrDocument(document);
-
                 // TODO: remove partitioning
                 ImagePartitioner partitioner = new ImagePartitioner(preprocessedImage);
                 BufferedImage[] imageParts = partitioner.process();
-                String[] ocrParts = this.performOCR(imageParts);
+                String[] ocrParts = this.performOCR(imageParts, preprocessedImage);
 
                 Platform.runLater(() -> status.setText("Extracting information..."));
 
                 // TODO: parallelize account records and invoice information
-                DataExtractorService service = new DataExtractorService(hocrDocument, ocrParts);
-                Invoice i = service.extractInvoiceInformationFromHocr();
-                List<Record> recordList = service.extractAccountingRecordInformation();
-                DocumentCaseSet caseSet = service.getCaseSet();
+                HocrDocument hocrDocument = new HocrDocument(ocrParts[4]);
 
-                ExtractionModel m = new ExtractionModel();
-                m.setInvoiceInformation(i);
-                m.setRecords(recordList);
-                m.setHocrDocument(hocrDocument);
-                m.setCaseSet(caseSet);
-
+                ExtractionModel m = this.extractInformation(hocrDocument, ocrParts);
                 r.setExtractionModel(m);
                 r.setProblem("");
-                //r.getExtractionModel().setCaseSet(caseSet);
 
                 if (this.resultValid(r)) {
                     r.setStatus(ScanStatus.OK);
@@ -119,60 +142,7 @@ public class ScanTask extends Task {
         return processResults;
     }
 
-    @Override
-    @Deprecated
-    protected List<ProcessResult> call() throws Exception {
-        return this.callNew();
-        /*int counter = 0;
-        Platform.runLater(() -> filesScanned.setText("0 / " + filesToScan.length));
-        for (File f : filesToScan) {
-            Platform.runLater(() -> currentFile.setText(f.getName()));
-            ProcessResult r = new ProcessResult();
-            r.setDocName(f.getName());
-            r.setFile(f);
-            try {
-                ImagePartitioner partitioner = new ImagePartitioner(f);
-                BufferedImage[] imageParts = partitioner.process();
-                Logger.getLogger(this.getClass()).log(Level.INFO, "initiating ocr threads...");
-                Platform.runLater(() -> this.status.setText("Scanning header, body and footer..."));
-
-                String[] ocrParts = this.performOCR(imageParts);
-
-                Platform.runLater(() -> status.setText("Extracting information..."));
-                DataExtractorService service = new DataExtractorService(ocrParts);
-                Invoice i = service.extractInvoiceInformation();
-                List<Record> recordList = service.extractAccountingRecordInformation();
-
-                ExtractionModel m = new ExtractionModel();
-                m.setInvoiceInformation(i);
-                m.setRecords(recordList);
-
-                r.setExtractionModel(m);
-                r.setProblem("");
-
-                if (this.resultValid(r)) {
-                    r.setStatus(ScanStatus.OK);
-                } else {
-                    r.setStatus(ScanStatus.ISSUE);
-                    r.setProblem("Missing Information");
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                r.setProblem(ex.getMessage());
-                r.setStatus(ScanStatus.ERROR);
-            }
-            current += percentage;
-            processResults.add(counter, r);
-            counter++;
-            int finalCounter = counter;
-            Platform.runLater(() -> filesScanned.setText(String.valueOf(finalCounter) + " / " + filesToScan.length));
-            Logger.getLogger(this.getClass()).log(Level.INFO, "new progress: " + current * 100 + "%.");
-            Platform.runLater(() -> progressBar.setProgress(current));
-        }
-        return processResults;*/
-    }
-
-    private String[] performOCR(BufferedImage[] imageParts) {
+    private String[] performOCR(BufferedImage[] imageParts, BufferedImage hocrImage) {
         // TODO: put stuff out of gui
         TesseractWorker leftHeaderWorker = new TesseractWorker(imageParts[0], false);
         Thread leftHeaderThread = new Thread(leftHeaderWorker);
@@ -186,21 +156,30 @@ public class ScanTask extends Task {
         TesseractWorker footerWorker = new TesseractWorker(imageParts[3], false);
         Thread footerThread = new Thread(footerWorker);
 
+        TesseractWorker hocrWorker = new TesseractWorker(hocrImage, true);
+        Thread hocrThread = new Thread(hocrWorker);
+
         boolean leftHeaderFinished = false;
         boolean rightHeaderFinished = false;
         boolean bodyFinished = false;
         boolean footerFinished = false;
+        boolean hocrFinished = false;
         boolean allFinished = false;
 
-        String[] ocrParts = new String[4];
+        String[] ocrParts = new String[5];
 
+        hocrThread.start();
         leftHeaderThread.start();
         rightHeaderThread.start();
         bodyThread.start();
         footerThread.start();
 
         while (!allFinished) {
-            if (leftHeaderThread.getState() == Thread.State.TERMINATED) {
+            if (!hocrFinished && hocrThread.getState() == Thread.State.TERMINATED) {
+                ocrParts[4] = hocrWorker.getResultIfFinished();
+                hocrFinished = true;
+            }
+            if (!leftHeaderFinished && leftHeaderThread.getState() == Thread.State.TERMINATED) {
                 ocrParts[0] = leftHeaderWorker.getResultIfFinished();
                 leftHeaderFinished = true;
                 if (rightHeaderFinished) {
@@ -208,7 +187,7 @@ public class ScanTask extends Task {
                     Platform.runLater(() -> status.setText(statusText.replace("header, ", "")));
                 }
             }
-            if (rightHeaderThread.getState()== Thread.State.TERMINATED) {
+            if (!rightHeaderFinished && rightHeaderThread.getState()== Thread.State.TERMINATED) {
                 ocrParts[1] = rightHeaderWorker.getResultIfFinished();
                 rightHeaderFinished = true;
                 if (leftHeaderFinished) {
@@ -216,19 +195,19 @@ public class ScanTask extends Task {
                     Platform.runLater(() -> status.setText(statusText.replace("header, ", "")));
                 }
             }
-            if (bodyThread.getState() == Thread.State.TERMINATED) {
+            if (!bodyFinished && bodyThread.getState() == Thread.State.TERMINATED) {
                 ocrParts[2] = bodyWorker.getResultIfFinished();
                 bodyFinished = true;
                 String statusText = this.status.getText();
                 Platform.runLater(() -> status.setText(statusText.replace("body ", "")));
             }
-            if (footerThread.getState() == Thread.State.TERMINATED) {
+            if (!footerFinished && footerThread.getState() == Thread.State.TERMINATED) {
                 ocrParts[3] = footerWorker.getResultIfFinished();
                 footerFinished = true;
                 String statusText = this.status.getText();
                 Platform.runLater(() -> status.setText(statusText.replace("and footer", "")));
             }
-            allFinished = leftHeaderFinished && rightHeaderFinished && bodyFinished && footerFinished;
+            allFinished = leftHeaderFinished && rightHeaderFinished && bodyFinished && footerFinished && hocrFinished;
         }
         return ocrParts;
     }
