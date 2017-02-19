@@ -127,57 +127,57 @@ public class ResultsController extends GUIController {
 
         if (this.extractedInvoiceNumber.getText() == null || this.extractedInvoiceNumber.getText().isEmpty()) {
             this.extractedInvoiceNumber.getStyleClass().add("error");
-            errors.add(ValidationStatus.UNKNOWNISSUE);
+            errors.add(ValidationStatus.MISSINGINVOICENO);
         }
         if (this.extractedCreditor.getText() == null || this.extractedCreditor.getText().isEmpty()) {
             ObservableList<String> styles = this.extractedCreditor.getStyleClass();
             styles.add("error");
             this.extractedCreditor.getStyleClass().add("error");
-            errors.add(ValidationStatus.UNKNOWNISSUE);
+            errors.add(ValidationStatus.MISSINGCREDITOR);
         }
         if (this.extractedDebitor.getText() == null || this.extractedDebitor.getText().isEmpty()) {
             this.extractedDebitor.getStyleClass().add("error");
-            errors.add(ValidationStatus.UNKNOWNISSUE);
+            errors.add(ValidationStatus.MISSINGDEBITOR);
         }
         if (this.extractedIssueDate.getText() == null || this.extractedIssueDate.getText().isEmpty()) {
             this.extractedIssueDate.getStyleClass().add("error");
-            errors.add(ValidationStatus.UNKNOWNISSUE);
+            errors.add(ValidationStatus.MALFORMEDISSUEDATE);
         }
         if (this.extractedLineTotal.getText() == null || this.extractedLineTotal.getText().isEmpty()) {
             this.extractedLineTotal.getStyleClass().add("error");
-            errors.add(ValidationStatus.UNKNOWNISSUE);
+            errors.add(ValidationStatus.NOLINETOTALVALUE);
         }
         if (this.extractedChargeTotal.getText() == null || this.extractedChargeTotal.getText().isEmpty()) {
             this.extractedChargeTotal.getStyleClass().add("error");
-            errors.add(ValidationStatus.UNKNOWNISSUE);
+            errors.add(ValidationStatus.NOCHARGETOTALVALUE);
         }
         if (this.extractedTaxBasisTotal.getText() == null || this.extractedTaxBasisTotal.getText().isEmpty()) {
             this.extractedTaxBasisTotal.getStyleClass().add("error");
-            errors.add(ValidationStatus.UNKNOWNISSUE);
+            errors.add(ValidationStatus.NOTAXBASISVALUE);
         }
         if (this.extractedTaxTotal.getText() == null || this.extractedTaxTotal.getText().isEmpty()) {
             this.extractedTaxTotal.getStyleClass().add("error");
-            errors.add(ValidationStatus.UNKNOWNISSUE);
+            errors.add(ValidationStatus.NOTAXTOTAL);
         } else {
             this.extractedTaxTotal.getStyleClass().remove("error");
         }
         if (this.extractedAllowanceTotal.getText() == null || this.extractedAllowanceTotal.getText().isEmpty()) {
             this.extractedAllowanceTotal.getStyleClass().add("error");
-            errors.add(ValidationStatus.UNKNOWNISSUE);
+            errors.add(ValidationStatus.NOALLOWANCETOTAL);
         }
         if (this.extractedGrandTotal.getText() == null || this.extractedGrandTotal.getText().isEmpty()) {
             this.extractedGrandTotal.getStyleClass().add("error");
-            errors.add(ValidationStatus.UNKNOWNISSUE);
+            errors.add(ValidationStatus.NOGRANDTOTAL);
         }
         if (this.extractedHasSkonto.isSelected()) {
             if (this.extractedSkonto.getText() == null || this.extractedSkonto.getText().isEmpty()) {
                 this.extractedSkonto.getStyleClass().add("error");
-                errors.add(ValidationStatus.UNKNOWNISSUE);
+                errors.add(ValidationStatus.SKONTOSELECTEDBUTNOTVALUE);
             }
         }
         if (this.extractedDeliveryDate.getText() == null || this.extractedDeliveryDate.getText().isEmpty()) {
             this.extractedDeliveryDate.getStyleClass().add("error");
-            errors.add(ValidationStatus.UNKNOWNISSUE);
+            errors.add(ValidationStatus.MALFORMEDDELIVERYDATE);
         }
         return errors;
     }

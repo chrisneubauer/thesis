@@ -103,27 +103,11 @@ public class SplitPaneController extends GUIController {
             String content = "Could not update the document! \n Please review the following errors: \n";
             StringBuilder sb = new StringBuilder();
             sb.append(content);
-            //TODO: Build errors for invoice errors
-            /*for (ValidationStatus error : invoiceErrors) {
-                switch (error) {
-                    case (ValidationStatus.UNKNOWNISSUE)
-                }
-            }*/
+            for (ValidationStatus error : invoiceErrors) {
+                sb.append(this.getValidationError(error)).append("\n");
+            }
             for (ValidationStatus error : accountingErrors) {
-                switch (error) {
-                    case MALFORMEDVALUE:
-                        sb.append("Aktiva and Passiva values do not sum up to zero! \n");
-                        break;
-                    case MISSINGACCOUNTS:
-                        sb.append("At least one side of accounts is empty! There must be at least one account on both sides \n");
-                        break;
-                    case MISSINGPOSITION:
-                        sb.append("No accounting position has been filled in. This is a mandatory field. \n");
-                        break;
-                    case MISSINGVALUES:
-                        sb.append("There are accounts selected but no values have been given. Please revise the accounts. \n");
-                        break;
-                }
+                sb.append(this.getValidationError(error)).append("\n");
             }
             info.setContentText(sb.toString());
             info.setHeaderText("Review Issue");
@@ -131,12 +115,16 @@ public class SplitPaneController extends GUIController {
         }
     }
 
+    private String getValidationError(ValidationStatus error) {
+        Locale locale = super.getCurrentLocale();
+        ResourceBundle bundle = ResourceBundle.getBundle("bundles/ValidationErrors", locale);
+        return bundle.getString(error.name());
+    }
+
     // updates all reviewed information and return to list view
     private void updateAndReturn() {
         Invoice oldInfo = model.getInvoiceInformation();
-        //model.setRecords(accountingRecordsTabController.updateInformation());
         model.setUpdatedRecords(accountingRecordsTabController.updateInformation());
-        //model.setInvoiceInformation(invoiceTabController.updateInformation());
         model.setUpdatedInvoiceInformation(invoiceTabController.updateInformation());
 
         //accountingRecordsTabController.addRevisedToFile();

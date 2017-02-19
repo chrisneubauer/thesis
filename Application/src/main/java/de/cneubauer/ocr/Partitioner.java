@@ -18,6 +18,7 @@ import java.io.IOException;
  * Body contains all the positions and services done
  * The footer has the total value to pay as well as payment information and skonto / tax information
  */
+@Deprecated
 class Partitioner {
     byte[] getCompleteFile() {
         return completeFile;

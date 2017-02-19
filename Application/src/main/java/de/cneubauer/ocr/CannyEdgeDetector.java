@@ -33,7 +33,7 @@ import java.util.Arrays;
  * @author Tom Gibara
  *
  */
-
+@Deprecated
 public class CannyEdgeDetector {
 
 	// statics

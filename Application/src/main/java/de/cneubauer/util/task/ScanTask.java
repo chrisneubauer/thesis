@@ -1,13 +1,12 @@
 package de.cneubauer.util.task;
 
-import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.service.DataExtractorService;
 import de.cneubauer.domain.service.validation.AccountingRecordValidator;
 import de.cneubauer.domain.service.validation.InvoiceValidator;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
-import de.cneubauer.ocr.HOCRExtractor;
 import de.cneubauer.ocr.ImagePartitioner;
 import de.cneubauer.ocr.ImagePreprocessor;
 import de.cneubauer.ocr.hocr.HocrDocument;
@@ -21,7 +20,6 @@ import javafx.scene.control.ProgressBar;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;

@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
  * Created by Christoph Neubauer on 14.11.2016.
  * Creates a skeleton of the image
  */
+@Deprecated
 class Skeletonizer {
     private BufferedImage img;
 

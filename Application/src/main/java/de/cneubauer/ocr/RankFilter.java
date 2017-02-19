@@ -9,6 +9,7 @@ import java.awt.image.WritableRaster;
  * Created by Christoph Neubauer on 12.11.2016.
  * RankFilter to reduce lines in the image
  */
+@Deprecated
 public class RankFilter {
     private int filterWidth = 5, filterHeight = 5;
 

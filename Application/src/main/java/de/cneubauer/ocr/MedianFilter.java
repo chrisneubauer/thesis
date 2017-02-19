@@ -19,6 +19,7 @@ import java.util.Arrays;
  * Created by Christoph Neubauer on 10.11.2016.
  * Used for removing salt and pepper noise of image
  */
+@Deprecated
 public class MedianFilter {
         int[] input;
         int[] output;

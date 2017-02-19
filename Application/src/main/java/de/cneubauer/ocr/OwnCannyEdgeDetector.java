@@ -18,6 +18,7 @@ import java.awt.image.WritableRaster;
  * Apply double threshold to determine potential edges
  * Track edge by hysteresis: Finalize the detection of edges by suppressing all the other edges that are weak and not connected to strong edges.
  */
+@Deprecated
 class OwnCannyEdgeDetector {
     private BufferedImage input;
     private BufferedImage output;

@@ -8,6 +8,7 @@ import java.io.File;
 /**
  * Created by Christoph Neubauer on 13.11.2016.
  */
+@Deprecated
 public class HoughTransformator {
 
 /**
