@@ -48,6 +48,8 @@ public class DataExtractorService implements Runnable {
     private List<LegalPerson> list;
     private DocumentCaseSet caseSet;
     public boolean extractInvoice;
+    private Invoice threadInvoice;
+    private List<Record> threadRecord;
 
     /**
      * Constructor of the DataExtractorService class
@@ -88,7 +90,7 @@ public class DataExtractorService implements Runnable {
         this.footer = parts[3];
     }
 
-    public Invoice extractInvoiceInformationFromHocr() {
+    private Invoice extractInvoiceInformationFromHocr() {
         Invoice result = new Invoice();
         result.setCreditor(this.findCreditor());
         if (result.getCreditor() != null) {
@@ -261,6 +263,7 @@ public class DataExtractorService implements Runnable {
      * Method to search for invoice metadata in the scanned page
      * @return the invoice metadata that has been found
      */
+    @Deprecated
     public Invoice extractInvoiceInformation() {
         Invoice result = new Invoice();
         result.setInvoiceNumber(this.findInvoiceNumber());
@@ -574,14 +577,18 @@ public class DataExtractorService implements Runnable {
 
         if (searchForCreditor) {
             for (String line : lines) {
-                if (creditorList.toString().contains(line)) {
-                    for (LegalPerson p : list) {
-                        if (p.getName() != null && p.getName().equals(line)) {
-                            return p;
-                        }
-                        if (this.refineSearch(line, p.getName())) {
-                            return p;
-                        }
+                // As almost all creditors are companies, we can try to improve this line if we find some corporate information
+                // ocr errors, such as a whole line containing not only the company, but also their address can be made more accurate
+                // therefore, we search for corporate information. If we find any, we will only take the first part of the string
+                int idx = this.findCorporateFormIndex(line);
+                if (idx > 0) {
+                    line = line.substring(0, idx);
+                }
+                String compareLine = line.trim().toLowerCase();
+                for (Creditor c : creditorList) {
+                    String creditor = c.getName().trim().toLowerCase();
+                    if (compareLine.contains(creditor) || refineSearch(compareLine, creditor)) {
+                        return c.getLegalPerson();
                     }
                 }
             }
@@ -589,10 +596,10 @@ public class DataExtractorService implements Runnable {
         else {
             for (String line : lines) {
                 for (LegalPerson p : list) {
-                    if (p.getName() != null && line.contains(p.getName())) {
-                        return p;
-                    } else {
-                        if (this.refineSearch(line, p.getName())) {
+                    if (p.getName() != null) {
+                        String person = p.getName().trim().toLowerCase();
+                        String toCheck = line.trim().toLowerCase();
+                        if (toCheck.contains(person) || this.refineSearch(toCheck, person)) {
                             return p;
                         }
                     }
@@ -865,26 +872,26 @@ public class DataExtractorService implements Runnable {
         return null;
     }
 
-    @Deprecated
     private int findCorporateFormIndex(String line) {
+        line = line.toLowerCase();
         int result = 0;
-        if (line.indexOf("GmbH") > 0) {
-            result = line.indexOf("GmbH");
+        if (line.indexOf("gmbh") > 0) {
+            result = line.indexOf("gmbh") + 4;
         }
-        else if (line.indexOf("AG") > 0) {
-            result = line.indexOf("AG");
+        else if (line.indexOf("ag") > 0) {
+            result = line.indexOf("ag") + 2;
         }
-        else if (line.indexOf("KG") > 0) {
-            result = line.indexOf("KG");
+        else if (line.indexOf("kg") > 0) {
+            result = line.indexOf("kg") + 2;
         }
-        else if (line.indexOf("KGaA") > 0) {
-            result = line.indexOf("KgaA");
+        else if (line.indexOf("kgaa") > 0) {
+            result = line.indexOf("kgaa") + 4;
         }
-        else if (line.indexOf("OHG") > 0) {
-            result = line.indexOf("OHG");
+        else if (line.indexOf("ohg") > 0) {
+            result = line.indexOf("ohg") + 3;
         }
-        else if (line.indexOf("GbR") > 0) {
-            result = line.indexOf("GbR");
+        else if (line.indexOf("gbr") > 0) {
+            result = line.indexOf("gbr") + 3;
         }
         return result;
     }
@@ -960,8 +967,6 @@ public class DataExtractorService implements Runnable {
             this.threadRecord = this.extractAccountingRecordInformation();
         }
     }
-    public Invoice threadInvoice;
-    public List<Record> threadRecord;
 
     public Invoice getThreadInvoice() {return this.threadInvoice;}
     public List<Record> getThreadRecord() {return this.threadRecord;}

@@ -30,11 +30,10 @@ public class RecordDaoImplTest extends AbstractTest {
 
     @Before
     public void setUp() throws Exception {
-        this.accountTypeDao = AccountTypeDaoImpl.getInstance();
-        this.accountDao = AccountDaoImpl.getInstance();
-        //this.accountDao = new AccountDaoImpl();
-        this.dao = RecordDaoImpl.getInstance();
-        this.accountRecordDao =  AccountRecordDaoImpl.getInstance();
+        this.accountTypeDao = new AccountTypeDaoImpl();
+        this.accountDao = new AccountDaoImpl();
+        this.dao = new RecordDaoImpl();
+        this.accountRecordDao = new AccountRecordDaoImpl();
     }
 
     @After

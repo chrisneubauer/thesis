@@ -208,7 +208,7 @@ public class TesseractWrapperTest extends AbstractTest {
 
     @Test
     public void testHOCROutput() {
-        String path = "..\\Temp\\Datenwerk4.pdf";
+        String path = "..\\Temp\\hoerex1.pdf";
         //BufferedImage file = ImageIO.read(new File(path));
         ImagePreprocessor preprocessor = new ImagePreprocessor(path);
 

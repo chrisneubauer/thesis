@@ -93,31 +93,32 @@ public class ImagePartitioner {
         //BufferedImage normalizedImage = normalizer.process(image);
         //BufferedImage thickened = this.thickenImage(normalizedImage);
         HistogramMaker maker = new HistogramMaker();
+        maker.calculateHistogram(image, whiteTable);
 
         //expect image to be preprocessed
         //ImagePreprocessor preprocessor = new ImagePreprocessor(image);
         //BufferedImage processedImage = preprocessor.preprocess();
-        BufferedImage processedImage = image;
-        BufferedImage histogram;
-        BufferedImage tobeRemoved = maker.makeVerticalHistogram(processedImage, true);
+        /*BufferedImage histogram;
+        BufferedImage tobeRemoved = maker.makeVerticalHistogram(image, true);
         if (whiteTable) {
-            histogram = maker.makeWhiteHistogram(processedImage);
+            histogram = maker.makeWhiteHistogram(image);
         } else {
-            histogram = maker.makeHistogram(processedImage);
-        }
+            histogram = maker.makeHistogram(image);
+        }*/
         long[] values = maker.getValues();
         long max = maker.getMaxValue();
 
         int maxWidth = image.getWidth();
         int maxHeight = image.getHeight();
 
-        String outputDir = ".\\temp\\";
+        //TODO: remove test output
+        /*String outputDir = ".\\temp\\";
         File test = new File(outputDir + "histogram.png");
         try {
             ImageIO.write(tobeRemoved, "png", test);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         for (int i = 0; i < values.length; i++) {
             if (values[i] < max * 0.5) {
@@ -128,11 +129,11 @@ public class ImagePartitioner {
                 }
             }
         }
-        if (yPosOfFirstHorizontalLine == 0) {
-            // original image return since no table has been found
-            return processedImage;
+        if (yPosOfFirstHorizontalLine == 0 || yPosOfLastHorizontalLine - yPosOfFirstHorizontalLine < 50) {
+            // original image return since no table has been found or cropped image is too small to contain information
+            return image;
         } else {
-            return processedImage.getSubimage(0, yPosOfFirstHorizontalLine, maxWidth, yPosOfLastHorizontalLine - yPosOfFirstHorizontalLine);
+            return image.getSubimage(0, yPosOfFirstHorizontalLine, maxWidth, yPosOfLastHorizontalLine - yPosOfFirstHorizontalLine);
         }
     }
 

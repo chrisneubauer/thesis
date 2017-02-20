@@ -130,6 +130,8 @@ public class DatabaseService {
         for (Creditor c : creditorList) {
             if (c.getLegalPerson().getId() == p.getId()) {
                 return c;
+            } else if (p.getName() != null && c.getName().trim().toLowerCase().equals(p.getName().trim().toLowerCase())) {
+                return c;
             }
         }
         // at this point, the legal person is not yet registered as a creditor
