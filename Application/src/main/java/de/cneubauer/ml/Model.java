@@ -33,7 +33,7 @@ public class Model {
         int levDistance = StringUtils.getLevenshteinDistance(this.getPosition(), positionToCompare);
         int length = this.getPosition().length();
         double distance = (double) levDistance / (double) length;
-        if (distance < ConfigHelper.getConfidenceRate()) {
+        if (distance < 1 - ConfigHelper.getConfidenceRate()) {
             return true;
         } else {
             return false;

@@ -8,6 +8,7 @@ import de.cneubauer.ml.Model;
 import de.cneubauer.ml.ModelWriter;
 import de.cneubauer.ocr.ImagePartitioner;
 import de.cneubauer.ocr.ImagePreprocessor;
+import de.cneubauer.ocr.hocr.HocrDocument;
 import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import de.cneubauer.transformation.ZugFerdTransformator;
 import de.cneubauer.ml.ModelReader;
@@ -63,24 +64,48 @@ public class ApplicationTest extends AbstractTest {
         String[] stringParts = new String[parts.length];
 
         this.logger.log(Level.INFO, "doing OCR");
-        for (int i = 0; i < parts.length; i++) {
+        for (int i = 0; i < parts.length -1; i++) {
             stringParts[i] = this.wrapper.initOcr(parts[i]);
         }
+        stringParts[4] = this.wrapper.initOcr(preprocessedImage, true);
+        HocrDocument doc = new HocrDocument(stringParts[4]);
 
-        this.dataExtractorService = new DataExtractorService(stringParts);
-        this.logger.log(Level.INFO, "extracting invoice information");
-        Invoice extractedInvoiceInformation = this.dataExtractorService.extractInvoiceInformation();
+        DataExtractorService invoiceExtractor = new DataExtractorService(doc, stringParts);
+        DataExtractorService accountingRecordExtractor = new DataExtractorService(doc, stringParts);
 
-        this.logger.log(Level.INFO, "extracting accounting record information");
-        List<Record> extractedAccountingRecordInformation = this.dataExtractorService.extractAccountingRecordInformation();
+        Thread invoiceThread = new Thread(invoiceExtractor);
+        Thread accountingRecordThread = new Thread(accountingRecordExtractor);
+
+        invoiceThread.start();
+        accountingRecordThread.start();
+
+        boolean invoiceFinished = false;
+        boolean accountingRecordFinished = false;
+
+        Invoice extractedInvoiceInformation = null;
+        List<Record> extractedAccountingRecordInformation = null;
+
+        while (!invoiceFinished || !accountingRecordFinished) {
+            if (!invoiceFinished && invoiceThread.getState().equals(Thread.State.TERMINATED)) {
+                this.logger.log(Level.INFO, "getting extracted invoice information");
+                extractedInvoiceInformation = invoiceExtractor.getThreadInvoice();
+                invoiceFinished = true;
+            }
+            if (!accountingRecordFinished && accountingRecordThread.getState().equals(Thread.State.TERMINATED)) {
+                this.logger.log(Level.INFO, "getting extracted accounting record information");
+                extractedAccountingRecordInformation = accountingRecordExtractor.getThreadRecord();
+                accountingRecordFinished = true;
+            }
+        }
 
         this.logger.log(Level.INFO, "creating conformal zugFerd file");
-        if (extractedInvoiceInformation.getDebitor() == null) {
+        if (extractedInvoiceInformation != null && extractedInvoiceInformation.getDebitor() == null) {
             extractedInvoiceInformation.setDebitor(new LegalPerson("FakeDebitor"));
         }
-        if (extractedInvoiceInformation.getCreditor() == null) {
+        if (extractedInvoiceInformation != null && extractedInvoiceInformation.getCreditor() == null) {
             extractedInvoiceInformation.setCreditor(new LegalPerson("FakeCreditor"));
         }
+
         io.konik.zugferd.Invoice resultingInvoice = this.transformator.createFullConformalBasicInvoice(extractedInvoiceInformation);
 
         try {

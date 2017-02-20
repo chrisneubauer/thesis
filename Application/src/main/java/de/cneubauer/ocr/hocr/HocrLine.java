@@ -48,7 +48,7 @@ public class HocrLine extends HocrElement {
         return sb.toString();
     }
 
-    public HocrWord getWordsByPosition(int[] linePos) {
+    public HocrWord getWordsByPosition(int[] linePos, int threshold) {
         List<HocrWord> possibleWords = new LinkedList<>();
         int xStart = linePos[0];
         int yStart = linePos[1];
@@ -59,10 +59,10 @@ public class HocrLine extends HocrElement {
             // 0: startX, 1: startY, 2: endX, 3: endY
             int[] pos = new int[] {Integer.valueOf(stringPos[0]), Integer.valueOf(stringPos[1]), Integer.valueOf(stringPos[2]), Integer.valueOf(stringPos[3])};
 
-            boolean xStartsEarlier = xStart <= pos[0];
-            boolean yStartsEarlier = yStart <= pos[1];
-            boolean xEndsLater = xEnd >= pos[2];
-            boolean yEndsLater = yEnd >= pos[3];
+            boolean xStartsEarlier = xStart <= pos[0] + threshold;
+            boolean yStartsEarlier = yStart <= pos[1] + threshold;
+            boolean xEndsLater = xEnd >= pos[2] - threshold;
+            boolean yEndsLater = yEnd >= pos[3] - threshold;
 
             if (xStartsEarlier && yStartsEarlier && xEndsLater && yEndsLater) {
                 possibleWords.add((HocrWord) word);

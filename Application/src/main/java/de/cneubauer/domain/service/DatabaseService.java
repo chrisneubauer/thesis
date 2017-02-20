@@ -76,51 +76,47 @@ public class DatabaseService {
         HocrDocument doc = extractionModel.getHocrDocument();
         DocumentCaseSet additionalSet = new DocumentCaseSet();
         DocumentCaseSet oldSet = extractionModel.getCaseSet();
+        Creditor c = this.findCreditor(newI.getCreditor());
         int caseId = this.caseDao.getHighestCaseId() + 1;
 
         if (compareWithOldSet && oldSet.getBuyerCase() != null && oldI.getDebitor() != null && newI.getDebitor() != null) {
             oldSet.getBuyerCase().setIsCorrect(newI.getDebitor().getId() == oldI.getDebitor().getId());
         }
-        DocumentCase buyerCase = new DocumentCase();
         String pos = doc.getPage(0).findPosition(newI.getDebitor().getName());
         if (pos != null) {
-            buyerCase.setPosition(pos);
-            buyerCase.setKeyword(this.keywordList.get(4));
-            buyerCase.setIsCorrect(true);
-            buyerCase.setCreatedDate(Date.valueOf(LocalDate.now()));
-            buyerCase.setCreditor(this.findCreditor(newI.getCreditor()));
-            buyerCase.setCaseId(caseId);
-            additionalSet.setBuyerCase(buyerCase);
+            additionalSet.setBuyerCase(new DocumentCase(c, caseId, this.keywordList.get(4), pos));
         }
 
         if (compareWithOldSet && oldSet.getInvoiceNoCase() != null && newI.getInvoiceNumber() != null && oldI.getInvoiceNumber() != null) {
             oldSet.getInvoiceNoCase().setIsCorrect(newI.getInvoiceNumber().equals(oldI.getInvoiceNumber()));
         }
-        DocumentCase invoiceNoCase = new DocumentCase();
         pos = doc.getPage(0).findPosition(newI.getInvoiceNumber());
         if (pos != null) {
-            invoiceNoCase.setPosition(pos);
-            invoiceNoCase.setKeyword(this.keywordList.get(1));
-            invoiceNoCase.setIsCorrect(true);
-            invoiceNoCase.setCreatedDate(Date.valueOf(LocalDate.now()));
-            invoiceNoCase.setCreditor(this.findCreditor(newI.getCreditor()));
-            invoiceNoCase.setCaseId(caseId);
-            additionalSet.setInvoiceNoCase(invoiceNoCase);
+            additionalSet.setInvoiceNoCase(new DocumentCase(c, caseId, this.keywordList.get(1), pos));
         }
 
         if (compareWithOldSet && oldSet.getInvoiceDateCase() != null && newI.getIssueDate() != null && oldI.getIssueDate() != null) {
             oldSet.getInvoiceDateCase().setIsCorrect(newI.getIssueDate().equals(oldI.getIssueDate()));
         }
-        DocumentCase invoiceDateCase = new DocumentCase();
         pos = doc.getPage(0).findPosition(this.convertDateToString(newI.getIssueDate()));
         if (pos != null) {
-            invoiceDateCase.setPosition(pos);
-            invoiceDateCase.setKeyword(this.keywordList.get(2));
-            invoiceDateCase.setIsCorrect(true);
-            invoiceDateCase.setCreatedDate(Date.valueOf(LocalDate.now()));
-            invoiceDateCase.setCreditor(this.findCreditor(newI.getCreditor()));
-            invoiceDateCase.setCaseId(caseId);
-            additionalSet.setInvoiceDateCase(invoiceDateCase);
+            additionalSet.setInvoiceDateCase(new DocumentCase(c, caseId, this.keywordList.get(2), pos));
+        }
+
+        if (compareWithOldSet && oldSet.getSellerCase() != null && newI.getCreditor() != null && oldI.getCreditor() != null) {
+            oldSet.getSellerCase().setIsCorrect(newI.getCreditor().getName().equals(oldI.getCreditor().getName()));
+        }
+        pos = doc.getPage(0).findPosition(newI.getCreditor().getName());
+        if (pos != null) {
+            additionalSet.setSellerCase(new DocumentCase(c, caseId, this.keywordList.get(3), pos));
+        }
+
+        if (compareWithOldSet && oldSet.getDocumentTypeCase() != null) {
+            oldSet.getDocumentTypeCase().setIsCorrect(true);
+        }
+        pos = doc.getPage(0).findPosition("Rechnung");
+        if (pos != null) {
+            additionalSet.setDocumentTypeCase(new DocumentCase(c, caseId, this.keywordList.get(0), pos));
         }
 
         return additionalSet;

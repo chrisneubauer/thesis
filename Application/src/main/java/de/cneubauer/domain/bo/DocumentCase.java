@@ -1,6 +1,7 @@
 package de.cneubauer.domain.bo;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Created by Christoph Neubauer on 15.02.2017.
@@ -13,6 +14,18 @@ public class DocumentCase {
     private String position;
     private boolean isCorrect;
     private Date createdDate;
+
+    public DocumentCase(Creditor creditor, int id, Keyword keyword, String position) {
+        this.setCreditor(creditor);
+        this.setCaseId(id);
+        this.setKeyword(keyword);
+        this.setPosition(position);
+        this.setCreatedDate(java.sql.Date.valueOf(LocalDate.now()));
+    }
+
+    public DocumentCase() {
+
+    }
 
     public int getId() {
         return id;

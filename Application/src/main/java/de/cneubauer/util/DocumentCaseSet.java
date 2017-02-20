@@ -12,6 +12,8 @@ public class DocumentCaseSet {
     private DocumentCase invoiceNoCase;
     private DocumentCase invoiceDateCase;
     private DocumentCase buyerCase;
+    private DocumentCase documentTypeCase;
+    private DocumentCase sellerCase;
 
     public DocumentCase getInvoiceNoCase() {
         return invoiceNoCase;
@@ -43,5 +45,21 @@ public class DocumentCaseSet {
         cases.add(invoiceDateCase);
         cases.add(buyerCase);
         return cases;
+    }
+
+    public void setDocumentTypeCase(DocumentCase documentTypeCase) {
+        this.documentTypeCase = documentTypeCase;
+    }
+
+    public void setSellerCase(DocumentCase sellerCase) {
+        this.sellerCase = sellerCase;
+    }
+
+    public DocumentCase getDocumentTypeCase() {
+        return documentTypeCase;
+    }
+
+    public DocumentCase getSellerCase() {
+        return sellerCase;
     }
 }

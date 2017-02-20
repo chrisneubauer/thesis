@@ -29,17 +29,17 @@ public abstract class HocrElement {
         this.position = position;
     }
 
-    public HocrElement getByPosition(int[] position) {
+    public HocrElement getByPosition(int[] position, int threshold) {
         for (HocrElement element : this.subElements) {
             String[] stringPos = element.getPosition().split("\\+");
             // 0: startX, 1: startY, 2: endX, 3: endY
             int[] pos = new int[] {Integer.valueOf(stringPos[0]), Integer.valueOf(stringPos[1]), Integer.valueOf(stringPos[2]), Integer.valueOf(stringPos[3])};
 
-            // adding 20 px as an impreciness value
-            boolean xStartsEarlier = pos[0] -20 <= position[0];
-            boolean yStartsEarlier = pos[1] -20 <= position[1];
-            boolean xEndsLater = pos[2] +20 >= position[2];
-            boolean yEndsLater = pos[3] +20 >= position[3];
+            // adding threshold as an impreciness value
+            boolean xStartsEarlier = pos[0] - threshold <= position[0];
+            boolean yStartsEarlier = pos[1] - threshold <= position[1];
+            boolean xEndsLater = pos[2] + threshold >= position[2];
+            boolean yEndsLater = pos[3] + threshold >= position[3];
 
             if (xStartsEarlier && yStartsEarlier && xEndsLater && yEndsLater) {
                 return element;

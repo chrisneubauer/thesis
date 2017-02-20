@@ -11,6 +11,8 @@ import de.cneubauer.domain.dao.impl.KeywordDaoImpl;
 import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
+import de.cneubauer.domain.helper.TableContentFileHelper;
+import de.cneubauer.domain.helper.TableEndFileHelper;
 import de.cneubauer.ml.LearningService;
 import de.cneubauer.ml.Model;
 import de.cneubauer.ocr.hocr.*;
@@ -59,18 +61,9 @@ public class DataExtractorService implements Runnable {
      *    <li>[1]: right header string</li>
      *    <li>[2]: body string</li>
      *    <li>[3]: footer string</li>
+     *    <li>[4]: hocr document string</li>
      * </ul></p>
      */
-    public DataExtractorService(String[] parts) {
-        Logger.getLogger(this.getClass()).log(Level.INFO, "Using confidence level: " + confidence*100 + "%");
-        this.leftHeader = parts[0];
-        this.rightHeader = parts[1];
-        this.body = parts[2];
-        this.footer = parts[3];
-        this.legalPersonDao = new LegalPersonDaoImpl();
-        this.list = this.legalPersonDao.getAll();
-    }
-
     public DataExtractorService(HocrDocument hocrDocument, String[] parts) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Using confidence level: " + confidence*100 + "%");
         this.document = hocrDocument;
@@ -92,14 +85,14 @@ public class DataExtractorService implements Runnable {
 
     private Invoice extractInvoiceInformationFromHocr() {
         Invoice result = new Invoice();
-        result.setCreditor(this.findCreditor());
+        result.setCreditor(this.getLegalPersonFromDatabase(this.getHocrDoument(), true));
         if (result.getCreditor() != null) {
             result = this.getCaseInformation(result);
         } else {
             String invNo = this.findInvoiceNumber();
             result.setInvoiceNumber(invNo);
             result.setIssueDate(this.findIssueDate());
-            result.setDebitor(this.findDebitor());
+            result.setDebitor(this.getLegalPersonFromDatabase(this.getHocrDoument(), false));
         }
         if (this.findSkontoInformation()) {
             result.setHasSkonto(true);
@@ -125,25 +118,27 @@ public class DataExtractorService implements Runnable {
             String invNo = this.findInvoiceNumber();
             result.setInvoiceNumber(invNo);
             result.setIssueDate(this.findIssueDate());
-            result.setDebitor(this.findDebitor());
+            result.setDebitor(this.getLegalPersonFromDatabase(this.getHocrDoument(), false));
             // return if no cases exist yet
             return result;
         }
         List<DocumentCase> invoiceNo = new LinkedList<>();
-        //TODO: doctype information
         List<DocumentCase> docType = new LinkedList<>();
         List<DocumentCase> invoiceDate = new LinkedList<>();
         List<DocumentCase> buyer = new LinkedList<>();
+        List<DocumentCase> seller = new LinkedList<>();
         int highestCase = 0;
         this.caseSet = new DocumentCaseSet();
 
         for (DocumentCase documentCase : cases) {
-            if (documentCase.getKeyword().getId() == 2) {
-                invoiceNo.add(documentCase);
-            } else if (documentCase.getKeyword().getId() == 1) {
+            if (documentCase.getKeyword().getId() == 1) {
                 docType.add(documentCase);
+            } else if (documentCase.getKeyword().getId() == 2) {
+                invoiceNo.add(documentCase);
             } else if (documentCase.getKeyword().getId() == 3) {
                 invoiceDate.add(documentCase);
+            } else if (documentCase.getKeyword().getId() == 4) {
+                seller.add(documentCase);
             } else if (documentCase.getKeyword().getId() == 5) {
                 buyer.add(documentCase);
             }
@@ -152,15 +147,35 @@ public class DataExtractorService implements Runnable {
             }
         }
 
+        // new highest case:
+        highestCase = highestCase+1;
+
+        Creditor creditor = null;
+        for (Creditor c : this.creditorList) {
+            if (c.getLegalPerson().getId() == result.getCreditor().getId()) {
+                creditor = c;
+                break;
+            }
+        }
+
+        HocrElement possibleType = this.findInCase(docType);
+        if (possibleType != null && possibleType.getPosition() != null) {
+            if (possibleType.getValue().toLowerCase().contains("rechnung")) {
+                this.caseSet.setDocumentTypeCase(new DocumentCase(creditor, highestCase, keywordList.get(0), possibleType.getPosition()));
+            }
+        }
+
         HocrElement possibleInvoiceNo = this.findInCase(invoiceNo);
         if (possibleInvoiceNo != null) {
             result.setInvoiceNumber(possibleInvoiceNo.getValue());
+            this.caseSet.setInvoiceNoCase(new DocumentCase(creditor, highestCase, keywordList.get(1), possibleInvoiceNo.getPosition()));
         }
-        //this.findDocTypeInCases(docType, result);
+
         HocrElement possibleInvoiceDate = this.findInCase(invoiceDate);
         String date = null;
         if (possibleInvoiceDate != null) {
             date = possibleInvoiceDate.getValue();
+            this.caseSet.setInvoiceDateCase(new DocumentCase(creditor, highestCase, keywordList.get(2), possibleInvoiceDate.getPosition()));
         }
 
         try {
@@ -175,6 +190,13 @@ public class DataExtractorService implements Runnable {
             result.setIssueDate(java.sql.Date.valueOf(LocalDate.now()));
         }
 
+        if (creditor != null) {
+            HocrElement possibleCreditor = this.findInCase(seller);
+            if (possibleCreditor != null) {
+                this.caseSet.setSellerCase(new DocumentCase(creditor, highestCase, keywordList.get(3), possibleCreditor.getPosition()));
+            }
+        }
+
         HocrElement possibleDebitor = this.findInCase(buyer);
         String debitor = null;
         if (possibleDebitor != null && possibleDebitor.getValue() != null) {
@@ -182,50 +204,18 @@ public class DataExtractorService implements Runnable {
         }
         if (debitor != null) {
             for (LegalPerson p : this.list) {
-                if(p.getName().toLowerCase().trim().equals(debitor)) {
+                String personName = p.getName().toLowerCase().trim();
+                if(personName.equals(debitor) || this.refineSearch(debitor, personName)) {
                     result.setDebitor(p);
+                    this.caseSet.setBuyerCase(new DocumentCase(creditor, highestCase, keywordList.get(4), possibleDebitor.getPosition()));
                     break;
                 }
             }
         }
-
-        Creditor creditor = null;
-        for (Creditor c : this.creditorList) {
-            if (c.getLegalPerson().getId() == result.getCreditor().getId()) {
-                creditor = c;
-                break;
-            }
-        }
-
+        /*
         if (possibleDebitor != null) {
-            DocumentCase buyerCase = new DocumentCase();
-            buyerCase.setCreditor(creditor);
-            buyerCase.setCaseId(highestCase+1);
-            buyerCase.setKeyword(keywordList.get(4));
-            buyerCase.setPosition(possibleDebitor.getPosition());
-            buyerCase.setCreatedDate(java.sql.Date.valueOf(LocalDate.now()));
-            this.caseSet.setBuyerCase(buyerCase);
-        }
-
-        if (possibleInvoiceNo != null) {
-            DocumentCase invoiceNoCase = new DocumentCase();
-            invoiceNoCase.setCreditor(creditor);
-            invoiceNoCase.setCaseId(highestCase + 1);
-            invoiceNoCase.setKeyword(keywordList.get(1));
-            invoiceNoCase.setPosition(possibleInvoiceNo.getPosition());
-            invoiceNoCase.setCreatedDate(java.sql.Date.valueOf(LocalDate.now()));
-            this.caseSet.setInvoiceNoCase(invoiceNoCase);
-        }
-
-        if (possibleInvoiceDate != null) {
-            DocumentCase invoiceDateCase = new DocumentCase();
-            invoiceDateCase.setCreditor(creditor);
-            invoiceDateCase.setCaseId(highestCase + 1);
-            invoiceDateCase.setKeyword(keywordList.get(2));
-            invoiceDateCase.setPosition(possibleInvoiceDate.getPosition());
-            invoiceDateCase.setCreatedDate(java.sql.Date.valueOf(LocalDate.now()));
-            this.caseSet.setInvoiceDateCase(invoiceDateCase);
-        }
+            this.caseSet.setBuyerCase(new DocumentCase(creditor, highestCase, keywordList.get(4), possibleDebitor.getPosition()));
+        }*/
         return result;
     }
 
@@ -237,18 +227,18 @@ public class DataExtractorService implements Runnable {
                 // 0: startX, 1: startY, 2: endX, 3: endY
                 int[] pos = new int[] {Integer.valueOf(position[0]), Integer.valueOf(position[1]), Integer.valueOf(position[2]), Integer.valueOf(position[3])};
 
-                HocrElement possibleArea = this.document.getPage(0).getByPosition(pos);
+                HocrElement possibleArea = this.document.getPage(0).getByPosition(pos, 50);
                 if (possibleArea != null) {
-                    HocrParagraph possibleParagraph = (HocrParagraph) possibleArea.getByPosition(pos);
+                    HocrParagraph possibleParagraph = (HocrParagraph) possibleArea.getByPosition(pos, 30);
                     if (possibleParagraph != null) {
-                        HocrLine possibleLine = (HocrLine) possibleParagraph.getByPosition(pos);
+                        HocrLine possibleLine = (HocrLine) possibleParagraph.getByPosition(pos, 30);
                         if (possibleLine != null) {
-                            HocrWord possibleWord = (HocrWord) possibleLine.getByPosition(pos);
+                            HocrWord possibleWord = (HocrWord) possibleLine.getByPosition(pos, 10);
                             if (possibleWord != null) {
                                 return possibleWord;
                             } else {
-                                // refine to multiple words
-                                possibleWord = possibleLine.getWordsByPosition(pos);
+                                // refine to multiple words, pixel threshold only a few pixels since we are searching for word
+                                possibleWord = possibleLine.getWordsByPosition(pos, 10);
                                 return possibleWord;
                             }
                         }
@@ -260,54 +250,21 @@ public class DataExtractorService implements Runnable {
     }
 
     /**
-     * Method to search for invoice metadata in the scanned page
-     * @return the invoice metadata that has been found
-     */
-    @Deprecated
-    public Invoice extractInvoiceInformation() {
-        Invoice result = new Invoice();
-        result.setInvoiceNumber(this.findInvoiceNumber());
-        result.setCreditor(this.findCreditor());
-        result.setIssueDate(this.findIssueDate());
-        result.setDebitor(this.findDebitor());
-        if(this.findSkontoInformation()) {
-            result.setHasSkonto(true);
-            result.setSkonto(this.findSkontoValue());
-        }
-        result.setDeliveryDate(this.findDeliveryDate());
-
-        InvoiceInformationHelper helper = this.findInvoiceValues();
-
-        result.setLineTotal(helper.getLineTotal());
-        result.setChargeTotal(helper.getChargeTotal());
-        result.setAllowanceTotal(helper.getAllowanceTotal());
-        result.setTaxBasisTotal(helper.getTaxBasisTotal());
-        result.setTaxTotal(helper.getTaxTotal());
-        result.setGrandTotal(helper.getGrandTotal());
-
-        return result;
-    }
-
-    /**
      * Uses scanned page and looks for several information regarding accounting records
      * @return  returns a list of all AccountingRecords that has been found on the page
      */
-    public List<Record> extractAccountingRecordInformation() {
+    private List<Record> extractAccountingRecordInformation() {
         List<Record> records = new LinkedList<>();
         //TODO: Additional filtering through the branch of the company
-
         //TODO: Filtering if invoice or voucher
-        //AccountDao dao = new AccountDaoImpl();
-
-        //List<Account> accountsLeft = dao.getAll();
-
         int index = 0;
         boolean found = false;
+        boolean endReached;
         this.body = this.body.replace("\n\n", "\n");
         String[] lines = this.body.split("\n");
         while (!found && lines.length > index) {
             String line = lines[index];
-            if (this.getAverageDistanceOfSearchConditions(line, new String[] { "Art.-Nr.", "Artikel", "Beschreibung", "Pos" }) < 1 - this.getConfidence()) {
+            if (this.lineContainsTableInformation(line)) {
                 found = true;
                 while (lines.length > index + 1) {
                     String nextLine = lines[index + 1];
@@ -319,8 +276,8 @@ public class DataExtractorService implements Runnable {
                         // now we have a line with position information
                         // or the end if there are keywords like "Betrag" or "Summe"
                         // check these before going on
-                        //double avg = this.getAverageDistanceOfSearchConditions(nextLine, new String[] { "Betrag", "Summe", "Zwischensumme", "Gesamtbetrag", "Bruttobetrag", "Nettobetrag"});
-                        //if (this.getAverageDistanceOfSearchConditions(nextLine, new String[] { "Betrag", "Summe", "Zwischensumme", "Gesamtbetrag", "Bruttobetrag", "Nettobetrag"}) < 1- this.getConfidence()) {
+                        endReached = this.lineContainsTableEndInformation(nextLine);
+                        if (!endReached) {
                             Record r = new Record();
                             String recordLine = this.removeFinancialInformationFromRecordLine(nextLine);
                             RecordTrainingEntry entry = this.recordInLearningFile(recordLine);
@@ -331,9 +288,9 @@ public class DataExtractorService implements Runnable {
                             }
                             records.add(r);
                             index++;
-                        //} else {
-                        //    break;
-                        //}
+                        } else {
+                            break;
+                        }
                     }
                 }
             } else {
@@ -362,6 +319,63 @@ public class DataExtractorService implements Runnable {
             }
         }
         return records;
+    }
+
+    /**
+     * Takes a line and searches for keywords that are usually in the header of an invoice table
+     * @param line the line to be searched
+     * @return true if the line contains table information
+     */
+    private boolean lineContainsTableInformation(String line) {
+        line = line.toLowerCase().trim();
+        boolean result = false;
+        // first iteration: search for some strings:
+        List<String> valuesToCheck = TableContentFileHelper.getValues();
+        for (String value : valuesToCheck) {
+            result = (result || line.contains(value));
+        }
+        if (result) { return true; }
+        else {
+            // second iteration: we have to refine the search because we didn't find any of those words
+            if (this.refineSearch(line.split(" "), valuesToCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Takes a line and searches for keywords that are usually in the end of an invoice table
+     * @param line the line to be searched
+     * @return true if the line contains table end information
+     */
+    private boolean lineContainsTableEndInformation(String line) {
+        line = line.toLowerCase().trim();
+        boolean result = false;
+        // first iteration: search for some strings:
+        List<String> valuesToCheck = TableEndFileHelper.getValues();
+        for (String value : valuesToCheck) {
+            result = (result || line.contains(value));
+        }
+        if (result) { return true; }
+        else {
+            // second iteration: we have to refine the search because we didn't find any of those words
+            if (this.refineSearch(line.split(" "), valuesToCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean refineSearch(String[] line, List<String> valuesToCheck) {
+        boolean result = false;
+        for (String string : line) {
+            for (String value : valuesToCheck) {
+                result = result || this.refineSearch(string, value);
+            }
+            if (result) { return true; }
+        }
+        return false;
     }
 
     /**
@@ -455,7 +469,7 @@ public class DataExtractorService implements Runnable {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find grand total in OCR. Using default value");
             result.setGrandTotal(0);
         }
-        // TODO: do we need to find these fields?
+        // TODO: do we need to find these fields?..yup!
         result.setChargeTotal(0);
         result.setAllowanceTotal(0);
         return result;
@@ -485,7 +499,7 @@ public class DataExtractorService implements Runnable {
      * @return  the found skonto value of there is Skonto, 0.0 otherwise
      */
     private double findSkontoValue() {
-        String skonto = "";
+        String skonto;
         if (!ConfigHelper.isDebugMode()) {
             try {
                 String[] lines = this.footer.split("\n");
@@ -622,21 +636,9 @@ public class DataExtractorService implements Runnable {
             return false;
         }
         double confidenceRate = ConfigHelper.getConfidenceRate();
-        double distance = StringUtils.getLevenshteinDistance(checkString, compareWith);
+        double distance = StringUtils.getLevenshteinDistance(checkString.toLowerCase().trim(), compareWith.toLowerCase().trim());
         double comparison = distance / checkString.length();
         return comparison < confidenceRate;
-    }
-
-    /**
-     * Searches for debitor in the left header part of the document
-     * Uses the getLegalPersonFromDatabase() method to retrieve the result
-     * @return  the debitor that has been found or null if none has been found
-     */
-    private LegalPerson findDebitor() {
-        // Debitor is usually in the left part of the invoice header
-        //String line = this.findLineWithContainingInformation(new String[] { "Str.", "Straße" }, this.leftHeader);
-        //return this.getLegalPersonFromDatabase(this.leftHeader);
-        return this.getLegalPersonFromDatabase(document, false);
     }
 
     /**
@@ -678,15 +680,6 @@ public class DataExtractorService implements Runnable {
             }
         }
         return cal;
-    }
-
-    /**
-     * Searches for creditor in the left header part of the document
-     * Uses the getLegalPersonFromDatabase() method to retrieve the result
-     * @return  the creditor that has been found or null if none has been found
-     */
-    private LegalPerson findCreditor() {
-        return this.getLegalPersonFromDatabase(this.document, true);
     }
 
     /**
@@ -799,7 +792,6 @@ public class DataExtractorService implements Runnable {
         return false;
     }
 
-
     /**
      * @param nextLine  the line that should be searched in
      * @return  true if the next line contains a numeric value
@@ -830,48 +822,6 @@ public class DataExtractorService implements Runnable {
         return caseSet;
     }
 
-
-    private LegalPerson getLegalPersonFromDatabase(HocrDocument document) {
-        for (HocrElement area : document.getPage(0).getSubElements()) { //getAreas()) {
-            HocrArea currentArea = (HocrArea) area;
-            List<String> allWordsInArea = currentArea.getAllWordsInArea();
-            for (int i = 0; i < allWordsInArea.size(); i++) {
-                String word = allWordsInArea.get(i);
-                for (LegalPerson p : list) {
-                    if (p.getName() != null) {
-                        if (p.getName().contains(" ")) {
-                            int parts = p.getName().split(" ").length;
-                            if (i+parts < allWordsInArea.size()) {
-                                for (int j = 1; j <= parts - 1; j++) {
-                                    word += " " + allWordsInArea.get(i+j);
-                                }
-                            }
-                        }
-                        if (word.equals(p.getName())) {
-                            return p;
-                        } else {
-                            // refine search if we have some ocr probs
-                    /* calculation explanation:
-                     * Comparing "18:1 Telecom GmbH" with "Telekom"
-                     * Levenshtein-Distance would be: 11
-                     * String length: 17
-                     * 11 of 17 are incorrect (65%) which means 35% correct
-                     * When confidence 80% we need less errors, maximum: 0/17 -> 0% < 20%
-                    */
-                            double confidenceRate = ConfigHelper.getConfidenceRate();
-                            double distance = StringUtils.getLevenshteinDistance(word, p.getName());
-                            double comparison = distance / word.length();
-                            if (comparison < confidenceRate) {
-                                return p;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
     private int findCorporateFormIndex(String line) {
         line = line.toLowerCase();
         int result = 0;
@@ -896,71 +846,14 @@ public class DataExtractorService implements Runnable {
         return result;
     }
 
-    /**
-     * Searches for legal persons and compares them with the lines
-     * @param lines  the ocr result
-     * @return  the legal person that occurs in the lines
-     */
-    private LegalPerson getLegalPersonFromDatabase(String lines, boolean searchForCreditor) {
-        LegalPersonDao dao = new LegalPersonDaoImpl();
-        List<LegalPerson> list = dao.getAll();
-
-        for (String line : lines.split("\n")) {
-            for (LegalPerson p : list) {
-                if (line.contains(p.toString())) {
-                    if (searchForCreditor) {
-                        for (Creditor c : creditorList) {
-                            if (c.getLegalPerson().equals(p)) {
-                                return p;
-                            }
-                        }
-                    } else {
-                        return p;
-                    }
-                } else {
-                    // refine search if we have some ocr probs
-                    /* calculation explanation:
-                     * Comparing "18:1 Telecom GmbH" with "Telekom"
-                     * Levenshtein-Distance would be: 11
-                     * String length: 17
-                     * 11 of 17 are incorrect (65%) which means 35% correct
-                     * When confidence 80% we need less errors, maximum: 0/17 -> 0% < 20%
-                    */
-                    double confidenceRate = ConfigHelper.getConfidenceRate();
-                    double distance = StringUtils.getLevenshteinDistance(line, p.toString());
-                    double comparison = distance / line.length();
-                    if (comparison < confidenceRate) {
-                        return p;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Searches for the search condition in the search position using the average distance method
-     * @param searchConditions  the conditions to be searched for
-     * @param searchPosition  the position where to search in
-     * @return  the found line if the average is higher than the confidence, an empty string if not
-     */
-    private String findLineWithContainingInformation(String[] searchConditions, String searchPosition) {
-        String[] lines = searchPosition.split("\n");
-        for (String line : lines) {
-            if (this.getAverageDistanceOfSearchConditions(line, searchConditions) < this.getConfidence()) {
-                return line;
-            }
-        }
-        // if we are here we have not found the given conditions
-        return "";
-    }
-
-    public HocrDocument getHocrDoument() {
+    private HocrDocument getHocrDoument() {
         return this.document;
     }
 
     @Override
     public void run() {
+        String info = this.extractInvoice? "invoice information" : "account record information";
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Thread started. Searching for " + info);
         if (this.extractInvoice) {
             this.threadInvoice = this.extractInvoiceInformationFromHocr();
         } else {
@@ -969,5 +862,6 @@ public class DataExtractorService implements Runnable {
     }
 
     public Invoice getThreadInvoice() {return this.threadInvoice;}
+
     public List<Record> getThreadRecord() {return this.threadRecord;}
 }
