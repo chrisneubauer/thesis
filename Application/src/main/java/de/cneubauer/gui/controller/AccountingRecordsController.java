@@ -491,12 +491,13 @@ public class AccountingRecordsController extends SplitPaneController {
             this.setPossiblePosition(record.getEntryText());
         }
 
-        Logger.getLogger(this.getClass()).log(Level.INFO, "current confidence: " + currentModel.getConfidence());
+        Logger.getLogger(this.getClass()).log(Level.INFO, "current confidence: " + currentModel.getRecord().getProbability());
 
         Image img;
-        if (currentModel.getConfidence() < 0.5) {
+
+        if (currentModel.getRecord().getProbability() < 0.5) {
             img = new Image("img/Circle_Red.png");
-        } else if (currentModel.getConfidence() < 0.8 && currentModel.getConfidence() >= 0.5) {
+        } else if (currentModel.getRecord().getProbability() < 0.8 && currentModel.getRecord().getProbability() >= 0.5) {
             img = new Image("img/Circle_Yellow.png");
         } else {
             img = new Image("img/Circle_Green.png");

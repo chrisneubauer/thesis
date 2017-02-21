@@ -266,6 +266,7 @@ public class DataExtractorService implements Runnable {
             String line = lines[index];
             if (this.lineContainsTableInformation(line)) {
                 found = true;
+                LearningService service = new LearningService();
                 while (lines.length > index + 1) {
                     String nextLine = lines[index + 1];
                     if(!this.nextLineContainsValue(nextLine) && lines.length > index + 1) {
@@ -280,11 +281,16 @@ public class DataExtractorService implements Runnable {
                         if (!endReached) {
                             Record r = new Record();
                             String recordLine = this.removeFinancialInformationFromRecordLine(nextLine);
-                            RecordTrainingEntry entry = this.recordInLearningFile(recordLine);
-                            if (entry == null) {
+                            double value = this.getValueFromLine(nextLine);
+
+                            Model m = service.getMostLikelyModel(recordLine);
+                            //RecordTrainingEntry entry = this.recordInLearningFile(recordLine);
+                            if (m == null) {
                                 r.setEntryText(nextLine);
                             } else {
-                                r.setEntryText(entry.getPosition());
+                                r.setEntryText(m.getPosition());
+                                r.setRecordAccounts(m.getAsAccountRecord(value));
+                                r.setProbability(m.getProbability());
                             }
                             records.add(r);
                             index++;
@@ -299,10 +305,9 @@ public class DataExtractorService implements Runnable {
         }
 
         // Index out of bounds, Map String String doesn't exist anymore
-        List<RecordTrainingEntry> values = AccountFileHelper.getAllRecords();
+        //List<RecordTrainingEntry> values = AccountFileHelper.getAllRecords();
         //Map<String, String> values = AccountFileHelper.getConfig();
-
-        for (Record r : records) {
+        /*for (Record r : records) {
             for (RecordTrainingEntry entry : values) {// key : values..keySet()) {
                 String key = entry.getPosition();
                 if (StringUtils.getLevenshteinDistance(key, r.getEntryText()) < this.getConfidence()) {
@@ -313,12 +318,34 @@ public class DataExtractorService implements Runnable {
                             AccountRecord accountRecord = new AccountRecord();
                             accountRecord.setAccount(a);
                             r.getRecordAccounts().add(accountRecord);
-                        }*/
+                        }
                     //}
                 }
-            }
-        }
+            }*/
+        //}
         return records;
+    }
+
+    private double getValueFromLine(String pos) {
+        int euroPos = 0;
+        if (pos.toLowerCase().contains("eur")) {
+            euroPos = pos.toLowerCase().lastIndexOf("eur");
+
+        } else if (pos.toLowerCase().contains("€")) {
+            euroPos = pos.toLowerCase().lastIndexOf("€");
+        }
+        try {
+            pos = pos.substring(0, euroPos);
+            String[] parts = pos.split(" ");
+            if (parts[parts.length - 1].contains(",")) {
+                parts[parts.length - 1] = parts[parts.length - 1].replace(",", ".");
+            }
+            double value = Double.valueOf(parts[parts.length -1]);
+            return value;
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).log(Level.INFO, "Unable to parse double value, using default");
+            return 0;
+        }
     }
 
     /**
@@ -405,6 +432,11 @@ public class DataExtractorService implements Runnable {
         LearningService service = new LearningService();
         Model m = service.getMostLikelyModel(position);
 
+        if (m != null) {
+            RecordTrainingEntry entry = new RecordTrainingEntry();
+            entry.setPosition(m.getPosition());
+            return entry;
+        }
         // AccountFileHelper.getConfig().containsValue(position);
        return AccountFileHelper.findAccountingRecord(position);
     }

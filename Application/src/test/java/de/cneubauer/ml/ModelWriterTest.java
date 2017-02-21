@@ -41,9 +41,9 @@ public class ModelWriterTest {
         Account debitAcc2 = new Account();
         debitAcc2.setAccountNo("3000");
 
-        m.addCreditAccount(creditAcc);
-        m.addDebitAccount(debitAcc);
-        m.addDebitAccount(debitAcc2);
+        m.addToCreditAccounts(creditAcc, 1.0);
+        m.addToDebitAccounts(debitAcc, 0.8);
+        m.addToDebitAccounts(debitAcc2, 0.2);
         this.writer.writeToFile(m);
 
         List<Model> models = this.reader.getModels();

@@ -16,6 +16,8 @@ import java.util.Set;
  * Business Object for Record table
  */
 public class Record {
+    private float probability;
+
     public Record() {
         this.recordAccounts = new HashSet<>(0);
     }
@@ -150,6 +152,14 @@ public class Record {
      */
     public void setEntryText(String entryText) {
         this.entryText = entryText;
+    }
+
+    public void setProbability(float probability) {
+        this.probability = probability;
+    }
+
+    public float getProbability() {
+        return probability;
     }
 
     /* public Account getDebit() {

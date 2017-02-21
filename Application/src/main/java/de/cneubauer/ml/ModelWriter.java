@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 
 /**
  * Created by Christoph Neubauer on 02.02.2017.
@@ -38,26 +39,30 @@ public class ModelWriter {
             sb.append(model.getPosition());
             sb.append("][");
             boolean first = true;
-            for (Account a : model.getCredit()) {
+            for (Map.Entry<Account, Double> m : model.getCredit().entrySet()) {
                 if (!first) {
                     sb.append(";");
                 }
-                sb.append(a.getAccountNo());
+                sb.append(m.getKey().getAccountNo());
+                sb.append(":");
+                sb.append(m.getValue());
                 first = false;
             }
             sb.append("][");
             first = true;
-            for (Account a : model.getDebit()) {
+            for (Map.Entry<Account, Double> m : model.getDebit().entrySet()) {
                 if (!first) {
                     sb.append(";");
                 }
-                sb.append(a.getAccountNo());
+                sb.append(m.getKey().getAccountNo());
+                sb.append(":");
+                sb.append(m.getValue());
                 first = false;
             }
             sb.append("]");
 
-            fw.write(sb.toString());
             fw.write(System.lineSeparator());
+            fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();

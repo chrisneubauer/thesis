@@ -1,10 +1,14 @@
 package de.cneubauer.ml;
 
 import de.cneubauer.domain.bo.Account;
+import de.cneubauer.domain.bo.AccountRecord;
+import de.cneubauer.domain.bo.Record;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -15,12 +19,13 @@ import java.util.Set;
  */
 public class Model {
     private String position;
-    private Set<Account> debit;
-    private Set<Account> credit;
+    private Map<Account, Double> debit;
+    private Map<Account, Double> credit;
+    private float probability;
 
     public Model() {
-        this.debit = new HashSet<>();
-        this.credit = new HashSet<>();
+        this.debit = new HashMap<>();
+        this.credit = new HashMap<>();
     }
 
     /**
@@ -43,20 +48,6 @@ public class Model {
     }
 
     /**
-     * @param a  the account that should be added to the list of debit accounts
-     */
-    void addDebitAccount(Account a) {
-        this.debit.add(a);
-    }
-
-    /**
-     * @param a  the account that should be added to the list of credit accounts
-     */
-    void addCreditAccount(Account a) {
-        this.credit.add(a);
-    }
-
-    /**
      * @return  the position of this model
      */
     public String getPosition() {
@@ -70,31 +61,48 @@ public class Model {
         this.position = position;
     }
 
-    /**
-     * @return  a set of all debit accounts for this model
-     */
-    Set<Account> getDebit() {
+    public Map<Account, Double> getDebit() {
         return debit;
     }
 
-    /**
-     * @param debit  a set of debit accounts that should belong to this model
-     */
-    public void setDebit(Set<Account> debit) {
-        this.debit = debit;
-    }
-
-    /**
-     * @return  a set of all credit accounts for this model
-     */
-    Set<Account> getCredit() {
+    public Map<Account, Double> getCredit() {
         return credit;
     }
 
-    /**
-     * @param credit  a set of credit accounts that should belong to this model
-     */
-    public void setCredit(Set<Account> credit) {
-        this.credit = credit;
+    public void addToDebitAccounts(Account debit, double percentualValue) {
+        this.debit.put(debit, percentualValue);
+    }
+
+    public void addToCreditAccounts(Account credit, double percentualValue) {
+        this.credit.put(credit, percentualValue);
+    }
+
+    public Set<AccountRecord> getAsAccountRecord(double value) {
+        Set<AccountRecord> result = new HashSet<>();
+
+        for (Map.Entry<Account, Double> debit : this.getDebit().entrySet()) {
+            AccountRecord record = new AccountRecord();
+            record.setIsDebit(true);
+            record.setAccount(debit.getKey());
+            record.setBruttoValue(debit.getValue() * value);
+            result.add(record);
+        }
+
+        for (Map.Entry<Account, Double> credit : this.getCredit().entrySet()) {
+            AccountRecord record = new AccountRecord();
+            record.setIsDebit(false);
+            record.setAccount(credit.getKey());
+            record.setBruttoValue(credit.getValue() * value);
+            result.add(record);
+        }
+        return result;
+    }
+
+    public void setProbability(float probability) {
+        this.probability = probability;
+    }
+
+    public float getProbability() {
+        return probability;
     }
 }

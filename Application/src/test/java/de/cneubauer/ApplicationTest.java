@@ -129,9 +129,9 @@ public class ApplicationTest extends AbstractTest {
                                 credits.add(ar.getAccount());
                             }
                         }
-                        m.setCredit(credits);
-                        m.setDebit(debits);
-                        this.writer.writeToFile(m);
+                        //m.addToCreditAccounts(credits);
+                        //m.setDebit(debits);
+                        //this.writer.writeToFile(m);
                     }
 
                 }

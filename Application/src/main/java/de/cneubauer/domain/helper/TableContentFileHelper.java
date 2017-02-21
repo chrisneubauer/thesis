@@ -20,9 +20,7 @@ public class TableContentFileHelper extends AbstractFileHelper {
 
     public static List<String> getValues() {
         List<String> result = new LinkedList<>();
-        if (file == null) {
-            init();
-        }
+        init();
 
         try {
             list = readFile();

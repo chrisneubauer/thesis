@@ -31,8 +31,8 @@ class NaiveBayesHelper {
         Classifier<String, List<Account>> classifier = this.getClassifier();
         for (Model m : models) {
             List<Account> category = new LinkedList<>();
-            category.addAll(m.getCredit());
-            category.addAll(m.getDebit());
+            category.addAll(m.getCredit().keySet());
+            category.addAll(m.getDebit().keySet());
 
             classifier.learn(category, Collections.singletonList(m.getPosition()));
         }

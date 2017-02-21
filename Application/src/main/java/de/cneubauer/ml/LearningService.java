@@ -71,12 +71,13 @@ public class LearningService {
             e.printStackTrace();
         }
 
-
         Classification<String, List<Account>> classification = helper.getClassifier().classify(Collections.singleton(replacedString));
         Logger.getLogger(this.getClass()).log(Level.INFO, "Probability of classification: " + classification.getProbability()*100 + "%");
         if (classification.getProbability() > ConfigHelper.getConfidenceRate()) {
             try {
-                return reader.getModelByStringAndAccounts(String.valueOf(classification.getFeatureset().toArray()[0]), classification.getCategory());
+                Model m = reader.getModelByStringAndAccounts(String.valueOf(classification.getFeatureset().toArray()[0]), classification.getCategory());
+                m.setProbability(classification.getProbability());
+                return m;
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;

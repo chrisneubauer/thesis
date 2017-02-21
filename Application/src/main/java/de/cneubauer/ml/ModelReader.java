@@ -55,21 +55,25 @@ public class ModelReader {
             List<String> values = this.getValues(line);
             m.setPosition(values.get(0));
 
-            for (String accNo : values.get(1).split(";")) {
+            for (String accountRelation : values.get(1).split(";")) {
+                String account = accountRelation.split(":")[0];
+                Double value = Double.valueOf(accountRelation.split(":")[1]);
                 // TODO: Make more efficient
                 for (Account a : accounts) {
-                    if (a.getAccountNo().equals(accNo)) {
-                        m.addCreditAccount(a);
+                    if (a.getAccountNo().equals(account)) {
+                        m.addToCreditAccounts(a, value);
                         break;
                     }
                 }
             }
 
-            for (String accNo : values.get(2).split(";")) {
+            for (String accountRelation : values.get(2).split(";")) {
                 // TODO: Make more efficient
+                String account = accountRelation.split(":")[0];
+                Double value = Double.valueOf(accountRelation.split(":")[1]);
                 for (Account a : accounts) {
-                    if (a.getAccountNo().equals(accNo)) {
-                        m.addDebitAccount(a);
+                    if (a.getAccountNo().equals(account)) {
+                        m.addToDebitAccounts(a, value);
                         break;
                     }
                 }
@@ -126,12 +130,12 @@ public class ModelReader {
         for (Model m : models) {
             if (m.getPosition().equals(position)) {
                 List<Account> deleteableList = new LinkedList<>(category);
-                for (Account debitAcc : m.getDebit()) {
+                for (Account debitAcc : m.getDebit().keySet()) {
                     if (deleteableList.contains(debitAcc)) {
                         deleteableList.remove(debitAcc);
                     }
                 }
-                for (Account creditAcc : m.getCredit()) {
+                for (Account creditAcc : m.getCredit().keySet()) {
                     if (deleteableList.contains(creditAcc)) {
                         deleteableList.remove(creditAcc);
                     }

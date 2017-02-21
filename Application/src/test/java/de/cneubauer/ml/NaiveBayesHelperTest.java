@@ -33,8 +33,8 @@ public class NaiveBayesHelperTest {
         List<Model> models = reader.getModels();
 
         List<Account> category = new LinkedList<>();
-        category.addAll(models.get(0).getCredit());
-        category.addAll(models.get(0).getDebit());
+        category.addAll(models.get(0).getCredit().keySet());
+        category.addAll(models.get(0).getDebit().keySet());
 
         this.helper.learnMockData(models);
 
