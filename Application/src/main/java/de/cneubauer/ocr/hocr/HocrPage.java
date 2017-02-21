@@ -83,4 +83,18 @@ public class HocrPage extends HocrElement {
         }
         return null;
     }
+
+    public boolean contains(String str) {
+        for (HocrElement area : this.getSubElements()) {
+            HocrArea currentArea = (HocrArea) area;
+            List<HocrElement> words = currentArea.getAllWordsInAreaAsList();
+            for (HocrElement word : words) {
+                String value = word.getValue().toLowerCase().trim();
+                if (value.equals(str.toLowerCase()) || value.contains(str)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

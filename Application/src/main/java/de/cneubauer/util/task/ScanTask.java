@@ -113,18 +113,28 @@ public class ScanTask extends Task {
 
                 Platform.runLater(() -> status.setText("Extracting information..."));
 
-                // TODO: parallelize account records and invoice information
                 HocrDocument hocrDocument = new HocrDocument(ocrParts[4]);
 
-                ExtractionModel m = this.extractInformation(hocrDocument, ocrParts);
-                r.setExtractionModel(m);
-                r.setProblem("");
+                ScanStatus status = this.checkDocumentBeforeExtraction(hocrDocument);
 
-                if (this.resultValid(r)) {
-                    r.setStatus(ScanStatus.OK);
+                if (status == ScanStatus.INVOICE) {
+                    ExtractionModel m = this.extractInformation(hocrDocument, ocrParts);
+                    r.setExtractionModel(m);
+                    r.setProblem("");
+
+                    if (this.resultValid(r)) {
+                        r.setStatus(ScanStatus.OK);
+                    }
+                    else {
+                        r.setStatus(ScanStatus.ISSUE);
+                        r.setProblem("Missing Information");
+                    }
                 } else {
-                    r.setStatus(ScanStatus.ISSUE);
-                    r.setProblem("Missing Information");
+                    if (status == ScanStatus.PROFORMAINVOICE) {
+                        r.setProblem("Proforma invoice detected");
+                    } else if (status == ScanStatus.CREDITNOTE) {
+                        r.setProblem("Credit note detected");
+                    }
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -140,6 +150,21 @@ public class ScanTask extends Task {
             Platform.runLater(() -> progressBar.setProgress(current));
         }
         return processResults;
+    }
+
+    /**
+     * Searches hocr document for "proforma" invoice or credit notes, they should not be processed (yet)
+     * @param hocrDocument the document to be searched
+     * @return OK if nothing found, PROFORMA if proforma invoice or CREDITNOTE if a credit note has been found
+     */
+    private ScanStatus checkDocumentBeforeExtraction(HocrDocument hocrDocument) {
+        ScanStatus result = ScanStatus.INVOICE;
+        if (hocrDocument.getPage(0).contains("proforma")) {
+            result = ScanStatus.PROFORMAINVOICE;
+        } else if (hocrDocument.getPage(0).contains("credit note") || hocrDocument.getPage(0).contains("gutschrift")) {
+            result = ScanStatus.CREDITNOTE;
+        }
+        return result;
     }
 
     private String[] performOCR(BufferedImage[] imageParts, BufferedImage hocrImage) {
