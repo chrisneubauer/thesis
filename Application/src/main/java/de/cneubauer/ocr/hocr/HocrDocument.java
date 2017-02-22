@@ -48,4 +48,8 @@ public class HocrDocument {
         }
         return null;
     }
+
+    public List<HocrPage> getPages() {
+        return pages;
+    }
 }
