@@ -257,6 +257,7 @@ public class DataExtractorService implements Runnable {
         List<Record> records = new LinkedList<>();
         //TODO: Additional filtering through the branch of the company
         //TODO: Filtering if invoice or voucher
+        //TODO: We could use the case approach in here too!
         int index = 0;
         boolean found = false;
         boolean endReached;
