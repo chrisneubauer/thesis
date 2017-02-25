@@ -1,0 +1,27 @@
+String position name
+Double value
+Invoice issuer
+
+
+Domain:
+
+Geschäftsvorfälle betreffen diverse Konten
+Konten sind aufgeteilt in Aktiv- und Passivkonten.
+Je nach Kontenart werden die Beträge entweder im Soll oder im Haben gebucht
+
+
+
+Wie geht das menschliche Gehirn vor?
+Erkennung Buchstabenverbindung -> Typ Objekt
+Gewisse Objekte gehören in bestimmte Klassen -> Kartoffel, Karotte = Klasse Gemüse
+
+Gemüse ist je nach Firma beispielsweise ein Rohstoff der eingekauft wird
+
+Daher zuordnung Kartoffel -> Rohstoffe
+
+Je nach Firma ist es evtl Endprodukt.
+D.h. das muss vom Algorithmus im Laufe der Zeit gelernt werden bzw. ist abhängig von der Nutzung des Programms
+-> Kann nicht trainiert werden bzw. soll trainiert werden aber kann man nicht im Vorfeld mitgeben.
+
+
+

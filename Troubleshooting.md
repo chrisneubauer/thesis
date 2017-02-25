@@ -2,11 +2,13 @@
 
 If you have any problems during the installation or usage of the application, have a look in this list of problems. Every known issue regarding the application will be listed here.
 
-### Packet for query is too large
+### 1. Packet for query is too large
 ##### Problem: 
 Possible stacktrace message: 
+```
 caused by: java.sql.BatchUpdateException: Packet for query is too large (1238730 > 1048576). You can change this value on the server by setting the max_allowed_packet' variable.
 at com.mysql.jdbc.PreparedStatement.executeBatchSerially(PreparedStatement.java:1213)
+```
 
 ##### Solution: 
 Check your MySQL Database settings. You can do that by using your MySQL Client and write: 

@@ -48,6 +48,7 @@ public class TesseractWrapper {
         return instance;
     }
 
+    /*
     public String initOcr(BufferedImage file, String config, String value) {
         ITesseract instance = this.getTesseractInstance();
         if (config != null && value != null) {
@@ -61,7 +62,7 @@ public class TesseractWrapper {
             System.err.println(e.getMessage());
         }
         return result;
-    }
+    }*/
 
     public String initOcr(BufferedImage file, boolean hocr) {
         Tesseract instance = (Tesseract) this.getTesseractInstance();

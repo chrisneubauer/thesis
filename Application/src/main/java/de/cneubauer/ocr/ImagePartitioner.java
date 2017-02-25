@@ -36,6 +36,25 @@ public class ImagePartitioner {
         this.fullImage = fileToScan;
     }
 
+    public boolean hasTable() {
+        try {
+            if (this.scanFile != null) {
+                this.convertFileToImage();
+            }
+            this.table = this.findTableInInvoice(this.body, false);
+            if (this.table != null) {
+                return true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to process image! Error: " + ex.getMessage());
+        }
+        return false;
+    }
+
+    public BufferedImage getTable() {
+        return this.table;
+    }
+
     /**
      * Processes the file, splits it into the following parts and temporarily saves it as a .png
      * <p><ul>
@@ -78,15 +97,8 @@ public class ImagePartitioner {
     }
 
     public BufferedImage findTableInInvoice(BufferedImage image, boolean whiteTable) {
-        //int xPosOfFirstHorizontalLine = 0;
         int yPosOfFirstHorizontalLine = 0;
-        //int xPosOfFirstVerticalLine;
-        //int yPosOfFirstVerticalLine;
-
-        //int xPosOfLastHorizontalLine = 0;
         int yPosOfLastHorizontalLine = 0;
-        //int xPosOfLastVerticalLine;
-        //int yPosOfLastVerticalLine;
 
 
         //Normalizer normalizer = new Normalizer();
@@ -95,30 +107,9 @@ public class ImagePartitioner {
         HistogramMaker maker = new HistogramMaker();
         maker.calculateHistogram(image, whiteTable);
 
-        //expect image to be preprocessed
-        //ImagePreprocessor preprocessor = new ImagePreprocessor(image);
-        //BufferedImage processedImage = preprocessor.preprocess();
-        /*BufferedImage histogram;
-        BufferedImage tobeRemoved = maker.makeVerticalHistogram(image, true);
-        if (whiteTable) {
-            histogram = maker.makeWhiteHistogram(image);
-        } else {
-            histogram = maker.makeHistogram(image);
-        }*/
         long[] values = maker.getValues();
         long max = maker.getMaxValue();
-
         int maxWidth = image.getWidth();
-        int maxHeight = image.getHeight();
-
-        //TODO: remove test output
-        /*String outputDir = ".\\temp\\";
-        File test = new File(outputDir + "histogram.png");
-        try {
-            ImageIO.write(tobeRemoved, "png", test);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
         for (int i = 0; i < values.length; i++) {
             if (values[i] < max * 0.5) {

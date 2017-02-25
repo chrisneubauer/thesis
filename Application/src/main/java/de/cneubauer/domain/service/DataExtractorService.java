@@ -41,6 +41,7 @@ public class DataExtractorService implements Runnable {
     private String rightHeader;
     private String body;
     private String footer;
+    private HocrDocument table;
     private double confidence = 1 - ConfigHelper.getConfidenceRate();
     private HocrDocument document;
     private DocumentCaseDao caseDao;
@@ -81,6 +82,7 @@ public class DataExtractorService implements Runnable {
         this.rightHeader = parts[1];
         this.body = parts[2];
         this.footer = parts[3];
+        //this.table = new HocrDocument(parts[5]);
     }
 
     private Invoice extractInvoiceInformationFromHocr() {
@@ -246,6 +248,17 @@ public class DataExtractorService implements Runnable {
                 }
             }
         }
+        return null;
+    }
+
+    private List<Record> extractAccountingRecordInformationFromHocr() {
+        List<Record> records = new LinkedList<>();
+        //TODO: Additional filtering through the branch of the company
+        //TODO: Filtering if invoice or voucher
+        //TODO: We could use the case approach in here too!
+        int index = 0;
+        boolean found = false;
+        boolean endReached;
         return null;
     }
 

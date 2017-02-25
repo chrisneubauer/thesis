@@ -89,7 +89,6 @@ public class ScanTask extends Task {
     }
 
     @Override
-    @Deprecated
     protected List<ProcessResult> call() throws Exception {
         int counter = 0;
         Platform.runLater(() -> filesScanned.setText("0 / " + filesToScan.length));
@@ -108,6 +107,10 @@ public class ScanTask extends Task {
 
                 // TODO: remove partitioning
                 ImagePartitioner partitioner = new ImagePartitioner(preprocessedImage);
+                //BufferedImage table = null;
+                /*if (partitioner.hasTable()) {
+                    table = partitioner.getTable();
+                }*/
                 BufferedImage[] imageParts = partitioner.process();
                 String[] ocrParts = this.performOCR(imageParts, preprocessedImage);
 
@@ -165,6 +168,45 @@ public class ScanTask extends Task {
             result = ScanStatus.CREDITNOTE;
         }
         return result;
+    }
+
+    private String[] performOCR(BufferedImage table, BufferedImage hocrImage) {
+        TesseractWorker tableWorker = null;
+        Thread tableThread = null;
+        if (table != null) {
+            tableWorker = new TesseractWorker(table, true);
+            tableThread = new Thread(tableWorker);
+        }
+
+        TesseractWorker hocrWorker = new TesseractWorker(hocrImage, true);
+        Thread hocrThread = new Thread(hocrWorker);
+
+        boolean tableFinished = true;
+        boolean hocrFinished = false;
+        boolean allFinished = false;
+
+        String[] ocrParts = new String[6];
+
+        hocrThread.start();
+        if (tableThread != null) {
+            tableThread.start();
+            tableFinished = false;
+
+        }
+        while (!allFinished) {
+            if (!hocrFinished && hocrThread.getState() == Thread.State.TERMINATED) {
+                ocrParts[4] = hocrWorker.getResultIfFinished();
+                hocrFinished = true;
+            }
+            if (table != null && !tableFinished && tableThread.getState() == Thread.State.TERMINATED) {
+                ocrParts[5] = tableWorker.getResultIfFinished();
+                tableFinished = true;
+                String statusText = this.status.getText();
+                Platform.runLater(() -> status.setText(statusText.replace("header, ", "")));
+            }
+            allFinished = tableFinished && hocrFinished;
+        }
+        return ocrParts;
     }
 
     private String[] performOCR(BufferedImage[] imageParts, BufferedImage hocrImage) {
