@@ -36,8 +36,295 @@ To access the database we will use classes for each business object. The package
 
 \section{Module 1 - OCR}
 
+The OCR module deals with the processing of the document. Therefore, we will use Googles Tesseract as described in chapter 3. In order to use it, we use Tess4J as a Java wrapper. TesseractWrapper.java is the class that initiates a tesseract instance. With initOcr() the tesseract instance is getting called. It returns a String as result. 
+We set HOCR to true, which means that our output will not only be a String containing the processed words, but in a structured way. HOCR is a xml-structured document first proposed by (TODO: CITE). Using this output we are not only able to retrieve the processed words, but also their position in the document.
+The package hocr contains necessary java classes to represent this document in an objective-oriented way. The string output of the TesseractWrapper class can be given to the constructor of the HocrDocument class, that completely parses the string and divides it into multiple HocrAreas, HocrParagraphs, HocrLines and HocrWords.
+Before the actual step of processing the image, we want to improve its quality. Therefore, we use the ImagePreprocesser class. Any kind of document inserted will first converted to a BufferedImage. Then preprocess() can be called which executes multiple algorithms on the image:
+
+\begin{lstlisting}
+public BufferedImage preprocess() {
+    try {
+        ...
+        BufferedImage outputFile = this.resizeImage(image);
+		...
+        outputFile = this.adjustDPI(image);
+		...
+        outputFile = this.deSkewImage(image);
+		...
+        outputFile = this.greyScaleImage(image);
+		...
+        outputFile = this.deSpeckleImage(image);
+		...
+        return outputFile;
+        } 
+  	...
+}
+\end{lstlisting}
+
+Most of those calculations are made using ImageMagick, a powerful open source library with several useful commands to apply on images. It is licensed under the Apache 2.0 license. In order to use it inside our application we are using IM4Java which is cited by ImageMagick itself (here: https://www.imagemagick.org/script/develop.php) and is licensed under the LGPL license.
+In order to increase the performance of the application, we want to be able to perform the optical character recognition by using multiple instances of the tesseract at the same time. Hence we need to implement the Runnable interface provided by the JDK. Seen from the outside, the TesseractWrapper class is just the Tesseract instance itself. So we need a worker class that can be given to a new Thread. The TesseractWorker class implements this interface. When we start a new Thread using start(), the run()-method of this worker is called internally. Run initiates a new Tesseract instance and executes OCR with the given ocr file: 
+
+\begin{lstlisting}
+/**
+ * Executes tesseract ocr using a wrapper
+ * The result can be obtained using the getResultIfFinished() method
+ */
+@Override
+public void run() {
+    TesseractWrapper wrapper = new TesseractWrapper();
+    if (this.imgToScan == null) {
+        this.result = wrapper.initOcr(this.fileToScan, runWithHocr);
+    } else {
+        this.result = wrapper.initOcr(this.imgToScan, runWithHocr);
+    }
+    Logger.getLogger(this.getClass()).log(Level.INFO, "Finished OCR");
+}
+\end{lstlisting}
+
+Since we want to be able to support not only pdf documents, but also images, we have to differentiate between this two. Depending what type of document, we have to parse it differently in order to get a BufferedImage out of it.
+Postprocessor: %TODO: write
+
+\section{Module 2 - Extraction}
+
+The core class that extracts the information from the hocr document is the DataExtractorService class. As we also want to retrieve information as fast as possible, we want to run it on different threads, so that we can extract the invoice information part on one thread and the accounting records information on another. Hence this class needs to implement the Runnable interface. When instantiated, a flag is set if this thread should extract the former or the latter:
+
+\begin{lstlisting}
+@Override
+public void run() {
+    ...
+    if (this.extractInvoice) {
+        this.threadInvoice = this.extractInvoiceInformationFromHocr();
+    } else {
+        this.threadRecord = this.extractAccountingRecordInformation();
+    }
+}
+\end{lstlisting}
+
+We will now start explaining the extractInvoiceInformationFromHocr() method in detail before continuing with the explanation of the extractAccountingRecordInformatio() method.
+As we built our invoice information extraction process on similar invoices of the same creditor, the extractInvoiceInformationFromHocr() method starts with a search for the creditor:
+
+\begin{lstlisting}
+...
+result.setCreditor(this.getLegalPersonFromDatabase(this.getHocrDoument(), true));
+if (result.getCreditor() != null) {
+    result = this.getCaseInformation(result);
+} else {
+    String invNo = this.findInvoiceNumber();
+    result.setInvoiceNumber(invNo);
+    result.setIssueDate(this.findIssueDate());
+    result.setDebitor(this.getLegalPersonFromDatabase(this.getHocrDoument(), false));
+}
+...
+\end{lstlisting}
+
+If we are not able to find the creditor in the database (because there was no invoice of this creditor yet) we will continue by searching for necessary invoice information by hand. This will be covered after the case information retrieval.
+If a creditor is found, we get the case information of the corresponding creditor. A DocumentCase consists of a creditor to which it belongs as well as a keyword which relates the DocumentCase to one of the following:
+-	Document type: The DocumentCase contains information where to find a keyword that defines the document as an invoice, a proforma invoice or a credit note.
+-	Invoice number: The DocumentCase contains information where to find the corresponding invoice number of the invoice.
+-	Invoice date: The DocumentCase contains information where the invoice date is being placed on the document.
+-	Creditor: The DocumentCase contains information where the name of the creditor usually is. This is being used for new documents that are not classified yet in order to improve the recognition of creditors.
+-	Debitor: The DocumentCase contains information where the name of the debitor usually is.
+Besides the keyword and the creditor, there is also the position stored where one of those keywords can be found, as well as the creation date of the DocumentCase, which is being used so that newer cases get a higher priority. This way we can react on changing designs for example when a company decides to restructure their invoice documents.
+In addition to that, a case id clusters all DocumentCases that are created on one document. With five keywords at hand, a maximum of five DocumentCases should be related to one document.
+A flag isCorrect is also existing but set to false in the beginning. After the user has reviewed missing information and wants to store the revised documents, the case is compared with the given information. If there are no changes, we expect the case to be correct. Hence at this time we set isCorrect to true.
+The getCaseInformation() method first retrieves all cases from the found creditor. Then, it sorts them to the corresponding cases.
+For each keyword the corresponding cases contain position information of older documents where the keyword has been found. With that position at hand, the current HOCR document is being searched for a value at that position. The method findInCase() deals with this process:
+
+\begin{lstlisting}
+private HocrElement findInCase(List<DocumentCase> cases) {
+    for (DocumentCase docCase : cases) {
+        if (docCase.getIsCorrect()) {
+            String[] position = docCase.getPosition().split("\\+");
+            // 0: startX, 1: startY, 2: endX, 3: endY
+            int[] pos = new int[] {
+				Integer.valueOf(position[0]), 
+				Integer.valueOf(position[1]), 
+				Integer.valueOf(position[2]), 
+				Integer.valueOf(position[3])
+			};
+
+            HocrElement possibleArea = this.document.getPage(0).getByPosition(pos, 50);
+            if (possibleArea != null) {
+                HocrParagraph possibleParagraph = (HocrParagraph)  possibleArea.getByPosition(pos, 30);
+                if (possibleParagraph != null) {
+                    HocrLine possibleLine = (HocrLine) possibleParagraph.getByPosition(pos, 30);
+                    if (possibleLine != null) {
+                        HocrWord possibleWord = (HocrWord) possibleLine.getByPosition(pos, 10);
+                        if (possibleWord != null) {
+                            return possibleWord;
+                        } else {
+                            // refine to multiple words, pixel threshold only a few pixels since we are searching for word
+                            possibleWord = possibleLine.getWordsByPosition(pos, 10);
+                            return possibleWord;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return null;
+}
+\end{lstlisting}
+
+We are only using the cases that have the flag isCorrect set to true. Then we compare all HocrElements in the document with the stored position. But, as there could also be some small differences (e.g. because the scans are hand-made and the document has not been placed on the exact same position every time) we apply a threshold value. Every element that is more or less consistent with the given position will be returned. Eventually, we will a word that matches the position, or, if the position stored contained multiple words, a combination of words. Those are concatenated and returned. If any of those steps fail, the method will return null.
+This is repeated for each keyword. A new DocumentCase is created and the position added. Every keyword that has not been found will result in missing DocumentCases. After that, the invoice filled with the retrieved information will be returned.
+As mentioned before, if we are unable to find a creditor, then we proceed with the document manually. Which means we are looking for keywords such as ''Rechnungsnummer'' (invoice no.) or ''Rechnungsdatum'' (invoice date) which are usually followed by the corresponding value. This is a fallback practice and will yield more errors due to missing position information. An invoice object with the found values will be returned all the same.
+The extractAccountingRecordInformation() method deals with the problem of information retrieval with a different approach: It uses the extracted table information if a table has been found (TODO: Include in text). If not, the HocrDocument is searched for keywords that are usually appear in invoice tables. If we find those information, we iterate over the following lines until we find table end information, such as ''Gesamtbetrag'' (total value), ''Lieferdatum'' (delivery date) and others. Both, the table header words as well as table end words are stored in two textfiles (tablecontents.txt and tableendings.txt) which allows the user to add more words to improve the accuracy.
+Now, every line will be processed the following way:
+
+\begin{lstlisting}
+Record r = new Record();
+String recordLine = this.removeFinancialInformationFromRecordLine(nextLine);
+double value = this.getValueFromLine(nextLine);
+
+Model m = service.getMostLikelyModel(recordLine); 
+if (m == null) {
+    r.setEntryText(nextLine);
+} else {
+    r.setEntryText(m.getPosition());
+    r.setRecordAccounts(m.getAsAccountRecord(value));
+    r.setProbability(m.getProbability());
+}
+records.add(r);
+index++;
+\end{lstlisting}
+
+We first want to remove all those additional information from the position so that we are able to store / retrieve it if it comes again more precisely. This is done by the removeFinancialInformationFromRecordLine() method. After that, we also retrieve the total amount of the position by searching in the line again for the financial information, but this time searching for the last numeric value that is proceeded by ''EUR'' or ''\euro''.
+After that, the machine learning module is called. What exactly happens there will be covered by the next section. We will retrieve a possible Model that applies to our position. We can assign the found value to every involved account as the Model also contains the percentual values of each account and add a probability value to the Record which will later presented to the user in order to facilitate his decision if the automatically made decision is correct or not.
+
+
 \section{Module 2 - ANN}
 
-\section{Module 3 - Converter}
+\section{Module 4 - Transformation}
+
+We have now extracted required basic information of the invoice as well as accounting records based on the positions in the invoice. Everything has been labelled by a confidence level in the application. All documents with a confidence level lower than previously defined by the user had to be reviewed by the user manually.
+The final part of the use case is the transformation of those extracted information into the ZugFerd invoice format. Therefore, we need to order the given information in a predefined format and append it as xml-information to the invoice pdf.
+We are using the Mustang project to generate the xml content for us. It is an open source project licensed under the Apache license version 2.0 and currently under version 1.3. This way, the amount of classes we need will be reduced to only one: The ZugFerdTransformator.java class.
+Before giving an in-depth explanation about our implementation, we first want to explain how the ZugFerd-Format works.
+
+\subsection{About the ZugFerd Scheme}
+
+ZugFerd has been developed to close the gap between manually sent invoices in small companies and heavy electronic data interchange (EDI) between big companies. While EDI with its sub-standards can be a good solution for a big company, most of the small and medium sized companies can not make use of such a standard due to the overwhelming complexity that lies beyond this standard. But dealing with pdf documents manually is also a source of costs, errors and is time consuming.
+ZugFerd stands in the middle between those two sides (TODO: ADD BILD). While documents can still be sent as a pdf, the underlying format enables automatic processing of the invoice. The extendibility with basic, comfort and extended levels enables also big companies to make use of this standard. This also improves the B2B relations between big and small companies.
+Depending on the desired level of the ZugFerd format, more fields have to be filled out. But even the lowest level, the basic level, brings the possibility to provide additional information which would only be required on the comfort or extended level. But there are still some fields that even on the basic level are required. Those will be introduced now and explained shortly.
+Document Context Parameter: This field describes which level will be used in this document. A possible option would be the comfort-level.
+Exchanged Document Identifier: A unique identifier for an invoice. This is usually the invoice number that is present in the invoice document.
+Exchanged Document Type Code: The type code defines the invoice more in detail. There are currently three codes available: 380, 84 and 389.
+In the basic level, only code 380 is supported. All invoices regarding goods or services, as well as credit notes and payment requests should be labelled with this code.
+Beginning with the Comfort-level, code 84 is also supported. It refers to invoices without goods or values as well as credit notes without goods or values.
+Only the Extended-level supports code 389, which is a special case for self-filled invoices or credit notes.
+Exchanged Document Issue Date: The date when the invoice has been issued.
+Trade Agreement Seller Trade Party Name: The name of the company that is selling the goods or services in the invoice (also known as the creditor of the invoice).
+Trade Agreement Buyer Trade Party Name: The name of the company or person that bought the goods or services and to whom this invoice is addressed at (also known as the debitor of the invoice).
+Supply Chain Trade Settlement Invoice Currency Code: This field describes the kind of currency that is used in the invoice. Countries in the European Union and Germany in particular will mostly be using ''EUR'' as the Code for Euro currency, but there are also codes for US Dollar (''USD''), the Britain pound (''GBP'') and the Columbian peso (''COP'') available.
+Trade Settlement Monetary Summation Line Total: Line total is the total value of all positions combined.
+Trade Settlement Monetary Summation Charge Total: This field contains the sum of all additional charges to the invoice. These are not the price of the goods or services, but more additional costs (for instance: delivery costs, cancellation charges or reminder fees).
+Trade Settlement Monetary Summation Allowance Total: The sum of all allowances made on this invoice (e.g.: parts of the goods that are tax-free).
+Trade Settlement Monetary Summation Tax Basis Total: The net total on which the tax will be calculated.
+Trade Settlement Monetary Summation Tax Total: The total tax value that is applied on the invoice.
+Trade Settlement Monetary Summation Grand Total: The total sum of the invoice (usually the net total added by the tax that has been applied).
+These are the most important fields in the ZugFerd format. Without them, it is not possible to create a conformal invoice document. This only applies on the Basic level of the ZugFerd format. Using the Comfort or even Extended-Level, several other fields are required. We will not further introduce these additional fields since the support of the other levels is not part of this thesis. 
+
+\subsection{The transformation process}
+
+We have now introduced all the necessary fields to create an invoice document which fulfils the requirements of the ZugFerd-Scheme Basic level and can now introduce the ZugFerdTransformator.java class. The core method of this class is the createFullConformalBasicInvoice() method. 
+In the first part, an invoice object is created and meta information are provided:
+
+\begin{lstlisting}
+Invoice i = new Invoice(BASIC);
+
+Context con = new Context(BASIC);
+Profile guideline = new Profile(BASIC);
+guideline.setVersion(ProfileVersion.V1P0);
+con.setGuideline(guideline);
+\end{lstlisting}
+
+This information defines the invoice object to be of the Basic level (it has been described before as the Document Context Parameter). The ProfileVersion is currently 1.0 but could be increased when the ZugFerd format is further developed.
+A header containing the basic information of the invoice is now instantiated:
+
+\begin{lstlisting}
+Header h = new Header();
+h.setName("RECHNUNG");
+h.setInvoiceNumber(inv.getInvoiceNumber());
+h.setCode(_380);
+h.setIssued(new ZfDateDay(inv.getIssueDate().getTime()));
+\end{lstlisting}
+
+As the application only deals with Invoices, we can set the name to ''RECHNUNG'' (engl.: invoice). The invoice number has been extracted from the invoice object that has been given to the method.
+Since this method creates an invoice object of the Basic level, the only applicable code for this level is 380. Afterwards, the issue date of the given invoice object is used as well.
+It is now time to add the actual invoice content. First, we have to define the creditor and debitor of this - in the terminology of the ZugFerd documentation - agreement. Both, the creditor and the debitor, are a TradeParty that are added to the agreement:
+
+\begin{lstlisting}
+Agreement a = new Agreement();
+a.setBuyer(new TradeParty().setName(inv.getDebitor().toString()));
+a.setSeller(new TradeParty().setName(inv.getCreditor().toString()));
+\end{lstlisting}
+
+Hence we create a new Agreement object and set Buyer and Seller instances (respectively debitor and creditor) by using the given name of the legal person in the provided invoice object.
+All the financial information such as Line Total or Tax Basis Total are now filled in to the MonetarySummation object:
+
+\begin{lstlisting}
+MonetarySummation sum = new MonetarySummation();
+sum.setLineTotal(new Amount(BigDecimal.valueOf(inv.getLineTotal()), EUR));
+sum.setChargeTotal(new Amount(BigDecimal.valueOf(inv.getChargeTotal()), EUR));
+sum.setAllowanceTotal(new Amount(BigDecimal.valueOf(inv.getAllowanceTotal()), EUR));
+sum.setTaxBasisTotal(new Amount(BigDecimal.valueOf(inv.getTaxBasisTotal()), EUR));
+sum.setTaxTotal(new Amount(BigDecimal.valueOf(inv.getTaxTotal()), EUR));
+sum.setGrandTotal(new Amount(BigDecimal.valueOf(inv.getGrandTotal()), EUR));
+
+Settlement s = new Settlement();
+s.setCurrency(EUR);
+s.setMonetarySummation(sum);
+\end{lstlisting}
+
+The Settlement object holds this information. For each value, we also have to provide currency information. The application currently only supports invoices with the currency Euro, hence every amount will be added as the currency Euro.
+To conclude the trade, we also have to define a delivery date. If no such information has been found in the invoice document, we will use the issue date as a fallback value:
+
+\begin{lstlisting}
+Delivery d;
+if (inv.getDeliveryDate() == null) {
+    d = new Delivery(new ZfDateDay(inv.getIssueDate().getTime()));
+} else {
+    d = new Delivery(new ZfDateDay(inv.getDeliveryDate().getTime()));
+}
+
+Trade tr = new Trade();
+Item item = new Item();
+tr.addItem(item);
+tr.setAgreement(a);
+tr.setDelivery(d);
+tr.setSettlement(s);
+\end{lstlisting}
+
+After that, a Trade object is being instantiated and the information are added. Note that we create an empty Item object for the trade. This is necessary for the invoice object to be valid. But only in the higher levels actual information regarding specific items are required to be provided.
+Eventually, we add the context, the header information as well as the trade object to the actual invoice object:
+
+\begin{lstlisting}
+i.setContext(con);
+i.setHeader(h);
+i.setTrade(tr);
+\end{lstlisting}
+
+Before we now return the invoice document, we have to make sure that this document is valid against the ZugFerd-Scheme. Only if this invoice is valid, it will be returned, otherwise the method will return null:
+
+\begin{lstlisting}
+if (this.isInvoiceValid(i)) {
+    return i;
+} else {
+    return null;
+}
+\end{lstlisting}
+
+The isInvoiceValid() method makes use of an InvoiceValidator, which is given by the Mustang framework and enables us to quickly validate the invoice object:
+
+\begin{lstlisting}
+InvoiceValidator invoiceValidator = new InvoiceValidator();
+
+Set<ConstraintViolation<Invoice>> violations = invoiceValidator.validate(i);
+return violations.size() < 1;
+\end{lstlisting}
+
+The InvoiceValidator does not only check if the required fields are filled out, but also makes calculations on the MonetarySummation object. For instance, if the provided tax value does not sum up correctly to the grand total or the tax basis is smaller than the actual tax (which would mean a tax value over 100\%) an error will be raised.
+With the correct validation of the invoice object the task of this module is completed. 
 
 \section{Problems during the implementation}
