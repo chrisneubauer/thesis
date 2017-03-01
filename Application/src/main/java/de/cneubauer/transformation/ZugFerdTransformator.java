@@ -238,24 +238,14 @@ public class ZugFerdTransformator {
         con.setGuideline(guideline);
 
         Header h = new Header();
-        //TODO: Application could also support other types except invoices
         h.setName("RECHNUNG");
         h.setInvoiceNumber(inv.getInvoiceNumber());
         h.setCode(_380);
         h.setIssued(new ZfDateDay(inv.getIssueDate().getTime()));
 
-        Trade tr = new Trade();
-
         Agreement a = new Agreement();
         a.setBuyer(new TradeParty().setName(inv.getDebitor().toString()));
         a.setSeller(new TradeParty().setName(inv.getCreditor().toString()));
-
-        Delivery d;
-        if (inv.getDeliveryDate() == null) {
-            d = new Delivery(new ZfDateDay(inv.getIssueDate().getTime()));
-        } else {
-            d = new Delivery(new ZfDateDay(inv.getDeliveryDate().getTime()));
-        }
 
         MonetarySummation sum = new MonetarySummation();
         sum.setLineTotal(new Amount(BigDecimal.valueOf(inv.getLineTotal()), EUR));
@@ -269,6 +259,14 @@ public class ZugFerdTransformator {
         s.setCurrency(EUR);
         s.setMonetarySummation(sum);
 
+        Delivery d;
+        if (inv.getDeliveryDate() == null) {
+            d = new Delivery(new ZfDateDay(inv.getIssueDate().getTime()));
+        } else {
+            d = new Delivery(new ZfDateDay(inv.getDeliveryDate().getTime()));
+        }
+
+        Trade tr = new Trade();
         Item item = new Item();
         tr.addItem(item);
         tr.setAgreement(a);
