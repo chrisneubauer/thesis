@@ -3,12 +3,27 @@
 % Conclusion and outlook
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\chapter{Conclusion}
-\label{Conclusion and outlook}
+\chapter{Conclusion and outlook}
+\label{cha6}
 
 \section{Result of the application}
 
 \section{Findings}
 
 \section{Outstanding issues}
+Even though the application is finalized and working, several improvements could be made in the future.
+Each of them will be listed here, including the reasons why they should be made as well as possible ideas on how to achieve these improvements.
+\begin{enumerate}
+	\item Improving the accuracy of OCR: As the application is highly dependent on the successful and accurate process of OCR, improving the accuracy of the OCR process will improve the usefulness of this application in general. Hence, every action made in this direction is an advantage. There are two ideas that could be realized in the future: 
+	\begin{itemize}
+		\item Improving the accuracy of the Tesseract by creating an own training set based on a representative amount of invoices (especially in German) of different companies.
+		\item Exchanging the open source solution for a proprietary solution that provides a higher accuracy and / or is specialized either on invoices or German text.
+	\end{itemize}
+	\item Refactor the overall design of the application: Various adjustments in the application could be made to make the application more extensible in the future. The following is a list of possible changes:
+	\begin{itemize}
+		\item Using the strategy pattern on the OCR module: The application should be independent from which kind of OCR API it retrieves the String output. The strategy pattern would ideally lead to the possibility for the user to choose the preferred OCR reader from the settings view.
+		\item Removing unnecessary or unused Business Objects, such as the Address or CorporateForm classes, since those are not used at the moment. Or instead, extend the application to make use of those classes.
+		\item TO BE CONTINUED %TODO: MORE
+	\end{itemize}
+	\item Increase the performance of the processing step: The slowest part of the application is the process of scanning a document and extracting its information. Finding a way to speed-up this step would lead to a faster application. One idea would to parallelize the process of information retrieval with multiple documents and to make use of all processor cores the device the application runs on has.
+\end{enumerate}
