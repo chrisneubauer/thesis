@@ -82,7 +82,7 @@ This application will also make use of an object-relational mapping framework (H
 
 The OCR module deals with the processing of the document. Therefore, we will use Googles Tesseract as described in chapter 3. In order to use it, we use Tess4J as a Java wrapper. TesseractWrapper.java is the class that initiates a tesseract instance. With initOcr() the tesseract instance is getting called. It returns a String as result. 
 
-We set HOCR to true, which means that our output will not only be a String containing the processed words, but in a structured way. HOCR is a xml-structured document first proposed by (TODO: CITE). Using this output we are not only able to retrieve the processed words, but also their position in the document.
+We set HOCR to true, which means that our output will not only be a String containing the processed words, but in a structured way. HOCR is a xml-structured document first proposed by \cite{Breuel07}. Using this output we are not only able to retrieve the processed words, but also their position in the document.
 
 The package hocr contains necessary java classes to represent this document in an objective-oriented way. The string output of the TesseractWrapper class can be given to the constructor of the HocrDocument class, that completely parses the string and divides it into multiple HocrAreas, HocrParagraphs, HocrLines and HocrWords.
 Before the actual step of processing the image, we want to improve its quality. Therefore, we use the ImagePreprocesser class. Any kind of document inserted will first converted to a BufferedImage. Then preprocess() can be called which executes multiple algorithms on the image:
@@ -107,7 +107,7 @@ public BufferedImage preprocess() {
 }
 \end{lstlisting}
 
-Most of those calculations are made using ImageMagick, a powerful open source library with several useful commands to apply on images. It is licensed under the Apache 2.0 license. In order to use it inside our application we are using IM4Java which is cited by ImageMagick itself (here: https://www.imagemagick.org/script/develop.php) and is licensed under the LGPL license.
+Most of those calculations are made using ImageMagick, a powerful open source library with several useful commands to apply on images. It is licensed under the Apache 2.0 license. In order to use it inside our application we are using IM4Java which is cited by ImageMagick itself\footnote{the citation can be found here: https://www.imagemagick.org/script/develop.php, last visited on 06.03.2017} and is licensed under the LGPL license.
 
 \begin{figure}[htb!]
 \centering
@@ -271,7 +271,11 @@ This is repeated for each keyword. A new DocumentCase is created and the positio
 
 As mentioned before, if we are unable to find a creditor, then we proceed with the document manually. Which means we are looking for keywords such as ''Rechnungsnummer'' (invoice no.) or ''Rechnungsdatum'' (invoice date) which are usually followed by the corresponding value. This is a fallback practice and will yield more errors due to missing position information. An invoice object with the found values will be returned all the same.
 
-The extractAccountingRecordInformation() method deals with the problem of information retrieval with a different approach: It uses the extracted table information if a table has been found (TODO: Include in text). If not, the HocrDocument is searched for keywords that are usually appear in invoice tables. If we find those information, we iterate over the following lines until we find table end information, such as ''Gesamtbetrag'' (total value), ''Lieferdatum'' (delivery date) and others. Both, the table header words as well as table end words are stored in two textfiles (tablecontents.txt and tableendings.txt) which allows the user to add more words to improve the accuracy.
+The extractAccountingRecordInformation() method deals with the problem of information retrieval with a different approach: It uses the extracted table information if a table has been found (TODO: Include in text). If not, the HocrDocument is searched for keywords that are usually appear in invoice tables.
+
+The detection of a table is done using another class, the HistogramMaker. 
+
+If we find those information, we iterate over the following lines until we find table end information, such as ''Gesamtbetrag'' (total value), ''Lieferdatum'' (delivery date) and others. Both, the table header words as well as table end words are stored in two textfiles (tablecontents.txt and tableendings.txt) which allows the user to add more words to improve the accuracy.
 Now, every line will be processed the following way:
 
 \begin{lstlisting}[caption={Extraction of accounting record information},label={arExtraction}]
@@ -675,7 +679,7 @@ Figure \ref{settings_General} shows the general settings tab.
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=\textwidth]{Images/GUI/settings_General.jpg}
-\caption{General settings tab \label{overflow}}
+\caption{General settings tab \label{settings_General}}
 \end{figure}
 
 This tab only contains the overall language of the application at the moment. More general settings could be added in the future. By selecting German as the application language the whole GUI will change its appeareance.

@@ -79,7 +79,7 @@ We will now introduce the remaining three algorithms and take a closer look on t
 \subsection{The K-Nearest-Neighbour algorithm}
 \label{sec4.2.1}
 The KNN algorithm tries to classify an object by using k neighbours of the object. Each of the k neighbours already have a class ci which enables the calculation of a likelihood value for the unclassified object.
-If we would choose k = 1 then the object would be given the same class then the closest neighbour. But this can lead to wrong assumptions since only neighbour has been taken into account. Hence we would need to select a value for k > 1. The given accuracy from Table (TODO: REF) has been achieved with k = 5.
+If we would choose k = 1 then the object would be given the same class then the closest neighbour. But this can lead to wrong assumptions since only neighbour has been taken into account. Hence we would need to select a value for k > 1. The given accuracy from Table \ref{mlAccuracy} has been achieved with k = 5.
 %TODO: MAKE Mathematical
 When further investigating in the results provided by the algorithm we found something we did not expect. In our trainingsdata we defined a position p1 and two different structures s1 and s2. n times p1 has been classified to s1, and n times to s2. This means, p1 is equally distributed between those two classes. But the KNN algorithm resulted in a classification of s1 = 60\% and s2 = 40\%. This can be explained by the chosen value for k. As we defined k = 5, there were 5 neighbours, 2/5 that belonged to s2 and 3/5 that belonged to s1. And indeed, as we changed k to an even value (k = 6) we had the expected classification of 50\% for s1 and 50\% for s2.
 

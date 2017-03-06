@@ -80,9 +80,6 @@
 
 \pagenumbering{roman}
 
-%\bibliographystyle{galpha1a} %german bibliography
-\bibliographystyle{alphamod} %english bibliography
-
 \def\ZweitInstitut{
 Universidade Federal do Parana
 
@@ -180,10 +177,10 @@ The application presented in this thesis deals with this problem and describes a
 \cleardoublepage
 \include{mt09}   % Glossar (\chapter{Glossar}  TEXT)
 \cleardoublepage
-\include{mt10}   % 
-\cleardoublepage
-\include{mt11}   % 
-\cleardoublepage
+%\include{mt10}   % 
+%\cleardoublepage
+%\include{mt11}   % 
+%\cleardoublepage
 
 \include{mt-lof} % Bilderverzeichnis
 \cleardoublepage
@@ -191,11 +188,17 @@ The application presented in this thesis deals with this problem and describes a
 \cleardoublepage
 \lstlistoflistings % Codelistings
 
-\bibliographystyle{plain}
+%\bibliographystyle{plain}
+
+%\bibliographystyle{galpha1a} %german bibliography
+%\bibliographystyle{alphamod} %english bibliography
+\bibliographystyle{ieeetr}
 \cleardoublepage
 
 % remove, only to see all the literature atm
 \nocite{*}
 
 \include{mt-lit} % Literaturverzeichnis
+%\bibliography{mt.bib}{}
+%\bibliographystyle{plain}
 \end{document}

@@ -24,7 +24,7 @@ Each of the following subsections will present an electronic invoice format. The
 
 EDIFACT is a well-established \cite{basware} subset of standards from CEFACT regarding the electronic interchange of structured data. The word 'EDIFACT' is an acronym from 'EDI' which stands for 'Electronic Data Interchange' in combination with 'FACT' (for Administration, Commerce and Transport). It is developed and maintained by the United Nations Economic Comission for Europe (UNECE) \cite{unece}.
 
-The European Commission states that the UN/EDIFACT INVOIC message has been a cornerstone in electronic invoicing over the past years \cite{ECInvcStandardization, page 14}.
+The European Commission states that the UN/EDIFACT INVOIC message has been a 'cornerstone' in electronic invoicing over the past years \cite[page 14]{ec12}.
 
 There are several subsets of EDIFACT that have been developed for different industries. For instance, the chemical industry uses CEFIC/ESCom\footnote{see also: https://www.cefic.org/Industry-support/Implementing-reach/escom/} as their standard, while automotive industry is in charge with ODETTE/FTP2\footnote{see also: https://www.odette.org/services/oftp2}.
 
@@ -35,7 +35,7 @@ EDIFACT has different message types such as ORDCHG for a request to change an or
 
 The XML Common Business Library is an extension of the CBL which originally has been devloped by Veo Systems Inc. \cite{coverpages}. The company has been bought by Commerce One Inc. in 1999 \cite{co}, page 29. 
 
-xCBL currently exists in version 4.0 (since 2003)\footnote{see also: https://www.xcbl.org}. Since the company has gone bancrupt in 2004 \ref{scm} it is not very likely that this format gains more interest in the future.
+xCBL currently exists in version 4.0 (since 2003)\footnote{see also: https://www.xcbl.org}. Since the company has gone bancrupt in 2004 \cite{scm} it is not very likely that this format gains more interest in the future.
 
 \subsection{OASIS/UBL}
 \label{sec2.1.3}
@@ -49,21 +49,21 @@ Also interesting in the context of invoice interchange is the UBL-based project 
 \subsection{ZugFerd}
 \label{sec2.1.4}
 
-This invoice format has been published initially in 2014 \cite{ferdIntro}. The name is a german acronym, containing the name of the corresponding forum (FeRD). It can be translated to ''Central User Guide of the Forum for electronic Invoicing in Germany''. 
+This invoice format has been published initially in 2014 \cite{Ferd14}. The name is a german acronym, containing the name of the corresponding forum (FeRD). It can be translated to ''Central User Guide of the Forum for electronic Invoicing in Germany''. 
 
-Although this invoice format is rather young it tries to fulfill the directive 2014/55/EU of the european parliament \cite{dir1455} while still being flexible and simple. This directive states that the use of electronic invoice formats should be adopted by all member states of the european union until the 27. of November 2018 \cite{dir1455, Article 11}. 
+Although this invoice format is rather young it tries to fulfill the directive 2014/55/EU of the european parliament \cite{eu14} while still being flexible and simple. This directive states that the use of electronic invoice formats should be adopted by all member states of the european union until the 27. of November 2018 \cite[article 11]{eu14}. 
  
 The approach of the ZugFerd-format enables not only big companies to work with that format, but also smaller and medium companies (SME's) that are in need of such a format but are normally not able to implement a complex electronic invoice standard. 
 Furthermore, three levels of conformance are defined: Basic, Comfort and Extended. Each of those levels have a different amount of required information fields, that have to be set in order to be a valid ZugFerd-format. Nevertheless, in all of the three formats, it is possible to define more information in free text fields. 
 
 This enables extensibility of the format and the possible business areas in which this standard can be used.
 
-The German Forum for electronic invoice (FeRD) states that this format has been accepted as a core standard in Germany to be used in the future such that every company, that wants to start business relations with a german company, has to use this standard \ref{ferd}. Furthermore, the possibility to extend this standard to all European Countries is in sight, as stated in \ref{ferd2}.
+Based on the directive 2014/55/EU \cite{eu14} a bill draft has been developed by the federal government of Germany \cite[page 10]{br16} that suggests the usage of the ZugFerd standard to ensure interoperability. In addition to that, the federal association of energy market and communication (EDNA) also published a recommendated course of action for the usage of the ZugFerd standard \cite{edna16}.
 
 \subsection{ODETTE File Transfer Protocol}
 \label{sec2.1.5}
 
-The Odette International Ltd. is a non-profit organization founded in the 1980s with the goal to standardize processes in the supply-chain-management. One of their results is the Odette File Transfer Protocol, which was initially released in 1997 and has been further improved. The current version is 2.0 and has been released in 2007. It is a specially designed file transfer protocol for the automotive industry to improve the procurement process between suppliers and vehicle manufacturers. While it is widely used in the automotive sector, the Odette FTP is not applicable in other industry areas.
+The Odette International Ltd. is a non-profit organization founded in the 1980s with the goal to standardize processes in the supply-chain-management. One of their results is the Odette File Transfer Protocol, which was initially released in 1997 and has been further improved. The current version is 2.0 and has been released in 2007\footnote{See also https://www.odette.org/services/oftp2 for further information}. It is a specially designed file transfer protocol for the automotive industry to improve the procurement process between suppliers and vehicle manufacturers. While it is widely used in the automotive sector, the Odette FTP is not applicable in other industry areas.
 
 \subsection{SAP IDoc}
 \label{sec2.1.6}
@@ -143,7 +143,7 @@ Complexity & \cellcolor[HTML]{FFFFFF}\begin{tabular}[c]{@{}c@{}}Highly complex \
 \end{tabular}%
 }
 \caption{Comparison between invoice standards}
-\label{my-label}
+\label{invoiceStandardComparison}
 \end{table}
 
 \subsection{Decision and explanation}
@@ -151,7 +151,7 @@ Complexity & \cellcolor[HTML]{FFFFFF}\begin{tabular}[c]{@{}c@{}}Highly complex \
 
 Comparing the invoice standards, we want to support one standard. While the versions of EDIFACT, UBL and ZugFerd have been updated recently, the Odette FTP still comes with a version of 2007. In addition to that, the Odette FTP may be used heavily in the automotive sector, but not in other industrial areas. Hence we will not support the Odette FTP in this version of the application.
 
-Even though EDIFACT has an international relevance and a high future potential, the complexity of the standard makes it hard to support it completely. Since we have a limited time for the creation of this thesis, we will not support the EDIFACT standard\footnote{But it would be a possible improvement of the application for the future (see also: section \ref{sec6.3})}. 
+Even though EDIFACT has an international relevance and a high future potential, the complexity of the standard makes it hard to support it completely. Since we have a limited time for the creation of this thesis, we will not support the EDIFACT standard\footnote{But it would be a possible improvement of the application for the future (see also section \ref{sec6.2})}. 
 
 UBL and ZugFerd both have a high future potential. They are both relevant in Europe and are not complex to be implemented. There are two reasons, why we decide to use the ZugFerd standard:
 \begin{enumerate}
@@ -180,5 +180,5 @@ Complexity & \cellcolor[HTML]{FE0000}\begin{tabular}[c]{@{}c@{}}Highly complex \
 \end{tabular}%
 }
 \caption{Advantages and disadvantages of invoice standards}
-\label{my-label}
+\label{invoiceStandardRating}
 \end{table}

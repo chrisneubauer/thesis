@@ -18,27 +18,27 @@ These steps are also shown in figure \ref{ocrSteps}:
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=100mm]{Images/OCR/Steps_Of_OCR.jpg}
-\caption{The Model-View-Controller pattern \label{ocrSteps}}
+\caption{Steps of OCR \label{ocrSteps}}
 \end{figure}
 
 The whole process of OCR is part of research since decades and several papers, dissertations and books have been published on the matter. Developing our own OCR algorithm would not only exceed the size of this master thesis, but also most likely retrieve less successful results than already developed and improved algorithms. Instead, this chapter will introduce several available OCR algorithms and compare open source solutions to find the best fit for our need.
 
-\label{CurrAvailOCRAlgorithms}
 \section{Currently available OCR algorithms}
+\label{sec3.1}
 
 OCR has been of interest for companies over many years. Hence we expect several possible solutions we could choose. As the amount of solutions can easily be very high we want to reduce the presented solutions to a maximum amount of 10.
 
 Each description of a solution will contain information about the license used, the supported operating systems, programming languages used as well as if there is a software development kit. Also general information about the company will be given, the currently released version of the solution and the release date and, if existent, the number of languages supported.
 
-\label{ABBYY}
 \subsection{ABBYY Fine Reader}
+\label{sec3.1.1}
 
-ABBYY Fine Reader is a proprietary solution from the identically named company ABBYY founded in 1989. It is usable for all three operating systems, whereby linux-distributions are only supported as a command-line-interface. ABBYY supports a SDK for all three operating systems. Although it is written in C/C++ there exists a wrapper for java development for Linux and Windows(TODO: Link für Abbyy broschüre version 11). 
+ABBYY Fine Reader is a proprietary solution from the identically named company ABBYY founded in 1989. It is usable for all three operating systems, whereby linux-distributions are only supported as a command-line-interface. ABBYY supports a SDK for all three operating systems. Although it is written in C/C++ there exists a wrapper for java development for Linux and Windows\cite{abbyy16}. 
 
 The SDK is currently in Version 11, it supports 185 languages, the latest update was on 03.10.2016.
 
-\label{Anyline}
 \subsection{Anyline SDK}
+\label{sec3.1.2}
 
 Anyline is an Austrian company founded in 2013 who aim at OCR solutions for mobile systems. They offer their SDK as a free license for non-commercial use. However, as they are focused on mobile systems, they do not explicitly support Windows-Desktop, Linux or MacOS.
 
@@ -46,34 +46,34 @@ It can be developed with Java and Objective-C as well as Swift, C\# and Javascri
 
 Currently supported are two languages: English and German.
 
-\label{Asprise}
 \subsection{Asprise OCR}
+\label{sec3.1.3}
 Asprise has been founded in 1998 in Singapure. The company offers OCR SDKs in various programming languages (Java, C\#, VB.NET, Python, C/C++ and Delphi Pascal). The SDKs are under loyalty-free license and therefore proprietary. More than 20 languages are supported, English and German are included.
 The SDK supports Windows, MacOS and Linux, whereby support of multiple operating systems at once increases the price.
 
-\label{GOCR}
 \subsection{GOCR}
-GOCR is an OCR application started by Joerg Schulenburg in 2000. The program is developed under the GNU Public License.
+\label{sec3.1.4}
+GOCR is an OCR application started by Joerg Schulenburg in 2000. The program is developed under the GNU Public License.\footnote{The project can be found here: http://jocr.sourceforge.net/, last visited on 06.03.2016}
 
 The latest version is 0.5 and has been released in March 2013. It is working under Windows, Linux and MacOS. The code is written in C, but is not known if there is a SDK which enables usage of the application inside another application. The number of supported languages is also unkown.
 
-\label{LEADTOOLS}
 \subsection{LEADTOOLS}
+\label{sec3.1.5}
 Leadtools is an American company founded in 1990 and offers various products in the range of document and image processing. 
 
 The Leadtools OCR Engine can be used as an SDK and integrated in another application. Development with the SDK is possible with C\# and VB as well as C/C++ and Java (and some others). The engine supports more than 40 languages, containing German and can be used on Windows, Linux and MacOS. 
 
 The current version of the SDK is 19 and has been released in December 2014.
 
-\label{MathOCR}
 \subsection{MathOCR}
-MathOCR is a document recognition system written in Java with focus on formulas. The MathOCR project started in March 2014 and is based on the GNU General Public Liense.
+\label{sec3.1.6}
+MathOCR is a document recognition system written in Java with focus on formulas. The MathOCR project started in March 2014 and is based on the GNU General Public Liense.\footnote{The source code can be found here: https://sourceforge.net/projects/mathocr/, last visited on 06.03.2017}
 
 The current version of the application is 0.0.3, which was released in May 2015 and is therefore still in a pre-alpha status. It can be used on Windows, Linux and MacOS. The amount of supported languages is not stated on the project page.
 
-\label{OCROpus}
 \subsection{OCROpus}
-The OCRopus Open Source OCR System is an open source system developed and maintained by the German Research Laboratory for Artificial Intelligence under guidance by Thomas M. Breuel. It is licensed under the Apache 2.0 License. 
+\label{sec3.1.7}
+The OCRopus Open Source OCR System is an open source system developed and maintained by the German Research Laboratory for Artificial Intelligence under guidance by Thomas M. Breuel\footnote{The source code can be found here: https://github.com/tmbdev/ocropy, last visited on 06.03.2017}. It is licensed under the Apache 2.0 License. It was first published in 2008 \cite{Breuel08}.
 
 The command-line application is written in Python and C++ and only supports Linux as Operating System. It currently uses the Tesseract as a text line recognizer but will be replace it in the future. 
 
@@ -81,7 +81,7 @@ The current stable version is 1.0 and has been released in November 2014. The am
 
 \label{OCRad}
 \subsection{OCRad}
-OCRad is a free OCR application under the GNU Public License and part of the GNU project. Antonio Diaz Diaz developed the application since 2003.
+OCRad is a free OCR application under the GNU Public License and part of the GNU project \footnote{The project can be found here: https://www.gnu.org/software/ocrad/, last visited on 06.03.2017}. Antonio Diaz Diaz developed the application since 2003.
 
 The current version is 0.25 and has been released in April 2015. It comes as a stand-alone console application but can also be used in the background by other applications.
 
@@ -93,9 +93,9 @@ The current version is 20 and has been released in 2016. It supports over 120 la
 
 \label{Tesseract}
 \subsection{Tesseract}
-The Tesseract OCR Engine historically was an early project developed by Hewlett Packard between 1984 and 1994. In 2005, it was put on an open source license. It is currently maintained by Google under the Apache 2.0 license.
+The Tesseract OCR Engine historically was an early project developed by Hewlett Packard between 1984 and 1994. In 2005, it was put on an open source license. It is currently maintained by Google under the Apache 2.0 license \cite{smith07}.
 
-Tesseract is originally written in C/C++ and can be used on Windows, MacOS and Linux. There also exists a wrapper which allows development in Java, the open source project Tess4J.
+Tesseract is originally written in C/C++ and can be used on Windows, MacOS and Linux\footnote{The source code for tesseract can be found here: https://github.com/tesseract-ocr, last visited on 06.03.2017}. There also exists a wrapper which allows development in Java, the open source project Tess4J\footnote{The wrapper can be found on: http://tess4j.sourceforge.net/, last visited on 06.03.2017}.
 
 The current stable version of the Tesseract is 3.04.01 and has been released in February 2016. It supports over 100 languages (including German). 
 
@@ -124,7 +124,7 @@ License                                                                   & \beg
 \end{tabular}%
 }
 \caption{Comparison between different OCR engines}
-\label{my-label}
+\label{ocrEngineComparison}
 \end{table}
 
 MathOCR is a relatively young application and therefore in a pre-alpha state. OCRad and GOCR are one step closer to the first major release. OCROpus has reached that state on November 2014. Tesseract is already on Version 3.04 and has recently released an alpha version of 4.0.
@@ -166,7 +166,7 @@ License                                                                   & \cel
 \end{tabular}%
 }
 \caption{Advantages and disadvantages of different OCR engines}
-\label{my-label}
+\label{ocrEngineRating}
 \end{table}
 
 
