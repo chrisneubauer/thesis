@@ -18,6 +18,8 @@
 %    Kodiermethode achten (z.B. Linux: latin1)! 
 \usepackage[latin1]{inputenc}
 
+\usepackage{amsmath} % package is used for displaying formulas with text
+
 % needed for euro symbol
 \usepackage{eurosym}
 
@@ -29,6 +31,11 @@
 \usepackage{graphicx}
 \usepackage[table,xcdraw]{xcolor}
 
+% IF colours in tables are sorrounded by white lines:
+%\setlength{\aboverulesep}{0pt}
+%\setlength{\belowrulesep}{0pt}
+%\setlength{\extrarowheight}{.75ex}
+
 % ++ es werden keine underfull hboxes als Fehler ausgegeben,
 %    da das ja nur heißt, dass die Seite noch nicht ganz voll ist
 \hbadness=10000
@@ -36,10 +43,10 @@
 %for code listings
 \usepackage{listings}
 \definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mygray}{rgb}{0.92,0.92,0.92}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 \lstset{ %
-  backgroundcolor=\color{lightgray},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  backgroundcolor=\color{mygray},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
   basicstyle=\footnotesize,      % the size of the fonts that are used for the code
   %\linespread{1.1},					% needed to remove white lines between gray background
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
@@ -119,6 +126,12 @@ Erlangen, den \selectlanguage{german} \today \hspace{6.0cm} \\[10mm]
 \bfseries
 "Ubersicht
 \normalfont
+
+Obwohl seit einigen Jahrzehnten der elektronische Datenaustausch existiert werden auch heute noch vielseitig Rechnungsdokumente in Papier oder elektronisches Dokument gesandt. Waehrend grosse Konzerne diesbezueglich bereits Uebereinkuenfte mit ihren Partnern getroffen haben fehlen kleinen und mittleren Unternehmen (KMU) diese Uebereinkunft - auch aufgrund der Komplexitaet der eingesetzten Datenaustauschstandards.
+Die Dauer der Rechnungsverarbeitung ist bei solchen Unternehmen in der Regel sehr hoch und verursacht dadurch hohe Kosten. 
+
+Die in dieser Abschlussarbeit praesentierte Anwendung greift dieses Problem auf und beschreibt wie mit Techniken aus der optischen Zeichenerkennung und Maschinellem Lernen eine Moeglichkeit geschaffen wird um Rechnungsdaten aus elektronischen Dokumenten zu extrahieren und diese in ein Format zu bringen, welches nach dem neuen elektronischen Rechnungsstandard ZugFerd des Forums fuer elektronische Rechnung Deutschland konform ist.
+
 \end{center}
 
 
@@ -128,6 +141,11 @@ Erlangen, den \selectlanguage{german} \today \hspace{6.0cm} \\[10mm]
 \bfseries
 Abstract
 \normalfont
+
+Although electronic data interchange exists since several decades there are still a lot of invoices sent as paper or electronic document. While big companies have established agreements with their partners, the smaller and medium sized companies still lack of those agreements - also because of the complexity of the used electronice invoice standards.
+The duration of the invoice processing for such companies is usually very high and hence cause high costs.
+
+The application presented in this thesis deals with this problem and describes a possibility how to extract invoice information from electronic documents using optical character recognition and machine learning. The extracted information will be processed in a way that the resulting invoice document is fully conformal with the ZugFerd standard, a new electronic invoice standard developed by the Forum fuer elektronische Rechnung Deutschland. 
 \end{center}
 
 \cleardoublepage
@@ -170,6 +188,9 @@ Abstract
 \include{mt-lof} % Bilderverzeichnis
 \cleardoublepage
 \include{mt-lot} % Tabellenverzeichnis
+\cleardoublepage
+\lstlistoflistings % Codelistings
+
 \bibliographystyle{plain}
 \cleardoublepage
 

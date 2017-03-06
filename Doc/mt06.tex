@@ -6,11 +6,19 @@
 \chapter{Conclusion and outlook}
 \label{cha6}
 
+This final chapter concludes the thesis. First, a summary about the achievements and the resulting application is given in section \ref{sec6.1}. After that, section \ref{sec6.2} will present an outlook what future work could be done in this area. This also includes ideas or suggestions what should be changed or could be improved.
+
 \section{Result of the application}
+\label{sec6.1}
 
-\section{Findings}
+The application presented in this thesis is capable of automatic form processing. Using OCR techniques, images and pdf documents can be scanned and words extracted. Using the Hocr format, position information of specific keywords are saved and saved as cases. Those cases are used in order to improve the quality and accuracy of the algorithm over time. 
 
-\section{Outstanding issues}
+In addition to that, a Na{\"i}ve Bayes classificator is used to learn possible ways of accounting a position in regards to the different possible accounting strategies different users (or companies) can user on the same position.
+
+As proposed in 2016, a new electronic invoice format - ZugFerd - has been published which has a high future potential. This electronic invoice format is supported by the application, as the result of the processing will be a full conformal invoice of this scheme.
+
+\section{Future Work}
+\label{sec6.2}
 Even though the application is finalized and working, several improvements could be made in the future.
 Each of them will be listed here, including the reasons why they should be made as well as possible ideas on how to achieve these improvements.
 \begin{enumerate}
@@ -26,4 +34,6 @@ Each of them will be listed here, including the reasons why they should be made 
 		\item TO BE CONTINUED %TODO: MORE
 	\end{itemize}
 	\item Increase the performance of the processing step: The slowest part of the application is the process of scanning a document and extracting its information. Finding a way to speed-up this step would lead to a faster application. One idea would to parallelize the process of information retrieval with multiple documents and to make use of all processor cores the device the application runs on has.
+	\item Add support for other electronic invoice standards: As of now, the application only supports the ZugFerd standard. But as stated in section \ref{sec2.3.2} before, EDIFACT has a high future potential. This also applies to the UBL standard. The more standards this application supports, the more companies can make use of it.
+	\item While comparing positions we could make use of a wordnet implementation that enables us to find similar words. This way we would be able to interprete the position string in a semantic way.
 \end{enumerate}

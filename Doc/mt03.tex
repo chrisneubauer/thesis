@@ -11,9 +11,15 @@ During the processing of a form, the image of it is not only scanned. To retriev
 The process of retrieving data, for instance in form of characters or numbers, requires several steps. In the beginning, the image to be processed is converted to a gray-scale image. Then preprocessing takes place. In this process several algorithms such as noise-reduction and the canny-edge-algorithm are applied on the image to reduce irritating and / or unnecessary information in the image and to enhance contrast.
 
 After that, features are extracted. Those features are single characters whose vectors are defined afterwards. With the information about the feature vector it is possible to classify each character (and to detect which character of the alphabet is most likely to be represented by the feature).
+
 When all characters have been classified, post-processing takes place. Here possible failures can be corrected for example by comparing words with a predefined dictionary.
-These steps are also shown in figure 3.1:
-%TODO image
+These steps are also shown in figure \ref{ocrSteps}:
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=100mm]{Images/OCR/Steps_Of_OCR.jpg}
+\caption{The Model-View-Controller pattern \label{ocrSteps}}
+\end{figure}
 
 The whole process of OCR is part of research since decades and several papers, dissertations and books have been published on the matter. Developing our own OCR algorithm would not only exceed the size of this master thesis, but also most likely retrieve less successful results than already developed and improved algorithms. Instead, this chapter will introduce several available OCR algorithms and compare open source solutions to find the best fit for our need.
 
@@ -100,8 +106,26 @@ While several companies exist that offer good OCR libraries and SDKs, we have to
 Upon the 10 presented solutions, only 5 are free for use. These are: GOCR, Tesseract, OCROpus, MathOCR and OCRad.
 
 The following table shows the named solutions and shows their differences regarding their version, the latest release date, the supported programming languages and operating systems as well as the license they are put on:
-
-%TODO{Table}
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[!htb]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccc}
+\hline
+Application                                                               & \textbf{GOCR}                                                                           & \textbf{Tesseract}                                                                           & \textbf{OCROpus}                                                               & \textbf{MathOCR}                                                                        & \textbf{OCRad}                                                                          \\ \hline
+Version                                                                   &0.5                                                             & 3.04.01                                                              & 1.0                                                    & 0.0.3                                                           & 0.25                                                            \\ \hline
+Release Date                                                              & 03.2013                                                         & 02.2016                                                              & 11.2014                                                & 05.2015                                                         & 04.2015                                                         \\ \hline
+\begin{tabular}[c]{@{}l@{}}Supported Programming\\ Languages\end{tabular} & C                                                               & \begin{tabular}[c]{@{}c@{}}C/C++, \\ Java (with Tess4J)\end{tabular} & \begin{tabular}[c]{@{}c@{}}C++, \\ Python\end{tabular} & Java                                                            & C++                                                             \\ \hline
+\begin{tabular}[c]{@{}l@{}}Supported Operating\\ Systems\end{tabular}     & \begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} & \begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular}      & Linux                                                  & \begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} & \begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} \\ \hline
+License                                                                   & \begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   & Apache 2.0                                                           & Apache 2.0                                             & \begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   & \begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   \\ \hline
+\end{tabular}%
+}
+\caption{Comparison between different OCR engines}
+\label{my-label}
+\end{table}
 
 MathOCR is a relatively young application and therefore in a pre-alpha state. OCRad and GOCR are one step closer to the first major release. OCROpus has reached that state on November 2014. Tesseract is already on Version 3.04 and has recently released an alpha version of 4.0.
 
@@ -128,7 +152,7 @@ The following table shows the solutions again, but with underlying colors regard
 % \usepackage{graphicx}
 % \usepackage[table,xcdraw]{xcolor}
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
-\begin{table}[]
+\begin{table}[!htb]
 \centering
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lccccc}
@@ -141,9 +165,10 @@ Release Date                                                              & \cel
 License                                                                   & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   & \cellcolor[HTML]{34FF34}Apache 2.0                                                           & \cellcolor[HTML]{34FF34}Apache 2.0                                             & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   \\ \hline
 \end{tabular}%
 }
-\caption{My caption}
+\caption{Advantages and disadvantages of different OCR engines}
 \label{my-label}
 \end{table}
+
 
 As shown in the table, MathOCR will not fit our needs as it is a pre-alpha version. GOCR is outdated and also supports only C as a programming language. OCROpus and OCRad only support C++ (and in the case of OCROpus Python). In addition to that, OCROpus could be of a problem when porting the application to other operating systems whereas OCRad is licensed under the GNU Public License. 
 

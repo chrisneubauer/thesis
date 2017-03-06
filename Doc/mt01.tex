@@ -5,6 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Introduction}
+\label{cha1}
 % 5-8 pages
 % Some general information on the context and setting.
 Optical Character Recognition (OCR) has been the topic of research for many years, even decades. Several workshops, papers and journals have been published, conferences hold on issues in this field. While there are still many open problems (for instance the accurate recognition of arabic texts, symbols, mathematic formulas or handwriting), the knowledge in this area has already led to the development of several highly accurate systems (especially based on English text).
@@ -19,6 +20,7 @@ In order to facilitate and accelerate the process of invoice recognition electro
 For every other company, there are still problems: Not every invoice is sent in an electronic format, some are still sent as a normal pdf document or even per post.
 
 \section{Motivation}
+\label{sec1.2}
 %Specific motivation for the problem at hand.
 
 Although still invoices exist, that do not meet any electronic invoicing standard, it is to be expected that electronic invoice formats will be a future standard for all invoices to be sent. But even though electronic invoice formats have already been introduced, there are still a variety of formats and no real standard defined. Therefore, depending on the country or area, different formats are used. To address this issue inside the European Union, the Forum für elektronische Rechnung Deutschland (FeRD) developed a new format which will be very likely a new de-facto standard for companies inside the European Union. Small and medium sized companies can make use of this format as well as bigger companies. Chapter 2 will explain the different levels of the format more deeply.
@@ -28,6 +30,7 @@ While hardware parts and devices improve over time, we are now on a point were e
 With the use of machine learning techniques it should be possible to develop an application that works on a personal computer, can handle lots of invoices and transforms them into an electronic invoice format.
 
 \section{Task}
+\label{sec1.3}
 
 The task of this master thesis is to develop an application which can handle various invoices that are present as a pdf file, extract necessary invoice information and transform and store those invoices enriched by the electronic invoice format. The advantages and disadvantages of this format should be evaluated first.
 During the processing of the invoice, optical character recognition should be used to extract the information from the file. During this process, machine learning should be used where it enables the most benefit for the application.
@@ -35,25 +38,47 @@ The occurrence of errors during the scan process should also be handled by the a
 The stored invoices should be retrievable again, enhanced and conform with the electronic invoice format, so that it is possible to process them further.
 
 \section{Related Work}
+\label{sec1.4}
 
-Other relevant academic work and how it differs from this work, for
-example %\citet{shannon_diff} and %\citet{blowfish}. Distinguish between
-``textual'' citation, as shown in %\citet{shannon_diff}, and
-``parenthesis'' citation %\citep{blowfish}.
+\subsection{Case-based-reasoning on invoice documents}
+The process of information extraction on invoice documents has been topic of research for many years. One approach using Case-based-reasoning (CBR) has been published by Hamza et. al. They present a two iterative step that first tries to classify the invoice document as a whole (global-solving) and later repeats the classification on a keyword and pattern structure level (local solving). A Keyword in this approach are invoice specific words, such as the invoice date or invoice number. Pattern structures are words that appear in tables. An invoice always has to list every single position, thus the preferred way to do this is using a table in a document.
+The case-based reasoning approach is an iterative approach that stores information if a pattern structure has been found on the same line or the same column and if the relevant data is present before (over) or after (under) the keyword. This way cases are stored in a database and reused everytime a new invoice has to be classified. The global solving resulted in a accuracy of 85.29\% whereas the local solving yielded 76.33\%.
+%TODO: Write how we do it and negative things of CBR
+\subsection{Using a predefined layout}
+Another approach that has been discussed before (TODO: CITE INFORMsys) is a definition of a structure how invoices look alike. This model has to be created by a user before and can be seen as a template. The system knows on which positions relevant invoice information are due to the predefined locations from the template.
+Some of the scanned invoices may contain quality issues (e.g. have been scanned with an angle) that have to be taken into account while processing the document. Counteractions, such as deskewing the invoice document, have to be applied in a way that the template can be applied on the document.
+
+We are not using a predefined layout that has to be manually created by the user. Instead, the application will learn from the position of keywords in previously processed invoice documents and reuse this pattern on invoices documents of the same creditor.
+
+The major downside of the approach of (TODO: CITE INFORMsys) is the need of a manually created template. This does not only take time and is error-prone, but also only applies on invoices of exactly the same structure. But, especially in the field of invoice documents, there are various kinds and different structured invoices. This would lead to the expectation that the user has to create a template every time an invoice of a new customer, supplier, etc. should be processed.
+
+\subsection{Extracting information from repeated text}
+Another issue to deal with invoices is to extract every position that is listed in the invoice. Typically these are multiple positions and therefore displayed in a table. A paper by Bart \& Psarker describe an approach that recognizes repated structures by analyzing the basic similarity between lines, the separation as well as gaps in between to find out the relevant information.
+
+In the application presented in this thesis, a histogram is used to detect tables with containing information. This enables us to narrow the relevant words to the ones inside the table. In addition to that, keywords that either mark table header words or sum up the positions in the end of the table are filtered out.
+
+The approach of Bart \& Psarker is based on the assumption that there are multiple lines of positions. Although this is often the case, there are also invoices with only one position that would not be detected. Also other relevant keywords will not be detected if they are not presented in the invoice document as a table (or at least embedded in a repeated structure).
+
+%Other relevant academic work and how it differs from this work, for
+%example %\citet{shannon_diff} and %\citet{blowfish}. Distinguish between
+%``textual'' citation, as shown in %\citet{shannon_diff}, and
+%``parenthesis'' citation %\citep{blowfish}.
 
 %\Blindtext[3][1]
 
 
 \section{Results}
+\label{sec1.5}
 
 What has been achieved in this work?
-%- open source application
+
 %- able to process multiple invoices
 %- machine learning concept to improve quality over time
 
 %\blindtext[2][1]
 
 \section{Outline}
+\label{sec1.6}
 
 %How is the thesis structured and why? 
 This document is structured in the following way: In the beginning, several electronic invoice formats are presented, explained and compared against each other. Important criteria for the selection of a format are defined and based on those criteria a decision is being made.
@@ -68,6 +93,7 @@ From this point on, we have a good understanding about what we want to achieve, 
 In the end, chapter 6 will conclude about this thesis. The resulting application will be explained briefly again. Issues that are still open as well as ideas that could improve the application are listed.
 
 \section{Acknowledgments}
+\label{sec1.7}
 
 During the implementation of the application and the creation of this document, several people helped me to achieve this presented work. I would like to thank some people in particular:
 
