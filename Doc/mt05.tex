@@ -273,9 +273,9 @@ As mentioned before, if we are unable to find a creditor, then we proceed with t
 
 The extractAccountingRecordInformation() method deals with the problem of information retrieval with a different approach: It uses the extracted table information if a table has been found (TODO: Include in text). If not, the HocrDocument is searched for keywords that are usually appear in invoice tables.
 
-The detection of a table is done using another class, the HistogramMaker. 
+The detection of a table is done using another class, the HistogramMaker. A table usually contains black lines that structure the containing information. These lines can be detected by counting the amount of black pixels. Lines that contain such structures will result in a peak in the histogram. Figure (TODO: FIGURE) shows a possible invoice document on the left side as well as the resulting histogram on the right. Note the peaks that indicate the tables in the invoice.
 
-If we find those information, we iterate over the following lines until we find table end information, such as ''Gesamtbetrag'' (total value), ''Lieferdatum'' (delivery date) and others. Both, the table header words as well as table end words are stored in two textfiles (tablecontents.txt and tableendings.txt) which allows the user to add more words to improve the accuracy.
+Afterwards, we iterate over the following lines until we find table end information, such as ''Gesamtbetrag'' (total value), ''Lieferdatum'' (delivery date) and others. Both, the table header words as well as table end words are stored in two textfiles (tablecontents.txt and tableendings.txt) which allows the user to add more words to improve the accuracy.
 Now, every line will be processed the following way:
 
 \begin{lstlisting}[caption={Extraction of accounting record information},label={arExtraction}]
