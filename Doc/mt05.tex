@@ -6,14 +6,14 @@
 \chapter{Implementation of the application}
 \label{cha5}
 
-The application is structured by different packages. Each of them providing a specific benefit to the program as a whole. Before speaking about those modules, we will talk about the actual requirements of the application. After that, each module will be explained in detail and how it works. After that, the last section will deal with problems and possible solutions.
+The application is structured by different packages. Each of them providing a specific benefit to the program as a whole. Before speaking about those modules, we will talk about the actual requirements of the application. After that, each module will be explained in detail. % After that, the last section will deal with problems and possible solutions.
 
 \section{Requirements definition}
 \label{sec5.1}
 
 Focus of this application is the possibility to automatically process forms and retrieve the data of the forms. Hence the application should be able to deal with several files and process them. But, since there is a big variety of forms and every company have different structures, retrieving all necessary information can fail. If this happens, a user has to review scanned documents that contain errors. If it doesn't fail, the data should be stored without the need of a review.
 
-These requirements are visualized as a use case in figure \ref{totalApplicationCase}.
+We visualized these requirements as an UML use case diagramm in figure \ref{totalApplicationCase}.
 
 \begin{figure}[ht!]
 \centering
@@ -21,7 +21,7 @@ These requirements are visualized as a use case in figure \ref{totalApplicationC
 \caption{Use case of the application \label{totalApplicationCase}}
 \end{figure}
 
-To improve the process of gathering data, a machine learning approach should be implement that facilitates retrieving data and to speed-up form processing over time.
+To improve the process of gathering data, a machine learning approach should be implemented that facilitates retrieving data and to speed-up form processing over time.
 
 Output of the application should be a storage of the processed forms, appended with electronic invoice information that is valid against the basic- or comfort-level of the ZugfErd-Invoice standard.
 
@@ -30,23 +30,24 @@ Output of the application should be a storage of the processed forms, appended w
 
 Following the Separation of Concerns principle (SoC) we want to separate all logical parts of the application into different modules.
 What the application will do is to take an invoice, read it (1), extract the information out of it (2), improve the information by using machine learning techniques (3) and eventually convert it to the ZugFerd-format (4). All these processes should be manageable for the user using a GUI (5).
-Hence we will define five different modules:
+Hence, we will define five different modules:
 \begin{enumerate}
-	\item OCR: After the user has passed an document to the application, this module will process the document and read it using OCR techniques. Therefore, this module will be named \"OCR\".
-	\item Extraction: This module will deal with the business logic regarding the retrieval of information from the processed document. Therefore, it will also give input and get output from the third module.
-	\item ML: In this module we will implement methods to improve future information extraction.
-	\item Transformation: Eventually, the extracted information and the processed document will be transformed into a new electronic invoice that is conform with the ZUGfERD-format.
-	\item GUI: In order to facilitate the process of entering and retrieving invoices, another module will be used that deals with all sorts of user interaction. As this application will have an graphical user interface, we will call this module GUI.
+	\item \emph{OCR}: After the user has passed an document to the application, this module will process the document and read it using OCR techniques. Therefore, this module will be named \emph{OCR}.
+	\item \emph{Extraction}: This module will deal with the business logic regarding the retrieval of information from the processed document. Therefore, it will also give input and get output from the third module.
+	\item \emph{ML}: In this module we will implement methods to improve future information extraction.
+	\item \emph{Transformation}: Eventually, the extracted information and the processed document will be transformed into a new electronic invoice that is conform with the ZUGfERD-format.
+	\item \emph{GUI}: In order to facilitate the process of entering and retrieving invoices, another module will be used that deals with all sorts of user interaction. As this application will have an graphical user interface, we will call this module \emph{GUI}.
 \end{enumerate}
 
 \section{Architectural concept}
+\label{sec5.3}
 
 The application is structured by different packages that each contribute to the application as a whole.
 As shown in figure \ref{applicationUML}, there are 7 different packages. 
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/UML/ApplicationUML.jpg}
+\includegraphics[width=\textwidth]{Images/UML/ApplicationUML.png}
 \caption{Packages of the application \label{applicationUML}}
 \end{figure}
 
@@ -54,7 +55,9 @@ In section \ref{sec5.2} we have already defined most of the packages before. How
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/UML/DomainUML.jpg}
+%\def\svgwidth{\columnwidth}
+%\includesvg{Images/UML/DomainUML}
+\includegraphics[width=\textwidth]{Images/UML/DomainML.png}
 \caption{The domain package in detail \label{domainUML}}
 \end{figure}
 
@@ -69,7 +72,7 @@ This pattern separates the application in three parts: The model, that contains 
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=100mm]{Images/UML/MVC.jpg}
+\includegraphics[width=100mm]{Images/UML/MVC.png}
 \caption{The Model-View-Controller pattern \label{MVCpattern}}
 \end{figure}
 
@@ -79,6 +82,7 @@ To access the database we will use classes for each business object. The package
 This application will also make use of an object-relational mapping framework (Hibernate), which facilitates the conversation between table data and java objects.
 
 \section{Module 1 - OCR}
+\label{sec5.4}
 
 The OCR module deals with the processing of the document. Therefore, we will use Googles Tesseract as described in chapter 3. In order to use it, we use Tess4J as a Java wrapper. TesseractWrapper.java is the class that initiates a tesseract instance. With initOcr() the tesseract instance is getting called. It returns a String as result. 
 
@@ -177,6 +181,7 @@ The distance is calculated using the Levenshtein distance again. If the distance
 Now that we have executed the OCR step and postprocessed the resulting values, the next module can go on in the complete process.
 
 \section{Module 2 - Extraction}
+\label{sec5.5}
 
 The core class that extracts the information from the hocr document is the DataExtractorService class. As we also want to retrieve information as fast as possible, we want to run it on different threads, so that we can extract the invoice information part on one thread and the accounting records information on another. Hence this class needs to implement the Runnable interface. When instantiated, a flag is set if this thread should extract the former or the latter:
 
@@ -273,16 +278,28 @@ As mentioned before, if we are unable to find a creditor, then we proceed with t
 
 The extractAccountingRecordInformation() method deals with the problem of information retrieval with a different approach: It uses the extracted table information if a table has been found (TODO: Include in text). If not, the HocrDocument is searched for keywords that are usually appear in invoice tables.
 
-The detection of a table is done using another class, the HistogramMaker. A table usually contains black lines that structure the containing information. These lines can be detected by counting the amount of black pixels. Lines that contain such structures will result in a peak in the histogram. Figure (TODO: FIGURE) shows a possible invoice document on the left side as well as the resulting histogram on the right. Note the peaks that indicate the tables in the invoice.
+The detection of a table is done using another class, the HistogramMaker. A table usually contains black lines that structure the containing information. These lines can be detected by counting the amount of black pixels. Lines that contain such structures will result in a peak in the histogram. 
 
-Afterwards, we iterate over the following lines until we find table end information, such as ''Gesamtbetrag'' (total value), ''Lieferdatum'' (delivery date) and others. Both, the table header words as well as table end words are stored in two textfiles (tablecontents.txt and tableendings.txt) which allows the user to add more words to improve the accuracy.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.6]{Images/OCR/histogram.jpg}
+\caption{Peaks of a table in the resulting histogram)  \label{histogramImage}}
+\end{figure}
+
+Figure \ref{histogramImage} shows a possible invoice document on the left side as well as the resulting histogram on the right. Note the peaks that indicate the tables in the invoice.
+
+If we find those information, we iterate over the following lines until we find table end information, such as ''Gesamtbetrag'' (total value), ''Lieferdatum'' (delivery date) and others. Both, the table header words as well as table end words are stored in two textfiles (tablecontents.txt and tableendings.txt) which allows the user to add more words to improve the accuracy.
 Now, every line will be processed the following way:
 
-\begin{lstlisting}[caption={Extraction of accounting record information},label={arExtraction}]
+\begin{lstlisting}[caption={Manipulating and retrieving information from a position},label={arExtractionOne}]
 Record r = new Record();
 String recordLine = this.removeFinancialInformationFromRecordLine(nextLine);
 double value = this.getValueFromLine(nextLine);
+\end{lstlisting}
 
+We first want to remove all those additional information from the position so that we are able to store / retrieve it if it comes again more precisely. This is done by the removeFinancialInformationFromRecordLine() method. After that, we also retrieve the total amount of the position by searching in the line again for the financial information, but this time searching for the last numeric value that is proceeded by ''EUR'' or ''\euro''. This behaviour is shown in listing \ref{arExtractionOne}.
+
+\begin{lstlisting}[caption={Finding a model for the position},label={arExtractionTwo}]
 Model m = service.getMostLikelyModel(recordLine); 
 if (m == null) {
     r.setEntryText(nextLine);
@@ -295,14 +312,13 @@ records.add(r);
 index++;
 \end{lstlisting}
 
-We first want to remove all those additional information from the position so that we are able to store / retrieve it if it comes again more precisely. This is done by the removeFinancialInformationFromRecordLine() method. After that, we also retrieve the total amount of the position by searching in the line again for the financial information, but this time searching for the last numeric value that is proceeded by ''EUR'' or ''\euro''.
-
-After that, the machine learning module is called. What exactly happens there will be covered by the next section. We will retrieve a possible Model that applies to our position. We can assign the found value to every involved account as the Model also contains the percentual values of each account and add a probability value to the Record which will later presented to the user in order to facilitate his decision if the automatically made decision is correct or not.
+After that, the machine learning module is called. What exactly happens there will be covered by the next section. We will retrieve a possible Model that applies to our position. We can assign the found value to every involved account as the Model also contains the percentual values of each account and add a probability value to the Record which will later presented to the user in order to facilitate his decision if the automatically made decision is correct or not. This is shown in listing \ref{arExtractionTwo}.
 
 
 \section{Module 3 - Machine Learning}
+\label{sec5.6}
 
-The Model object shown in listing \ref{arExtraction} is a combination of debit and credit accounts (stored as a map with the corresponding values), the position string and the probability value. The LearningService class is the core class of this module and is getting called using the getMostLikelyModel() function. What this method does is the following:
+The Model object shown in listing \ref{arExtractionTwo} is a combination of debit and credit accounts (stored as a map with the corresponding values), the position string and the probability value. The LearningService class is the core class of this module and is getting called using the getMostLikelyModel() function. What this method does is the following:
 
 \begin{lstlisting}[caption={Search for the most likely model}]
  public Model getMostLikelyModel(String feature) {
@@ -362,9 +378,10 @@ If  this is the case, the ModelReader will be called again to retrieve the found
     }
 \end{lstlisting}
 
-However, if the probability is below the confidence rate, or any other problem might occur, null will be returned. This way only the position value will be set and the user has to manually check this accounting record (as can be seen in listing \ref{arExtraction}).
+However, if the probability is below the confidence rate, or any other problem might occur, null will be returned. This way only the position value will be set and the user has to manually check this accounting record (as can be seen in listing \ref{arExtractionTwo}).
     
 \section{Module 4 - Transformation}
+\label{sec5.7}
 
 We have now extracted required basic information of the invoice as well as accounting records based on the positions in the invoice. Everything has been labelled by a confidence level in the application. All documents with a confidence level lower than previously defined by the user had to be reviewed by the user manually.
 The final part of the use case is the transformation of those extracted information into the ZugFerd invoice format. Therefore, we need to order the given information in a predefined format and append it as xml-information to the invoice pdf.
@@ -374,10 +391,16 @@ We are using the Mustang project to generate the xml content for us. It is an op
 Before giving an in-depth explanation about our implementation, we first want to explain how the ZugFerd-Format works.
 
 \subsection{About the ZugFerd Scheme}
+\label{sec5.7.1}
 
-ZugFerd has been developed to close the gap between manually sent invoices in small companies and heavy electronic data interchange (EDI) between big companies. While EDI with its sub-standards can be a good solution for a big company, most of the small and medium sized companies can not make use of such a standard due to the overwhelming complexity that lies beyond this standard. But dealing with pdf documents manually is also a source of costs, errors and is time consuming.
+ZugFerd has been developed to close the gap between manually sent invoices in small companies and heavy electronic data interchange (EDI) between big companies. While EDI with its sub-standards can be a good solution for a big company, most of the small and medium sized companies can not make use of such a standard due to the overwhelming complexity that lies beyond this standard. But dealing with pdf documents manually is also a source of costs, errors and is time consuming. ZugFerd stands in the middle between those two sides (figure \ref{zugFerdImage} visualizes this).
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=\textwidth]{Images/ZugFerd/ZugFerd_English.jpg}
+\caption{ZugFerd stands between paper invoice and edi-ready invoice (based on \cite[page 13]{zugFerdSpecificationEnglish})  \label{zugFerdImage}}
+\end{figure}
 
-ZugFerd stands in the middle between those two sides (TODO: ADD IMAGE). While documents can still be sent as a pdf, the underlying format enables automatic processing of the invoice. The extendibility with basic, comfort and extended levels enables also big companies to make use of this standard. This also improves the B2B relations between big and small companies.
+While documents can still be sent as a pdf, the underlying format enables automatic processing of the invoice. The extendibility with basic, comfort and extended levels enables also big companies to make use of this standard. This also improves the B2B relations between big and small companies.
 
 Depending on the desired level of the ZugFerd format, more fields have to be filled out. But even the lowest level, the basic level, brings the possibility to provide additional information which would only be required on the comfort or extended level. But there are still some fields that even on the basic level are required. Those will be introduced now and explained shortly.
 \begin{itemize}
@@ -403,6 +426,7 @@ Exchanged Document Issue Date: The date when the invoice has been issued.
 These are the most important fields in the ZugFerd format. Without them, it is not possible to create a conformal invoice document. This only applies on the Basic level of the ZugFerd format. Using the Comfort or even Extended-Level, several other fields are required. We will not further introduce these additional fields since the support of the other levels is not part of this thesis. 
 
 \subsection{The transformation process}
+\label{sec5.7.2}
 
 We have now introduced all the necessary fields to create an invoice document which fulfils the requirements of the ZugFerd-Scheme Basic level and can now explain the actual transformation process. 
 
@@ -529,22 +553,23 @@ The InvoiceValidator does not only check if the required fields are filled out, 
 With the correct validation of the invoice object the task of this module is completed. 
 
 \section{Module 5 - GUI}
+\label{sec5.8}
 The complete application is also supported by a graphical user interface which facilitates working with it.
 As defined in section \ref{sec5.2} before, we will not only enable the user to extract information, but also retrieve stored invoices later on. This section will first go through the process of invoice information extraction and deal with invoice retrieval later on. In the end, a settings site will presented and explained as well.
 
 \subsection{Scanning and reviewing an invoice document}
-\label{sec5.7.1}
+\label{sec5.8.1}
 
 When starting the application, a startpage opens. As the first process of the application would be the scanning of a document, a button already hints to the task of scanning a form. This can be seen in figure \ref{startmenu}.
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/GUI/startmenu.jpg}
+\includegraphics[scale=0.6]{Images/GUI/startmenu.jpg}
 \caption{The start page of the application \label{startmenu}}
 \end{figure}
 
-In the top there are the buttons 'File', 'Actions' and 'Help'. File enables the user to open the settings view (as discussed in \ref{sec5.7.3}) and to close the application.
-Actions also contains the possibility of starting to process a form directory, as well as the search function (as explained in \ref{sec5.7.2}.
-Help contains information about the application (such as version, used frameworks etc.) and links to a help document.
+In the top there are the menus \emph{File}, \emph{Actions} and \emph{Help}. The \emph{File} menu provides the settings (as discussed in \ref{sec5.7.3}) and the close application actions.
+\emph{Actions} also contains the possibility of starting to process a form directory, as well as the search function (as explained in \ref{sec5.7.2}.
+\emph{Help} contains information about the application (such as version, used frameworks etc.) and links to a help document.
 
 After the user clicked on the 'Scan form' button, a file chooser opens where the user can choose a directory where the files are. When the user has selected a directory, the application begins processing the forms under that directory.
 
@@ -552,7 +577,7 @@ This process can be seen in figure \ref{processingFiles}.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/GUI/processingFiles.jpg}
+\includegraphics[scale=0.6]{Images/GUI/processingFiles.jpg}
 \caption{Processing document files \label{processingFiles}}
 \end{figure}
 
@@ -628,7 +653,7 @@ Note that the dot of the manually reviewed document has now changed from yellow 
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/GUI/GreenAfterReview.jpg}
+\includegraphics[scale=0.6]{Images/GUI/GreenAfterReview.jpg}
 \caption{Changing of the dot after manually reviewing the document \label{greenAfterReview}}
 \end{figure}
 
@@ -636,21 +661,21 @@ When the user eventually clicks on 'Save revised to database', all documents wit
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/GUI/SavingSuccessful.jpg}
+\includegraphics[scale=0.6]{Images/GUI/SavingSuccessful.jpg}
 \caption{A popup that indicates the successful saving of the documents \label{savingSuccessful}}
 \end{figure}
 
 After the saving of the document, this process is completed. The user has now the possibility to navigate over 'Actions' and either scan other documents or retrieve documents from the database. This will be covered now in the following section.
 
 \subsection{Searching for documents in the database}
-\label{sec5.7.2}
+\label{sec5.8.2}
 
 After the processing of the document, the user very likely wants to retrieve the converted document. But also older documents that once have been processed should be retrievable again.
 Figure \ref{searchInDatabase} shows the possible input information. 
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/GUI/SearchInDatabase.jpg}
+\includegraphics[scale=0.6]{Images/GUI/SearchInDatabase.jpg}
 \caption{Possible search filters for stored documents \label{searchInDatabase}}
 \end{figure}
 
@@ -658,11 +683,13 @@ The user is able to search for invoices either on a specific date (by leaving th
 It is also possible to search for a specific creditor or debitor name or a specific value of the invoice.
 None of these fields have to be filled out. It only narrows the search as a filter and will facilitate the process of retrieving the desired invoice document.
 
+As there is always the possibility that a user is trying to inject malicious code, the application is programmed with parameterized queries to prevent such possible SQL injections.
+
 When the values have been set and the user has clicked on the button 'Search in database' a list of stored invoice documents that match the filter criteria is shown (figure \ref{searchResults}).
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/GUI/SearchResults.jpg}
+\includegraphics[scale=0.6]{Images/GUI/SearchResults.jpg}
 \caption{The results of the database search \label{searchResults}}
 \end{figure}
 
@@ -671,14 +698,14 @@ In this list, the existing information are shown to facilitate the finding of a 
 Pressing 'Return' enables the user to re-enter search criteria. 
 
 \subsection{Additional settings}
-\label{sec5.7.3}
+\label{sec5.8.3}
 
 To make the application flexible and adjustable to the needs of the user, we provide several possible configuration settings that can be adjusted in the settings view. This view contains of four tabs, each of them deals with settings to a specific part of the application.
 Figure \ref{settings_General} shows the general settings tab. 
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/GUI/settings_General.jpg}
+\includegraphics[scale=0.6]{Images/GUI/settings_General.jpg}
 \caption{General settings tab \label{settings_General}}
 \end{figure}
 
@@ -686,7 +713,7 @@ This tab only contains the overall language of the application at the moment. Mo
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/GUI/settings_Scan.jpg}
+\includegraphics[scale=0.6]{Images/GUI/settings_Scan.jpg}
 \caption{Scan settings tab \label{settings_Scan}}
 \end{figure}
 
@@ -696,7 +723,7 @@ The language packs for the OCR reader are important to increase the overall OCR 
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/GUI/settings_ZugFerd.jpg}
+\includegraphics[scale=0.6]{Images/GUI/settings_ZugFerd.jpg}
 \caption{ZugFerd specific settings tab \label{settings_ZugFerd}}
 \end{figure}
 
@@ -704,7 +731,7 @@ The ZugFerd tab enables the user to choose between a preferred ZugFerd level (fi
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Images/GUI/settings_Database.jpg}
+\includegraphics[scale=0.6]{Images/GUI/settings_Database.jpg}
 \caption{Database connection settings tab \label{settings_Database}}
 \end{figure}
 

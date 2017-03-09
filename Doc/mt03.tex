@@ -6,22 +6,21 @@
 \chapter{OCR - State of the art, possibilities and drawbacks}
 \label{cha3}
 
-During the processing of a form, the image of it is not only scanned. To retrieve additional information and work it we will use Optical Character Recognition (OCR).
+During the processing of a form, the image of it is not only scanned. To enhance the retrieved information and thus optimize our result we additionally make use of OCR.%To retrieve additional information and work it we will use Optical Character Recognition (OCR).
 
-The process of retrieving data, for instance in form of characters or numbers, requires several steps. In the beginning, the image to be processed is converted to a gray-scale image. Then preprocessing takes place. In this process several algorithms such as noise-reduction and the canny-edge-algorithm are applied on the image to reduce irritating and / or unnecessary information in the image and to enhance contrast.
+The process of retrieving data, for instance in form of characters or numbers, requires several steps. These steps are also shown in figure \ref{ocrSteps}. In the beginning, the image to be processed is converted to a gray-scale image. Then preprocessing takes place. In the processing phase, several algorithms such as noise-reduction and the canny-edge-algorithm are applied on the image to reduce irritating and / or unnecessary information in the image and to enhance contrast.
+
+\begin{figure}[htbp!]
+\centering
+\includegraphics[scale=0.9]{Images/OCR/Steps_Of_OCR.png}
+\caption{Steps of OCR \label{ocrSteps}}
+\end{figure}
 
 After that, features are extracted. Those features are single characters whose vectors are defined afterwards. With the information about the feature vector it is possible to classify each character (and to detect which character of the alphabet is most likely to be represented by the feature).
 
 When all characters have been classified, post-processing takes place. Here possible failures can be corrected for example by comparing words with a predefined dictionary.
-These steps are also shown in figure \ref{ocrSteps}:
 
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=100mm]{Images/OCR/Steps_Of_OCR.jpg}
-\caption{Steps of OCR \label{ocrSteps}}
-\end{figure}
-
-The whole process of OCR is part of research since decades and several papers, dissertations and books have been published on the matter. Developing our own OCR algorithm would not only exceed the size of this master thesis, but also most likely retrieve less successful results than already developed and improved algorithms. Instead, this chapter will introduce several available OCR algorithms and compare open source solutions to find the best fit for our need.
+The whole process of OCR is part of research since decades and several papers, dissertations and books have been published on the matter(TODO:Links). Developing our own OCR algorithm would not only exceed the size of this master thesis, but also most likely retrieve less successful results than already developed and improved algorithms. Instead, this chapter will introduce several available OCR algorithms and compare open source solutions to find the best fit for our need.
 
 \section{Currently available OCR algorithms}
 \label{sec3.1}
@@ -99,9 +98,9 @@ Tesseract is originally written in C/C++ and can be used on Windows, MacOS and L
 
 The current stable version of the Tesseract is 3.04.01 and has been released in February 2016. It supports over 100 languages (including German). 
 
-\label{OCRComparison}
 \section{Comparison between open source algorithms}
-While several companies exist that offer good OCR libraries and SDKs, we have to stick to free software, since we are not able to afford a proprietary license. In a later state of the application, it could be possible to switch to a proprietary solution in order to increase our OCR efficiency. Until then, we will decide for the best fitting open source algorithm library and improve our efficiency by preprocessing the forms ourselves. This is explained in Chapter 4, Module 1.
+\label{sec3.2}
+While several companies exist that offer good OCR libraries and SDKs, we will stick to free software in order to increase the acceptance for SMEs. In a later state of the application, it could be possible to switch to a proprietary solution in order to increase our OCR efficiency. Until then, we will decide for the best fitting open source algorithm library. We implemented a preprocessing routine on top of the OCR application's software stack to enable automation as much as possible. This is explained in \ref{sec5.4}.
 
 Upon the 10 presented solutions, only 5 are free for use. These are: GOCR, Tesseract, OCROpus, MathOCR and OCRad.
 
@@ -142,7 +141,7 @@ In the beginning of this thesis, it was defined that the application should work
 
 MathOCR is in a pre-alpha state which makes it difficult to use due to several missing functionalities and persistent bugs in the code. As it is mostly focused on mathematical equations and formulas, we will not consider MathOCR any longer, even though it supports Java as a programming language. 
 
-As explained in section 3.2, the GNU Public License requires our application to be licensed under the GNU Public License as well if we use another code which is licensed under this license. Therefore, the Apache 2.0 license is considered better, as it allows us to decide about the license for ourselves.
+As explained in section \ref{sec3.2}, the GNU Public License requires our application to be licensed under the GNU Public License as well if we use another code which is licensed under this license. Therefore, the Apache 2.0 license is considered better, as it allows us to decide about the license for ourselves.
 
 In the interest of the application, we want to use solutions that are up-to-date and are still under development. Therefore, the latest release date gives us insights about the activity on a project. Since a lot of open source projects suffer from missing developers, we expect longer development cycles. But the last version of GOCR has been released around 4 years ago. Hence we consider GOCR as not up-to-date anymore.
 
@@ -158,11 +157,11 @@ The following table shows the solutions again, but with underlying colors regard
 \begin{tabular}{lccccc}
 \hline
 Application                                                               & \textbf{GOCR}                                                                           & \textbf{Tesseract}                                                                           & \textbf{OCROpus}                                                               & \textbf{MathOCR}                                                                        & \textbf{OCRad}                                                                          \\ \hline
-Version                                                                   & \cellcolor[HTML]{FFFE65}0.5                                                             & \cellcolor[HTML]{34FF34}3.04.01                                                              & \cellcolor[HTML]{34FF34}1.0                                                    & \cellcolor[HTML]{FE0000}0.0.3                                                           & \cellcolor[HTML]{FFFE65}0.25                                                            \\ \hline
-Release Date                                                              & \cellcolor[HTML]{FE0000}03.2013                                                         & \cellcolor[HTML]{34FF34}02.2016                                                              & \cellcolor[HTML]{FFFE65}11.2014                                                & \cellcolor[HTML]{34FF34}05.2015                                                         & \cellcolor[HTML]{34FF34}04.2015                                                         \\ \hline
-\begin{tabular}[c]{@{}l@{}}Supported Programming\\ Languages\end{tabular} & \cellcolor[HTML]{FE0000}C                                                               & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}C/C++, \\ Java (with Tess4J)\end{tabular} & \cellcolor[HTML]{FE0000}\begin{tabular}[c]{@{}c@{}}C++, \\ Python\end{tabular} & \cellcolor[HTML]{34FF34}Java                                                            & \cellcolor[HTML]{FE0000}C++                                                             \\ \hline
-\begin{tabular}[c]{@{}l@{}}Supported Operating\\ Systems\end{tabular}     & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular}      & \cellcolor[HTML]{FFFE65}Linux                                                  & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} \\ \hline
-License                                                                   & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   & \cellcolor[HTML]{34FF34}Apache 2.0                                                           & \cellcolor[HTML]{34FF34}Apache 2.0                                             & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   \\ \hline
+Version                                                                   & \cellcolor[HTML]{FFFE65}0.5                                                             & \cellcolor[HTML]{96D532}3.04.01                                                              & \cellcolor[HTML]{96D532}1.0                                                    & \cellcolor[HTML]{FD4703}0.0.3                                                           & \cellcolor[HTML]{FFFE65}0.25                                                            \\ \hline
+Release Date                                                              & \cellcolor[HTML]{FD4703}03.2013                                                         & \cellcolor[HTML]{96D532}02.2016                                                              & \cellcolor[HTML]{FFFE65}11.2014                                                & \cellcolor[HTML]{96D532}05.2015                                                         & \cellcolor[HTML]{96D532}04.2015                                                         \\ \hline
+\begin{tabular}[c]{@{}l@{}}Supported Programming\\ Languages\end{tabular} & \cellcolor[HTML]{FD4703}C                                                               & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}C/C++, \\ Java (with Tess4J)\end{tabular} & \cellcolor[HTML]{FD4703}\begin{tabular}[c]{@{}c@{}}C++, \\ Python\end{tabular} & \cellcolor[HTML]{96D532}Java                                                            & \cellcolor[HTML]{FD4703}C++                                                             \\ \hline
+\begin{tabular}[c]{@{}l@{}}Supported Operating\\ Systems\end{tabular}     & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular}      & \cellcolor[HTML]{FFFE65}Linux                                                  & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}Windows, Linux,\\ MacOS\end{tabular} \\ \hline
+License                                                                   & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   & \cellcolor[HTML]{96D532}Apache 2.0                                                           & \cellcolor[HTML]{96D532}Apache 2.0                                             & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}GNU Public \\ License\end{tabular}   \\ \hline
 \end{tabular}%
 }
 \caption{Advantages and disadvantages of different OCR engines}
@@ -172,5 +171,5 @@ License                                                                   & \cel
 
 As shown in the table, MathOCR will not fit our needs as it is a pre-alpha version. GOCR is outdated and also supports only C as a programming language. OCROpus and OCRad only support C++ (and in the case of OCROpus Python). In addition to that, OCROpus could be of a problem when porting the application to other operating systems whereas OCRad is licensed under the GNU Public License. 
 
-Hence the Tesseract seems to be the best fit for our application. It is consistently updated and improved and by the history of it, the application itself has grown mature. The possibility to work with Tess4J enables the usage of it with Java. Multiple operating systems are supported and the Apache 2.0 license enables us to decide for ourselves under which license we will put the application.
+Hence the Tesseract seems to be the best fit for our application. It is consistently updated and improved. Considering the development history, the application itself has grown mature. The possibility to work with Tess4J enables the usage of it with Java. Multiple operating systems are supported and the Apache 2.0 license enables us to decide for ourselves under which license we will put the application.
 

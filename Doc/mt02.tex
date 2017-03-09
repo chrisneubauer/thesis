@@ -6,18 +6,19 @@
 \chapter{Electronic invoice formats - A comparison}
 \label{cha2}
 
-During the technologization of companies over the world, electronic invoices (also known as e-invoice) have become more and more important. E-Invoicing offers companies the possibility to improve their business processes, making invoicing faster and more efficient and enables a direct connection to other tools like ERP-Software. 
+During the digitalization of companies over the world, electronic invoices (also known as e-invoice) have become more and more important. E-Invoicing offers companies the possibility to improve their business processes, making invoicing faster and more efficient and enables a direct connection to other tools like ERP-Software. 
 
-To enable companies these benefits and to make the communication between companies even possible a comprehensive standard must be defined. With an invoice standard at hand, companies can use invoices from their business partners and read them into their systems (in case of B2B). 
+To give companies access to these benefits and to make the communication between companies even possible a comprehensive standard must be defined. With an invoice standard at hand, companies can use invoices from their business partners and read them into their systems (in case of Business-to-Business (B2B)). 
 
-There are several invoice standards in action at the moment. The next section will deal with the most important ones and describes them as well as pointing out the benefits and drawbacks of the format.
+Several invoice standards are currently used. The next section will deal with the most important ones and describes them as well as pointing out the benefits and drawbacks of the format.
 After that, the next section defines criteria that are relevant for the application and how to measure them.
-In the last section, these criteria are applied on the formats defined in section \ref{sec2.1} and compared against each other. Eventually a decision regarding the usage of one of these formats is made.
+In the last section, these criteria are applied to the formats defined in section \ref{sec2.1} and compared against each other. Eventually a decision regarding the usage of one of these formats is made.
 
 \section{Description of leading formats}
 \label{sec2.1}
 
-Each of the following subsections will present an electronic invoice format. The history of the format, as well as the current version and, if found, the future promise will be explained. As there exist many different formats, it is out of the scope of this thesis to describe them all. Instead, we will pick a few that we think are either important, promising or especially related to the region (Germany and the European Union).
+Each of the following subsections will present an electronic invoice format. The history of the format, as well as the current version and, if found, the future promise will be explained. As there exist many different formats, it is out of the scope of this thesis to describe them all. %Instead, we will pick a few that we think are either important, promising or especially related to the region (Germany and the European Union).
+Instead, we will pick a few that seem important and promising in regards to Germany's and the EU's demands towards an invoice standard. 
 
 \subsection{UN/EDIFACT}
 \label{sec2.1.1}
@@ -54,7 +55,7 @@ This invoice format has been published initially in 2014 \cite{Ferd14}. The name
 Although this invoice format is rather young it tries to fulfill the directive 2014/55/EU of the european parliament \cite{eu14} while still being flexible and simple. This directive states that the use of electronic invoice formats should be adopted by all member states of the european union until the 27. of November 2018 \cite[article 11]{eu14}. 
  
 The approach of the ZugFerd-format enables not only big companies to work with that format, but also smaller and medium companies (SME's) that are in need of such a format but are normally not able to implement a complex electronic invoice standard. 
-Furthermore, three levels of conformance are defined: Basic, Comfort and Extended. Each of those levels have a different amount of required information fields, that have to be set in order to be a valid ZugFerd-format. Nevertheless, in all of the three formats, it is possible to define more information in free text fields. 
+Furthermore, three levels of conformance are defined: Basic, Comfort and Extended. Each of those levels have a different amount of required information fields, that have to be set in order to be valid. Nevertheless, in all of the three formats, it is possible to define more information in free text fields. 
 
 This enables extensibility of the format and the possible business areas in which this standard can be used.
 
@@ -83,7 +84,8 @@ While the standards defined in the section before focus on specific areas or try
 % Zukunftssicherheit / Aussichtsreichtum
 \subsection{Future Potential}
 \label{sec2.2.1}
-One of the major criteria for a suitable invoice standard should be its future potential. Developing an application that deals with a standard that is not being used 10 years later does not make sense. Therefore, any standard that is going to be replaced should not be considered useful.
+One of the major criteria for a suitable invoice standard should be its future potential. Developing an application that makes use of a format that will be obsolete after a short time makes little sense. Therefore, any standard that is going to be replaced should not be considered useful.
+%Developing an application that deals with a standard that is not being used 10 years later does not make sense. Therefore, any standard that is going to be replaced should not be considered useful.
 
 % Relevanz in Deutschland + Relevanz in Europa
 \subsection{Relevance in Germany (and Europe)}
@@ -96,25 +98,25 @@ As this thesis is being written at a German university, the chosen standard shou
 The possibilities of a standard to be used in other countries will also affect its importance over the next decades. Standards that only suits the requirements of one country are not important enough. The focus lies on standards with a wide (possible) range of countries to be affected, instead.
 
 % Erweiterbarkeit des Standards allgemein bzw. was deckt er ab?
-\subsection{Extendibility of the standard itself}
+\subsection{Expandability of the standard itself}
 \label{sec2.2.4}
-The extendibility of the standard itself is an important criterion. The world is changing and new requirements are coming while older ones are getting broken up. A valuable standard should be able to deal with these changes and should be extensible towards new requirements, or special requirements in specific business areas.
+The expandability of the standard itself is an important criterion. The world is changing and new requirements are coming while older ones are getting broken up. A valuable standard should be able to deal with these changes and should be expandable towards new requirements, or special requirements in specific business areas.
 
 % Komplexität
 \subsection{Complexity}
 \label{sec2.2.5}
-The complexity of the standard is important for this thesis too. Not only is the development of the application limited by time, but also makes a complex standard it hard to understand it and less error-prone.
+The complexity of the standard is important for this thesis too. First, the development of the application is limited by time. And secondly, a difficult to understand standard more error-prone.
 
 % Availability
 \subsection{Availability}
 \label{sec2.2.6}
 
-Some of the presented invoice standards are commercial products and must be purchased to be used. We are not able to afford such standards and will exclude them from the list of choices. 
+Some of the presented invoice standards are commercial products and must be purchased to be used. In addition to the costs of those products, a free-to-use product would also affect the acceptance for SMCs due to lower costs. Hence we will exclude propriertary products from the list of choices. 
 
 \section{Comparison and decision finding}
 \label{sec2.3}
 
-Even though electronic data interchange is used for decades, there is still no absolute standard. Depending on the location (ANSI X12, EDIFACT) or the industrial sector (ODETTE FTP) there exist different solutions. As proposed by the criteria in the section before, we want to find an electronic invoice format that has the best future benefit. We will now apply all criteria on the presented invoice standards and then decide which invoice format we want to support.
+Even though electronic data interchange is used for decades, there is still no absolute standard. Depending on the location (ANSI X12, EDIFACT) or the industrial sector (ODETTE FTP) different solutions exist. As proposed by the criteria in the section before, we want to find an electronic invoice format that has the best future benefit. We will now apply all criteria on the presented invoice standards and then decide which invoice format we want to support.
 
 \subsection{Application of the criteria}
 \label{sec2.3.1}
@@ -174,9 +176,9 @@ The following table will sum up our decision again:
 \begin{tabular}{@{}lcccc@{}}
 \toprule
 Invoice standard & \textbf{EDIFACT} & \textbf{UBL} & \textbf{ZugFerd} & \textbf{Odette FTP} \\ \midrule
-Future Potential & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}New Version\\ twice a year\end{tabular} & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Version 2.1 (2013),\\ Version 3 already\\ exists as a draft\end{tabular} & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Version 1.0 (2016),\\ Version 2.0 \\ announced for 2017\end{tabular} & \cellcolor[HTML]{FE0000}Version 2.0 (2007) \\ \midrule
-\begin{tabular}[c]{@{}l@{}}Relevance in Germany\\ (and Europe)\end{tabular} & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}International relevance \\ due to a lot of users. \\ Not specialized on Germany\end{tabular} & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Initially used in \\ Denmark, main \\ usage in Europe\end{tabular} & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Highly relevant,\\ especially in \\ Germany but also\\ in Europe\end{tabular} & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}Relevant in Germany\\ due to big\\ automotive \\ companies\\ and their suppliers\end{tabular} \\ \midrule
-Complexity & \cellcolor[HTML]{FE0000}\begin{tabular}[c]{@{}c@{}}Highly complex \\ due to the many \\ possible options \\ and message types\end{tabular} & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}Complex (normal UBL)\\ or simpler \\ (Small Business Subset)\end{tabular} & \cellcolor[HTML]{34FF34}\begin{tabular}[c]{@{}c@{}}Depending on the\\ use case \\ from simple\\ to complex\end{tabular} & \cellcolor[HTML]{FFFE65}N.A. \\ \bottomrule
+Future Potential & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}New Version\\ twice a year\end{tabular} & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}Version 2.1 (2013),\\ Version 3 already\\ exists as a draft\end{tabular} & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}Version 1.0 (2016),\\ Version 2.0 \\ announced for 2017\end{tabular} & \cellcolor[HTML]{FD4703}Version 2.0 (2007) \\ \midrule
+\begin{tabular}[c]{@{}l@{}}Relevance in Germany\\ (and Europe)\end{tabular} & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}International relevance \\ due to a lot of users. \\ Not specialized on Germany\end{tabular} & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}Initially used in \\ Denmark, main \\ usage in Europe\end{tabular} & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}Highly relevant,\\ especially in \\ Germany but also\\ in Europe\end{tabular} & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}Relevant in Germany\\ due to big\\ automotive \\ companies\\ and their suppliers\end{tabular} \\ \midrule
+Complexity & \cellcolor[HTML]{FD4703}\begin{tabular}[c]{@{}c@{}}Highly complex \\ due to the many \\ possible options \\ and message types\end{tabular} & \cellcolor[HTML]{FFFE65}\begin{tabular}[c]{@{}c@{}}Complex (normal UBL)\\ or simpler \\ (Small Business Subset)\end{tabular} & \cellcolor[HTML]{96D532}\begin{tabular}[c]{@{}c@{}}Depending on the\\ use case \\ from simple\\ to complex\end{tabular} & \cellcolor[HTML]{FFFE65}N.A. \\ \bottomrule
 \end{tabular}%
 }
 \caption{Advantages and disadvantages of invoice standards}

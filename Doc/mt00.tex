@@ -31,6 +31,9 @@
 \usepackage{graphicx}
 \usepackage[table,xcdraw]{xcolor}
 
+% for svg images
+\usepackage{svg}
+
 % IF colours in tables are sorrounded by white lines:
 %\setlength{\aboverulesep}{0pt}
 %\setlength{\belowrulesep}{0pt}
@@ -48,7 +51,7 @@
 \lstset{ %
   backgroundcolor=\color{mygray},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
   basicstyle=\footnotesize,      % the size of the fonts that are used for the code
-  %\linespread{1.1},					% needed to remove white lines between gray background
+  %\linespread{0.7},					% needed to remove white lines between gray background
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
   breaklines=true,                 % sets automatic line breaking
   captionpos=b,                    % sets the caption-position to bottom
@@ -63,7 +66,7 @@
   %morekeywords={*,...},           % if you want to add more keywords to the set
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
   numbersep=5pt,                   % how far the line-numbers are from the code
-  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  numberstyle=\tiny\color{black}, % the style that is used for the line-numbers
   rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
   showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
   showstringspaces=false,          % underline spaces within strings only
@@ -71,12 +74,15 @@
   stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
   stringstyle=\color{mymauve},     % string literal style
   tabsize=2,	                   % sets default tabsize to 2 spaces
-  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+  title=\lstname,                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+  lineskip={-0.8pt}
 }
 
 \usepackage{parskip} % used to make dividers between paragraphs and remove identation
 
 \includeonly{mt01, mt02, mt03, mt04, mt05, mt06, mt07, mt08, mt09, mt10, mt11, mt-lit, mt-lof, mt-lot}
+
+%\usepackage[square,comma,numbers,sort&compress]{natbib} % for bibliography
 
 \pagenumbering{roman}
 
@@ -124,10 +130,10 @@ Erlangen, den \selectlanguage{german} \today \hspace{6.0cm} \\[10mm]
 "Ubersicht
 \normalfont
 
-Obwohl seit einigen Jahrzehnten der elektronische Datenaustausch existiert werden auch heute noch vielseitig Rechnungsdokumente in Papier oder elektronisches Dokument gesandt. Waehrend grosse Konzerne diesbezueglich bereits Uebereinkuenfte mit ihren Partnern getroffen haben fehlen kleinen und mittleren Unternehmen (KMU) diese Uebereinkunft - auch aufgrund der Komplexitaet der eingesetzten Datenaustauschstandards.
+Obwohl seit einigen Jahrzehnten der elektronische Datenaustausch existiert werden auch heute noch vielseitig Rechnungsdokumente in Papierform oder als elektronisches Dokument gesandt. W\"ahrend grosse Konzerne diesbez\"uglich bereits \"Ubereink\"unfte mit ihren Partnern getroffen haben fehlen kleinen und mittleren Unternehmen (KMU) diese Uebereinkunft - auch aufgrund der Komplexit\"at der eingesetzten Datenaustauschstandards.
 Die Dauer der Rechnungsverarbeitung ist bei solchen Unternehmen in der Regel sehr hoch und verursacht dadurch hohe Kosten. 
 
-Die in dieser Abschlussarbeit praesentierte Anwendung greift dieses Problem auf und beschreibt wie mit Techniken aus der optischen Zeichenerkennung und Maschinellem Lernen eine Moeglichkeit geschaffen wird um Rechnungsdaten aus elektronischen Dokumenten zu extrahieren und diese in ein Format zu bringen, welches nach dem neuen elektronischen Rechnungsstandard ZugFerd des Forums fuer elektronische Rechnung Deutschland konform ist.
+Die in dieser Abschlussarbeit pr\"asentierte Anwendung greift dieses Problem auf und beschreibt wie mit Techniken aus der optischen Zeichenerkennung und Maschinellem Lernen eine M\"oglichkeit geschaffen wird, um Rechnungsdaten aus elektronischen Dokumenten zu extrahieren und diese in ein Format zu bringen, welches nach dem neuen elektronischen Rechnungsstandard ZugFerd des Forums f\"ur elektronische Rechnung Deutschland (FeRD) konform ist.
 
 \end{center}
 
@@ -139,10 +145,10 @@ Die in dieser Abschlussarbeit praesentierte Anwendung greift dieses Problem auf 
 Abstract
 \normalfont
 
-Although electronic data interchange exists since several decades there are still a lot of invoices sent as paper or electronic document. While big companies have established agreements with their partners, the smaller and medium sized companies still lack of those agreements - also because of the complexity of the used electronice invoice standards.
+Although electronic invoice formats have existed for several decades, a lot of invoices are still sent using the paper format. While format agreements persist between large companies and their suppliers or business partners the same can not be said about small and medium sized companies - also because of the complexity of the used electronic invoice standards.
 The duration of the invoice processing for such companies is usually very high and hence cause high costs.
 
-The application presented in this thesis deals with this problem and describes a possibility how to extract invoice information from electronic documents using optical character recognition and machine learning. The extracted information will be processed in a way that the resulting invoice document is fully conformal with the ZugFerd standard, a new electronic invoice standard developed by the Forum fuer elektronische Rechnung Deutschland. 
+The application presented in this thesis deals with this problem and describes a possibility how to extract invoice information from electronic documents using optical character recognition and machine learning. The extracted information will be processed in a way that the resulting invoice document is fully conformal with the ZugFerd standard, a new electronic invoice standard developed by the E-Invoicing Forum of Germany (FeRD). 
 \end{center}
 
 \cleardoublepage
@@ -161,11 +167,9 @@ The application presented in this thesis deals with this problem and describes a
 \cleardoublepage
 \include{mt05}   % (\chapter{Implementation})
 \cleardoublepage
-%\include{mt06}   % (\chapter{Data})
-%\include{mt06}   % (\chapter{Data})
+\include{mt06}   % (\chapter{Data})
 \cleardoublepage
-%include{mt07}   % (\chapter{Conclusion})
-\include{mt06}   % (\chapter{Conclusion})
+\include{mt07}   % (\chapter{Conclusion})
 \cleardoublepage
 %\include{mt07}   % Ausblick (\chapter{Ausblick} TEXT)
 \cleardoublepage
@@ -177,7 +181,7 @@ The application presented in this thesis deals with this problem and describes a
 \cleardoublepage
 \include{mt09}   % Glossar (\chapter{Glossar}  TEXT)
 \cleardoublepage
-%\include{mt10}   % 
+\include{mt10}   % CV
 %\cleardoublepage
 %\include{mt11}   % 
 %\cleardoublepage
@@ -192,7 +196,9 @@ The application presented in this thesis deals with this problem and describes a
 
 %\bibliographystyle{galpha1a} %german bibliography
 %\bibliographystyle{alphamod} %english bibliography
-\bibliographystyle{ieeetr}
+%\bibliographystyle{ieeetr}
+\bibliographystyle{plain}
+%\bibliographystyle{natbib}
 \cleardoublepage
 
 % remove, only to see all the literature atm
@@ -200,5 +206,4 @@ The application presented in this thesis deals with this problem and describes a
 
 \include{mt-lit} % Literaturverzeichnis
 %\bibliography{mt.bib}{}
-%\bibliographystyle{plain}
 \end{document}

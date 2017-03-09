@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Conclusion and outlook
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Conclusion and outlook}
+\label{cha6}
+
+This final chapter concludes the thesis. First, a summary about the achievements and the resulting application is given in section \ref{sec6.1}. After that, section \ref{sec6.2} will present an outlook what future work could be done in this area. This also includes ideas or suggestions what should be changed or could be improved.
+
+\section{Conclusion}
+\label{sec6.1}
+
+The application presented in this thesis is capable of automatic form processing. Using OCR techniques, images and pdf documents can be scanned and words are extracted. The underlying OCR engine has been chosen by evaluating different products in order to select the most suitable one.
+With implemented pre- and postprocessing steps, the accuracy of the OCR has been enhanced. Using the hOCR format that has been presented by Thomas M. Breuel\cite{Breuel07}, position information of specific keywords are saved as cases. Those cases are used in order to improve the quality and accuracy of the algorithm over time. 
+
+In addition to that, a Na{\"i}ve Bayes classificator is used to learn possible ways of accounting a position in regards to the possible accounting strategies different users (or companies) can apply on the same position. The selection of a machine learning classifier has been made by evaluating different approaches and their accuracy. 
+
+As proposed in 2014, a new electronic invoice format - ZugFerd - has been published which has a high future potential\cite{Ferd14}. This electronic invoice format is supported by the application, as the result of the processing will be a full conformal invoice of this scheme. The support of this format is a result of a comparison between leading and potential interesting formats in the future and the decision using predefined criteria.
+
+The resulting converted invoices are stored in a MySQL database and can be retrieved by the user. Additional filtering allows a facilitated retrieval process. This process is also secure against SQL injections.
+
+Several parameters of the application are customized and enables adjustments and personal preferences of the user. This also allows to further define the minimum confidence the application should have in regards to an invoice document as it classifies the document based on the confidence level. 
+
+\section{Future Work}
+\label{sec6.2}
+Even though the application is finalized and working, several improvements could be made in the future.
+Each of them will be listed here, including the reasons why they should be made as well as possible ideas on how to achieve these improvements.
+
+Improving the accuracy of OCR: As the application is highly dependent on the successful and accurate process of OCR, improving the accuracy of the OCR process will improve the usefulness of this application in general. Hence, every action made in this direction is an advantage. There are two ideas that could be realized in the future: 
+	\begin{itemize}
+		\item Improving the accuracy of the Tesseract by creating an own training set based on a representative amount of invoices (especially in German) of different companies. 
+		\item Exchanging the open source solution for a proprietary solution that provides a higher accuracy and / or is specialized either on invoices or German text.
+	\end{itemize}
+
+Refactor the overall design of the application: Various adjustments in the application could be made to make the application more extensible in the future. The following is a list of possible changes:
+	\begin{itemize}
+		\item Using the strategy pattern on the OCR module: The application should be independent from which kind of OCR API it retrieves the String output. The strategy pattern would ideally lead to the possibility for the user to choose the preferred OCR reader from the settings view.
+		\item Removing unnecessary or unused Business Objects, such as the Address or CorporateForm classes, since those are not used at the moment. Or instead, extend the application to make use of those classes.
+	\end{itemize}
+
+Increase the performance of the processing step: The slowest part of the application is the process of scanning a document and extracting its information. Finding a way to speed-up this step would lead to a faster application. One idea would to parallelize the process of information retrieval with multiple documents and to make use of all processor cores the device the application runs on has.
+
+Add support for other electronic invoice standards: As of now, the application only supports the ZugFerd standard. But as stated in section \ref{sec2.3.2} before, EDIFACT has a high future potential. This also applies to the UBL standard. The more standards this application supports, the more companies can make use of it.
+
+While comparing positions we could make use of a wordnet implementation that enables us to find similar words. This way we would be able to interprete the position string in a semantic way.
+
+Supporting other account systems besides the SKR03 could lead to a higher usefulness for companies using other account systems (such as the SKR04).
