@@ -6,7 +6,7 @@
 \chapter{Implementation of the application}
 \label{cha5}
 
-The application is structured by different packages. Each of them providing a specific benefit to the program as a whole. Before speaking about those modules, we will talk about the actual requirements of the application. After that, each module will be explained in detail. % After that, the last section will deal with problems and possible solutions.
+The application is structured by different packages. Each of them providing a specific benefit to the program as a whole. Before speaking about those modules, we will talk about the actual requirements of the application. After that, each module will be explained in detail.
 
 \section{Requirements definition}
 \label{sec5.1}
@@ -23,19 +23,19 @@ We visualized these requirements as an UML use-case diagram in figure \ref{total
 
 To improve the process of gathering data, a machine learning approach should be implemented that facilitates retrieving data and to speed-up form processing over time.
 
-The output of the application should be a storage of the processed forms, appended with electronic invoice information that is valid against the basic- or comfort-level of the ZugfErd-Invoice standard.
+The output of the application should be a storage of the processed forms, appended with electronic invoice information that is valid against the basic- or comfort-level of the ZUGFeRD-Invoice standard.
 
 \section{Definition of modules}
 \label{sec5.2}
 
 Following the Separation of Concerns principle (SoC), we want to separate all logical parts of the application into different modules.
-What the application will do is to take an invoice, read it (1), extract the information out of it (2), improve the information by using machine learning techniques (3) and eventually convert it to the ZugFerd-format (4). All these processes should be manageable for the user using a GUI (5).
+What the application will do is to take an invoice, read it (1), extract the information out of it (2), improve the information by using machine learning techniques (3) and eventually convert it to the ZUGFeRD-format (4). All these processes should be manageable for the user using a GUI (5).
 Hence, we will define five different modules:
 \begin{enumerate}
 	\item \emph{OCR}: After the user has passed a document to the application, this module will process the document and read it using OCR techniques. Therefore, this module will be named \emph{OCR}.
 	\item \emph{Extraction}: This module will deal with the business logic regarding the retrieval of information from the processed document. Therefore, it will also give input and get output from the third module.
 	\item \emph{ML}: In this module, we will implement methods to improve future information extraction.
-	\item \emph{Transformation}: Eventually, the extracted information and the processed document will be transformed into a new electronic invoice that is conform with the ZUGfERD-format.
+	\item \emph{Transformation}: Eventually, the extracted information and the processed document will be transformed into a new electronic invoice that is conform with the ZUGFeRD-format.
 	\item \emph{GUI}: In order to facilitate the process of entering and retrieving invoices, another module will be used that deals with all sorts of user interaction. As this application will have a graphical user interface, we will call this module \emph{GUI}.
 \end{enumerate}
 
@@ -51,7 +51,7 @@ As shown in figure \ref{applicationUML}, there are 7 different packages.
 \caption{Packages of the application \label{applicationUML}}
 \end{figure}
 
-In section \ref{sec5.2} we have already defined most of the packages before. However, we want to explain the other packages as well. While the modules OCR, ML, Transformation, and GUI are present, the module Extraction is missing. The reason for that is that the actual extraction of information is a domain specific part of our application. Hence it can be found in the domain package. Figure \ref{domainUML} shows a detailed view of the domain package. This package again is structured by the sub packages \emph{bo}, \emph{dao}, \emph{helper} and \emph{service}.
+In section \ref{sec5.2} we have already defined most of the packages before. However, we want to explain the other packages as well. While the modules \emph{OCR}, \emph{ML}, \emph{Transformation}, and \emph{GUI} are present, the module Extraction is missing. The reason for that is that the actual extraction of information is a domain specific part of our application. Hence it can be found in the domain package. Figure \ref{domainUML} shows a detailed view of the domain package. This package again is structured by the sub packages \emph{bo}, \emph{dao}, \emph{helper} and \emph{service}.
 
 \begin{figure}[ht!]
 \centering
@@ -63,7 +63,7 @@ In section \ref{sec5.2} we have already defined most of the packages before. How
 
 \emph{Service} contains the DataExtractorService class which is responsible for the actual extraction of invoice information. To do this, several other classes are called, some of them located in other packages (e.g. the utils package).
 
-Besides the DataExtractorService class, there are other important classes. The ZugFerdExtendService class adds the valid ZugFerd invoice to the pdf document. The DatabaseService is responsible for saving the reviewed invoice documents (as the last part of the use case in \ref{totalApplicationCase}). When a user searches for invoice documents, the DatabaseResultsService is called that performs the actual request.
+Besides the DataExtractorService class, there are other important classes. The ZUGFeRDExtendService class adds the valid ZUGFeRD invoice to the PDF document. The DatabaseService is responsible for saving the reviewed invoice documents (as the last part of the use case in \ref{totalApplicationCase}). When a user searches for invoice documents, the DatabaseResultsService is called that performs the actual request.
 
 In addition to those classes, the package validation also contains classes to validate not only the mandatory invoice information but also the accounting records.
 
@@ -79,16 +79,16 @@ This pattern separates the application in three parts: The model, that contains 
 Using this architectural pattern, we are more flexible and can easily change views or models since these are only loosely coupled. Hence the graphical user interface will be steered by a controller which retrieves data from the database and shows it to the user using the JavaFX framework and .fxml-Files (those represent the 'View' in the MVC pattern). Input and changes the user makes in the view will be transported by the controller to the model which is stored in the database again.
 
 To access the database we will use classes for each business object. The package BO contains classes that represent a table. A data-access-object (DAO) will be used to retrieve data from the database. Note that these two packages are present in the domain package (see figure \ref{domainUML}).
-This application will also make use of an object-relational mapping framework (Hibernate), which facilitates the conversation between table data and java objects.
+This application will also make use of an object-relational mapping framework (Hibernate), which facilitates the conversation between table data and Java objects.
 
 \section{Module 1 - OCR}
 \label{sec5.4}
 
-The OCR module deals with the processing of the document. Therefore, we will use Googles Tesseract as described in chapter 3. In order to use it, we use Tess4J as a Java wrapper. TesseractWrapper.java is the class that initiates a tesseract instance. With initOcr() the tesseract instance is getting called. It returns a String as result. 
+The OCR module deals with the processing of the document. Therefore, we will use Googles Tesseract as described in chapter 3. In order to use it, we use Tess4J as a Java wrapper. TesseractWrapper.java is the class that initiates a Tesseract instance. With initOcr() the Tesseract instance is getting called. It returns a String as result. 
 
-We set HOCR to true, which means that our output will not only be a String containing the processed words but in a structured way. HOCR is a XML-structured document first proposed by \cite{Breuel07}. Using this output we are not only able to retrieve the processed words, but also their position in the document.
+We set hOCR to true, which means that our output will not only be a String containing the processed words but in a structured way. hOCR is a XML-structured document first proposed by \cite{Breuel07}. Using this output we are not only able to retrieve the processed words, but also their position in the document.
 
-The package hocr contains necessary java classes to represent this document in an objective-oriented way. The string output of the TesseractWrapper class can be given to the constructor of the HocrDocument class, that completely parses the string and divides it into multiple HocrAreas, HocrParagraphs, HocrLines, and HocrWords.
+The package \emph{hocr} contains necessary Java classes to represent this document in an objective-oriented way. The string output of the TesseractWrapper class can be given to the constructor of the HocrDocument class, that completely parses the string and divides it into multiple HocrAreas, HocrParagraphs, HocrLines, and HocrWords.
 Before the actual step of processing the image, we want to improve its quality. Therefore, we use the ImagePreprocesser class. Any kind of document inserted will first converted to a BufferedImage. Then preprocess() can be called which executes multiple algorithms on the image:
 
 \begin{lstlisting}[caption={Image preprocessing}]
@@ -143,7 +143,7 @@ public void run() {
 }
 \end{lstlisting}
 
-Since we want to be able to support not only pdf documents but also images, we have to differentiate between this two. Depending what type of document, we have to parse it differently in order to get a BufferedImage out of it.
+Since we want to be able to support not only PDF documents but also images, we have to differentiate between this two. Depending what type of document, we have to parse it differently in order to get a BufferedImage out of it.
 
 After the OCR process took place, we have an HOCRDocument. It may be that some of the values are wrong, e.g. have a wrong but similar looking letter in it. This is not a problem as long as specific keywords are not affected. Recognizing such keywords in the document is crucial for the next steps. Hence we want to improve those values afterward. 
 The Postprocessor class targets this goal by going through the HOCRDocument:
@@ -183,7 +183,7 @@ Now that we have executed the OCR step and post processed the resulting values, 
 \section{Module 2 - Extraction}
 \label{sec5.5}
 
-The core class that extracts the information from the hocr document is the DataExtractorService class. As we also want to retrieve information as fast as possible, we want to run it on different threads, so that we can extract the invoice information part on one thread and the accounting records information on another. Hence this class needs to implement the Runnable interface. When instantiated, a flag is set if this thread should extract the former or the latter:
+The core class that extracts the information from the hOCR document is the DataExtractorService class. As we also want to retrieve information as fast as possible, we want to run it on different threads, so that we can extract the invoice information part on one thread and the accounting records information on another. Hence this class needs to implement the Runnable interface. When instantiated, a flag is set if this thread should extract the former or the latter:
 
 \begin{lstlisting}[caption={Beginning of the information extraction}]
 @Override
@@ -274,7 +274,7 @@ We are only using the cases that have the flag isCorrect set to true. Then we co
 
 This is repeated for each keyword. A new DocumentCase is created and the position added. Every keyword that has not been found will result in missing DocumentCases. After that, the invoice filled with the retrieved information will be returned.
 
-As mentioned before, if we are unable to find a creditor, then we proceed with the document manually. Which means we are looking for keywords such as ''Rechnungsnummer'' (invoice no.) or ''Rechnungsdatum'' (invoice date) which are usually followed by the corresponding value. This is a fallback practice and will yield more errors due to missing position information. An invoice object with the found values will be returned all the same.
+As mentioned before, if we are unable to find a creditor, then we proceed with the document manually. Which means we are looking for keywords such as ''Rechnungsnummer'' (invoice no.) or ''Rechnungsdatum'' (issue date) which are usually followed by the corresponding value. This is a fall-back practice and will yield more errors due to missing position information. An invoice object with the found values will be returned all the same.
 
 The extractAccountingRecordInformation() method deals with the problem of information retrieval with a different approach: It uses the extracted table information if a table has been found. If not, the HocrDocument is searched for keywords that usually appear in invoice tables.
 
@@ -297,7 +297,8 @@ String recordLine = this.removeFinancialInformationFromRecordLine(nextLine);
 double value = this.getValueFromLine(nextLine);
 \end{lstlisting}
 
-We first want to remove all those additional information from the position so that we are able to store / retrieve it if it comes again more precisely. This is done by the removeFinancialInformationFromRecordLine() method. After that, we also retrieve the total amount of the position by searching in the line again for the financial information, but this time searching for the last numeric value that is proceeded by ''EUR'' or ''\euro''. This behavior is shown in listing \ref{arExtractionOne}.
+We first want to remove all those additional information from the position so that we are able to store / retrieve it if it comes again more precisely. This is done by the removeFinancialInformationFromRecordLine() method. 
+After that, we also retrieve the total amount of the position by searching in the line again for the financial information, but this time searching for the last numeric value that is proceeded by ''EUR'' or ''\euro''. This behavior is shown in listing \ref{arExtractionOne}.
 
 \begin{lstlisting}[caption={Finding a model for the position},label={arExtractionTwo}]
 Model m = service.getMostLikelyModel(recordLine); 
@@ -339,7 +340,6 @@ The Model object shown in listing \ref{arExtractionTwo} is a combination of debi
 \end{lstlisting}
 
 In the first part, the NaiveBayesHelper is called, that trains the classifier with all models that are stored. Every time the user saves an invoice document, all the accounting records are transformed into this model and saved to a file. The ModelReader takes this information for the next classification and hands it to the NaiveBayesHelper that is training the classifier.
-
 
 To use the Naive Bayes classifier, we make use of a small implementation by Philipp Nolte, licensed under the MIT license\footnote{See also: https://github.com/ptnplanet/Java-Naive-Bayes-Classifier (Retrieved March 5, 2017)}.
 
@@ -384,25 +384,25 @@ However, if the probability is below the confidence rate, or any other problem m
 \label{sec5.7}
 
 We have now extracted required basic information of the invoice as well as accounting records based on the positions in the invoice. Everything has been labeled by a confidence level in the application. All documents with a confidence level lower than previously defined by the user had to be reviewed by the user manually.
-The final part of the use case is the transformation of this extracted information into the ZugFerd invoice format. Therefore, we need to order the given information in a predefined format and append it as XML-information to the invoice PDF.
+The final part of the use case is the transformation of this extracted information into the ZUGFeRD invoice format. Therefore, we need to order the given information in a predefined format and append it as XML-information to the invoice PDF.
 
-We are using the Mustang project to generate the XML content for us. It is an open source project licensed under the Apache license version 2.0 and currently under version 1.3. This way, the amount of classes we need will be reduced to only one: The ZugFerdTransformator.java class.
+We are using the Mustang project to generate the XML content for us. It is an open source project licensed under the Apache license version 2.0 and currently under version 1.3. This way, the amount of classes we need will be reduced to only one: The ZugferdTransformator.java class.
 
-Before giving an in-depth explanation about our implementation, we first want to explain how the ZugFerd-Format works.
+Before giving an in-depth explanation about our implementation, we first want to explain how the ZUGFeRD-Format works.
 
-\subsection{About the ZugFerd Scheme}
+\subsection{About the ZUGFeRD Scheme}
 \label{sec5.7.1}
 
-ZugFerd has been developed to close the gap between manually sent invoices in small companies and heavy electronic data interchange (EDI) between big companies. While EDI with its sub-standards can be a good solution for a big company, most of the small and medium sized companies can not make use of such a standard due to the overwhelming complexity that lies beyond this standard. But dealing with PDF documents manually is also a source of costs, errors and is time-consuming. ZugFerd stands in the middle between those two sides (figure \ref{zugFerdImage} visualizes this).
+ZUGFeRD has been developed to close the gap between manually sent invoices in small companies and heavy electronic data interchange (EDI) between big companies. While EDI with its sub-standards can be a good solution for a big company, most of the small and medium sized companies can not make use of such a standard due to the overwhelming complexity that lies beyond this standard. But dealing with PDF documents manually is also a source of costs, errors and is time-consuming. ZUGFeRD stands in the middle between those two sides (figure \ref{ZugFerdImage} visualizes this).
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=\textwidth]{Images/ZugFerd/ZugFerd_English.jpg}
-\caption{ZugFerd stands between paper invoice and edi-ready invoice (based on \cite[page 13]{zugFerdSpecificationEnglish})  \label{zugFerdImage}}
+\caption{ZUGFeRD stands between paper invoice and edi-ready invoice (based on \cite[page 13]{zugFerdSpecificationEnglish})  \label{ZugFerdImage}}
 \end{figure}
 
 While documents can still be sent as a PDF, the underlying format enables automatic processing of the invoice. The extendibility with basic, comfort and extended levels enables also big companies to make use of this standard. This also improves the B2B relations between big and small companies.
 
-Depending on the desired level of the ZugFerd format, more fields have to be filled out. But even the lowest level, the basic level, brings the possibility to provide additional information which would only be required for the comfort or extended level. But there are still some fields that even on the basic level are required. Those will be introduced now and explained shortly.
+Depending on the desired level of the ZUGFeRD format, more fields have to be filled out. But even the lowest level, the basic level, brings the possibility to provide additional information which would only be required for the comfort or extended level. But there are still some fields that even on the basic level are required. Those will be introduced now and explained shortly.
 \begin{itemize}
 	\item Document Context Parameter: This field describes which level will be used in this document. A possible option would be the comfort-level.
 	\item Exchanged Document Identifier: A unique identifier for an invoice. This is usually the invoice number that is present in the invoice document.
@@ -423,21 +423,21 @@ Exchanged Document Issue Date: The date when the invoice has been issued.
 	\item Trade Settlement Monetary Summation Grand Total: The total sum of the invoice (usually the net total added by the tax that has been applied).
 \end{itemize}
 
-These are the most important fields in the ZugFerd format. Without them, it is not possible to create a conformal invoice document. This only applies on the Basic level of the ZugFerd format. Using the Comfort or even Extended-Level, several other fields are required. We will not further introduce these additional fields since the support of the other levels is not part of this thesis. 
+These are the most important fields in the ZUGFeRD format. Without them, it is not possible to create a conformal invoice document. This only applies on the Basic level of the ZUGFeRD format. Using the Comfort or even Extended-Level, several other fields are required. We will not further introduce these additional fields since the support of the other levels is not part of this thesis. 
 
 \subsection{The transformation process}
 \label{sec5.7.2}
 
-We have now introduced all the necessary fields to create an invoice document which fulfills the requirements of the ZugFerd-Scheme Basic level and can now explain the actual transformation process. 
+We have now introduced all the necessary fields to create an invoice document which fulfills the requirements of the ZUGFeRD-Scheme Basic level and can now explain the actual transformation process. 
 
-When the user decides to save the invoice, the DatabaseService is called. The saveProcessResult() method first saves the invoice object and then tries to save the scan object. Now, the ZugFerdTransformator class comes in place. The transformator object transforms the invoice to a ZugFerd invoice using the Mustang framework. This transformation will be explained shortly after. After the ZugFerd invoice has been appended to the document, a scan object is saved. This can be seen in listing \ref{saveScan}.
+When the user decides to save the invoice, the DatabaseService is called. The saveProcessResult() method first saves the invoice object and then tries to save the scan object. Now, the ZugferdTransformator class comes in place. The transformator object transforms the invoice to a ZUGFeRD invoice using the Mustang framework. This transformation will be explained shortly after. After the ZUGFeRD invoice has been appended to the document, a scan object is saved. This can be seen in listing \ref{saveScan}.
 
 \begin{lstlisting}[caption={}, label={saveScan}]
         Invoice i = result.getExtractionModel().getUpdatedInvoiceInformation();
         ...
         Scan scan = new Scan();
         try {
-            ZugFerdTransformator transformator = new ZugFerdTransformator();
+            ZugferdTransformator transformator = new ZugferdTransformator();
             byte[] file = Files.toByteArray(result.getFile());
             byte[] enhancedFile = transformator.appendInvoiceToPDF(file, i);
             scan.setFile(enhancedFile);
@@ -448,7 +448,7 @@ When the user decides to save the invoice, the DatabaseService is called. The sa
         }
 \end{lstlisting}
 
-Let us have a detailed look on the ZugFerdTransformator.java class. The core method of this class is the createFullConformalBasicInvoice() method. 
+Let us have a detailed look on the ZugferdTransformator.java class. The core method of this class is the createFullConformalBasicInvoice() method. 
 In the first part, an invoice object is created and meta information is provided:
 
 \begin{lstlisting}[caption={Creation of the invoice object}]
@@ -460,7 +460,7 @@ guideline.setVersion(ProfileVersion.V1P0);
 con.setGuideline(guideline);
 \end{lstlisting}
 
-This information defines the invoice object to be of the Basic level (it has been described before as the Document Context Parameter). The ProfileVersion is currently 1.0 but could be increased when the ZugFerd format is further developed.
+This information defines the invoice object to be of the Basic level (it has been described before as the Document Context Parameter). The ProfileVersion is currently 1.0 but could be increased when the ZUGFeRD format is further developed.
 A header containing the basic information of the invoice is now instantiated:
 
 \begin{lstlisting}[caption={Populating header information}]
@@ -474,7 +474,7 @@ h.setIssued(new ZfDateDay(inv.getIssueDate().getTime()));
 As the application only deals with Invoices, we can set the name to ''RECHNUNG'' (engl.: invoice). The invoice number has been extracted from the invoice object that has been given to the method.
 Since this method creates an invoice object of the Basic level, the only applicable code for this level is 380. Afterwards, the issue date of the given invoice object is used as well.
 
-It is now time to add the actual invoice content. First, we have to define the creditor and debitor of this - in the terminology of the ZugFerd documentation - agreement. Both, the creditor and the debitor, are a TradeParty that are added to the agreement:
+It is now time to add the actual invoice content. First, we have to define the creditor and debitor of this - in the terminology of the ZUGFeRD documentation - agreement. Both, the creditor and the debitor, are a TradeParty that are added to the agreement:
 
 \begin{lstlisting}[caption={Creation of a new agreement}]
 Agreement a = new Agreement();
@@ -502,7 +502,7 @@ s.setMonetarySummation(sum);
 
 The Settlement object holds this information. For each value, we also have to provide currency information. The application currently only supports invoices with the currency Euro, hence every amount will be added as the currency Euro.
 
-To conclude the trade, we also have to define a delivery date. If no such information has been found in the invoice document, we will use the issue date as a fallback value:
+To conclude the trade, we also have to define a delivery date. If no such information has been found in the invoice document, we will use the issue date as a fall-back value:
 
 \begin{lstlisting}[caption={Population of the trade object}]
 Delivery d;
@@ -530,7 +530,7 @@ i.setHeader(h);
 i.setTrade(tr);
 \end{lstlisting}
 
-Before we now return the invoice document, we have to make sure that this document is valid against the ZugFerd-Scheme. Only if this invoice is valid, it will be returned, otherwise the method will return null:
+Before we now return the invoice document, we have to make sure that this document is valid against the ZUGFeRD-Scheme. Only if this invoice is valid, it will be returned, otherwise the method will return null:
 
 \begin{lstlisting}[caption={Validation of the invoice object}]
 if (this.isInvoiceValid(i)) {
@@ -561,6 +561,7 @@ As defined in section \ref{sec5.2} before, we will not only enable the user to e
 \label{sec5.8.1}
 
 When starting the application, a start page opens. As the first process of the application would be the scanning of a document, a button already hints to the task of scanning a form. This can be seen in figure \ref{startmenu}.
+
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.6]{Images/GUI/startmenu.png}
@@ -610,11 +611,11 @@ Figure \ref{reviewElectronicInvoice} shows the first detail view.
 
 On the left side, all the necessary information are present, while on the right side the invoice document can be seen. The user has the possibility to move the document around and zoom in and out. This is useful if there are missing information that the user has to add in the case of missing information.
 
-The required information on the left side are the ones required for a full conformal ZugFerd invoice of BASIC level. The number of input fields could be extended in the future in order to support the COMFORT or even EXTENDED level.
+The required information on the left side are the ones required for a full conformal ZUGFeRD invoice of BASIC level. The number of input fields could be extended in the future in order to support the COMFORT or even EXTENDED level.
 
 All the values that have been extracted are set into these fields. If the application was unable to extract information regarding a specific field, it will be left blank. If the user fills out the missing fields and forgets one, a validation message will be shown up, making it impossible to safe the document before filling out all fields.
 
-If there is a Skonto applicable to the invoice, checking the checkbox 'Has Skonto?' will reveal another input field where the user is asked to provide the skonto value.
+If there is a skonto applicable to the invoice, checking the checkbox 'Has Skonto?' will reveal another input field where the user is asked to provide the skonto value.
 
 On the top left side of the image, there is also the possibility to switch between the general invoice information and the accounting records information. This information is shown in figure \ref{reviewAR}.
 
@@ -647,13 +648,13 @@ If the user hits the 'reviewed' button both, the invoice information, as well as
 	\item Checking for empty accounts where a value has been written in
 \end{itemize}
 
-If any of these checks fail, a popup will show up and provide information which specific issues are persistent. The document can not be saved in this case. If there are no validation errors, the values are updated, the detail view closes and the user is returned to the list of the documents.
+If any of these checks fail, a pop-up will show up and provide information which specific issues are persistent. The document can not be saved in this case. If there are no validation errors, the values are updated, the detail view closes and the user is returned to the list of the documents.
 
 Note that the dot of the manually reviewed document has now changed from yellow to green (figure: \ref{greenAfterReview}) indicating that this document can now be saved.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[scale=0.6]{Images/GUI/greenAfterReview.png}
+\includegraphics[scale=0.6]{Images/GUI/GreenAfterReview.jpg}
 \caption{Changing of the dot after manually reviewing the document \label{greenAfterReview}}
 \end{figure}
 
@@ -693,7 +694,7 @@ When the values have been set and the user has clicked on the button 'Search in 
 \caption{The results of the database search \label{searchResults}}
 \end{figure}
 
-In this list, the existing information is shown to facilitate the finding of a specific invoice. By pressing the button 'View PDF' the user is able to save the file and view it. This invoice file also contains the added electronic invoice information of the ZugFerd standard.
+In this list, the existing information is shown to facilitate the finding of a specific invoice. By pressing the button 'View PDF' the user is able to save the file and view it. This invoice file also contains the added electronic invoice information of the ZUGFeRD standard.
 
 Pressing 'Return' enables the user to re-enter search criteria. 
 
@@ -724,10 +725,10 @@ The language packs for the OCR reader are important to increase the overall OCR 
 \begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.6]{Images/GUI/settings_ZugFerd.jpg}
-\caption{ZugFerd specific settings tab \label{settings_ZugFerd}}
+\caption{ZUGFeRD specific settings tab \label{settings_ZugFerd}}
 \end{figure}
 
-The ZugFerd tab enables the user to choose between a preferred ZugFerd level (figure \ref{settings_ZugFerd}). As of now, the application only supports the BASIC level. When the application supports Comfort or Extended level in the future, this setting would enable a different view in the invoice information detail view.
+The ZUGFeRD tab enables the user to choose between a preferred ZUGFeRD level (figure \ref{settings_ZugFerd}). As of now, the application only supports the BASIC level. When the application supports Comfort or Extended level in the future, this setting would enable a different view in the invoice information detail view.
 
 \begin{figure}[ht!]
 \centering
@@ -735,4 +736,4 @@ The ZugFerd tab enables the user to choose between a preferred ZugFerd level (fi
 \caption{Database connection settings tab \label{settings_Database}}
 \end{figure}
 
-The last tab, database settings, contains several database values that can be set to a specific database. The button 'Test Connection' enables a quick connection check and returns a popup with information if the connection was successful (see also figure \ref{settings_Database}). 
+The last tab, database settings, contains several database values that can be set to a specific database. The button 'Test Connection' enables a quick connection check and returns a pop-up with information if the connection was successful (see also figure \ref{settings_Database}). 

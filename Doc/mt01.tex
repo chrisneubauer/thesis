@@ -14,7 +14,7 @@ Several workshops, papers, and journals have been published, conferences hold on
 Recent results have already spawned/created some highly accurate systems, especially based on English text. Currently, research focus is gradually shifting towards the recognition of non-latin alphabets and scalable approaches at OCR. %TODO:Hier ggf. noch nachlegen mit 'this thesis presents one such scalable approach ...'
 
 %While already a lot of companies use those systems, there is still a majority of others that do not. But, as these systems grow more accurate each year, it is very likely that the need for ocr systems will grow. \par
-While some companies are already using ORC as a means of process optimization, others have left its potential untapped. With more and more research towards scalable approaches, the demand for ORC systems is likely to grow in the future \cite{Klein04}\cite{Attaran01}\cite{Billentis16}.
+While some companies are already using ORC as a means of process optimization, others have left its potential untapped. With more and more research towards scalable approaches, the demand for OCR systems is likely to grow in the future \cite{Klein04}\cite{Attaran01}\cite{Billentis16}.
 
 As companies are getting connected and globalized, more and more data has to be handled. Modern keywords such as 'Big Data' or 'Data Mining' show, that there is currently a need for solutions to process that information.
 
@@ -24,7 +24,7 @@ Although ERP-systems capable of invoice generation already exist, they often rep
 
 In order to facilitate and accelerate the process of invoice recognition, electronic invoice formats have been introduced. If invoices are sent in such a format, a company recognizes the required fields and handles this invoice. Again, this is often the case for big companies, that have defined contracts with their suppliers or customers and have therefore been able to define an electronic invoicing format to automatically process an invoice.
 
-For every other company, the problems persist: Not every invoice is sent in an electronic format, some are still sent as a normal pdf document or even postal.
+For every other company, the problems persist: Not every invoice is sent in an electronic format, some are still sent as a normal PDF document or even postal.
 
 \section{Motivation}
 \label{sec1.2}
@@ -51,19 +51,19 @@ The stored invoices should be retrievable again, enhanced and conform with the e
 This section will present other work and concepts that have been presented before and distinguish between their solution and the method used in this thesis. In addition to that, we will explain reasons why the presented approach has not been suitable for our solution.
 
 \subsection{Case-based-reasoning on invoice documents}
-The process of information extraction on invoice documents has been topic of research for many years. One approach using Case-based-reasoning (CBR) has been published by Hamza et. al. \cite{hamza07}. They present a two iterative step that first tries to classify the invoice document as a whole (global-solving) and later repeats the classification on a keyword and pattern structure level (local solving). A Keyword in this approach are invoice specific words, such as the invoice date or invoice number. Pattern structures are words that appear in tables. An invoice always has to list every single position, thus the preferred way to do this is using a table in a document.
-The case-based reasoning approach is an iterative approach that stores information if a pattern structure has been found on the same line or the same column and if the relevant data is present before (over) or after (under) the keyword. This way cases are stored in a database and reused everytime a new invoice has to be classified. The global solving resulted in an accuracy of 85.29\% whereas the local solving yielded 76.33\%.
+The process of information extraction on invoice documents has been topic of research for many years. One approach using Case-based-reasoning (CBR) has been published by Hamza et. al. \cite{hamza07}. They present a two iterative step that first tries to classify the invoice document as a whole (global-solving) and later repeats the classification on a keyword and pattern structure level (local solving). Keywords in this approach are invoice specific words, such as the issue date or invoice number. Pattern structures are words that appear in tables. An invoice always has to list every single position, thus the preferred way to do this is using a table in a document.
+The case-based reasoning approach is an iterative approach that stores information if a pattern structure has been found on the same line or the same column and if the relevant data is present before (over) or after (under) the keyword. This way cases are stored in a database and reused every time a new invoice has to be classified. The global solving resulted in an accuracy of 85.29\% whereas the local solving yielded 76.33\%.
 %TODO: Write how we do it and negative things of CBR
 \subsection{Using a predefined layout}
-Another approach that has been discussed before by Cesarini et. al. is a definition of a structure how invoices look alike \cite{Cesarini98}. This model has to be created by a user before and can be seen as a template. The system knows on which positions relevant invoice information are due to the predefined locations from the template.
+Another approach that has been presented by Cesarini et. al. is a definition of a structure how invoices look alike \cite{Cesarini98}. This model has to be created by a user before and can be seen as a template. The system knows on which positions relevant invoice information are, due to the predefined locations from the template.
 Some of the scanned invoices may contain quality issues (e.g. have been scanned with an angle) that have to be taken into account while processing the document. Counteractions, such as deskewing\footnote{Deskewing is related to the rotation of an image to a zero degree angle} the invoice document, have to be applied in a way that the template can be applied on the document.
 
 We are not using a predefined layout that has to be manually created by the user. Instead, the application will learn from the position of keywords in previously processed invoice documents and reuse this pattern on invoices documents of the same creditor.
 
-The major downside of the approach of Cesarini et. al. \cite{Cesarini98} is the need of a manually created template. This does not only take time and is error-prone, but also only applies on invoices of exactly the same structure. But, especially in the field of invoice documents, there are various kinds and different structured invoices. This would lead to the expectation that the user has to create a template every time an invoice of a new customer, supplier, etc. should be processed.
+The major downside of the approach of Cesarini et. al. \cite{Cesarini98} is the need of a manually created template. This does not only take time and is error-prone, but also only applies on invoices of exactly the same structure. But, especially in the field of invoice documents, there are various kinds and different structured invoices. This would lead to the expectation, that the user has to create a template every time an invoice of a new customer, supplier, etc. should be processed.
 
 \subsection{Extracting information from repeated text}
-Another issue to deal with invoices is to extract every position that is listed in the invoice. Typically these are multiple positions and therefore displayed in a table. A paper by Bart \& Psarker \cite{Bart10}  describes an approach that recognizes repeated structures by analyzing the basic similarity between lines, the separation as well as gaps in between to find out the relevant information.
+Another issue to deal with invoices is to extract every position that is listed in the invoice. Typically these are multiple positions and therefore displayed in a table. A paper by Bart \& Psarker \cite{Bart10}  describes an approach that recognizes repeated structures by analyzing the basic similarity between lines, the separation, as well as gaps in between, to find out the relevant information.
 
 In the application presented in this thesis, a histogram is used to detect tables which contain information. This enables us to narrow the relevant words to the ones inside the table. In addition to that, keywords that either mark table header words or sum up the positions at the end of the table are filtered out.
 
@@ -82,7 +82,7 @@ This thesis presents an application that is capable of automatic form processing
 
 A Machine Learning algorithm supports the extraction of invoice information. The relation between a position and a set of debit and credit accounts are saved. A Na{\"i}ve Bayes classificator is used to determine the most reasonable combination of credit and debit accounts for a new position.
 
-Processed invoice documents are stored in the database and can be retrieved using a search function. All processed and saved documents are conformal with the ZugFerd standard originally published in 2014 \cite{Ferd14}.
+Processed invoice documents are stored in the database and can be retrieved using a search function. All processed and saved documents are conformal with the ZUGFeRD standard originally published in 2014 \cite{Ferd14}.
 
 \section{Outline}
 \label{sec1.6}
@@ -93,8 +93,7 @@ This thesis is structured as follows: First, several electronic invoice formats 
 After that, we will explain how we want to process a file to a document in the selected electronic invoice format. Chapter 3 will deal with OCR, the available systems at this time as well as a comparison between them and the selection of one of them (including the explanation why this selection has been made).
 As the application should learn and improve results over time, we will also deal with machine learning techniques and choose an appropriate one. Chapter 4 will focus on this issue.
 
-%From this point on, we have a good understanding about what we want to achieve, with which technologies and methods as well as necessary tools or frameworks for that. 
-Chapter 5 will now discuss several use-cases of the application and show the architectural concept of the application. The following sections will deal with each module and explain it in-depth. The last section will discuss problems that occurred during the implementation.
+Chapter 5 will now discuss several use-cases of the application and show the architectural concept of the application. The following sections will deal with each module and explain it in-depth.
 
 Finally, chapter 6 will conclude about this thesis. The accuracy of the application will be presented on generated data. The resulting application will be explained briefly again. Issues that are still open, as well as ideas that could improve the application, are listed.
 
@@ -105,10 +104,10 @@ During the implementation of the application and the creation of this document, 
 
 To Dr. Peter Wilke, who not only supervised my work but also put thoughts to things that I have not considered before but were crucial for the application.
 
-To Prof. Dr. Oliveira, who supervised my work during my stay in Brasil and who gave me good input especially in the field of OCR.
+To Prof. Dr. Oliveira, who supervised my work during my stay in Brazil and who gave me good input especially in the field of OCR.
 
-To Prof. Daniel Weingaertner, who managed my stay in brazil, enrolled me in the university and organized all the necessary documents.
+To Prof. Daniel Weingaertner, who managed my stay in Brazil, enrolled me in the university and organized all the necessary documents.
 
-To Daniel Stemler whose engagement enabled me to gain access to over thousand invoice documents in order to get a reasonable amount of data to test on.
+To Daniel Stemler whose engagement enabled me to gain access to various invoice documents in order to get a reasonable amount of data to test on.
 
 And to several other friends that helped me or supported me with advice or discussions about technologies or to clarify my understanding regarding a specific approach.
