@@ -284,6 +284,12 @@ public class ZugFerdTransformator {
         }
     }
 
+    public boolean pdfIsZugFerdConform(byte[] pdf) {
+        PdfHandler handler = new PdfHandler();
+        Invoice i = handler.extractInvoice(new ByteArrayInputStream(pdf));
+        return this.isInvoiceValid(i);
+    }
+
     @Deprecated
     Invoice createMockInvoice() {
 
@@ -340,4 +346,10 @@ public class ZugFerdTransformator {
 
         return invoice;
     }
+
+    public byte[] appendInvoiceToPDF(byte[] originalPdf, de.cneubauer.domain.bo.Invoice i) throws IOException {
+        io.konik.zugferd.Invoice konikInvoice = this.createFullConformalBasicInvoice(i);
+        return this.appendInvoiceToPdf(originalPdf, konikInvoice);
+    }
+
 }
