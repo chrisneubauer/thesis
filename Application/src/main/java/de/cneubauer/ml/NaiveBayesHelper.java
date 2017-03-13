@@ -27,7 +27,7 @@ class NaiveBayesHelper {
      * Trains the naive Bayes classifier
      * @param models  the training models
      */
-    void learnMockData(List<Model> models) {
+    void trainClassifier(List<Model> models) {
         Classifier<String, List<Account>> classifier = this.getClassifier();
         for (Model m : models) {
             List<Account> category = new LinkedList<>();

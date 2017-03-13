@@ -57,7 +57,7 @@ public class LearningService {
         NaiveBayesHelper helper = new NaiveBayesHelper();
         ModelReader reader = new ModelReader();
         try {
-            helper.learnMockData(reader.getModels());
+            helper.trainClassifier(reader.getModels());
 
             // replace string if it is equal with an existing value
             for (Model m : reader.getModels()) {
