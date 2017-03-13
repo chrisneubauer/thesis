@@ -1,9 +1,0 @@
-artikel
-beschreibung
-position
-menge
-einheit
-einzelpreis
-stück
-gesamt
-mwst
