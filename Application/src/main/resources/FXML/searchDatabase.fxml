@@ -41,15 +41,18 @@
             <Label text="%searchDatabase.label.date" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
             <DatePicker fx:id="date" prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="4"
                         GridPane.columnSpan="4" GridPane.rowIndex="2"/>
-            <Label text="%searchDatabase.label.debitor" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+            <Label text="%searchDatabase.label.dateTo" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+            <DatePicker fx:id="dateTo" prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="4"
+                        GridPane.columnSpan="4" GridPane.rowIndex="3"/>
+            <Label text="%searchDatabase.label.debitor" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
             <TextField fx:id="debitor" prefHeight="25.0" prefWidth="140.0" GridPane.columnIndex="4"
-                       GridPane.columnSpan="4" GridPane.rowIndex="3"/>
-            <Label text="%searchDatabase.label.creditor" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
-            <TextField fx:id="creditor" GridPane.columnIndex="4" GridPane.columnSpan="4" GridPane.rowIndex="4"/>
-            <Label text="%searchDatabase.label.value" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
-            <TextField fx:id="value" GridPane.columnIndex="4" GridPane.columnSpan="4" GridPane.rowIndex="5"/>
+                       GridPane.columnSpan="4" GridPane.rowIndex="4"/>
+            <Label text="%searchDatabase.label.creditor" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+            <TextField fx:id="creditor" GridPane.columnIndex="4" GridPane.columnSpan="4" GridPane.rowIndex="5"/>
+            <Label text="%searchDatabase.label.value" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+            <TextField fx:id="value" GridPane.columnIndex="4" GridPane.columnSpan="4" GridPane.rowIndex="6"/>
             <ButtonBar buttonMinWidth="120.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="5"
-                       GridPane.rowIndex="6">
+                       GridPane.rowIndex="7">
                 <buttons>
                     <Button mnemonicParsing="false" onAction="#searchInDatabase" text="%searchDatabase.button.search"/>
                 </buttons>

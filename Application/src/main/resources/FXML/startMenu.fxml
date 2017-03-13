@@ -42,9 +42,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <Label text="%startMenu.label.welcome" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="2" />
-         <Label text="%startMenu.label.intro1" GridPane.columnIndex="1" GridPane.columnSpan="8" GridPane.rowIndex="6" />
-         <Label text="%startMenu.label.intro2" GridPane.columnIndex="1" GridPane.columnSpan="8" GridPane.rowIndex="5" />
-         <Label text="%startMenu.label.intro3" GridPane.columnIndex="1" GridPane.columnSpan="8" GridPane.rowIndex="4" />
+         <Label text="%startMenu.label.intro1" GridPane.columnIndex="1" GridPane.columnSpan="10" GridPane.rowIndex="6" />
+         <Label text="%startMenu.label.intro2" GridPane.columnIndex="1" GridPane.columnSpan="10" GridPane.rowIndex="5" />
+         <Label text="%startMenu.label.intro3" GridPane.columnIndex="1" GridPane.columnSpan="10" GridPane.rowIndex="4" />
          <ButtonBar buttonMinWidth="100.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="8">
            <buttons>
                <Button fx:id="startScanButton" mnemonicParsing="false" onAction="#openFileDialog" text="%mainMenu.button.scanForm" />
