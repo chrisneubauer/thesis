@@ -1,8 +1,0 @@
-Possible setting options:
-
-- default used language for tesseract: german, english, german+english (maybe more later)
-- minimum confidence rate for including scanned fields
-- overall language of the application (localization fehlt noch)
-- date format
-- database connection
-- ...

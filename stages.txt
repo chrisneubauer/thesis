@@ -1,3 +1,0 @@
-OnApplicationStart:
-	New Stage (primaryStage)
-		New Scene (MainMenu)
