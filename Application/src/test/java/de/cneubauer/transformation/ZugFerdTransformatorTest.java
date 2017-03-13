@@ -1,5 +1,6 @@
 package de.cneubauer.transformation;
 
+import com.google.common.io.Files;
 import de.cneubauer.AbstractTest;
 import de.cneubauer.domain.bo.LegalPerson;
 import io.konik.zugferd.Invoice;
@@ -7,6 +8,8 @@ import junit.framework.AssertionFailedError;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -76,6 +79,21 @@ public class ZugFerdTransformatorTest extends AbstractTest {
 
         Invoice valid = transformator.createFullConformalComfortInvoice(i);
         Assert.assertNotNull(valid);
+    }
+
+    @Test
+    public void testValidPDF() {
+        boolean result = false;
+        try {
+            byte[] pdf = Files.toByteArray(new File("C:\\Users\\Christoph\\Desktop\\appendedInvoice.pdf"));
+            Invoice mock = transformator.createMockInvoice();
+            byte[] output = transformator.appendInvoiceToPdf(pdf, mock);
+            result = transformator.pdfIsZugFerdConform(output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertTrue(result);
     }
 
     private de.cneubauer.domain.bo.Invoice createInvoiceForTesting() {

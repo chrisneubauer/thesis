@@ -24,6 +24,7 @@ public class ImagePreprocessorTest extends AbstractTest {
     @Before
     public void setUp() throws Exception {
         String path = "..\\data\\Datenwerk4.pdf";
+        path = "C:\\Users\\Christoph\\Desktop\\preprocessingsteps\\scan\\1_original.jpg";
 
         //path = "..\\data\\20160830_Scans\\Scan_20160822_161042_003.jpg";
         //path = ".\\temp\\tempImage.png";
@@ -48,9 +49,9 @@ public class ImagePreprocessorTest extends AbstractTest {
     @Test
     public void preprocess() throws Exception {
         BufferedImage result = this.preprocessor.preprocess();
-        File test = new File(".\\temp\\testI4.png");
-        ImageIO.write(result, "png", test);
-        Assert.isTrue(Files.exists(new File(".\\temp\\tempImage.png").toPath()));
+        File test = new File(".\\temp\\preprocessingResult.jpg");
+        ImageIO.write(result, "jpg", test);
+        Assert.isTrue(Files.exists(new File(".\\temp\\tempImage.jpg").toPath()));
         Assert.isTrue(!this.origImage.equals(result));
     }
 }

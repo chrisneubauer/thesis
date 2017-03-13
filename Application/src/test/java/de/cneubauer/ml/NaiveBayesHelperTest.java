@@ -2,7 +2,6 @@ package de.cneubauer.ml;
 
 import de.cneubauer.domain.bo.Account;
 import de.cneubauer.ml.classification.Classification;
-import de.cneubauer.ml.classification.Classifier;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class NaiveBayesHelperTest {
         category.addAll(models.get(0).getCredit().keySet());
         category.addAll(models.get(0).getDebit().keySet());
 
-        this.helper.learnMockData(models);
+        this.helper.trainClassifier(models);
 
         Classification classification = this.helper.getClassifier().classify(Collections.singleton("Grundgebühr 1&1 Surf & Phone 16.000 Office"));
         System.out.println(classification.getProbability());

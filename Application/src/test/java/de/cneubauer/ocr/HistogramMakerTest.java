@@ -1,5 +1,7 @@
 package de.cneubauer.ocr;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,10 +19,16 @@ public class HistogramMakerTest {
 
     @Before
     public void setUp() throws Exception {
-        String path = ".\\temp\\tryold.png";
+        String path = ".\\temp\\invoice.pdf";
         File imageFile = new File(path);
 
-        this.image = ImageIO.read(imageFile);
+        if (path.endsWith("pdf")) {
+            PDDocument pdf = PDDocument.load(imageFile);
+            PDFRenderer renderer = new PDFRenderer(pdf);
+            this.image = renderer.renderImageWithDPI(0, 300);
+        } else {
+            this.image = ImageIO.read(imageFile);
+        }
         this.maker = new HistogramMaker();
     }
 
