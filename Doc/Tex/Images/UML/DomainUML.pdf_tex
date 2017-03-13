@@ -1,0 +1,72 @@
+%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'DomainUML.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{465.6bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.41408935)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{DomainUML.pdf}}%
+    \put(0.35223368,0.35223368){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{\textbf{domain}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{DomainUML.pdf}}%
+    \put(0.0652921,0.1975945){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{\textbf{bo}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{DomainUML.pdf}}%
+    \put(0.24226804,0.1975945){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{\textbf{dao}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{DomainUML.pdf}}%
+    \put(0.41408935,0.1975945){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{\textbf{helper}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{DomainUML.pdf}}%
+    \put(0.59106529,0.1975945){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{\textbf{service}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{DomainUML.pdf}}%
+    \put(0.06185567,0.0257732){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{\textbf{validation}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{DomainUML.pdf}}%
+    \put(0.30068729,0.0532646){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{\textbf{DataExtractorService}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{DomainUML.pdf}}%
+    \put(0.58075601,0.0532646){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{\textbf{DatabaseService}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{DomainUML.pdf}}%
+    \put(0.86254296,0.0532646){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{\textbf{DatabaseResultsService}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{DomainUML.pdf}}%
+  \end{picture}%
+\endgroup%
