@@ -83,9 +83,9 @@ public class ProcessedListController extends GUIController {
     // if called, all results should be stored to the database except the ones that have not been revised yet
     public void saveRevised() {
         int counter = 0;
+        DatabaseService service = new DatabaseService();
         for (ProcessResult result : this.model) {
             if (result.getStatus().equals(ScanStatus.OK)) {
-                DatabaseService service = new DatabaseService();
                 service.saveProcessResult(result);
                 //Invoice i = result.getExtractionModel().getInvoiceInformation();
                // InvoiceFileHelper.write(i.getCreditor().getName(), i.getDebitor().getName());

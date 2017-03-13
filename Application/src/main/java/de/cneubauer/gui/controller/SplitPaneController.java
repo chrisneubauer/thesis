@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by Christoph Neubauer on 22.11.2016.
- * Controller for the Splitpane
+ * controller for the Splitpane
  */
 public class SplitPaneController extends GUIController {
     @FXML public SplitPane splitPaneInclude;

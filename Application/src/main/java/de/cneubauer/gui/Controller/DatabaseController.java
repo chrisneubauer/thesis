@@ -22,6 +22,7 @@ import java.util.ResourceBundle;
  */
 public class DatabaseController extends GUIController {
     @FXML private DatePicker date;
+    @FXML private DatePicker dateTo;
     @FXML private TextField creditor;
     @FXML private TextField debitor;
     @FXML private TextField value;
@@ -60,7 +61,8 @@ public class DatabaseController extends GUIController {
                 Logger.getLogger(this.getClass()).log(Level.INFO, "Parsing double value failed. Using default");
                 filterValue = 0;
             }
-            ctrl.initData(this.date.getValue(), this.debitor.getText(), this.creditor.getText(), filterValue);
+
+            ctrl.initData(this.date.getValue(), this.debitor.getText(), this.creditor.getText(), filterValue, this.dateTo.getValue());
 
             Scene scene = new Scene(root, 800, 600);
             Logger.getLogger(this.getClass()).log(Level.INFO, "loading css files");

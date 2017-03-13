@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by Christoph Neubauer on 04.11.2016.
- * Controller to manage settings selected in the view
+ * controller to manage settings selected in the view
  */
 public class SettingsController extends GUIController {
     @FXML FlowPane root;

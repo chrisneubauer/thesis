@@ -31,6 +31,7 @@ import java.util.List;
  */
 public class DatabaseResultsController extends GUIController {
     private LocalDate date;
+    private LocalDate dateTo;
     private String deb;
     private String cred;
     private double value;
@@ -53,11 +54,12 @@ public class DatabaseResultsController extends GUIController {
         downloadColumn.setCellFactory(p -> new ButtonCell());
     }
 
-    void initData(LocalDate date, String debitor, String creditor, double value) {
+    void initData(LocalDate date, String debitor, String creditor, double value, LocalDate dateToValue) {
         this.date = date;
         this.deb = debitor;
         this.cred = creditor;
         this.value = value;
+        this.dateTo = dateToValue;
 
         this.fillListWithValues();
     }
@@ -77,7 +79,7 @@ public class DatabaseResultsController extends GUIController {
 
     private ObservableList<SearchResult> getFromDb() {
         DatabaseResultsService service = new DatabaseResultsService();
-        List<Scan> scanList = service.getFromDatabase(date, deb, cred, value);
+        List<Scan> scanList = service.getFromDatabase(date, deb, cred, value, dateTo);
 
         ObservableList<SearchResult> allData = FXCollections.observableArrayList();
         for (Scan s : scanList) {

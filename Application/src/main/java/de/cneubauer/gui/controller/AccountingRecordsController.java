@@ -23,7 +23,7 @@ import java.util.*;
 
 /**
  * Created by Christoph Neubauer on 21.11.2016.
- * Controller for managing extracted accounting records
+ * controller for managing extracted accounting records
  */
 public class AccountingRecordsController extends SplitPaneController {
     @FXML
