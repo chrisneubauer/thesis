@@ -3,7 +3,7 @@ package de.cneubauer.ocr;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
-import de.cneubauer.util.DeSkewer;
+import de.cneubauer.util.config.ConfigHelper;
 import magick.MagickException;
 
 import org.apache.log4j.Level;
@@ -32,11 +32,10 @@ import java.io.*;
  * 5. Analyzation of the invoice layout
  * 6. Find baseline for words and separate the words
  * 7. Aspect Ratio and Scale is being normalised
- * TODO: Dictionary that contains invoice words
  */
 public class ImagePreprocessor {
-    private String tempPath = ".\\temp\\tempImage.png";
-    private String tempPathConverted = ".\\temp\\tempImageConverted.png";
+    private String tempPath = ".\\temp\\tempImage.jpg";
+    private String tempPathConverted = ".\\temp\\tempImageConverted.jpg";
 
     private BufferedImage inputFile;
     private double gaussianRatio = 10.0;
@@ -47,8 +46,8 @@ public class ImagePreprocessor {
         File outputfile = new File(this.tempPath);
         File outputConvertedFile = new File(this.tempPathConverted);
         try {
-            ImageIO.write(this.inputFile, "png", outputfile);
-            ImageIO.write(this.inputFile, "png", outputConvertedFile);
+            ImageIO.write(this.inputFile, "jpg", outputfile);
+            ImageIO.write(this.inputFile, "jpg", outputConvertedFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,8 +69,8 @@ public class ImagePreprocessor {
 
         File outputfile = new File(this.tempPath);
         File outputConvertedFile = new File(this.tempPathConverted);
-            ImageIO.write(this.inputFile, "png", outputfile);
-            ImageIO.write(this.inputFile, "png", outputConvertedFile);
+            ImageIO.write(this.inputFile, "jpg", outputfile);
+            ImageIO.write(this.inputFile, "jpg", outputConvertedFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,24 +81,82 @@ public class ImagePreprocessor {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Preprocessing started...");
             BufferedImage image = this.inputFile;
 
+            if (ConfigHelper.isDebugMode()) {
+                try {
+                    File testfile = new File(".\\temp\\1_original.jpg");
+                    ImageIO.write(image, "jpg", testfile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             Logger.getLogger(this.getClass()).log(Level.INFO, "resizing...");
             BufferedImage outputFile = this.resizeImage(image);
 
             image = outputFile;
+
+            if (ConfigHelper.isDebugMode()) {
+                try {
+                    File testfile = new File(".\\temp\\2_resized.jpg");
+                    ImageIO.write(outputFile, "jpg", testfile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             Logger.getLogger(this.getClass()).log(Level.INFO, "adjusting to 300dpi...");
             outputFile = this.adjustDPI(image);
 
             image = outputFile;
+
+            if (ConfigHelper.isDebugMode()) {
+                try {
+                    File testfile = new File(".\\temp\\3_adjustedTo300DPI.jpg");
+                    ImageIO.write(outputFile, "jpg", testfile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             Logger.getLogger(this.getClass()).log(Level.INFO, "deskewing...");
             outputFile = this.deSkewImage(image);
 
             image = outputFile;
+
+            if (ConfigHelper.isDebugMode()) {
+                try {
+                    File testfile = new File(".\\temp\\4_deskewed.jpg");
+                    ImageIO.write(outputFile, "jpg", testfile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             Logger.getLogger(this.getClass()).log(Level.INFO, "greyscaling...");
             outputFile = this.greyScaleImage(image);
 
             image = outputFile;
+
+            if (ConfigHelper.isDebugMode()) {
+                try {
+                    File testfile = new File(".\\temp\\5_greyscaled.jpg");
+                    ImageIO.write(outputFile, "jpg", testfile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             Logger.getLogger(this.getClass()).log(Level.INFO, "despeckling...");
             outputFile = this.deSpeckleImage(image);
+
+            if (ConfigHelper.isDebugMode()) {
+                try {
+                    File testfile = new File(".\\temp\\6_despeckled_Result.jpg");
+                    ImageIO.write(outputFile, "jpg", testfile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
             /*this.removeLinesWithoutWords();
             this.analyzeInvoiceLayout();
@@ -119,7 +176,7 @@ public class ImagePreprocessor {
         op.addImage();
 
         op.adaptiveResize(3508, 2480);
-        op.addImage("png:-");
+        op.addImage("jpg:-");
 
         ConvertCmd convert = new ConvertCmd();
         Stream2BufferedImage s2b = new Stream2BufferedImage();
@@ -142,7 +199,7 @@ public class ImagePreprocessor {
         op.addImage();
 
         op.despeckle();
-        op.addImage("png:-");
+        op.addImage("jpg:-");
 
         ConvertCmd convert = new ConvertCmd();
         Stream2BufferedImage s2b = new Stream2BufferedImage();
@@ -156,9 +213,11 @@ public class ImagePreprocessor {
         IMOperation op = new IMOperation();
         op.addImage();
 
-        double value = DeSkewer.calculateRadiant(img);
+        //double value = DeSkewer.calculateRadiant(img);
+        // recommended by imagemagick: https://www.imagemagick.org/script/command-line-options.php#deskew
+        double value = 0.4;
         op.deskew(value);
-        op.addImage("png:-");
+        op.addImage("jpg:-");
 
         ConvertCmd convert = new ConvertCmd();
         Stream2BufferedImage s2b = new Stream2BufferedImage();
