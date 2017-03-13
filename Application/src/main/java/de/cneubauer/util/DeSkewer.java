@@ -9,6 +9,7 @@ import java.awt.image.DataBuffer;
  * This class calculates the Radian for descewing
  * TODO: link to sourcecode
  */
+@Deprecated
 public class DeSkewer {
     public static double calculateRadiant(BufferedImage image) {
         final double skewRadians;

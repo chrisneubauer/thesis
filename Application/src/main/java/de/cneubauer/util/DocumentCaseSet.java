@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Created by Christoph Neubauer on 15.02.2017.
  */
+//TODO: MOVE TO Model
 public class DocumentCaseSet {
     private DocumentCase invoiceNoCase;
     private DocumentCase invoiceDateCase;

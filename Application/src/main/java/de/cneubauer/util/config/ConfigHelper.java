@@ -104,7 +104,7 @@ public final class ConfigHelper {
         if (config == null) {
             new ConfigHelper();
         }
-        return FerdLevel.valueOf(config.get(Cfg.FERDPROFILE.getValue()));
+        return FerdLevel.valueOf(config.get(Cfg.FERDPROFILE.getValue()).toUpperCase());
     }
 
     public static boolean isDebugMode() {

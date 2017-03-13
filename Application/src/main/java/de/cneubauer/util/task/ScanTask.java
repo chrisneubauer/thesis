@@ -93,57 +93,62 @@ public class ScanTask extends Task {
         int counter = 0;
         Platform.runLater(() -> filesScanned.setText("0 / " + filesToScan.length));
         for (File f : filesToScan) {
-            Platform.runLater(() -> currentFile.setText(f.getName()));
-            ProcessResult r = new ProcessResult();
-            r.setDocName(f.getName());
-            r.setFile(f);
-            try {
-                Logger.getLogger(this.getClass()).log(Level.INFO, "reading file on path: " + f.getPath());
-                ImagePreprocessor preprocessor = new ImagePreprocessor(f.getPath());
-                BufferedImage preprocessedImage = preprocessor.preprocess();
+                Platform.runLater(() -> currentFile.setText(f.getName()));
+                ProcessResult r = new ProcessResult();
+                r.setDocName(f.getName());
+                r.setFile(f);
+                if (f.getName().endsWith(".pdf") || f.getName().endsWith(".jpg") || f.getName().endsWith(".png")) {
+                    try {
+                        Logger.getLogger(this.getClass()).log(Level.INFO, "reading file on path: " + f.getPath());
+                        ImagePreprocessor preprocessor = new ImagePreprocessor(f.getPath());
+                        BufferedImage preprocessedImage = preprocessor.preprocess();
 
-                Logger.getLogger(this.getClass()).log(Level.INFO, "initiating ocr threads...");
-                Platform.runLater(() -> this.status.setText("Scanning header, body and footer..."));
+                        Logger.getLogger(this.getClass()).log(Level.INFO, "initiating ocr threads...");
+                        Platform.runLater(() -> this.status.setText("Scanning header, body and footer..."));
 
-                // TODO: remove partitioning
-                ImagePartitioner partitioner = new ImagePartitioner(preprocessedImage);
-                //BufferedImage table = null;
-                /*if (partitioner.hasTable()) {
-                    table = partitioner.getTable();
-                }*/
-                BufferedImage[] imageParts = partitioner.process();
-                String[] ocrParts = this.performOCR(imageParts, preprocessedImage);
+                        // TODO: remove partitioning
+                        ImagePartitioner partitioner = new ImagePartitioner(preprocessedImage);
+                        //BufferedImage table = null;
+                    /*if (partitioner.hasTable()) {
+                        table = partitioner.getTable();
+                    }*/
+                        BufferedImage[] imageParts = partitioner.process();
+                        String[] ocrParts = this.performOCR(imageParts, preprocessedImage);
 
-                Platform.runLater(() -> status.setText("Extracting information..."));
+                        Platform.runLater(() -> status.setText("Extracting information..."));
 
-                HocrDocument hocrDocument = new HocrDocument(ocrParts[4]);
+                        HocrDocument hocrDocument = new HocrDocument(ocrParts[4]);
 
-                ScanStatus status = this.checkDocumentBeforeExtraction(hocrDocument);
+                        ScanStatus status = this.checkDocumentBeforeExtraction(hocrDocument);
 
-                if (status == ScanStatus.INVOICE) {
-                    ExtractionModel m = this.extractInformation(hocrDocument, ocrParts);
-                    r.setExtractionModel(m);
-                    r.setProblem("");
+                        if (status == ScanStatus.INVOICE) {
+                            ExtractionModel m = this.extractInformation(hocrDocument, ocrParts);
+                            r.setExtractionModel(m);
+                            r.setProblem("");
 
-                    if (this.resultValid(r)) {
-                        r.setStatus(ScanStatus.OK);
-                    }
-                    else {
-                        r.setStatus(ScanStatus.ISSUE);
-                        r.setProblem("Missing Information");
-                    }
-                } else {
-                    if (status == ScanStatus.PROFORMAINVOICE) {
-                        r.setProblem("Proforma invoice detected");
-                    } else if (status == ScanStatus.CREDITNOTE) {
-                        r.setProblem("Credit note detected");
+                            if (this.resultValid(r)) {
+                                r.setStatus(ScanStatus.OK);
+                            } else {
+                                r.setStatus(ScanStatus.ISSUE);
+                                r.setProblem("Missing Information");
+                            }
+                        } else {
+                            if (status == ScanStatus.PROFORMAINVOICE) {
+                                r.setProblem("Proforma invoice detected");
+                            } else if (status == ScanStatus.CREDITNOTE) {
+                                r.setProblem("Credit note detected");
+                            }
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        r.setProblem(ex.getMessage());
+                        r.setStatus(ScanStatus.ERROR);
                     }
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                r.setProblem(ex.getMessage());
-                r.setStatus(ScanStatus.ERROR);
-            }
+                else {
+                    r.setProblem("Unsupported filetype!");
+                    r.setStatus(ScanStatus.ERROR);
+                }
             current += percentage;
             processResults.add(counter, r);
             counter++;
