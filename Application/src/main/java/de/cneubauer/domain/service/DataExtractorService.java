@@ -42,7 +42,7 @@ public class DataExtractorService implements Runnable {
     private String body;
     private String footer;
     private HocrDocument table;
-    private double confidence = 1 - ConfigHelper.getConfidenceRate();
+    private double confidence = ConfigHelper.getConfidenceRate();
     private HocrDocument document;
     private DocumentCaseDao caseDao;
     private LegalPersonDao legalPersonDao;
@@ -90,17 +90,30 @@ public class DataExtractorService implements Runnable {
         result.setCreditor(this.getLegalPersonFromDatabase(this.getHocrDoument(), true));
         if (result.getCreditor() != null) {
             result = this.getCaseInformation(result);
+            if (result.getInvoiceNumber() == null || result.getInvoiceNumber().length() == 0) {
+                result.setInvoiceNumber(this.findInvoiceNumber());
+            }
+            if (result.getIssueDate().toLocalDate().compareTo(LocalDate.now()) == 0) {
+                result.setIssueDate(this.findIssueDate());
+            }
+            if (result.getDebitor() == null || result.getDebitor().getName().length() == 0) {
+                result.setDebitor(this.findDebitor());
+            }
         } else {
             String invNo = this.findInvoiceNumber();
             result.setInvoiceNumber(invNo);
             result.setIssueDate(this.findIssueDate());
-            result.setDebitor(this.getLegalPersonFromDatabase(this.getHocrDoument(), false));
+            result.setDebitor(this.findDebitor());
+            // try again
+            if (result.getDebitor() == null) {
+                result.setDebitor(this.getLegalPersonFromDatabase(this.getHocrDoument(), false));
+            }
         }
         if (this.findSkontoInformation()) {
             result.setHasSkonto(true);
             result.setSkonto(this.findSkontoValue());
         }
-        result.setDeliveryDate(this.findDeliveryDate());
+        result.setDeliveryDate(this.findDeliveryDate(result.getIssueDate()));
 
         InvoiceInformationHelper helper = this.findInvoiceValues();
 
@@ -112,6 +125,23 @@ public class DataExtractorService implements Runnable {
         result.setGrandTotal(helper.getGrandTotal());
 
         return result;
+    }
+
+    private LegalPerson findDebitor() {
+        String person = null;
+        String[] words = this.leftHeader.split("\\n");
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            if (word.contains("Herr") || word.contains("Frau")) {
+                // using substring removes pretitle
+                person = word.split(" ")[1] + " " + word.split(" ")[2];
+                break;
+            }
+        }
+        if (person != null) {
+            return new LegalPerson(person);
+        }
+        return null;
     }
 
     private Invoice getCaseInformation(Invoice result) {
@@ -479,6 +509,9 @@ public class DataExtractorService implements Runnable {
                 taxBasis = values[0] + "." + values[1];
             }
             result.setTaxBasisTotal(Double.valueOf(taxBasis));
+            if (Double.valueOf(taxBasis) > 0 && result.getLineTotal() == 0) {
+                result.setLineTotal(Double.valueOf(taxBasis));
+            }
         } catch (Exception ex) {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find tax basis total in OCR. Using default value");
             result.setTaxBasisTotal(0);
@@ -515,6 +548,10 @@ public class DataExtractorService implements Runnable {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find grand total in OCR. Using default value");
             result.setGrandTotal(0);
         }
+        if (result.getTaxTotal() > 0 && result.getTaxBasisTotal() > 0 && result.getGrandTotal() == 0) {
+            // otherwise use the values of tax basis + tax
+            result.setGrandTotal(result.getTaxBasisTotal() + result.getTaxTotal());
+        }
         // TODO: do we need to find these fields?..yup!
         result.setChargeTotal(0);
         result.setAllowanceTotal(0);
@@ -525,7 +562,7 @@ public class DataExtractorService implements Runnable {
      * Searchs for the delivery date in the string
      * @return  the date that has been found, or the current date if nothing has been found
      */
-    private java.sql.Date findDeliveryDate() {
+    private java.sql.Date findDeliveryDate(java.sql.Date issueDate) {
         String date = this.findValueInString(new String[] { "Lieferdatum"}, this.rightHeader);
         Calendar cal = this.convertStringToCalendar(date);
 
@@ -534,8 +571,8 @@ public class DataExtractorService implements Runnable {
         if (deliveryDate.getTime() > 0) {
             result = new java.sql.Date(deliveryDate.getTime());
         } else {
-            result = java.sql.Date.valueOf(LocalDate.now());
-            Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find delivery date in OCR. Using default value");
+            result = issueDate;
+            Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find delivery date in OCR. Using issue date");
         }
         return result;
     }
@@ -692,7 +729,7 @@ public class DataExtractorService implements Runnable {
      * @return  the issue date if it has been found, the current date if not
      */
     private java.sql.Date findIssueDate() {
-        String date = this.findValueInString(new String[] { "Rechnungsdatum"}, this.rightHeader);
+        String date = this.findValueInString(new String[] { "Datum", "Rechnungsdatum"}, this.rightHeader);
         Calendar cal = this.convertStringToCalendar(date);
 
         Date issueDate = cal.getTime();
@@ -712,6 +749,7 @@ public class DataExtractorService implements Runnable {
      * @return  the Calendar object with the given date
      */
     private Calendar convertStringToCalendar(String date) {
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Trying to convert date: " + date);
         Calendar cal = new Calendar.Builder().build();
         if (date.contains(".")) {
             String[] dateValues = date.split("\\.");
@@ -738,22 +776,30 @@ public class DataExtractorService implements Runnable {
             for (String line : lines) {
                 String[] parts = line.split(" ");
                 for (int i = 0; i < parts.length; i++) {
-                    String part = parts[i];
-                    if (part.contains("Rechnungs-Nr") || part.contains("Rechnungsnummer")) {
+                    String part = parts[i].toLowerCase();
+                    if (part.contains("rechnung") || part.contains("rechnungs-Nr") || part.contains("rechnungsnummer")) {
                         if (i < parts.length - 1) {
+                            if (parts[i+1].toLowerCase().contains("nr")) {
+                                if (i < parts.length - 2) {
+                                    return parts[i+2];
+                                }
+                            }
                             return parts[i + 1];
                         } else {
                             return "";
                         }
                     } else {
                         // try again with levenshtein distance
-                        int amountOfChanges = StringUtils.getLevenshteinDistance(part, "Rechnungs-Nr");
-                        double ratio = ((double) amountOfChanges) / (Math.max(part.length(), "Rechnungs-Nr".length()));
+                        int amountOfChanges = StringUtils.getLevenshteinDistance(part, "rechnungs-nr");
+                        double ratio = ((double) amountOfChanges) / (Math.max(part.length(), "rechnungs-nr".length()));
                         // take the line if ratio > 80%
                         if (ratio < confidence) {
-                            if (i < parts.length - 1) {
-                                return parts[i + 1];
+                            if (parts[i+1].toLowerCase().contains("nr")) {
+                                if (i < parts.length - 2) {
+                                    return parts[i+2];
+                                }
                             }
+                            return parts[i + 1];
                         }
                     }
                 }
@@ -907,7 +953,15 @@ public class DataExtractorService implements Runnable {
         }
     }
 
-    public Invoice getThreadInvoice() {return this.threadInvoice;}
+    public Invoice getThreadInvoice() {
+        if (this.threadInvoice == null) {
+            return null;
+        } else {
+            this.caseDao = null;
+            this.legalPersonDao = null;
+            return this.threadInvoice;
+        }
+    }
 
     public List<Record> getThreadRecord() {return this.threadRecord;}
 }

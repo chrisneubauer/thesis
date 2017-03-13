@@ -16,6 +16,7 @@ import java.time.LocalDate;
  * It takes the given invoice information and hands it to the ZugFerdTransformator
  * Output is the given PDF including a fully functional zugferd xml appended
  */
+@Deprecated
 public class ZugFerdExtendService {
     private ZugFerdTransformator transformator;
     private ScanDao dao;
@@ -25,6 +26,7 @@ public class ZugFerdExtendService {
         this.dao = new ScanDaoImpl();
     }
 
+    @Deprecated
     public byte[] appendInvoiceToPDF(byte[] originalPdf, Invoice i) throws IOException {
         io.konik.zugferd.Invoice konikInvoice = transformator.createFullConformalBasicInvoice(i);
         return transformator.appendInvoiceToPdf(originalPdf, konikInvoice);
@@ -35,6 +37,7 @@ public class ZugFerdExtendService {
      * @param file  the file that should be saved
      * @param i  the invoice that should be linked and saved
      */
+    @Deprecated
     public void save(byte[] file, Invoice i) {
         Scan scanToSave = new Scan();
         scanToSave.setCreatedDate(Date.valueOf(LocalDate.now()));

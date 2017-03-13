@@ -29,15 +29,20 @@ public class DatabaseResultsService {
      * @param   deb     the debitor to search for
      * @param   cred    the creditor to search for
      * @param   value   the value the total sum of the invoice has
+     * @param dateTo
      * @return  a list of all scans that match the specified criteria
      */
-    public List<Scan> getFromDatabase(LocalDate date, String deb, String cred, double value) {
+    public List<Scan> getFromDatabase(LocalDate date, String deb, String cred, double value, LocalDate dateTo) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "calling database..");
         scanDao = new ScanDaoImpl();
         invoiceDao = new InvoiceDaoImpl();
         List<Invoice> invoiceResults;
         if (date != null) {
-            invoiceResults = invoiceDao.getAllByDate(date);
+            if (dateTo != null) {
+                invoiceResults = invoiceDao.getAllBetweenDates(date, dateTo);
+            } else {
+                invoiceResults = invoiceDao.getAllByDate(date);
+            }
         } else {
             invoiceResults = invoiceDao.getAll();
         }

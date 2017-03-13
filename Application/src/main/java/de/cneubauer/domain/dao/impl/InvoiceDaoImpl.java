@@ -59,4 +59,28 @@ public class InvoiceDaoImpl extends AbstractDao<Invoice> implements InvoiceDao {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Results found: " + result.size());
         return result;
     }
+
+    @Override
+    public List<Invoice> getAllBetweenDates(LocalDate date, LocalDate dateTo) {
+        Logger.getLogger(this.getClass()).log(Level.INFO, "getting all by date: " + date.toString());
+
+        String hql = "FROM Invoice I WHERE (I.issueDate BETWEEN ?1 AND ?2)";
+
+        Query q = this.getSession().createQuery(hql);
+        q.setParameter(1, Date.valueOf(date));
+        q.setParameter(2, Date.valueOf(dateTo));
+
+        List results = q.getResultList();
+        List<Invoice> result = new ArrayList<>(results.size());
+
+        for (Object o : results) {
+            if (o instanceof Invoice) {
+                result.add((Invoice) o);
+            }
+        }
+
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Results found: " + result.size());
+        return result;
+
+    }
 }

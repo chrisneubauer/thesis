@@ -7,6 +7,8 @@ import de.cneubauer.domain.dao.KeywordDao;
 import de.cneubauer.util.DocumentCaseSet;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.sql.Date;
@@ -29,7 +31,10 @@ public class DocumentCaseDaoImpl extends AbstractDao<DocumentCase> implements Do
     public List<DocumentCase> getAllByCreditorName(String name) {
         String hql = "FROM DocumentCase c WHERE c.creditor.name = ?1";
 
-        Query q = this.getSession().createQuery(hql);
+        Session currentSession = this.getSessionFactory().openSession();
+        Transaction getTrans = currentSession.beginTransaction();
+
+        Query q = currentSession.createQuery(hql);
         Logger.getLogger(this.getClass()).log(Level.INFO, "Searching for Cases of Creditor " + name);
         q.setParameter(1, name);
 
@@ -39,6 +44,8 @@ public class DocumentCaseDaoImpl extends AbstractDao<DocumentCase> implements Do
         for (Object docCase : cases) {
             docCases.add((DocumentCase) docCase);
         }
+        getTrans.commit();
+        //currentSession.close();
         return docCases;
     }
 

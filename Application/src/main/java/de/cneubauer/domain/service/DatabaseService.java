@@ -7,6 +7,7 @@ import de.cneubauer.domain.dao.impl.*;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.ocr.hocr.HocrDocument;
+import de.cneubauer.transformation.ZugFerdTransformator;
 import de.cneubauer.util.DocumentCaseSet;
 
 import java.io.IOException;
@@ -35,9 +36,13 @@ public class DatabaseService {
         InvoiceDao invoiceDao = new InvoiceDaoImpl();
         invoiceDao.save(i);
 
+
         Scan scan = new Scan();
         try {
-            scan.setFile(Files.toByteArray(result.getFile()));
+            ZugFerdTransformator transformator = new ZugFerdTransformator();
+            byte[] file = Files.toByteArray(result.getFile());
+            byte[] enhancedFile = transformator.appendInvoiceToPDF(file, i);
+            scan.setFile(enhancedFile);
             scan.setCreatedDate(Date.valueOf(LocalDate.now()));
             scan.setInvoiceInformation(i);
             ScanDao scanDao = new ScanDaoImpl();
@@ -53,13 +58,13 @@ public class DatabaseService {
 
         DocumentCaseSet additionalSet;
         DocumentCaseSet oldSet = result.getExtractionModel().getCaseSet();
-        this.caseDao = new DocumentCaseDaoImpl();
 
         KeywordDao keywordDao = new KeywordDaoImpl();
         keywordList = keywordDao.getAll();
 
         this.creditorDao = new CreditorDaoImpl();
         this.creditorList = creditorDao.getAll();
+        this.caseDao = new DocumentCaseDaoImpl();
         // oldSet == null if there was no information to the creditor or the creditor has not been found
         if (oldSet == null) {
             additionalSet = this.checkCaseSet(result.getExtractionModel(), false);

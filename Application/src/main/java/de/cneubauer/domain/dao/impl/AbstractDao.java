@@ -40,13 +40,16 @@ public abstract class AbstractDao<T> implements IDao<T> {
      * @return  the session to the database. Opens a new session if there is none
      */
     public Session getSession() {
-        if (this.session == null) {
+        Session current = this.getSessionFactory().getCurrentSession();
+        if (current == null) {
             this.session = this.getSessionFactory().openSession();
+        } else {
+            this.session = current;
         }
         return this.session;
     }
 
-    private SessionFactory getSessionFactory() {
+    protected SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
@@ -62,27 +65,40 @@ public abstract class AbstractDao<T> implements IDao<T> {
     }
 
     public List<T> getAll() {
-        CriteriaQuery<T> query = this.getSession().getCriteriaBuilder().createQuery(clazz);
-        query.select(query.from(clazz));
-
-        Query<T> q2 = this.getSession().createQuery(query);
-        return q2.getResultList();
-    }
-
-    public void save(T entity) {
-        Transaction tx = null;
+        Session getSession = this.getSessionFactory().openSession();
+        Transaction tx = getSession.beginTransaction();
         try {
-            tx = this.getSession().beginTransaction();
+            CriteriaQuery<T> query = getSession.getCriteriaBuilder().createQuery(clazz);
+            query.select(query.from(clazz));
 
-            this.onSave(entity);
-
-            this.getSession().save(entity);
-            this.getSession().getTransaction().commit();
+            Query<T> q2 = getSession.createQuery(query);
+            return q2.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
             if (tx != null) {
                 tx.rollback();
             }
+        }
+        return null;
+    }
+
+    public void save(T entity) {
+        Session saveSession = this.getSessionFactory().openSession();
+        Transaction tx = saveSession.beginTransaction();
+        try {
+            this.onSave(entity);
+
+            saveSession.save(entity);
+            //this.getSession().save(entity);
+            //this.getSession().getTransaction().commit();
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            saveSession.close();
         }
     }
 

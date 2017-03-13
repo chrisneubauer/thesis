@@ -16,4 +16,6 @@ public interface InvoiceDao extends IDao<Invoice> {
      * @return  a list of invoices that are issued on the given date
      */
     List<Invoice> getAllByDate(LocalDate date);
+
+    List<Invoice> getAllBetweenDates(LocalDate date, LocalDate dateTo);
 }
