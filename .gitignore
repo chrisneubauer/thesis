@@ -8,3 +8,4 @@
 *.so
 **/Application/temp/*
 **/Application/target/*
+**/Application/src/test/resources/**
