@@ -1,5 +1,5 @@
 
--- CREATE SCHEMA ferd_transformator;
+CREATE SCHEMA ferd_transformator;
 
 USE ferd_transformator;
 
