@@ -4,3 +4,8 @@ Important things that have to be made:
 
 - Forgetful learning of positions per Creditor
 
+- Extract Accounting Record as Textfile
+
+- Efficient searching for Accounts
+
+- Deletion of Accounting Records

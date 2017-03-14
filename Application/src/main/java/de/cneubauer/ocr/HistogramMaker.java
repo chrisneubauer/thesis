@@ -28,7 +28,7 @@ public class HistogramMaker {
 
     void calculateHistogram(BufferedImage input, boolean whiteHistogram) {
         makeHistogram(input, whiteHistogram);
-    };
+    }
 
     BufferedImage makeWhiteHistogram(BufferedImage input) {
         return this.makeHistogram(input, true);
