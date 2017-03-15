@@ -1,6 +1,5 @@
 package de.cneubauer.gui.controller;
 
-import de.cneubauer.util.config.Cfg;
 import de.cneubauer.util.config.ConfigHelper;
 import de.cneubauer.util.enumeration.AppLang;
 import javafx.application.Platform;

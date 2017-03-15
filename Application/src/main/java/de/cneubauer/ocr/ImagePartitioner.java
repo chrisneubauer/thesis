@@ -27,28 +27,9 @@ public class ImagePartitioner {
     private BufferedImage footer;
     private BufferedImage table;
 
-    public ImagePartitioner(File fileToScan) {
-        this.scanFile = fileToScan;
-    }
-
     public ImagePartitioner(BufferedImage fileToScan) {
         this.scanFile = null;
         this.fullImage = fileToScan;
-    }
-
-    public boolean hasTable() {
-        try {
-            if (this.scanFile != null) {
-                this.convertFileToImage();
-            }
-            this.table = this.findTableInInvoice(this.body, false);
-            if (this.table != null) {
-                return true;
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to process image! Error: " + ex.getMessage());
-        }
-        return false;
     }
 
     public BufferedImage getTable() {
@@ -99,7 +80,6 @@ public class ImagePartitioner {
     public BufferedImage findTableInInvoice(BufferedImage image, boolean whiteTable) {
         int yPosOfFirstHorizontalLine = 0;
         int yPosOfLastHorizontalLine = 0;
-
 
         //Normalizer normalizer = new Normalizer();
         //BufferedImage normalizedImage = normalizer.process(image);

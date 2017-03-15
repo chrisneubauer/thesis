@@ -5,11 +5,15 @@ import de.cneubauer.AbstractTest;
 import de.cneubauer.domain.bo.LegalPerson;
 import io.konik.zugferd.Invoice;
 import junit.framework.AssertionFailedError;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,40 +26,32 @@ import java.time.format.DateTimeFormatter;
 public class ZugFerdTransformatorTest extends AbstractTest {
     private ZugFerdTransformator transformator;
 
-    @org.junit.Before
+    @Before
     public void setUp() throws Exception {
         super.setUp();
         transformator = new ZugFerdTransformator();
     }
 
-    @org.junit.After
+    @After
     public void tearDown() throws Exception {
         transformator = null;
     }
 
-    @org.junit.Test
-    public void testCreatingInvoice() throws Exception {
-        System.out.println("Testing simple invoice creation process...");
-
-        Invoice inv = transformator.createMockInvoice();
-
-        Assert.assertNotNull(inv);
-        Assert.assertEquals("20131122-42", inv.getHeader().getInvoiceNumber());
-        Assert.assertEquals(inv.getTrade().getAgreement().getBuyer().getName(), "Buyer Inc.");
-        Assert.assertEquals(inv.getTrade().getAgreement().getSeller().getName(), "Seller Inc.");
-    }
-
     @Test
     public void fullInvoiceExtractionTest() {
-        Invoice generatedInvoice = transformator.createMockInvoice();
+        de.cneubauer.domain.bo.Invoice i = this.createInvoiceForTesting();
+        Invoice generatedInvoice = transformator.createFullConformalBasicInvoice(i);
+        byte[] output;
         try {
-            String filepath = "../../../../../target/test-classes/invoice/2015-11-26_Reifen Ebay.pdf";
-            transformator.addMockInvoiceToPDF(filepath, "mockTest");
+            String filepath = "../../../../../target/test-classes/data/generation/template1_geerated0.pdf";
+            output = transformator.appendInvoiceToPDF(Files.toByteArray(new File(filepath)), i);
         } catch (Exception e) {
             throw new AssertionFailedError("Unable to add invoice to pdf");
         }
-        Invoice result = transformator.extractInvoiceFromMockPdf("mockTest");
-        transformator.validateMockInvoiceFromPdf("mockTest");
+        InputStream outFileStream = new ByteArrayInputStream(output);
+        Invoice result = transformator.getInvoiceFromPdf(outFileStream);
+
+        transformator.pdfIsZugFerdConform(output);
 
         Assert.assertEquals(result.getHeader().getInvoiceNumber(), generatedInvoice.getHeader().getInvoiceNumber());
         Assert.assertEquals(result.getHeader().getCode(), generatedInvoice.getHeader().getCode());
@@ -74,19 +70,11 @@ public class ZugFerdTransformatorTest extends AbstractTest {
     }
 
     @Test
-    public void createFullConformalComfortInvoiceTest() {
-        de.cneubauer.domain.bo.Invoice i = this.createInvoiceForTesting();
-
-        Invoice valid = transformator.createFullConformalComfortInvoice(i);
-        Assert.assertNotNull(valid);
-    }
-
-    @Test
     public void testValidPDF() {
         boolean result = false;
         try {
             byte[] pdf = Files.toByteArray(new File("C:\\Users\\Christoph\\Desktop\\appendedInvoice.pdf"));
-            Invoice mock = transformator.createMockInvoice();
+            Invoice mock = transformator.createFullConformalBasicInvoice(this.createInvoiceForTesting());
             byte[] output = transformator.appendInvoiceToPdf(pdf, mock);
             result = transformator.pdfIsZugFerdConform(output);
         } catch (IOException e) {

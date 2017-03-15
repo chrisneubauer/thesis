@@ -30,10 +30,6 @@ public class HistogramMaker {
         makeHistogram(input, whiteHistogram);
     }
 
-    BufferedImage makeWhiteHistogram(BufferedImage input) {
-        return this.makeHistogram(input, true);
-    }
-
     BufferedImage makeHistogram(BufferedImage input) {
         return this.makeHistogram(input, false);
     }

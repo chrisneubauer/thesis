@@ -2,8 +2,6 @@ package de.cneubauer.gui.util;
 
 import com.sun.glass.ui.Robot;
 import com.sun.javafx.scene.control.skin.ComboBoxListViewSkin;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
@@ -11,7 +9,8 @@ import javafx.scene.control.IndexRange;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 // found on http://tech.chitgoks.com/2013/08/20/how-to-create-autocomplete-combobox-or-textfield-in-java-fx-2/ on 11.01.2017
 
@@ -29,26 +28,15 @@ public class AutoCompleteComboBoxListener extends ComboBox implements EventHandl
         this.comboBox.setOnKeyReleased(AutoCompleteComboBoxListener.this);
 
         // add a focus listener such that if not in focus, reset the filtered typed keys
-        this.comboBox.getEditor().focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    // in focus
-                }
-                else {
-                    lastLength = 0;
-                    sb.delete(0, sb.length());
-                    selectClosestResultBasedOnTextFieldValue(false, false);
-                }
+        this.comboBox.getEditor().focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                lastLength = 0;
+                sb.delete(0, sb.length());
+                selectClosestResultBasedOnTextFieldValue(false, false);
             }
         });
 
-        this.comboBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                selectClosestResultBasedOnTextFieldValue(true, true);
-            }
-        });
+        this.comboBox.setOnMouseClicked(event -> selectClosestResultBasedOnTextFieldValue(true, true));
     }
 
     @Override
@@ -74,7 +62,9 @@ public class AutoCompleteComboBoxListener extends ComboBox implements EventHandl
         // remove selected string index until end so only unselected text will be recorded
         try {
             sb.delete(ir.getStart(), sb.length());
-        } catch (Exception e) { }
+        } catch (Exception e) {
+            Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to remove selected string index");
+        }
 
         ObservableList items = comboBox.getItems();
         for (int i=0; i<items.size(); i++) {
@@ -117,7 +107,9 @@ public class AutoCompleteComboBoxListener extends ComboBox implements EventHandl
                     lv.scrollTo(lv.getSelectionModel().getSelectedIndex());
                     found = true;
                     break;
-                } catch (Exception e) { }
+                } catch (Exception e) {
+                    Logger.getLogger(this.getClass()).log(Level.ERROR, "Error getting list view");
+                }
             }
         }
 

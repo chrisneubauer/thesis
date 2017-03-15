@@ -2,7 +2,6 @@ package de.cneubauer;
 
 import de.cneubauer.domain.bo.*;
 import de.cneubauer.domain.service.DataExtractorService;
-import de.cneubauer.domain.service.ZugFerdExtendService;
 import de.cneubauer.ml.LearningService;
 import de.cneubauer.ml.Model;
 import de.cneubauer.ml.ModelWriter;
@@ -18,10 +17,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -31,13 +28,9 @@ import java.util.Set;
  */
 public class ApplicationTest extends AbstractTest {
     private ImagePreprocessor preprocessor;
-    private ImagePartitioner partitioner;
     private TesseractWrapper wrapper;
-    private DataExtractorService dataExtractorService;
     private ZugFerdTransformator transformator;
-    private ZugFerdExtendService zugFerdExtendService;
     private ModelReader reader;
-    private ModelWriter writer;
     private LearningService learningService;
     private Logger logger;
 
@@ -47,7 +40,7 @@ public class ApplicationTest extends AbstractTest {
         this.wrapper = new TesseractWrapper();
         this.transformator = new ZugFerdTransformator();
         this.reader = new ModelReader();
-        this.writer = new ModelWriter();
+        ModelWriter writer = new ModelWriter();
         this.learningService = new LearningService();
         this.logger = Logger.getLogger(this.getClass());
     }
@@ -57,9 +50,10 @@ public class ApplicationTest extends AbstractTest {
         this.logger.log(Level.INFO, "initiating full application test");
         this.logger.log(Level.INFO, "preprocessing image");
         BufferedImage preprocessedImage = this.preprocessor.preprocess();
+
         this.logger.log(Level.INFO, "partitioning");
-        this.partitioner = new ImagePartitioner(preprocessedImage);
-        BufferedImage[] parts = this.partitioner.process();
+        ImagePartitioner partitioner = new ImagePartitioner(preprocessedImage);
+        BufferedImage[] parts = partitioner.process();
 
         String[] stringParts = new String[parts.length];
 
@@ -129,9 +123,6 @@ public class ApplicationTest extends AbstractTest {
                                 credits.add(ar.getAccount());
                             }
                         }
-                        //m.addToCreditAccounts(credits);
-                        //m.setDebit(debits);
-                        //this.writer.writeToFile(m);
                     }
 
                 }

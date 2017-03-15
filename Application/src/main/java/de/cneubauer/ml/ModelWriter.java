@@ -30,7 +30,7 @@ public class ModelWriter {
      * Writes the model information to the learning file
      * @param model the model to be saved
      */
-    public void writeToFile(Model model) {
+    void writeToFile(Model model) {
         try {
             File modelFile = this.openFile();
             FileWriter fw = new FileWriter(modelFile, true);
@@ -38,27 +38,13 @@ public class ModelWriter {
             sb.append("[");
             sb.append(model.getPosition());
             sb.append("][");
-            boolean first = true;
-            for (Map.Entry<Account, Double> m : model.getCredit().entrySet()) {
-                if (!first) {
-                    sb.append(";");
-                }
-                sb.append(m.getKey().getAccountNo());
-                sb.append(":");
-                sb.append(m.getValue());
-                first = false;
-            }
+            String credit = this.getEntryString(model.getCredit());
+            sb.append(credit);
+
             sb.append("][");
-            first = true;
-            for (Map.Entry<Account, Double> m : model.getDebit().entrySet()) {
-                if (!first) {
-                    sb.append(";");
-                }
-                sb.append(m.getKey().getAccountNo());
-                sb.append(":");
-                sb.append(m.getValue());
-                first = false;
-            }
+
+            String debit = this.getEntryString(model.getDebit());
+            sb.append(debit);
             sb.append("]");
 
             fw.write(System.lineSeparator());
@@ -67,5 +53,20 @@ public class ModelWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String getEntryString(Map<Account, Double> credOrDeb) {
+        boolean first = true;
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<Account, Double> m : credOrDeb.entrySet()) {
+            if (!first) {
+                result.append(";");
+            }
+            result.append(m.getKey().getAccountNo());
+            result.append(":");
+            result.append(m.getValue());
+            first = false;
+        }
+        return result.toString();
     }
 }

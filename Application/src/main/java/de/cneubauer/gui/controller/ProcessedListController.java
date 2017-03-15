@@ -1,9 +1,5 @@
 package de.cneubauer.gui.controller;
 
-import de.cneubauer.domain.bo.Record;
-import de.cneubauer.domain.bo.Invoice;
-import de.cneubauer.domain.helper.AccountFileHelper;
-import de.cneubauer.domain.helper.InvoiceFileHelper;
 import de.cneubauer.domain.service.DatabaseService;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;

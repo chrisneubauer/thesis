@@ -22,4 +22,9 @@ public interface IDao<T> {
      * @param entity  the entity to be saved in the database
      */
     void save(T entity);
+
+    /**
+     * Stops the session of the dao instance
+     */
+    void stopAccess();
 }

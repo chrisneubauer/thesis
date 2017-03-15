@@ -4,15 +4,22 @@ import de.cneubauer.AbstractTest;
 import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.domain.bo.*;
 import de.cneubauer.domain.dao.*;
+import de.cneubauer.gui.model.AccountingRecordModel;
+import de.cneubauer.ml.Model;
+import de.cneubauer.ml.ModelReader;
+import de.cneubauer.ml.NaiveBayesHelper;
+import de.cneubauer.ml.NaiveBayesHelperTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 26.10.2016.
@@ -27,6 +34,7 @@ public class FullApplicationPersistenceTest extends AbstractTest {
     private LegalPersonDao legalPersonDao;
     private InvoiceDao invoiceDao;
     private ScanDao scanDao;
+    private AccountDao accountDao;
 
     @Before
     public void setUp() throws Exception {
@@ -42,6 +50,7 @@ public class FullApplicationPersistenceTest extends AbstractTest {
         this.legalPersonDao = new LegalPersonDaoImpl();
         this.invoiceDao = new InvoiceDaoImpl();
         this.scanDao = new ScanDaoImpl();
+        this.accountDao = new AccountDaoImpl();
     }
 
     @After
@@ -56,7 +65,7 @@ public class FullApplicationPersistenceTest extends AbstractTest {
         this.legalPersonDao = null;
         this.invoiceDao = null;
         this.scanDao = null;
-
+        this.accountDao = null;
     }
 
     @Test
@@ -186,5 +195,42 @@ public class FullApplicationPersistenceTest extends AbstractTest {
         Assert.isTrue(persistentAg.getUsedInCountries().contains(persistentGermany));
 
         Assert.isTrue(persistentInvoice2.getDebitor().getAddress().getCountry() == germany);
+    }
+
+    @Test
+    public void testSaveAllDaos() {
+        LegalPerson creditor = new LegalPerson("BigDataCreditor AG");
+        LegalPerson debitor = new LegalPerson("BigData Client");
+
+        this.legalPersonDao.save(creditor);
+        this.legalPersonDao.save(debitor);
+
+        for (int i = 0; i < 40; i++) {
+            Invoice invoice = this.generateInvoice(creditor, debitor);
+            Scan s = new Scan();
+            s.setInvoiceInformation(invoice);
+            invoiceDao.save(invoice);
+            scanDao.save(s);
+        }
+
+        /*List<Account> accs = this.accountDao.getAll();
+        Record record = new Record();
+        record.g
+        AccountRecord ar1 = new AccountRecord();
+        ar1.setAccount(accs.get(3));
+        ar1.setRecord();
+        AccountingRecordModel model = new AccountingRecordModel(0);
+        model.set*/
+    }
+
+    private Invoice generateInvoice(LegalPerson creditor, LegalPerson debitor) {
+        Invoice invoice = new Invoice();
+        invoice.setDebitor(debitor);
+        invoice.setCreditor(creditor);
+        invoice.setInvoiceNumber(String.valueOf(Math.random()*50000));
+        invoice.setGrandTotal(Math.random() * 200);
+        invoice.setCreatedDate(Date.valueOf(LocalDate.now()));
+        invoice.setDeliveryDate(Date.valueOf(LocalDate.now().plusDays(3)));
+        return invoice;
     }
 }

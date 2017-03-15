@@ -3,7 +3,6 @@ package de.cneubauer.ocr;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
-import de.cneubauer.util.config.ConfigHelper;
 import magick.MagickException;
 
 import org.apache.log4j.Level;
@@ -36,9 +35,7 @@ import java.io.*;
 public class ImagePreprocessor {
     private String tempPath = ".\\temp\\tempImage.jpg";
     private String tempPathConverted = ".\\temp\\tempImageConverted.jpg";
-
     private BufferedImage inputFile;
-    private double gaussianRatio = 10.0;
 
     public ImagePreprocessor(BufferedImage imageToProcess) {
         ProcessStarter.setGlobalSearchPath(".\\portable\\imagemagick\\ImageMagick-7.0.3-6-portable-Q16-x86;");
@@ -81,88 +78,29 @@ public class ImagePreprocessor {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Preprocessing started...");
             BufferedImage image = this.inputFile;
 
-            if (ConfigHelper.isDebugMode()) {
-                try {
-                    File testfile = new File(".\\temp\\1_original.jpg");
-                    ImageIO.write(image, "jpg", testfile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
             Logger.getLogger(this.getClass()).log(Level.INFO, "resizing...");
             BufferedImage outputFile = this.resizeImage(image);
 
             image = outputFile;
-
-            if (ConfigHelper.isDebugMode()) {
-                try {
-                    File testfile = new File(".\\temp\\2_resized.jpg");
-                    ImageIO.write(outputFile, "jpg", testfile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
 
             Logger.getLogger(this.getClass()).log(Level.INFO, "adjusting to 300dpi...");
             outputFile = this.adjustDPI(image);
 
             image = outputFile;
 
-            if (ConfigHelper.isDebugMode()) {
-                try {
-                    File testfile = new File(".\\temp\\3_adjustedTo300DPI.jpg");
-                    ImageIO.write(outputFile, "jpg", testfile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
             Logger.getLogger(this.getClass()).log(Level.INFO, "deskewing...");
             outputFile = this.deSkewImage(image);
 
             image = outputFile;
-
-            if (ConfigHelper.isDebugMode()) {
-                try {
-                    File testfile = new File(".\\temp\\4_deskewed.jpg");
-                    ImageIO.write(outputFile, "jpg", testfile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
 
             Logger.getLogger(this.getClass()).log(Level.INFO, "greyscaling...");
             outputFile = this.greyScaleImage(image);
 
             image = outputFile;
 
-            if (ConfigHelper.isDebugMode()) {
-                try {
-                    File testfile = new File(".\\temp\\5_greyscaled.jpg");
-                    ImageIO.write(outputFile, "jpg", testfile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
             Logger.getLogger(this.getClass()).log(Level.INFO, "despeckling...");
             outputFile = this.deSpeckleImage(image);
 
-            if (ConfigHelper.isDebugMode()) {
-                try {
-                    File testfile = new File(".\\temp\\6_despeckled_Result.jpg");
-                    ImageIO.write(outputFile, "jpg", testfile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            /*this.removeLinesWithoutWords();
-            this.analyzeInvoiceLayout();
-            this.findBaselineForWords();
-            this.separateWords();
-            this.normaliseAspectRatioAndScale();*/
             Logger.getLogger(this.getClass()).log(Level.INFO, "Preprocessing done. Returning image...");
             return outputFile;
         } catch (MagickException | InterruptedException | IOException | IM4JavaException e) {
@@ -213,8 +151,6 @@ public class ImagePreprocessor {
         IMOperation op = new IMOperation();
         op.addImage();
 
-        //double value = DeSkewer.calculateRadiant(img);
-        // recommended by imagemagick: https://www.imagemagick.org/script/command-line-options.php#deskew
         double value = 0.4;
         op.deskew(value);
         op.addImage("jpg:-");
@@ -233,11 +169,10 @@ public class ImagePreprocessor {
         JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(fos);
         JPEGEncodeParam jpegEncodeParam = jpegEncoder.getDefaultJPEGEncodeParam(image);
         jpegEncodeParam.setDensityUnit(JPEGEncodeParam.DENSITY_UNIT_DOTS_INCH);
-        //jpegEncodeParam.setQuality(0.75f, false);
 
         jpegEncodeParam.setQuality(1, false);
-        jpegEncodeParam.setXDensity(300); //DPI rate 100, 200 or 300
-        jpegEncodeParam.setYDensity(300); //DPI rate 100, 200 or 300
+        jpegEncodeParam.setXDensity(300);
+        jpegEncodeParam.setYDensity(300);
         jpegEncoder.setJPEGEncodeParam(jpegEncodeParam);
         try {
             jpegEncoder.encode(image, jpegEncodeParam);
@@ -253,37 +188,6 @@ public class ImagePreprocessor {
             return null;
         }
     }
-
-    /*public BufferedImage reduceNoise() {
-        Raster source = inputFile.getRaster();
-        BufferedImage output = new BufferedImage(inputFile.getWidth(), inputFile.getHeight(), inputFile.getType());
-        WritableRaster out = output.getRaster();
-
-        int currVal;
-        double newVal;
-        double gaussian;
-        int bands  = out.getNumBands();
-        int width  = inputFile.getWidth();
-        int height = inputFile.getHeight();
-        java.util.Random randGen = new java.util.Random();
-
-        for (int j=0; j<height; j++) {
-            for (int i=0; i<width; i++) {
-                gaussian = randGen.nextGaussian();
-
-                for (int b=0; b<bands; b++) {
-                    newVal = gaussianRatio * gaussian;
-                    currVal = source.getSample(i, j, b);
-                    newVal = newVal + currVal;
-                    if (newVal < 0)   newVal = 0.0;
-                    if (newVal > 255) newVal = 255.0;
-
-                    out.setSample(i, j, b, (int)(newVal));
-                }
-            }
-        }
-        return output;
-    }*/
 
     public BufferedImage getImage() {
         return this.inputFile;

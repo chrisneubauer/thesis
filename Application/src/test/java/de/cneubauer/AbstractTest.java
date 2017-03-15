@@ -45,6 +45,8 @@ public class AbstractTest {
         AbstractDao<CorporateForm> corporateFormDao = new CorporateFormDaoImpl();
         AbstractDao<Address> addressDao = new AddressDaoImpl();
         AbstractDao<Country> countryDao = new CountryDaoImpl();
+        AbstractDao<Creditor> creditorDao = new CreditorDaoImpl();
+        AbstractDao<DocumentCase> documentCaseDao = new DocumentCaseDaoImpl();
 
         String deleteScans = "DELETE FROM Scan";
         scanDao.getSession().beginTransaction();
@@ -57,6 +59,18 @@ public class AbstractTest {
         query = invoiceDao.getSession().createQuery(deleteInvoices);
         query.executeUpdate();
         invoiceDao.getSession().getTransaction().commit();
+
+        String deleteDocCases = "DELETE FROM DocumentCase";
+        documentCaseDao.getSession().beginTransaction();
+        query = documentCaseDao.getSession().createQuery(deleteDocCases);
+        query.executeUpdate();
+        documentCaseDao.getSession().getTransaction().commit();
+
+        String deleteCreditors = "DELETE FROM Creditor";
+        creditorDao.getSession().beginTransaction();
+        query = creditorDao.getSession().createQuery(deleteCreditors);
+        query.executeUpdate();
+        creditorDao.getSession().getTransaction().commit();
 
         String deletePersons = "DELETE FROM LegalPerson";
         personDao.getSession().beginTransaction();

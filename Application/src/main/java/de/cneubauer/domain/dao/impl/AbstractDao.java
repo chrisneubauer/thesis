@@ -20,7 +20,6 @@ public abstract class AbstractDao<T> implements IDao<T> {
     private SessionFactory sessionFactory;
     private Configuration config;
     private Class<T> clazz;
-    public int sessions = 0;
 
     AbstractDao(Class<T> paramClass) {
         this.clazz = paramClass;
@@ -28,12 +27,6 @@ public abstract class AbstractDao<T> implements IDao<T> {
         File configFile = new File("src/main/resources/hibernate.cfg.xml");
         this.getConfig().configure(configFile);
         this.sessionFactory = this.getConfig().buildSessionFactory();
-        /*if (sessions < 1) {
-            this.session = this.getSessionFactory().openSession();
-            sessions++;
-        } else {
-            this.session = this.getSessionFactory().getCurrentSession();
-        }*/
     }
 
     /**
@@ -49,7 +42,7 @@ public abstract class AbstractDao<T> implements IDao<T> {
         return this.session;
     }
 
-    protected SessionFactory getSessionFactory() {
+    SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
@@ -89,8 +82,6 @@ public abstract class AbstractDao<T> implements IDao<T> {
             this.onSave(entity);
 
             saveSession.save(entity);
-            //this.getSession().save(entity);
-            //this.getSession().getTransaction().commit();
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,4 +94,14 @@ public abstract class AbstractDao<T> implements IDao<T> {
     }
 
     protected abstract void onSave(T entity);
+
+    public void stopAccess() {
+        if (this.session != null) {
+            this.session.close();
+        }
+
+        if (!this.getSessionFactory().isClosed()) {
+            this.getSessionFactory().close();
+        }
+    }
 }

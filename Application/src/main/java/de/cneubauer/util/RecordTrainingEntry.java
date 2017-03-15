@@ -1,23 +1,16 @@
 package de.cneubauer.util;
 
-import de.cneubauer.domain.bo.Account;
-
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Christoph Neubauer on 07.01.2017.
+ * Entry for the accounting record training model
  */
 public class RecordTrainingEntry {
     public String position;
     public Map<String, Double> debitAccounts;
     public Map<String, Double> creditAccounts;
-
-    public RecordTrainingEntry(String position) {
-        this.position = position;
-        this.debitAccounts = new HashMap<>(0);
-        this.creditAccounts = new HashMap<>(0);
-    }
 
     public RecordTrainingEntry() {
         this.debitAccounts = new HashMap<>(0);

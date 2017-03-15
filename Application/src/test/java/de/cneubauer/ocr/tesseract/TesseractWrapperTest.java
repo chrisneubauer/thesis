@@ -2,12 +2,11 @@ package de.cneubauer.ocr.tesseract;
 
 import de.cneubauer.AbstractTest;
 import de.cneubauer.ocr.ImagePreprocessor;
-import de.cneubauer.ocr.tesseract.TesseractWrapper;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -34,82 +33,17 @@ public class TesseractWrapperTest extends AbstractTest {
     }
 
     @Test
-    public void testInitOcr() throws Exception {
-        String path = ".\\src\\test\\resources\\text\\eurotext.tif";
-        String result = wrapper.initOcr(path);
-        if (result != null) {
-            System.out.println(result);
-            Assert.assertTrue(result.length() > 0);
-        }
-    }
-
-    @Test
-    public void testInitOcrWithPng() throws Exception {
-        String path = ".\\src\\test\\resources\\text\\wa2.png";
-        String result = wrapper.initOcr(path);
-        if (result != null) {
-            System.out.println(result);
-            Assert.assertTrue(result.length() > 0);
-        }
-    }
-
-    @Test
-    public void testInitOcrWithPdf() throws Exception {
-        String path = ".\\src\\test\\resources\\invoice\\2015-11-26_Reifen Ebay.pdf";
-        String result = wrapper.initOcr(path);
-        if (result != null) {
-            System.out.println(result);
-            Assert.assertTrue(result.length() > 0);
-            Assert.assertTrue(result.contains("mein-reifen-outlet"));
-            Assert.assertTrue(result.contains("26. Nov. 2015"));
-        }
-    }
-
-    @Test
-    public void testInitOcrWithPdf2() throws Exception {
-        String path = ".\\src\\test\\resources\\invoice\\2015-07-10 Rechnung Yamaha YDP 142.pdf";
-        String result = wrapper.initOcr(path);
-        if (result != null) {
-            System.out.println(result);
-            Assert.assertTrue(result.length() > 0);
-            Assert.assertTrue(result.contains("Musik Klier"));
-            Assert.assertTrue(result.contains("Christoph Neubauer"));
-            Assert.assertTrue(result.contains("10.07.15"));
-        }
-    }
-
-    @Test
-    public void testInitOcrWithPdf3() throws Exception {
-        String path = ".\\src\\test\\resources\\invoice\\2015-05-15 Rechnung Ersatzteil Dachfenster.pdf";
-        String result = wrapper.initOcr(path);
-        if (result != null) {
-            System.out.println(result);
-            Assert.assertTrue(result.length() > 0);
-        }
-    }
-
-    @Test
-    public void testInitOcrWithPdf3Processed() throws Exception {
-        String path = ".\\src\\test\\resources\\invoice\\2015-05-15 Rechnung Ersatzteil Dachfenster_Processed.pdf";
-        String result = wrapper.initOcr(path);
-        if (result != null) {
-            System.out.println(result);
-            Assert.assertTrue(result.length() > 0);
-        }
-    }
-
-    @Test
     public void testOCRKeywordBruttoSum() throws Exception {
         String path1 = ".\\src\\test\\resources\\invoice\\KeywordSuccess\\Bruttosumme\\Scan_20160822_161042_012.jpg";
         String path2 = ".\\src\\test\\resources\\invoice\\KeywordSuccess\\Bruttosumme\\Scan_20160822_161042_019.jpg";
         String path3 = ".\\src\\test\\resources\\invoice\\KeywordSuccess\\Bruttosumme\\Scan_20160822_163306_001.jpg";
         String path4 = ".\\src\\test\\resources\\invoice\\KeywordSuccess\\Bruttosumme\\Scan_20160822_163306_005.jpg";
         String path5 = ".\\src\\test\\resources\\invoice\\KeywordSuccess\\Bruttosumme\\Scan_20160822_163306_007.jpg";
-        String result1 = wrapper.initOcr(path1);
-        String result2 = wrapper.initOcr(path2);
-        String result3 = wrapper.initOcr(path3);
-        String result4 = wrapper.initOcr(path4);
-        String result5 = wrapper.initOcr(path5);
+        String result1 = wrapper.initOcr(ImageIO.read(new File(path1)));
+        String result2 = wrapper.initOcr(ImageIO.read(new File(path2)));
+        String result3 = wrapper.initOcr(ImageIO.read(new File(path3)));
+        String result4 = wrapper.initOcr(ImageIO.read(new File(path4)));
+        String result5 = wrapper.initOcr(ImageIO.read(new File(path5)));
 
         if (result1 != null) {
             Assert.assertTrue(result1.contains("Bruttosumme"));
@@ -133,30 +67,6 @@ public class TesseractWrapperTest extends AbstractTest {
         }
     }
 
-    //the intent of this test is to check if using other languages will reveal better results
-    @Test
-    public void testDifferentLanguages() throws Exception {
-        String path = ".\\src\\test\\resources\\invoice\\2015-11-26_Reifen Ebay.pdf";
-        String englishResult = wrapper.initOcr(path);
-
-        wrapper.setLanguage("deu");
-        String germanResult = wrapper.initOcr(path);
-
-        if (englishResult != null) {
-            System.out.println(englishResult);
-            Assert.assertTrue(englishResult.length() > 0);
-            Assert.assertTrue(englishResult.contains("mein-reifen-outlet"));
-            Assert.assertTrue(englishResult.contains("26. Nov. 2015"));
-        }
-        if (germanResult != null) {
-            System.out.println(germanResult);
-            Assert.assertTrue(germanResult.length() > 0);
-            Assert.assertTrue(germanResult.contains("mein-reifen-outlet"));
-            Assert.assertTrue(germanResult.contains("26. Nov. 2015"));
-        }
-
-    }
-
     @Test
     public void testImprovementByDictionaryAndPreprocessing() throws Exception{
         String path = "..\\Data\\Datenwerk4.pdf";
@@ -169,30 +79,6 @@ public class TesseractWrapperTest extends AbstractTest {
         String output = this.wrapper.initOcr(inputImage);
 
         System.out.println(output);
-    }
-
-    @Test
-    public void testDifferenceBetweenSplitPagesAndWholePage() throws Exception {
-        String path = ".\\src\\test\\resources\\invoice\\SplitPage\\";
-        String result = wrapper.initOcr(path + "original.jpg");
-        String lines[] = result.split("\\r?\\n");
-        File outputFile = new File(path + "original.txt");
-        Files.write(outputFile.toPath(), Arrays.asList(lines));
-
-        result = wrapper.initOcr(path + "header.jpg");
-        lines = result.split("\\r?\\n");
-        outputFile = new File(path + "header.txt");
-        Files.write(outputFile.toPath(), Arrays.asList(lines));
-
-        result = wrapper.initOcr(path + "body.jpg");
-        lines = result.split("\\r?\\n");
-        outputFile = new File(path + "body.txt");
-        Files.write(outputFile.toPath(), Arrays.asList(lines));
-
-        result = wrapper.initOcr(path + "footer.jpg");
-        lines = result.split("\\r?\\n");
-        outputFile = new File(path + "footer.txt");
-        Files.write(outputFile.toPath(), Arrays.asList(lines));
     }
 
     @Test
@@ -209,12 +95,10 @@ public class TesseractWrapperTest extends AbstractTest {
     @Test
     public void testHOCROutput() {
         String path = "..\\Temp\\hoerex1.pdf";
-        //BufferedImage file = ImageIO.read(new File(path));
         ImagePreprocessor preprocessor = new ImagePreprocessor(path);
 
         BufferedImage inputImage = preprocessor.preprocess();
         String result = this.wrapper.initOcr(inputImage, true);
-        //String resultNoOcr = this.wrapper.initOcr(inputImage, false);
         File noocrFile = new File("..\\hocrStringOutput.txt");
 
         String lines[] = result.split("\\r?\\n");
@@ -222,7 +106,6 @@ public class TesseractWrapperTest extends AbstractTest {
         File outputFile = new File("..\\hocrOutput.xml");
         File outputFile2 = new File("..\\hocrOutput.jpg");
         try {
-            //Files.write(noocrFile.toPath(), Arrays.asList(resultNoOcr.split("\\r?\\n!")));
             Files.write(outputFile.toPath(), Arrays.asList(lines));
             ImageIO.write(inputImage, "jpg", outputFile2);
         } catch (IOException e) {
@@ -232,7 +115,7 @@ public class TesseractWrapperTest extends AbstractTest {
 
 
     private void doOcrAndSave(String input, String output) throws Exception {
-        String result = wrapper.initOcr(input);
+        String result = wrapper.initOcr(new File(input));
         String[] lines = result.split("\\r?\\n");
         File outputFile = new File(output);
         Files.write(outputFile.toPath(), Arrays.asList(lines));

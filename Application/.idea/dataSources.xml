@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="0">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="hibernate.cfg.xml" uuid="21b95e0e-ebb1-44ce-baff-c743e9ee7046">
-      <driver-ref>mysql</driver-ref>
+      <driver-ref>3f10892d-fc1b-49bd-8b88-43b7abdc1326</driver-ref>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost/ferd_transformator</jdbc-url>
       <libraries>
@@ -12,7 +12,7 @@
       </libraries>
     </data-source>
     <data-source source="LOCAL" name="src:main:hibernate.cfg.xml" uuid="b5cbee57-fef4-4a21-93c5-420c75dd15ea">
-      <driver-ref>mysql</driver-ref>
+      <driver-ref>3f10892d-fc1b-49bd-8b88-43b7abdc1326</driver-ref>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://127.0.0.1:3306/ferd_transformator?autoReconnect=true</jdbc-url>
       <libraries>
@@ -22,7 +22,7 @@
       </libraries>
     </data-source>
     <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="653a7b0b-25b9-4f71-b9f9-4e3bccc9672d">
-      <driver-ref>mysql</driver-ref>
+      <driver-ref>3f10892d-fc1b-49bd-8b88-43b7abdc1326</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://127.0.0.1:3306/ferd_transformator?autoReconnect=true&amp;useSSL=false</jdbc-url>
@@ -42,4 +42,3 @@
     </data-source>
   </component>
 </project>
-

@@ -16,16 +16,6 @@ public class TesseractWorker implements Runnable {
     private BufferedImage imgToScan;
     private boolean runWithHocr;
 
-    public TesseractWorker(File f) {
-        this.fileToScan = f;
-        this.imgToScan = null;
-    }
-
-    public TesseractWorker(BufferedImage img) {
-        this.imgToScan = img;
-        this.fileToScan = null;
-    }
-
     public TesseractWorker(BufferedImage img, boolean hocr) {
         this.imgToScan = img;
         this.fileToScan = null;

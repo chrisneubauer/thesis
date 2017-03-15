@@ -1,15 +1,14 @@
 package de.cneubauer.ocr.tesseract;
 
 import de.cneubauer.util.config.ConfigHelper;
-import net.sourceforge.tess4j.*;
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,23 +47,7 @@ public class TesseractWrapper {
         return instance;
     }
 
-    /*
-    public String initOcr(BufferedImage file, String config, String value) {
-        ITesseract instance = this.getTesseractInstance();
-        if (config != null && value != null) {
-            instance.setTessVariable(config, value);
-        }
-
-        String result = "";
-        try {
-            result = instance.doOCR(file);
-        } catch (TesseractException e) {
-            System.err.println(e.getMessage());
-        }
-        return result;
-    }*/
-
-    public String initOcr(BufferedImage file, boolean hocr) {
+    private String initOcr(BufferedImage imageFile, File file, boolean hocr) {
         Tesseract instance = (Tesseract) this.getTesseractInstance();
 
         if (hocr) {
@@ -74,11 +57,23 @@ public class TesseractWrapper {
 
         String result = "";
         try {
-            result = instance.doOCR(file);
+            if (imageFile != null) {
+                result = instance.doOCR(imageFile);
+            } else {
+                result = instance.doOCR(file);
+            }
         } catch (TesseractException e) {
             System.err.println(e.getMessage());
         }
         return result;
+    }
+
+    public String initOcr(BufferedImage file, boolean hocr) {
+        return this.initOcr(file, null, hocr);
+    }
+
+    String initOcr(File file, boolean hocr) {
+        return this.initOcr(null, file, hocr);
     }
 
     /**
@@ -87,59 +82,14 @@ public class TesseractWrapper {
      */
     public String initOcr(BufferedImage file) {
         return this.initOcr(file, true);
-        /*ITesseract instance = this.getTesseractInstance();
-
-        String result = "";
-        try {
-            result = instance.doOCR(file);
-        } catch (TesseractException e) {
-            System.err.println(e.getMessage());
-        }
-        return result;*/
-    }
-
-    /**
-     * @param path  the path where the file to be scanned is located
-     * @return  the ocr result as a String
-     */
-    @Deprecated
-    public String initOcr(String path) {
-        File imageFile = new File(path);
-        return this.initOcr(imageFile);
     }
 
     /**
      * @param file  the file to be scanned
      * @return  the ocr result as a String
      */
-    public String initOcr(File file) {
+    String initOcr(File file) {
         return this.initOcr(file, true);
-        /*ITesseract instance = this.getTesseractInstance();
-
-        String result = "";
-        try {
-            result = instance.doOCR(file);
-        } catch (TesseractException e) {
-            System.err.println(e.getMessage());
-        }
-        return result;*/
-    }
-
-    public String initOcr(File file, boolean hocr) {
-        Tesseract instance = (Tesseract) this.getTesseractInstance();
-
-        if (hocr) {
-            instance.setHocr(true);
-            instance.setPageSegMode(3);
-        }
-
-        String result = "";
-        try {
-            result = instance.doOCR(file);
-        } catch (TesseractException e) {
-            System.err.println(e.getMessage());
-        }
-        return result;
     }
 
     /**

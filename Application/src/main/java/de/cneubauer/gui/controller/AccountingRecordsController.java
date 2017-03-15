@@ -83,10 +83,16 @@ public class AccountingRecordsController extends SplitPaneController {
     private List<AccountingRecordModel> recordsFound;
     private SplitPaneController superCtrl;
     private int index = 1;
+    private List<Account> accounts;
 
     void initData(List<Record> data, SplitPaneController superCtrl) {
         this.superCtrl = superCtrl;
         Logger.getLogger(this.getClass()).log(Level.INFO, "initiating AccountingRecordsController data");
+
+        AccountDao accountDao = new AccountDaoImpl();
+        this.accounts = accountDao.getAll();
+        accountDao.stopAccess();
+
         List<AccountingRecordModel> records = this.convertToAccountingRecordModel(data);
         this.setRecordsFound(records);
         this.possiblePosition.getScene().getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
@@ -147,9 +153,7 @@ public class AccountingRecordsController extends SplitPaneController {
         toDropDownAccountThree.setConverter(this.createAccountConverter());
         toDropDownAccountFour.setConverter(this.createAccountConverter());
 
-        AccountDao accountDao = new AccountDaoImpl();
-        ObservableList<Account> accounts = FXCollections.observableArrayList(accountDao.getAll());
-
+        ObservableList<Account> accounts = FXCollections.observableArrayList(this.accounts);
         Logger.getLogger(this.getClass()).log(Level.INFO, "adding " + accounts.size() + " elements to account dropdowns");
 
         fromDropDownAccountOne.setItems(accounts);
@@ -257,26 +261,6 @@ public class AccountingRecordsController extends SplitPaneController {
             }
         };
     }
-
-    /*void addRevisedToFile() {
-        // check if all records have been revised before saving
-        //if (this.validateAccountingRecords()) {
-            for (AccountingRecordModel acc : this.recordsFound) {
-                //if (acc.isRevised()) {
-                    AccountFileHelper.addAccountingRecordModel(acc);
-                //}
-            }
-        //}
-    }*/
-
-    /*private boolean validateAccountingRecords() {
-        for (AccountingRecordModel record : this.getRecordsFound()) {
-            if (!record.isRevised()) {
-                return false;
-            }
-        }
-        return true;
-    }*/
 
     public void nextRecord() {
         if (this.getRecordsFound() != null && this.getRecordsFound().size() > this.index) {
@@ -725,6 +709,7 @@ public class AccountingRecordsController extends SplitPaneController {
     }
 
     public void deleteCurrentEntry() {
+        //TODO: Bug if we are on position 2 of 2 positions
         this.prevRecord();
         this.getRecordsFound().remove(this.index);
     }

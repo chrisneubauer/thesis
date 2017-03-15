@@ -2,7 +2,6 @@ package de.cneubauer.ml;
 
 import de.cneubauer.domain.bo.Account;
 import de.cneubauer.domain.bo.AccountRecord;
-import de.cneubauer.domain.bo.Record;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,11 +37,7 @@ public class Model {
         int levDistance = StringUtils.getLevenshteinDistance(this.getPosition(), positionToCompare);
         int length = this.getPosition().length();
         double distance = (double) levDistance / (double) length;
-        if (distance < 1 - ConfigHelper.getConfidenceRate()) {
-            return true;
-        } else {
-            return false;
-        }
+        return distance < 1 - ConfigHelper.getConfidenceRate();
 
         //return position.equals(positionToCompare);
     }
@@ -61,7 +56,7 @@ public class Model {
         this.position = position;
     }
 
-    public Map<Account, Double> getDebit() {
+    Map<Account, Double> getDebit() {
         return debit;
     }
 
@@ -69,11 +64,11 @@ public class Model {
         return credit;
     }
 
-    public void addToDebitAccounts(Account debit, double percentualValue) {
+    void addToDebitAccounts(Account debit, double percentualValue) {
         this.debit.put(debit, percentualValue);
     }
 
-    public void addToCreditAccounts(Account credit, double percentualValue) {
+    void addToCreditAccounts(Account credit, double percentualValue) {
         this.credit.put(credit, percentualValue);
     }
 
@@ -98,7 +93,7 @@ public class Model {
         return result;
     }
 
-    public void setProbability(float probability) {
+    void setProbability(float probability) {
         this.probability = probability;
     }
 

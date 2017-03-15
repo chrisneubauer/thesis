@@ -44,12 +44,10 @@ public class ResultsController extends GUIController {
     @FXML private TextField extractedSkonto;
     @FXML private TextField extractedDeliveryDate;
     private Invoice model;
-    private Invoice oldModel;
 
     void initData(Invoice extractedInformation, SplitPaneController superCtrl) {
         this.superCtrl = superCtrl;
         this.model = extractedInformation;
-        this.oldModel = extractedInformation;
         this.updateModel(extractedInformation);
         this.extractedDebitor.getScene().getStylesheets().add(String.valueOf(getClass().getResource("../../../../css/validationError.css")));
         this.addAllListeners();
@@ -255,14 +253,8 @@ public class ResultsController extends GUIController {
 
     void addRevisedToFile() {
         // check if all records have been revised before saving
-        //if (this.validateFieldsBeforeSave()) {
-            if (this.model.isRevised()) {
-                InvoiceFileHelper.write(this.model.getDebitor().getName(), this.model.getCreditor().getName());
-            }
-        //}
-    }
-
-    public void checkReviewed() {
-        this.model.setRevised(true);
+        if (this.model.isRevised()) {
+            InvoiceFileHelper.write(this.model.getDebitor().getName(), this.model.getCreditor().getName());
+        }
     }
 }

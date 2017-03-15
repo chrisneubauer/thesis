@@ -16,13 +16,10 @@ public class ImageCropper {
     private boolean[] importantRows;
     private BufferedImage imageToCrop;
     private int counter = 1;
-    private String outputDir = ".\\temp\\areas\\";
 
     public ImageCropper(int threshold) {
         this.threshold = threshold;
     }
-
-    public ImageCropper() {}
 
     public void cropImages() {
         int width = this.imageToCrop.getWidth();
@@ -34,7 +31,8 @@ public class ImageCropper {
                 int end = Integer.parseInt(s.split("-")[1]);
                 BufferedImage sub = this.imageToCrop.getSubimage(0, start, width, end - start);
 
-                File test = new File(this.outputDir + "cropped_" + this.counter + ".png");
+                String outputDir = ".\\temp\\areas\\";
+                File test = new File(outputDir + "cropped_" + this.counter + ".png");
                 try {
                     ImageIO.write(sub, "png", test);
                 } catch (IOException e) {
@@ -66,16 +64,8 @@ public class ImageCropper {
         return rows;
     }
 
-    public BufferedImage getImageToCrop() {
-        return imageToCrop;
-    }
-
     public void setImageToCrop(BufferedImage imageToCrop, boolean[] importantRows) {
         this.imageToCrop = imageToCrop;
         this.importantRows = importantRows;
-    }
-
-    public void setOutputDir(String dir) {
-        this.outputDir = dir;
     }
 }

@@ -15,42 +15,10 @@ import java.util.List;
  * Postprocessor to improve output of images by checking dictionary values
  */
 public class PostProcessor {
-    private double confidence = 1 - ConfigHelper.getConfidenceRate();
-    private String textToProcess;
     private HocrDocument documentToProcess;
-
-    public PostProcessor(String text) {
-        this.textToProcess = text;
-        this.documentToProcess = null;
-    }
 
     public PostProcessor(HocrDocument doc) {
         this.documentToProcess = doc;
-        this.textToProcess = null;
-    }
-
-    public String improveValues() {
-        String[] separated = this.textToProcess.split(" ");
-        List<String> dict = this.readDictionaryValues();
-
-        // compare every word in the sequence with values in the dictionary
-        for (String word : separated) {
-            for (String dictWord : dict) {
-                // replace the word if the dictionary word is probably the right word
-                if (StringUtils.getLevenshteinDistance(word, dictWord) < this.confidence) {
-                    word = dictWord;
-                }
-            }
-        }
-
-        // reunite the words and return them
-        StringBuilder sb = new StringBuilder();
-        for (String word : separated) {
-            sb.append(word);
-            sb.append(" ");
-        }
-
-        return sb.toString();
     }
 
     public HocrDocument postProcess() {
