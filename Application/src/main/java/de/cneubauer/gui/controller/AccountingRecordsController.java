@@ -121,6 +121,11 @@ public class AccountingRecordsController extends SplitPaneController {
 
             records.add(model);
         }
+        if (records.size() == 0) {
+            AccountingRecordModel model = new AccountingRecordModel(1);
+            model.setRecord(new Record());
+            records.add(model);
+        }
         return records;
     }
 
@@ -487,6 +492,7 @@ public class AccountingRecordsController extends SplitPaneController {
             img = new Image("img/Circle_Green.png");
         }
         this.getConfidenceImage().setImage(img);
+        this.setCurrentRecord(String.valueOf(currentModel.getIndex()));
     }
 
     // when called, invoice has been reviewed by the user
@@ -706,6 +712,8 @@ public class AccountingRecordsController extends SplitPaneController {
         AccountingRecordModel model = new AccountingRecordModel(this.getRecordsFound().size() + 1);
         model.setRecord(new Record());
         this.getRecordsFound().add(model);
+        this.index = this.getRecordsFound().size();
+        this.updateAccountingRecordView(this.getRecordsFound().get(this.index - 1));
     }
 
     public void deleteCurrentEntry() {
