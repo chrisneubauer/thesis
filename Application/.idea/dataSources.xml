@@ -36,6 +36,12 @@
       </driver-properties>
       <libraries>
         <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.40/mysql-connector-license.txt</url>
+        </library>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.40/mysql-connector-java-5.1.40-bin.jar</url>
+        </library>
+        <library>
           <url>file://D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\lib\mysql\mysql-connector-java-5.1.40-bin.jar</url>
         </library>
       </libraries>

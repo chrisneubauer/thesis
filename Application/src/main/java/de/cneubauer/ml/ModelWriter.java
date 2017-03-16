@@ -30,7 +30,7 @@ public class ModelWriter {
      * Writes the model information to the learning file
      * @param model the model to be saved
      */
-    void writeToFile(Model model) {
+    public void writeToFile(Model model) {
         try {
             File modelFile = this.openFile();
             FileWriter fw = new FileWriter(modelFile, true);

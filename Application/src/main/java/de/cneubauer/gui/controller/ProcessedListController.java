@@ -1,8 +1,12 @@
 package de.cneubauer.gui.controller;
 
+import de.cneubauer.domain.bo.Record;
 import de.cneubauer.domain.service.DatabaseService;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
+import de.cneubauer.ml.LearningService;
+import de.cneubauer.ml.Model;
+import de.cneubauer.ml.ModelWriter;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
@@ -83,14 +87,12 @@ public class ProcessedListController extends GUIController {
         for (ProcessResult result : this.model) {
             if (result.getStatus().equals(ScanStatus.OK)) {
                 service.saveProcessResult(result);
-                //Invoice i = result.getExtractionModel().getInvoiceInformation();
-               // InvoiceFileHelper.write(i.getCreditor().getName(), i.getDebitor().getName());
-                //List<Record> recordList = result.getExtractionModel().getRecords();
-                //for (Record record : recordList) {
-
-                 //   AccountFileHelper.addAccountingRecord(record);
-                    //AccountFileHelper.write(record.getEntryText(), record.getDebit().getAccountNo());
-                //}
+                ModelWriter writer = new ModelWriter();
+                LearningService service1 = new LearningService();
+                for (Record r : result.getExtractionModel().getUpdatedRecords()) {
+                    Model m = service1.createModel(r);
+                    writer.writeToFile(m);
+                }
                 counter++;
             }
         }

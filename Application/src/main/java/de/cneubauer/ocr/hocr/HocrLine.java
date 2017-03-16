@@ -28,6 +28,7 @@ public class HocrLine extends HocrElement {
                 }
             } else if (part.contains("class='ocrx_word'")) {
                 HocrWord word = new HocrWord(part);
+                word.setParent(this);
                 this.addSubElement(word);
             }
         }

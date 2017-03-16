@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Christoph Neubauer on 14.02.2017.
  * Represents the document in the HOCR output format
  */
-public class HocrDocument {
+public class HocrDocument extends HocrElement {
     private List<HocrPage> pages;
 
     public HocrDocument(String document) {
@@ -19,22 +19,26 @@ public class HocrDocument {
         for (String line : lines) {
             if (line.contains("<div class='ocr_page'")) {
                 HocrPage page = new HocrPage(line);
+                page.setParent(this);
                 currentPage++;
                 this.pages.add(page);
             }
             if (line.contains("<div class='ocr_carea'")) {
                 HocrArea area = new HocrArea(line);
+                area.setParent(this.getPage(currentPage));
 
                 this.getPage(currentPage).addSubElement(area);
                 currentArea = area.getId();
             }
             if (line.contains("<p class='ocr_par")) {
                 HocrParagraph paragraph = new HocrParagraph(line);
+                paragraph.setParent(this.getPage(currentPage).getSubElement(currentArea));
                 this.getPage(currentPage).getSubElement(currentArea).addSubElement(paragraph);
                 currentParagraph = paragraph.getId();
             }
             if (line.contains("<span class='ocr_line'")) {
                 HocrLine hocrLine = new HocrLine(line);
+                hocrLine.setParent(this.getPage(currentPage).getSubElement(currentArea).getSubElement(currentParagraph));
                 this.getPage(currentPage).getSubElement(currentArea).getSubElement(currentParagraph).addSubElement(hocrLine);
             }
         }

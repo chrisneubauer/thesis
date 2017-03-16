@@ -9,6 +9,8 @@ import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.ocr.hocr.HocrDocument;
 import de.cneubauer.transformation.ZugFerdTransformator;
 import de.cneubauer.util.DocumentCaseSet;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -122,6 +124,15 @@ public class DatabaseService {
         pos = doc.getPage(0).findPosition("Rechnung");
         if (pos != null) {
             additionalSet.setDocumentTypeCase(new DocumentCase(c, caseId, this.keywordList.get(0), pos));
+        }
+
+        for (Record r : extractionModel.getUpdatedRecords()) {
+            //TODO: Add old set comparison
+            pos = doc.getPage(0).findPosition(r.getEntryText());
+            if (pos != null) {
+                Logger.getLogger(this.getClass()).log(Level.INFO, "Saving case for position " + r.getEntryText());
+                additionalSet.addPositionCase(new DocumentCase(c, caseId, this.keywordList.get(5), pos));
+            }
         }
 
         return additionalSet;

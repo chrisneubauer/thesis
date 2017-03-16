@@ -9,7 +9,6 @@ import de.cneubauer.domain.dao.impl.CreditorDaoImpl;
 import de.cneubauer.domain.dao.impl.DocumentCaseDaoImpl;
 import de.cneubauer.domain.dao.impl.KeywordDaoImpl;
 import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
-import de.cneubauer.domain.helper.AccountFileHelper;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
 import de.cneubauer.domain.helper.TableContentFileHelper;
 import de.cneubauer.domain.helper.TableEndFileHelper;
@@ -17,8 +16,8 @@ import de.cneubauer.ml.LearningService;
 import de.cneubauer.ml.Model;
 import de.cneubauer.ocr.hocr.*;
 import de.cneubauer.util.DocumentCaseSet;
-import de.cneubauer.util.RecordTrainingEntry;
 import de.cneubauer.util.config.ConfigHelper;
+import de.cneubauer.util.enumeration.CaseKey;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -130,8 +129,7 @@ public class DataExtractorService implements Runnable {
     private LegalPerson findDebitor() {
         String person = null;
         String[] words = this.leftHeader.split("\\n");
-        for (int i = 0; i < words.length; i++) {
-            String word = words[i];
+        for (String word : words) {
             if (word.contains("Herr") || word.contains("Frau")) {
                 // using substring removes pretitle
                 person = word.split(" ")[1] + " " + word.split(" ")[2];
@@ -283,12 +281,104 @@ public class DataExtractorService implements Runnable {
 
     private List<Record> extractAccountingRecordInformationFromHocr() {
         List<Record> records = new LinkedList<>();
-        //TODO: Additional filtering through the branch of the company
-        //TODO: Filtering if invoice or voucher
-        //TODO: We could use the case approach in here too!
-        int index = 0;
-        boolean found = false;
         boolean endReached;
+        LegalPerson possibleCreditor = this.getLegalPersonFromDatabase(this.getHocrDoument(), true);
+
+        if (possibleCreditor != null) {
+            Creditor creditor = null;
+            for (Creditor c : this.creditorList) {
+                if (c.getLegalPerson().getId() == possibleCreditor.getId()) {
+                    creditor = c;
+                    break;
+                }
+            }
+
+            List<DocumentCase> cases = this.caseDao.getAllByCreditorName(possibleCreditor.getName());
+
+            List<DocumentCase> positionCase = new LinkedList<>();
+            int highestCase = 0;
+            this.caseSet = new DocumentCaseSet();
+
+            for (DocumentCase documentCase : cases) {
+                if (documentCase.getKeyword().getId() == CaseKey.POSITION) {
+                    positionCase.add(documentCase);
+                }
+                if (documentCase.getCaseId() > highestCase) {
+                    highestCase = documentCase.getCaseId();
+                }
+            }
+
+            int minStartX = 2000;
+            int minStartY = 2000;
+            int possibleMaxX = 0;
+            int possibleMaxY = 0;
+
+            // getting starting values of Y and X positions in the document as well as possible endings
+            for (DocumentCase position : positionCase) {
+                String pos = position.getPosition();
+                // 0: startX, 1: startY, 2: endX, 3: endY
+                int startX = Integer.valueOf(pos.split("\\+")[0]);
+                minStartX = startX < minStartX ? startX : minStartX;
+                int startY = Integer.valueOf(pos.split("\\+")[1]);
+                minStartY = startY < minStartY ? startY : minStartY;
+                int endX = Integer.valueOf(pos.split("\\+")[2]);
+                possibleMaxX = endX > possibleMaxX ? endX : possibleMaxX;
+                int endY = Integer.valueOf(pos.split("\\+")[3]);
+                possibleMaxY = endY > possibleMaxY ? endY : possibleMaxY;
+            }
+
+            List<HocrElement> words = this.document.getPage(0).getRecursiveElementsByPosition(new int[]{minStartX, minStartY, possibleMaxX, possibleMaxY}, 20);
+
+            // remove hocrarea and only use words
+            /*List<HocrElement> lines = new LinkedList<>();
+            for (HocrElement ele : parts) {
+                if (ele instanceof HocrArea) {
+                    List<HocrElement> paragraphs = ele.getSubElements();
+                    for (HocrElement par : paragraphs) {
+                        lines.addAll(par.getSubElements());
+                    }
+                }
+                else if (ele instanceof HocrParagraph) {
+                    lines.addAll(ele.getSubElements());
+                }
+                else {
+                    lines.add(ele);
+                }
+            }*/
+
+            // new highest case:
+            highestCase = highestCase + 1;
+
+            LearningService service = new LearningService();
+            List<HocrElement> lines = new LinkedList<>();
+            for (HocrElement word : words) {
+                lines.add(word.getParent());
+            }
+            for (HocrElement line : lines) {
+                for (HocrElement word : words) {
+                    String position = word.getValue();
+                    endReached = this.lineContainsTableEndInformation(position);
+                    if (!endReached) {
+                        Record r = new Record();
+                        String recordLine = this.removeFinancialInformationFromRecordLine(position);
+                        double value = this.getValueFromLine(line.getValue());
+
+                        Model m = service.getMostLikelyModel(recordLine);
+                        if (m != null) {
+                            r.setEntryText(m.getPosition());
+                            r.setRecordAccounts(m.getAsAccountRecord(value));
+                            r.setProbability(m.getProbability());
+                            records.add(r);
+                            this.caseSet.addPositionCase(new DocumentCase(creditor, highestCase, keywordList.get(5), position));
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            return records;
+        }
         return null;
     }
 
@@ -298,9 +388,6 @@ public class DataExtractorService implements Runnable {
      */
     private List<Record> extractAccountingRecordInformation() {
         List<Record> records = new LinkedList<>();
-        //TODO: Additional filtering through the branch of the company
-        //TODO: Filtering if invoice or voucher
-        //TODO: We could use the case approach in here too!
         int index = 0;
         boolean found = false;
         boolean endReached;
@@ -463,26 +550,6 @@ public class DataExtractorService implements Runnable {
 
         line = m.replaceAll("");
         return line;
-    }
-
-    /**
-     * checks if record already exists in learning file
-     * if this is the case, the existing string is being returned
-     * if not, the given string is returned again
-     * @param position  the position to be searched for
-     * @return  the RecordTrainingEntry with the position found in the learning file
-     */
-    private RecordTrainingEntry recordInLearningFile(String position) {
-        LearningService service = new LearningService();
-        Model m = service.getMostLikelyModel(position);
-
-        if (m != null) {
-            RecordTrainingEntry entry = new RecordTrainingEntry();
-            entry.setPosition(m.getPosition());
-            return entry;
-        }
-        // AccountFileHelper.getConfig().containsValue(position);
-       return AccountFileHelper.findAccountingRecord(position);
     }
 
     /**
@@ -949,7 +1016,11 @@ public class DataExtractorService implements Runnable {
         if (this.extractInvoice) {
             this.threadInvoice = this.extractInvoiceInformationFromHocr();
         } else {
-            this.threadRecord = this.extractAccountingRecordInformation();
+            this.threadRecord = this.extractAccountingRecordInformationFromHocr();
+            if (this.threadRecord == null || this.threadRecord.size() == 0) {
+                Logger.getLogger(this.getClass()).log(Level.INFO, "No record information in hOCR, using default strategy");
+                this.threadRecord = extractAccountingRecordInformation();
+            }
         }
     }
 

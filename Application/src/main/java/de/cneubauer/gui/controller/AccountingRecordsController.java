@@ -710,8 +710,22 @@ public class AccountingRecordsController extends SplitPaneController {
 
     public void deleteCurrentEntry() {
         //TODO: Bug if we are on position 2 of 2 positions
-        this.prevRecord();
-        this.getRecordsFound().remove(this.index);
+        // Fixed: Test if works
+        if (this.index > 1) {
+            this.prevRecord();
+            this.getRecordsFound().remove(this.index);
+        } else {
+            // if only one record is left that should be removed
+            if (this.recordsFound.size() == 1) {
+                this.clearTextfields();
+                this.setPossiblePosition("");
+                this.getConfidenceImage().setImage(new Image("img/Circle_Red.png"));
+            } else {
+                // this time we want to delete the first record and go to the next
+                this.nextRecord();
+                this.getRecordsFound().remove(this.index - 1);
+            }
+        }
     }
 
     private void setCurrentRecord(String currentRecord) {

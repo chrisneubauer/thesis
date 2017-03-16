@@ -1,8 +1,10 @@
 package de.cneubauer.util;
 
 import de.cneubauer.domain.bo.DocumentCase;
+import de.cneubauer.util.enumeration.CaseKey;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ public class DocumentCaseSet {
     private DocumentCase buyerCase;
     private DocumentCase documentTypeCase;
     private DocumentCase sellerCase;
+    private List<DocumentCase> positionCases;
 
     public DocumentCase getInvoiceNoCase() {
         return invoiceNoCase;
@@ -62,5 +65,22 @@ public class DocumentCaseSet {
 
     public DocumentCase getSellerCase() {
         return sellerCase;
+    }
+
+    public List<DocumentCase> getPositionCases() {
+        if (positionCases == null) {
+            positionCases = new LinkedList<>();
+        }
+        return positionCases;
+    }
+
+    public void addPositionCase(DocumentCase documentCase) {
+        if (documentCase.getKeyword().getId() == CaseKey.POSITION) {
+            this.getPositionCases().add(documentCase);
+        }
+    }
+
+    public void setPositionCases(List<DocumentCase> positionCases) {
+        this.positionCases = positionCases;
     }
 }

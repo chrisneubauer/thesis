@@ -5,60 +5,605 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/AccountDaoImplTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/ZugFerdExtendService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/cbr/CbrBlock.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/cbr/CbrDocumentGraph.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/cbr/CbrField.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/cbr/CbrGraphEdge.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/cbr/CbrGraphVertice.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/cbr/CbrHelper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/cbr/CbrKeyWordStructure.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/cbr/CbrLine.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/cbr/CbrPatternStructure.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/cbr/CbrPosition.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/cbr/CbrWord.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/DeSkewer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/FXML/mainMenu.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/invoice/2015-05-15 Rechnung Ersatzteil Dachfenster.pdf" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/database/DBInformationHolder.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/database/MySQLConnector.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/Account.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/AccountRecord.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/AccountType.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/Address.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/CorporateForm.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/Country.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/Creditor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/DocumentCase.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/Invoice.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/Keyword.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/LegalPerson.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/Record.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/bo/Scan.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/AccountDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/AccountRecordDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/AccountTypeDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/AddressDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/CorporateFormDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/CountryDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/CreditorDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/DocumentCaseDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/IDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/InvoiceDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/KeywordDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/LegalPersonDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/RecordDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/ScanDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/AbstractDao.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/AccountDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/AccountRecordDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/AccountTypeDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/AddressDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/CorporateFormDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/CountryDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/CreditorDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/DocumentCaseDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/InvoiceDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/KeywordDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/LegalPersonDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/RecordDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/dao/impl/ScanDaoImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/helper/AbstractFileHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/helper/AccountFileHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/helper/InvoiceFileHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/helper/InvoiceInformationHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/helper/TableContentFileHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/helper/TableEndFileHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/DataExtractorService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/DatabaseResultsService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/DatabaseService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/ZugFerdExtendService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/validation/AccountingRecordValidator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/domain/service/validation/InvoiceValidator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/Controller/DatabaseController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/Controller/GUIController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/Start.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/AccountingRecordsController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/DatabaseResultsController$ButtonCell$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/DatabaseResultsController$ButtonCell.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/DatabaseResultsController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$ButtonCell$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController$ButtonCell.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProcessedListController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ProgressController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/ResultsController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/SettingsController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/controller/SplitPaneController.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/model/AccountingRecordModel.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/model/ExtractionModel.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/model/ProcessResult.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/model/SearchResult.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/util/AutoCompleteComboBoxListener$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/util/AutoCompleteComboBoxListener$2.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/gui/util/AutoCompleteComboBoxListener.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ml/LearningService.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ml/Model.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ml/ModelReader.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ml/ModelWriter.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ml/NaiveBayesHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ml/classification/Classification.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ml/classification/Classifier.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ml/classification/IFeatureProbability.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ml/classification/bayes/BayesClassifier.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/CannyEdgeDetector.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/HistogramMaker.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/HoughLine.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/HoughTransformator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/ImageCropper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/ImagePartitioner.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/ImagePreprocessor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/MedianFilter.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/OwnCannyEdgeDetector.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/Partitioner.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/PostProcessor.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/RankFilter.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/Skeletonizer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/hocr/HocrArea.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/hocr/HocrDocument.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/hocr/HocrElement.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/hocr/HocrLine.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/hocr/HocrPage.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/hocr/HocrParagraph.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/hocr/HocrWord.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/tesseract/TesseractWorker.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/ocr/tesseract/TesseractWrapper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/ZugFerdTransformator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/cbr/CbrBlock.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/cbr/CbrDocumentGraph.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/cbr/CbrField.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/cbr/CbrGraphEdge.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/cbr/CbrGraphVertice.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/cbr/CbrHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/cbr/CbrKeyWordStructure.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/cbr/CbrLine.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/cbr/CbrPatternStructure.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/cbr/CbrPosition.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/transformation/cbr/CbrWord.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/DeSkewer$BitUtils.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/DeSkewer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/DocumentCaseSet.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/EasyFileReader.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/RecordTrainingEntry.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/SQLGenerator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/config/Cfg.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/config/ConfigHelper.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/enumeration/AccType.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/enumeration/AppLang.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/enumeration/FerdLevel.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/enumeration/ScanStatus.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/enumeration/TessLang.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/enumeration/ValidationStatus.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/de/cneubauer/util/task/ScanTask.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/img/Circle_Green.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/img/Circle_Grey.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/img/Circle_Orange.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/img/Circle_Red.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/img/Circle_Yellow.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/invoice/2015-05-15 Rechnung Ersatzteil Dachfenster.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/AbstractTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ApplicationTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/database/MySQLConnectorTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/domain/dao/impl/CorporateFormDaoImplTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/domain/dao/impl/FullApplicationPersistenceTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/domain/dao/impl/InvoiceDaoImplTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/domain/dao/impl/LegalPersonDaoImplTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/domain/dao/impl/RecordDaoImplTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/domain/dao/impl/ScanDaoImplTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/domain/helper/AccountFileHelperTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/domain/service/DatabaseServiceTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ml/LearningServiceTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ml/ModelReaderTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ml/ModelWriterTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ml/NaiveBayesHelperTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/CannyEdgeDetectorTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/HistogramMakerTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/ImageCropperTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/ImagePartitionerTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/ImagePreprocessorTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/PartitionerTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/PostProcessorTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/RankFilterTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/SkeletonizerTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/hocr/HocrDocumentTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/tesseract/TesseractDataCollectorTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/ocr/tesseract/TesseractWrapperTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/transformation/ZugFerdTransformatorTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/de/cneubauer/util/SQLGeneratorTest.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/2015-05-15 Rechnung Ersatzteil Dachfenster.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/2015-07-10 Rechnung Yamaha YDP 142.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/2015-11-26_Reifen Ebay.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Bruttosumme/Scan_20160822_161042_012.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Bruttosumme/Scan_20160822_161042_019.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Bruttosumme/Scan_20160822_163306_001.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Bruttosumme/Scan_20160822_163306_005.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Bruttosumme/Scan_20160822_163306_007.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_003.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_006.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_007.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_008.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_009.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_010.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_011.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_015.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_006.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_007.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_008.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_010.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_011.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_012.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_013.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_014.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_015.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_016.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_017.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_019.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Übertrag/Scan_20160822_161042.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Übertrag/Scan_20160822_161042_001.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Übertrag/Scan_20160822_161042_002.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Übertrag/Scan_20160822_161042_004.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Übertrag/Scan_20160822_161042_005.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Übertrag/Scan_20160822_161042_013.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Übertrag/Scan_20160822_161042_014.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Übertrag/Scan_20160822_163306_003.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Übertrag/Scan_20160822_163306_004.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/KeywordSuccess/Übertrag/Scan_20160822_163306_006.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/body.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/body_150.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/body_75.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/footer.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/footer_150.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/footer_75.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/SplitPage/body.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/SplitPage/footer.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/SplitPage/header.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/SplitPage/original.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/text/eurotext.bmp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/text/eurotext.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/text/eurotext.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/text/eurotext.tif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/text/eurotext_deskew.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/text/eurotext_unlv.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/text/multipage-pdf.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Literature/H+16 - Hasan et. al. - OCRoRACT A Sequence Learning OCR System Trained on Isolated Characters - DAS 2016.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Literature/H+16 - He et. al. - Text-Attentional Convolutional Neural Network for Scene Text Detection - TIP 2016.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Literature/SL05 - Simon M. Lucas - Text Locating Competition Results - ICDAR 2005.pdf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Bruttosumme/Scan_20160822_161042_012.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Bruttosumme/Scan_20160822_161042_019.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Bruttosumme/Scan_20160822_163306_001.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Bruttosumme/Scan_20160822_163306_005.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Bruttosumme/Scan_20160822_163306_007.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_003.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_006.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_007.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_008.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_009.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_010.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_011.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160822_161042_015.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_006.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_007.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_008.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_010.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_011.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_012.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_013.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_014.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_015.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_016.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_017.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Gesamtsumme/Scan_20160823_100523_019.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Übertrag/Scan_20160822_161042.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Übertrag/Scan_20160822_161042_001.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Übertrag/Scan_20160822_161042_002.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Übertrag/Scan_20160822_161042_004.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Übertrag/Scan_20160822_161042_005.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Übertrag/Scan_20160822_161042_013.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Übertrag/Scan_20160822_161042_014.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Übertrag/Scan_20160822_163306_003.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Übertrag/Scan_20160822_163306_004.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Validation/KeywordSuccess/Übertrag/Scan_20160822_163306_006.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/data/templates/template1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/data/templates/template2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/data/templates/template3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/empty.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/main.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/mainMenu.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/menubar.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/processedList.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/progress.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/scanForm.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/searchDatabase.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/settings.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/showAccountingRecords.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/showDatabaseResults.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/showResults.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/splitPane.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/FXML/startMenu.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/bundles/Application.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/bundles/Application_de.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/bundles/Application_en.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/bundles/ValidationErrors.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/bundles/ValidationErrors_de.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/bundles/ValidationErrors_en.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/css/BasicApplication.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/css/validationError.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/dict/invoice.de.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/dict/postprocessing.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/dict/tablecontents.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/Account.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/AccountRecord.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/AccountType.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/AccountingRecord.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/Address.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/CorporateForm.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/Country.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/Creditor.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/DocumentCase.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/Invoice.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/Keyword.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/LegalPerson.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/Record.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hbm/Scan.hbm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/body.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/body_150.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/body_75.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/footer.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/footer_150.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/Resizing/footer_75.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/SplitPage/body.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/SplitPage/footer.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/SplitPage/header.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/invoice/SplitPage/original.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/text/eurotext_unlv.uzn" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/AccountFileHelper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/AccountDaoImplTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/helper/AccountFileHelperTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/areas/cropped_1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/areas/cropped_2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/areas/cropped_3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/areas/cropped_4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/areas/cropped_5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/areas/cropped_6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/areas/cropped_7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/areas/cropped_8.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/areas/cropped_9.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/body.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/croppedLine.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/histogramWords.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/oldEdgeDetector.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/removeLinesManually.bat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/table.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/tableDeskewed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/tableHistogram.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/testEdgeDetector.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/testTGDetector.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/try.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/tryold.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/temp/withoutEdgesTest.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/Accuracy/Values.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/Accuracy/Values2.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/Accuracy/accuracyTable.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/Accuracy/accuracyTable.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/GreenAfterReview.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/ReviewAR.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/ReviewElectronicInvoice.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/SavingSuccessful.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/SearchInDatabase.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/SearchResults.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/greenAfterReview.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/greenAfterReview.xcf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/processingFiles.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/processingFiles.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/processingFiles.xcf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/reviewAR.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/reviewAR.xcf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/reviewElectronicInvoice.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/reviewElectronicInvoice.xcf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/reviseBeforeSafe.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/reviseBeforeSafe.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/reviseBeforeSafe.xcf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/savingSuccessful.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/savingSuccessful.xcf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/settings_Database.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/settings_General.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/settings_Scan.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/settings_ZugFerd.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/startmenu.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/startmenu.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/GUI/startmenu.xcf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/ML/DecisionTreeExample.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/OCR/PreprocessingSteps.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/OCR/Steps_Of_OCR.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/OCR/Steps_Of_OCR.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/OCR/histogram.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/ApplicationUML.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/ApplicationUML.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/ApplicationUML.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/ApplicationUML.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/DomainML.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/DomainML.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/DomainML.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/DomainML.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/DomainUML.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/DomainUML.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/DomainUML.pdf_tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/DomainUML.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/MVC.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/MVC.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/MVC.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UML/MVC.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/UseCase/TotalApplicationCase.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/ZugFerd/ZugFerd_English.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Images/ZugFerd/ZugFerd_English.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/SearchInDatabase.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/SearchResults.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/greenAfterReview.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/greenAfterReview1.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/processingFiles.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/reviewAR.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/reviewElectronicInvoice.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/reviseBeforeSafe.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/savingSuccessful.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/settings_Database.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/settings_General.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/settings_Scan.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/settings_ZugFerd.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/GUI/startmenu.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/ML/DecisionTreeExample.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/OCR/PreprocessingSteps.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/OCR/Steps_Of_OCR.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/OCR/histogram.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/UML/ApplicationUML.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/UML/DomainML.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/UML/MVC.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/UseCase/TotalApplicationCase.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/ZugFerd/ZugFerd_English-eps-converted-to.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/ZugFerd/ZugFerd_English.eps" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/Images/ZugFerd/ZugFerd_English.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt-lit.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt-lof.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt-lot.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt00.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt01.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt01.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt02.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt02.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt03.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt03.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt04.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt04.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt05.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt05.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt06.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt06.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt09.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt10.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/Tex/mt10.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/alphamod.bst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/boldmath.sty" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/galpha1a.bst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/german.sty" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/lmedoc.cls" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/math.sty" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt-lit.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt-lof.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt-lot.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt.bib" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt00.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt00.fdb_latexmk" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt00.fls" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt00.lof" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt00.lot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt00.ps" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt00.toc" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt08.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt09.tex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/mt11.aux" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/rcs.sty" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Doc/twolang.sty" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/Invoice Standards/201455EU_Eng.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/Invoice Standards/Entwurf_Gesetz_elektronische_Rechnungsstellung.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/Invoice Standards/ZUGFeRD-EDNA-Umsetzungsempfehlungen.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/Invoice Standards/e-invoicing-standardisation-overview-issues-and-conclusions-for-future-actions_en.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/Invoice Standards/xCBL/10_k.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/Abbyy/fr-engine-11-feature-overview-e-online-abbyy-hq.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/BT02 - Two geometric algorithms for layout analysis - International workshop on document analysis systems.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/BT03 - High Performance Document Layout Analysis - Symp on DIUT.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/BT07 - The hOCR Microformat for OCR Workflow and Results - ICDAR.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/BT08 - The OCRopus open source OCR system - Electronic Imaging.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/CQ+08 - A double-threshold image binarization method based on edge detector - Pattern Recognition 41.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/CS+13 - An Efficient Universal Noise Removal Algorithm Combining Spatial Gradient and Impulse statistic - MPiE.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/DA+14 - Analysis of the Logical Layout of Documents - DIPR.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/HH+07 - Case-Based Reasoning for Invoice Analysis and Recognition - CBRRD.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/NG95 - Document Image Analysis What is missing - IAP.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/RC+12 - Layout-aware text extraction from full-text PDF of scientific articles - SCBM.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/WC+15 - OCR with adaptive dictionary - ICIG.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/OCR/ZL+05 - An OCR Post-processing Approach based on Multi-knowledge - Knowledge based intelligent information and engineering systems.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/Tesseract/tesseracticdar2007.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[14] RC01 - XML Common Business Library.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[15] Datev12 - Datev-Kontenrahmen nach dem Bilanzmodernisierungsgesetz.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[19] FeRD15 - The ZUGFeRD-Format_1p0_Specification-english.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[20] AWV16 - Der Weg zur E-rechnung in der Verwaltungspraxis.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[23] KA15 - 5 Punkte die Sie ueber ZUGFeRD wissen sollten.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[24] BK+04 - Results of a study of invoice reading systems in Germany - Kopie.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[25] BK+04 - Results of a study of invoice reading systems in Germany.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[26] KB16 - E-Invoicing_E-Billing.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[27] MK04 - Commerce One Declares Bankruptcy_ Does This Foretell The Fate Of B2B E-Commerce_.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[2] MA01 - The coming age of online procurement - IMDS.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[32] UNECE - Introducing UN_EDIFACT.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[3] EB+10 - Information Extraction by finding repeating structure - DAS.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Literature/[9] CF+98 - Informys a flexible invoice-like form reader system.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../MA_Richtlinien.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../TODOs.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Zugferd10/Dokumentation/Das ZUGFeRD-Format_1p0.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Zugferd10/Zugferd10.zip" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Doc/mt00.pdf" afterPath="$PROJECT_DIR$/../Doc/mt00.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/21b95e0e-ebb1-44ce-baff-c743e9ee7046.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/21b95e0e-ebb1-44ce-baff-c743e9ee7046.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/653a7b0b-25b9-4f71-b9f9-4e3bccc9672d.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/653a7b0b-25b9-4f71-b9f9-4e3bccc9672d.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/b5cbee57-fef4-4a21-93c5-420c75dd15ea.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/b5cbee57-fef4-4a21-93c5-420c75dd15ea.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/resourceBundles.xml" afterPath="$PROJECT_DIR$/.idea/resourceBundles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application.iml" afterPath="$PROJECT_DIR$/Application.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/install/install_schema_and_tables.sql" afterPath="$PROJECT_DIR$/db/install/install_schema_and_tables.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/install/install_schema_and_tables_20.sql" afterPath="$PROJECT_DIR$/db/install/install_schema_and_tables_20.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/update/001_AddValuesToInvoiceTable.sql" afterPath="$PROJECT_DIR$/db/update/001_AddValuesToInvoiceTable.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/update/002_AddLegalPersonInvoiceTable.sql" afterPath="$PROJECT_DIR$/db/update/002_AddLegalPersonInvoiceTable.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/update/201_AddUniqueConstraints.sql" afterPath="$PROJECT_DIR$/db/update/201_AddUniqueConstraints.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/update/202_AddAccountTypes.sql" afterPath="$PROJECT_DIR$/db/update/202_AddAccountTypes.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/update/203_AddAccountInformation.sql" afterPath="$PROJECT_DIR$/db/update/203_AddAccountInformation.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/update/204_CreateAccountRecordTable.sql" afterPath="$PROJECT_DIR$/db/update/204_CreateAccountRecordTable.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/update/205_ExpandAccountRecordTables.sql" afterPath="$PROJECT_DIR$/db/update/205_ExpandAccountRecordTables.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/update/206_ChangeTimestampToDate.sql" afterPath="$PROJECT_DIR$/db/update/206_ChangeTimestampToDate.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/update/207_AddKeywordDocumentCaseAndCreditorTable.sql" afterPath="$PROJECT_DIR$/db/update/207_AddKeywordDocumentCaseAndCreditorTable.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/invoiceData.txt" afterPath="$PROJECT_DIR$/invoiceData.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models.txt" afterPath="$PROJECT_DIR$/models.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/DocumentCaseDao.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/DocumentCaseDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/IDao.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/IDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/InvoiceDao.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/InvoiceDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AbstractDao.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AbstractDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/DocumentCaseDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/DocumentCaseDaoImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/InvoiceDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/InvoiceDaoImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DataExtractorService.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DataExtractorService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseResultsService.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseResultsService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseService.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Controller/DatabaseController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Controller/DatabaseController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Controller/GUIController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Controller/GUIController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/DatabaseResultsController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/DatabaseResultsController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ResultsController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ResultsController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SettingsController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SettingsController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/util/AutoCompleteComboBoxListener.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/util/AutoCompleteComboBoxListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/LearningService.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/LearningService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/Model.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/Model.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/ModelWriter.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/ModelWriter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/NaiveBayesHelper.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/NaiveBayesHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/classification/Classification.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/classification/Classification.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/classification/Classifier.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/classification/Classifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/classification/IFeatureProbability.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/classification/IFeatureProbability.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/classification/bayes/BayesClassifier.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/classification/bayes/BayesClassifier.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/HistogramMaker.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/HistogramMaker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/ImageCropper.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/ImageCropper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/ImagePartitioner.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/ImagePartitioner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/ImagePreprocessor.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/ImagePreprocessor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/PostProcessor.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/PostProcessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrDocument.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrDocument.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrElement.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrElement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrLine.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrLine.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/tesseract/TesseractWorker.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/tesseract/TesseractWorker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/tesseract/TesseractWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/tesseract/TesseractWrapper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/ZugFerdTransformator.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/ZugFerdTransformator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/DocumentCaseSet.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/DocumentCaseSet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/RecordTrainingEntry.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/RecordTrainingEntry.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/SQLGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/SQLGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/config/ConfigHelper.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/config/ConfigHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/AppLang.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/AppLang.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/FerdLevel.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/FerdLevel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/ScanStatus.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/ScanStatus.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/ValidationStatus.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/ValidationStatus.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java" afterPath="$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/empty.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/empty.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/main.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/main.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/menubar.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/menubar.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/processedList.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/processedList.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/progress.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/progress.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/searchDatabase.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/searchDatabase.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/settings.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/settings.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/showAccountingRecords.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/showAccountingRecords.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/showDatabaseResults.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/showDatabaseResults.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/showResults.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/showResults.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/splitPane.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/splitPane.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/FXML/startMenu.fxml" afterPath="$PROJECT_DIR$/src/main/resources/FXML/startMenu.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" afterPath="$PROJECT_DIR$/src/main/resources/bundles/Application_de.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" afterPath="$PROJECT_DIR$/src/main/resources/bundles/Application_en.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/css/BasicApplication.css" afterPath="$PROJECT_DIR$/src/main/resources/css/BasicApplication.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/ApplicationTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/ApplicationTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/FullApplicationPersistenceTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/FullApplicationPersistenceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/ml/NaiveBayesHelperTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/ml/NaiveBayesHelperTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/HistogramMakerTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/HistogramMakerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/ImagePreprocessorTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/ImagePreprocessorTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractWrapperTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractWrapperTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/transformation/ZugFerdTransformatorTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/transformation/ZugFerdTransformatorTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/util/BigDataTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/util/BigDataTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/cneubauer/util/DataGenerationTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/cneubauer/util/DataGenerationTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../README.md" afterPath="$PROJECT_DIR$/../README.md" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -95,6 +640,26 @@
     <option name="SHOW_TABLE_DETAILS" value="true" />
     <option name="SHOW_EMPTY_GROUPS" value="false" />
     <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="hibernate.cfg.xml/Hibernate" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="hibernate.cfg.xml" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="DebuggerManager">
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true" converted="true">
@@ -140,109 +705,160 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="GUIController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2584">
+              <caret line="175" column="6" lean-forward="false" selection-start-line="175" selection-start-column="6" selection-end-line="175" selection-end-column="6" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#3092#3093#0" expanded="false" />
+                <element signature="e#3123#3124#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LearningService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ml/LearningService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Model.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ml/Model.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="35" column="11" lean-forward="false" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1589#1590#0" expanded="false" />
+                <element signature="e#1620#1621#0" expanded="false" />
+                <element signature="e#1743#1744#0" expanded="false" />
+                <element signature="e#1783#1784#0" expanded="false" />
+                <element signature="e#1822#1823#0" expanded="false" />
+                <element signature="e#1850#1851#0" expanded="false" />
+                <element signature="e#1897#1898#0" expanded="false" />
+                <element signature="e#1926#1927#0" expanded="false" />
+                <element signature="e#1996#1997#0" expanded="false" />
+                <element signature="e#2050#2051#0" expanded="false" />
+                <element signature="e#2122#2123#0" expanded="false" />
+                <element signature="e#2178#2179#0" expanded="false" />
+                <element signature="e#3021#3022#0" expanded="false" />
+                <element signature="e#3067#3068#0" expanded="false" />
+                <element signature="e#3104#3105#0" expanded="false" />
+                <element signature="e#3138#3139#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ModelReader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ml/ModelReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1242">
-              <caret line="105" column="5" lean-forward="false" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
+            <state relative-caret-position="986">
+              <caret line="70" column="19" lean-forward="false" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="19" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="docComment;method#getValues#0;class#ModelReader#0" expanded="false" />
+                <element signature="imports" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AbstractDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AbstractDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="44" column="4" lean-forward="false" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TesseractWrapper.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/tesseract/TesseractWrapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-364">
-              <caret line="49" column="4" lean-forward="false" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="4" />
-              <folding>
-                <element signature="e#2499#2500#0" expanded="true" />
-                <element signature="e#2552#2553#0" expanded="true" />
-                <element signature="e#2599#2600#0" expanded="true" />
-                <element signature="e#2652#2653#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccountDaoImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AccountDaoImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-925">
-              <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccountRecordDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/AccountRecordDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccountDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/AccountDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="34" column="42" lean-forward="false" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/IDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="32" lean-forward="false" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DocumentCaseDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/DocumentCaseDao.java">
+      <file leaf-file-name="DocumentCaseSet.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/DocumentCaseSet.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-              <folding />
+              <caret line="12" column="2" lean-forward="false" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#597#598#0" expanded="false" />
+                <element signature="e#633#634#0" expanded="false" />
+                <element signature="e#697#698#0" expanded="false" />
+                <element signature="e#747#748#0" expanded="false" />
+                <element signature="e#795#796#0" expanded="false" />
+                <element signature="e#833#834#0" expanded="false" />
+                <element signature="e#901#902#0" expanded="false" />
+                <element signature="e#955#956#0" expanded="false" />
+                <element signature="e#997#998#0" expanded="false" />
+                <element signature="e#1029#1030#0" expanded="false" />
+                <element signature="e#1085#1086#0" expanded="false" />
+                <element signature="e#1127#1128#0" expanded="false" />
+                <element signature="e#1424#1425#0" expanded="false" />
+                <element signature="e#1480#1481#0" expanded="false" />
+                <element signature="e#1538#1539#0" expanded="false" />
+                <element signature="e#1582#1583#0" expanded="false" />
+                <element signature="e#1631#1632#0" expanded="false" />
+                <element signature="e#1670#1671#0" expanded="false" />
+                <element signature="e#1713#1714#0" expanded="false" />
+                <element signature="e#1746#1747#0" expanded="false" />
+                <element signature="e#2201#2202#0" expanded="false" />
+                <element signature="e#2251#2252#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScanDaoImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/ScanDaoImpl.java">
+      <file leaf-file-name="ScanTask.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-160">
-              <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+            <state relative-caret-position="2601">
+              <caret line="176" column="11" lean-forward="false" selection-start-line="176" selection-start-column="11" selection-end-line="176" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#11387#11388#0" expanded="false" />
+                <element signature="e#11424#11425#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="39" column="10" lean-forward="false" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataExtractorService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DataExtractorService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="260" column="16" lean-forward="false" selection-start-line="260" selection-start-column="16" selection-end-line="260" selection-end-column="16" />
+              <folding>
+                <element signature="method#findDebitor#0;class#DataExtractorService#0" expanded="false" />
+                <element signature="docComment;method#extractAccountingRecordInformation#0;class#DataExtractorService#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CaseKey.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/CaseKey.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AccountDaoImplTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AccountDaoImplTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/AccountDaoImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1710">
-              <caret line="126" column="30" lean-forward="true" selection-start-line="126" selection-start-column="30" selection-end-line="126" selection-end-column="30" />
+            <state relative-caret-position="119">
+              <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -258,6 +874,7 @@
         <option value="Interface" />
         <option value="Class" />
         <option value="JUnit4 Test Class" />
+        <option value="SQL Script" />
       </list>
     </option>
   </component>
@@ -274,6 +891,7 @@
       <find>Dao</find>
       <find>.getInstance();</find>
       <find>&quot;png&quot;</find>
+      <find>208_</find>
     </findStrings>
     <replaceStrings>
       <replace>Two</replace>
@@ -308,21 +926,39 @@
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/Model.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/ModelReader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/ModelWriter.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/tesseract/TesseractWorker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractWrapperTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/ZugFerdTransformator.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/transformation/ZugFerdTransformatorTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/NaiveBayesHelper.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/FullApplicationPersistenceTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/AccountDaoImplTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/AccountDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/IDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AbstractDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/tesseract/TesseractWrapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/ModelWriter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java" />
+        <option value="$PROJECT_DIR$/models.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ml/LearningService.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/653a7b0b-25b9-4f71-b9f9-4e3bccc9672d/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/ScanStatus.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/Keyword.java" />
+        <option value="$PROJECT_DIR$/db/update/208_AddPositionKeyword.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/util/DocumentCaseSet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/DocumentCaseDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrDocument.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrLine.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrElement.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/DocumentCaseDaoImpl.java" />
+        <option value="$PROJECT_DIR$/db/install/install_schema_and_tables.sql" />
+        <option value="$PROJECT_DIR$/invoiceData.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseResultsService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DataExtractorService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java" />
       </list>
     </option>
   </component>
@@ -360,6 +996,22 @@
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Android</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
@@ -391,188 +1043,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cneubauer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ocr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -592,7 +1062,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/javaml-0.1.7.jar!/" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
@@ -605,7 +1075,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.completion" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/Christoph/Documents/1_Studium/1.2_Master/MA/Thesis/Application/src/main/java/de/cneubauer/database/DBInformationHolder.java&#10;AccountTyp&#9;PSI&#9;JAVA://de.cneubauer.domain.bo.AccountType&#10;ScratchFileBuffer&#9;PSI&#9;JAVA://org.apache.pdfbox.io.ScratchFileBuffer" />
     <property name="js.eslint.eslintPackage" value="" />
@@ -614,6 +1084,13 @@
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\NodeJS\node.exe" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="de.cneubauer.domain.dao.impl" />
+      <recent name="de.cneubauer.transformation.cbr" />
+      <recent name="de.cneubauer.domain.service" />
+      <recent name="de.cneubauer.gui.model" />
+      <recent name="de.cneubauer.util.enumeration" />
+    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="de.cneubauer.learning" />
     </key>
@@ -628,19 +1105,16 @@
       <recent name="" />
       <recent name="de.cneubauer.AbstractTest" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\css" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\bundles" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test" />
-      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources" />
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="de.cneubauer.ocr.tesseract" />
+      <recent name="de.cneubauer.domain.dao.impl" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="de.cneubauer.util.enumeration" />
       <recent name="de.cneubauer.domain.helper" />
       <recent name="de.cneubauer.domain.dao" />
       <recent name="de.cneubauer.domain.service" />
       <recent name="de.cneubauer.domain.service.validation" />
-      <recent name="de.cneubauer.gui.model" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Christoph\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test\resources\invoice" />
@@ -649,19 +1123,15 @@
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\img" />
       <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="de.cneubauer.ocr.tesseract" />
-      <recent name="de.cneubauer.domain.dao.impl" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="de.cneubauer.domain.dao.impl" />
-      <recent name="de.cneubauer.transformation.cbr" />
-      <recent name="de.cneubauer.domain.service" />
-      <recent name="de.cneubauer.gui.model" />
-      <recent name="de.cneubauer.util.enumeration" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\css" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\FXML" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources\bundles" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\test" />
+      <recent name="D:\Documents\1_Studium\1.2_Master\MA\Thesis\Application\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AccountDaoImplTest.testMultipleInstances">
+  <component name="RunManager" selected="Application.Start">
     <configuration default="false" name="Start" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1133,6 +1603,26 @@
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
       <method />
     </configuration>
+    <configuration default="true" type="OdpsJavaConfigurationType" factoryName="MaxCompute Java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <odpsJavaType />
+      <odpsProjectName />
+      <tableName />
+      <tableColumns />
+      <tablePartition />
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -1242,8 +1732,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.AccountDaoImplTest.testMultipleInstances" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Start" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Start" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.AccountDaoImplTest.testMultipleInstances" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.FullApplicationPersistenceTest.testSaveAllDaos" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.BigDataTest.compare" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.BigDataTest.execute" />
@@ -1310,7 +1800,12 @@
       <workItem from="1489519069201" duration="687000" />
       <workItem from="1489520201005" duration="210000" />
       <workItem from="1489520427203" duration="3326000" />
-      <workItem from="1489584551219" duration="7465000" />
+      <workItem from="1489584551219" duration="10773000" />
+      <workItem from="1489612339137" duration="802000" />
+      <workItem from="1489614548024" duration="2959000" />
+      <workItem from="1489618284538" duration="62000" />
+      <workItem from="1489657486439" duration="17217000" />
+      <workItem from="1489686053618" duration="546000" />
     </task>
     <servers />
   </component>
@@ -1347,7 +1842,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94340000" />
+    <option name="totallyTimeSpent" value="119234000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -1364,50 +1859,57 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32575756" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="MaxCompute Job Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24920128" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36933047" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3690476" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="MaxCompute Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32683983" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32683983" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3051948" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3051948" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792208" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31735888" sideWeight="0.46290323" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32995737" sideWeight="0.5354839" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34861407" sideWeight="0.5354839" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32575756" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Running Info" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Running Result" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.80868167" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39956802" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960597" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32937366" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.80868167" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960597" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32575756" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1472,461 +1974,579 @@
           <properties />
           <option name="timeStamp" value="283" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java</url>
+          <line>713</line>
+          <properties />
+          <option name="timeStamp" value="387" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java</url>
+          <line>88</line>
+          <properties />
+          <option name="timeStamp" value="388" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java</url>
+          <line>80</line>
+          <properties />
+          <option name="timeStamp" value="399" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseService.java</url>
+          <line>128</line>
+          <properties />
+          <option name="timeStamp" value="400" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrPage.java</url>
+          <line>83</line>
+          <properties />
+          <option name="timeStamp" value="406" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DataExtractorService.java</url>
+          <line>329</line>
+          <properties />
+          <option name="timeStamp" value="408" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DataExtractorService.java</url>
+          <line>351</line>
+          <properties />
+          <option name="timeStamp" value="411" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="385" />
+      <option name="time" value="418" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="((HocrPage)this).parent" custom="de.cneubauer.ocr.hocr.HocrPage" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/settings.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showAccountingRecords.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showDatabaseResults.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/showResults.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/splitPane.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/startMenu.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/ZugFerdExtendService.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ApplicationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="118" column="61" lean-forward="false" selection-start-line="118" selection-start-column="61" selection-end-line="118" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/database/MySQLConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/Start.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/CorporateFormDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/util/AutoCompleteComboBoxListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1388">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/SearchResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/ProcessResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="38" column="18" lean-forward="false" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/DatabaseController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AddressDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/DatabaseResultsController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AccountTypeDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1170">
-          <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="-491">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AccountRecordDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="176" column="20" lean-forward="false" selection-start-line="176" selection-start-column="20" selection-end-line="176" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state relative-caret-position="376">
+          <caret line="32" column="9" lean-forward="true" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProgressController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-150">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ResultsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="785">
-          <caret line="258" column="5" lean-forward="false" selection-start-line="258" selection-start-column="5" selection-end-line="258" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/SplitPaneController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-425">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ml/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-391">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding>
-            <element signature="e#2122#2123#0" expanded="false" />
-            <element signature="e#2178#2179#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ml/ModelWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="46" column="29" lean-forward="false" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/config/ConfigHelper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/LegalPersonDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/config/Cfg.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/ScanDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-          <folding>
-            <element signature="e#557#558#0" expanded="false" />
-            <element signature="e#591#592#0" expanded="false" />
-            <element signature="e#623#624#0" expanded="false" />
-            <element signature="e#651#652#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="-219">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrParagraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2550">
-          <caret line="173" column="0" lean-forward="false" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#11314#11315#0" expanded="false" />
-            <element signature="e#11351#11352#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="408">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/CorporateFormDaoImplTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrWord.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="10" column="17" lean-forward="true" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/LegalPersonDaoImplTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrLine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state relative-caret-position="204">
+          <caret line="29" column="39" lean-forward="false" selection-start-line="29" selection-start-column="39" selection-end-line="29" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractDataCollectorTest.java">
+    <entry file="jar://$PROJECT_DIR$/lib/hibernate/hibernate-core-5.2.2.Final.jar!/org/hibernate/proxy/pojo/javassist/JavassistLazyInitializer.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state relative-caret-position="238">
+          <caret line="15" column="183" lean-forward="false" selection-start-line="15" selection-start-column="183" selection-end-line="15" selection-end-column="183" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/tesseract/TesseractWorker.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/validation/AccountingRecordValidator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="29" lean-forward="false" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1257#1258#0" expanded="false" />
-            <element signature="e#1291#1292#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="176">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/database/MySQLConnectorTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrDocument.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="323">
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/ocr/tesseract/TesseractWrapperTest.java">
+    <entry file="file://$PROJECT_DIR$/Application.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/transformation/ZugFerdTransformator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="140" column="43" lean-forward="false" selection-start-line="140" selection-start-column="43" selection-end-line="140" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/transformation/ZugFerdTransformatorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="78" column="60" lean-forward="false" selection-start-line="78" selection-start-column="60" selection-end-line="78" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="65" column="30" lean-forward="false" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/util/BigDataTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/AccountingRecordModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-41">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/model/ExtractionModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="-3406">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/ProcessedListController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="114" column="0" lean-forward="true" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+        <state relative-caret-position="176">
+          <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding>
+            <element signature="class#ButtonCell#0;class#ProcessedListController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ml/NaiveBayesHelper.java">
+    <entry file="dbDummy://dbtable:/7ee8ad/653a7b0b-25b9-4f71-b9f9-4e3bccc9672d/ferd_transformator.documentcase">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/hocr/HocrElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="29" column="11" lean-forward="false" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
+        <state relative-caret-position="20">
+          <caret line="100" column="35" lean-forward="true" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/DocumentCaseDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="69" lean-forward="false" selection-start-line="4" selection-start-column="69" selection-end-line="4" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/empty.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/main.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="82" lean-forward="false" selection-start-line="9" selection-start-column="80" selection-end-line="9" selection-end-column="82" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/jre/lib/jfxswt.jar!/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/jre/lib/jfxswt.jar!/META-INF/INDEX.LIST">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/javafx-src.zip!/javafx/embed/swt/FXCanvas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="146" column="13" lean-forward="false" selection-start-line="146" selection-start-column="13" selection-end-line="146" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/jre/lib/ext/jfxrt.jar!/version.rc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-209">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/jre/lib/ext/jfxrt.jar!/META-INF/INDEX.LIST">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2589">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/jre/lib/ext/jfxrt.jar!/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_74/javafx-src.zip!/javafx/animation/Animation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="94" column="40" lean-forward="false" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/install/install_schema_and_tables.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="30" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/bo/Record.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="903">
+          <caret line="104" column="17" lean-forward="false" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/helper/AccountFileHelperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="14" column="8" lean-forward="false" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/invoiceData.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/InvoiceFileHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="97" column="6" lean-forward="false" selection-start-line="97" selection-start-column="6" selection-end-line="97" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DatabaseResultsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="30" column="76" lean-forward="false" selection-start-line="30" selection-start-column="76" selection-end-line="30" selection-end-column="76" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/AccountingRecordsController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="711" column="58" lean-forward="false" selection-start-line="711" selection-start-column="58" selection-end-line="711" selection-end-column="58" />
+        <state relative-caret-position="4573">
+          <caret line="712" column="31" lean-forward="false" selection-start-line="712" selection-start-column="31" selection-end-line="712" selection-end-column="31" />
           <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#4552#4553#0" expanded="false" />
+            <element signature="e#4625#4626#0" expanded="false" />
             <element signature="method#initiateDropdowns#0;class#AccountingRecordsController#0" expanded="false" />
             <element signature="method#addAllListeners#0;class#AccountingRecordsController#0" expanded="false" />
             <element signature="method#saveCurrentValuesToRecord#0;class#AccountingRecordsController#0" expanded="false" />
             <element signature="method#clearTextfields#0;class#AccountingRecordsController#0" expanded="false" />
             <element signature="method#validateFieldsBeforeSave#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="e#32704#32705#0" expanded="false" />
+            <element signature="e#32760#32761#0" expanded="false" />
+            <element signature="e#33821#33822#0" expanded="false" />
+            <element signature="e#33878#33879#0" expanded="false" />
+            <element signature="e#33939#33940#0" expanded="false" />
+            <element signature="e#33974#33975#0" expanded="false" />
+            <element signature="e#34052#34053#0" expanded="false" />
+            <element signature="e#34100#34101#0" expanded="false" />
+            <element signature="e#34151#34152#0" expanded="false" />
+            <element signature="e#34207#34208#0" expanded="false" />
+            <element signature="method#setFromDropDownAccountOne#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="e#34424#34425#0" expanded="false" />
+            <element signature="e#34480#34481#0" expanded="false" />
+            <element signature="method#setFromDropDownAccountTwo#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="e#34699#34700#0" expanded="false" />
+            <element signature="e#34757#34758#0" expanded="false" />
+            <element signature="method#setFromDropDownAccountThree#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="e#34979#34980#0" expanded="false" />
+            <element signature="e#35036#35037#0" expanded="false" />
+            <element signature="method#setFromDropDownAccountFour#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="e#35253#35254#0" expanded="false" />
+            <element signature="e#35307#35308#0" expanded="false" />
+            <element signature="method#setToDropDownAccountOne#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="e#35514#35515#0" expanded="false" />
+            <element signature="e#35568#35569#0" expanded="false" />
+            <element signature="method#setToDropDownAccountTwo#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="e#35777#35778#0" expanded="false" />
+            <element signature="e#35833#35834#0" expanded="false" />
+            <element signature="method#setToDropDownAccountThree#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="e#36045#36046#0" expanded="false" />
+            <element signature="e#36100#36101#0" expanded="false" />
+            <element signature="method#setToDropDownAccountFour#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="e#36306#36307#0" expanded="false" />
+            <element signature="e#36344#36345#0" expanded="false" />
+            <element signature="method#getPositionValueFromAccountOne#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#setPositionValueFromAccountOne#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#getPositionValueFromAccountTwo#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#setPositionValueFromAccountTwo#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#getPositionValueFromAccountThree#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#setPositionValueFromAccountThree#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#getPositionValueFromAccountFour#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#setPositionValueFromAccountFour#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#getPositionValueToAccountOne#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#setPositionValueToAccountOne#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#getPositionValueToAccountTwo#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#setPositionValueToAccountTwo#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#getPositionValueToAccountThree#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#setPositionValueToAccountThree#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#getPositionValueToAccountFour#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="method#setPositionValueToAccountFour#0;class#AccountingRecordsController#0" expanded="false" />
+            <element signature="e#41346#41347#0" expanded="false" />
+            <element signature="e#41395#41396#0" expanded="false" />
+            <element signature="e#41460#41461#0" expanded="false" />
+            <element signature="e#41523#41524#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/FullApplicationPersistenceTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
-          <caret line="70" column="9" lean-forward="true" selection-start-line="70" selection-start-column="9" selection-end-line="71" selection-end-column="44" />
+        <state relative-caret-position="2584">
+          <caret line="175" column="6" lean-forward="false" selection-start-line="175" selection-start-column="6" selection-end-line="175" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="false" />
-            <element signature="method#testFullApplicationPersistence#0;class#FullApplicationPersistenceTest#0" expanded="false" />
+            <element signature="e#3092#3093#0" expanded="false" />
+            <element signature="e#3123#3124#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ml/LearningService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="36" column="10" lean-forward="false" selection-start-line="36" selection-start-column="10" selection-end-line="36" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ml/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="35" column="11" lean-forward="false" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1589#1590#0" expanded="false" />
+            <element signature="e#1620#1621#0" expanded="false" />
+            <element signature="e#1743#1744#0" expanded="false" />
+            <element signature="e#1783#1784#0" expanded="false" />
+            <element signature="e#1822#1823#0" expanded="false" />
+            <element signature="e#1850#1851#0" expanded="false" />
+            <element signature="e#1897#1898#0" expanded="false" />
+            <element signature="e#1926#1927#0" expanded="false" />
+            <element signature="e#1996#1997#0" expanded="false" />
+            <element signature="e#2050#2051#0" expanded="false" />
+            <element signature="e#2122#2123#0" expanded="false" />
+            <element signature="e#2178#2179#0" expanded="false" />
+            <element signature="e#3021#3022#0" expanded="false" />
+            <element signature="e#3067#3068#0" expanded="false" />
+            <element signature="e#3104#3105#0" expanded="false" />
+            <element signature="e#3138#3139#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ml/ModelReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1242">
-          <caret line="105" column="5" lean-forward="false" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
+        <state relative-caret-position="986">
+          <caret line="70" column="19" lean-forward="false" selection-start-line="70" selection-start-column="19" selection-end-line="70" selection-end-column="19" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#getValues#0;class#ModelReader#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/AccountDaoImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1710">
-          <caret line="126" column="30" lean-forward="true" selection-start-line="126" selection-start-column="30" selection-end-line="126" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/AccountRecordDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/AccountDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="34" column="42" lean-forward="false" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/IDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="32" lean-forward="false" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/DocumentCaseDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/DocumentCaseSet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <caret line="12" column="2" lean-forward="false" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#597#598#0" expanded="false" />
+            <element signature="e#633#634#0" expanded="false" />
+            <element signature="e#697#698#0" expanded="false" />
+            <element signature="e#747#748#0" expanded="false" />
+            <element signature="e#795#796#0" expanded="false" />
+            <element signature="e#833#834#0" expanded="false" />
+            <element signature="e#901#902#0" expanded="false" />
+            <element signature="e#955#956#0" expanded="false" />
+            <element signature="e#997#998#0" expanded="false" />
+            <element signature="e#1029#1030#0" expanded="false" />
+            <element signature="e#1085#1086#0" expanded="false" />
+            <element signature="e#1127#1128#0" expanded="false" />
+            <element signature="e#1424#1425#0" expanded="false" />
+            <element signature="e#1480#1481#0" expanded="false" />
+            <element signature="e#1538#1539#0" expanded="false" />
+            <element signature="e#1582#1583#0" expanded="false" />
+            <element signature="e#1631#1632#0" expanded="false" />
+            <element signature="e#1670#1671#0" expanded="false" />
+            <element signature="e#1713#1714#0" expanded="false" />
+            <element signature="e#1746#1747#0" expanded="false" />
+            <element signature="e#2201#2202#0" expanded="false" />
+            <element signature="e#2251#2252#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/task/ScanTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2601">
+          <caret line="176" column="11" lean-forward="false" selection-start-line="176" selection-start-column="11" selection-end-line="176" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#11387#11388#0" expanded="false" />
+            <element signature="e#11424#11425#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/AbstractTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="39" column="10" lean-forward="false" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/DataExtractorService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="260" column="16" lean-forward="false" selection-start-line="260" selection-start-column="16" selection-end-line="260" selection-end-column="16" />
+          <folding>
+            <element signature="method#findDebitor#0;class#DataExtractorService#0" expanded="false" />
+            <element signature="docComment;method#extractAccountingRecordInformation#0;class#DataExtractorService#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/helper/AccountFileHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="22" column="19" lean-forward="false" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/ScanDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/service/ZugFerdExtendService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-160">
+        <state relative-caret-position="170">
           <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AbstractDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/DeSkewer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="44" column="4" lean-forward="false" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
+        <state relative-caret-position="153">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/domain/dao/impl/AccountDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/util/enumeration/CaseKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-925">
+        <state relative-caret-position="102">
+          <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/FXML/scanForm.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/cneubauer/domain/dao/impl/AccountDaoImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
           <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/ocr/tesseract/TesseractWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-364">
-          <caret line="49" column="4" lean-forward="false" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="4" />
-          <folding>
-            <element signature="e#2499#2500#0" expanded="true" />
-            <element signature="e#2552#2553#0" expanded="true" />
-            <element signature="e#2599#2600#0" expanded="true" />
-            <element signature="e#2652#2653#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1941,7 +2561,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -1961,7 +2580,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>opencv-2413</last-edited>
+          <last-edited>sass-stdlib</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1973,7 +2592,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>1.8_121</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1985,7 +2604,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>Application</last-edited>
+          <last-edited>Spring|Application</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -79,6 +79,7 @@ public class ScanTask extends Task {
             allFinished = invoiceFinished &&  recordFinished;
         }
         caseSet = copy.getCaseSet();
+        caseSet.setPositionCases(copy2.getCaseSet().getPositionCases());
 
         ExtractionModel m = new ExtractionModel();
         m.setInvoiceInformation(i);

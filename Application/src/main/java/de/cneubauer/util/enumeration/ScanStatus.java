@@ -10,5 +10,8 @@ package de.cneubauer.util.enumeration;
 public enum ScanStatus {
     OK,
     ERROR,
-    PROFORMAINVOICE, CREDITNOTE, INVOICE, ISSUE
+    PROFORMAINVOICE,
+    CREDITNOTE,
+    INVOICE,
+    ISSUE
 }

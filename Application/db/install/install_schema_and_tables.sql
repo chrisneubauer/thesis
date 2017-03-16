@@ -6,7 +6,6 @@ CREATE TABLE LegalPerson (
 Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 IsCompany BOOL NOT NULL,
 CompanyName VARCHAR(100) NULL,
--- TODO: CorporateForm as own Table
 CorporateForm VARCHAR(30) NULL,
 Name VARCHAR(100) NULL,
 SurName VARCHAR(100) NULL,

@@ -15,4 +15,6 @@ public interface DocumentCaseDao extends IDao<DocumentCase> {
     void saveCases(DocumentCaseSet set);
 
     int getHighestCaseId();
+
+    void saveAll(List<DocumentCase> positionCases);
 }
