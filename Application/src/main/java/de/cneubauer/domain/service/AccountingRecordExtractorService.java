@@ -62,18 +62,24 @@ public class AccountingRecordExtractorService extends DataExtractorService {
 
             // getting starting values of Y and X positions in the document as well as possible endings
             for (DocumentCase position : positionCase) {
-                String pos = position.getPosition();
-                // 0: startX, 1: startY, 2: endX, 3: endY
-                int startX = Integer.valueOf(pos.split("\\+")[0]);
-                minStartX = startX < minStartX ? startX : minStartX;
-                int startY = Integer.valueOf(pos.split("\\+")[1]);
-                minStartY = startY < minStartY ? startY : minStartY;
-                int endX = Integer.valueOf(pos.split("\\+")[2]);
-                possibleMaxX = endX > possibleMaxX ? endX : possibleMaxX;
-                int endY = Integer.valueOf(pos.split("\\+")[3]);
-                possibleMaxY = endY > possibleMaxY ? endY : possibleMaxY;
+                if (position.getIsCorrect()) {
+                    String pos = position.getPosition();
+                    // 0: startX, 1: startY, 2: endX, 3: endY
+                    int startX = Integer.valueOf(pos.split("\\+")[0]);
+                    minStartX = startX < minStartX ? startX : minStartX;
+                    int startY = Integer.valueOf(pos.split("\\+")[1]);
+                    minStartY = startY < minStartY ? startY : minStartY;
+                    int endX = Integer.valueOf(pos.split("\\+")[2]);
+                    possibleMaxX = endX > possibleMaxX ? endX : possibleMaxX;
+                    int endY = Integer.valueOf(pos.split("\\+")[3]);
+                    possibleMaxY = endY > possibleMaxY ? endY : possibleMaxY;
+                }
             }
 
+            // return null if nothing has been found. No cases available, hence use old approach
+            if (minStartX == 2000 && minStartY == 2000 && possibleMaxX == 0 && possibleMaxY == 0) {
+                return null;
+            }
             List<HocrElement> words = this.document.getPage(0).getRecursiveElementsByPosition(new int[]{minStartX, minStartY, possibleMaxX, possibleMaxY}, 20);
 
             // new highest case:

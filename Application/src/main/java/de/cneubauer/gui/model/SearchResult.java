@@ -1,5 +1,6 @@
 package de.cneubauer.gui.model;
 
+import de.cneubauer.domain.bo.Scan;
 import javafx.beans.property.*;
 
 import java.sql.Date;
@@ -14,14 +15,16 @@ public class SearchResult {
     private DoubleProperty value;
     private StringProperty debitor;
     private StringProperty creditor;
-    private ObjectProperty<byte[]> file;
+    private ObjectProperty<Scan> scan;
+    //private ObjectProperty<byte[]> file;
 
     public SearchResult() {
         this.date = new SimpleObjectProperty<>();
         this.value = new SimpleDoubleProperty();
         this.debitor = new SimpleStringProperty();
         this.creditor = new SimpleStringProperty();
-        this.file = new SimpleObjectProperty<>();
+        this.scan = new SimpleObjectProperty<>();
+        //this.file = new SimpleObjectProperty<>();
     }
 
     public Date getDate() {
@@ -72,6 +75,18 @@ public class SearchResult {
         this.creditor.set(creditor);
     }
 
+    public Scan getScan() {
+        return scan.get();
+    }
+
+    public ObjectProperty<Scan> scanProperty() {
+        return scan;
+    }
+
+    public void setScan(Scan scan) {
+        this.scan.set(scan);
+    }
+/*
     public byte[] getFile() {
         return file.get();
     }
@@ -83,5 +98,5 @@ public class SearchResult {
     public void setFile(byte[] file) {
         this.file.set(file);
     }
-
+*/
 }

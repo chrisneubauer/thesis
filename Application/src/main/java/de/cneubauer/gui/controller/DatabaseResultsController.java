@@ -1,5 +1,6 @@
 package de.cneubauer.gui.controller;
 
+import de.cneubauer.domain.bo.Position;
 import de.cneubauer.domain.bo.Scan;
 import de.cneubauer.domain.service.AccountingRecordWriter;
 import de.cneubauer.domain.service.DatabaseResultsService;
@@ -44,7 +45,7 @@ public class DatabaseResultsController extends GUIController {
     @FXML private TableColumn<SearchResult, Double> valueColumn;
     @FXML private TableColumn<SearchResult, String> debitorColumn;
     @FXML private TableColumn<SearchResult, String> creditorColumn;
-    @FXML private TableColumn<SearchResult, byte[]> downloadColumn;
+    @FXML private TableColumn<SearchResult, Scan> downloadColumn;
 
     @FXML
     private void initialize() {
@@ -53,7 +54,7 @@ public class DatabaseResultsController extends GUIController {
         valueColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty().asObject());
         debitorColumn.setCellValueFactory(cellData -> cellData.getValue().debitorProperty());
         creditorColumn.setCellValueFactory(cellData -> cellData.getValue().creditorProperty());
-        downloadColumn.setCellValueFactory(cellData -> cellData.getValue().fileProperty());
+        downloadColumn.setCellValueFactory(cellData -> cellData.getValue().scanProperty()); //.fileProperty());
         downloadColumn.setCellFactory(p -> new ButtonCell());
     }
 
@@ -91,7 +92,7 @@ public class DatabaseResultsController extends GUIController {
             sr.setValue(s.getInvoiceInformation().getGrandTotal());
             sr.setCreditor(s.getInvoiceInformation().getCreditor().toString());
             sr.setDebitor(s.getInvoiceInformation().getDebitor().toString());
-            sr.setFile(s.getFile());
+            sr.setScan(s);
 
             allData.add(sr);
         }
@@ -100,7 +101,7 @@ public class DatabaseResultsController extends GUIController {
     }
 
     // Holds logic for the open pdf button
-    private class ButtonCell extends TableCell<SearchResult, byte[]> {
+    private class ButtonCell extends TableCell<SearchResult, Scan> {
         private Button button;
 
         ButtonCell() {
@@ -122,15 +123,17 @@ public class DatabaseResultsController extends GUIController {
                     if (fileDir != null) {
                         OutputStream out;
                         try {
-                            String file = fileDir + LocalDate.now().toString() + "_" + Arrays.hashCode(getItem());
+                            String file = fileDir + LocalDate.now().toString() + "_" + getItem().getId();
 
                             out = new FileOutputStream(file + ".pdf");
-                            out.write(getItem());
+                            out.write(getItem().getFile());
                             out.close();
                             Logger.getLogger(this.getClass()).log(Level.INFO, "opening pdf on " + file);
 
                             AccountingRecordWriter writer = new AccountingRecordWriter();
-
+                            for (Position pos : getItem().getPositions()) {
+                                Logger.getLogger(this.getClass()).log(Level.INFO, writer.convert(pos));
+                            }
 
                             Start.getHostServicesInternal().showDocument(file + ".pdf");
                         } catch (Exception ex) {
@@ -143,7 +146,7 @@ public class DatabaseResultsController extends GUIController {
 
         //Display button if the row is not empty
         @Override
-        protected void updateItem(byte[] result, boolean empty) {
+        protected void updateItem(Scan result, boolean empty) {
             super.updateItem(result, empty);
             if(!empty){
                 button.setText("View PDF");

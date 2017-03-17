@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -32,14 +33,19 @@ public class DatabaseService {
      * @param result  the process result that should be saved
      */
     public void saveProcessResult(ProcessResult result) {
+        Scan scan = new Scan();
+
         Invoice i = result.getExtractionModel().getUpdatedInvoiceInformation();
         List<Position> records = result.getExtractionModel().getUpdatedRecords();
 
         InvoiceDao invoiceDao = new InvoiceDaoImpl();
         invoiceDao.save(i);
 
+        PositionDao positionDao = new PositionDaoImpl();
+        for (Position r : records) {
+            r.setScan(scan);
+        }
 
-        Scan scan = new Scan();
         try {
             ZugFerdTransformator transformator = new ZugFerdTransformator();
             byte[] file = Files.toByteArray(result.getFile());
@@ -53,9 +59,8 @@ public class DatabaseService {
             e.printStackTrace();
         }
 
-        PositionDao accountDao = new PositionDaoImpl();
         for (Position r : records) {
-            accountDao.save(r);
+            positionDao.save(r);
         }
 
         DocumentCaseSet additionalSet;
@@ -127,10 +132,19 @@ public class DatabaseService {
         }
 
         for (Position r : extractionModel.getUpdatedRecords()) {
-            //TODO: Add old set comparison
+            // sort both alphabetically
+            //extractionModel.getUpdatedRecords().sort(Comparator.comparing(Position::getEntryText));
+            //oldSet.getPositionCases().sort(Comparator.comparing(DocumentCase::getPosition));
+            if (compareWithOldSet && oldSet.getPositionCases() != null) {
+                for (DocumentCase docCase : oldSet.getPositionCases()) {
+                    if (!docCase.getIsCorrect() && docCase.getPosition().toLowerCase().equals(r.getEntryText().toLowerCase())) {
+                        docCase.setIsCorrect(true);
+                    }
+                }
+            }
             pos = doc.getPage(0).findPosition(r.getEntryText());
             if (pos != null) {
-                Logger.getLogger(this.getClass()).log(Level.INFO, "Saving case for position " + r.getEntryText());
+                Logger.getLogger(this.getClass()).log(Level.INFO, "Saving case for position " + r.getEntryText() + " with position " + pos);
                 additionalSet.addPositionCase(new DocumentCase(c, caseId, this.keywordList.get(5), pos));
             }
         }

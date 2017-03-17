@@ -17,10 +17,10 @@
         <property name="skonto" column="Skonto" />
         <property name="createdDate" column="CreatedDate" />
         <property name="modifiedDate" column="ModifiedDate" />
-        <many-to-one name="debitor" class="de.cneubauer.domain.bo.LegalPerson" cascade="save-update">
+        <many-to-one name="debitor" class="de.cneubauer.domain.bo.LegalPerson" cascade="save-update" lazy="false">
             <column name="Debitor"/>
         </many-to-one>
-        <many-to-one name="creditor" class="de.cneubauer.domain.bo.LegalPerson" cascade="save-update">
+        <many-to-one name="creditor" class="de.cneubauer.domain.bo.LegalPerson" cascade="save-update" lazy="false">
             <column name="Creditor"/>
         </many-to-one>
     </class>

@@ -4,6 +4,7 @@ import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.dao.InvoiceDao;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.sql.Date;
@@ -44,7 +45,8 @@ public class InvoiceDaoImpl extends AbstractDao<Invoice> implements InvoiceDao {
 
         String hql = "FROM Invoice I WHERE I.issueDate = ?1";
 
-        Query q = this.getSession().createQuery(hql);
+        Session session = this.getSessionFactory().openSession();
+        Query q = session.createQuery(hql);
         q.setParameter(1, Date.valueOf(date));
 
         List results = q.getResultList();
@@ -57,6 +59,7 @@ public class InvoiceDaoImpl extends AbstractDao<Invoice> implements InvoiceDao {
         }
 
         Logger.getLogger(this.getClass()).log(Level.INFO, "Results found: " + result.size());
+        session.close();
         return result;
     }
 
@@ -66,7 +69,8 @@ public class InvoiceDaoImpl extends AbstractDao<Invoice> implements InvoiceDao {
 
         String hql = "FROM Invoice I WHERE (I.issueDate BETWEEN ?1 AND ?2)";
 
-        Query q = this.getSession().createQuery(hql);
+        Session session = this.getSessionFactory().openSession();
+        Query q = session.createQuery(hql);
         q.setParameter(1, Date.valueOf(date));
         q.setParameter(2, Date.valueOf(dateTo));
 
@@ -80,6 +84,7 @@ public class InvoiceDaoImpl extends AbstractDao<Invoice> implements InvoiceDao {
         }
 
         Logger.getLogger(this.getClass()).log(Level.INFO, "Results found: " + result.size());
+        session.close();
         return result;
 
     }
