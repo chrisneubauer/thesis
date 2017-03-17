@@ -1,7 +1,7 @@
 package de.cneubauer.ml;
 
 import de.cneubauer.domain.bo.Account;
-import de.cneubauer.domain.bo.AccountRecord;
+import de.cneubauer.domain.bo.AccountPosition;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.commons.lang3.StringUtils;
 
@@ -72,11 +72,11 @@ public class Model {
         this.credit.put(credit, percentualValue);
     }
 
-    public Set<AccountRecord> getAsAccountRecord(double value) {
-        Set<AccountRecord> result = new HashSet<>();
+    public Set<AccountPosition> getAsAccountRecord(double value) {
+        Set<AccountPosition> result = new HashSet<>();
 
         for (Map.Entry<Account, Double> debit : this.getDebit().entrySet()) {
-            AccountRecord record = new AccountRecord();
+            AccountPosition record = new AccountPosition();
             record.setIsDebit(true);
             record.setAccount(debit.getKey());
             record.setBruttoValue(debit.getValue() * value);
@@ -84,7 +84,7 @@ public class Model {
         }
 
         for (Map.Entry<Account, Double> credit : this.getCredit().entrySet()) {
-            AccountRecord record = new AccountRecord();
+            AccountPosition record = new AccountPosition();
             record.setIsDebit(false);
             record.setAccount(credit.getKey());
             record.setBruttoValue(credit.getValue() * value);

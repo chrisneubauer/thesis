@@ -2,6 +2,7 @@ package de.cneubauer;
 
 import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.domain.bo.*;
+import de.cneubauer.domain.dao.PositionDao;
 import de.cneubauer.domain.dao.impl.*;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.log4j.Level;
@@ -47,10 +48,24 @@ public class AbstractTest {
         AbstractDao<Country> countryDao = new CountryDaoImpl();
         AbstractDao<Creditor> creditorDao = new CreditorDaoImpl();
         AbstractDao<DocumentCase> documentCaseDao = new DocumentCaseDaoImpl();
+        AbstractDao<Position> positionDao = new PositionDaoImpl();
+        AbstractDao<AccountPosition> accountPositionDao = new AccountPositionDaoImpl();
+
+        String deleteAccountPositions = "DELETE FROM AccountPosition";
+        accountPositionDao.getSession().beginTransaction();
+        Query query = accountPositionDao.getSession().createQuery(deleteAccountPositions);
+        query.executeUpdate();
+        accountPositionDao.getSession().getTransaction().commit();
+
+        String deletePositions = "DELETE FROM Position";
+        positionDao.getSession().beginTransaction();
+        query = positionDao.getSession().createQuery(deletePositions);
+        query.executeUpdate();
+        positionDao.getSession().getTransaction().commit();
 
         String deleteScans = "DELETE FROM Scan";
         scanDao.getSession().beginTransaction();
-        Query query = scanDao.getSession().createQuery(deleteScans);
+        query = scanDao.getSession().createQuery(deleteScans);
         query.executeUpdate();
         scanDao.getSession().getTransaction().commit();
 

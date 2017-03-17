@@ -1,8 +1,8 @@
 package de.cneubauer.gui.controller;
 
 import de.cneubauer.domain.bo.Account;
-import de.cneubauer.domain.bo.AccountRecord;
-import de.cneubauer.domain.bo.Record;
+import de.cneubauer.domain.bo.AccountPosition;
+import de.cneubauer.domain.bo.Position;
 import de.cneubauer.domain.dao.AccountDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.gui.model.AccountingRecordModel;
@@ -85,7 +85,7 @@ public class AccountingRecordsController extends SplitPaneController {
     private int index = 1;
     private List<Account> accounts;
 
-    void initData(List<Record> data, SplitPaneController superCtrl) {
+    void initData(List<Position> data, SplitPaneController superCtrl) {
         this.superCtrl = superCtrl;
         Logger.getLogger(this.getClass()).log(Level.INFO, "initiating AccountingRecordsController data");
 
@@ -108,10 +108,10 @@ public class AccountingRecordsController extends SplitPaneController {
         }
     }
 
-    private List<AccountingRecordModel> convertToAccountingRecordModel(List<Record> data) {
+    private List<AccountingRecordModel> convertToAccountingRecordModel(List<Position> data) {
         List<AccountingRecordModel> records = new ArrayList<>(data.size());
         int idx = 1;
-        for (Record record : data) {
+        for (Position record : data) {
             AccountingRecordModel model = new AccountingRecordModel(idx++);
             model.setRevised(false);
             model.setRecord(record);
@@ -123,7 +123,7 @@ public class AccountingRecordsController extends SplitPaneController {
         }
         if (records.size() == 0) {
             AccountingRecordModel model = new AccountingRecordModel(1);
-            model.setRecord(new Record());
+            model.setRecord(new Position());
             records.add(model);
         }
         return records;
@@ -170,11 +170,11 @@ public class AccountingRecordsController extends SplitPaneController {
         toDropDownAccountThree.setItems(accounts);
         toDropDownAccountFour.setItems(accounts);
 
-        if (model != null && model.getRecord().getRecordAccounts().size() > 0) {
+        if (model != null && model.getRecord().getPositionAccounts().size() > 0) {
             int idxDebit = 0;
             int idxCredit = 0;
-            Set<AccountRecord> entries = model.getRecord().getRecordAccounts();
-            for (AccountRecord current : entries) {
+            Set<AccountPosition> entries = model.getRecord().getPositionAccounts();
+            for (AccountPosition current : entries) {
                 if (current.getIsDebit()) {
                     switch (idxDebit) {
                         case 0:
@@ -220,8 +220,8 @@ public class AccountingRecordsController extends SplitPaneController {
         }
     }
 
-    private List<Record> convertToAccountingRecords() {
-        List<Record> result = new ArrayList<>(this.recordsFound.size());
+    private List<Position> convertToAccountingRecords() {
+        List<Position> result = new ArrayList<>(this.recordsFound.size());
         int index = 0;
         for (AccountingRecordModel model : recordsFound) {
             //Record newRecord = new Record();
@@ -287,14 +287,14 @@ public class AccountingRecordsController extends SplitPaneController {
 
     private void saveCurrentValuesToRecord() {
         AccountingRecordModel current;
-        Record currentRecord;
+        Position currentRecord;
         try {
             current = this.getRecordsFound().get(this.index - 1);
             currentRecord = current.getRecord();
         } catch (IndexOutOfBoundsException ex) {
             // when no current model exists -> No records found at all
             current = new AccountingRecordModel(this.index - 1);
-            currentRecord = new Record();
+            currentRecord = new Position();
             current.setRecord(currentRecord);
 
             if (this.getRecordsFound() == null) {
@@ -308,73 +308,73 @@ public class AccountingRecordsController extends SplitPaneController {
             currentRecord.setEntryText(this.getPossiblePosition());
         }
 
-        currentRecord.getRecordAccounts().clear();
+        currentRecord.getPositionAccounts().clear();
 
         if (this.getToDropDownAccountOne() != null && this.getPositionValueToAccountOne() > 0) {
-            AccountRecord record = new AccountRecord();
+            AccountPosition record = new AccountPosition();
             record.setAccount(this.getToDropDownAccountOne());
             record.setBruttoValue(this.getPositionValueToAccountOne());
             record.setIsDebit(false);
-            currentRecord.getRecordAccounts().add(record);
+            currentRecord.getPositionAccounts().add(record);
         }
 
         if (this.getToDropDownAccountTwo() != null && this.getPositionValueToAccountTwo() > 0) {
-            AccountRecord record = new AccountRecord();
+            AccountPosition record = new AccountPosition();
             record.setAccount(this.getToDropDownAccountTwo());
             record.setBruttoValue(this.getPositionValueToAccountTwo());
             record.setIsDebit(false);
-            currentRecord.getRecordAccounts().add(record);
+            currentRecord.getPositionAccounts().add(record);
         }
 
         if (this.getToDropDownAccountThree() != null && this.getPositionValueToAccountThree() > 0) {
-            AccountRecord record = new AccountRecord();
+            AccountPosition record = new AccountPosition();
             record.setAccount(this.getToDropDownAccountThree());
             record.setBruttoValue(this.getPositionValueToAccountThree());
             record.setIsDebit(false);
-            currentRecord.getRecordAccounts().add(record);
+            currentRecord.getPositionAccounts().add(record);
         }
 
         if (this.getToDropDownAccountFour() != null && this.getPositionValueToAccountFour() > 0) {
-            AccountRecord record = new AccountRecord();
+            AccountPosition record = new AccountPosition();
             record.setAccount(this.getToDropDownAccountFour());
             record.setBruttoValue(this.getPositionValueToAccountFour());
             record.setIsDebit(false);
-            currentRecord.getRecordAccounts().add(record);
+            currentRecord.getPositionAccounts().add(record);
         }
 
         if (this.getFromDropDownAccountOne() != null && this.getPositionValueFromAccountOne() > 0) {
-            AccountRecord record = new AccountRecord();
+            AccountPosition record = new AccountPosition();
             record.setAccount(this.getFromDropDownAccountOne());
             record.setBruttoValue(this.getPositionValueFromAccountOne());
             record.setIsDebit(true);
-            currentRecord.getRecordAccounts().add(record);
+            currentRecord.getPositionAccounts().add(record);
         }
 
         if (this.getFromDropDownAccountTwo() != null && this.getPositionValueFromAccountTwo() > 0) {
-            AccountRecord record = new AccountRecord();
+            AccountPosition record = new AccountPosition();
             record.setAccount(this.getFromDropDownAccountTwo());
             record.setBruttoValue(this.getPositionValueFromAccountTwo());
             record.setIsDebit(true);
-            currentRecord.getRecordAccounts().add(record);
+            currentRecord.getPositionAccounts().add(record);
         }
 
         if (this.getFromDropDownAccountThree() != null && this.getPositionValueFromAccountThree() > 0) {
-            AccountRecord record = new AccountRecord();
+            AccountPosition record = new AccountPosition();
             record.setAccount(this.getFromDropDownAccountThree());
             record.setBruttoValue(this.getPositionValueFromAccountThree());
             record.setIsDebit(true);
-            currentRecord.getRecordAccounts().add(record);
+            currentRecord.getPositionAccounts().add(record);
         }
 
         if (this.getFromDropDownAccountFour() != null && this.getPositionValueFromAccountFour() > 0) {
-            AccountRecord record = new AccountRecord();
+            AccountPosition record = new AccountPosition();
             record.setAccount(this.getFromDropDownAccountFour());
             record.setBruttoValue(this.getPositionValueFromAccountFour());
             record.setIsDebit(true);
-            currentRecord.getRecordAccounts().add(record);
+            currentRecord.getPositionAccounts().add(record);
         }
 
-        for (AccountRecord a : currentRecord.getRecordAccounts()) {
+        for (AccountPosition a : currentRecord.getPositionAccounts()) {
             a.setRecord(currentRecord);
         }
     }
@@ -420,13 +420,13 @@ public class AccountingRecordsController extends SplitPaneController {
 
     // core method to update the whole view when new information is present
     private void updateAccountingRecordView(AccountingRecordModel currentModel) {
-        Record record = currentModel.getRecord();
+        Position record = currentModel.getRecord();
 
         this.clearTextfields();
         this.setPossiblePosition(record.getEntryText());
         int debitIdx = 0;
         int creditIdx = 0;
-        for (AccountRecord entry : record.getRecordAccounts()) {
+        for (AccountPosition entry : record.getPositionAccounts()) {
             if (entry.getIsDebit()) {
                 switch (debitIdx) {
                     case 0:
@@ -506,7 +506,7 @@ public class AccountingRecordsController extends SplitPaneController {
         List<ValidationStatus> errors = new LinkedList<>();
         for (AccountingRecordModel record : this.getRecordsFound()) {
             boolean currentlyShownRecord = this.getRecordsFound().indexOf(record) == this.index - 1;
-            Record current = record.getRecord();
+            Position current = record.getRecord();
             if (current.getEntryText() == null || Objects.equals(current.getEntryText(), "")) {
                 errors.add(ValidationStatus.MISSINGPOSITION);
                 if (currentlyShownRecord) {
@@ -525,7 +525,7 @@ public class AccountingRecordsController extends SplitPaneController {
             }
             double debitSum = 0;
             double creditSum = 0;
-            for (AccountRecord entry : current.getRecordAccounts()) {
+            for (AccountPosition entry : current.getPositionAccounts()) {
                 if (entry.getIsDebit()) {
                     debitSum += entry.getBruttoValue();
                 } else {
@@ -553,7 +553,7 @@ public class AccountingRecordsController extends SplitPaneController {
                     }
                 }
             }
-            if (current.getRecordAccounts().size() == 0) {
+            if (current.getPositionAccounts().size() == 0) {
                 errors.add(ValidationStatus.MISSINGACCOUNTS);
                 if (!currentlyShownRecord) {
                     if (record.getIndex() < this.index - 1) {
@@ -704,13 +704,13 @@ public class AccountingRecordsController extends SplitPaneController {
         return errors;
     }
 
-    List<Record> updateInformation() {
+    List<Position> updateInformation() {
         return this.convertToAccountingRecords();
     }
 
     public void addNewEntry() {
         AccountingRecordModel model = new AccountingRecordModel(this.getRecordsFound().size() + 1);
-        model.setRecord(new Record());
+        model.setRecord(new Position());
         this.getRecordsFound().add(model);
         this.index = this.getRecordsFound().size();
         this.updateAccountingRecordView(this.getRecordsFound().get(this.index - 1));

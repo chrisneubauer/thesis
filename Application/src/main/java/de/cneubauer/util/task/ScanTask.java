@@ -1,12 +1,12 @@
 package de.cneubauer.util.task;
 
 import de.cneubauer.domain.bo.Invoice;
-import de.cneubauer.domain.bo.Record;
+import de.cneubauer.domain.bo.Position;
 import de.cneubauer.domain.service.AccountingRecordExtractorService;
 import de.cneubauer.domain.service.DataExtractorService;
 import de.cneubauer.domain.service.InvoiceExtractorService;
-import de.cneubauer.domain.service.validation.AccountingRecordValidator;
 import de.cneubauer.domain.service.validation.InvoiceValidator;
+import de.cneubauer.domain.service.validation.PositionAccountValidator;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.ocr.ImagePartitioner;
@@ -61,7 +61,7 @@ public class ScanTask extends Task {
         boolean invoiceFinished = false;
         boolean recordFinished = false;
         Invoice i = null;
-        List<Record> recordList = null;
+        List<Position> recordList = null;
         DocumentCaseSet caseSet;
 
         invoiceThread.start();
@@ -251,7 +251,7 @@ public class ScanTask extends Task {
     private boolean resultValid(ProcessResult r) {
         InvoiceValidator invoiceValidator = new InvoiceValidator(r.getExtractionModel().getInvoiceInformation());
         boolean invoiceValid = invoiceValidator.isValid();
-        AccountingRecordValidator accountingValidator = new AccountingRecordValidator(r.getExtractionModel().getRecords());
+        PositionAccountValidator accountingValidator = new PositionAccountValidator(r.getExtractionModel().getRecords());
         boolean accountingRecordsValid = accountingValidator.isValid();
         return invoiceValid && accountingRecordsValid;
     }

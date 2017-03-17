@@ -1,6 +1,7 @@
 package de.cneubauer.domain.bo;
 
 import java.sql.Date;
+import java.util.Set;
 
 /**
  * Created by Christoph Neubauer on 05.10.2016.
@@ -12,6 +13,15 @@ public class Scan {
     private Invoice invoiceInformation;
     private Date createdDate;
     private Date modifiedDate;
+    private Set<Position> positions;
+
+    public Set<Position> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(Set<Position> positions) {
+        this.positions = positions;
+    }
 
     /**
      * @return  the id of this object stored in the database table

@@ -4,11 +4,11 @@ package de.cneubauer.domain.bo;
  * Created by Christoph Neubauer on 08.01.2017.
  * Many-To-Many mapping of accounts to records
  */
-public class AccountRecord {
+public class AccountPosition {
     private int id;
     private double bruttoValue;
     private Account account;
-    private Record record;
+    private Position record;
     private boolean isDebit;
 
     /**
@@ -31,7 +31,7 @@ public class AccountRecord {
      * Gets the record which is related to this account-record relation
      * @return  the record of this relation
      */
-    public Record getRecord() {
+    public Position getRecord() {
         return record;
     }
 
@@ -39,7 +39,7 @@ public class AccountRecord {
      * Sets the record which is related to this account-record relation
      * @param record  the record for this relation
      */
-    public void setRecord(Record record) {
+    public void setRecord(Position record) {
         this.record = record;
     }
 

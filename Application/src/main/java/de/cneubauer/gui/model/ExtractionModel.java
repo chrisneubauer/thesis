@@ -1,6 +1,6 @@
 package de.cneubauer.gui.model;
 
-import de.cneubauer.domain.bo.Record;
+import de.cneubauer.domain.bo.Position;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.ocr.hocr.HocrDocument;
 import de.cneubauer.util.DocumentCaseSet;
@@ -15,8 +15,8 @@ public class ExtractionModel {
     private Invoice invoiceInformation;
     private Invoice updatedInvoiceInformation;
 
-    private List<Record> records;
-    private List<Record> updatedRecords;
+    private List<Position> records;
+    private List<Position> updatedRecords;
 
     private HocrDocument hocrDocument;
     private DocumentCaseSet caseSet;
@@ -31,11 +31,11 @@ public class ExtractionModel {
         this.invoiceInformation = invoiceInformation;
     }
 
-    public List<Record> getRecords() {
+    public List<Position> getRecords() {
         return records;
     }
 
-    public void setRecords(List<Record> records) {
+    public void setRecords(List<Position> records) {
         this.records = records;
     }
 
@@ -55,7 +55,7 @@ public class ExtractionModel {
         this.updatedInvoiceInformation = updatedInvoiceInformation;
     }
 
-    public void setUpdatedRecords(List<Record> updatedRecords) {
+    public void setUpdatedRecords(List<Position> updatedRecords) {
         this.updatedRecords = updatedRecords;
     }
 
@@ -63,7 +63,7 @@ public class ExtractionModel {
         return updatedInvoiceInformation;
     }
 
-    public List<Record> getUpdatedRecords() {
+    public List<Position> getUpdatedRecords() {
         return updatedRecords;
     }
 

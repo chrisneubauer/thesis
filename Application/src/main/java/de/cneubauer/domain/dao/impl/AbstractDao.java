@@ -52,8 +52,9 @@ public abstract class AbstractDao<T> implements IDao<T> {
 
     public T getById(int id) {
             T result;
-
-            result = this.getSession().get(clazz, id);
+            Session getSession = this.getSessionFactory().openSession();
+            result = getSession.get(clazz, id);
+            getSession.close();
             return result;
     }
 

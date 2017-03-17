@@ -79,7 +79,7 @@ public class ApplicationTest extends AbstractTest {
         boolean accountingRecordFinished = false;
 
         Invoice extractedInvoiceInformation = null;
-        List<Record> extractedAccountingRecordInformation = null;
+        List<Position> extractedAccountingRecordInformation = null;
 
         while (!invoiceFinished || !accountingRecordFinished) {
             if (!invoiceFinished && invoiceThread.getState().equals(Thread.State.TERMINATED)) {
@@ -109,7 +109,7 @@ public class ApplicationTest extends AbstractTest {
             List<Model> existingModels = this.reader.getModels();
 
             this.logger.log(Level.INFO, "adding models that are missing");
-            for (Record r : extractedAccountingRecordInformation) {
+            for (Position r : extractedAccountingRecordInformation) {
                 if (r.getEntryText() != null) {
                     if (this.learningService.exists(r.getEntryText())) {
                         // dunno
@@ -118,7 +118,7 @@ public class ApplicationTest extends AbstractTest {
                         m.setPosition(r.getEntryText());
                         Set<Account> credits = new LinkedHashSet<>();
                         Set<Account> debits = new LinkedHashSet<>();
-                        for (AccountRecord ar : r.getRecordAccounts()) {
+                        for (AccountPosition ar : r.getPositionAccounts()) {
                             if (ar.getIsDebit()) {
                                 debits.add(ar.getAccount());
                             } else {

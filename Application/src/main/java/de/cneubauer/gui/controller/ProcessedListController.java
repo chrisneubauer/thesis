@@ -1,6 +1,6 @@
 package de.cneubauer.gui.controller;
 
-import de.cneubauer.domain.bo.Record;
+import de.cneubauer.domain.bo.Position;
 import de.cneubauer.domain.service.DatabaseService;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
@@ -89,7 +89,7 @@ public class ProcessedListController extends GUIController {
                 service.saveProcessResult(result);
                 ModelWriter writer = new ModelWriter();
                 LearningService service1 = new LearningService();
-                for (Record r : result.getExtractionModel().getUpdatedRecords()) {
+                for (Position r : result.getExtractionModel().getUpdatedRecords()) {
                     Model m = service1.createModel(r);
                     writer.writeToFile(m);
                 }

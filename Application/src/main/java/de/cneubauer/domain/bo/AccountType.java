@@ -4,6 +4,7 @@ package de.cneubauer.domain.bo;
  * Created by Christoph Neubauer on 15.11.2016.
  * Business Object for table AccountType
  */
+@Deprecated
 public class AccountType {
     private int id;
     private int type;

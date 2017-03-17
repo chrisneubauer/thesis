@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
  * Created by Christoph Neubauer on 15.11.2016.
  * DAO implementation of business object AccountType
  */
+@Deprecated
 public class AccountTypeDaoImpl extends AbstractDao<AccountType> implements AccountTypeDao {
     public AccountTypeDaoImpl() {
         super(AccountType.class);

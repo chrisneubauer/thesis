@@ -2,9 +2,8 @@ package de.cneubauer.domain.dao.impl;
 
 import de.cneubauer.AbstractTest;
 import de.cneubauer.database.MySQLConnector;
-import de.cneubauer.domain.bo.Invoice;
-import de.cneubauer.domain.bo.LegalPerson;
-import de.cneubauer.domain.bo.Scan;
+import de.cneubauer.domain.bo.*;
+import de.cneubauer.domain.dao.AccountDao;
 import de.cneubauer.domain.dao.InvoiceDao;
 import de.cneubauer.domain.dao.LegalPersonDao;
 import org.junit.After;
@@ -17,8 +16,7 @@ import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class ScanDaoImplTest extends AbstractTest {
     private MySQLConnector connector;
@@ -54,7 +52,7 @@ public class ScanDaoImplTest extends AbstractTest {
     public void testSave() throws Exception {
         Scan s = new Scan();
 
-        File pdf = new File(".\\src\\test\\resources\\invoice\\2015-11-26_Reifen Ebay.pdf");
+        File pdf = new File(".\\src\\test\\resources\\data\\generation\\template1_generated0.pdf");
 
         Invoice i = new Invoice();
         i.setGrandTotal(299.99);
@@ -69,10 +67,32 @@ public class ScanDaoImplTest extends AbstractTest {
         i.setDebitor(deb);
         i.setCreditor(cred);
 
-        //invoiceDao.save(i);
+        Position pos = new Position();
+        pos.setEntryText("fakePos");
+
+        AccountPosition debit = new AccountPosition();
+        AccountPosition credit = new AccountPosition();
+
+        AccountDao accountDao = new AccountDaoImpl();
+        List<Account> accounts = accountDao.getAll();
+        debit.setAccount(accounts.get(5));
+        debit.setBruttoValue(20);
+        debit.setIsDebit(true);
+        debit.setRecord(pos);
+        credit.setAccount(accounts.get(8));
+        credit.setBruttoValue(20);
+        credit.setRecord(pos);
+
+        Set<AccountPosition> accountPositionSet = new HashSet<>();
+        accountPositionSet.add(debit);
+        accountPositionSet.add(credit);
+
+        pos.setPositionAccounts(accountPositionSet);
+        pos.setScan(s);
 
         s.setInvoiceInformation(i);
         s.setFile(Files.readAllBytes(pdf.toPath()));
+        s.setPositions(Collections.singleton(pos));
 
         this.dao.save(s);
 
@@ -81,6 +101,8 @@ public class ScanDaoImplTest extends AbstractTest {
         Assert.notNull(persistentScan);
         Assert.isTrue(persistentScan.getId() == s.getId());
         Assert.isTrue(persistentScan.getInvoiceInformation() != null);
+        Assert.isTrue(persistentScan.getPositions() != null);
+        Assert.isTrue(persistentScan.getPositions().size() > 0);
         Assert.isTrue(persistentScan.getInvoiceInformation().getId() == i.getId());
         Assert.isTrue(persistentScan.getInvoiceInformation().getDebitor().getId() == deb.getId());
         Assert.isTrue(persistentScan.getInvoiceInformation().getCreditor().getId() == cred.getId());

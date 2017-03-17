@@ -1,8 +1,8 @@
 package de.cneubauer.domain.service;
 
 import de.cneubauer.domain.bo.Account;
-import de.cneubauer.domain.bo.AccountRecord;
-import de.cneubauer.domain.bo.Record;
+import de.cneubauer.domain.bo.AccountPosition;
+import de.cneubauer.domain.bo.Position;
 import de.cneubauer.domain.dao.AccountDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import org.junit.Assert;
@@ -12,8 +12,6 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Christoph on 17.03.2017.
@@ -32,11 +30,11 @@ public class AccountingRecordWriterTest {
 
     @Test
     public void convert() throws Exception {
-        Record r = new Record();
-        AccountRecord credit1 = new AccountRecord();
-        AccountRecord credit2 = new AccountRecord();
-        AccountRecord debit1 = new AccountRecord();
-        AccountRecord debit2 = new AccountRecord();
+        Position r = new Position();
+        AccountPosition credit1 = new AccountPosition();
+        AccountPosition credit2 = new AccountPosition();
+        AccountPosition debit1 = new AccountPosition();
+        AccountPosition debit2 = new AccountPosition();
 
         debit1.setIsDebit(true);
         debit2.setIsDebit(true);
@@ -53,13 +51,13 @@ public class AccountingRecordWriterTest {
         debit2.setBruttoValue(30.22);
         debit2.setAccount(accountList.get(80));
 
-        Set<AccountRecord> set = new HashSet<>();
+        Set<AccountPosition> set = new HashSet<>();
         set.add(debit1);
         set.add(credit1);
         set.add(debit2);
         set.add(credit2);
 
-        r.setRecordAccounts(set);
+        r.setPositionAccounts(set);
 
         Assert.assertNotNull(this.writer.convert(r));
     }

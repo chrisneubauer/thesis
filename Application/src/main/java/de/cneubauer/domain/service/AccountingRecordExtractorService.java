@@ -3,7 +3,7 @@ package de.cneubauer.domain.service;
 import de.cneubauer.domain.bo.Creditor;
 import de.cneubauer.domain.bo.DocumentCase;
 import de.cneubauer.domain.bo.LegalPerson;
-import de.cneubauer.domain.bo.Record;
+import de.cneubauer.domain.bo.Position;
 import de.cneubauer.ml.LearningService;
 import de.cneubauer.ml.Model;
 import de.cneubauer.ocr.hocr.HocrDocument;
@@ -26,8 +26,8 @@ public class AccountingRecordExtractorService extends DataExtractorService {
         super.extractInvoice = false;
     }
 
-    private List<Record> extractAccountingRecordInformationFromHocr() {
-        List<Record> records = new LinkedList<>();
+    private List<Position> extractAccountingRecordInformationFromHocr() {
+        List<Position> records = new LinkedList<>();
         boolean endReached;
         LegalPerson possibleCreditor = this.getLegalPersonFromDatabase(this.getHocrDoument(), true);
 
@@ -89,14 +89,14 @@ public class AccountingRecordExtractorService extends DataExtractorService {
                     String position = word.getValue();
                     endReached = this.lineContainsTableEndInformation(position);
                     if (!endReached) {
-                        Record r = new Record();
+                        Position r = new Position();
                         String recordLine = this.removeFinancialInformationFromRecordLine(position);
                         double value = this.getValueFromLine(line.getValue());
 
                         Model m = service.getMostLikelyModel(recordLine);
                         if (m != null) {
                             r.setEntryText(m.getPosition());
-                            r.setRecordAccounts(m.getAsAccountRecord(value));
+                            r.setPositionAccounts(m.getAsAccountRecord(value));
                             r.setProbability(m.getProbability());
                             records.add(r);
                             this.caseSet.addPositionCase(new DocumentCase(creditor, highestCase, keywordList.get(5), position));
@@ -116,8 +116,8 @@ public class AccountingRecordExtractorService extends DataExtractorService {
      * Uses scanned page and looks for several information regarding accounting records
      * @return  returns a list of all AccountingRecords that has been found on the page
      */
-    private List<Record> extractAccountingRecordInformation() {
-        List<Record> records = new LinkedList<>();
+    private List<Position> extractAccountingRecordInformation() {
+        List<Position> records = new LinkedList<>();
         int index = 0;
         boolean found = false;
         boolean endReached;
@@ -140,7 +140,7 @@ public class AccountingRecordExtractorService extends DataExtractorService {
                         // check these before going on
                         endReached = this.lineContainsTableEndInformation(nextLine);
                         if (!endReached) {
-                            Record r = new Record();
+                            Position r = new Position();
                             String recordLine = this.removeFinancialInformationFromRecordLine(nextLine);
                             double value = this.getValueFromLine(nextLine);
 
@@ -150,7 +150,7 @@ public class AccountingRecordExtractorService extends DataExtractorService {
                                 r.setEntryText(nextLine);
                             } else {
                                 r.setEntryText(m.getPosition());
-                                r.setRecordAccounts(m.getAsAccountRecord(value));
+                                r.setPositionAccounts(m.getAsAccountRecord(value));
                                 r.setProbability(m.getProbability());
                             }
                             records.add(r);

@@ -2,14 +2,14 @@ package de.cneubauer.gui.model;
 
 import de.cneubauer.domain.bo.Account;
 import de.cneubauer.domain.bo.AccountType;
-import de.cneubauer.domain.bo.Record;
+import de.cneubauer.domain.bo.Position;
 
 /**
  * Created by Christoph Neubauer on 21.11.2016.
  * Model for the AccountingRecordsController
  */
 public class AccountingRecordModel {
-    private Record record;
+    private Position record;
     private boolean revised;
     private AccountType toPossibleType;
     private Account toPossibleAccount;
@@ -23,11 +23,11 @@ public class AccountingRecordModel {
         this.index = index;
     }
 
-    public Record getRecord() {
+    public Position getRecord() {
         return record;
     }
 
-    public void setRecord(Record record) {
+    public void setRecord(Position record) {
         this.record = record;
     }
 

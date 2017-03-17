@@ -1,8 +1,8 @@
 package de.cneubauer.ml;
 
 import de.cneubauer.domain.bo.Account;
-import de.cneubauer.domain.bo.AccountRecord;
-import de.cneubauer.domain.bo.Record;
+import de.cneubauer.domain.bo.AccountPosition;
+import de.cneubauer.domain.bo.Position;
 import de.cneubauer.ml.classification.Classification;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.log4j.Level;
@@ -88,19 +88,19 @@ public class LearningService {
         return null;
     }
 
-    public Model createModel(Record r) {
+    public Model createModel(Position r) {
         Model m = new Model();
         m.setPosition(r.getEntryText());
 
         double total = 0;
 
-        for (AccountRecord ar : r.getRecordAccounts()) {
+        for (AccountPosition ar : r.getPositionAccounts()) {
             if (ar.getIsDebit()) {
                 total += ar.getBruttoValue();
             }
         }
 
-        for (AccountRecord ar : r.getRecordAccounts()) {
+        for (AccountPosition ar : r.getPositionAccounts()) {
             if (ar.getIsDebit()) {
                 m.addToDebitAccounts(ar.getAccount(), (ar.getBruttoValue() / total));
             } else {

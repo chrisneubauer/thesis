@@ -1,6 +1,6 @@
 package de.cneubauer.domain.dao;
 
-import de.cneubauer.domain.bo.AccountRecord;
+import de.cneubauer.domain.bo.AccountPosition;
 
 import java.util.Set;
 
@@ -8,9 +8,9 @@ import java.util.Set;
  * Created by Christoph Neubauer on 15.11.2016.
  * DAO for business object AccountRecord
  */
-public interface AccountRecordDao extends IDao<AccountRecord> {
+public interface AccountPositionDao extends IDao<AccountPosition> {
     /**
      * @param recordAccounts  the accounts that should be stored
      */
-    void saveAll(Set<AccountRecord> recordAccounts);
+    void saveAll(Set<AccountPosition> recordAccounts);
 }

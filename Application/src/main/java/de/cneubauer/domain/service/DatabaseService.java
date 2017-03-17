@@ -33,7 +33,7 @@ public class DatabaseService {
      */
     public void saveProcessResult(ProcessResult result) {
         Invoice i = result.getExtractionModel().getUpdatedInvoiceInformation();
-        List<Record> records = result.getExtractionModel().getUpdatedRecords();
+        List<Position> records = result.getExtractionModel().getUpdatedRecords();
 
         InvoiceDao invoiceDao = new InvoiceDaoImpl();
         invoiceDao.save(i);
@@ -53,8 +53,8 @@ public class DatabaseService {
             e.printStackTrace();
         }
 
-        RecordDao accountDao = new RecordDaoImpl();
-        for (Record r : records) {
+        PositionDao accountDao = new PositionDaoImpl();
+        for (Position r : records) {
             accountDao.save(r);
         }
 
@@ -126,7 +126,7 @@ public class DatabaseService {
             additionalSet.setDocumentTypeCase(new DocumentCase(c, caseId, this.keywordList.get(0), pos));
         }
 
-        for (Record r : extractionModel.getUpdatedRecords()) {
+        for (Position r : extractionModel.getUpdatedRecords()) {
             //TODO: Add old set comparison
             pos = doc.getPage(0).findPosition(r.getEntryText());
             if (pos != null) {

@@ -7,6 +7,6 @@
         </id>
         <property name="accountNo" column="AccountNo" />
         <property name="name" column="Name" />
-        <many-to-one name="type" class="de.cneubauer.domain.bo.AccountType" column="AccountType_Id"/>
+        <!--<many-to-one name="type" class="de.cneubauer.domain.bo.AccountType" column="AccountType_Id"/>-->
     </class>
 </hibernate-mapping>

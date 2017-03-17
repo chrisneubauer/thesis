@@ -30,8 +30,8 @@
         <mapping resource="hbm/Account.hbm.xml"/>
         <!--<mapping resource="hbm/AccountingRecord.hbm.xml"/>-->
 
-        <mapping resource="hbm/AccountRecord.hbm.xml"/>
-        <mapping resource="hbm/Record.hbm.xml"/>
+        <mapping resource="hbm/AccountPosition.hbm.xml"/>
+        <mapping resource="hbm/Position.hbm.xml"/>
 
         <mapping resource="hbm/Country.hbm.xml"/>
         <mapping resource="hbm/CorporateForm.hbm.xml"/>

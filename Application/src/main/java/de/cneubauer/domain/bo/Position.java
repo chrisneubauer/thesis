@@ -15,19 +15,25 @@ import java.util.Set;
  * Created by Christoph Neubauer on 15.11.2016.
  * Business Object for Record table
  */
-public class Record {
-    private float probability;
+public class Position {
+    public Position() {
+        this.positionAccounts = new HashSet<>(0);
+    }
 
-    public Record() {
-        this.recordAccounts = new HashSet<>(0);
+    private Scan scan;
+
+    public Scan getScan() {
+        return scan;
+    }
+
+    public void setScan(Scan scan) {
+        this.scan = scan;
     }
 
     private int id;
-    private Date entryDate;
-    private String documentNo;
-    private byte[] document;
     private String entryText;
-    private Set<AccountRecord> recordAccounts;
+    private Set<AccountPosition> positionAccounts;
+    private float probability;
 
     /**
      * @param entry  the account-record relation entry to be used for training instances
@@ -37,7 +43,7 @@ public class Record {
         List<Account> accountList = accountDao.getAll();
         for (Map.Entry<String, Double> mapEntry : entry.getDebitAccounts().entrySet()) {
             try {
-                AccountRecord record = new AccountRecord();
+                AccountPosition record = new AccountPosition();
                 record.setIsDebit(true);
                 for (Account a : accountList) {
                     if (mapEntry.getKey().equals(a.getName())) {
@@ -46,7 +52,7 @@ public class Record {
                     }
                 }
                 record.setBruttoValue(mapEntry.getValue());
-                this.getRecordAccounts().add(record);
+                this.getPositionAccounts().add(record);
             } catch (Exception e) {
                 Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to parse account from string, skipping..");
             }
@@ -54,7 +60,7 @@ public class Record {
 
         for (Map.Entry<String, Double> mapEntry : entry.getCreditAccounts().entrySet()) {
             try {
-                AccountRecord record = new AccountRecord();
+                AccountPosition record = new AccountPosition();
                 record.setIsDebit(false);
                 for (Account a : accountList) {
                     if (mapEntry.getKey().equals(a.getName())) {
@@ -64,7 +70,7 @@ public class Record {
                 }
                 record.setAccount(accountDao.getByName(mapEntry.getKey()));
                 record.setBruttoValue(mapEntry.getValue());
-                this.getRecordAccounts().add(record);
+                this.getPositionAccounts().add(record);
             } catch (Exception e) {
                 Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to parse account from string, skipping..");
             }
@@ -74,15 +80,15 @@ public class Record {
     /**
      * @return  returns a set of account-record relations
      */
-    public Set<AccountRecord> getRecordAccounts() {
-        return recordAccounts;
+    public Set<AccountPosition> getPositionAccounts() {
+        return positionAccounts;
     }
 
     /**
-     * @param recordAccounts  the set of account-record relations to be stored
+     * @param positionAccounts  the set of account-record relations to be stored
      */
-    public void setRecordAccounts(Set<AccountRecord> recordAccounts) {
-        this.recordAccounts = recordAccounts;
+    public void setPositionAccounts(Set<AccountPosition> positionAccounts) {
+        this.positionAccounts = positionAccounts;
     }
 
     /**
@@ -98,46 +104,6 @@ public class Record {
      */
     public void setId(int id) {
         this.id = id;
-    }
-
-    /**
-     *
-     * @return //TODO: whats entrydate?
-     */
-    public Date getEntryDate() {
-        return entryDate;
-    }
-
-    public void setEntryDate(Date entryDate) {
-        this.entryDate = entryDate;
-    }
-
-    /**
-     * @return  the identification number of the document
-     */
-    public String getDocumentNo() {
-        return documentNo;
-    }
-
-    /**
-     * @param documentNo  the identification number of the document
-     */
-    public void setDocumentNo(String documentNo) {
-        this.documentNo = documentNo;
-    }
-
-    /**
-     * @return  the scanned document stored as a byte[]
-     */
-    public byte[] getDocument() {
-        return document;
-    }
-
-    /**
-     * @param document  the scanned document stored as a byte[]
-     */
-    public void setDocument(byte[] document) {
-        this.document = document;
     }
 
     /**
@@ -161,44 +127,4 @@ public class Record {
     public float getProbability() {
         return probability;
     }
-
-    /* public Account getDebit() {
-        return debit;
-    }
-
-    public void setDebit(Account debit) {
-        this.debit = debit;
-    }
-
-    public Account getCredit() {
-        return credit;
-    }
-
-    public void setCredit(Account credit) {
-        this.credit = credit;
-    }
-
-    public double getBruttoValue() {
-        return bruttoValue;
-    }
-
-    public void setBruttoValue(double bruttoValue) {
-        this.bruttoValue = bruttoValue;
-    }
-
-    public double getVat_rate() {
-        return vat_rate;
-    }
-
-    public void setVat_rate(double vat_rate) {
-        this.vat_rate = vat_rate;
-    }
-
-    public String getSalesTaxId() {
-        return salesTaxId;
-    }
-
-    public void setSalesTaxId(String salesTaxId) {
-        this.salesTaxId = salesTaxId;
-    }*/
 }

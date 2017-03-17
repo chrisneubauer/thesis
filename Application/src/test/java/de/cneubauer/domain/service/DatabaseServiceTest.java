@@ -48,7 +48,7 @@ public class DatabaseServiceTest extends AbstractTest {
     @Test
     public void saveProcessResult() throws Exception {
         ExtractionModel model = new ExtractionModel();
-        List<Record> recordList = new ArrayList<>(1);
+        List<Position> recordList = new ArrayList<>(1);
         recordList.add(this.createRecord());
 
         model.setRecords(recordList);
@@ -83,15 +83,15 @@ public class DatabaseServiceTest extends AbstractTest {
         return i;
     }
 
-    private Record createRecord() {
-        AccountType asset = this.accountTypeDao.getAssetAccount();
+    private Position createRecord() {
+        //AccountType asset = this.accountTypeDao.getAssetAccount();
         Account darlehen = this.accountDao.getByAccountNo("0550");
         Account bank = this.accountDao.getByAccountNo("0630");
 
-        Assert.isTrue(Objects.equals(darlehen.getType().getName(), asset.getName()));
-        Assert.isTrue(Objects.equals(bank.getType().getId(), AccType.LIABILITY));
+        //Assert.isTrue(Objects.equals(darlehen.getType().getName(), asset.getName()));
+        //Assert.isTrue(Objects.equals(bank.getType().getId(), AccType.LIABILITY));
 
-        Record record = new Record();
+        Position record = new Position();
         /*record.setCredit(bank);
         record.setDebit(darlehen);
         record.setBruttoValue(100);

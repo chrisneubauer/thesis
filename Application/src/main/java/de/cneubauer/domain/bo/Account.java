@@ -8,7 +8,6 @@ public class Account {
     private int id;
     private String accountNo;
     private String name;
-    private AccountType type;
 
     /**
      * @return  the id of the stored account
@@ -55,38 +54,6 @@ public class Account {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * Returns the type of the account
-     * There are five different Types of accounts:
-     * <p><ul>
-     *     <li>"Aktivkonto"</li>
-     *     <li>"Passivkonto"</li>
-     *     <li>"Aufwandskonto"</li>
-     *     <li>"Ertragskonto"</li>
-     *     <li>"Statistikkonto"</li>
-     * </ul></p>
-     * @return  the type of the current account
-     */
-    public AccountType getType() {
-        return type;
-    }
-
-    /**
-     * Sets the type of the account
-     * There are five different Types of accounts:
-     * <p><ul>
-     *     <li>"Aktivkonto"</li>
-     *     <li>"Passivkonto"</li>
-     *     <li>"Aufwandskonto"</li>
-     *     <li>"Ertragskonto"</li>
-     *     <li>"Statistikkonto"</li>
-     * </ul></p>
-     * @param type  the new type for the current account object
-     */
-    public void setType(AccountType type) {
-        this.type = type;
     }
 
     /**

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="de.cneubauer.domain.bo.Position" table="position">
+        <id name="id" column="Id" >
+            <generator class="increment"/>
+        </id>
+
+        <property name="entryText" column="EntryText" />
+        <set name="positionAccounts" table="account_position" cascade="save-update"
+             inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID" not-null="true" />
+            </key>
+            <one-to-many class="de.cneubauer.domain.bo.AccountPosition" />
+        </set>
+        <many-to-one name="scan" class="de.cneubauer.domain.bo.Scan" column="Scan"/>
+
+        <!--<many-to-one name="credit" class="de.cneubauer.domain.bo.Account" column="Credit_Account"/>-->
+    </class>
+</hibernate-mapping>

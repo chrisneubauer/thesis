@@ -8,8 +8,6 @@ Important things that have to be made:
 
 - Efficient searching for Accounts
 
-- Deletion of Accounting Records
-
 - Issue Date gets Month + 1
 
 - Validation of Accounting Records doesn't take place if user is in invoice view. (Makes it possible to save document without acc recs)

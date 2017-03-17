@@ -8,6 +8,12 @@
         <property name="file" column="File" />
         <property name="createdDate" column="CreatedDate" />
         <property name="modifiedDate" column="ModifiedDate" />
-        <many-to-one  name="invoiceInformation" class="de.cneubauer.domain.bo.Invoice" column="InvoiceInformation" cascade="save-update"/>
+        <many-to-one  name="invoiceInformation" class="de.cneubauer.domain.bo.Invoice" column="InvoiceInformation" cascade="save-update" lazy="false"/>
+        <set name="positions" table="position" cascade="save-update" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="Scan" not-null="true" />
+            </key>
+            <one-to-many class="de.cneubauer.domain.bo.Position" />
+        </set>
     </class>
 </hibernate-mapping>

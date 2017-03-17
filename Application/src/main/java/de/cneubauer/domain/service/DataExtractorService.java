@@ -43,7 +43,7 @@ public abstract class DataExtractorService implements Runnable {
     DocumentCaseSet caseSet;
     boolean extractInvoice;
     Invoice threadInvoice;
-    List<Record> threadRecord;
+    List<Position> threadRecord;
 
     /**
      * Constructor of the DataExtractorService class
@@ -402,5 +402,5 @@ public abstract class DataExtractorService implements Runnable {
         }
     }
 
-    public List<Record> getThreadRecord() {return this.threadRecord;}
+    public List<Position> getThreadRecord() {return this.threadRecord;}
 }
