@@ -1,6 +1,7 @@
 package de.cneubauer.gui.controller;
 
 import de.cneubauer.domain.bo.Scan;
+import de.cneubauer.domain.service.AccountingRecordWriter;
 import de.cneubauer.domain.service.DatabaseResultsService;
 import de.cneubauer.gui.Start;
 import de.cneubauer.gui.model.SearchResult;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.log4j.Level;
@@ -22,6 +24,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -89,6 +92,7 @@ public class DatabaseResultsController extends GUIController {
             sr.setCreditor(s.getInvoiceInformation().getCreditor().toString());
             sr.setDebitor(s.getInvoiceInformation().getDebitor().toString());
             sr.setFile(s.getFile());
+
             allData.add(sr);
         }
 
@@ -104,24 +108,31 @@ public class DatabaseResultsController extends GUIController {
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    FileChooser fileChooser = new FileChooser();
+                    DirectoryChooser dir = new DirectoryChooser();
+                    //FileChooser fileChooser = new FileChooser();
 
                     //Set extension filter
-                    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
-                    fileChooser.getExtensionFilters().add(extFilter);
+                    //FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+                    //fileChooser.getExtensionFilters().add(extFilter);
 
                     //Show save file dialog
-                    File file = fileChooser.showSaveDialog(new Stage());
+                    //File file = fileChooser.showSaveDialog(new Stage());
+                    File fileDir = dir.showDialog(new Stage());
 
-                    if (file != null) {
+                    if (fileDir != null) {
                         OutputStream out;
                         try {
-                            out = new FileOutputStream(file);
+                            String file = fileDir + LocalDate.now().toString() + "_" + Arrays.hashCode(getItem());
+
+                            out = new FileOutputStream(file + ".pdf");
                             out.write(getItem());
                             out.close();
-                            Logger.getLogger(this.getClass()).log(Level.INFO, "opening pdf on " + file.getPath());
+                            Logger.getLogger(this.getClass()).log(Level.INFO, "opening pdf on " + file);
 
-                            Start.getHostServicesInternal().showDocument(file.getPath());
+                            AccountingRecordWriter writer = new AccountingRecordWriter();
+
+
+                            Start.getHostServicesInternal().showDocument(file + ".pdf");
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
