@@ -2,7 +2,9 @@ package de.cneubauer.util.task;
 
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.Record;
+import de.cneubauer.domain.service.AccountingRecordExtractorService;
 import de.cneubauer.domain.service.DataExtractorService;
+import de.cneubauer.domain.service.InvoiceExtractorService;
 import de.cneubauer.domain.service.validation.AccountingRecordValidator;
 import de.cneubauer.domain.service.validation.InvoiceValidator;
 import de.cneubauer.gui.model.ExtractionModel;
@@ -50,12 +52,10 @@ public class ScanTask extends Task {
     }
 
     private ExtractionModel extractInformation(HocrDocument doc, String[] parts) {
-        DataExtractorService copy = new DataExtractorService(doc, parts);
-        DataExtractorService copy2 = new DataExtractorService(doc, parts);
-        copy.extractInvoice = true;
-        copy2.extractInvoice = false;
-        Thread invoiceThread = new Thread(copy);
-        Thread recordThread = new Thread(copy2);
+        DataExtractorService invoiceExtractor = new InvoiceExtractorService(doc, parts);
+        DataExtractorService accountingRecordExtractor = new AccountingRecordExtractorService(doc, parts);
+        Thread invoiceThread = new Thread(invoiceExtractor);
+        Thread recordThread = new Thread(accountingRecordExtractor);
 
         boolean allFinished = false;
         boolean invoiceFinished = false;
@@ -69,17 +69,22 @@ public class ScanTask extends Task {
 
         while (!allFinished) {
             if (!invoiceFinished && invoiceThread.getState() == Thread.State.TERMINATED) {
-                i = copy.getThreadInvoice();
+                i = invoiceExtractor.getThreadInvoice();
                 invoiceFinished = true;
             }
             if (!recordFinished && recordThread.getState() == Thread.State.TERMINATED) {
-                recordList = copy2.getThreadRecord();
+                recordList = accountingRecordExtractor.getThreadRecord();
                 recordFinished = true;
             }
             allFinished = invoiceFinished &&  recordFinished;
         }
-        caseSet = copy.getCaseSet();
-        caseSet.setPositionCases(copy2.getCaseSet().getPositionCases());
+        caseSet = invoiceExtractor.getCaseSet();
+        if (caseSet == null) {
+            caseSet = new DocumentCaseSet();
+        }
+        if (accountingRecordExtractor.getCaseSet() != null) {
+            caseSet.setPositionCases(accountingRecordExtractor.getCaseSet().getPositionCases());
+        }
 
         ExtractionModel m = new ExtractionModel();
         m.setInvoiceInformation(i);

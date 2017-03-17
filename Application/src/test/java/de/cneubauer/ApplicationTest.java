@@ -1,7 +1,9 @@
 package de.cneubauer;
 
 import de.cneubauer.domain.bo.*;
+import de.cneubauer.domain.service.AccountingRecordExtractorService;
 import de.cneubauer.domain.service.DataExtractorService;
+import de.cneubauer.domain.service.InvoiceExtractorService;
 import de.cneubauer.ml.LearningService;
 import de.cneubauer.ml.Model;
 import de.cneubauer.ml.ModelWriter;
@@ -64,8 +66,8 @@ public class ApplicationTest extends AbstractTest {
         stringParts[4] = this.wrapper.initOcr(preprocessedImage, true);
         HocrDocument doc = new HocrDocument(stringParts[4]);
 
-        DataExtractorService invoiceExtractor = new DataExtractorService(doc, stringParts);
-        DataExtractorService accountingRecordExtractor = new DataExtractorService(doc, stringParts);
+        DataExtractorService invoiceExtractor = new InvoiceExtractorService(doc, stringParts);
+        DataExtractorService accountingRecordExtractor = new AccountingRecordExtractorService(doc, stringParts);
 
         Thread invoiceThread = new Thread(invoiceExtractor);
         Thread accountingRecordThread = new Thread(accountingRecordExtractor);
