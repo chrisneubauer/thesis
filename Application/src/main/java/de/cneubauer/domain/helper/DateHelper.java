@@ -17,6 +17,7 @@ public class DateHelper {
      * @param date  the date that should be converted
      * @return  the Calendar object with the given date
      */
+    @Deprecated
     private Calendar convertStringToCalendar(String date) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Trying to convert date: " + date);
         Calendar cal = new Calendar.Builder().build();
@@ -24,7 +25,6 @@ public class DateHelper {
             String[] dateValues = date.split("\\.");
             if (dateValues.length == 3) {
                 // we expect german calendar writing style, so days are in the first row, then months, then years
-                // TODO: Do internationalization as a setting in the application
                 if (dateValues[2].length() > 2) {
                     cal.set(Calendar.YEAR, Integer.parseInt(dateValues[dateValues.length - 1]));
                 }
@@ -35,8 +35,33 @@ public class DateHelper {
         return cal;
     }
 
+    private int[] extractDateInformation(String date) {
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Trying to convert date: " + date);
+        int[] result = new int[3];
+        // first german locale
+        // TODO: Do internationalization as a setting in the application
+        if (date.contains(".")) {
+            String[] dateValues = date.split("\\.");
+            if (dateValues.length == 3) {
+                // we expect german calendar writing style, so days are in the first row, then months, then years
+                result[0] = Integer.parseInt(dateValues[0]);
+                result[1] = Integer.parseInt(dateValues[1]);
+                if (dateValues[2].length() > 2) {
+                    result[2] = Integer.parseInt(dateValues[dateValues.length - 1]);
+                }
+            }
+        } else {
+            return null;
+        }
+        return result;
+    }
+
     public LocalDate stringToDate(String date) {
-        Calendar cal = this.convertStringToCalendar(date);
-        return LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+        int[] values = this.extractDateInformation(date);
+        if (values != null) {
+            return LocalDate.of(values[2], values[1], values[0]);
+        } else {
+            return LocalDate.ofEpochDay(0);
+        }
     }
 }

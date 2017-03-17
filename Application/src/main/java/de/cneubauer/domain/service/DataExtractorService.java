@@ -9,6 +9,7 @@ import de.cneubauer.domain.dao.impl.CreditorDaoImpl;
 import de.cneubauer.domain.dao.impl.DocumentCaseDaoImpl;
 import de.cneubauer.domain.dao.impl.KeywordDaoImpl;
 import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
+import de.cneubauer.domain.helper.DateHelper;
 import de.cneubauer.domain.helper.InvoiceInformationHelper;
 import de.cneubauer.domain.helper.TableContentFileHelper;
 import de.cneubauer.domain.helper.TableEndFileHelper;
@@ -22,9 +23,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -40,7 +40,7 @@ public class DataExtractorService implements Runnable {
     private String rightHeader;
     private String body;
     private String footer;
-    private HocrDocument table;
+    //private HocrDocument table;
     private double confidence = ConfigHelper.getConfidenceRate();
     private HocrDocument document;
     private DocumentCaseDao caseDao;
@@ -329,23 +329,6 @@ public class DataExtractorService implements Runnable {
 
             List<HocrElement> words = this.document.getPage(0).getRecursiveElementsByPosition(new int[]{minStartX, minStartY, possibleMaxX, possibleMaxY}, 20);
 
-            // remove hocrarea and only use words
-            /*List<HocrElement> lines = new LinkedList<>();
-            for (HocrElement ele : parts) {
-                if (ele instanceof HocrArea) {
-                    List<HocrElement> paragraphs = ele.getSubElements();
-                    for (HocrElement par : paragraphs) {
-                        lines.addAll(par.getSubElements());
-                    }
-                }
-                else if (ele instanceof HocrParagraph) {
-                    lines.addAll(ele.getSubElements());
-                }
-                else {
-                    lines.add(ele);
-                }
-            }*/
-
             // new highest case:
             highestCase = highestCase + 1;
 
@@ -435,25 +418,6 @@ public class DataExtractorService implements Runnable {
             }
         }
 
-        // Index out of bounds, Map String String doesn't exist anymore
-        //List<RecordTrainingEntry> values = AccountFileHelper.getAllRecords();
-        //Map<String, String> values = AccountFileHelper.getConfig();
-        /*for (Record r : records) {
-            for (RecordTrainingEntry entry : values) {// key : values..keySet()) {
-                String key = entry.getPosition();
-                if (StringUtils.getLevenshteinDistance(key, r.getEntryText()) < this.getConfidence()) {
-                    // distance right, take the entry
-                    r.addRecordTrainingEntry(entry);
-                    //for (Account a : accountsLeft) {
-                        /*if (a.getAccountNo().equals(values.get(key))) {
-                            AccountRecord accountRecord = new AccountRecord();
-                            accountRecord.setAccount(a);
-                            r.getRecordAccounts().add(accountRecord);
-                        }
-                    //}
-                }
-            }*/
-        //}
         return records;
     }
 
@@ -471,8 +435,7 @@ public class DataExtractorService implements Runnable {
             if (parts[parts.length - 1].contains(",")) {
                 parts[parts.length - 1] = parts[parts.length - 1].replace(",", ".");
             }
-            double value = Double.valueOf(parts[parts.length -1]);
-            return value;
+            return Double.valueOf(parts[parts.length -1]);
         } catch (Exception e) {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Unable to parse double value, using default");
             return 0;
@@ -629,14 +592,13 @@ public class DataExtractorService implements Runnable {
      * Searchs for the delivery date in the string
      * @return  the date that has been found, or the current date if nothing has been found
      */
-    private java.sql.Date findDeliveryDate(java.sql.Date issueDate) {
+    private Date findDeliveryDate(Date issueDate) {
         String date = this.findValueInString(new String[] { "Lieferdatum"}, this.rightHeader);
-        Calendar cal = this.convertStringToCalendar(date);
-
-        Date deliveryDate = cal.getTime();
-        java.sql.Date result;
-        if (deliveryDate.getTime() > 0) {
-            result = new java.sql.Date(deliveryDate.getTime());
+        DateHelper helper = new DateHelper();
+        LocalDate deliveryDate = helper.stringToDate(date);
+        Date result;
+        if (deliveryDate.toEpochDay() > 1) {
+            result = Date.valueOf(deliveryDate);
         } else {
             result = issueDate;
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find delivery date in OCR. Using issue date");
@@ -795,42 +757,18 @@ public class DataExtractorService implements Runnable {
      * Searches for the issue date in the right header of the document
      * @return  the issue date if it has been found, the current date if not
      */
-    private java.sql.Date findIssueDate() {
+    private Date findIssueDate() {
         String date = this.findValueInString(new String[] { "Datum", "Rechnungsdatum"}, this.rightHeader);
-        Calendar cal = this.convertStringToCalendar(date);
-
-        Date issueDate = cal.getTime();
-        java.sql.Date result;
-        if (issueDate.getTime() > 0) {
-            result = new java.sql.Date(issueDate.getTime());
+        DateHelper helper = new DateHelper();
+        LocalDate issueDate = helper.stringToDate(date);
+        Date result;
+        if (issueDate.toEpochDay() > 1) {
+            result = Date.valueOf(issueDate);
         } else {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find issue date in OCR. Using default value");
-            result = java.sql.Date.valueOf(LocalDate.now());
+            result = Date.valueOf(LocalDate.now());
         }
         return result;
-    }
-
-    /**
-     * Converts a string containing date information to a Calendar object
-     * @param date  the date that should be converted
-     * @return  the Calendar object with the given date
-     */
-    private Calendar convertStringToCalendar(String date) {
-        Logger.getLogger(this.getClass()).log(Level.INFO, "Trying to convert date: " + date);
-        Calendar cal = new Calendar.Builder().build();
-        if (date.contains(".")) {
-            String[] dateValues = date.split("\\.");
-            if (dateValues.length == 3) {
-                // we expect german calendar writing style, so days are in the first row, then months, then years
-                // TODO: Do internationalization as a setting in the application
-                if (dateValues[2].length() > 2) {
-                    cal.set(Calendar.YEAR, Integer.parseInt(dateValues[dateValues.length - 1]));
-                }
-                cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateValues[0]));
-                cal.set(Calendar.MONTH, Integer.parseInt(dateValues[1]));
-            }
-        }
-        return cal;
     }
 
     /**
