@@ -16,7 +16,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -24,8 +23,8 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -110,30 +109,29 @@ public class DatabaseResultsController extends GUIController {
                 @Override
                 public void handle(ActionEvent event) {
                     DirectoryChooser dir = new DirectoryChooser();
-                    //FileChooser fileChooser = new FileChooser();
-
-                    //Set extension filter
-                    //FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
-                    //fileChooser.getExtensionFilters().add(extFilter);
-
-                    //Show save file dialog
-                    //File file = fileChooser.showSaveDialog(new Stage());
                     File fileDir = dir.showDialog(new Stage());
 
                     if (fileDir != null) {
                         OutputStream out;
                         try {
-                            String file = fileDir + LocalDate.now().toString() + "_" + getItem().getId();
+                            String file = fileDir + "\\" + LocalDate.now().toString() + "_" + getItem().getId();
+                            File pdfFile = new File(file + ".pdf");
 
-                            out = new FileOutputStream(file + ".pdf");
+                            out = new FileOutputStream(pdfFile);
                             out.write(getItem().getFile());
                             out.close();
                             Logger.getLogger(this.getClass()).log(Level.INFO, "opening pdf on " + file);
 
                             AccountingRecordWriter writer = new AccountingRecordWriter();
+                            File textFile = new File(file + ".txt");
+                            out = new FileOutputStream(textFile);
+                            StringBuilder output = new StringBuilder();
                             for (Position pos : getItem().getPositions()) {
+                                output.append(writer.convert(pos));
                                 Logger.getLogger(this.getClass()).log(Level.INFO, writer.convert(pos));
                             }
+                            out.write(output.toString().getBytes(Charset.forName("UTF-8")));
+                            out.close();
 
                             Start.getHostServicesInternal().showDocument(file + ".pdf");
                         } catch (Exception ex) {

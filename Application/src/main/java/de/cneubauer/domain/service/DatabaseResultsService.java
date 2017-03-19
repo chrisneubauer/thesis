@@ -1,17 +1,22 @@
 package de.cneubauer.domain.service;
 
+import de.cneubauer.domain.bo.AccountPosition;
 import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.bo.Position;
 import de.cneubauer.domain.bo.Scan;
+import de.cneubauer.domain.dao.AccountPositionDao;
 import de.cneubauer.domain.dao.InvoiceDao;
+import de.cneubauer.domain.dao.PositionDao;
 import de.cneubauer.domain.dao.ScanDao;
+import de.cneubauer.domain.dao.impl.AccountPositionDaoImpl;
 import de.cneubauer.domain.dao.impl.InvoiceDaoImpl;
+import de.cneubauer.domain.dao.impl.PositionDaoImpl;
 import de.cneubauer.domain.dao.impl.ScanDaoImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Christoph Neubauer on 25.10.2016.
@@ -19,9 +24,6 @@ import java.util.List;
  * Has access to daos
  */
 public class DatabaseResultsService {
-    private ScanDao scanDao;
-    private InvoiceDao invoiceDao;
-
     /**
      * Calls database and searches for Scans that match the specified values
      * @param   date    the date when the invoice has been specified
@@ -33,8 +35,8 @@ public class DatabaseResultsService {
      */
     public List<Scan> getFromDatabase(LocalDate date, String deb, String cred, double value, LocalDate dateTo) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "calling database..");
-        scanDao = new ScanDaoImpl();
-        invoiceDao = new InvoiceDaoImpl();
+        ScanDao scanDao = new ScanDaoImpl();
+        InvoiceDao invoiceDao = new InvoiceDaoImpl();
         List<Invoice> invoiceResults;
         if (date != null) {
             if (dateTo != null) {
@@ -80,6 +82,20 @@ public class DatabaseResultsService {
                     result.remove(s);
                 }
             }
+        }
+
+        PositionDao positionDao = new PositionDaoImpl();
+        AccountPositionDao accountPositionDao = new AccountPositionDaoImpl();
+
+        for (Scan s : result) {
+            Set<Position> positionSet = new HashSet<>();
+            positionSet.addAll(positionDao.getAllByScanId(s.getId()));
+            for (Position p : positionSet) {
+                Set<AccountPosition> accountPositionSet = new HashSet<>();
+                accountPositionSet.addAll(accountPositionDao.getByPosition(p.getId()));
+                p.setPositionAccounts(accountPositionSet);
+            }
+            s.setPositions(positionSet);
         }
 
         return result;

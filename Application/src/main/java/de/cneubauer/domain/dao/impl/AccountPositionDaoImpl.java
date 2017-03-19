@@ -2,7 +2,14 @@ package de.cneubauer.domain.dao.impl;
 
 import de.cneubauer.domain.bo.AccountPosition;
 import de.cneubauer.domain.dao.AccountPositionDao;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -31,5 +38,27 @@ public class AccountPositionDaoImpl extends AbstractDao<AccountPosition> impleme
         for (AccountPosition record : recordAccounts) {
             this.save(record);
         }
+    }
+
+    @Override
+    public Collection<AccountPosition> getByPosition(int id) {
+        String hql = "FROM AccountPosition p WHERE p.record.id = ?1";
+
+        Session session = this.getSessionFactory().openSession();
+        Query q = session.createQuery(hql);
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Searching by position id " + id);
+        q.setParameter(1, id);
+
+        List resultList = q.list();
+        Collection<AccountPosition> results = new ArrayList<>(resultList.size());
+
+        for (Object o : resultList) {
+            if (o instanceof AccountPosition) {
+                results.add((AccountPosition) o);
+            }
+        }
+
+        session.close();
+        return results;
     }
 }

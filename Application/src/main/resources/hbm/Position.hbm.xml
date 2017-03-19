@@ -7,7 +7,7 @@
         </id>
 
         <property name="entryText" column="EntryText" />
-        <set name="positionAccounts" table="account_position" cascade="all" inverse="true" lazy="false" fetch="select">
+        <set name="positionAccounts" table="account_position" cascade="all" inverse="true" lazy="false" fetch="join">
             <key>
                 <column name="ID" not-null="true" />
             </key>

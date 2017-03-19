@@ -2,6 +2,7 @@ package de.cneubauer.domain.dao;
 
 import de.cneubauer.domain.bo.AccountPosition;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -13,4 +14,6 @@ public interface AccountPositionDao extends IDao<AccountPosition> {
      * @param recordAccounts  the accounts that should be stored
      */
     void saveAll(Set<AccountPosition> recordAccounts);
+
+    Collection<AccountPosition> getByPosition(int id);
 }
