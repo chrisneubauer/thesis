@@ -4,29 +4,24 @@ import de.cneubauer.AbstractTest;
 import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.domain.bo.*;
 import de.cneubauer.domain.dao.AccountDao;
-import de.cneubauer.domain.dao.AccountTypeDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
-import de.cneubauer.domain.dao.impl.AccountTypeDaoImpl;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
-import de.cneubauer.util.enumeration.AccType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.util.Assert;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Christoph Neubauer on 07.12.2016.
+ * Test for DatabaseService class
  */
 public class DatabaseServiceTest extends AbstractTest {
     private MySQLConnector connector;
-    private AccountTypeDao accountTypeDao;
     private AccountDao accountDao;
     private DatabaseService service;
 
@@ -36,7 +31,6 @@ public class DatabaseServiceTest extends AbstractTest {
         this.service = new DatabaseService();
         databaseChanged = true;
         this.connector = new MySQLConnector();
-        this.accountTypeDao = new AccountTypeDaoImpl();
         this.accountDao = new AccountDaoImpl();
     }
 

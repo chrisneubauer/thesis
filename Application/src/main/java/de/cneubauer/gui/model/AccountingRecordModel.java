@@ -1,7 +1,6 @@
 package de.cneubauer.gui.model;
 
 import de.cneubauer.domain.bo.Account;
-import de.cneubauer.domain.bo.AccountType;
 import de.cneubauer.domain.bo.Position;
 
 /**
@@ -11,9 +10,7 @@ import de.cneubauer.domain.bo.Position;
 public class AccountingRecordModel {
     private Position record;
     private boolean revised;
-    private AccountType toPossibleType;
     private Account toPossibleAccount;
-    private AccountType fromPossibleType;
     private Account fromPossibleAccount;
     private double confidence;
     private int index;
@@ -47,28 +44,12 @@ public class AccountingRecordModel {
         this.confidence = confidence;
     }
 
-    public AccountType getToPossibleType() {
-        return toPossibleType;
-    }
-
-    public void setToPossibleType(AccountType toPossibleType) {
-        this.toPossibleType = toPossibleType;
-    }
-
     public Account getToPossibleAccount() {
         return toPossibleAccount;
     }
 
     public void setToPossibleAccount(Account toPossibleAccount) {
         this.toPossibleAccount = toPossibleAccount;
-    }
-
-    public AccountType getFromPossibleType() {
-        return fromPossibleType;
-    }
-
-    public void setFromPossibleType(AccountType fromPossibleType) {
-        this.fromPossibleType = fromPossibleType;
     }
 
     public Account getFromPossibleAccount() {

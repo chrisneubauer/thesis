@@ -3,11 +3,8 @@ package de.cneubauer.domain.dao.impl;
 import de.cneubauer.AbstractTest;
 import de.cneubauer.domain.bo.Account;
 import de.cneubauer.domain.bo.AccountPosition;
-import de.cneubauer.domain.bo.AccountType;
 import de.cneubauer.domain.bo.Position;
 import de.cneubauer.domain.dao.AccountDao;
-import de.cneubauer.domain.dao.AccountPositionDao;
-import de.cneubauer.domain.dao.AccountTypeDao;
 import de.cneubauer.domain.dao.PositionDao;
 import org.junit.After;
 import org.junit.Before;
@@ -15,31 +12,26 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
  * Created by Christoph Neubauer on 15.11.2016.
+ * Test for PositionDaoImpl class
  */
 public class PositionDaoImplTest extends AbstractTest {
-    private AccountTypeDao accountTypeDao;
     private AccountDao accountDao;
     private PositionDao dao;
-    private AccountPositionDao accountPositionDao;
 
     @Before
     public void setUp() throws Exception {
-        this.accountTypeDao = new AccountTypeDaoImpl();
         this.accountDao = new AccountDaoImpl();
         this.dao = new PositionDaoImpl();
-        this.accountPositionDao = new AccountPositionDaoImpl();
     }
 
     @After
     public void tearDown() throws Exception {
         this.dao = null;
         this.accountDao = null;
-        this.accountTypeDao = null;
     }
 
     @Test
@@ -66,23 +58,6 @@ public class PositionDaoImplTest extends AbstractTest {
         Assert.isTrue(record.getId() == record2.getId());
         //Assert.isTrue(record.getBruttoValue() == record2.getBruttoValue());
        // Assert.isTrue(Objects.equals(record2.getDebit().getName(), darlehen.getName()));
-    }
-
-    @Test
-    public void testAccountsFilteredByType() {
-        AccountType expense = this.accountTypeDao.getExpenseAccount();
-        List<Account> allAcounts = this.accountDao.getAll();
-        List<Account> onlyExpense = this.accountDao.getAllByType(expense);
-        List<Account> onlyExpenseById = this.accountDao.getAllByType(expense.getId());
-
-        Assert.notNull(allAcounts);
-        Assert.notNull(onlyExpense);
-        Assert.notNull(onlyExpenseById);
-        Assert.notEmpty(allAcounts);
-        Assert.notEmpty(onlyExpense);
-        Assert.notEmpty(onlyExpenseById);
-        Assert.isTrue(allAcounts.size() > onlyExpense.size());
-        Assert.isTrue(onlyExpense.size() == onlyExpenseById.size());
     }
 
     @Test
