@@ -55,7 +55,9 @@ public class LearningService {
      * @return  the model that is most likely to be used, null if the confidence is not reached
      */
     public Model getMostLikelyModel(String feature) {
-        String replacedString = feature;
+        //String replacedString = feature;
+        DictionaryHelper dictionaryHelper = new DictionaryHelper();
+        String replacedString = dictionaryHelper.replaceValuesFromDictionary(feature);
         NaiveBayesHelper helper = new NaiveBayesHelper();
         ModelReader reader = new ModelReader();
         try {
