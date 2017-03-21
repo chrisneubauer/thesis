@@ -65,4 +65,17 @@ public class HocrDocument extends HocrElement {
     public List<HocrPage> getPages() {
         return pages;
     }
+
+    public List<String> getDocumentAsList() {
+        List<String> lines = new LinkedList<>();
+        for (HocrElement area : this.getPage(0).getSubElements()) {
+            for (HocrElement paragraph : area.getSubElements()) {
+                for (HocrElement line : paragraph.getSubElements()) {
+                    HocrLine currentLine = (HocrLine) line;
+                    lines.add(currentLine.getWordsAsString());
+                }
+            }
+        }
+        return lines;
+    }
 }

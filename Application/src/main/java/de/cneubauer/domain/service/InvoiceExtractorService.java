@@ -185,44 +185,57 @@ public class InvoiceExtractorService extends DataExtractorService {
      */
     private InvoiceInformationHelper findInvoiceValues() {
         InvoiceInformationHelper result = new InvoiceInformationHelper();
+        List<String> doc = this.document.getDocumentAsList();
         try {
-            String lineTotal = this.findValueInString(new String[] { "Zwischensumme" }, this.footer);
-            if (lineTotal.contains(",")) {
-                String[] values = lineTotal.split(",");
-                lineTotal = values[0] + "." + values[1];
+            String lineTotal = this.findValueInString(new String[] { "Zwischensumme" }, doc, true);
+            if (Objects.equals(lineTotal, "")) {
+                lineTotal = this.findValueInString(new String[]{"Zwischensumme"}, this.footer);
             }
+            lineTotal = this.optimizeFinancialValue(lineTotal);
+
             result.setLineTotal(Double.valueOf(lineTotal));
         } catch (Exception ex) {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find line total in OCR. Using default value");
             result.setLineTotal(0);
         }
         try {
-            String taxBasis = this.findValueInString(new String[]{"Nettobetrag", "Netto", "Nettosumme"}, this.footer);
-            if (taxBasis.contains(",")) {
-                String[] values = taxBasis.split(",");
-                taxBasis = values[0] + "." + values[1];
+            String taxBasis = this.findValueInString(new String[] { "Nettobetrag", "Netto", "Nettosumme" }, doc, true);
+            if (taxBasis.equals("")) {
+                taxBasis = this.findValueInString(new String[]{"Nettobetrag", "Netto", "Nettosumme"}, this.footer);
             }
+            taxBasis = this.optimizeFinancialValue(taxBasis);
             result.setTaxBasisTotal(Double.valueOf(taxBasis));
             if (Double.valueOf(taxBasis) > 0 && result.getLineTotal() == 0) {
                 result.setLineTotal(Double.valueOf(taxBasis));
             }
         } catch (Exception ex) {
-            Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find tax basis total in OCR. Using default value");
+            Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find tax basis total in OCR. Using line total");
+            if (result.getLineTotal() > 0) {
+                result.setTaxBasisTotal(result.getLineTotal());
+            }
             result.setTaxBasisTotal(0);
         }
         try {
-            String tax = this.findValueInString(new String[] { "MwSt", "USt", "Mehrwertsteuer" }, this.footer);
-            if (tax.contains(",")) {
-                String[] values = tax.split(",");
-                tax = values[0] + "." + values[1];
+            String tax = this.findValueInString(new String[] { "MwSt", "USt", "Mehrwertsteuer" }, doc, true);
+            if (tax.equals("")) {
+                tax = this.findValueInString(new String[]{"MwSt", "USt", "Mehrwertsteuer"}, this.footer);
             }
+            tax = this.optimizeFinancialValue(tax);
             result.setTaxTotal(Double.valueOf(tax));
         } catch (Exception ex) {
-            Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find tax total in OCR. Using default value");
+            Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find tax total in OCR.  Assuming 19% VAT");
+            if (result.getLineTotal() > 0) {
+                result.setTaxTotal(result.getLineTotal() * 0.19);
+            } else if (result.getTaxBasisTotal() > 0) {
+                result.setTaxTotal(result.getTaxBasisTotal() * 0.19);
+            }
             result.setTaxTotal(0);
         }
         try {
-            String grandTotal = this.findValueInString(new String[] { "Gesamtbetrag", "Gesamt", "Rechnungsbetrag"}, this.footer);
+            String grandTotal = this.findValueInString(new String[] { "Gesamtbetrag", "Gesamt", "Rechnungsbetrag" }, doc, true);
+            if (grandTotal.equals("")) {
+                grandTotal = this.findValueInString(new String[]{"Gesamtbetrag", "Gesamt", "Rechnungsbetrag"}, this.footer);
+            }
 
             if (grandTotal.length() == 0) {
                 // second approach:
@@ -233,10 +246,7 @@ public class InvoiceExtractorService extends DataExtractorService {
                     }
                 }
             }
-            if (grandTotal.contains(",")) {
-                String[] values = grandTotal.split(",");
-                grandTotal = values[0] + "." + values[1];
-            }
+            grandTotal = this.optimizeFinancialValue(grandTotal);
             result.setGrandTotal(Double.valueOf(grandTotal));
         } catch (Exception ex) {
             Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find grand total in OCR. Using default value");
@@ -250,6 +260,16 @@ public class InvoiceExtractorService extends DataExtractorService {
         result.setChargeTotal(0);
         result.setAllowanceTotal(0);
         return result;
+    }
+
+    private String optimizeFinancialValue(String value) {
+        if (value != null && value.length() > 0) {
+            value = value.replace(",", ".");
+            value = value.replace("[^\\d.]+", "");
+            // regex doesn't affect euro sign somehow, replace it explicitly:
+            value = value.replace("€", "").replace("$", "");
+        }
+        return value;
     }
 
     /**

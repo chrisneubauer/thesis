@@ -260,17 +260,7 @@ public abstract class DataExtractorService implements Runnable {
     }
 
     LegalPerson getLegalPersonFromDatabase(HocrDocument document, boolean searchForCreditor) {
-
-        List<String> lines = new LinkedList<>();
-        for (HocrElement area : document.getPage(0).getSubElements()) {
-            for (HocrElement paragraph : area.getSubElements()) {
-                for (HocrElement line : paragraph.getSubElements()) {
-                    HocrLine currentLine = (HocrLine) line;
-                    lines.add(currentLine.getWordsAsString());
-                }
-            }
-        }
-
+        List<String> lines = document.getDocumentAsList();
         return this.getLegalPersonFromDatabase(lines, searchForCreditor);
     }
 
@@ -301,6 +291,15 @@ public abstract class DataExtractorService implements Runnable {
     String findValueInString(String[] searchConditions, String searchPosition) {
         return this.findValueInString(searchConditions, searchPosition, false);
     }
+
+    String findValueInString(String[] searchConditions, List<String> searchPosition, boolean everythingAfter) {
+        StringBuilder sb = new StringBuilder();
+        for (String s : searchPosition) {
+            sb.append(s).append("\n");
+        }
+        return this.findValueInString(searchConditions, sb.toString(), everythingAfter);
+    }
+
 
     /**
      * This method goes through the searchPosition and tries to find any of the given search conditions
