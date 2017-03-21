@@ -17,12 +17,12 @@ public class MySQLConnector {
     private final int PORT;
 
     /**
-     *
+     * Creates a MySQLConnector using the specified values
      * @param srv  the servername where the mysql database is
      * @param db  the name of the database to be used
      * @param usr  the username which is used to access the db
      * @param pw  the password for the corresponding user
-     * @param prt  the port of the mysql databse (default: 3306)
+     * @param prt  the port of the mysql database (default: 3306)
      */
     public MySQLConnector(String srv, String db, String usr, String pw, int prt) {
         this.USERNAME = usr;
@@ -32,6 +32,9 @@ public class MySQLConnector {
         this.PORT = prt;
     }
 
+    /**
+     * Default constructor, using values defined in config file
+     */
     public MySQLConnector() {
         this.USERNAME = ConfigHelper.getDBUserName();
         this.PW = ConfigHelper.getDBPassword();

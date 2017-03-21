@@ -26,6 +26,10 @@ public class AccountingRecordExtractorService extends DataExtractorService {
         super.extractInvoice = false;
     }
 
+    /**
+     * Extracts accounting positions by using the hOCR document
+     * @return a list of positions that have been found in the document
+     */
     private List<Position> extractAccountingRecordInformationFromHocr() {
         List<Position> records = new LinkedList<>();
         boolean endReached;

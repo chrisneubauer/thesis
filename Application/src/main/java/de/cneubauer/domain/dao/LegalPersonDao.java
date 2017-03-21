@@ -10,5 +10,8 @@ import java.util.List;
  * Defines specific methods for LegalPerson
  */
 public interface LegalPersonDao extends IDao<LegalPerson> {
+    /**
+     * @return a list of all legalpersons that are <u>not</u> part of the creditors
+     */
     List<LegalPerson> getAllDebitors();
 }

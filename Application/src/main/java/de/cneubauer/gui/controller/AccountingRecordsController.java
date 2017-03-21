@@ -375,7 +375,7 @@ public class AccountingRecordsController extends SplitPaneController {
         }
 
         for (AccountPosition a : currentRecord.getPositionAccounts()) {
-            a.setRecord(currentRecord);
+            a.setPosition(currentRecord);
         }
     }
 

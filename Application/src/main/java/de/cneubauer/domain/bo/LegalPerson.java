@@ -27,18 +27,6 @@ public class LegalPerson {
      * @param name  the name of the legal person. Can contain corporate form information
      */
     public LegalPerson(String name) {
-        /*if (name.contains(" ")) {
-            if (this.checkCorporateForm(name)) {
-                this.setIsCompany(true);
-                this.setCompanyName(name.split(" ")[0]);
-                //this.setCorporateForm(name.split(" ")[1]);
-            } else {
-                this.setFirstName(name.split(" ")[0]);
-                this.setName(name.split(" ")[1]);
-            }
-        } else {
-            this.setName(name);
-        }*/
         this.setName(name);
         if (this.checkCorporateForm(name)) {
             this.setIsCompany(true);
@@ -67,15 +55,6 @@ public class LegalPerson {
             }
         }
         return result;
-    }
-
-    /**
-     * Checks the given String for indications for corporate information
-     * @param name  the name which should be checked
-     * @return  true if the name contains company abbreviations (such as "AG"), false if otherwise
-     */
-    private boolean checkCorporateForm(String name) {
-        return name.contains("AG") || name.contains("OHG") || name.contains("GmbH") || name.contains("GbR") || name.contains("S.A.") || name.contains("KG");
     }
 
     /**
@@ -204,5 +183,14 @@ public class LegalPerson {
      */
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    /**
+     * Checks the given String for indications for corporate information
+     * @param name  the name which should be checked
+     * @return  true if the name contains company abbreviations (such as "AG"), false if otherwise
+     */
+    private boolean checkCorporateForm(String name) {
+        return name.contains("AG") || name.contains("OHG") || name.contains("GmbH") || name.contains("GbR") || name.contains("S.A.") || name.contains("KG");
     }
 }

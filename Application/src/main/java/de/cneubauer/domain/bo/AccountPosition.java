@@ -8,7 +8,7 @@ public class AccountPosition {
     private int id;
     private double bruttoValue;
     private Account account;
-    private Position record;
+    private Position position;
     private boolean isDebit;
 
     /**
@@ -31,16 +31,16 @@ public class AccountPosition {
      * Gets the record which is related to this account-record relation
      * @return  the record of this relation
      */
-    public Position getRecord() {
-        return record;
+    public Position getPosition() {
+        return position;
     }
 
     /**
      * Sets the record which is related to this account-record relation
      * @param record  the record for this relation
      */
-    public void setRecord(Position record) {
-        this.record = record;
+    public void setPosition(Position record) {
+        this.position = record;
     }
 
     /**
@@ -52,7 +52,7 @@ public class AccountPosition {
     }
 
     /**
-     * Sets the account which is related to this account-record relation
+     * Sets the account which is related to this account-position relation
      * @param account  the account for this relation
      */
     public void setAccount(Account account) {
@@ -60,7 +60,7 @@ public class AccountPosition {
     }
 
     /**
-     * Returns the id of this account-record relation stored in the database table
+     * Returns the id of this account-position relation stored in the database table
      * @return  the id of the relation in the database
      */
     public int getId() {

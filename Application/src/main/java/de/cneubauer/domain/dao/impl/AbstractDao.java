@@ -21,6 +21,10 @@ public abstract class AbstractDao<T> implements IDao<T> {
     private Configuration config;
     private Class<T> clazz;
 
+    /**
+     * Creates an abstract dao object that is typed by the paramClass and provides default operations
+     * @param paramClass the business object class that should be referenced by the Dao
+     */
     AbstractDao(Class<T> paramClass) {
         this.clazz = paramClass;
         this.config = new Configuration();
@@ -42,14 +46,10 @@ public abstract class AbstractDao<T> implements IDao<T> {
         return this.session;
     }
 
-    SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    private Configuration getConfig() {
-        return config;
-    }
-
+    /**
+     * @param id  the id of the object which is searched for
+     * @return the object with the containing id
+     */
     public T getById(int id) {
             T result;
             Session getSession = this.getSessionFactory().openSession();
@@ -58,6 +58,9 @@ public abstract class AbstractDao<T> implements IDao<T> {
             return result;
     }
 
+    /**
+     * @return a list of all objects in the table
+     */
     public List<T> getAll() {
         Session getSession = this.getSessionFactory().openSession();
         Transaction tx = getSession.beginTransaction();
@@ -76,6 +79,10 @@ public abstract class AbstractDao<T> implements IDao<T> {
         return null;
     }
 
+    /**
+     * Saves the object in the database
+     * @param entity  the entity to be saved in the database
+     */
     public void save(T entity) {
         Session saveSession = this.getSessionFactory().openSession();
         Transaction tx = saveSession.beginTransaction();
@@ -94,8 +101,9 @@ public abstract class AbstractDao<T> implements IDao<T> {
         }
     }
 
-    protected abstract void onSave(T entity);
-
+    /**
+     * Closes all sessions that are related to this dao object
+     */
     public void stopAccess() {
         if (this.session != null) {
             this.session.close();
@@ -105,4 +113,22 @@ public abstract class AbstractDao<T> implements IDao<T> {
             this.getSessionFactory().close();
         }
     }
+
+    /**
+     * @return returns a SessionFactory that is capable of instantiating a new session
+     */
+    SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    /**
+     * Hook method that specifies additional logic before save
+     * @param entity the object that should be saved
+     */
+    protected abstract void onSave(T entity);
+
+    private Configuration getConfig() {
+        return config;
+    }
+
 }

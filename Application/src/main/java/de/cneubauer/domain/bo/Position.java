@@ -5,7 +5,6 @@ import de.cneubauer.util.RecordTrainingEntry;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,27 +12,21 @@ import java.util.Set;
 
 /**
  * Created by Christoph Neubauer on 15.11.2016.
- * Business Object for Record table
+ * Business Object for Position table
  */
 public class Position {
-    public Position() {
-        this.positionAccounts = new HashSet<>(0);
-    }
-
     private Scan scan;
-
-    public Scan getScan() {
-        return scan;
-    }
-
-    public void setScan(Scan scan) {
-        this.scan = scan;
-    }
-
     private int id;
     private String entryText;
     private Set<AccountPosition> positionAccounts;
     private float probability;
+
+    /**
+     * Default constructor of the Position object. Sets positionAccounts to a size of 0
+     */
+    public Position() {
+        this.positionAccounts = new HashSet<>(0);
+    }
 
     /**
      * @param entry  the account-record relation entry to be used for training instances
@@ -75,6 +68,22 @@ public class Position {
                 Logger.getLogger(this.getClass()).log(Level.ERROR, "Unable to parse account from string, skipping..");
             }
         }
+    }
+
+    /**
+     * Returns a Scan object that is related to the position
+     * @return The Scan object that is related to the position
+     */
+    public Scan getScan() {
+        return scan;
+    }
+
+    /**
+     * Links a Scan object to this position
+     * @param scan the Scan object that should be linked with this position
+     */
+    public void setScan(Scan scan) {
+        this.scan = scan;
     }
 
     /**
@@ -120,10 +129,16 @@ public class Position {
         this.entryText = entryText;
     }
 
+    /**
+     * @param probability the probability of this position
+     */
     public void setProbability(float probability) {
         this.probability = probability;
     }
 
+    /**
+     * @return the probability of this position
+     */
     public float getProbability() {
         return probability;
     }

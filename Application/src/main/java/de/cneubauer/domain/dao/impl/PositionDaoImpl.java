@@ -28,6 +28,10 @@ public class PositionDaoImpl extends AbstractDao<Position> implements PositionDa
     protected void onSave(Position entity) {
     }
 
+    /**
+     * @param id the id of the scan object
+     * @return a collection of positions that are linked to a specific scan object
+     */
     @Override
     public Collection<Position> getAllByScanId(int id) {
         String hql = "FROM Position p WHERE p.scan.id = ?1";

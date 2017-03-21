@@ -35,6 +35,16 @@ public class DateHelper {
         return cal;
     }
 
+    /**
+     * Converts a string containing date information to an int[] containing:
+     * <ul>
+     *     <li>[0]: the day</li>
+     *     <li>[1]: the month</li>
+     *     <li>[2]: the year</li>
+     * </ul>
+     * @param date the date that should be converted
+     * @return the int[] containing the found values, null if there is no "." in the string
+     */
     private int[] extractDateInformation(String date) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Trying to convert date: " + date);
         int[] result = new int[3];
@@ -56,6 +66,11 @@ public class DateHelper {
         return result;
     }
 
+    /**
+     * Converts a string to LocalDate
+     * @param date the string that should be converted
+     * @return the LocalDate of the given string, or EpochDay(0) if conversion not possible
+     */
     public LocalDate stringToDate(String date) {
         int[] values = this.extractDateInformation(date);
         if (values != null) {

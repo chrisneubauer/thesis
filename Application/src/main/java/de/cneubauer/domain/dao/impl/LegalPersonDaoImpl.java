@@ -34,6 +34,9 @@ public class LegalPersonDaoImpl extends AbstractDao<LegalPerson> implements Lega
         entity.setModifiedDate(Date.valueOf(LocalDate.now()));
     }
 
+    /**
+     * @return a list of all legalpersons that are <u>not</u> part of the creditors
+     */
     @Override
     public List<LegalPerson> getAllDebitors() {
         Logger.getLogger(this.getClass()).log(Level.INFO, "getting all debitors");

@@ -63,6 +63,11 @@ public class InvoiceDaoImpl extends AbstractDao<Invoice> implements InvoiceDao {
         return result;
     }
 
+    /**
+     * @param date the beginning issue date that invoices should be filtered for
+     * @param dateTo the last issue date that invoices should be filtered for
+     * @return a list of invoices that are issued between the two given dates
+     */
     @Override
     public List<Invoice> getAllBetweenDates(LocalDate date, LocalDate dateTo) {
         Logger.getLogger(this.getClass()).log(Level.INFO, "getting all by date: " + date.toString());

@@ -5,11 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by Christoph Neubauer on 20.02.2017.
+ * Abstract file helper class that facilitates the process of file reading
  */
 public class AbstractFileHelper {
     protected static File file;

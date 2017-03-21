@@ -10,6 +10,10 @@ import java.util.Set;
  * This class converts accounting records into human-readable text lines
  */
 public class AccountingRecordWriter {
+    /**
+     * @param r the position
+     * @return a formatted text showing debit and credit values
+     */
     public String convert(Position r) {
         StringBuilder result = new StringBuilder();
         result.append("Soll").append(this.getTabs()).append("Haben");

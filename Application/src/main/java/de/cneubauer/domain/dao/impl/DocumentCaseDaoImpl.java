@@ -24,6 +24,10 @@ public class DocumentCaseDaoImpl extends AbstractDao<DocumentCase> implements Do
 
     }
 
+    /**
+     * @param name the name of the creditor
+     * @return a list of all DocumentCases that are linked to the specified creditor
+     */
     @Override
     public List<DocumentCase> getAllByCreditorName(String name) {
         String hql = "FROM DocumentCase c WHERE c.creditor.name = ?1";
@@ -46,6 +50,10 @@ public class DocumentCaseDaoImpl extends AbstractDao<DocumentCase> implements Do
         return docCases;
     }
 
+    /**
+     * Saves all cases that are present in the documentCaseSet
+     * @param set the DocumentCaseSet containing all DocumentCases that should be saved
+     */
     @Override
     public void saveCases(DocumentCaseSet set) {
         if (set.getInvoiceDateCase() != null) {
@@ -68,6 +76,9 @@ public class DocumentCaseDaoImpl extends AbstractDao<DocumentCase> implements Do
         }
     }
 
+    /**
+     * @return the highest existing case id
+     */
     @Override
     public int getHighestCaseId() {
         List<DocumentCase> documentCases = this.getAll();
@@ -80,6 +91,10 @@ public class DocumentCaseDaoImpl extends AbstractDao<DocumentCase> implements Do
         return max;
     }
 
+    /**
+     * Saves all DocumentCases that are in the given list
+     * @param positionCases the cases that should be saved
+     */
     @Override
     public void saveAll(List<DocumentCase> positionCases) {
         for (DocumentCase docCase : positionCases) {

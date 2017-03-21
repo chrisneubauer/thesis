@@ -40,9 +40,13 @@ public class AccountPositionDaoImpl extends AbstractDao<AccountPosition> impleme
         }
     }
 
+    /**
+     * @param id the id of the position that combines all accountPositions
+     * @return a collection of AccountPosition relations that are related to the given position id
+     */
     @Override
     public Collection<AccountPosition> getByPosition(int id) {
-        String hql = "FROM AccountPosition p WHERE p.record.id = ?1";
+        String hql = "FROM AccountPosition p WHERE p.position.id = ?1";
 
         Session session = this.getSessionFactory().openSession();
         Query q = session.createQuery(hql);

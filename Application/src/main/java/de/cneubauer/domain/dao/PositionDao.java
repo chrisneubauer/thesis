@@ -9,5 +9,9 @@ import java.util.Collection;
  * DAO for business object AccountRecord
  */
 public interface PositionDao extends IDao<Position> {
+    /**
+     * @param id the id of the scan object
+     * @return a collection of positions that are linked to a specific scan object
+     */
     Collection<Position> getAllByScanId(int id);
 }
