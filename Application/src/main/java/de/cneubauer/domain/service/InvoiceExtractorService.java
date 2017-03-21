@@ -18,8 +18,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Christoph on 17.03.2017.
@@ -333,19 +332,28 @@ public class InvoiceExtractorService extends DataExtractorService {
     }
 
     private LegalPerson findDebitor() {
-        String person = null;
-        String[] words = this.leftHeader.split("\\n");
-        for (String word : words) {
-            if (word.contains("Herr") || word.contains("Frau")) {
-                // using substring removes pretitle
-                person = word.split(" ")[1] + " " + word.split(" ")[2];
-                break;
+        List<String> lines = Arrays.asList(this.leftHeader.split("\\n"));
+        LegalPerson debitor = this.getLegalPersonFromDatabase(lines, false);
+        // repeat searching if nothing found in database
+        if (debitor == null) {
+            String[] words = this.leftHeader.split("\\n");
+            String person = null;
+            for (String word : words) {
+                if (word.contains("Herr") || word.contains("Frau")) {
+                    // using substring removes pretitle
+                    if (word.split(" ").length > 2) {
+                        person = word.split(" ")[1] + " " + word.split(" ")[2];
+                    } else {
+                        person = word.split(" ")[1];
+                    }
+                    break;
+                }
+            }
+            if (person != null) {
+                return new LegalPerson(person);
             }
         }
-        if (person != null) {
-            return new LegalPerson(person);
-        }
-        return null;
+        return debitor;
     }
 
     /**
@@ -372,40 +380,19 @@ public class InvoiceExtractorService extends DataExtractorService {
      */
     private String findInvoiceNumber() {
         String header = this.leftHeader + "\n" + this.rightHeader;
-        String[] lines = header.split("\n");
-        for (String line : lines) {
-            String[] parts = line.split(" ");
-            for (int i = 0; i < parts.length; i++) {
-                String part = parts[i].toLowerCase();
-                if (part.contains("rechnung") || part.contains("rechnungs-Nr") || part.contains("rechnungsnummer")) {
-                    if (i < parts.length - 1) {
-                        if (parts[i+1].toLowerCase().contains("nr")) {
-                            if (i < parts.length - 2) {
-                                return parts[i+2];
-                            }
-                        }
-                        return parts[i + 1];
-                    } else {
-                        return "";
-                    }
-                } else {
-                    // try again with levenshtein distance
-                    int amountOfChanges = StringUtils.getLevenshteinDistance(part, "rechnungs-nr");
-                    double ratio = ((double) amountOfChanges) / (Math.max(part.length(), "rechnungs-nr".length()));
-                    // take the line if ratio > 80%
-                    if (ratio < confidence) {
-                        if (parts[i+1].toLowerCase().contains("nr")) {
-                            if (i < parts.length - 2) {
-                                return parts[i+2];
-                            }
-                        }
-                        return parts[i + 1];
-                    }
-                }
-            }
+        String[] searchConditions = new String[] { "rechnung", "rechnungs-nr", "rechnungsnummer" };
+
+        String number = this.findValueInString(searchConditions, header, true);
+        if (number.toLowerCase().contains("nr.")) {
+            number = number.replace("nr.", "").replace("Nr.", "");
+        } else if (number.toLowerCase().contains("nr")) {
+            number = number.replace("nr", "").replace("Nr", "");
+        } else if (number.toLowerCase().contains("no.")) {
+            number = number.replace("no.", "").replace("No.", "");
+        } else if (number.toLowerCase().contains("no")) {
+            number = number.replace("no", "").replace("No", "");
         }
-        // if we are here we have not found an invoice number
-        return "";
+        return number;
     }
 
     /**

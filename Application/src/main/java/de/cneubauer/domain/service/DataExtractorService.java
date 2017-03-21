@@ -44,6 +44,7 @@ public abstract class DataExtractorService implements Runnable {
     boolean extractInvoice;
     Invoice threadInvoice;
     List<Position> threadRecord;
+    private List<String> tableContentWords;
 
     /**
      * Constructor of the DataExtractorService class
@@ -73,6 +74,8 @@ public abstract class DataExtractorService implements Runnable {
         this.rightHeader = parts[1];
         this.body = parts[2];
         this.footer = parts[3];
+
+        this.tableContentWords = TableContentFileHelper.getValues();
     }
 
     HocrElement findInCase(List<DocumentCase> cases) {
@@ -135,14 +138,14 @@ public abstract class DataExtractorService implements Runnable {
         line = line.toLowerCase().trim();
         boolean result = false;
         // first iteration: search for some strings:
-        List<String> valuesToCheck = TableContentFileHelper.getValues();
-        for (String value : valuesToCheck) {
+        //List<String> valuesToCheck = TableContentFileHelper.getValues();
+        for (String value : tableContentWords) {
             result = (result || line.contains(value));
         }
         if (result) { return true; }
         else {
             // second iteration: we have to refine the search because we didn't find any of those words
-            if (this.refineSearch(line.split(" "), valuesToCheck)) {
+            if (this.refineSearch(line.split(" "), tableContentWords)) {
                 return true;
             }
         }
@@ -199,21 +202,11 @@ public abstract class DataExtractorService implements Runnable {
         return line;
     }
 
-    LegalPerson getLegalPersonFromDatabase(HocrDocument document, boolean searchForCreditor) {
+    LegalPerson getLegalPersonFromDatabase(List<String> lines, boolean searchForCreditor) {
         LegalPersonDao dao = new LegalPersonDaoImpl();
-        List<LegalPerson> list = dao.getAll();
-
-        List<String> lines = new LinkedList<>();
-        for (HocrElement area : document.getPage(0).getSubElements()) {
-            for (HocrElement paragraph : area.getSubElements()) {
-                for (HocrElement line : paragraph.getSubElements()) {
-                    HocrLine currentLine = (HocrLine) line;
-                    lines.add(currentLine.getWordsAsString());
-                }
-            }
-        }
 
         if (searchForCreditor) {
+
             for (String line : lines) {
                 // As almost all creditors are companies, we can try to improve this line if we find some corporate information
                 // ocr errors, such as a whole line containing not only the company, but also their address can be made more accurate
@@ -230,8 +223,27 @@ public abstract class DataExtractorService implements Runnable {
                     }
                 }
             }
+            // retry again to maybe find a creditor that has been saved but not been found due to ocr
+            double min = 1;
+            int minPos = -1;
+            for (String line : lines) {
+                for (int i = 0; i < creditorList.size(); i++) {
+                    Creditor c = creditorList.get(i);
+                    String creditor = c.getName().trim().toLowerCase();
+
+                    double distance = StringUtils.getLevenshteinDistance(line.toLowerCase().trim(), creditor);
+                    double comparison = distance / line.length();
+
+                    minPos = comparison < min ? i : minPos;
+                    min = comparison < min ? comparison : min;
+                }
+            }
+            if (minPos >= 0 && min < ConfigHelper.getConfidenceRate()) {
+                creditorList.get(minPos);
+            }
         }
         else {
+            List<LegalPerson> list = dao.getAllDebitors();
             for (String line : lines) {
                 for (LegalPerson p : list) {
                     if (p.getName() != null) {
@@ -245,6 +257,21 @@ public abstract class DataExtractorService implements Runnable {
             }
         }
         return null;
+    }
+
+    LegalPerson getLegalPersonFromDatabase(HocrDocument document, boolean searchForCreditor) {
+
+        List<String> lines = new LinkedList<>();
+        for (HocrElement area : document.getPage(0).getSubElements()) {
+            for (HocrElement paragraph : area.getSubElements()) {
+                for (HocrElement line : paragraph.getSubElements()) {
+                    HocrLine currentLine = (HocrLine) line;
+                    lines.add(currentLine.getWordsAsString());
+                }
+            }
+        }
+
+        return this.getLegalPersonFromDatabase(lines, searchForCreditor);
     }
 
     boolean refineSearch(String checkString, String compareWith) {
@@ -266,32 +293,62 @@ public abstract class DataExtractorService implements Runnable {
     }
 
     /**
+     * Convenience method
+     * @param searchConditions the conditions that should be searched for
+     * @param searchPosition the string where the conditions should be in
+     * @return the next word after the found search condition, or an empty string if nothing has been found
+     */
+    String findValueInString(String[] searchConditions, String searchPosition) {
+        return this.findValueInString(searchConditions, searchPosition, false);
+    }
+
+    /**
      * This method goes through the searchPosition and tries to find any of the given search conditions
      * @param searchConditions  the conditions that should be searched for
      * @param searchPosition  the string where the conditions should be in
+     * @param everythingAfter a flag that indicates if the whole line should be returned after the search condition
      * @return  the next word after the found search condition, or an empty string if nothing has been found
      */
-    String findValueInString(String[] searchConditions, String searchPosition) {
+    String findValueInString(String[] searchConditions, String searchPosition, boolean everythingAfter) {
         String[] lines = searchPosition.split("\n");
-        for (String line : lines) {
+        double min = 1.0;
+        int minPos = -1;
+        int minI = -1;
+        for (int i1 = 0; i1 < lines.length; i1++) {
+            String line = lines[i1];
             String[] parts = line.split(" ");
             for (int i = 0; i < parts.length; i++) {
                 String part = parts[i];
                 if (this.partContainsSearchConditions(part, searchConditions)) {
                     if (i < parts.length - 1) {
-                        return parts[i+1];
+                        return parts[i + 1];
                     } else {
                         return "";
                     }
                 } else {
                     // try again with levenshtein distance
                     double avgRatio = this.getAverageDistanceOfSearchConditions(part, searchConditions);
-                    // take the line if ratio > 80%
+                    // save the line if ratio > 80%
                     if (avgRatio < confidence) {
-                        if (i < parts.length - 1) {
-                            return parts[i+1];
-                        }
+                        minPos = avgRatio < min? i1 : minPos;
+                        minI = avgRatio < min? i : minI;
+                        min = avgRatio < min ? avgRatio : min;
                     }
+                }
+            }
+        }
+        // use the best levenshtein result if there is one
+        if (minPos >= 0 && min < 1.0) {
+            String[] parts = lines[minPos].split(" ");
+            if (minI < parts.length - 1) {
+                if (everythingAfter) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 1; i < parts.length - minI; i++) {
+                        sb.append(parts[minI + i]);
+                    }
+                    return sb.toString();
+                } else {
+                    return parts[minI + 1];
                 }
             }
         }
