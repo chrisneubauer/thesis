@@ -11,6 +11,7 @@ public class HocrDocument extends HocrElement {
     private List<HocrPage> pages;
 
     public HocrDocument(String document) {
+        document = this.removeHtmlTags(document);
         String[] lines = document.split("\\r?\\n");
         this.pages = new LinkedList<>();
         int currentPage = -1;
@@ -42,6 +43,14 @@ public class HocrDocument extends HocrElement {
                 this.getPage(currentPage).getSubElement(currentArea).getSubElement(currentParagraph).addSubElement(hocrLine);
             }
         }
+    }
+
+    private String removeHtmlTags(String document) {
+        document = document.replace("<em>", "");
+        document = document.replace("</em>", "");
+        document = document.replace("<strong>", "");
+        document = document.replace("</strong>", "");
+        return document;
     }
 
     public HocrPage getPage(int pageNumber) {
