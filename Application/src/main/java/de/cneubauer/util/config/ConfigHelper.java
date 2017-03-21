@@ -118,6 +118,13 @@ public final class ConfigHelper {
         }
     }
 
+    public static String getOCREngine() {
+        if (config == null) {
+            new ConfigHelper();
+        }
+        return config.get(Cfg.OCRENGINE.getValue());
+    }
+
     private static String getValue(String property) {
         if (config == null) {
             new ConfigHelper();

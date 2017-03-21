@@ -15,7 +15,8 @@ public enum Cfg {
     TESSERACTLANGUAGE("tesseractLanguage"),
     CONFIDENCERATE("confidenceRate"),
     FERDPROFILE("defaultFerdProfile"),
-    DEBUG("debugMode");
+    DEBUG("debugMode"),
+    OCRENGINE("ocrEngine");
 
     private String value;
 

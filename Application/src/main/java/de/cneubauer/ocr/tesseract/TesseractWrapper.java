@@ -1,14 +1,21 @@
 package de.cneubauer.ocr.tesseract;
 
+import com.google.common.io.Files;
+import de.cneubauer.ocr.OCRStrategy;
 import de.cneubauer.util.config.ConfigHelper;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +25,7 @@ import static net.sourceforge.tess4j.ITessAPI.TessOcrEngineMode.OEM_TESSERACT_ON
  * Created by Christoph on 17.08.2016.
  * Uses Tess4J as a wrapper for googles Tesseract
  */
-public class TesseractWrapper {
+public class TesseractWrapper implements OCRStrategy {
     private String language = ConfigHelper.getTesseractLanguages().getValue();
     private final Logger logger = Logger.getLogger(this.getClass());
 
@@ -65,14 +72,31 @@ public class TesseractWrapper {
         } catch (TesseractException e) {
             System.err.println(e.getMessage());
         }
+        if (ConfigHelper.isDebugMode() && hocr) {
+            File hocrFile = new File(".\\temp\\hocr.xml");
+            File hocrImage = new File(".\\temp\\hocr.jpg");
+            try {
+                FileUtils.writeByteArrayToFile(hocrFile, result.getBytes(Charset.forName("UTF-8")));
+                if (imageFile == null) {
+                    FileUtils.writeByteArrayToFile(hocrImage, Files.toByteArray(file));
+                } else {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageIO.write(imageFile, "jpg", hocrImage);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return result;
     }
 
+    @Override
     public String initOcr(BufferedImage file, boolean hocr) {
         return this.initOcr(file, null, hocr);
     }
 
-    String initOcr(File file, boolean hocr) {
+    @Override
+    public String initOcr(File file, boolean hocr) {
         return this.initOcr(null, file, hocr);
     }
 
@@ -80,6 +104,7 @@ public class TesseractWrapper {
      * @param file  the file to be scanned
      * @return  the ocr result as a String
      */
+    @Override
     public String initOcr(BufferedImage file) {
         return this.initOcr(file, true);
     }
@@ -88,7 +113,8 @@ public class TesseractWrapper {
      * @param file  the file to be scanned
      * @return  the ocr result as a String
      */
-    String initOcr(File file) {
+    @Override
+    public String initOcr(File file) {
         return this.initOcr(file, true);
     }
 

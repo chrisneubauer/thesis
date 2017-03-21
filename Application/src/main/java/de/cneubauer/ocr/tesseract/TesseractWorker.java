@@ -1,10 +1,13 @@
 package de.cneubauer.ocr.tesseract;
 
+import de.cneubauer.ocr.OCRStrategy;
+import de.cneubauer.util.config.ConfigHelper;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Objects;
 
 /**
  * Created by Christoph Neubauer on 09.12.2016.
@@ -28,13 +31,17 @@ public class TesseractWorker implements Runnable {
      */
     @Override
     public void run() {
-        TesseractWrapper wrapper = new TesseractWrapper();
-        if (this.imgToScan == null) {
-            this.result = wrapper.initOcr(this.fileToScan, runWithHocr);
+        if (!Objects.equals(ConfigHelper.getOCREngine(), "Tesseract")) {
+            // here could other ocr engines be implemented
         } else {
-            this.result = wrapper.initOcr(this.imgToScan, runWithHocr);
+            OCRStrategy wrapper = new TesseractWrapper();
+            if (this.imgToScan == null) {
+                this.result = wrapper.initOcr(this.fileToScan, runWithHocr);
+            } else {
+                this.result = wrapper.initOcr(this.imgToScan, runWithHocr);
+            }
+            Logger.getLogger(this.getClass()).log(Level.INFO, "Finished OCR");
         }
-        Logger.getLogger(this.getClass()).log(Level.INFO, "Finished OCR");
     }
 
     /**
