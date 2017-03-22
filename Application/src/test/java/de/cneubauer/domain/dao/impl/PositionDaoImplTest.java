@@ -71,19 +71,19 @@ public class PositionDaoImplTest extends AbstractTest {
 
         AccountPosition accountRecord = new AccountPosition();
         accountRecord.setAccount(debit1);
-        accountRecord.setRecord(r);
+        accountRecord.setPosition(r);
         accountRecord.setBruttoValue(400);
         accountRecord.setIsDebit(true);
 
         AccountPosition accountRecord2 = new AccountPosition();
         accountRecord2.setAccount(debit2);
-        accountRecord2.setRecord(r);
+        accountRecord2.setPosition(r);
         accountRecord2.setBruttoValue(600);
         accountRecord2.setIsDebit(true);
 
         AccountPosition accountRecord3 = new AccountPosition();
         accountRecord3.setAccount(credit1);
-        accountRecord3.setRecord(r);
+        accountRecord3.setPosition(r);
         accountRecord3.setBruttoValue(1000);
         accountRecord3.setIsDebit(false);
 

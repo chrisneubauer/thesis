@@ -78,10 +78,10 @@ public class ScanDaoImplTest extends AbstractTest {
         debit.setAccount(accounts.get(5));
         debit.setBruttoValue(20);
         debit.setIsDebit(true);
-        debit.setRecord(pos);
+        debit.setPosition(pos);
         credit.setAccount(accounts.get(8));
         credit.setBruttoValue(20);
-        credit.setRecord(pos);
+        credit.setPosition(pos);
 
         Set<AccountPosition> accountPositionSet = new HashSet<>();
         accountPositionSet.add(debit);

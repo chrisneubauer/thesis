@@ -218,7 +218,7 @@ public class FullApplicationPersistenceTest extends AbstractTest {
         record.g
         AccountRecord ar1 = new AccountRecord();
         ar1.setAccount(accs.get(3));
-        ar1.setRecord();
+        ar1.setPosition();
         AccountingRecordModel model = new AccountingRecordModel(0);
         model.set*/
     }
