@@ -7,15 +7,14 @@ import org.apache.log4j.Logger;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Christoph Neubauer on 24.11.2016.
  * This class is responsible for retrieving and writing values to the invoice learning file
  */
+@Deprecated
 public final class InvoiceFileHelper {
     private static File learningFile;
     private static Map<String, String> invoiceMap;
@@ -56,23 +55,6 @@ public final class InvoiceFileHelper {
         return invoiceMap;
     }
 
-
-    /*
-     * searches for key and adjusts value
-     * if no key could be found, a new line is added to the config file
-     * @param   key     the name of the creditor
-     * @param   value   the name of the debitor
-     */
-    public static void addOrUpdate(String key, String value) {
-        if (getValue(key) == null) {
-            invoiceMap.put(key, value);
-            write(key, value);
-        } else {
-            invoiceMap.replace(key, value);
-        }
-        rewrite(invoiceMap);
-    }
-
     /*
      * Extend training data by the specified position account value
      * @param   key     the name of the creditor
@@ -102,31 +84,5 @@ public final class InvoiceFileHelper {
         } catch (IOException e) {
             learningFile = new File(path + "\\invoiceData.txt");
         }
-    }
-
-    private static void rewrite(Map<String, String> newConfiguration) {
-        try {
-            OutputStream out = new FileOutputStream(learningFile);
-            BufferedWriter w = new BufferedWriter(new OutputStreamWriter(out));
-            for (Map.Entry<String, String> entry : newConfiguration.entrySet()) {
-                w.write("[" + entry.getKey() + "][" + entry.getValue() + "]");
-                w.newLine();
-            }
-            w.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Logger.getLogger(ConfigHelper.class).log(Level.ERROR, "Unable to rewrite invoice settings! Please delete config.ini to reset to default settings");
-        }
-    }
-
-    // returns all keys and values as a List
-    public static List<String> createListOfValues() {
-        if (invoiceMap == null) {
-            new InvoiceFileHelper();
-        }
-        List<String> result = new ArrayList<>(invoiceMap.size() * 2);
-        result.addAll(invoiceMap.keySet());
-        result.addAll(invoiceMap.values());
-        return result;
     }
 }

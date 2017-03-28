@@ -4,8 +4,6 @@ import de.cneubauer.domain.bo.Creditor;
 import de.cneubauer.domain.bo.DocumentCase;
 import de.cneubauer.domain.bo.LegalPerson;
 import de.cneubauer.domain.bo.Position;
-import de.cneubauer.ml.LearningService;
-import de.cneubauer.ml.Model;
 import de.cneubauer.ml.nlp.NLPFacade;
 import de.cneubauer.ml.nlp.NLPModel;
 import de.cneubauer.ocr.hocr.HocrDocument;

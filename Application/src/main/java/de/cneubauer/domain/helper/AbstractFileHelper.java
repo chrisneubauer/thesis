@@ -10,11 +10,11 @@ import java.util.List;
  * Created by Christoph Neubauer on 20.02.2017.
  * Abstract file helper class that facilitates the process of file reading
  */
-public class AbstractFileHelper {
-    protected static File file;
-    protected static List<String> list;
+public abstract class AbstractFileHelper {
+    protected File file;
+    protected List<String> list;
 
-    protected static void setFile(String fullFilePath) {
+    protected void setFile(String fullFilePath) {
         try {
             file = Files.createFile(Paths.get(fullFilePath)).toFile();
         } catch (IOException e) {
@@ -22,7 +22,7 @@ public class AbstractFileHelper {
         }
     }
 
-    static List<String> readFile() {
+    List<String> readFile() {
         List<String> contents = new LinkedList<>();
         try {
             InputStream in = new FileInputStream(file);
@@ -36,5 +36,23 @@ public class AbstractFileHelper {
             e.printStackTrace();
         }
         return contents;
+    }
+
+    abstract void init();
+
+    public List<String> getValues() {
+        List<String> result = new LinkedList<>();
+        init();
+
+        try {
+            list = readFile();
+            for (String line : list) {
+                result.add(line.trim().toLowerCase());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            list = new LinkedList<>();
+        }
+        return result;
     }
 }

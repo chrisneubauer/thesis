@@ -18,7 +18,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,7 +74,8 @@ public abstract class DataExtractorService implements Runnable {
         this.body = parts[2];
         this.footer = parts[3];
 
-        this.tableContentWords = TableContentFileHelper.getValues();
+        TableContentFileHelper contentFileHelper = new TableContentFileHelper();
+        this.tableContentWords = contentFileHelper.getValues();
     }
 
     HocrElement findInCase(List<DocumentCase> cases) {
@@ -161,7 +161,8 @@ public abstract class DataExtractorService implements Runnable {
         line = line.toLowerCase().trim();
         boolean result = false;
         // first iteration: search for some strings:
-        List<String> valuesToCheck = TableEndFileHelper.getValues();
+        TableEndFileHelper tableEndFileHelper = new TableEndFileHelper();
+        List<String> valuesToCheck = tableEndFileHelper.getValues();
         for (String value : valuesToCheck) {
             result = (result || line.contains(value));
         }
