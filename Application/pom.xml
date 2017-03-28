@@ -43,6 +43,12 @@
             <artifactId>Java-Naive-Bayes-Classifier</artifactId>
             <version>1.0.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.opennlp</groupId>
+            <artifactId>opennlp-tools</artifactId>
+            <version>1.7.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

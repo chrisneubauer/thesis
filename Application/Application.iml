@@ -233,5 +233,6 @@
     <orderEntry type="library" name="Maven: org.apache.pdfbox:xmpbox:2.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.im4java:im4java:1.4.0" level="project" />
     <orderEntry type="library" name="Maven: com.github.ptnplanet:Java-Naive-Bayes-Classifier:1.0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.opennlp:opennlp-tools:1.7.2" level="project" />
   </component>
 </module>

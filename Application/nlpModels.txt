@@ -1,0 +1,2 @@
+[{Office}{Surf&Fon}{Flat}{Grundgebühr}{16.000}][0020:100.0][0085:100.0]
+[{Office}{Surf&Fon}{Flat}{Grundgebühr}{16.000}][0020:100.0][0085:100.0]

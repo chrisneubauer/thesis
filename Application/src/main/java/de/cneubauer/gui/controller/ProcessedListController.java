@@ -7,6 +7,7 @@ import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.ml.LearningService;
 import de.cneubauer.ml.Model;
 import de.cneubauer.ml.ModelWriter;
+import de.cneubauer.ml.nlp.NLPModel;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
