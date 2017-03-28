@@ -43,7 +43,7 @@ public class InvoiceValidator {
         }
         valid = valid && this.invoice.getInvoiceNumber() != null;
         valid = valid && this.invoice.getIssueDate() != null;
-        valid = valid && this.invoice.getChargeTotal() > 0;
+        valid = valid && this.invoice.getGrandTotal() > 0;
         if (this.invoice.isHasSkonto()) {
             valid = valid && this.invoice.getSkonto() > 0;
         }
