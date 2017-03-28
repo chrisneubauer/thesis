@@ -32,6 +32,22 @@ public class DocumentCase {
     }
 
     /**
+     * A DocumentCase that stores information to a creditor such as invoice number and their position in the document
+     * @param creditor the creditor that should be related to this case
+     * @param id the caseId that indicates how old this case is
+     * @param keyword a Keyword that specifies what kind of information this DocumentCase holds
+     * @param position the position where the specified keyword can be found
+     */
+    public DocumentCase(Creditor creditor, int id, Keyword keyword, String position, boolean isCorrect) {
+        this.setCreditor(creditor);
+        this.setCaseId(id);
+        this.setKeyword(keyword);
+        this.setPosition(position);
+        this.setCreatedDate(java.sql.Date.valueOf(LocalDate.now()));
+        this.setIsCorrect(isCorrect);
+    }
+
+    /**
      * Default constructor of the DocumentCase object
      */
     public DocumentCase() {}

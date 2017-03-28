@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
  * Created by Christoph Neubauer on 02.02.2017.
  * This class is responsible for reading in the file that contains the already stored models
  */
+@Deprecated
 public class ModelReader {
     private List<Model> models;
     private List<Account> accounts;

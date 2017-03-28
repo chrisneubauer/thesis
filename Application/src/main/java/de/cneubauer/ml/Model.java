@@ -16,6 +16,7 @@ import java.util.Set;
  * It contains the invoice position as a string
  * And two Set<Account> that represent debit and credit
  */
+@Deprecated
 public class Model {
     private String position;
     private Map<Account, Double> debit;

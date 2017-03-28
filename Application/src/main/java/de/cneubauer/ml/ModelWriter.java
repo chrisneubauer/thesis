@@ -12,6 +12,7 @@ import java.util.Map;
  * Created by Christoph Neubauer on 02.02.2017.
  * This class enables writing models to the learning file
  */
+@Deprecated
 public class ModelWriter {
     /**
      * @return the file containing model information

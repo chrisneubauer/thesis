@@ -16,6 +16,7 @@ import java.util.List;
  * Created by Christoph Neubauer on 02.02.2017.
  * This class is used for initiating the search
  */
+@Deprecated
 public class LearningService {
 
     /**

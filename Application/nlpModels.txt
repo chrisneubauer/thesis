@@ -1,2 +1,4 @@
 [{Office}{Surf&Fon}{Flat}{Grundgebühr}{16.000}][0020:100.0][0085:100.0]
 [{Office}{Surf&Fon}{Flat}{Grundgebühr}{16.000}][0020:100.0][0085:100.0]
+[{Support}{IPfonie}{centraflex}][0020:1.0][0784:1.0]
+[{Support}{IPfonie}{centraflex}][0030:1.0][0530:1.0]

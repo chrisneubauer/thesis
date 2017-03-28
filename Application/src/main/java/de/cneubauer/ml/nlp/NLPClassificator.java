@@ -1,5 +1,8 @@
 package de.cneubauer.ml.nlp;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +60,7 @@ public class NLPClassificator {
                 value += valuedKeys.get(key);
             }
         }
+        Logger.getLogger(this.getClass()).log(Level.INFO, "Classifying model " + model.getValues().toString() + " with probability of " + value / maximum );
         model.setProbability(value / maximum);
     }
 

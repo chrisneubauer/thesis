@@ -96,7 +96,7 @@ public class DatabaseService {
         }
         String pos = doc.getPage(0).findPosition(newI.getDebitor().getName());
         if (pos != null) {
-            additionalSet.setBuyerCase(new DocumentCase(c, caseId, this.keywordList.get(4), pos));
+            additionalSet.setBuyerCase(new DocumentCase(c, caseId, this.keywordList.get(4), pos, true));
         }
 
         if (compareWithOldSet && oldSet.getInvoiceNoCase() != null && newI.getInvoiceNumber() != null && oldI.getInvoiceNumber() != null) {
@@ -104,7 +104,7 @@ public class DatabaseService {
         }
         pos = doc.getPage(0).findPosition(newI.getInvoiceNumber());
         if (pos != null) {
-            additionalSet.setInvoiceNoCase(new DocumentCase(c, caseId, this.keywordList.get(1), pos));
+            additionalSet.setInvoiceNoCase(new DocumentCase(c, caseId, this.keywordList.get(1), pos, true));
         }
 
         if (compareWithOldSet && oldSet.getInvoiceDateCase() != null && newI.getIssueDate() != null && oldI.getIssueDate() != null) {
@@ -112,7 +112,7 @@ public class DatabaseService {
         }
         pos = doc.getPage(0).findPosition(this.convertDateToString(newI.getIssueDate()));
         if (pos != null) {
-            additionalSet.setInvoiceDateCase(new DocumentCase(c, caseId, this.keywordList.get(2), pos));
+            additionalSet.setInvoiceDateCase(new DocumentCase(c, caseId, this.keywordList.get(2), pos, true));
         }
 
         if (compareWithOldSet && oldSet.getSellerCase() != null && newI.getCreditor() != null && oldI.getCreditor() != null) {
@@ -120,7 +120,7 @@ public class DatabaseService {
         }
         pos = doc.getPage(0).findPosition(newI.getCreditor().getName());
         if (pos != null) {
-            additionalSet.setSellerCase(new DocumentCase(c, caseId, this.keywordList.get(3), pos));
+            additionalSet.setSellerCase(new DocumentCase(c, caseId, this.keywordList.get(3), pos, true));
         }
 
         if (compareWithOldSet && oldSet.getDocumentTypeCase() != null) {
@@ -128,7 +128,7 @@ public class DatabaseService {
         }
         pos = doc.getPage(0).findPosition("Rechnung");
         if (pos != null) {
-            additionalSet.setDocumentTypeCase(new DocumentCase(c, caseId, this.keywordList.get(0), pos));
+            additionalSet.setDocumentTypeCase(new DocumentCase(c, caseId, this.keywordList.get(0), pos, true));
         }
 
         for (Position r : extractionModel.getUpdatedRecords()) {
@@ -145,7 +145,7 @@ public class DatabaseService {
             pos = doc.getPage(0).findPosition(r.getEntryText());
             if (pos != null) {
                 Logger.getLogger(this.getClass()).log(Level.INFO, "Saving case for position " + r.getEntryText() + " with position " + pos);
-                additionalSet.addPositionCase(new DocumentCase(c, caseId, this.keywordList.get(5), pos));
+                additionalSet.addPositionCase(new DocumentCase(c, caseId, this.keywordList.get(5), pos, true));
             }
         }
 

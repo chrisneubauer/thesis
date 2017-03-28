@@ -7,6 +7,7 @@ import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.ml.LearningService;
 import de.cneubauer.ml.Model;
 import de.cneubauer.ml.ModelWriter;
+import de.cneubauer.ml.nlp.NLPFacade;
 import de.cneubauer.ml.nlp.NLPModel;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.beans.property.SimpleObjectProperty;
@@ -88,11 +89,13 @@ public class ProcessedListController extends GUIController {
         for (ProcessResult result : this.model) {
             if (result.getStatus().equals(ScanStatus.OK)) {
                 service.saveProcessResult(result);
-                ModelWriter writer = new ModelWriter();
-                LearningService service1 = new LearningService();
+                //ModelWriter writer = new ModelWriter();
+                //LearningService service1 = new LearningService();
+                NLPFacade facade = new NLPFacade();
                 for (Position r : result.getExtractionModel().getUpdatedRecords()) {
-                    Model m = service1.createModel(r);
-                    writer.writeToFile(m);
+                    facade.writeModel(r);
+                    //Model m = service1.createModel(r);
+                    //writer.writeToFile(m);
                 }
                 counter++;
             }

@@ -1,11 +1,9 @@
 package de.cneubauer.ml.nlp;
 
 import de.cneubauer.domain.bo.Account;
+import de.cneubauer.domain.bo.AccountPosition;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -75,5 +73,26 @@ public class NLPModel {
 
     public double getProbability() {
         return probability;
+    }
+
+    public Set<AccountPosition> getAsAccountRecord(double value) {
+        Set<AccountPosition> result = new HashSet<>();
+
+        for (Map.Entry<Account, Double> debit : this.getDebit().entrySet()) {
+            AccountPosition record = new AccountPosition();
+            record.setIsDebit(true);
+            record.setAccount(debit.getKey());
+            record.setBruttoValue(debit.getValue() * value);
+            result.add(record);
+        }
+
+        for (Map.Entry<Account, Double> credit : this.getCredit().entrySet()) {
+            AccountPosition record = new AccountPosition();
+            record.setIsDebit(false);
+            record.setAccount(credit.getKey());
+            record.setBruttoValue(credit.getValue() * value);
+            result.add(record);
+        }
+        return result;
     }
 }

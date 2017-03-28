@@ -6,6 +6,8 @@ import de.cneubauer.domain.bo.LegalPerson;
 import de.cneubauer.domain.bo.Position;
 import de.cneubauer.ml.LearningService;
 import de.cneubauer.ml.Model;
+import de.cneubauer.ml.nlp.NLPFacade;
+import de.cneubauer.ml.nlp.NLPModel;
 import de.cneubauer.ocr.hocr.HocrDocument;
 import de.cneubauer.ocr.hocr.HocrElement;
 import de.cneubauer.util.DocumentCaseSet;
@@ -89,7 +91,8 @@ public class AccountingRecordExtractorService extends DataExtractorService {
             // new highest case:
             highestCase = highestCase + 1;
 
-            LearningService service = new LearningService();
+            //LearningService service = new LearningService();
+            NLPFacade facade = new NLPFacade();
             List<HocrElement> lines = new LinkedList<>();
             for (HocrElement word : words) {
                 lines.add(word.getParent());
@@ -103,7 +106,16 @@ public class AccountingRecordExtractorService extends DataExtractorService {
                         String recordLine = this.removeFinancialInformationFromRecordLine(position);
                         double value = this.getValueFromLine(line.getValue());
 
-                        Model m = service.getMostLikelyModel(recordLine);
+                        NLPModel model = facade.getMostLikelyModel(recordLine);
+                        if (model != null) {
+                            r.setEntryText(recordLine);
+                            r.setPositionAccounts(model.getAsAccountRecord(value));
+                            r.setProbability((float) model.getProbability());
+                            records.add(r);
+                            this.caseSet.addPositionCase(new DocumentCase(creditor, highestCase, keywordList.get(5), position));
+                        }
+
+                        /*Model m = service.getMostLikelyModel(recordLine);
                         if (m != null) {
                             r.setEntryText(m.getPosition());
                             r.setPositionAccounts(m.getAsAccountRecord(value));
@@ -111,7 +123,7 @@ public class AccountingRecordExtractorService extends DataExtractorService {
                             records.add(r);
                             this.caseSet.addPositionCase(new DocumentCase(creditor, highestCase, keywordList.get(5), position));
                             break;
-                        }
+                        }*/
                     } else {
                         break;
                     }
@@ -137,7 +149,8 @@ public class AccountingRecordExtractorService extends DataExtractorService {
             String line = lines[index];
             if (this.lineContainsTableInformation(line)) {
                 found = true;
-                LearningService service = new LearningService();
+                //LearningService service = new LearningService();
+                NLPFacade facade = new NLPFacade();
                 while (lines.length > index + 1) {
                     String nextLine = lines[index + 1];
                     if(!this.nextLineContainsValue(nextLine) && lines.length > index + 1) {
@@ -154,16 +167,24 @@ public class AccountingRecordExtractorService extends DataExtractorService {
                             String recordLine = this.removeFinancialInformationFromRecordLine(nextLine);
                             double value = this.getValueFromLine(nextLine);
 
-                            Model m = service.getMostLikelyModel(recordLine);
+                            NLPModel model = facade.getMostLikelyModel(recordLine);
+                            r.setEntryText(recordLine);
+                            if (model != null) {
+                                r.setPositionAccounts(model.getAsAccountRecord(value));
+                                r.setProbability((float) model.getProbability());
+                            }
+                            records.add(r);
+
+                            //Model m = service.getMostLikelyModel(recordLine);
                             //RecordTrainingEntry entry = this.recordInLearningFile(recordLine);
-                            if (m == null) {
+                            /*if (m == null) {
                                 r.setEntryText(nextLine);
                             } else {
                                 r.setEntryText(m.getPosition());
                                 r.setPositionAccounts(m.getAsAccountRecord(value));
                                 r.setProbability(m.getProbability());
                             }
-                            records.add(r);
+                            records.add(r);*/
                             index++;
                         } else {
                             break;

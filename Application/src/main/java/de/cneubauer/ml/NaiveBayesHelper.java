@@ -10,6 +10,7 @@ import java.util.*;
  * Created by Christoph Neubauer on 03.02.2017.
  * This class is used as an interface for the naive bayes library
  */
+@Deprecated
 public class NaiveBayesHelper {
     private Classifier<String, List<Account>> bayes;
 
