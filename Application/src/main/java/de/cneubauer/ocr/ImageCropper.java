@@ -11,17 +11,17 @@ import java.io.IOException;
  * And crops out areas where important rows are
  * param threshold defines how many important rows have to be together in order to be cropped out
  */
-public class ImageCropper {
+class ImageCropper {
     private int threshold = 1;
     private boolean[] importantRows;
     private BufferedImage imageToCrop;
     private int counter = 1;
 
-    public ImageCropper(int threshold) {
+    ImageCropper(int threshold) {
         this.threshold = threshold;
     }
 
-    public void cropImages() {
+    void cropImages() {
         int width = this.imageToCrop.getWidth();
         String[] rows = this.calcRows();
 
@@ -64,7 +64,7 @@ public class ImageCropper {
         return rows;
     }
 
-    public void setImageToCrop(BufferedImage imageToCrop, boolean[] importantRows) {
+    void setImageToCrop(BufferedImage imageToCrop, boolean[] importantRows) {
         this.imageToCrop = imageToCrop;
         this.importantRows = importantRows;
     }

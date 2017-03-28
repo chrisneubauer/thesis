@@ -12,7 +12,7 @@ import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.ocr.ImagePartitioner;
 import de.cneubauer.ocr.ImagePreprocessor;
 import de.cneubauer.ocr.hocr.HocrDocument;
-import de.cneubauer.ocr.tesseract.TesseractWorker;
+import de.cneubauer.ocr.tesseract.TesseractWorkerStrategy;
 import de.cneubauer.util.DocumentCaseSet;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.application.Platform;
@@ -180,19 +180,19 @@ public class ScanTask extends Task {
 
     private String[] performOCR(BufferedImage[] imageParts, BufferedImage hocrImage) {
         // TODO: put stuff out of gui
-        TesseractWorker leftHeaderWorker = new TesseractWorker(imageParts[0], false);
+        TesseractWorkerStrategy leftHeaderWorker = new TesseractWorkerStrategy(imageParts[0], false);
         Thread leftHeaderThread = new Thread(leftHeaderWorker);
 
-        TesseractWorker rightHeaderWorker = new TesseractWorker(imageParts[1], false);
+        TesseractWorkerStrategy rightHeaderWorker = new TesseractWorkerStrategy(imageParts[1], false);
         Thread rightHeaderThread = new Thread(rightHeaderWorker);
 
-        TesseractWorker bodyWorker = new TesseractWorker(imageParts[2], false);
+        TesseractWorkerStrategy bodyWorker = new TesseractWorkerStrategy(imageParts[2], false);
         Thread bodyThread = new Thread(bodyWorker);
 
-        TesseractWorker footerWorker = new TesseractWorker(imageParts[3], false);
+        TesseractWorkerStrategy footerWorker = new TesseractWorkerStrategy(imageParts[3], false);
         Thread footerThread = new Thread(footerWorker);
 
-        TesseractWorker hocrWorker = new TesseractWorker(hocrImage, true);
+        TesseractWorkerStrategy hocrWorker = new TesseractWorkerStrategy(hocrImage, true);
         Thread hocrThread = new Thread(hocrWorker);
 
         boolean leftHeaderFinished = false;

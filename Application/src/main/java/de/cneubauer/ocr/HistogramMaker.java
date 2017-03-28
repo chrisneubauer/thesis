@@ -114,31 +114,28 @@ public class HistogramMaker {
         if (inRow) {
             for (int col = 0; col < input.getWidth(); col++) {
                 Color cur = new Color(input.getRGB(col, rowOrCol));
-                if (whiteHistogram) {
-                    if (cur.getRed() < 255 * maxThreshold) {
-                        value += cur.getRed();
-                    }
-                } else {
-                    if (cur.getRed() > 255 * maxThreshold) {
-                        value += cur.getRed();
-                    }
-                }
+                value += this.addToValue(whiteHistogram, cur);
             }
         } else {
             for (int row = 0; row < input.getHeight(); row++) {
                 Color cur = new Color(input.getRGB(rowOrCol, row));
-                if (whiteHistogram) {
-                    if (cur.getRed() < 255 * maxThreshold) {
-                        value += cur.getRed();
-                    }
-                } else {
-                    if (cur.getRed() > 255 * maxThreshold) {
-                        value += cur.getRed();
-                    }
-                }
+                value += this.addToValue(whiteHistogram, cur);
             }
         }
         return value;
+    }
+
+    private long addToValue(boolean whiteHistogram, Color cur) {
+        if (whiteHistogram) {
+            if (cur.getRed() < 255 * maxThreshold) {
+                return cur.getRed();
+            }
+        } else {
+            if (cur.getRed() > 255 * maxThreshold) {
+                return cur.getRed();
+            }
+        }
+        return 0;
     }
 
     private void adjustValues(long[] values, long maxValue) {

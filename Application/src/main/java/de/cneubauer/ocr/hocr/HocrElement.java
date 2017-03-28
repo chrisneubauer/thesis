@@ -12,7 +12,7 @@ public abstract class HocrElement {
     String position;
     String value;
     private List<HocrElement> subElements;
-    HocrElement parent;
+    private HocrElement parent;
 
     public HocrElement getParent() {
         return parent;
@@ -57,6 +57,7 @@ public abstract class HocrElement {
         return null;
     }
 
+    /*
     public HocrElement getByStartingPosition(int startX, int startY, int threshold) {
         for (HocrElement element : this.subElements) {
             String[] stringPos = element.getPosition().split("\\+");
@@ -72,7 +73,7 @@ public abstract class HocrElement {
             }
         }
         return null;
-    }
+    }*/
 
     void addSubElement(HocrElement sub) {
         if (this.subElements == null) {
@@ -98,6 +99,7 @@ public abstract class HocrElement {
         return id;
     }
 
+    /*
     public List<HocrElement> getElementsByPosition(int[] positions, int threshold) {
         List<HocrElement> result = new LinkedList<>();
 
@@ -118,7 +120,7 @@ public abstract class HocrElement {
             }
         }
         return result;
-    }
+    }*/
 
     public List<HocrElement> getRecursiveElementsByPosition(int[] positions, int threshold) {
         List<HocrElement> result = new LinkedList<>();

@@ -13,13 +13,13 @@ import java.util.Objects;
  * Created by Christoph Neubauer on 09.12.2016.
  * Worker for multiple Tesseract Threads
  **/
-public class TesseractWorker implements Runnable {
+public class TesseractWorkerStrategy implements Runnable {
     private String result;
     private File fileToScan;
     private BufferedImage imgToScan;
     private boolean runWithHocr;
 
-    public TesseractWorker(BufferedImage img, boolean hocr) {
+    public TesseractWorkerStrategy(BufferedImage img, boolean hocr) {
         this.imgToScan = img;
         this.fileToScan = null;
         this.runWithHocr = hocr;

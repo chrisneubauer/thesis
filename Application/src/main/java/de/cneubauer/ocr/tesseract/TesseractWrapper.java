@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -80,7 +79,6 @@ public class TesseractWrapper implements OCRStrategy {
                 if (imageFile == null) {
                     FileUtils.writeByteArrayToFile(hocrImage, Files.toByteArray(file));
                 } else {
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ImageIO.write(imageFile, "jpg", hocrImage);
                 }
             } catch (IOException e) {

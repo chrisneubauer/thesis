@@ -14,14 +14,14 @@ import java.util.List;
  * Created by Christoph Neubauer on 15.11.2016.
  * Postprocessor to improve output of images by checking dictionary values
  */
-public class PostProcessor {
+class PostProcessor {
     private HocrDocument documentToProcess;
 
-    public PostProcessor(HocrDocument doc) {
+    PostProcessor(HocrDocument doc) {
         this.documentToProcess = doc;
     }
 
-    public HocrDocument postProcess() {
+    HocrDocument postProcess() {
         List<String> correctWords = this.readDictionaryValues();
         for (HocrPage page : this.documentToProcess.getPages()) {
             for (HocrElement area : page.getSubElements()) {

@@ -38,7 +38,7 @@ public class ZugFerdTransformator {
      * @param i  the invoice information that should be added to the file
      * @return  the new file with additional invoice information
      */
-    public byte[] appendInvoiceToPdf(byte[] pdf, Invoice i) {
+    byte[] appendInvoiceToPdf(byte[] pdf, Invoice i) {
         ByteArrayOutputStream outPdf = new ByteArrayOutputStream();
         InputStream reader = new ByteArrayInputStream(pdf);
 
@@ -125,7 +125,7 @@ public class ZugFerdTransformator {
         }
     }
 
-    public boolean pdfIsZugFerdConform(byte[] pdf) {
+    boolean pdfIsZugFerdConform(byte[] pdf) {
         PdfHandler handler = new PdfHandler();
         Invoice i = handler.extractInvoice(new ByteArrayInputStream(pdf));
         return this.isInvoiceValid(i);
@@ -136,7 +136,7 @@ public class ZugFerdTransformator {
         return this.appendInvoiceToPdf(originalPdf, konikInvoice);
     }
 
-    public Invoice getInvoiceFromPdf(InputStream pdf) {
+    Invoice getInvoiceFromPdf(InputStream pdf) {
         PdfHandler handler = new PdfHandler();
         return handler.extractInvoice(pdf);
     }
