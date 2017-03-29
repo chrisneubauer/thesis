@@ -8,6 +8,6 @@
         <property name="bruttoValue" column="BruttoValue" />
         <property name="isDebit" column="IsDebit"/>
         <many-to-one name="account" class="de.cneubauer.domain.bo.Account" column="Account" lazy="false"/>
-        <many-to-one name="position" class="de.cneubauer.domain.bo.Position" column="Position"/>
+        <many-to-one name="position" class="de.cneubauer.domain.bo.Position" column="Position" lazy="false"/>
     </class>
 </hibernate-mapping>

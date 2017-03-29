@@ -153,9 +153,9 @@ public class ScanDaoImplTest extends AbstractTest {
 
         Assert.notNull(results);
         Assert.isTrue(results.size() > 0);
-        Assert.isTrue(results.contains(scan1));
-        Assert.isTrue(results.contains(scan2));
-        Assert.isTrue(!results.contains(scan3));
+        Assert.isTrue(results.stream().anyMatch(dbObject -> dbObject.getId() == scan1.getId()));
+        Assert.isTrue(results.stream().anyMatch(dbObject -> dbObject.getId() == scan2.getId()));
+        Assert.isTrue(results.stream().noneMatch(dbObject -> dbObject.getId() == scan3.getId()));
         Scan resultObject = (Scan) results.toArray()[0];
         Assert.isTrue(resultObject.getInvoiceInformation().getId() == correctInvoice.getId());
     }

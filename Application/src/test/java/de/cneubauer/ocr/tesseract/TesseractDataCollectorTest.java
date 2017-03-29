@@ -7,6 +7,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
@@ -37,6 +38,7 @@ public class TesseractDataCollectorTest extends AbstractTest {
     }
 
     @Test
+    @Ignore
     public void execute() throws Exception {
         String path =  "..\\Data\\20160830_Scans\\";
         String outputPath = "..\\Data\\Output\\";
@@ -55,6 +57,7 @@ public class TesseractDataCollectorTest extends AbstractTest {
     }
 
     @Test
+    @Ignore
     public void executeDatenwerk() throws Exception {
         String path =  "..\\temp\\Datenwerk";
         String outputPath = "..\\";
@@ -79,6 +82,7 @@ public class TesseractDataCollectorTest extends AbstractTest {
     }
 
     @Test
+    @Ignore
     public void executeDatenwerkHeader() throws Exception {
         String path =  "..\\temp\\Datenwerk";
         String outputPath = "..\\";

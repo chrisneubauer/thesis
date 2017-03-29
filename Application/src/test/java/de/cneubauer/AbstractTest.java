@@ -2,7 +2,6 @@ package de.cneubauer;
 
 import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.domain.bo.*;
-import de.cneubauer.domain.dao.PositionDao;
 import de.cneubauer.domain.dao.impl.*;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.log4j.Level;
@@ -18,7 +17,7 @@ import java.sql.Connection;
  * Created by Christoph Neubauer on 06.10.2016.
  * Configures log and necessary basic testing configuration
  */
-public class AbstractTest {
+public abstract class AbstractTest {
     protected static boolean databaseChanged;
     protected Connection connection;
     protected MySQLConnector connector;

@@ -7,8 +7,6 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 /**
@@ -20,9 +18,7 @@ public class PostProcessorTest {
 
     @Before
     public void setUp() throws Exception {
-        File hocr = new File("..\\hocrOutput.xml");
-        FileInputStream in = new FileInputStream(hocr);
-        InputStreamReader isr = new InputStreamReader(in);
+        InputStreamReader isr = new InputStreamReader(getClass().getResourceAsStream("/hocr/hocrOutput.xml"));
         BufferedReader r = new BufferedReader(isr);
         String line = r.readLine();
         String hocrDoc = "";

@@ -36,28 +36,33 @@ public class PositionDaoImplTest extends AbstractTest {
 
     @Test
     public void testAccountingRecordCreation() {
-        //AccountType asset = this.accountTypeDao.getAssetAccount();
         Account darlehen = this.accountDao.getByAccountNo("0550");
         Account bank = this.accountDao.getByAccountNo("0630");
 
-        //Assert.isTrue(Objects.equals(darlehen.getType().getName(), asset.getName()));
-        //Assert.isTrue(Objects.equals(bank.getType().getId(), AccType.LIABILITY));
-
         Position record = new Position();
-        /*record.setCredit(bank);
-        record.setDebit(darlehen);
-        record.setBruttoValue(100);
-        record.setDocumentNo("0001");
-        record.setEntryDate(Timestamp.valueOf(LocalDateTime.now()));
-        record.setVat_rate(0.0);*/
+
+        AccountPosition accountRecord = new AccountPosition();
+        accountRecord.setAccount(darlehen);
+        accountRecord.setPosition(record);
+        accountRecord.setBruttoValue(400);
+        accountRecord.setIsDebit(true);
+
+        AccountPosition accountRecord2 = new AccountPosition();
+        accountRecord2.setAccount(bank);
+        accountRecord2.setPosition(record);
+        accountRecord2.setBruttoValue(400);
+        accountRecord2.setIsDebit(false);
+
+        Set<AccountPosition> positionSet = new HashSet<>();
+        positionSet.add(accountRecord);
+        positionSet.add(accountRecord2);
+        record.setPositionAccounts(positionSet);
 
         this.dao.save(record);
 
         Position record2 = this.dao.getById(record.getId());
 
         Assert.isTrue(record.getId() == record2.getId());
-        //Assert.isTrue(record.getBruttoValue() == record2.getBruttoValue());
-       // Assert.isTrue(Objects.equals(record2.getDebit().getName(), darlehen.getName()));
     }
 
     @Test

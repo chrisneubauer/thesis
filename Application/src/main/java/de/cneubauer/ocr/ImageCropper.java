@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Created by Christoph Neubauer on 14.11.2016.
@@ -32,8 +34,9 @@ class ImageCropper {
                 BufferedImage sub = this.imageToCrop.getSubimage(0, start, width, end - start);
 
                 String outputDir = ".\\temp\\areas\\";
-                File test = new File(outputDir + "cropped_" + this.counter + ".png");
+                //File test = new File(outputDir + "cropped_" + this.counter + ".png");
                 try {
+                    File test = Files.createFile(Paths.get(outputDir + "cropped_" + this.counter + ".png")).toFile();
                     ImageIO.write(sub, "png", test);
                 } catch (IOException e) {
                     e.printStackTrace();

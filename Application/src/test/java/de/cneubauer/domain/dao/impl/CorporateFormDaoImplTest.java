@@ -6,6 +6,7 @@ import de.cneubauer.domain.bo.CorporateForm;
 import de.cneubauer.domain.dao.CorporateFormDao;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
@@ -15,6 +16,7 @@ import java.sql.Connection;
  * Created by Christoph Neubauer on 13.12.2016.
  * Test for CorporateFormDao
  */
+@Deprecated
 public class CorporateFormDaoImplTest extends AbstractTest {
     private MySQLConnector connector;
     private Connection con;
@@ -38,6 +40,7 @@ public class CorporateFormDaoImplTest extends AbstractTest {
     }
 
     @Test
+    @Ignore
     public void testGetById() {
         CorporateForm gmbH = this.dao.getById(2);
         Assert.notNull(gmbH);

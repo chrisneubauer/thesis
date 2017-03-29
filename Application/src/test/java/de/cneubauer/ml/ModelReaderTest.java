@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
  * Created by Christoph Neubauer on 03.02.2017.
  * Test for the ModelReader class
  */
+@Deprecated
 public class ModelReaderTest extends AbstractTest {
     private ModelReader reader;
 

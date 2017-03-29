@@ -12,6 +12,7 @@ import java.util.List;
  * Created by Christoph Neubauer on 03.02.2017.
  * Test for LearningService class
  */
+@Deprecated
 public class LearningServiceTest extends AbstractTest {
 
     private LearningService service;

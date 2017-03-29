@@ -1,26 +1,31 @@
 package de.cneubauer;
 
-import de.cneubauer.domain.bo.*;
+import de.cneubauer.domain.bo.Invoice;
+import de.cneubauer.domain.bo.LegalPerson;
+import de.cneubauer.domain.bo.Position;
 import de.cneubauer.domain.service.AccountingRecordExtractorService;
 import de.cneubauer.domain.service.DataExtractorService;
 import de.cneubauer.domain.service.InvoiceExtractorService;
-import de.cneubauer.ml.LearningService;
-import de.cneubauer.ml.Model;
-import de.cneubauer.ml.ModelWriter;
+import de.cneubauer.ml.nlp.NLPFacade;
+import de.cneubauer.ml.nlp.NLPModel;
 import de.cneubauer.ocr.ImagePartitioner;
 import de.cneubauer.ocr.ImagePreprocessor;
 import de.cneubauer.ocr.hocr.HocrDocument;
 import de.cneubauer.ocr.tesseract.TesseractWrapper;
 import de.cneubauer.transformation.ZugFerdTransformator;
-import de.cneubauer.ml.ModelReader;
+import io.konik.validation.InvoiceValidator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.util.Assert;
 
+import javax.validation.ConstraintViolation;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.LinkedHashSet;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 
@@ -32,18 +37,20 @@ public class ApplicationTest extends AbstractTest {
     private ImagePreprocessor preprocessor;
     private TesseractWrapper wrapper;
     private ZugFerdTransformator transformator;
-    private ModelReader reader;
-    private LearningService learningService;
+    private NLPFacade facade;
     private Logger logger;
 
     @Before
-    public void SetUp() {
-        this.preprocessor = new ImagePreprocessor("..\\Data\\Datenwerk4.pdf");
+    public void SetUp() throws IOException {
+        InputStream file = this.getClass().getResourceAsStream("/data/output/template1_generated0.pdf");
+        PDDocument pdf = PDDocument.load(file);
+        PDFRenderer renderer = new PDFRenderer(pdf);
+
+        BufferedImage pdfImage  = renderer.renderImageWithDPI(0, 300);
+        this.preprocessor = new ImagePreprocessor(pdfImage);
         this.wrapper = new TesseractWrapper();
         this.transformator = new ZugFerdTransformator();
-        this.reader = new ModelReader();
-        ModelWriter writer = new ModelWriter();
-        this.learningService = new LearningService();
+        this.facade = new NLPFacade();
         this.logger = Logger.getLogger(this.getClass());
     }
 
@@ -61,10 +68,10 @@ public class ApplicationTest extends AbstractTest {
 
         this.logger.log(Level.INFO, "doing OCR");
         for (int i = 0; i < parts.length -1; i++) {
-            stringParts[i] = this.wrapper.initOcr(parts[i]);
+            stringParts[i] = this.wrapper.initOcr(parts[i], false);
         }
-        stringParts[4] = this.wrapper.initOcr(preprocessedImage, true);
-        HocrDocument doc = new HocrDocument(stringParts[4]);
+        stringParts[3] = this.wrapper.initOcr(preprocessedImage, true);
+        HocrDocument doc = new HocrDocument(stringParts[3]);
 
         DataExtractorService invoiceExtractor = new InvoiceExtractorService(doc, stringParts);
         DataExtractorService accountingRecordExtractor = new AccountingRecordExtractorService(doc, stringParts);
@@ -104,34 +111,19 @@ public class ApplicationTest extends AbstractTest {
 
         io.konik.zugferd.Invoice resultingInvoice = this.transformator.createFullConformalBasicInvoice(extractedInvoiceInformation);
 
-        try {
-            this.logger.log(Level.INFO, "reading models");
-            List<Model> existingModels = this.reader.getModels();
-
-            this.logger.log(Level.INFO, "adding models that are missing");
-            for (Position r : extractedAccountingRecordInformation) {
-                if (r.getEntryText() != null) {
-                    if (this.learningService.exists(r.getEntryText())) {
-                        // dunno
-                    } else {
-                        Model m = new Model();
-                        m.setPosition(r.getEntryText());
-                        Set<Account> credits = new LinkedHashSet<>();
-                        Set<Account> debits = new LinkedHashSet<>();
-                        for (AccountPosition ar : r.getPositionAccounts()) {
-                            if (ar.getIsDebit()) {
-                                debits.add(ar.getAccount());
-                            } else {
-                                credits.add(ar.getAccount());
-                            }
-                        }
-                    }
-
+        this.logger.log(Level.INFO, "adding models that are missing");
+        for (Position r : extractedAccountingRecordInformation) {
+            if (r.getEntryText() != null) {
+                NLPModel model = this.facade.getMostLikelyModel(r.getEntryText());
+                if (model != null) {
+                    Logger.getLogger(this.getClass()).log(Level.INFO, "Model found with probability of " + model.getProbability());
+                } else {
+                    this.facade.writeModel(r);
                 }
             }
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        InvoiceValidator validator = new InvoiceValidator();
+        Set<ConstraintViolation<io.konik.zugferd.Invoice>> violations = validator.validate(resultingInvoice);
+        Assert.isTrue(violations.size() == 0);
     }
 }

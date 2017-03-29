@@ -3,15 +3,15 @@ package de.cneubauer.ocr.tesseract;
 import de.cneubauer.AbstractTest;
 import de.cneubauer.ocr.ImagePreprocessor;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.junit.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.Arrays;
 
@@ -33,6 +33,7 @@ public class TesseractWrapperTest extends AbstractTest {
     }
 
     @Test
+    @Ignore
     public void testOCRKeywordBruttoSum() throws Exception {
         String path1 = ".\\src\\test\\resources\\invoice\\KeywordSuccess\\Bruttosumme\\Scan_20160822_161042_012.jpg";
         String path2 = ".\\src\\test\\resources\\invoice\\KeywordSuccess\\Bruttosumme\\Scan_20160822_161042_019.jpg";
@@ -82,6 +83,7 @@ public class TesseractWrapperTest extends AbstractTest {
     }
 
     @Test
+    @Ignore
     public void testDifferenceBetweenSize() throws Exception {
         String path = ".\\src\\test\\resources\\invoice\\Resizing\\";
         this.doOcrAndSave(path + "body.jpg", path + "body.txt");
@@ -93,9 +95,11 @@ public class TesseractWrapperTest extends AbstractTest {
     }
 
     @Test
-    public void testHOCROutput() {
-        String path = "..\\Temp\\hoerex1.pdf";
-        ImagePreprocessor preprocessor = new ImagePreprocessor(path);
+    public void testHOCROutput() throws IOException {
+        InputStream file = this.getClass().getResourceAsStream("/data/generation/template1_generated0.pdf");
+        PDDocument pdf = PDDocument.load(file);
+        PDFRenderer renderer = new PDFRenderer(pdf);
+        ImagePreprocessor preprocessor = new ImagePreprocessor(renderer.renderImageWithDPI(0, 300));
 
         BufferedImage inputImage = preprocessor.preprocess();
         String result = this.wrapper.initOcr(inputImage, true);

@@ -1,17 +1,16 @@
 package de.cneubauer.transformation;
 
-import com.google.common.io.Files;
 import de.cneubauer.AbstractTest;
 import de.cneubauer.domain.bo.LegalPerson;
 import io.konik.zugferd.Invoice;
 import junit.framework.AssertionFailedError;
+import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
@@ -43,8 +42,9 @@ public class ZugFerdTransformatorTest extends AbstractTest {
         Invoice generatedInvoice = transformator.createFullConformalBasicInvoice(i);
         byte[] output;
         try {
-            String filepath = "../../../../../target/test-classes/data/generation/template1_geerated0.pdf";
-            output = transformator.appendInvoiceToPDF(Files.toByteArray(new File(filepath)), i);
+            InputStream in = this.getClass().getResourceAsStream("/data/output/template1_generated0.pdf");
+            output = transformator.appendInvoiceToPDF(IOUtils.toByteArray(in), i);
+            in.close();
         } catch (Exception e) {
             throw new AssertionFailedError("Unable to add invoice to pdf");
         }
@@ -73,7 +73,8 @@ public class ZugFerdTransformatorTest extends AbstractTest {
     public void testValidPDF() {
         boolean result = false;
         try {
-            byte[] pdf = Files.toByteArray(new File("C:\\Users\\Christoph\\Desktop\\appendedInvoice.pdf"));
+            InputStream in = this.getClass().getResourceAsStream("/data/output/template1_generated0.pdf");
+            byte[] pdf = IOUtils.toByteArray(in);
             Invoice mock = transformator.createFullConformalBasicInvoice(this.createInvoiceForTesting());
             byte[] output = transformator.appendInvoiceToPdf(pdf, mock);
             result = transformator.pdfIsZugFerdConform(output);

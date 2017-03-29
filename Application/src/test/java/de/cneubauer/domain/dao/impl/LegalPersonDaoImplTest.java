@@ -39,24 +39,13 @@ public class LegalPersonDaoImplTest extends AbstractTest {
 
     @Test
     public void testSave() throws Exception {
-        LegalPerson p = new LegalPerson();
-        p.setCompanyName("fakeCompany");
-
-        CorporateForm c = new CorporateForm();
-        c.setShortName("AG");
-        p.setCorporateForm(c);
-
-        Address a = new Address();
-        a.setCity("Erlangen");
-        a.setZipCode(91056);
-        p.setAddress(a);
-
         //Assertion not needed. Should fail by exception
-        this.dao.save(p);
+        this.dao.save(this.createLegalPerson());
     }
 
     @Test
     public void testGetById() throws Exception {
+        this.dao.save(this.createLegalPerson());
         LegalPerson p = this.dao.getById(1);
         Assert.notNull(p);
         Assert.isTrue(p.getId() == 1);
@@ -64,11 +53,23 @@ public class LegalPersonDaoImplTest extends AbstractTest {
 
     @Test
     public void testGetAll() throws Exception {
+        this.dao.save(this.createLegalPerson());
         List<LegalPerson> result;
         result = this.dao.getAll();
 
         Assert.notNull(result);
         Assert.isTrue(result.size() > 0);
         System.out.println("Size of table LegalPerson: " + result.size());
+    }
+
+    private LegalPerson createLegalPerson() {
+        LegalPerson p = new LegalPerson();
+        p.setCompanyName("fakeCompany");
+
+        Address a = new Address();
+        a.setCity("Erlangen");
+        a.setZipCode(91056);
+        p.setAddress(a);
+        return p;
     }
 }

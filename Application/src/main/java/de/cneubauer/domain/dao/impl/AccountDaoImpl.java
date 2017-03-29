@@ -4,6 +4,7 @@ import de.cneubauer.domain.bo.Account;
 import de.cneubauer.domain.dao.AccountDao;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 /**
@@ -31,12 +32,15 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao {
     @Override
     public Account getByAccountNo(String accNo) {
         String hql = "FROM Account a WHERE a.accountNo = ?1";
+        Session s = this.getSessionFactory().openSession();
 
-        Query q = this.getSession().createQuery(hql);
+        Query q = s.createQuery(hql);
         Logger.getLogger(this.getClass()).log(Level.INFO, "Searching for Account " + accNo);
         q.setParameter(1, accNo);
 
-        return (Account) q.getSingleResult();
+        Account a = (Account) q.getSingleResult();
+        s.close();
+        return a;
     }
 
     /**

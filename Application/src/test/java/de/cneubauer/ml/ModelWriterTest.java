@@ -12,6 +12,7 @@ import java.util.List;
  * Created by Christoph Neubauer on 02.02.2017.
  * Test for the ModelWriter class
  */
+@Deprecated
 public class ModelWriterTest {
     private ModelWriter writer;
     private ModelReader reader;

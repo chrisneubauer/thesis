@@ -1,27 +1,39 @@
 package de.cneubauer.domain.service;
 
 import de.cneubauer.AbstractTest;
-import de.cneubauer.database.MySQLConnector;
 import de.cneubauer.domain.bo.*;
 import de.cneubauer.domain.dao.AccountDao;
 import de.cneubauer.domain.dao.impl.AccountDaoImpl;
 import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
+import de.cneubauer.ocr.hocr.HocrDocument;
+import de.cneubauer.ocr.tesseract.TesseractWrapper;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.util.Assert;
 
+import javax.annotation.Resources;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Christoph Neubauer on 07.12.2016.
  * Test for DatabaseService class
  */
 public class DatabaseServiceTest extends AbstractTest {
-    private MySQLConnector connector;
     private AccountDao accountDao;
     private DatabaseService service;
 
@@ -30,7 +42,6 @@ public class DatabaseServiceTest extends AbstractTest {
       super.setUp();
         this.service = new DatabaseService();
         databaseChanged = true;
-        this.connector = new MySQLConnector();
         this.accountDao = new AccountDaoImpl();
     }
 
@@ -42,20 +53,33 @@ public class DatabaseServiceTest extends AbstractTest {
     @Test
     public void saveProcessResult() throws Exception {
         ExtractionModel model = new ExtractionModel();
-        List<Position> recordList = new ArrayList<>(1);
+        List<Position> recordList = new ArrayList<>();
         recordList.add(this.createRecord());
+        File f = new File(getClass().getResource("/data/output/template1_generated0.pdf").toURI());
 
+        Invoice i = this.createInvoice();
         model.setRecords(recordList);
-        model.setInvoiceInformation(this.createInvoice());
+        model.setUpdatedRecords(recordList);
+        model.setInvoiceInformation(i);
+        model.setUpdatedInvoiceInformation(i);
+        model.setHocrDocument(this.createHocrDocument(f));
 
         ProcessResult mock = new ProcessResult();
         mock.setExtractionModel(model);
+        mock.setFile(f);
 
         this.service.saveProcessResult(mock);
     }
 
+    private HocrDocument createHocrDocument(File f) {
+        TesseractWrapper wrapper = new TesseractWrapper();
+        String hocr = wrapper.initOcr(f, true);
+        return new HocrDocument(hocr);
+    }
+
     private Invoice createInvoice() {
         Invoice i = new Invoice();
+        i.setInvoiceNumber("mockupNo123");
         i.setIssueDate(Date.valueOf(LocalDate.now()));
         i.setDeliveryDate(Date.valueOf(LocalDate.now()));
 
@@ -78,21 +102,25 @@ public class DatabaseServiceTest extends AbstractTest {
     }
 
     private Position createRecord() {
-        //AccountType asset = this.accountTypeDao.getAssetAccount();
         Account darlehen = this.accountDao.getByAccountNo("0550");
         Account bank = this.accountDao.getByAccountNo("0630");
 
-        //Assert.isTrue(Objects.equals(darlehen.getType().getName(), asset.getName()));
-        //Assert.isTrue(Objects.equals(bank.getType().getId(), AccType.LIABILITY));
-
         Position record = new Position();
-        /*record.setCredit(bank);
-        record.setDebit(darlehen);
-        record.setBruttoValue(100);
-        record.setDocumentNo("0001");
-        record.setEntryDate(Timestamp.valueOf(LocalDateTime.now()));
-        record.setVat_rate(0.0);*/
+        record.setEntryText("fakePosition");
 
+        AccountPosition ap = new AccountPosition();
+        ap.setAccount(darlehen);
+        ap.setBruttoValue(119);
+
+        AccountPosition ap2 = new AccountPosition();
+        ap2.setAccount(bank);
+        ap2.setIsDebit(true);
+        ap2.setBruttoValue(119);
+
+        Set<AccountPosition> set = new HashSet<>();
+        set.add(ap);
+        set.add(ap2);
+        record.setPositionAccounts(set);
         return record;
     }
 }

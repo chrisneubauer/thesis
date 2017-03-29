@@ -29,12 +29,10 @@ public class NLPFileHelper {
     }
 
     public List<NLPModel> getModels() {
-        if (models == null) {
-            try {
-                this.initiateModels();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            this.initiateModels();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return models;
     }

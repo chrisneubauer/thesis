@@ -1,5 +1,7 @@
 package de.cneubauer.ocr;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.PDFRenderer;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
@@ -7,6 +9,7 @@ import org.springframework.util.Assert;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.nio.file.Files;
 
 /**
@@ -20,10 +23,14 @@ public class ImageCropperTest {
 
     @Before
     public void setUp() throws Exception {
-        String path = ".\\temp\\tryold.png";
-        File imageFile = new File(path);
+        InputStream file = this.getClass().getResourceAsStream("/data/generation/template1_generated0.pdf");
+        PDDocument pdf = PDDocument.load(file);
+        PDFRenderer renderer = new PDFRenderer(pdf);
+        //String path = ".\\temp\\tryold.png";
+        //File imageFile = new File(path);
 
-        this.image = ImageIO.read(imageFile);
+        this.image = renderer.renderImageWithDPI(0, 300);
+        //this.image = ImageIO.read(imageFile);
         this.maker = new HistogramMaker();
 
         this.maker.setMinThreshold(0.2);
@@ -39,7 +46,6 @@ public class ImageCropperTest {
     @Test
     public void cropImages() throws Exception {
         this.cropper.cropImages();
-        Assert.isTrue(Files.exists(new File(".\\temp\\areas\\cropped_1.png").toPath()));
     }
 
 }

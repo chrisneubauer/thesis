@@ -8,6 +8,7 @@ import org.junit.Test;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 
 /**
  * Created by Christoph Neubauer on 14.11.2016.
@@ -19,16 +20,10 @@ public class HistogramMakerTest {
 
     @Before
     public void setUp() throws Exception {
-        String path = ".\\temp\\invoice.pdf";
-        File imageFile = new File(path);
-
-        if (path.endsWith("pdf")) {
-            PDDocument pdf = PDDocument.load(imageFile);
-            PDFRenderer renderer = new PDFRenderer(pdf);
-            this.image = renderer.renderImageWithDPI(0, 300);
-        } else {
-            this.image = ImageIO.read(imageFile);
-        }
+        InputStream file = this.getClass().getResourceAsStream("/data/generation/template1_generated0.pdf");
+        PDDocument pdf = PDDocument.load(file);
+        PDFRenderer renderer = new PDFRenderer(pdf);
+        this.image = renderer.renderImageWithDPI(0, 300);
         this.maker = new HistogramMaker();
     }
 
@@ -42,9 +37,8 @@ public class HistogramMakerTest {
 
     @Test
     public void makeVerticalHistogram() throws Exception {
-        BufferedImage line = ImageIO.read(new File(".\\temp\\croppedLine.png"));
         this.maker = new HistogramMaker();
-        BufferedImage output = this.maker.makeVerticalHistogram(line, false);
+        BufferedImage output = this.maker.makeVerticalHistogram(this.image, false);
 
         File test = new File(".\\temp\\histogramWords.png");
         ImageIO.write(output, "png", test);

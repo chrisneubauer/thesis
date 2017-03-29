@@ -7,9 +7,9 @@
         </id>
 
         <property name="entryText" column="EntryText" />
-        <set name="positionAccounts" table="account_position" cascade="all" inverse="true" lazy="false" fetch="join">
+        <set name="positionAccounts" table="account_position" cascade="all" inverse="true" lazy="false" fetch="select">
             <key>
-                <column name="ID" not-null="true" />
+                <column name="Position" not-null="true" />
             </key>
             <one-to-many class="de.cneubauer.domain.bo.AccountPosition" />
         </set>
