@@ -17,7 +17,7 @@
         <!--<MenuItem mnemonicParsing="false" text="%menu.title.start"/>-->
         <MenuItem mnemonicParsing="false" text="%menu.title.scan" onAction="#openStartMenu"/>
         <MenuItem mnemonicParsing="false" text="%menu.title.search" onAction="#openDatabaseMenu"/>
-        <MenuItem mnemonicParsing="false" text="%menu.title.export" onAction="#openExportMenu"/>
+        <!--<MenuItem mnemonicParsing="false" text="%menu.title.export" onAction="#openExportMenu"/>-->
     </Menu>
     <Menu mnemonicParsing="false" text="%menu.title.help">
         <MenuItem mnemonicParsing="false" text="%menu.title.help"/>
