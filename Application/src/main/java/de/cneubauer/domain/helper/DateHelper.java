@@ -24,7 +24,6 @@ public class DateHelper {
         Logger.getLogger(this.getClass()).log(Level.INFO, "Trying to convert date: " + date);
         int[] result = new int[3];
         // first german locale
-        // TODO: Do internationalization as a setting in the application
         if (date.contains(".")) {
             String[] dateValues = date.split("\\.");
             if (dateValues.length == 3) {
@@ -35,6 +34,17 @@ public class DateHelper {
                     result[2] = Integer.parseInt(dateValues[dateValues.length - 1]);
                 }
             }
+        } else if (date.contains("-")){
+            // english locale
+            String[] dateValues = date.split("\\-");
+            if (dateValues.length == 3) {
+                // we expect english calendar writing style, so months are in the first row, then days, then years
+                result[1] = Integer.parseInt(dateValues[0]);
+                result[0] = Integer.parseInt(dateValues[1]);
+                if (dateValues[2].length() > 2) {
+                    result[2] = Integer.parseInt(dateValues[dateValues.length - 1]);
+                }
+            };
         } else {
             return null;
         }

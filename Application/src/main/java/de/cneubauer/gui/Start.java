@@ -81,6 +81,9 @@ public class Start extends Application {
         config.putIfAbsent(Cfg.DBPORT.getValue(), "3306");
         config.putIfAbsent(Cfg.TESSERACTLANGUAGE.getValue(), TessLang.ENGLISHANDGERMAN.getValue());
         config.putIfAbsent(Cfg.APPLICATIONLANGUAGE.getValue(), AppLang.ENGLISH.name());
+        config.putIfAbsent(Cfg.DEBUG.getValue(), "false");
+        config.putIfAbsent(Cfg.OCRENGINE.getValue(), "Tesseract");
+        config.putIfAbsent(Cfg.FERDPROFILE.getValue(), "basic");
         ConfigHelper.rewrite(config);
     }
 }

@@ -4,7 +4,7 @@ import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGEncodeParam;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import magick.MagickException;
-
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -18,7 +18,10 @@ import org.im4java.process.ProcessStarter;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by Christoph Neubauer on 10.11.2016.
@@ -38,7 +41,10 @@ public class ImagePreprocessor {
     private BufferedImage inputFile;
 
     public ImagePreprocessor(BufferedImage imageToProcess) {
-        ProcessStarter.setGlobalSearchPath(".\\portable\\imagemagick\\ImageMagick-7.0.3-6-portable-Q16-x86;");
+        //TODO: make IM portable dependant on OS
+        this.setImageMagickSearchPath();
+        //ProcessStarter.setGlobalSearchPath(".\\portable\\imagemagick\\ImageMagick-7.0.5-4-portable-Q16-x86;");
+        //ProcessStarter.setGlobalSearchPath(".\\portable\\imagemagick\\ImageMagick-7.0.3-6-portable-Q16-x86;");
         this.inputFile = imageToProcess;
         File outputfile = new File(this.tempPath);
         File outputConvertedFile = new File(this.tempPathConverted);
@@ -52,22 +58,36 @@ public class ImagePreprocessor {
 
     public ImagePreprocessor(String path) {
         try {
-        File imageFile = new File(path);
-        if (path.endsWith(".pdf")) {
-            PDDocument pdf = PDDocument.load(imageFile);
-            PDFRenderer renderer = new PDFRenderer(pdf);
-            this.inputFile = renderer.renderImageWithDPI(0, 300);
-            pdf.close();
-        } else {
-            this.inputFile = ImageIO.read(imageFile);
-        }
+            File imageFile = new File(path);
+            if (path.endsWith(".pdf")) {
+                PDDocument pdf = PDDocument.load(imageFile);
+                PDFRenderer renderer = new PDFRenderer(pdf);
+                this.inputFile = renderer.renderImageWithDPI(0, 300);
+                pdf.close();
+            } else {
+                this.inputFile = ImageIO.read(imageFile);
+            }
+            this.setImageMagickSearchPath();
+            //ProcessStarter.setGlobalSearchPath(".\\portable\\imagemagick\\ImageMagick-7.0.5-4-portable-Q16-x86;");
+            //ProcessStarter.setGlobalSearchPath(".\\portable\\imagemagick\\ImageMagick-7.0.3-6-portable-Q16-x86;");
 
-        ProcessStarter.setGlobalSearchPath(".\\portable\\imagemagick\\ImageMagick-7.0.3-6-portable-Q16-x86;");
+            File dir = new File(".\\temp\\");
+            File outputfile = new File(this.tempPath);
+            File outputConvertedFile = new File(this.tempPathConverted);
+            // creates a file if it doesn't exist yet
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            if (!outputfile.exists()) {
+                outputfile.createNewFile();
+            }
+            if (!outputConvertedFile.exists()) {
+                outputConvertedFile.createNewFile();
+            }
 
-        File outputfile = new File(this.tempPath);
-        File outputConvertedFile = new File(this.tempPathConverted);
             ImageIO.write(this.inputFile, "jpg", outputfile);
             ImageIO.write(this.inputFile, "jpg", outputConvertedFile);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,6 +127,14 @@ public class ImagePreprocessor {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private void setImageMagickSearchPath() {
+        if (SystemUtils.IS_OS_WINDOWS) {
+            ProcessStarter.setGlobalSearchPath(".\\portable\\imagemagick\\ImageMagick-7.0.5-4-portable-Q16-x86;");
+        } else if (SystemUtils.IS_OS_UNIX) {
+
+        }
     }
 
     private BufferedImage resizeImage(BufferedImage image) throws InterruptedException, IOException, IM4JavaException {

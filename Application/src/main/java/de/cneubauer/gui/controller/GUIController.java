@@ -3,7 +3,6 @@ package de.cneubauer.gui.controller;
 import de.cneubauer.util.config.ConfigHelper;
 import de.cneubauer.util.enumeration.AppLang;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -171,10 +170,5 @@ public class GUIController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    //TODO: Implement
-    public void openExportMenu(ActionEvent actionEvent) {
-
     }
 }

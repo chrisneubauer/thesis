@@ -3,7 +3,6 @@ package de.cneubauer.gui.model;
 import de.cneubauer.domain.bo.Position;
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.ocr.hocr.HocrDocument;
-import de.cneubauer.util.DocumentCaseSet;
 
 import java.util.List;
 

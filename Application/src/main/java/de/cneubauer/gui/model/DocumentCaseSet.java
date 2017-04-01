@@ -1,4 +1,4 @@
-package de.cneubauer.util;
+package de.cneubauer.gui.model;
 
 import de.cneubauer.domain.bo.DocumentCase;
 import de.cneubauer.util.enumeration.CaseKey;
@@ -9,8 +9,8 @@ import java.util.List;
 
 /**
  * Created by Christoph Neubauer on 15.02.2017.
+ * Object for managing different document case types
  */
-//TODO: MOVE TO Model
 public class DocumentCaseSet {
     private DocumentCase invoiceNoCase;
     private DocumentCase invoiceDateCase;

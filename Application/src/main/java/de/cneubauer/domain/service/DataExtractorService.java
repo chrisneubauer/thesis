@@ -12,7 +12,7 @@ import de.cneubauer.domain.dao.impl.LegalPersonDaoImpl;
 import de.cneubauer.domain.helper.TableContentFileHelper;
 import de.cneubauer.domain.helper.TableEndFileHelper;
 import de.cneubauer.ocr.hocr.*;
-import de.cneubauer.util.DocumentCaseSet;
+import de.cneubauer.gui.model.DocumentCaseSet;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;

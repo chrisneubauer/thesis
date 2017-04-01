@@ -14,7 +14,7 @@ import java.util.Map;
 public class NLPClassificator {
     private List<NLPModel> models;
 
-    public NLPClassificator(List<NLPModel> modelList) {
+    NLPClassificator(List<NLPModel> modelList) {
         this.models = modelList;
     }
 

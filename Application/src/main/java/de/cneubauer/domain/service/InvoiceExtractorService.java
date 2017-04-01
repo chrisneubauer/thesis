@@ -10,7 +10,7 @@ import de.cneubauer.ocr.hocr.HocrArea;
 import de.cneubauer.ocr.hocr.HocrDocument;
 import de.cneubauer.ocr.hocr.HocrElement;
 import de.cneubauer.ocr.hocr.HocrLine;
-import de.cneubauer.util.DocumentCaseSet;
+import de.cneubauer.gui.model.DocumentCaseSet;
 import de.cneubauer.util.config.ConfigHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
@@ -256,7 +256,7 @@ public class InvoiceExtractorService extends DataExtractorService {
             // otherwise use the values of tax basis + tax
             result.setGrandTotal(result.getTaxBasisTotal() + result.getTaxTotal());
         }
-        // TODO: do we need to find these fields?..yup!
+        // TODO: do we need to find these fields? we need to get data to get information what to search about!
         result.setChargeTotal(0);
         result.setAllowanceTotal(0);
         return result;
@@ -395,7 +395,7 @@ public class InvoiceExtractorService extends DataExtractorService {
     }
 
     /**
-     * Searche for the invoice number in both header strings
+     * Searches for the invoice number in both header strings
      * @return  the invoice number or an empty string if nothing has been found
      */
     private String findInvoiceNumber() {

@@ -3,7 +3,6 @@ package de.cneubauer.ml.nlp;
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTagger;
 import opennlp.tools.postag.POSTaggerME;
-import opennlp.tools.tokenize.Tokenizer;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,8 +14,6 @@ import java.io.InputStream;
 public class OpenNLPSpeechTagger {
 
     public String[] tag(String[] tokens) {
-        Tokenizer tokenizer = null;
-
         InputStream modelIn = null;
         try {
             // Loading tokenizer model

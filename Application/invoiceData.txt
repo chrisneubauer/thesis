@@ -1,6 +1,0 @@
-[TestKreditor][TestDebitor]
-[1&1 Telecom GmbH][Datenwerk GmbH][Telekom][null]
-[Telecom][null]
-[Telecom][null]
-[Datenwerk GmbH][Telecom]
-[Datenwerk GmbH][Telecom]

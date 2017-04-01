@@ -35,7 +35,6 @@ public class LearningService {
      */
     public boolean isModelExisting(Model model) {
         ModelReader reader = new ModelReader();
-        //TODO: url of the reader
         try {
             for (Model m : reader.getModels()) {
                 if (m.positionEqualsWith(model.getPosition())) {

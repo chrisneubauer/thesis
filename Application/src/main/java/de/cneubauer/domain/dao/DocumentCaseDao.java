@@ -1,7 +1,7 @@
 package de.cneubauer.domain.dao;
 
 import de.cneubauer.domain.bo.DocumentCase;
-import de.cneubauer.util.DocumentCaseSet;
+import de.cneubauer.gui.model.DocumentCaseSet;
 
 import java.util.List;
 

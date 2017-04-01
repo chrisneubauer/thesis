@@ -2,7 +2,7 @@ package de.cneubauer.gui.controller;
 
 import com.sun.javafx.collections.ObservableListWrapper;
 import de.cneubauer.gui.model.ProcessResult;
-import de.cneubauer.util.task.ScanTask;
+import de.cneubauer.domain.service.ScanTask;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

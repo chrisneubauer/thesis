@@ -8,7 +8,7 @@ import de.cneubauer.ml.nlp.NLPFacade;
 import de.cneubauer.ml.nlp.NLPModel;
 import de.cneubauer.ocr.hocr.HocrDocument;
 import de.cneubauer.ocr.hocr.HocrElement;
-import de.cneubauer.util.DocumentCaseSet;
+import de.cneubauer.gui.model.DocumentCaseSet;
 import de.cneubauer.util.enumeration.CaseKey;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -137,6 +137,7 @@ public class AccountingRecordExtractorService extends DataExtractorService {
      * @return  returns a list of all AccountingRecords that has been found on the page
      */
     private List<Position> extractAccountingRecordInformation() {
+        //TODO: Strategy for normal and hOCR
         List<Position> records = new LinkedList<>();
         int index = 0;
         boolean found = false;

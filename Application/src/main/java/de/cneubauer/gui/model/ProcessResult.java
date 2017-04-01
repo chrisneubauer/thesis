@@ -1,6 +1,5 @@
 package de.cneubauer.gui.model;
 
-import de.cneubauer.util.DocumentCaseSet;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.beans.property.*;
 import java.io.File;

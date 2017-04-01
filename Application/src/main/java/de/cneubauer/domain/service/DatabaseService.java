@@ -8,7 +8,7 @@ import de.cneubauer.gui.model.ExtractionModel;
 import de.cneubauer.gui.model.ProcessResult;
 import de.cneubauer.ocr.hocr.HocrDocument;
 import de.cneubauer.transformation.ZugFerdTransformator;
-import de.cneubauer.util.DocumentCaseSet;
+import de.cneubauer.gui.model.DocumentCaseSet;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 

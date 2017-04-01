@@ -60,6 +60,7 @@ public class ImagePartitioner {
                 this.body = this.table;
                 this.table.flush();
             }
+            //TODO: do we need those even without debug?
             if (ConfigHelper.isDebugMode()) {
                 File leftHeaderFile = new File(".\\temp\\leftHeader.png");
                 File rightHeaderFile = new File(".\\temp\\rightHeader.png");

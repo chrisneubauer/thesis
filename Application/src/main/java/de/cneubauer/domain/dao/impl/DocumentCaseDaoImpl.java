@@ -2,7 +2,7 @@ package de.cneubauer.domain.dao.impl;
 
 import de.cneubauer.domain.bo.DocumentCase;
 import de.cneubauer.domain.dao.DocumentCaseDao;
-import de.cneubauer.util.DocumentCaseSet;
+import de.cneubauer.gui.model.DocumentCaseSet;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;

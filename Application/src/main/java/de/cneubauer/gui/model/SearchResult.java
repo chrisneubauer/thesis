@@ -16,7 +16,6 @@ public class SearchResult {
     private StringProperty debitor;
     private StringProperty creditor;
     private ObjectProperty<Scan> scan;
-    //private ObjectProperty<byte[]> file;
 
     public SearchResult() {
         this.date = new SimpleObjectProperty<>();
@@ -24,7 +23,6 @@ public class SearchResult {
         this.debitor = new SimpleStringProperty();
         this.creditor = new SimpleStringProperty();
         this.scan = new SimpleObjectProperty<>();
-        //this.file = new SimpleObjectProperty<>();
     }
 
     public Date getDate() {
@@ -86,17 +84,4 @@ public class SearchResult {
     public void setScan(Scan scan) {
         this.scan.set(scan);
     }
-/*
-    public byte[] getFile() {
-        return file.get();
-    }
-
-    public ObjectProperty<byte[]> fileProperty() {
-        return file;
-    }
-
-    public void setFile(byte[] file) {
-        this.file.set(file);
-    }
-*/
 }

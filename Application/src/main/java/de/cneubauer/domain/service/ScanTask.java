@@ -1,4 +1,4 @@
-package de.cneubauer.util.task;
+package de.cneubauer.domain.service;
 
 import de.cneubauer.domain.bo.Invoice;
 import de.cneubauer.domain.bo.Position;
@@ -13,7 +13,7 @@ import de.cneubauer.ocr.ImagePartitioner;
 import de.cneubauer.ocr.ImagePreprocessor;
 import de.cneubauer.ocr.hocr.HocrDocument;
 import de.cneubauer.ocr.tesseract.TesseractWorkerStrategy;
-import de.cneubauer.util.DocumentCaseSet;
+import de.cneubauer.gui.model.DocumentCaseSet;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
