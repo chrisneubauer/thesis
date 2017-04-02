@@ -163,10 +163,10 @@ public class GUIController {
 
             Locale locale = this.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/progress.fxml"), bundle);
+            URL fxml = this.getFXML("progress");
+            FXMLLoader loader = new FXMLLoader(fxml, bundle);
             //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/progress.fxml"), bundle);
             VBox v = loader.load();
-
 
             Scene scene = new Scene(v, 600, 200);
             stage.setScene(scene);
