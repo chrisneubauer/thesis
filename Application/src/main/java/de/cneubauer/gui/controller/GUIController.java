@@ -105,20 +105,25 @@ public class GUIController {
             Stage stage = (Stage) menuBar.getScene().getWindow();
 
             Locale locale = this.getCurrentLocale();
+
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
+            if (bundle == null) {
+                System.out.println("Bundle is null");
+            }
 
             //InputStream is = this.getClass().getResourceAsStream("/FXML/settings.fxml");
 
             URL url = getClass().getResource("FXML\\settings.fxml");
-            System.out.println("URL 1. mal null? " + url == null);
+            System.out.println("URL 1. mal null? " + String.valueOf(url == null));
             if (url == null) {
                 url = getClass().getResource("settings.fxml");
-                System.out.println("URL 2. mal null? " + url == null);
+                System.out.println("URL 2. mal null? " +  String.valueOf(url == null));
             }
             if (url == null) {
                 url = getClass().getClassLoader().getResource("FXML\\settings.fxml");
-                System.out.println("URL 3. mal null? " + url == null);
+                System.out.println("URL 3. mal null? " +  String.valueOf(url == null));
             }
+
             FXMLLoader loader = new FXMLLoader(url, bundle);
             //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/settings.fxml"), bundle);
             FlowPane f = loader.load();
