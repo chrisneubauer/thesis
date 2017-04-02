@@ -109,7 +109,7 @@ public class GUIController {
 
             //InputStream is = this.getClass().getResourceAsStream("/FXML/settings.fxml");
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/settings.fxml"), bundle);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML\\settings.fxml"), bundle);
             //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/settings.fxml"), bundle);
             FlowPane f = loader.load();
             Scene scene = new Scene(f, 600, 400);
@@ -164,7 +164,7 @@ public class GUIController {
 
             Locale locale = this.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/progress.fxml"), bundle);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/progress.fxml"), bundle);
             //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/progress.fxml"), bundle);
             VBox v = loader.load();
 

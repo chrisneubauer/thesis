@@ -60,7 +60,8 @@ public class ProgressController extends GUIController {
 
             Locale locale = this.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/processedList.fxml"), bundle);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/processedList.fxml"), bundle);
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/processedList.fxml"), bundle);
 
             Parent root = loader.load();
             Scene scene = new Scene(root, 800, 600);
