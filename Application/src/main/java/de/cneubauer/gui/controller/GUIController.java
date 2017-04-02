@@ -109,7 +109,17 @@ public class GUIController {
 
             //InputStream is = this.getClass().getResourceAsStream("/FXML/settings.fxml");
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML\\settings.fxml"), bundle);
+            URL url = getClass().getResource("FXML\\settings.fxml");
+            System.out.println("URL 1. mal null? " + url == null);
+            if (url == null) {
+                url = getClass().getResource("settings.fxml");
+                System.out.println("URL 2. mal null? " + url == null);
+            }
+            if (url == null) {
+                url = getClass().getClassLoader().getResource("FXML\\settings.fxml");
+                System.out.println("URL 3. mal null? " + url == null);
+            }
+            FXMLLoader loader = new FXMLLoader(url, bundle);
             //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/settings.fxml"), bundle);
             FlowPane f = loader.load();
             Scene scene = new Scene(f, 600, 400);
