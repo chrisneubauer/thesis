@@ -18,10 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.net.URL;
-import java.net.URLStreamHandler;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -48,7 +45,7 @@ public class GUIController {
     protected void openStartMenu(Event e) {
         try {
             Stage stage = (Stage) menuBar.getScene().getWindow();
-            URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/startMenu.fxml");
+            URL fxmlURL = this.getFXML("startMenu");
 
             Locale locale = this.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
@@ -77,7 +74,7 @@ public class GUIController {
             } else {
                 stage = (Stage) menuBar.getScene().getWindow();
             }
-            URL fxmlURL = this.getClass().getClassLoader().getResource("FXML/searchDatabase.fxml");
+            URL fxmlURL = this.getFXML("searchDatabase");
 
             Locale locale = this.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
@@ -111,29 +108,8 @@ public class GUIController {
                 System.out.println("Bundle is null");
             }
 
-            //InputStream is = this.getClass().getResourceAsStream("/FXML/settings.fxml");
-
-            URL url = getClass().getResource("FXML\\settings.fxml");
-            System.out.println("URL 1. mal null? " + String.valueOf(url == null));
-            if (url == null) {
-                url = getClass().getResource("settings.fxml");
-                System.out.println("URL 2. mal null? " +  String.valueOf(url == null));
-            }
-            if (url == null) {
-                url = getClass().getClassLoader().getResource("FXML\\settings.fxml");
-                System.out.println("URL 3. mal null? " +  String.valueOf(url == null));
-            }
-            if (url == null) {
-                url = getClass().getClassLoader().getResource("settings.fxml");
-                System.out.println("URL 4. mal null? " +  String.valueOf(url == null));
-            }
-            if (url == null) {
-                url = getClass().getClassLoader().getResource("FXML/settings.fxml");
-                System.out.println("URL 5. mal null? " +  String.valueOf(url == null));
-            }
-
+            URL url = this.getFXML("settings");
             FXMLLoader loader = new FXMLLoader(url, bundle);
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/settings.fxml"), bundle);
             FlowPane f = loader.load();
             Scene scene = new Scene(f, 600, 400);
 
@@ -201,5 +177,9 @@ public class GUIController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    protected URL getFXML(String name) {
+        return this.getClass().getClassLoader().getResource("FXML/" + name + ".fxml");
     }
 }

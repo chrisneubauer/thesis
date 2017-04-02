@@ -82,12 +82,10 @@ public class SettingsController extends GUIController {
     public void closeAndSaveSettings() {
         this.updateSettings();
         Stage settingsWindow = (Stage) root.getScene().getWindow();
-        //Stage settingsWindow = (Stage) this.cancelButtonSettings.getScene().getWindow();
         settingsWindow.close();
     }
 
     public void closeAndIgnoreSettings() {
-        //Stage settingsWindow = (Stage) this.cancelButtonSettings.getScene().getWindow();
         Stage settingsWindow = (Stage) root.getScene().getWindow();
         settingsWindow.close();
     }

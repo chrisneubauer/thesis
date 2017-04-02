@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -119,7 +120,8 @@ public class ProcessedListController extends GUIController {
 
                         Locale locale = getCurrentLocale();
                         ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/splitPane.fxml"), bundle);
+                        URL fxml = getFXML("splitPane");
+                        FXMLLoader loader = new FXMLLoader(fxml, bundle);
                         Parent root = loader.load();
                         Scene scene = new Scene(root, Screen.getPrimary().getVisualBounds().getMaxX() - 100, Screen.getPrimary().getVisualBounds().getMaxY() - 20);
 

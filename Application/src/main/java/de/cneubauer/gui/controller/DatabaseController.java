@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -49,7 +50,8 @@ public class DatabaseController extends GUIController {
 
             Node node = (Node) e.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/showDatabaseResults.fxml"), bundle);
+            URL fxml = this.getFXML("showDatabaseResults");
+            FXMLLoader loader = new FXMLLoader(fxml, bundle);
 
             Parent root = loader.load();
             DatabaseResultsController ctrl = loader.getController();

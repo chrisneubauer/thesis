@@ -26,6 +26,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -78,7 +79,8 @@ public class SplitPaneController extends GUIController {
             this.leftPane.getChildren().clear();
             Locale locale = super.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-            this.leftPane.getChildren().add(FXMLLoader.load(getClass().getResource("../../../../FXML/scanForm.fxml"), bundle));
+            URL fxml = this.getFXML("scanForm");
+            this.leftPane.getChildren().add(FXMLLoader.load(fxml, bundle));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -91,7 +93,8 @@ public class SplitPaneController extends GUIController {
             leftPane.getChildren().clear();
             Locale locale = super.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-            leftPane.getChildren().add(FXMLLoader.load(getClass().getResource("../../../../FXML/searchDatabase.fxml"), bundle));
+            URL fxml = this.getFXML("searchDatabase");
+            leftPane.getChildren().add(FXMLLoader.load(fxml, bundle));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -53,7 +53,7 @@ public class DatabaseResultsController extends GUIController {
         valueColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty().asObject());
         debitorColumn.setCellValueFactory(cellData -> cellData.getValue().debitorProperty());
         creditorColumn.setCellValueFactory(cellData -> cellData.getValue().creditorProperty());
-        downloadColumn.setCellValueFactory(cellData -> cellData.getValue().scanProperty()); //.fileProperty());
+        downloadColumn.setCellValueFactory(cellData -> cellData.getValue().scanProperty());
         downloadColumn.setCellFactory(p -> new ButtonCell());
     }
 

@@ -14,6 +14,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URL;
 import java.util.*;
 
 /**
@@ -60,8 +61,8 @@ public class ProgressController extends GUIController {
 
             Locale locale = this.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/processedList.fxml"), bundle);
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/processedList.fxml"), bundle);
+            URL fxml = this.getFXML("processedList");
+            FXMLLoader loader = new FXMLLoader(fxml, bundle);
 
             Parent root = loader.load();
             Scene scene = new Scene(root, 800, 600);
