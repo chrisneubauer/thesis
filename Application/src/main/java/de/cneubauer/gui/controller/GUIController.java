@@ -18,7 +18,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URL;
+import java.net.URLStreamHandler;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -103,7 +106,11 @@ public class GUIController {
 
             Locale locale = this.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/settings.fxml"), bundle);
+
+            //InputStream is = this.getClass().getResourceAsStream("/FXML/settings.fxml");
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/settings.fxml"), bundle);
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/settings.fxml"), bundle);
             FlowPane f = loader.load();
             Scene scene = new Scene(f, 600, 400);
 
@@ -157,7 +164,8 @@ public class GUIController {
 
             Locale locale = this.getCurrentLocale();
             ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/progress.fxml"), bundle);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/progress.fxml"), bundle);
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/progress.fxml"), bundle);
             VBox v = loader.load();
 
 
