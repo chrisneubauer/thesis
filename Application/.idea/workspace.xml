@@ -138,8 +138,8 @@
       <file leaf-file-name="GUIController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="123" column="85" lean-forward="false" selection-start-line="123" selection-start-column="85" selection-end-line="123" selection-end-column="85" />
+            <state relative-caret-position="264">
+              <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1375,7 +1375,14 @@
       <option name="project" value="LOCAL" />
       <updated>1491119936181</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="added more output">
+      <created>1491120490993</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1491120490993</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1536,7 +1543,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added DateHelper and Test" />
     <MESSAGE value="Fixed issue with wrong month conversion due to the usage of Calendar." />
     <MESSAGE value="Refactored DataExtractorService" />
     <MESSAGE value="Prepared AccountingRecordWriter for export of accounting records" />
@@ -1561,7 +1567,8 @@
     <MESSAGE value="Tried to fix resource problem in jar" />
     <MESSAGE value="Still trying to fix the resource problem with jars on linux" />
     <MESSAGE value="Still trying to fix the resource bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Still trying to fix the resource bug" />
+    <MESSAGE value="added more output" />
+    <option name="LAST_COMMIT_MESSAGE" value="added more output" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2011,8 +2018,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/cneubauer/gui/controller/GUIController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="123" column="85" lean-forward="false" selection-start-line="123" selection-start-column="85" selection-end-line="123" selection-end-column="85" />
+        <state relative-caret-position="264">
+          <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -123,6 +123,14 @@ public class GUIController {
                 url = getClass().getClassLoader().getResource("FXML\\settings.fxml");
                 System.out.println("URL 3. mal null? " +  String.valueOf(url == null));
             }
+            if (url == null) {
+                url = getClass().getClassLoader().getResource("settings.fxml");
+                System.out.println("URL 4. mal null? " +  String.valueOf(url == null));
+            }
+            if (url == null) {
+                url = getClass().getClassLoader().getResource("FXML/settings.fxml");
+                System.out.println("URL 5. mal null? " +  String.valueOf(url == null));
+            }
 
             FXMLLoader loader = new FXMLLoader(url, bundle);
             //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../../FXML/settings.fxml"), bundle);
