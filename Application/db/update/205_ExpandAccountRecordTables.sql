@@ -1,6 +1,6 @@
 USE ferd_transformator;
 
-DROP Table accountingrecord;
+DROP Table AccountingRecord;
 
 Create Table Record(
 Id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,

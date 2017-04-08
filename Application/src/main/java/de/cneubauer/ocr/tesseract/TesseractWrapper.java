@@ -38,6 +38,9 @@ public class TesseractWrapper implements OCRStrategy {
         ITesseract instance = new Tesseract();
         logger.log(Level.INFO, "initialization of tesseract completed. Time taken: " + (System.currentTimeMillis() - time));
 
+        System.out.println("setting to tessdata datapath");
+        instance.setDatapath("./tessdata/");
+        System.out.println("using dot as normal path");
         instance.setDatapath(".");
         instance.setLanguage(this.getLanguage());
         instance.setTessVariable("tessedit_write_images", "true");
@@ -45,10 +48,16 @@ public class TesseractWrapper implements OCRStrategy {
         logger.log(Level.INFO, "Using language(s): " + this.getLanguage());
 
         List<String> configs = new ArrayList<>(4);
-        configs.add(0, "tessdata\\configs\\api_config");
-        configs.add(1, "tessdata\\configs\\digits");
-        configs.add(2, "tessdata\\configs\\letters");
-        configs.add(3, "tessdata\\configs\\hocr");
+        configs.add(0, "./tessdata/configs/api_config");
+        configs.add(1, "./tessdata/configs/digits");
+        configs.add(2, "./tessdata/configs/letters");
+        configs.add(3, "./tessdata/configs/hocr");
+        if (configs.size() == 0) {
+            configs.add(0, "tessdata\\configs\\api_config");
+            configs.add(1, "tessdata\\configs\\digits");
+            configs.add(2, "tessdata\\configs\\letters");
+            configs.add(3, "tessdata\\configs\\hocr");
+        }
         instance.setConfigs(configs);
         return instance;
     }

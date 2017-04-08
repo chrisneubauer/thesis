@@ -1,3 +1,3 @@
 USE ferd_transformator;
 
-INSERT INTO keyword(Name) VALUE ('Rechnungsposition');
+INSERT INTO Keyword(Name) VALUE ('Rechnungsposition');

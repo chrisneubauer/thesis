@@ -85,6 +85,8 @@
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/javax/validation/validation-api/1.1.0.Final/validation-api-1.1.0.Final.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/pdfbox/fontbox/2.0.2/fontbox-2.0.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/ocr/logback-classic-1.1.7.jar" path-in-jar="/" />
+      <element id="dir-copy" path="$PROJECT_DIR$/tessdata" />
+      <element id="dir-copy" path="$PROJECT_DIR$/portable" />
     </root>
   </artifact>
 </component>

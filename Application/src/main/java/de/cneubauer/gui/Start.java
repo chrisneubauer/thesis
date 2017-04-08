@@ -69,6 +69,7 @@ public class Start extends Application {
 
     public static void main(String[] args) {
         PropertyConfigurator.configure("src/main/log4j.properties");
+        //PropertyConfigurator.configure("./log4j.properties");
         initSettings();
         Logger.getRootLogger().setLevel(Level.DEBUG);
         launch(args);

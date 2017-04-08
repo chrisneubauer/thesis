@@ -1,6 +1,6 @@
 -- Links positions to scans
 
-USE FERD_Transformator;
+USE ferd_transformator;
 
 ALTER TABLE Account DROP FOREIGN KEY account_ibfk_1;
 ALTER TABLE Account DROP COLUMN AccountType_Id;

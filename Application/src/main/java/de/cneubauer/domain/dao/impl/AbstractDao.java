@@ -8,7 +8,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaQuery;
-import java.io.File;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -28,7 +28,21 @@ public abstract class AbstractDao<T> implements IDao<T> {
     AbstractDao(Class<T> paramClass) {
         this.clazz = paramClass;
         this.config = new Configuration();
-        File configFile = new File("src/main/resources/hibernate.cfg.xml");
+
+        URL configFile = this.getClass().getResource("hibernate.cfg.xml");
+        if (configFile == null) {
+            configFile = this.getClass().getResource("/hibernate.cfg.xml");
+        }
+            //File configFile = new File("src/main/resources/hibernate.cfg.xml");
+        if (configFile == null) {
+            configFile = this.getClass().getResource("/resources/hibernate.cfg.xml");
+        }
+        if (configFile == null) {
+            configFile = this.getClass().getClassLoader().getResource("hibernate.cfg.xml");
+        }
+        if (configFile == null) {
+            configFile = this.getClass().getClassLoader().getResource("/hibernate.cfg.xml");
+        }
         this.getConfig().configure(configFile);
         this.sessionFactory = this.getConfig().buildSessionFactory();
     }

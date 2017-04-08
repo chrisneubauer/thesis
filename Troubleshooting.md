@@ -44,3 +44,7 @@ mysql> SET GLOBAL max_allowed_packet=268435456;
 ```
 
 You will still need to update your /etc/my.cnf file as described in the method above to make the change persistent.
+
+### 2. Invalid default value for Modified_Date / Created_Date
+##### Problem:
+##### Solution: Run SET SQL_MODE='ALLOW_INVALID_DATES';
