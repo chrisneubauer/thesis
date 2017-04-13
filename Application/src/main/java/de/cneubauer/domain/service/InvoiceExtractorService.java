@@ -17,8 +17,11 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Christoph on 17.03.2017.
@@ -388,10 +391,31 @@ public class InvoiceExtractorService extends DataExtractorService {
         if (issueDate.toEpochDay() > 1) {
             result = Date.valueOf(issueDate);
         } else {
-            Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find issue date in OCR. Using default value");
-            result = Date.valueOf(LocalDate.now());
+            // try to find any date information in the document before using current date
+            issueDate = this.findDateInformation();
+            if (issueDate.toEpochDay() > 1) {
+                result = Date.valueOf(issueDate);
+            } else {
+                Logger.getLogger(this.getClass()).log(Level.INFO, "Could not find issue date in OCR. Using default value");
+                result = Date.valueOf(LocalDate.now());
+            }
         }
         return result;
+    }
+
+    protected LocalDate findDateInformation() {
+        String header = this.leftHeader + "\n" + this.rightHeader;
+        DateHelper helper = new DateHelper();
+        //SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        Pattern p = Pattern.compile("\\d\\d\\.\\d\\d\\.\\d\\d\\d\\d");
+        Matcher m = p.matcher(header);
+        LocalDate tempDate = null;
+        if(m.find())
+        {
+            tempDate = helper.stringToDate(m.group());
+            //tempDate = format.parse(m.group());
+        }
+        return tempDate;
     }
 
     /**
