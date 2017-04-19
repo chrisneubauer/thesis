@@ -78,6 +78,11 @@ public abstract class DataExtractorService implements Runnable {
         this.tableContentWords = contentFileHelper.getValues();
     }
 
+    /**
+     * Searches for an HocrElement that has been stored in a documentcase before
+     * @param cases a list of documentCases where a possible match could be
+     * @return the element that has been found or null if nothing has been found
+     */
     HocrElement findInCase(List<DocumentCase> cases) {
         // TODO: make parameter to repell or attract position
         for (DocumentCase docCase : cases) {
@@ -108,6 +113,11 @@ public abstract class DataExtractorService implements Runnable {
         return null;
     }
 
+    /**
+     * Parses a string and tries to extract numeric information
+     * @param pos the string that contains the value information
+     * @return a double value or 0.0 if nothing has been found
+     */
     double getValueFromLine(String pos) {
         int euroPos = 0;
         if (pos.toLowerCase().contains("eur")) {

@@ -13,7 +13,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 // found on http://tech.chitgoks.com/2013/08/20/how-to-create-autocomplete-combobox-or-textfield-in-java-fx-2/ on 11.01.2017
-
 public class AutoCompleteComboBoxListener extends ComboBox implements EventHandler<KeyEvent> {
 
     private ComboBox comboBox;
@@ -124,9 +123,6 @@ public class AutoCompleteComboBoxListener extends ComboBox implements EventHandl
             // press enter key programmatically to have this entry added
             Robot robot = com.sun.glass.ui.Application.GetApplication().createRobot();
             robot.keyPress(java.awt.event.KeyEvent.VK_ENTER);
-
-            //KeyEvent ke = KeyEvent.impl_keyEvent(comboBox, KeyCode.ENTER.toString(), KeyCode.ENTER.getName(), KeyCode.ENTER.impl_getCode(), false, false, false, false, KeyEvent.KEY_RELEASED);
-            //comboBox.fireEvent(ke);
         }
     }
 

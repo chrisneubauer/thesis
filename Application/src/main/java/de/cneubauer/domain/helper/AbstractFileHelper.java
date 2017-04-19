@@ -22,7 +22,7 @@ public abstract class AbstractFileHelper {
         }
     }
 
-    List<String> readFile() {
+    private List<String> readFile() {
         List<String> contents = new LinkedList<>();
         try {
             InputStream in = new FileInputStream(file);
@@ -40,6 +40,9 @@ public abstract class AbstractFileHelper {
 
     abstract void init();
 
+    /**
+     * @return a list of values read from the file
+     */
     public List<String> getValues() {
         List<String> result = new LinkedList<>();
         init();

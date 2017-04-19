@@ -235,9 +235,9 @@ public class InvoiceExtractorService extends DataExtractorService {
             result.setTaxTotal(0);
         }
         try {
-            String grandTotal = this.findValueInString(new String[] { "Gesamtbetrag", "Gesamt", "Rechnungsbetrag" }, doc, true);
+            String grandTotal = this.findValueInString(new String[] { "Gesamtbetrag", "Gesamt", "Rechnungsbetrag", "Endsumme" }, doc, true);
             if (grandTotal.equals("")) {
-                grandTotal = this.findValueInString(new String[]{"Gesamtbetrag", "Gesamt", "Rechnungsbetrag"}, this.footer);
+                grandTotal = this.findValueInString(new String[]{"Gesamtbetrag", "Gesamt", "Rechnungsbetrag", "Endsumme"}, this.footer);
             }
 
             if (grandTotal.length() == 0) {

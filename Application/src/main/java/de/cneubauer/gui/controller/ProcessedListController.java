@@ -8,8 +8,6 @@ import de.cneubauer.ml.nlp.NLPFacade;
 import de.cneubauer.util.enumeration.ScanStatus;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -79,7 +77,9 @@ public class ProcessedListController extends GUIController {
         this.initialize();
     }
 
-    // if called, all results should be stored to the database except the ones that have not been revised yet
+    /**
+     * if called, all results should be stored to the database except the ones that have not been revised yet
+     */
     public void saveRevised() {
         int counter = 0;
         DatabaseService service = new DatabaseService();
@@ -109,37 +109,34 @@ public class ProcessedListController extends GUIController {
 
         ButtonCell() {
             button = new Button();
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    try {
-                        TableRow row = (TableRow) button.getParent().getParent();
-                        ProcessResult selected = (ProcessResult) row.getItem();
+            button.setOnAction(event -> {
+                try {
+                    TableRow row = (TableRow) button.getParent().getParent();
+                    ProcessResult selected = (ProcessResult) row.getItem();
 
-                        Stage stage = (Stage) button.getScene().getWindow();
+                    Stage stage = (Stage) button.getScene().getWindow();
 
-                        Locale locale = getCurrentLocale();
-                        ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
-                        URL fxml = getFXML("splitPane");
-                        FXMLLoader loader = new FXMLLoader(fxml, bundle);
-                        Parent root = loader.load();
-                        Scene scene = new Scene(root, Screen.getPrimary().getVisualBounds().getMaxX() - 100, Screen.getPrimary().getVisualBounds().getMaxY() - 20);
+                    Locale locale = getCurrentLocale();
+                    ResourceBundle bundle = ResourceBundle.getBundle("bundles/Application", locale);
+                    URL fxml = getFXML("splitPane");
+                    FXMLLoader loader = new FXMLLoader(fxml, bundle);
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root, Screen.getPrimary().getVisualBounds().getMaxX() - 100, Screen.getPrimary().getVisualBounds().getMaxY() - 20);
 
-                        Stage popupStage = new Stage(StageStyle.DECORATED);
-                        popupStage.setX(stage.getX() + 20);
-                        popupStage.setY(stage.getY() + 20);
-                        popupStage.setTitle("Review");
-                        popupStage.initOwner(stage);
-                        popupStage.initModality(Modality.APPLICATION_MODAL);
-                        popupStage.setScene(scene);
-                        popupStage.show();
+                    Stage popupStage = new Stage(StageStyle.DECORATED);
+                    popupStage.setX(stage.getX() + 20);
+                    popupStage.setY(stage.getY() + 20);
+                    popupStage.setTitle("Review");
+                    popupStage.initOwner(stage);
+                    popupStage.initModality(Modality.APPLICATION_MODAL);
+                    popupStage.setScene(scene);
+                    popupStage.show();
 
-                        SplitPaneController ctrl = loader.getController();
+                    SplitPaneController ctrl = loader.getController();
 
-                        ctrl.initResults(row.getIndex(), selected.getExtractionModel(), selected.getFile(), getControllerReference());
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+                    ctrl.initResults(row.getIndex(), selected.getExtractionModel(), selected.getFile(), getControllerReference());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             });
         }

@@ -67,6 +67,10 @@ public class DatabaseResultsController extends GUIController {
         this.fillListWithValues();
     }
 
+    /**
+     * Returns to the search mask when button has clicked
+     * @param e the mouseclick-event (handled by JavaFX)
+     */
     public void returnToDatabaseSearch(ActionEvent e) {
         try {
             super.openDatabaseMenu(e);

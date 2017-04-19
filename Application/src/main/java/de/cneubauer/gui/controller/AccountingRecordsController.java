@@ -267,6 +267,10 @@ public class AccountingRecordsController extends SplitPaneController {
         };
     }
 
+    /**
+     * This method is bound to the button ">>" that selects the next record
+     * It saves the current state and loads the next record in the list
+     */
     public void nextRecord() {
         if (this.getRecordsFound() != null && this.getRecordsFound().size() > this.index) {
             this.saveCurrentValuesToRecord();
@@ -276,6 +280,10 @@ public class AccountingRecordsController extends SplitPaneController {
         }
     }
 
+    /**
+     * This method is bound to the button "<<" that selects the previous record
+     * It saves the current state and loads the previous record in the list
+     */
     public void prevRecord() {
         if (this.getRecordsFound() != null && this.index > 1) {
             this.saveCurrentValuesToRecord();
@@ -708,6 +716,9 @@ public class AccountingRecordsController extends SplitPaneController {
         return this.convertToAccountingRecords();
     }
 
+    /**
+     * Adds a new, empty, AccountingRecordModel entry when the "+"-Button has been clicked
+     */
     public void addNewEntry() {
         AccountingRecordModel model = new AccountingRecordModel(this.getRecordsFound().size() + 1);
         model.setRecord(new Position());
@@ -716,6 +727,9 @@ public class AccountingRecordsController extends SplitPaneController {
         this.updateAccountingRecordView(this.getRecordsFound().get(this.index - 1));
     }
 
+    /**
+     * Deletes the AccountingRecordModel that is currently open when the "x"-Button has been clicked
+     */
     public void deleteCurrentEntry() {
         if (this.index > 1) {
             this.prevRecord();

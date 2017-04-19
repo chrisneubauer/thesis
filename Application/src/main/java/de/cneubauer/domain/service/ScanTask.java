@@ -94,6 +94,11 @@ public class ScanTask extends Task {
         return m;
     }
 
+    /**
+     * Initiates the process of a processing task.
+     * @return a list of ProcessResult that contain information of each invoice document
+     * @throws Exception if any problem occurs
+     */
     @Override
     protected List<ProcessResult> call() throws Exception {
         int counter = 0;

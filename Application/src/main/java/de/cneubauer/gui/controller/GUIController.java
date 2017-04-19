@@ -97,6 +97,9 @@ public class GUIController {
         Platform.exit();
     }
 
+    /**
+     * Opens the settings page
+     */
     public void openSettings() {
         try {
             Stage stage = (Stage) menuBar.getScene().getWindow();
@@ -130,6 +133,10 @@ public class GUIController {
         }
     }
 
+    /**
+     * Returns the locale by reading the configfile
+     * @return German or english locale, depending on the selected setting entry
+     */
     Locale getCurrentLocale() {
         Locale locale;
         AppLang currentLanguage = ConfigHelper.getApplicationLanguage();
@@ -179,7 +186,7 @@ public class GUIController {
         }
     }
 
-    protected URL getFXML(String name) {
+    URL getFXML(String name) {
         return this.getClass().getClassLoader().getResource("FXML/" + name + ".fxml");
     }
 }

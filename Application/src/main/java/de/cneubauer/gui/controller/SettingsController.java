@@ -75,21 +75,34 @@ public class SettingsController extends GUIController {
         this.defaultFerdProfileDropDown.setValue(ConfigHelper.getPreferredFerdLevel());
     }
 
+    /**
+     * Updates config file and saves the changes
+     */
     public void applyNewSettings() {
         this.updateSettings();
     }
 
+    /**
+     * Updates config file and saves the changes. Closes the view afterwards.
+     */
     public void closeAndSaveSettings() {
         this.updateSettings();
         Stage settingsWindow = (Stage) root.getScene().getWindow();
         settingsWindow.close();
     }
 
+    /**
+     * Closes the view and ignores the changes
+     */
     public void closeAndIgnoreSettings() {
         Stage settingsWindow = (Stage) root.getScene().getWindow();
         settingsWindow.close();
     }
 
+    /**
+     * Tries to establish a database connection with the given information
+     * Returns an alert with information if the connection has been successfully enabled
+     */
     public void testDatabaseConnection() {
         boolean valid = this.validateDatabaseFields();
         if (valid) {
